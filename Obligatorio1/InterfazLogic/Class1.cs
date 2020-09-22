@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio1
+namespace InterfazLogic
 {
     public class Class1
     {

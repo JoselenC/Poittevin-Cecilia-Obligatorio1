@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>f7e1117a-3b3b-46b7-8500-3c100d4187d7</ProjectGuid>
+    <ProjectGuid>ce07cb4d-438a-44db-bb6e-30dadead4930</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Obligatorio1</RootNamespace>
-    <AssemblyName>Obligatorio1</AssemblyName>
+    <RootNamespace>InterfazLogic</RootNamespace>
+    <AssemblyName>InterfazLogic</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
