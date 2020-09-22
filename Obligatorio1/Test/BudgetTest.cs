@@ -11,14 +11,17 @@ namespace Test
         public void TestCreateBudgetDate()
         {
             DateTime currentDate = DateTime.Now;
-            Budget budget = Budget(currentDate, 4000);
+            int totalAmount = 4000;
+            Budget budget = new Budget(currentDate, totalAmount);
             Assert.AreEqual(currentDate, budget.date);
         }
 
         [TestMethod]
         public void TestCreateBudgetTotalAmount()
         {
-            Budget budget = Budget(DateTime.Now, 4000);
+            int totalAmount = 4000;
+
+            Budget budget = new Budget(DateTime.Now, totalAmount);
             Assert.AreEqual(4000, budget.totalAmount);
         }
     }
