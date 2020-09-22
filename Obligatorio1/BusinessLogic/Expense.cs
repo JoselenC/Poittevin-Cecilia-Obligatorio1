@@ -16,5 +16,11 @@ namespace BusinessLogic
             this.amount = 0;
             this.creationDate = DateTime.MinValue;
         }
+
+        public Expense(int amountPassed, DateTime creationDatePassed)
+        {
+            this.amount = amountPassed;
+            this.creationDate = creationDatePassed;
+        }
     }
 }
