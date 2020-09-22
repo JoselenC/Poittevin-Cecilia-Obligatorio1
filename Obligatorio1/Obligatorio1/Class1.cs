@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Obligatorio1
+namespace BusinessLogic
 {
-    public class Class1
-    {
 
-    }
+
 }
+ 
