@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,18 @@ namespace BusinessLogic
             this.creationDate = DateTime.MinValue;
         }
 
+        public bool validDate(DateTime date)
+        {
+            if (date.Year > 2020) return false;
+            return true;
+        }
+
         public Expense(int amountPassed, DateTime creationDatePassed)
         {
+            if (!validDate(creationDate))
+            {
+                throw new InvalidOperationException();
+            }
             this.amount = amountPassed;
             this.creationDate = creationDatePassed;
         }
