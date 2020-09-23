@@ -20,12 +20,21 @@ namespace Test
         [TestMethod]
         public void creatNotEmptyExpense()
         {
-            int amount = 0;
+            int amount = 23;
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense(amount, creationDate);
             Assert.AreEqual(expense.amount, amount);
             Assert.AreEqual(expense.creationDate, creationDate);
 
+        }
+
+        [TestMethod]
+        public void creatExpenseInvalidDate()
+        {
+            int amount = 23;
+            DateTime creationDate = new DateTime(2030, 01, 01);
+            Expense expense = new Expense(amount, creationDate);
+            Assert.Fail();
         }
     }
 
