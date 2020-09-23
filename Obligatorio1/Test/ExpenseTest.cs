@@ -13,23 +13,23 @@ namespace Test
 
         public void createExpenseZeroAmount()
         {
-            
+
             int amount = 0;
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense emptyExpense = new Expense(amount,creationDate);
-           
+            Expense emptyExpense = new Expense(amount, creationDate);
+
         }
 
         [TestMethod]
 
-        [ExpectedException(typeof(InvalidOperationException),"")]
+        [ExpectedException(typeof(InvalidOperationException), "")]
         public void createExpenseNegativeAmount()
         {
 
             int amount = -10;
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense emptyExpense = new Expense(amount, creationDate);
-            
+
         }
 
 
@@ -92,7 +92,7 @@ namespace Test
         public void creatExpenseInvalidDateDay()
         {
             int amount = 23;
-            DateTime creationDate = new DateTime(2020,10,40);
+            DateTime creationDate = new DateTime(2020, 10, 40);
             Expense expense = new Expense(amount, creationDate);
             Assert.Fail();
         }
@@ -116,11 +116,21 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
+     [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
         public void creatExpenseInvalidDate()
         {
             int amount = 23;
             DateTime creationDate = new DateTime(2030, 35, 40);
+            Expense expense = new Expense(amount, creationDate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
+        //February cannot have thirty days
+        public void creatExpenseInvalidDate2()
+        {
+            int amount = 23;
+            DateTime creationDate = new DateTime(2030, 2, 30);
             Expense expense = new Expense(amount, creationDate);
         }
 
