@@ -68,7 +68,6 @@ namespace Test
             int totalAmount = -1;
 
             Budget budget = new Budget(DateTime.Now, totalAmount);
-            Assert.AreEqual(int.MaxValue, budget.totalAmount);
         }
     }
 }
