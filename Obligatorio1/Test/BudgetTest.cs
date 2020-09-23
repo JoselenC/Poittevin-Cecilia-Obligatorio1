@@ -67,7 +67,7 @@ namespace Test
         {
             int totalAmount = -1;
 
-            Budget budget = new Budget(DateTime.Now, totalAmount);
+            new Budget(DateTime.Now, totalAmount);
         }
     }
 }
