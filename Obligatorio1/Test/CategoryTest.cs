@@ -12,7 +12,8 @@ namespace Test
         {
 
             String nombre = "";
-            Category emptyCategory = new Category();
+            Category emptyCategory = new Category(nombre);
+            
 
         }
     }
