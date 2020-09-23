@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    class Category
+    public class Category
     {
+        public string nombre{ get; set; }
+
+        public Category(string nombreReceived)
+        {
+            this.nombre = nombreReceived;
+        }
+
     }
 }

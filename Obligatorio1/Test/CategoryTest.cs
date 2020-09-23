@@ -10,10 +10,9 @@ namespace Test
         [TestMethod]
         public void createCategoryEmptyName()
         {
-
             String nombre = "";
-            Category emptyCategory = new Category(nombre);
-            
+            Category emptyCategory = new Category("");
+            Assert.AreEqual(emptyCategory.nombre,nombre);
 
         }
     }
