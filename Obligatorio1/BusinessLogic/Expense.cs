@@ -28,7 +28,7 @@ namespace BusinessLogic
         {
             if (!validDate(creationDate))
             {
-                throw new InvalidOperationException();
+                //Que hago aca?
             }
             this.amount = amountPassed;
             this.creationDate = creationDatePassed;
