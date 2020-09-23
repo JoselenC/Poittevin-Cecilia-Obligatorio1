@@ -14,19 +14,19 @@ namespace Test
             int amount = 0;
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense emptyExpense = new Expense(amount,creationDate);
-            DateTime creationDate = DateTime.MinValue;
+            Assert.Fail();
         }
 
         [TestMethod]
-        public void creatNotEmptyExpense()
+        public void createExpenseNegativeAmount()
         {
-            int amount = 23;
-            DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate);
-            Assert.AreEqual(expense.amount, amount);
-            Assert.AreEqual(expense.creationDate, creationDate);
 
+            int amount = -10;
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense emptyExpense = new Expense(amount, creationDate);
+            Assert.Fail();
         }
+
 
         [TestMethod]
         public void creatExpenseInvalidDateYear()
@@ -116,6 +116,18 @@ namespace Test
             DateTime creationDate = new DateTime(2030, 35, 40);
             Expense expense = new Expense(amount, creationDate);
             Assert.Fail();
+        }
+
+
+        [TestMethod]
+        public void creatExpense()
+        {
+            int amount = 23;
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense(amount, creationDate);
+            Assert.AreEqual(expense.amount, amount);
+            Assert.AreEqual(expense.creationDate, creationDate);
+
         }
     }
 

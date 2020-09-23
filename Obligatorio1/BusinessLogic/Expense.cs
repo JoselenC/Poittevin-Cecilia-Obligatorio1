@@ -12,12 +12,7 @@ namespace BusinessLogic
         public int amount { get; set; }
         public DateTime creationDate { get; set; }
 
-        public Expense()
-        {
-            this.amount = 0;
-            this.creationDate = DateTime.MinValue;
-        }
-
+        
         public bool validDate(DateTime date)
         {
             if (date.Year > 2020 || date.Year<1900) return false;
