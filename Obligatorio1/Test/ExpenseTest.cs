@@ -8,13 +8,13 @@ namespace Test
     public class ExpenseTest
     {
         [TestMethod]
-        public void createEmptyExpense()
+        public void createExpenseZeroAmount()
         {
-            Expense emptyExpense = new Expense();
+            
             int amount = 0;
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense emptyExpense = new Expense(amount,creationDate);
             DateTime creationDate = DateTime.MinValue;
-            Assert.AreEqual(emptyExpense.amount, amount);
-            Assert.AreEqual(emptyExpense.creationDate, creationDate);
         }
 
         [TestMethod]
