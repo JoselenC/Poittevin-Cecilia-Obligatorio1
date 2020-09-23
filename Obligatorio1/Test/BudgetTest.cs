@@ -60,5 +60,15 @@ namespace Test
             Budget budget = new Budget(DateTime.Now, totalAmount);
             Assert.AreEqual(int.MaxValue, budget.totalAmount);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(NegativeValueErrorAttribute))]
+        public void TestCreateBudgetWithNegativeTotalAmount()
+        {
+            int totalAmount = -1;
+
+            Budget budget = new Budget(DateTime.Now, totalAmount);
+            Assert.AreEqual(int.MaxValue, budget.totalAmount);
+        }
     }
 }
