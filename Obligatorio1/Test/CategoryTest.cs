@@ -1,14 +1,19 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessLogic;
 
 namespace Test
 {
     [TestClass]
-    public class UnitTest2
+    public class CategoryTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void createCategoryEmptyName()
         {
+
+            String nombre = "";
+            Category emptyCategory = new Category();
+
         }
     }
 }
