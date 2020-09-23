@@ -15,33 +15,44 @@ namespace BusinessLogic
         
         public bool validDate(DateTime date)
         {
-            if (date.Year > 2020 || date.Year<1900) return false;
-            if (date.Month > 12 || date.Month < 1) return false;
-            if (date.Day < 1) return false;
-            if ((date.Month==1|| date.Month == 3 || date.Month == 5 || 
-                date.Month ==7 || date.Month == 8 || date.Month == 10|| 
-                  date.Month ==12) && date.Day>31 ) return false;
-            if ((date.Month == 4 || date.Month == 6 || date.Month == 9 ||
-                date.Month == 11) && date.Day > 30) return false;
-            if (date.Month == 2 && date.Day > 28) return false;
-
-            return true;
+            if (date.Year > 2020 || date.Year < 1900) { return false; }
+            else if (date.Month > 12 || date.Month < 1) { return false; }
+            else if (date.Day < 1) { return false; }
+            else if ((date.Month == 1 || date.Month == 3 || date.Month == 5 ||
+                date.Month == 7 || date.Month == 8 || date.Month == 10 ||
+                  date.Month == 12) && date.Day > 31) { return false; }
+            else if ((date.Month == 4 || date.Month == 6 || date.Month == 9 ||
+                date.Month == 11) && date.Day > 30) { return false; }
+            else if (date.Month == 2 && date.Day > 28) { return false; }
+            else { return true; }
         }
 
         public bool validAmount(int amountPassed)
         {
-            if (amountPassed <= 0) return false;
-            return true;
+            if (amountPassed <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public Expense(int amountPassed, DateTime creationDatePassed)
         {
-            if (!validDate(creationDate) || !validAmount(amountPassed))
+            if (!validAmount(amountPassed))
             {
-                //Que hago aca?
+                throw new InvalidOperationException();
             }
-            this.amount = amountPassed;
-            this.creationDate = creationDatePassed;
+            else if (!validDate(creationDatePassed)){
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                this.amount = amountPassed;
+                this.creationDate = creationDatePassed;
+            }
         }
     }
 }
