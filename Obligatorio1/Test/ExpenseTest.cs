@@ -134,6 +134,16 @@ namespace Test
             Expense expense = new Expense(amount, creationDate);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
+        //February cannot have thirty days
+        public void creatExpenseInvalidDate2()
+        {
+            int amount = 23;
+            DateTime creationDate = new DateTime(2030, 2, 30);
+            Expense expense = new Expense(amount, creationDate);
+        }
+
 
         [TestMethod]
         public void creatExpense()
