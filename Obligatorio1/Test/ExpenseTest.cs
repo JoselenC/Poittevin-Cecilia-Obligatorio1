@@ -38,7 +38,7 @@ namespace Test
         public void creatExpenseInvalidDateYear()
         {
             int amount = 23;
-            DateTime creationDate = new DateTime(2030, 01, 01);
+            DateTime creationDate = new DateTime(2021, 01, 01);
             Expense expense = new Expense(amount, creationDate);
         }
 
@@ -136,11 +136,11 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
-        //February cannot have thirty days
-        public void creatExpenseInvalidDate2()
+        //April cannot have fthirty one days
+        public void creatExpenseInvalidDate3()
         {
             int amount = 23;
-            DateTime creationDate = new DateTime(2030, 2, 30);
+            DateTime creationDate = new DateTime(2030, 4, 31);
             Expense expense = new Expense(amount, creationDate);
         }
 
