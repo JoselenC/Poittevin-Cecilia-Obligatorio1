@@ -29,14 +29,8 @@ namespace BusinessLogic
 
         public bool validAmount(int amountPassed)
         {
-            if (amountPassed <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            if (amountPassed <= 0) { return false; }
+            else { return true; }
         }
 
         public Expense(int amountPassed, DateTime creationDatePassed)
