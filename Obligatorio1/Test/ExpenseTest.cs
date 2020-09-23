@@ -54,6 +54,15 @@ namespace Test
             Expense expense = new Expense(amount, creationDate);
             Assert.Fail();
         }
+
+        [TestMethod]
+        public void creatExpenseInvalidDate()
+        {
+            int amount = 23;
+            DateTime creationDate = new DateTime(2030, 35, 40);
+            Expense expense = new Expense(amount, creationDate);
+            Assert.Fail();
+        }
     }
 
 
