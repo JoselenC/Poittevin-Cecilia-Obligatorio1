@@ -38,6 +38,15 @@ namespace Test
         }
 
         [TestMethod]
+        public void creatExpenseInvalidDateYear2()
+        {
+            int amount = 23;
+            DateTime creationDate = new DateTime(-1, 01, 01);
+            Expense expense = new Expense(amount, creationDate);
+            Assert.Fail();
+        }
+
+        [TestMethod]
         public void creatExpenseInvalidDateMonth()
         {
             int amount = 23;
