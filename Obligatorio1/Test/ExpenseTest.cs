@@ -144,6 +144,14 @@ namespace Test
             Expense expense = new Expense(amount, creationDate);
         }
 
+         [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
+        public void creatExpenseInvalidDate4()
+        {
+            int amount = 23;
+            DateTime creationDate = new DateTime(2030, 1, 32);
+            Expense expense = new Expense(amount, creationDate);
+        }
 
         [TestMethod]
         public void creatExpense()
