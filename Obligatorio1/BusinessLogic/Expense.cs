@@ -20,7 +20,7 @@ namespace BusinessLogic
 
         public bool validDate(DateTime date)
         {
-            if (date.Year > 2020) return false;
+            if (date.Year > 2020 || date.Year<1900) return false;
             if (date.Month > 12 || date.Month < 1) return false;
             if (date.Day < 1) return false;
             if ((date.Month==1|| date.Month == 3 || date.Month == 5 || 
