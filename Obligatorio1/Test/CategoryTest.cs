@@ -8,22 +8,38 @@ namespace Test
     public class CategoryTest
     {
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "")]
         public void createCategoryEmptyName()
         {
-            String nombre = "";
-            Category emptyCategory = new Category(nombre);
-            Assert.AreEqual(emptyCategory.nombre,nombre);
+            String categoryName = "";
+            Category emptyCategory = new Category(categoryName);
+            
 
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "")]
+        public void createCategoryInvalidName()
+        {
+            String categoryName = "9999";
+            Category emptyCategory = new Category(categoryName);
         }
 
         [TestMethod]
         public void createCategory()
         {
-            String nombre = "food";
-            Category emptyCategory = new Category(nombre);
-            Assert.AreEqual(emptyCategory.nombre, nombre);
+            String categoryName = "food";
+            Category emptyCategory = new Category(categoryName);
+            Assert.AreEqual(emptyCategory.name, categoryName);
         }
 
-        
+        [TestMethod]
+        public void createCategory2()
+        {
+            String categoryName = "rent apartment 2";
+            Category emptyCategory = new Category(categoryName);
+            Assert.AreEqual(emptyCategory.name, categoryName);
+        }
+
     }
 }
