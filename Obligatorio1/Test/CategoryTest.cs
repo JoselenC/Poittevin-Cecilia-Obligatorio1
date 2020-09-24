@@ -21,18 +21,25 @@ namespace Test
         [ExpectedException(typeof(InvalidOperationException), "")]
         public void createCategoryInvalidName()
         {
-            String nombre = "9999";
-            Category emptyCategory = new Category(nombre);
+            String categoryName = "9999";
+            Category emptyCategory = new Category(categoryName);
         }
 
         [TestMethod]
         public void createCategory()
         {
-            String nombre = "food";
-            Category emptyCategory = new Category(nombre);
-            Assert.AreEqual(emptyCategory.name, nombre);
+            String categoryName = "food";
+            Category emptyCategory = new Category(categoryName);
+            Assert.AreEqual(emptyCategory.name, categoryName);
         }
 
-        
+        [TestMethod]
+        public void createCategory2()
+        {
+            String categoryName = "rent apartment 2";
+            Category emptyCategory = new Category(categoryName);
+            Assert.AreEqual(emptyCategory.name, categoryName);
+        }
+
     }
 }
