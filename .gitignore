@@ -131,3 +131,6 @@ $RECYCLE.BIN/
 .DS_Store
 
 _NCrunch*
+*.testlog
+
+Obligatorio1/.vs/Obligatorio1/v16/TestStore/0/testlog.manifest
