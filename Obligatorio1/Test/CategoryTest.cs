@@ -8,11 +8,12 @@ namespace Test
     public class CategoryTest
     {
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "")]
         public void createCategoryEmptyName()
         {
             String nombre = "";
             Category emptyCategory = new Category(nombre);
-            Assert.AreEqual(emptyCategory.nombre,nombre);
+            
 
         }
 
