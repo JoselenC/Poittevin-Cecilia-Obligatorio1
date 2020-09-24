@@ -12,6 +12,10 @@ namespace BusinessLogic
 
         public Category(string nombreReceived)
         {
+            if (nombreReceived == "")
+            {
+                throw new InvalidOperationException();
+            }
             this.nombre = nombreReceived;
         }
 
