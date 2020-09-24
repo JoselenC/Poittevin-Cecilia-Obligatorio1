@@ -8,15 +8,22 @@ namespace BusinessLogic
 {
     public class Category
     {
-        public string nombre{ get; set; }
+        public string name{ get; set; }
 
-        public Category(string nombreReceived)
+        public bool validName(string nameReceived)
         {
-            if (nombreReceived == "")
+            if (nameReceived == "" || nameReceived.All(char.IsDigit)) { return false; }
+            return true;
+
+        }
+
+        public Category(string nameReceived)
+        {
+            if (!validName(nameReceived))
             {
                 throw new InvalidOperationException();
             }
-            this.nombre = nombreReceived;
+            this.name = nameReceived;
         }
 
     }

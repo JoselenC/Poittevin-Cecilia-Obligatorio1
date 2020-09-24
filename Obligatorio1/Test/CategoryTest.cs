@@ -11,8 +11,8 @@ namespace Test
         [ExpectedException(typeof(InvalidOperationException), "")]
         public void createCategoryEmptyName()
         {
-            String nombre = "";
-            Category emptyCategory = new Category(nombre);
+            String categoryName = "";
+            Category emptyCategory = new Category(categoryName);
             
 
         }
@@ -30,7 +30,7 @@ namespace Test
         {
             String nombre = "food";
             Category emptyCategory = new Category(nombre);
-            Assert.AreEqual(emptyCategory.nombre, nombre);
+            Assert.AreEqual(emptyCategory.name, nombre);
         }
 
         
