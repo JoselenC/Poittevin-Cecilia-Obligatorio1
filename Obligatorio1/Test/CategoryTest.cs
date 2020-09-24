@@ -11,9 +11,19 @@ namespace Test
         public void createCategoryEmptyName()
         {
             String nombre = "";
-            Category emptyCategory = new Category("");
+            Category emptyCategory = new Category(nombre);
             Assert.AreEqual(emptyCategory.nombre,nombre);
 
         }
+
+        [TestMethod]
+        public void createCategory()
+        {
+            String nombre = "food";
+            Category emptyCategory = new Category(nombre);
+            Assert.AreEqual(emptyCategory.nombre, nombre);
+        }
+
+        
     }
 }
