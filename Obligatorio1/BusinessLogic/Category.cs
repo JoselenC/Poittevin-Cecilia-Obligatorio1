@@ -10,7 +10,7 @@ namespace BusinessLogic
     {
         public string name{ get; set; }
 
-        public bool validName(string nameReceived)
+        private bool validName(string nameReceived)
         {
             if (nameReceived == "" || nameReceived.All(char.IsDigit)) { return false; }
             return true;
