@@ -52,7 +52,7 @@ namespace Test
         [TestMethod]
         public void createCategory2()
         {
-            String categoryName = "rent apartment 2";
+            String categoryName = "rent apartment";
             Category emptyCategory = new Category(categoryName);
             Assert.AreEqual(emptyCategory.name, categoryName);
         }
