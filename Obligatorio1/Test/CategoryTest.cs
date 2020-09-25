@@ -40,23 +40,26 @@ namespace Test
         public void createCategoryInvalidName3()
         {
             String categoryName = "la";
-            Category emptyCategory = new Category(categoryName);
+            List<string> keyWords = new List<string>();
+            Category category = new Category(categoryName, keyWords);
         }
 
         [TestMethod]
         public void createCategory()
         {
             String categoryName = "food";
-            Category emptyCategory = new Category(categoryName);
-            Assert.AreEqual(emptyCategory.name, categoryName);
+            List<string> keyWords = new List<string>();
+            Category category = new Category(categoryName, keyWords);
+            Assert.AreEqual(category.name, categoryName);
         }
 
         [TestMethod]
         public void createCategory2()
         {
             String categoryName = "rent apartment";
-            Category emptyCategory = new Category(categoryName);
-            Assert.AreEqual(emptyCategory.name, categoryName);
+            List<string> keyWords = new List<string>();
+            Category category = new Category(categoryName, keyWords);
+            Assert.AreEqual(category.name, categoryName);
         }
 
     }
