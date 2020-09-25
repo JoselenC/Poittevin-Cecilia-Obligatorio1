@@ -34,6 +34,14 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "")]
+        public void createCategoryInvalidName3()
+        {
+            String categoryName = "la";
+            Category emptyCategory = new Category(categoryName);
+        }
+
+        [TestMethod]
         public void createCategory()
         {
             String categoryName = "food";
