@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic;
 using System.Collections.Generic;
@@ -13,8 +13,8 @@ namespace Test
         public void createCategoryEmptyName()
         {
             String categoryName = "";
-            List<string> palabrasClave = new List<string>();
-            Category emptyCategory = new Category(categoryName,palabrasClave);
+            List<string> keyWords = new List<string>();
+            Category emptyCategory = new Category(categoryName,keyWords);
         }
 
         [TestMethod]
