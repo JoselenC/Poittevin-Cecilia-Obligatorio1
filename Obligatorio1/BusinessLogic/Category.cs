@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +19,15 @@ namespace BusinessLogic
         }
 
         public Category(string nameReceived)
+        {
+            if (!validName(nameReceived))
+            {
+                throw new InvalidOperationException();
+            }
+            this.name = nameReceived;
+        }
+
+        public Category(string nameReceived, List<string> keyWords)
         {
             if (!validName(nameReceived))
             {
