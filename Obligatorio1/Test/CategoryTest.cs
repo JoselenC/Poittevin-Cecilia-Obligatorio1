@@ -31,7 +31,8 @@ namespace Test
         public void createCategoryInvalidName2()
         {
             String categoryName = "entretenimientos";
-            Category emptyCategory = new Category(categoryName);
+            List<string> keyWords = new List<string>();
+            Category category = new Category(categoryName, keyWords);
         }
 
         [TestMethod]
