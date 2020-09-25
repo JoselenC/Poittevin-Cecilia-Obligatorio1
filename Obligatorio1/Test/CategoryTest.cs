@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic;
+using System.Collections.Generic;
 
 namespace Test
 {
@@ -12,9 +13,8 @@ namespace Test
         public void createCategoryEmptyName()
         {
             String categoryName = "";
-            Category emptyCategory = new Category(categoryName);
-            
-
+            List<string> palabrasClave = new List<string>();
+            Category emptyCategory = new Category(categoryName,palabrasClave);
         }
 
         [TestMethod]
