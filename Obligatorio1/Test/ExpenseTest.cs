@@ -26,10 +26,10 @@ namespace Test
         public void createExpenseNegativeAmount()
         {
 
-            int amount = -10;
+            double amount = -10.5;
+            string description = "";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense emptyExpense = new Expense(amount, creationDate);
-
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
 
