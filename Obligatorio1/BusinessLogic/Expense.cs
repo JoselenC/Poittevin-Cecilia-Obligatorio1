@@ -13,10 +13,11 @@ namespace BusinessLogic
         public DateTime creationDate { get; set; }
 
         public string description { get; set; }
-        
+
+
         public bool validDate(DateTime date)
         {
-            if (date.Year > 2020 || date.Year < 1900) { return false; }
+            if (date.Year > 2030 || date.Year < 2018) { return false; }
             return true;
         }
 
