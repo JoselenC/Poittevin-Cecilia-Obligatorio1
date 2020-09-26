@@ -99,7 +99,7 @@ namespace Test
         [TestMethod]
         public void creatExpense()
         {
-            int amount = 23;
+            double amount = 23.55;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense(amount, creationDate,description);
