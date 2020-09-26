@@ -72,6 +72,7 @@ namespace Test
             List<string> keyWords = new List<string>();
             Category category = new Category(categoryName, keyWords);
             Assert.AreEqual(category.name, categoryName);
+            Assert.AreEqual(category.keyWords, keyWords);
         }
 
         [TestMethod]
