@@ -12,6 +12,7 @@ namespace BusinessLogic
         public double amount { get; set; }
         public DateTime creationDate { get; set; }
 
+        public string description { get; set; }
         
         public bool validDate(DateTime date)
         {
