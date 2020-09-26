@@ -47,9 +47,10 @@ namespace Test
         [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
         public void creatExpenseInvalidDateYear2()
         {
-            int amount = 23;
-            DateTime creationDate = new DateTime(-1, 2, 2);
-            Expense expense = new Expense(amount, creationDate);
+            double amount = 23;
+            string description = "";
+            DateTime creationDate = new DateTime(2017, 2, 2);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
