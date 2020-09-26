@@ -10,20 +10,30 @@ namespace BusinessLogic
     {
         public string name{ get; set; }
 
-        public bool validName(string nameReceived)
+        public List<string> keyWords { get ; set; }
+
+        private bool validName(string nameReceived)
         {
-            if (nameReceived == "" || nameReceived.All(char.IsDigit)) { return false; }
+            if (nameReceived.All(char.IsDigit) || nameReceived.Length>15 || nameReceived.Length<3) { return false; }
             return true;
 
         }
 
-        public Category(string nameReceived)
+        private bool validKeyWords(List<string> keyWordsReceived)
         {
-            if (!validName(nameReceived))
+            if(keyWordsReceived.Count>10) { return false; }
+            return true;
+
+        }
+
+        public Category(string nameReceived, List<string> keyWordsReceived)
+        {
+            if (!validName(nameReceived) || !validKeyWords(keyWordsReceived))
             {
                 throw new InvalidOperationException();
             }
             this.name = nameReceived;
+            this.keyWords = keyWordsReceived;
         }
 
     }
