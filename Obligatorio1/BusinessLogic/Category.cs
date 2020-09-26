@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +9,7 @@ namespace BusinessLogic
     public class Category
     {
         public string name{ get; set; }
+        public List<string> keyWords { get; set; }
 
         private bool validName(string nameReceived)
         {
