@@ -8,15 +8,15 @@ namespace Test
     public class ExpenseTest
     {
         [TestMethod]
-
         [ExpectedException(typeof(InvalidOperationException), "")]
 
-        public void createExpenseZeroAmount()
+        public void createEmptyExpense()
         {
 
-            int amount = 0;
+            double amount = 0;
+            string descripcion = "";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense emptyExpense = new Expense(amount, creationDate);
+            Expense emptyExpense = new Expense(amount, creationDate,descripcion);
 
         }
 
