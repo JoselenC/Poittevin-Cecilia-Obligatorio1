@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+using BusinessLogic;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,9 +14,9 @@ namespace Test
         {
 
             double amount = 0;
-            string descripcion = "";
+            string description = "";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense emptyExpense = new Expense(amount, creationDate,descripcion);
+            Expense expense = new Expense(amount, creationDate,description);
 
         }
 
