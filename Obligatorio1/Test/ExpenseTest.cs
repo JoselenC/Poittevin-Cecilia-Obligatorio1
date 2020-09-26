@@ -40,6 +40,14 @@ namespace Test
 
             double amount = 23.555;
             string description = "cuando fui al cine";
+
+        [TestMethod]
+
+        [ExpectedException(typeof(InvalidOperationException), "")]
+        public void createExpenseInvalidAmount2()
+        {
+
+            double amount = 23.344;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense(amount, creationDate, description);
