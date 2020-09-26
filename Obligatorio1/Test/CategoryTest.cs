@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic;
 using System.Collections.Generic;
@@ -68,7 +68,7 @@ namespace Test
         [TestMethod]
         public void createCategory()
         {
-            String categoryName = "food";
+            String categoryName = "entretenimiento";
             List<string> keyWords = new List<string>();
             Category category = new Category(categoryName, keyWords);
             Assert.AreEqual(category.name, categoryName);
@@ -79,8 +79,19 @@ namespace Test
         {
             String categoryName = "rent apartment";
             List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("teatro");
+            keyWords.Add("salida");
+            keyWords.Add("libreria");
+            keyWords.Add("jugeteria");
+            keyWords.Add("shopping");
+            keyWords.Add("patinaje");
+            keyWords.Add("casino");
+            keyWords.Add("sala de juego");
+            keyWords.Add("parque");
             Category category = new Category(categoryName, keyWords);
             Assert.AreEqual(category.name, categoryName);
+            Assert.AreEqual(category.keyWords, keyWords);
         }
 
     }
