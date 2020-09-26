@@ -54,7 +54,7 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
+        [ExpectedException(typeof(InvalidOperationException), "")]
         public void creatExpenseInvalidDateYear3()
         {
             int amount = 23;
