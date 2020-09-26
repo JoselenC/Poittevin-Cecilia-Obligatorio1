@@ -14,7 +14,7 @@ namespace Test
         {
 
             double amount = 0;
-            string description = "";
+            string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense(amount, creationDate,description);
 
@@ -27,7 +27,7 @@ namespace Test
         {
 
             double amount = -10.5;
-            string description = "";
+            string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense(amount, creationDate, description);
         }
@@ -39,7 +39,8 @@ namespace Test
         {
 
             double amount = 23.555;
-            string description = "";
+            string description = "cuando fui al cine";
+            string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense(amount, creationDate, description);
         }
@@ -49,7 +50,7 @@ namespace Test
         public void creatExpenseInvalidDateYear()
         {
             double amount = 23;
-            string description = "";
+            string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2031, 01, 01);
             Expense expense = new Expense(amount, creationDate, description);
         }
@@ -59,7 +60,7 @@ namespace Test
         public void creatExpenseInvalidDateYear2()
         {
             double amount = 23;
-            string description = "";
+            string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2017, 2, 2);
             Expense expense = new Expense(amount, creationDate, description);
         }
@@ -69,6 +70,7 @@ namespace Test
         public void creatExpenseInvalidDateYear3()
         {
             int amount = 23;
+            string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(0, 01, 01);
             Expense expense = new Expense(amount, creationDate);
         }
