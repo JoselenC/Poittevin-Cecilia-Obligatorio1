@@ -1,6 +1,7 @@
 using BusinessLogic;
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 namespace Test
 {
@@ -108,7 +109,18 @@ namespace Test
             Assert.AreEqual(expense.description, description);
 
         }
-    }
+
+        [TestMethod]
+        public void findCategory()
+        {
+            double amount = 23.55;
+            string description = "cuando fui al cine";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense(amount, creationDate, description);
+            Category category = repository.findCategory(description);
+        }
+
+        }
 
 
 }
