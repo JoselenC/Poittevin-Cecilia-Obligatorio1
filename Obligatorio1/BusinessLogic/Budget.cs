@@ -5,7 +5,7 @@ namespace BusinessLogic
     public class Budget
     {
         public double totalAmount { get => totalAmount; set => SetTotalAmount(value);  }
-        public DateTime date { get; set; }
+        public int currentMonth { get; set; }
 
         public void SetTotalAmount(double vTotalAmount)
         {
@@ -17,9 +17,9 @@ namespace BusinessLogic
         }
 
 
-        public Budget(DateTime currentDate, double vtotalAmount)
+        public Budget(int vCurrentMonth, double vtotalAmount)
         {
-            date = currentDate;
+            currentMonth = vCurrentMonth;
             totalAmount = vtotalAmount;
         }
 
