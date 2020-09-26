@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -24,6 +24,7 @@ namespace BusinessLogic
         public bool validAmount(double amountPassed)
         {
             if (amountPassed <= 0) { return false; }
+            if (amountPassed != Math.Round(amountPassed,2)) { return false; }
             else { return true; }
         }
 
@@ -35,7 +36,7 @@ namespace BusinessLogic
 
         public Expense(double amountPassed, DateTime creationDatePassed)
         {
-            if (!validAmount(amountPassed))
+            if (!validAmount(amountPassed) )
             {
                 throw new InvalidOperationException();
             }
