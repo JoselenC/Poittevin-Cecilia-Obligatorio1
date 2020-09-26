@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace BusinessLogic
 {
     public class Expense
     {
-        public int amount { get; set; }
+        public double amount { get; set; }
         public DateTime creationDate { get; set; }
 
         
@@ -19,13 +19,14 @@ namespace BusinessLogic
             return true;
         }
 
-        public bool validAmount(int amountPassed)
+        public bool validAmount(double amountPassed)
         {
             if (amountPassed <= 0) { return false; }
             else { return true; }
         }
 
         public Expense(int amountPassed, DateTime creationDatePassed)
+        public Expense(double amountPassed, DateTime creationDatePassed)
         {
             if (!validAmount(amountPassed))
             {
