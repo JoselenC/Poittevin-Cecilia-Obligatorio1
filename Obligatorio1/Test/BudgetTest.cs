@@ -11,7 +11,7 @@ namespace Test
         public void TestCreateBudgetDate()
         {
             DateTime currentDate = DateTime.Now;
-            int totalAmount = 4000;
+            double totalAmount = 4000;
             Budget budget = new Budget(currentDate, totalAmount);
             Assert.AreEqual(currentDate, budget.date);
         }
@@ -20,7 +20,7 @@ namespace Test
         public void TestCreateBudgetWithDateInThePass()
         {
             DateTime currentDate = DateTime.Now.AddDays(-2);
-            int totalAmount = 4000;
+            double totalAmount = 4000;
             Budget budget = new Budget(currentDate, totalAmount);
             Assert.AreEqual(currentDate, budget.date);
         }
@@ -29,7 +29,7 @@ namespace Test
         public void TestCreateBudgetWithDateInTheFeature()
         {
             DateTime currentDate = DateTime.Now.AddDays(2);
-            int totalAmount = 4000;
+            double totalAmount = 4000;
             Budget budget = new Budget(currentDate, totalAmount);
             Assert.AreEqual(currentDate, budget.date);
         }
@@ -37,7 +37,7 @@ namespace Test
         [TestMethod]
         public void TestCreateBudgetTotalAmount()
         {
-            int totalAmount = 4000;
+            double totalAmount = 4000;
 
             Budget budget = new Budget(DateTime.Now, totalAmount);
             Assert.AreEqual(4000, budget.totalAmount);
@@ -46,7 +46,7 @@ namespace Test
         [TestMethod]
         public void TestCreateBudgetWithCeroTotalAmount()
         {
-            int totalAmount = 0;
+            double totalAmount = 0;
 
             Budget budget = new Budget(DateTime.Now, totalAmount);
             Assert.AreEqual(0, budget.totalAmount);
@@ -55,7 +55,7 @@ namespace Test
         [TestMethod]
         public void TestCreateBudgetWithBigTotalAmount()
         {
-            int totalAmount = int.MaxValue;
+            double totalAmount = int.MaxValue;
 
             Budget budget = new Budget(DateTime.Now, totalAmount);
             Assert.AreEqual(int.MaxValue, budget.totalAmount);
@@ -65,7 +65,7 @@ namespace Test
         [ExpectedException(typeof(NegativeValueErrorAttribute))]
         public void TestCreateBudgetWithNegativeTotalAmount()
         {
-            int totalAmount = -1;
+            double totalAmount = -1;
 
             new Budget(DateTime.Now, totalAmount);
         }
