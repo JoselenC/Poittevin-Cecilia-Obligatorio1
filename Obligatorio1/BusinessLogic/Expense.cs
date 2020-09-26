@@ -26,7 +26,12 @@ namespace BusinessLogic
             else { return true; }
         }
 
-        public Expense(int amountPassed, DateTime creationDatePassed)
+        public bool validDescription(string description)
+        {
+            if (description.Length<3 || description.Length>20) { return false; }
+            else { return true; }
+        }
+
         public Expense(double amountPassed, DateTime creationDatePassed)
         {
             if (!validAmount(amountPassed))
@@ -40,6 +45,24 @@ namespace BusinessLogic
             {
                 this.amount = amountPassed;
                 this.creationDate = creationDatePassed;
+            }
+        }
+
+        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
+        {
+            if (!validAmount(amountPassed) || !validDescription(descriptionPassed))
+            {
+                throw new InvalidOperationException();
+            }
+            else if (!validDate(creationDatePassed))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                this.amount = amountPassed;
+                this.creationDate = creationDatePassed;
+                this.description = descriptionPassed;
             }
         }
     }
