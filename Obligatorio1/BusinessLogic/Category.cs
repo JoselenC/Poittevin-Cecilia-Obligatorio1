@@ -18,6 +18,13 @@ namespace BusinessLogic
 
         }
 
+        private bool validKeyWords(List<string> keyWordsReceived)
+        {
+            if(keyWordsReceived.Count>10) { return false; }
+            return true;
+
+        }
+
         public Category(string nameReceived)
         {
             if (!validName(nameReceived))
@@ -27,9 +34,9 @@ namespace BusinessLogic
             this.name = nameReceived;
         }
 
-        public Category(string nameReceived, List<string> keyWords)
+        public Category(string nameReceived, List<string> keyWordsReceived)
         {
-            if (!validName(nameReceived))
+            if (!validName(nameReceived) || !validKeyWords(keyWordsReceived))
             {
                 throw new InvalidOperationException();
             }
