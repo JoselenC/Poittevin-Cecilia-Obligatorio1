@@ -26,15 +26,6 @@ namespace BusinessLogic
 
         }
 
-        public Category(string nameReceived)
-        {
-            if (!validName(nameReceived))
-            {
-                throw new InvalidOperationException();
-            }
-            this.name = nameReceived;
-        }
-
         public Category(string nameReceived, List<string> keyWordsReceived)
         {
             if (!validName(nameReceived) || !validKeyWords(keyWordsReceived))
