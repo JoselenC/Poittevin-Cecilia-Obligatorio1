@@ -8,7 +8,9 @@ namespace BusinessLogic
 
         private void SetCategory(Category vCategory)
         {
-            category = vCategory ?? throw new ArgumentNullException();
+            if(vCategory == null) {
+                throw new ArgumentNullException();
+            }
         }
 
         public double amount { get; }
