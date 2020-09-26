@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic;
 using System.Collections.Generic;
@@ -42,6 +42,27 @@ namespace Test
             String categoryName = "la";
             List<string> keyWords = new List<string>();
             Category category = new Category(categoryName, keyWords);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "")]
+        public void createCategoryInvalidKeyWords()
+        {
+            String categoryName = "entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("teatro");
+            keyWords.Add("salida");
+            keyWords.Add("libreria");
+            keyWords.Add("jugeteria");
+            keyWords.Add("shopping");
+            keyWords.Add("patinaje");
+            keyWords.Add("casino");
+            keyWords.Add("sala de juego");
+            keyWords.Add("parque");
+            keyWords.Add("piscina");
+            Category category = new Category(categoryName, keyWords);
+            
         }
 
         [TestMethod]
