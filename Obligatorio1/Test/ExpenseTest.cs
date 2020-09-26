@@ -32,6 +32,17 @@ namespace Test
             Expense expense = new Expense(amount, creationDate, description);
         }
 
+        [TestMethod]
+
+        [ExpectedException(typeof(InvalidOperationException), "")]
+        public void createExpenseInvalidAmount()
+        {
+
+            double amount = 23.555;
+            string description = "";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense(amount, creationDate, description);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
