@@ -77,13 +77,13 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
         public void creatExpenseInvalidDateYear3()
         {
-            int amount = 23;
+            double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(0, 01, 01);
-            Expense expense = new Expense(amount, creationDate);
+            Expense expense = new Expense(amount, creationDate,description);
         }
 
         [TestMethod]
