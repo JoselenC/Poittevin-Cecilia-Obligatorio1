@@ -42,6 +42,7 @@ namespace BusinessLogic
                 throw new InvalidOperationException();
             }
             this.name = nameReceived;
+            this.keyWords = keyWordsReceived;
         }
 
     }
