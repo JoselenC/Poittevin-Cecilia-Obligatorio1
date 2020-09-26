@@ -16,6 +16,7 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void TestCreateBudgetCategoryNullCategory()
         {
             double amount = 100;
@@ -25,8 +26,10 @@ namespace Test
         [TestMethod]
         public void TestCreateBudgetCategoryAmountWithDecimals()
         {
+            Category category = new Category("testCategory");
             double amount = 100.23;
-            new BudgetCategory(null, amount);
+            new BudgetCategory(category, amount);
         }
+
     }
 }
