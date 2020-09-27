@@ -9,7 +9,7 @@ namespace Test
     public class repositoryTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void findCategory()
         {
             List<Category> categoryList = new List<Category>();
             List<string> keyWords1 = new List<string>();
@@ -21,15 +21,13 @@ namespace Test
             keyWords2.Add("restaurante");
             keyWords2.Add("McDonalds");
             keyWords2.Add("cena");
+            string description = "cuando fuimos al cine";
             Category category2 = new Category("comida", keyWords2);
             categoryList.Add(category1);
             categoryList.Add(category2);
-            string description = "cuando fuimos al cine";
-            for(int n=0; n<categoryList.Count; n++)
-            {
-                Category category = categoryList[n];
-                category.findCategory(description);
-            }
+            Repository repo = new Repository(categoryList);
+            Assert.AreEqual(category1, repo.findCategory(description));
+             
         }
     }
 }
