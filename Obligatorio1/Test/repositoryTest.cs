@@ -50,12 +50,28 @@ namespace Test
             Repository repo = new Repository();
             string description = "cuando fuimos a la cena";
             Assert.IsNull(repo.findCategory(description, categoryList));
+
+        }
+        [TestMethod]
+        public void findCategory3()
+        {
+            List<Category> categoryList = new List<Category>();
+            List<string> keyWords1 = new List<string>();
+            keyWords1.Add("cena");
+            keyWords1.Add("teatro");
+            keyWords1.Add("casino");
+            Category category1 = new Category("entretenimiento", keyWords1);
+            List<string> keyWords2 = new List<string>();
+            keyWords2.Add("restaurante");
+            keyWords2.Add("McDonalds");
+            keyWords2.Add("cena");
             Category category2 = new Category("comida", keyWords2);
             categoryList.Add(category1);
             categoryList.Add(category2);
-            Repository repo = new Repository(categoryList);
-            Assert.AreEqual(category1, repo.findCategory(description));
-             
+            Repository repo = new Repository();
+            string description = "cuando fuimos al shopping";
+            Assert.IsNull(repo.findCategory(description, categoryList));
+
         }
     }
 }
