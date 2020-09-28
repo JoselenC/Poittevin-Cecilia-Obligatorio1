@@ -9,8 +9,10 @@ namespace BusinessLogic
     public class Repository
     {
         public List<Category> categoryList { get; set; }
+        public Repository()
         {
-
+            this.categoryList = new List<Category>();
+            
         }
 
         public Category findCategory(String description)
