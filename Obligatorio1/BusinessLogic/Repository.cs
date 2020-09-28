@@ -1,7 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BusinessLogic
@@ -9,6 +10,9 @@ namespace BusinessLogic
     public class Repository
     {
         public List<Category> categoryList { get; set; }
+
+       // public List<Expense> expenseList { get; set; }
+
         public Repository()
         {
             this.categoryList = new List<Category>();
@@ -44,6 +48,8 @@ namespace BusinessLogic
                 return null;
             }
         }
+
+       
 
     }
 }

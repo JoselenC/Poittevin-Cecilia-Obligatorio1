@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -8,6 +8,15 @@ namespace Test
     [TestClass]
     public class repositoryTest
     {
+
+        [TestMethod]
+        public void createRepository()
+        {
+            List<Category> categoryList = new List<Category>();
+           // List<Expense> expenseList = new List<Expense>();
+
+        }
+
         [TestMethod]
         public void findCategory()
         {
