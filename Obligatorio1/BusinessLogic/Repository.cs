@@ -15,9 +15,34 @@ namespace BusinessLogic
             
         }
 
-        public Category findCategory(String description)
+
+        public Category findCategory(string description, List<Category> categoryListReceived)
         {
-              return null;
+            Category category = null;
+            string[] desc = description.Split(' ');
+            bool exist = false;
+            int cont = 0;
+            for (int i = 0; i < categoryListReceived.Count; i++)
+            {
+                exist = false;
+                for (int j = 0; j < desc.Length && !exist; j++)
+                {
+                    exist = categoryListReceived[i].keyWords.Contains(desc[j]);
+                }
+                if (exist)
+                {
+                    category = categoryListReceived[i];
+                    cont=cont+1;
+                }
+            }
+            if (cont == 1)
+            {
+                return category;
+            }
+            else
+            {
+                return null;
+            }
         }
 
     }
