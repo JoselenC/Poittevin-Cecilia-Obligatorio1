@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,7 +21,16 @@ namespace Test
             keyWords2.Add("restaurante");
             keyWords2.Add("McDonalds");
             keyWords2.Add("cena");
+            Category category2 = new Category("comida", keyWords2);
+            categoryList.Add(category1);
+            categoryList.Add(category2);
+            Repository repo = new Repository();
             string description = "cuando fuimos al cine";
+            Category category3 = repo.findCategory(description, categoryList);
+            Assert.AreEqual(category1,category3);
+             
+        }
+
             Category category2 = new Category("comida", keyWords2);
             categoryList.Add(category1);
             categoryList.Add(category2);
