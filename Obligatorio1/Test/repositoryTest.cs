@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,14 +9,7 @@ namespace Test
     public class repositoryTest
     {
 
-        [TestMethod]
-        public void createRepository()
-        {
-            List<Category> categoryList = new List<Category>();
-           // List<Expense> expenseList = new List<Expense>();
-
-        }
-
+      
         [TestMethod]
         public void findCategory()
         {
@@ -59,8 +52,8 @@ namespace Test
             Repository repo = new Repository();
             string description = "cuando fuimos a la cena";
             Assert.IsNull(repo.findCategory(description, categoryList));
-
         }
+
         [TestMethod]
         public void findCategory3()
         {
@@ -82,5 +75,75 @@ namespace Test
             Assert.IsNull(repo.findCategory(description, categoryList));
 
         }
-    }
-}
+
+        [TestMethod]
+        public void monthsOrdered()
+        {
+         
+            List<string> months = new List<string>();
+            List<Expense> expenses = new List<Expense>();
+            months.Add("Enero");
+            months.Add("Mayo");
+            DateTime month1 = new DateTime(2020, 1, 24);
+            DateTime month5 = new DateTime(2020, 5, 24);
+            Expense expense1 = new Expense(23,month1,"cine");
+            Expense expense2 = new Expense(23,month5,"cine");
+            expenses.Add(expense1);
+            expenses.Add(expense2);
+            Repository repo = new Repository();
+            repo.expenseList = expenses;
+            List<string> monthsOrder = repo.MonthsOrdered();
+            for (int i = 0; i < months.Count; i++)
+            {
+                Assert.AreEqual(months[i], monthsOrder[i]);
+            }
+        }
+
+        [TestMethod]
+        public void monthsOrdered2()
+        {
+
+            List<string> months = new List<string>();
+            List<Expense> expenses = new List<Expense>();
+            months.Add("Enero");
+            DateTime month1 = new DateTime(2020, 1, 24);
+            DateTime month5 = new DateTime(2020, 1, 24);
+            Expense expense1 = new Expense(23, month1, "cine");
+            Expense expense2 = new Expense(23, month5, "cine");
+            expenses.Add(expense1);
+            expenses.Add(expense2);
+            Repository repo = new Repository();
+            repo.expenseList = expenses;
+            List<string> monthsOrder = repo.MonthsOrdered();
+            for (int i = 0; i < months.Count; i++)
+            {
+                Assert.AreEqual(months[i], monthsOrder[i]);
+            }
+        }
+
+        [TestMethod]
+        public void monthsOrdered3()
+        {
+
+            List<string> months = new List<string>();
+            List<Expense> expenses = new List<Expense>();
+            months.Add("Enero");
+            months.Add("Mayo");
+            months.Add("Agosto");
+            DateTime month8 = new DateTime(2020, 8, 24);
+            DateTime month5 = new DateTime(2020, 5, 24);
+            DateTime month1 = new DateTime(2020, 1, 24);
+            Expense expense1 = new Expense(23, month8, "cine");
+            Expense expense2 = new Expense(23, month1, "cine");
+            Expense expense3 = new Expense(21, month5, "casino");
+            expenses.Add(expense1);
+            expenses.Add(expense2);
+            expenses.Add(expense3);
+            Repository repo = new Repository();
+            repo.expenseList = expenses;
+            List<string> monthsOrder = repo.MonthsOrdered();
+            for (int i = 0; i < months.Count; i++)
+            {
+                Assert.AreEqual(months[i], monthsOrder[i]);
+            }
+        }
