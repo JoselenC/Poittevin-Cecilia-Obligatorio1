@@ -4,25 +4,29 @@ namespace BusinessLogic
 {
     public class Budget
     {
-        public double totalAmount { get => totalAmount; set => SetTotalAmount(value);  }
-        public int currentMonth { get; set; }
+
+        public double TotalAmount { get => TotalAmount; set => SetTotalAmount(value);  }
+        public int CurrentMonth { get; set; }
+        public int CurrentYear { get; set; }
+
 
         public void SetTotalAmount(double vTotalAmount)
         {
-            if (totalAmount < 0)
+            if (TotalAmount < 0)
             {
                 throw new NegativeValueErrorAttribute();
             }
-            totalAmount = vTotalAmount;
+            TotalAmount = vTotalAmount;
+            Console.WriteLine("total asignado");
         }
 
 
-        public Budget(int vCurrentMonth, double vtotalAmount)
+        public Budget(int vCurrentMonth, double vtotalAmount, int vCurrentYear)
         {
-            currentMonth = vCurrentMonth;
-            totalAmount = vtotalAmount;
+            CurrentMonth = vCurrentMonth;
+            TotalAmount = vtotalAmount;
+            CurrentYear = vCurrentYear;
         }
-
 
     }
 }

@@ -8,30 +8,45 @@ namespace Test
     public class BudgetTest
     {
         [TestMethod]
-        public void TestCreateBudgetDate()
+        public void TestCreateBudgetMonth()
         {
             int currentMonth = DateTime.Now.Month;
+            int currentYear = DateTime.Now.Year;
             double totalAmount = 4000;
-            Budget budget = new Budget(currentMonth, totalAmount);
-            Assert.AreEqual(currentMonth, budget.currentMonth);
+            Budget budget = new Budget(currentMonth, totalAmount, currentYear);
+            Assert.AreEqual(currentMonth, budget);
+        }
+
+        [TestMethod]
+        public void TestCreateBudgetYear()
+        {
+            Console.WriteLine("iniciando la prueba");
+            int currentMonth = DateTime.Now.Month;
+            int currentYear = DateTime.Now.Year;
+            double totalAmount = 4000;
+            Budget budget = new Budget(currentMonth, totalAmount, currentYear);
+            Console.WriteLine("budget creado");
+            Assert.AreEqual(currentMonth, budget.CurrentYear);
         }
 
         [TestMethod]
         public void TestCreateBudgetWithDateInThePass()
         {
             int currentDate = DateTime.Now.AddMonths(-1).Month;
+            int currentYear = DateTime.Now.Year;
             double totalAmount = 4000;
-            Budget budget = new Budget(currentDate, totalAmount);
-            Assert.AreEqual(currentDate, budget.currentMonth);
+            Budget budget = new Budget(currentDate, totalAmount, currentYear);
+            Assert.AreEqual(currentDate, budget.CurrentMonth);
         }
         
         [TestMethod]
         public void TestCreateBudgetWithDateInTheFeature()
         {
             int currentDate = DateTime.Now.AddMonths(1).Month;
+            int currentYear = DateTime.Now.Year;
             double totalAmount = 4000;
-            Budget budget = new Budget(currentDate, totalAmount);
-            Assert.AreEqual(currentDate, budget.currentMonth);
+            Budget budget = new Budget(currentDate, totalAmount, currentYear);
+            Assert.AreEqual(currentDate, budget.CurrentMonth);
         }
 
         [TestMethod]
@@ -39,8 +54,8 @@ namespace Test
         {
             double totalAmount = 4000;
 
-            Budget budget = new Budget(DateTime.Now.Month, totalAmount);
-            Assert.AreEqual(4000, budget.totalAmount);
+            Budget budget = new Budget(DateTime.Now.Month, totalAmount, DateTime.Now.Year);
+            Assert.AreEqual(4000, budget.TotalAmount);
         }
 
         [TestMethod]
@@ -48,8 +63,8 @@ namespace Test
         {
             double totalAmount = 0;
 
-            Budget budget = new Budget(DateTime.Now.Month, totalAmount);
-            Assert.AreEqual(0, budget.totalAmount);
+            Budget budget = new Budget(DateTime.Now.Month, totalAmount, DateTime.Now.Year);
+            Assert.AreEqual(0, budget.TotalAmount);
         }
 
         [TestMethod]
@@ -57,8 +72,8 @@ namespace Test
         {
             double totalAmount = int.MaxValue;
 
-            Budget budget = new Budget(DateTime.Now.Month, totalAmount);
-            Assert.AreEqual(int.MaxValue, budget.totalAmount);
+            Budget budget = new Budget(DateTime.Now.Month, totalAmount, DateTime.Now.Year);
+            Assert.AreEqual(int.MaxValue, budget.TotalAmount);
         }
 
         [TestMethod]
@@ -67,7 +82,7 @@ namespace Test
         {
             double totalAmount = -1;
 
-            new Budget(DateTime.Now.Month, totalAmount);
+            new Budget(DateTime.Now.Month, totalAmount, DateTime.Now.Year);
         }
     }
 }
