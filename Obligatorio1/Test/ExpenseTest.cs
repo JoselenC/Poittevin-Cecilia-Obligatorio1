@@ -98,6 +98,16 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException), "")]
+        public void creatExpenseInvalidDescription()
+        {
+            double amount = 23;
+            string description = "aa";
+            DateTime creationDate = new DateTime(2021, 2, 2);
+            Expense expense = new Expense(amount, creationDate, description);
+        }
+
+        [TestMethod]
         public void creatExpense()
         {
             double amount = 23.55;
@@ -110,16 +120,7 @@ namespace Test
 
         }
 
-        [TestMethod]
-        public void findCategory()
-        {
-            double amount = 23.55;
-            string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
-            Category category = repository.findCategory(description);
-        }
-
+       
         }
 
 
