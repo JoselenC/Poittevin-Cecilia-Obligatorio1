@@ -120,16 +120,7 @@ namespace Test
 
         }
 
-        [TestMethod]
-        public void findCategory()
-        {
-            double amount = 23.55;
-            string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description, category);
-
-        }
-
+        
         }
 
 
