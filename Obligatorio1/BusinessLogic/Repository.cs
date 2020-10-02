@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -9,7 +10,7 @@ namespace BusinessLogic
 {
     public class Repository
     {
-        public List<Category> categoryList { get; set; }
+        public List<Category> categoryList { set { } }
 
         public List<Expense> expenseList { get; set; }
 
@@ -73,7 +74,38 @@ namespace BusinessLogic
             }
             return monthsString;
         }
-       
 
+        public double ExpenseByMonths(string month)
+        {
+            int monthInt = ToIntMonth(month);
+            double total = 0;
+            for (int i = 0; i < this.expenseList.Count; i++)
+            {
+                Expense expense = this.expenseList[i];
+                if (expense.creationDate.Month == monthInt)
+                    total += expense.amount;                    
+            }
+            return total;
+        }
+
+        private int ToIntMonth(string month)
+        {
+            if (month == "Enero") return 1;
+            if (month == "Febrero") return 2;
+            if (month == "Marzo") return 3;
+            if (month == "Abril") return 4;
+            if (month == "Mayo") return 5;
+            if (month == "Junio") return 6;
+            if (month == "Julio") return 7;
+            if (month == "Agosto") return 8;
+            if (month == "Setiembre") return 9;
+            if (month == "Octubre") return 10;
+            if (month == "Noviembre") return 11;
+            return 12;
+        }
+
+
+
+        }
     }
-}
+
