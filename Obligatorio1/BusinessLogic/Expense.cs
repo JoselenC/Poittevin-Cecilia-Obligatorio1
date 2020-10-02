@@ -14,6 +14,7 @@ namespace BusinessLogic
 
         public string description { get; set; }
 
+        public Category category { get; set; }
 
         public bool validDate(DateTime date)
         {
