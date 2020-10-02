@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -34,21 +34,6 @@ namespace BusinessLogic
             else { return true; }
         }
 
-        public Expense(double amountPassed, DateTime creationDatePassed)
-        {
-            if (!validAmount(amountPassed) )
-            {
-                throw new InvalidOperationException();
-            }
-            else if (!validDate(creationDatePassed)){
-                throw new ArgumentOutOfRangeException();
-            }
-            else
-            {
-                this.amount = amountPassed;
-                this.creationDate = creationDatePassed;
-            }
-        }
 
         public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
         {
