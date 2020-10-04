@@ -15,9 +15,10 @@ namespace Test
         {
 
             double amount = 0;
-            string description = "cuando fui al cine";
+            string description = "";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate,description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate,description,category);
 
         }
 
@@ -30,7 +31,8 @@ namespace Test
             double amount = -10.5;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate, description, category);
         }
 
         [TestMethod]
@@ -42,7 +44,8 @@ namespace Test
             double amount = 23.555;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate, description, category);
         }
 
         [TestMethod]
@@ -54,7 +57,8 @@ namespace Test
             double amount = 23.344;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate, description, category);
         }
 
         [TestMethod]
@@ -64,7 +68,8 @@ namespace Test
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2031, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate, description, category);
         }
 
         [TestMethod]
@@ -74,7 +79,8 @@ namespace Test
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2017, 2, 2);
-            Expense expense = new Expense(amount, creationDate, description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate, description, category);
         }
 
         [TestMethod]
@@ -84,7 +90,8 @@ namespace Test
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(0, 01, 01);
-            Expense expense = new Expense(amount, creationDate,description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate, description, category);
         }
 
         [TestMethod]
@@ -94,7 +101,8 @@ namespace Test
             double amount = 23;
             string description = "cuando fuimos al cine de punta carretas";
             DateTime creationDate = new DateTime(2021, 2, 2);
-            Expense expense = new Expense(amount, creationDate, description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate, description, category);
         }
 
         [TestMethod]
@@ -103,23 +111,16 @@ namespace Test
             double amount = 23.55;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate,description);
+            Category category = repository.findCategory(description);
+            Expense expense = new Expense(amount, creationDate, description, category);
             Assert.AreEqual(expense.amount, amount);
             Assert.AreEqual(expense.creationDate, creationDate);
             Assert.AreEqual(expense.description, description);
+            Assert.AreEqual(expense.category, category);
 
         }
 
-        [TestMethod]
-        public void findCategory()
-        {
-            double amount = 23.55;
-            string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
-            Category category = repository.findCategory(description);
-        }
-
+        
         }
 
 

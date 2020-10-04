@@ -14,6 +14,7 @@ namespace BusinessLogic
 
         public string description { get; set; }
 
+        public Category category { get; set; }
 
         public bool validDate(DateTime date)
         {
@@ -34,23 +35,8 @@ namespace BusinessLogic
             else { return true; }
         }
 
-        public Expense(double amountPassed, DateTime creationDatePassed)
-        {
-            if (!validAmount(amountPassed) )
-            {
-                throw new InvalidOperationException();
-            }
-            else if (!validDate(creationDatePassed)){
-                throw new ArgumentOutOfRangeException();
-            }
-            else
-            {
-                this.amount = amountPassed;
-                this.creationDate = creationDatePassed;
-            }
-        }
-
-        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
+        
+        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed, Category category)
         {
             if (!validAmount(amountPassed) || !validDescription(descriptionPassed))
             {
