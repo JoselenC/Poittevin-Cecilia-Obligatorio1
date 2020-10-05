@@ -262,11 +262,17 @@ namespace Test
             Assert.AreEqual(expense.Category, category);
         }
 
+        [TestMethod]
+        public void asignCategory()
+        {
+            double amount = 23.55;
+            string description = "cuando fui al cine";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Repository repository = new Repository();
+            Expense expense = new Expense(amount, creationDate, description, repository);
+            Assert.IsNull(expense.Category);
         }
-
-       
-        
-        }
+    }
 
 
 }
