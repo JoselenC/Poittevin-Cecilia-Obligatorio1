@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -28,9 +28,9 @@ namespace Test
             categoryList.Add(category2);
             Repository repo = new Repository(categoryList);
             string description = "cuando fuimos al cine";
-            Category category3 = repo.findCategory(description, categoryList);
-            Assert.AreEqual(category1,category3);
-             
+            Category category3 = repo.FindCategoryByDescription(description);
+            Assert.AreEqual(category1, category3);
+
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Test
             categoryList.Add(category2);
             Repository repo = new Repository(categoryList);
             string description = "cuando fuimos al cine";
-            Assert.IsNull(repo.findCategory(description, categoryList));
+            Assert.IsNull(repo.FindCategoryByDescription(description));
         }
 
         [TestMethod]
@@ -72,14 +72,14 @@ namespace Test
             categoryList.Add(category2);
             Repository repo = new Repository(categoryList);
             string description = "cuando fuimos al shopping";
-            Assert.IsNull(repo.findCategory(description, categoryList));
+            Assert.IsNull(repo.FindCategoryByDescription(description));
 
         }
 
         [TestMethod]
         public void monthsOrdered()
         {
-         
+
             List<string> months = new List<string>();
             List<Expense> expenses = new List<Expense>();
             months.Add("Enero");
@@ -91,7 +91,7 @@ namespace Test
             expenses.Add(expense1);
             expenses.Add(expense2);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             List<string> monthsOrder = repo.MonthsOrdered();
             for (int i = 0; i < months.Count; i++)
             {
@@ -113,7 +113,7 @@ namespace Test
             expenses.Add(expense1);
             expenses.Add(expense2);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             List<string> monthsOrder = repo.MonthsOrdered();
             for (int i = 0; i < months.Count; i++)
             {
@@ -140,7 +140,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             List<string> monthsOrder = repo.MonthsOrdered();
             for (int i = 0; i < months.Count; i++)
             {
@@ -163,10 +163,10 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);            
+            repo.Expenses = expenses;
+            double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(46, totalAmount);
-            
+
         }
 
         [TestMethod]
@@ -184,7 +184,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(0, totalAmount);
 
@@ -205,7 +205,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -226,7 +226,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(21, totalAmount);
 
@@ -247,7 +247,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23, totalAmount);
 
@@ -268,7 +268,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -289,7 +289,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -310,7 +310,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -331,7 +331,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -352,7 +352,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -373,7 +373,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -395,7 +395,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -417,7 +417,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
@@ -438,7 +438,7 @@ namespace Test
             expenses.Add(expense2);
             expenses.Add(expense3);
             Repository repo = new Repository();
-            repo.expenseList = expenses;
+            repo.Expenses = expenses;
             double totalAmount = repo.ExpenseByMonths(month);
             Assert.AreEqual(23.5, totalAmount);
 
