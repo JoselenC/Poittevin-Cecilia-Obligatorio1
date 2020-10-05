@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,7 +9,7 @@ namespace Test
     public class repositoryTest
     {
 
-      
+
         [TestMethod]
         public void findCategory()
         {
@@ -26,7 +26,7 @@ namespace Test
             Category category2 = new Category("comida", keyWords2);
             categoryList.Add(category1);
             categoryList.Add(category2);
-            Repository repo = new Repository();
+            Repository repo = new Repository(categoryList);
             string description = "cuando fuimos al cine";
             Category category3 = repo.findCategory(description, categoryList);
             Assert.AreEqual(category1,category3);
@@ -49,8 +49,8 @@ namespace Test
             Category category2 = new Category("comida", keyWords2);
             categoryList.Add(category1);
             categoryList.Add(category2);
-            Repository repo = new Repository();
-            string description = "cuando fuimos a la cena";
+            Repository repo = new Repository(categoryList);
+            string description = "cuando fuimos al cine";
             Assert.IsNull(repo.findCategory(description, categoryList));
         }
 
@@ -70,7 +70,7 @@ namespace Test
             Category category2 = new Category("comida", keyWords2);
             categoryList.Add(category1);
             categoryList.Add(category2);
-            Repository repo = new Repository();
+            Repository repo = new Repository(categoryList);
             string description = "cuando fuimos al shopping";
             Assert.IsNull(repo.findCategory(description, categoryList));
 
@@ -86,8 +86,8 @@ namespace Test
             months.Add("Mayo");
             DateTime month1 = new DateTime(2020, 1, 24);
             DateTime month5 = new DateTime(2020, 5, 24);
-            Expense expense1 = new Expense(23,month1,"cine");
-            Expense expense2 = new Expense(23,month5,"cine");
+            Expense expense1 = new Expense(23, month1, "cine");
+            Expense expense2 = new Expense(23, month5, "cine");
             expenses.Add(expense1);
             expenses.Add(expense2);
             Repository repo = new Repository();
