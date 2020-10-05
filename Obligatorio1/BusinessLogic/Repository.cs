@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -14,10 +14,10 @@ namespace BusinessLogic
 
         public List<Expense> expenseList { get; set; }
 
-        public Repository()
+        public Repository(List<Category> categoryReceived)
         {
-            this.categoryList = new List<Category>();
-            
+            this.Categories = categoryReceived;
+
         }       
 
         public Category findCategory(string description, List<Category> categoryListReceived)
