@@ -55,5 +55,24 @@ namespace BusinessLogic
 
             }
         }
+        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
+        {
+            if (!ValidAmount(amountPassed) || !ValidDescription(descriptionPassed))
+            {
+                throw new InvalidOperationException();
+            }
+            else if (!ValidDate(creationDatePassed))
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                this.Amount = amountPassed;
+                this.CreationDate = creationDatePassed;
+                this.Description = descriptionPassed;
+                this.Category = null;
+            }
+        }
+
     }
 }
