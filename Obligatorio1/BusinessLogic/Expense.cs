@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -36,7 +36,7 @@ namespace BusinessLogic
         }
 
         
-        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed, Category category)
+        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed, Repository repository)
         {
             if (!validAmount(amountPassed) || !validDescription(descriptionPassed))
             {
@@ -51,6 +51,8 @@ namespace BusinessLogic
                 this.amount = amountPassed;
                 this.creationDate = creationDatePassed;
                 this.description = descriptionPassed;
+                this.Category = repository.FindCategoryByDescription(this.Description);
+
             }
         }
     }
