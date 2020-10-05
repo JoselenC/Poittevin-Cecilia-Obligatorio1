@@ -444,6 +444,42 @@ namespace Test
 
         }
 
+        [TestMethod]
+        public void ExpenseReport()
+        {
+            List<string[]> reports = new List<string[]>();
+            string[] report = new string[4];
+            report[0] = "24/12/2020";
+            report[1] = "cine";
+            report[2] = "Entretenimiento";
+            report[3] = "230";
+            reports.Add(report);
+            List<Expense> expenses = new List<Expense>();
+            DateTime month1 = new DateTime(2020, 12, 24);
+            String categoryName = "Entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("teatro");
+            keyWords.Add("salida");
+            keyWords.Add("libreria");
+            keyWords.Add("jugeteria");
+            keyWords.Add("shopping");
+            keyWords.Add("patinaje");
+            keyWords.Add("casino");
+            keyWords.Add("sala de juego");
+            Category category = new Category(categoryName, keyWords);
+            List<Category> categories = new List<Category>();
+            categories.Add(category);
+            Repository repository = new Repository(categories);
+            Expense expense1 = new Expense(230, month1, "cine",repository);
+            expenses.Add(expense1);
+            repository.Expenses = expenses;           
+            List<string[]> reports1 = repository.ExpenseReport(month1.Month.ToString());
+            Assert.AreEqual(reports.ToArray()[0][0], reports1.ToArray()[0][0]);
+            Assert.AreEqual(reports.ToArray()[0][1], reports1.ToArray()[0][1]);
+            Assert.AreEqual(reports.ToArray()[0][2], reports1.ToArray()[0][2]);
+            Assert.AreEqual(reports.ToArray()[0][3], reports1.ToArray()[0][3]);
+        }
 
     }
 }
