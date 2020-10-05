@@ -104,8 +104,43 @@ namespace BusinessLogic
             return 12;
         }
 
+        //funciones de Reporte de Gastos:se muestran los gastos y el monto total del month. 
+        //obtener todo eso que tenemos que mostrar
+        public List<string[]> ExpenseReport(string month)
+        {
+            int monthInt = ToIntMonth(month);
+            List<string[]> reports = new List<string[]>();
+            for (int i = 0; i < this.Expenses.Count; i++)
+            {
+                string[] report = new string[4];
+                Expense expense = this.Expenses[i];
+                if (expense.CreationDate.Month == monthInt)
+                {
+                    string date = ToStringDate(expense.CreationDate);
+                    string description = expense.Description;
+                    string name = expense.Category.Name;
+                    string amount = expense.Amount.ToString();
 
+                    report[0] = date;
+                    report[1] = description;
+                    report[2] = name;
+                    report[3] = amount;
 
+                }
+                reports.Add(report);
+            }
+            return reports;
         }
-    }
 
+        private string ToStringDate(DateTime creationDate)
+        {
+            string date;
+            string year = creationDate.Year.ToString();
+            string month = creationDate.Month.ToString();
+            string day = creationDate.Day.ToString();
+            date = day + "/" + month + "/" + year;
+            return date;
+        }
+
+    }
+}
