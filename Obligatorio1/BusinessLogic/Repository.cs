@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -10,33 +10,38 @@ namespace BusinessLogic
 {
     public class Repository
     {
-        public List<Category> categoryList { set { } }
+        public List<Category> Categories { get; set; }
 
-        public List<Expense> expenseList { get; set; }
+        public List<Expense> Expenses { get; set; }
 
         public Repository(List<Category> categoryReceived)
         {
             this.Categories = categoryReceived;
 
-        }       
+        }
+        public Repository()
+        {
+            this.Categories = new List<Category>();
+            this.Expenses = new List<Expense>();
+        }
 
-        public Category findCategory(string description, List<Category> categoryListReceived)
+        public Category FindCategoryByDescription(string description)
         {
             Category category = null;
             string[] desc = description.Split(' ');
             bool exist = false;
             int cont = 0;
-            for (int i = 0; i < categoryListReceived.Count; i++)
+            for (int i = 0; i < Categories.Count; i++)
             {
                 exist = false;
                 for (int j = 0; j < desc.Length && !exist; j++)
                 {
-                    exist = categoryListReceived[i].keyWords.Contains(desc[j]);
+                    exist = Categories[i].KeyWords.Contains(desc[j]);
                 }
                 if (exist)
                 {
-                    category = categoryListReceived[i];
-                    cont=cont+1;
+                    category = Categories[i];
+                    cont = cont + 1;
                 }
             }
             if (cont == 1)
@@ -52,14 +57,14 @@ namespace BusinessLogic
         public List<string> MonthsOrdered()
         {
             List<int> months = new List<int>();
-            for (int i = 0; i < this.expenseList.Count; i++)
+            for (int i = 0; i < this.Expenses.Count; i++)
             {
-                Expense expense = this.expenseList[i];
-                if (!months.Contains(expense.creationDate.Month))
-                    months.Add(expense.creationDate.Month);
+                Expense expense = this.Expenses[i];
+                if (!months.Contains(expense.CreationDate.Month))
+                    months.Add(expense.CreationDate.Month);
             }
             months.Sort();
-            List<string> monthsString=GetMonthsString(months);
+            List<string> monthsString = GetMonthsString(months);
             return monthsString;
         }
 
@@ -70,7 +75,7 @@ namespace BusinessLogic
             {
                 DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
                 string nombreMes = formatoFecha.GetMonthName(months[i]);
-                monthsString.Add(nombreMes);                
+                monthsString.Add(nombreMes);
             }
             return monthsString;
         }
@@ -79,11 +84,11 @@ namespace BusinessLogic
         {
             int monthInt = ToIntMonth(month);
             double total = 0;
-            for (int i = 0; i < this.expenseList.Count; i++)
+            for (int i = 0; i < this.Expenses.Count; i++)
             {
-                Expense expense = this.expenseList[i];
-                if (expense.creationDate.Month == monthInt)
-                    total += expense.amount;                    
+                Expense expense = this.Expenses[i];
+                if (expense.CreationDate.Month == monthInt)
+                    total += expense.Amount;
             }
             return total;
         }
