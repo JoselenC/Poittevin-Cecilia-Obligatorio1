@@ -8,32 +8,32 @@ namespace BusinessLogic
 {
     public class Category
     {
-        public string name{ get; set; }
+        public string Name { get; set; }
 
-        public List<string> keyWords { get ; set; }
+        public List<string> KeyWords { get; set; }
 
-        private bool validName(string nameReceived)
+        private bool ValidName(string nameReceived)
         {
-            if (nameReceived.All(char.IsDigit) || nameReceived.Length>15 || nameReceived.Length<3) { return false; }
+            if (nameReceived.All(char.IsDigit) || nameReceived.Length > 15 || nameReceived.Length < 3) { return false; }
             return true;
 
         }
 
-        private bool validKeyWords(List<string> keyWordsReceived)
+        private bool ValidKeyWords(List<string> keyWordsReceived)
         {
-            if(keyWordsReceived.Count>10) { return false; }
+            if (keyWordsReceived.Count > 10) { return false; }
             return true;
 
         }
 
         public Category(string nameReceived, List<string> keyWordsReceived)
         {
-            if (!validName(nameReceived) || !validKeyWords(keyWordsReceived))
+            if (!ValidName(nameReceived) || !ValidKeyWords(keyWordsReceived))
             {
                 throw new InvalidOperationException();
             }
-            this.name = nameReceived;
-            this.keyWords = keyWordsReceived;
+            this.Name = nameReceived;
+            this.KeyWords = keyWordsReceived;
         }
 
     }
