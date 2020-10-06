@@ -10,8 +10,8 @@ namespace Test
     {
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createCategoryEmptyName()
+        [ExpectedException(typeof(ExcepcionInvalidNameLengthCategory), "")]
+        public void CreateCategoryEmptyName()
         {
             String categoryName = "";
             List<string> keyWords = new List<string>();          
@@ -19,8 +19,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createCategoryInvalidName()
+        [ExpectedException(typeof(ExcepcionInvalidNameDigitCategory), "")]
+        public void CreateCategoryInvalidName()
         {
             String categoryName = "9999";
             List<string> keyWords = new List<string>();
@@ -28,8 +28,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createCategoryInvalidName2()
+        [ExpectedException(typeof(ExcepcionInvalidNameLengthCategory), "")]
+        public void CreateCategoryInvalidName2()
         {
             String categoryName = "entretenimientos";
             List<string> keyWords = new List<string>();
@@ -37,20 +37,18 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createCategoryInvalidName3()
+        [ExpectedException(typeof(ExcepcionInvalidNameLengthCategory), "")]
+        public void CreateCategoryInvalidName3()
         {
             String categoryName = "la";
             List<string> keyWords = new List<string>();
             Category category = new Category(categoryName, keyWords);
-        }
-
-       
+        }       
 
         
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createCategoryInvalidKeyWords()
+        [ExpectedException(typeof(ExcepcionInvalidKeyWordsLengthCategory), "")]
+        public void CreateCategoryInvalidKeyWords()
         {
             String categoryName = "entretenimiento";
             List<string> keyWords = new List<string>();
@@ -67,13 +65,11 @@ namespace Test
             keyWords.Add("shopping");
             Category category = new Category(categoryName, keyWords);
 
-        }
-
-       
+        }       
        
 
         [TestMethod]
-        public void createCategory()
+        public void CreateCategory()
         {
             String categoryName = "entretenimiento";
             List<string> keyWords = new List<string>();
@@ -93,7 +89,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void createCategory2()
+        public void CreateCategory2()
         {
             String categoryName = "rent apartment";
             List<string> keyWords = new List<string>();
