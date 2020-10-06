@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -147,5 +147,48 @@ namespace BusinessLogic
             return date;
         }
 
+        private bool isValidName(string categoryName)
+        {
+            bool validName = true;
+            for (int i = 0; i < Categories.Count; i++)
+            {
+                if (categoryName.ToLower() == Categories[i].Name.ToLower())
+                {
+                    validName= false;
+                }
+
+            }
+            return validName;
+        }
+
+        public void addCategory(string name, List<string> keyWords)
+        {
+            if(isValidName(name)&& areValidKeywords(keyWords))
+            {
+                Category category = new Category(name, keyWords);
+                this.Categories.Add(category);                
+            }
+           
+        private bool  areValidKeywords(List<string> keyWords)
+        {
+            bool validKeywords = true;
+            for (int i = 0; i < Categories.Count; i++)
+            {
+                for (int k = 0; k < Categories[i].KeyWords.Count; k++)
+                {
+                    for (int j = 0; j < keyWords.Count; j++)
+                    {
+                        string keyWord = Categories[i].KeyWords[k];
+                        string vkeyWord = keyWords[j];
+                        if (keyWord.ToLower() == vkeyWord.ToLower())
+                        {
+                            validKeywords = false;
+                        }
+                    }
+                }
+
+            }
+            return validKeywords;
+        }
     }
 }
