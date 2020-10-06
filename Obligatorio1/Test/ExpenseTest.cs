@@ -9,9 +9,9 @@ namespace Test
     public class ExpenseTest
     {
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
+        [ExpectedException(typeof(ExcepcionNegativeAmountExpense), "")]
 
-        public void createEmptyExpense()
+        public void CreateEmptyExpense()
         {
 
             double amount = 0;
@@ -23,8 +23,8 @@ namespace Test
 
         [TestMethod]
 
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createExpenseNegativeAmount()
+        [ExpectedException(typeof(ExcepcionNegativeAmountExpense), "")]
+        public void CreateExpenseNegativeAmount()
         {
 
             double amount = -10.5;
@@ -35,8 +35,8 @@ namespace Test
 
         [TestMethod]
 
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createExpenseInvalidAmount()
+        [ExpectedException(typeof(ExcepcionInvalidAmountExpense), "")]
+        public void CreateExpenseInvalidDecimalAmount()
         {
 
             double amount = 23.555;
@@ -47,8 +47,8 @@ namespace Test
 
         [TestMethod]
 
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createExpenseInvalidAmount2()
+        [ExpectedException(typeof(ExcepcionInvalidAmountExpense), "")]
+        public void CreateExpenseInvalidDecimalAmount2()
         {
 
             double amount = 23.344;
@@ -58,8 +58,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
-        public void creatExpenseInvalidDateYear()
+        [ExpectedException(typeof(ExcepcionInvalidYearExpense), "")]
+        public void CreatExpenseInvalidDateYear()
         {
             double amount = 23;
             string description = "cuando fui al cine";
@@ -68,8 +68,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
-        public void creatExpenseInvalidDateYear2()
+        [ExpectedException(typeof(ExcepcionInvalidYearExpense), "")]
+        public void CreatExpenseInvalidDateYear2()
         {
             double amount = 23;
             string description = "cuando fui al cine";
@@ -79,7 +79,7 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
-        public void creatExpenseInvalidDateYear3()
+        public void CreatExpenseInvalidDateYear3()
         {
             double amount = 23;
             string description = "cuando fui al cine";
@@ -88,8 +88,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void creatExpenseInvalidDescription2()
+        [ExpectedException(typeof(ExcepcionInvalidDescriptionLengthExpense), "")]
+        public void CreatExpenseInvalidDescriptionLength2()
         {
             double amount = 23;
             string description = "cuando fuimos al cine de punta carretas";
@@ -98,8 +98,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void creatExpenseInvalidDescription()
+        [ExpectedException(typeof(ExcepcionInvalidDescriptionLengthExpense), "")]
+        public void CreatExpenseInvalidDescriptionLength()
         {
             double amount = 23;
             string description = "al";
@@ -108,7 +108,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void creatExpense()
+        public void CreatExpense()
         {
             double amount = 23.55;
             string description = "cuando fui al cine";
