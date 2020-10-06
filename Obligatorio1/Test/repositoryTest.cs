@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -597,4 +597,41 @@ namespace Test
             Assert.AreEqual(category2.KeyWords, repository.Categories.ToArray()[1].KeyWords);
             Assert.AreEqual(2, repository.Categories.Count);
         }       
+
+        [TestMethod]
+        public void addExpenseNullCategory()
+        {          
+            DateTime month = new DateTime(2020, 1, 24);            
+            Repository repository = new Repository();
+            repository.addExpense(23.5, month, "cine");
+            Assert.AreEqual(0, repository.Expenses.Count);
+        }
+       
+        [TestMethod]
+        public void addExpense()
+        {
+            String categoryName = "Entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("teatro");
+            Category category = new Category(categoryName, keyWords);
+            List<Category> categories = new List<Category>();
+            categories.Add(category);
+            DateTime month = new DateTime(2020, 1, 24);
+            Expense expense = new Expense(23.5, month, "cine");
+            List<Expense> expenses = new List<Expense>();
+            expenses.Add(expense);
+            expense.Category = category;
+            Repository repository = new Repository();
+            repository.addCategory(categoryName, keyWords);
+            repository.addExpense(23.5, month, "cine");
+            Expense expense1 = expenses.ToArray()[0];
+            Expense expense2 = repository.Expenses.ToArray()[0];
+            Assert.AreEqual(expense1.Amount, expense2.Amount);
+            Assert.AreEqual(expense1.Category.Name, expense2.Category.Name);
+            Assert.AreEqual(expense1.Category.KeyWords, expense2.Category.KeyWords);
+            Assert.AreEqual(expense1.CreationDate, expense2.CreationDate);
+            Assert.AreEqual(expense1.Description, expense2.Description);
+        }
+    }
 }
