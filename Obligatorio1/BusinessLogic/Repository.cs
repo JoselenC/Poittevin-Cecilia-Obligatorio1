@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -126,7 +126,7 @@ namespace BusinessLogic
                 Expense expense = this.Expenses[i];
                 if (expense.CreationDate.Month == monthInt )
                 {
-                    string date = ToStringDate(expense.CreationDate);
+                    string date = expense.CreationDate.ToString("dd/mm/yyyy");
                     string description = expense.Description;
                     string name = expense.Category.Name;
                     string amount = expense.Amount.ToString();
@@ -142,15 +142,6 @@ namespace BusinessLogic
             return reports;
         }
 
-        private string ToStringDate(DateTime creationDate)
-        {
-            string date;
-            string year = creationDate.Year.ToString();
-            string month = creationDate.Month.ToString();
-            string day = creationDate.Day.ToString();
-            date = day + "/" + month + "/" + year;
-            return date;
-        }
 
         private bool isValidName(string categoryName)
         {
