@@ -470,5 +470,131 @@ namespace Test
             Assert.AreEqual(reports.ToArray()[0][3], reports1.ToArray()[0][3]);
         }
 
-    }
+       
+
+        [TestMethod]
+        public void AddCategoryinvalidName()
+        {
+            String categoryName = "Entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("sala de juego");
+            Category category = new Category(categoryName, keyWords);            
+            Repository repository = new Repository();
+            repository.addCategory(categoryName, keyWords);
+            repository.addCategory(categoryName, keyWords);
+            Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
+            Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
+            Assert.AreEqual(1, repository.Categories.Count);
+            
+
+        }
+
+        [TestMethod]
+        public void AddCategoryinvalidName2()
+        {
+            String categoryName = "Entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("sala de juego");
+            Category category = new Category(categoryName, keyWords);
+            Repository repository = new Repository();
+            repository.addCategory(categoryName, keyWords);
+            String categoryName2 = "entretenimiento";
+            List<string> keyWords2 = new List<string>();
+            keyWords.Add("casino");
+            keyWords.Add("shopping");
+            Category category2 = new Category(categoryName2, keyWords2);
+            repository.addCategory(categoryName2, keyWords2);
+            Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
+            Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
+            Assert.AreEqual(1, repository.Categories.Count);
+
+
+        }
+
+        [TestMethod]
+        public void AddCategoryvalidName()
+        {
+            String categoryName = "Entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("sala de juego");
+            Category category = new Category(categoryName, keyWords);
+            Repository repository = new Repository();
+            repository.addCategory(categoryName, keyWords);
+            String categoryName2 = "Comida";
+            List<string> keyWords2 = new List<string>();
+            keyWords2.Add("restaurant");
+            keyWords2.Add("cena");
+            Category category2 = new Category(categoryName2, keyWords2);
+            repository.addCategory(categoryName2, keyWords2);
+            Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
+            Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
+            Assert.AreEqual(category2.Name, repository.Categories.ToArray()[1].Name);
+            Assert.AreEqual(category2.KeyWords, repository.Categories.ToArray()[1].KeyWords);
+            Assert.AreEqual(2, repository.Categories.Count);
+        }
+
+        [TestMethod]
+        public void AddCategoryinvalidKeyWords()
+        {
+            String categoryName = "Entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("teatro");
+            Category category = new Category(categoryName, keyWords);
+            Repository repository = new Repository();
+            repository.addCategory(categoryName, keyWords);            
+            String categoryName2 = "Comida";
+            List<string> keyWords2 = new List<string>();
+            keyWords2.Add("cine");
+            keyWords2.Add("teatro");
+            repository.addCategory(categoryName2, keyWords2);
+            Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
+            Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
+            Assert.AreEqual(1, repository.Categories.Count);
+        }
+
+        [TestMethod]
+        public void AddCategoryinvalidKeyWords2()
+        {
+            String categoryName = "Entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("teatro");
+            Category category = new Category(categoryName, keyWords);
+            Repository repository = new Repository();
+            repository.addCategory(categoryName, keyWords);
+            String categoryName2 = "Comida";
+            List<string> keyWords2 = new List<string>();
+            keyWords2.Add("Cine");
+            keyWords2.Add("Restaurante");
+            repository.addCategory(categoryName2, keyWords2);
+            Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
+            Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
+            Assert.AreEqual(1, repository.Categories.Count);
+        }
+
+        [TestMethod]
+        public void AddCategoryValidKeyWords()
+        {
+            String categoryName = "Entretenimiento";
+            List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("sala de juego");
+            Category category = new Category(categoryName, keyWords);
+            Repository repository = new Repository();
+            repository.addCategory(categoryName, keyWords);
+            String categoryName2 = "Comida";
+            List<string> keyWords2 = new List<string>();
+            keyWords2.Add("restaurant");
+            Category category2 = new Category(categoryName2, keyWords2);
+            repository.addCategory(categoryName2, keyWords2);
+            Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
+            Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
+            Assert.AreEqual(category2.Name, repository.Categories.ToArray()[1].Name);
+            Assert.AreEqual(category2.KeyWords, repository.Categories.ToArray()[1].KeyWords);
+            Assert.AreEqual(2, repository.Categories.Count);
+        }       
 }
