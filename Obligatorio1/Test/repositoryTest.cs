@@ -11,7 +11,7 @@ namespace Test
 
 
         [TestMethod]
-        public void findCategory()
+        public void FindCategory()
         {
             List<Category> categoryList = new List<Category>();
             List<string> keyWords1 = new List<string>();
@@ -34,7 +34,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void findCategory2()
+        public void FindCategory2()
         {
             List<Category> categoryList = new List<Category>();
             List<string> keyWords1 = new List<string>();
@@ -55,7 +55,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void findCategory3()
+        public void FindCategory3()
         {
             List<Category> categoryList = new List<Category>();
             List<string> keyWords1 = new List<string>();
@@ -77,7 +77,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void monthsOrdered()
+        public void MonthsOrdered()
         {
 
             List<string> months = new List<string>();
@@ -100,7 +100,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void monthsOrdered2()
+        public void MonthsOrdered2()
         {
 
             List<string> months = new List<string>();
@@ -122,7 +122,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void monthsOrdered3()
+        public void MonthsOrdered3()
         {
 
             List<string> months = new List<string>();
@@ -461,8 +461,10 @@ namespace Test
             keyWords.Add("cine");
             keyWords.Add("teatro");
             Repository repository = new Repository();
-            repository.addCategory(categoryName, keyWords);
-            repository.addExpense(230, month1, "cine");
+            Expense expense = new Expense(230, month1, "cine");
+            Category category = new Category(categoryName, keyWords);
+            repository.addCategory(category);
+            repository.addExpense(expense);
             List<string[]> reports1 = repository.ExpenseReport(month1.Month.ToString());
             Assert.AreEqual(reports.ToArray()[0][0], reports1.ToArray()[0][0]);
             Assert.AreEqual(reports.ToArray()[0][1], reports1.ToArray()[0][1]);
@@ -473,6 +475,7 @@ namespace Test
        
 
         [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
         public void AddCategoryinvalidName()
         {
             String categoryName = "Entretenimiento";
@@ -481,16 +484,13 @@ namespace Test
             keyWords.Add("sala de juego");
             Category category = new Category(categoryName, keyWords);            
             Repository repository = new Repository();
-            repository.addCategory(categoryName, keyWords);
-            repository.addCategory(categoryName, keyWords);
-            Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
-            Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
-            Assert.AreEqual(1, repository.Categories.Count);
-            
+            repository.addCategory(category); 
+            repository.addCategory(category);           
 
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
         public void AddCategoryinvalidName2()
         {
             String categoryName = "Entretenimiento";
@@ -499,17 +499,13 @@ namespace Test
             keyWords.Add("sala de juego");
             Category category = new Category(categoryName, keyWords);
             Repository repository = new Repository();
-            repository.addCategory(categoryName, keyWords);
+            repository.addCategory(category);
             String categoryName2 = "entretenimiento";
             List<string> keyWords2 = new List<string>();
             keyWords.Add("casino");
             keyWords.Add("shopping");
             Category category2 = new Category(categoryName2, keyWords2);
-            repository.addCategory(categoryName2, keyWords2);
-            Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
-            Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
-            Assert.AreEqual(1, repository.Categories.Count);
-
+            repository.addCategory(category2);
 
         }
 
@@ -521,14 +517,14 @@ namespace Test
             keyWords.Add("cine");
             keyWords.Add("sala de juego");
             Category category = new Category(categoryName, keyWords);
-            Repository repository = new Repository();
-            repository.addCategory(categoryName, keyWords);
+            Repository repository = new Repository(); 
+            repository.addCategory(category);
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
             keyWords2.Add("cena");
             Category category2 = new Category(categoryName2, keyWords2);
-            repository.addCategory(categoryName2, keyWords2);
+            repository.addCategory(category2);
             Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
             Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
             Assert.AreEqual(category2.Name, repository.Categories.ToArray()[1].Name);
@@ -537,6 +533,7 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory), "")]
         public void AddCategoryinvalidKeyWords()
         {
             String categoryName = "Entretenimiento";
@@ -545,18 +542,20 @@ namespace Test
             keyWords.Add("teatro");
             Category category = new Category(categoryName, keyWords);
             Repository repository = new Repository();
-            repository.addCategory(categoryName, keyWords);            
+            repository.addCategory(category);            
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("cine");
             keyWords2.Add("teatro");
-            repository.addCategory(categoryName2, keyWords2);
+            Category category2 = new Category(categoryName2, keyWords2);
+            repository.addCategory(category2);
             Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
             Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
             Assert.AreEqual(1, repository.Categories.Count);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory), "")]
         public void AddCategoryinvalidKeyWords2()
         {
             String categoryName = "Entretenimiento";
@@ -565,12 +564,13 @@ namespace Test
             keyWords.Add("teatro");
             Category category = new Category(categoryName, keyWords);
             Repository repository = new Repository();
-            repository.addCategory(categoryName, keyWords);
+            repository.addCategory(category);
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("Cine");
             keyWords2.Add("Restaurante");
-            repository.addCategory(categoryName2, keyWords2);
+            Category category2 = new Category(categoryName2, keyWords2);
+            repository.addCategory(category2);
             Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
             Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
             Assert.AreEqual(1, repository.Categories.Count);
@@ -585,12 +585,12 @@ namespace Test
             keyWords.Add("sala de juego");
             Category category = new Category(categoryName, keyWords);
             Repository repository = new Repository();
-            repository.addCategory(categoryName, keyWords);
+            repository.addCategory(category);
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
             Category category2 = new Category(categoryName2, keyWords2);
-            repository.addCategory(categoryName2, keyWords2);
+            repository.addCategory(category2);
             Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
             Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
             Assert.AreEqual(category2.Name, repository.Categories.ToArray()[1].Name);
@@ -599,16 +599,17 @@ namespace Test
         }       
 
         [TestMethod]
-        public void addExpenseNullCategory()
+        [ExpectedException(typeof(ExcepcionExpenseWithEmptyCategory), "")] 
+        public void AddExpenseNullCategory()
         {          
             DateTime month = new DateTime(2020, 1, 24);            
             Repository repository = new Repository();
-            repository.addExpense(23.5, month, "cine");
-            Assert.AreEqual(0, repository.Expenses.Count);
+            Expense expense = new Expense(23.5, month, "cine");
+            repository.addExpense(expense);
         }
        
         [TestMethod]
-        public void addExpense()
+        public void AddExpense()
         {
             String categoryName = "Entretenimiento";
             List<string> keyWords = new List<string>();
@@ -623,8 +624,8 @@ namespace Test
             expenses.Add(expense);
             expense.Category = category;
             Repository repository = new Repository();
-            repository.addCategory(categoryName, keyWords);
-            repository.addExpense(23.5, month, "cine");
+            repository.addCategory(category);
+            repository.addExpense(expense);
             Expense expense1 = expenses.ToArray()[0];
             Expense expense2 = repository.Expenses.ToArray()[0];
             Assert.AreEqual(expense1.Amount, expense2.Amount);
