@@ -8,12 +8,13 @@ namespace Test
     [TestClass]
     public class CategoryTest
     {
+
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException), "")]
         public void createCategoryEmptyName()
         {
             String categoryName = "";
-            List<string> keyWords = new List<string>();
+            List<string> keyWords = new List<string>();          
             Category emptyCategory = new Category(categoryName, keyWords);
         }
 
@@ -44,6 +45,9 @@ namespace Test
             Category category = new Category(categoryName, keyWords);
         }
 
+       
+
+        
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException), "")]
         public void createCategoryInvalidKeyWords()
@@ -60,16 +64,29 @@ namespace Test
             keyWords.Add("casino");
             keyWords.Add("sala de juego");
             keyWords.Add("parque");
-            keyWords.Add("piscina");
+            keyWords.Add("shopping");
             Category category = new Category(categoryName, keyWords);
 
         }
+
+       
+       
 
         [TestMethod]
         public void createCategory()
         {
             String categoryName = "entretenimiento";
             List<string> keyWords = new List<string>();
+            keyWords.Add("cine");
+            keyWords.Add("teatro");
+            keyWords.Add("salida");
+            keyWords.Add("libreria");
+            keyWords.Add("jugeteria");
+            keyWords.Add("shopping");
+            keyWords.Add("patinaje");
+            keyWords.Add("casino");
+            keyWords.Add("sala de juego");
+            keyWords.Add("parque");
             Category category = new Category(categoryName, keyWords);
             Assert.AreEqual(category.Name, categoryName);
             Assert.AreEqual(category.KeyWords, keyWords);
