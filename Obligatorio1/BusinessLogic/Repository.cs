@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -14,16 +14,21 @@ namespace BusinessLogic
 
         public List<Expense> Expenses { get; set; }
 
-        public Repository(List<Category> categoryReceived)
-        {
-            this.Categories = categoryReceived;
-
-        }
         public Repository()
         {
-            this.Categories = new List<Category>();
+            Categories = new List<Category>();
+            Expenses = new List<Expense>();
+        }
+
+        
+
+        public Repository(List<Category> categoriesReceived)
+        {
+            this.Categories = categoriesReceived;
             this.Expenses = new List<Expense>();
         }
+
+
 
         public Category FindCategoryByDescription(string description)
         {
@@ -113,13 +118,14 @@ namespace BusinessLogic
         //obtener todo eso que tenemos que mostrar
         public List<string[]> ExpenseReport(string month)
         {
+            
             int monthInt = ToIntMonth(month);
             List<string[]> reports = new List<string[]>();
             for (int i = 0; i < this.Expenses.Count; i++)
             {
                 string[] report = new string[4];
                 Expense expense = this.Expenses[i];
-                if (expense.CreationDate.Month == monthInt)
+                if (expense.CreationDate.Month == monthInt )
                 {
                     string date = ToStringDate(expense.CreationDate);
                     string description = expense.Description;
@@ -169,6 +175,17 @@ namespace BusinessLogic
                 this.Categories.Add(category);                
             }
            
+        }
+
+        public void addExpense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
+        {
+            Expense expense = new Expense(amountPassed, creationDatePassed, descriptionPassed);
+            expense.Category= FindCategoryByDescription(descriptionPassed);
+            if(expense.Category!=null)
+            Expenses.Add(expense);
+           
+        }
+
         private bool  areValidKeywords(List<string> keyWords)
         {
             bool validKeywords = true;
