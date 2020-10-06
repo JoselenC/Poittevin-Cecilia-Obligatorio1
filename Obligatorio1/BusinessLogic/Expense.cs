@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -34,27 +34,7 @@ namespace BusinessLogic
             if (description.Length < 3 || description.Length > 20) { return false; }
             else { return true; }
         }
-
-
-        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed, Repository repository)
-        {
-            if (!ValidAmount(amountPassed) || !ValidDescription(descriptionPassed))
-            {
-                throw new InvalidOperationException();
-            }
-            else if (!ValidDate(creationDatePassed))
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            else
-            {
-                this.Amount = amountPassed;
-                this.CreationDate = creationDatePassed;
-                this.Description = descriptionPassed;
-                this.Category = repository.FindCategoryByDescription(this.Description);
-
-            }
-        }
+               
         public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
         {
             if (!ValidAmount(amountPassed) || !ValidDescription(descriptionPassed))
