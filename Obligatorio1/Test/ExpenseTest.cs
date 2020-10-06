@@ -16,22 +16,8 @@ namespace Test
 
             double amount = 0;
             string description = "";
-            DateTime creationDate = new DateTime(2020, 01, 01); String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense(amount, creationDate, description);
 
         }
 
@@ -43,22 +29,8 @@ namespace Test
 
             double amount = -10.5;
             string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2020, 01, 01); String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
@@ -69,22 +41,8 @@ namespace Test
 
             double amount = 23.555;
             string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2020, 01, 01); String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
@@ -95,23 +53,8 @@ namespace Test
 
             double amount = 23.344;
             string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2020, 01, 01); 
-            String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
@@ -120,22 +63,8 @@ namespace Test
         {
             double amount = 23;
             string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2031, 01, 01); String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            DateTime creationDate = new DateTime(2031, 01, 01);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
@@ -144,22 +73,8 @@ namespace Test
         {
             double amount = 23;
             string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2017, 2, 2); String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            DateTime creationDate = new DateTime(2017, 2, 2);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
@@ -168,22 +83,8 @@ namespace Test
         {
             double amount = 23;
             string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(0, 01, 01); String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            DateTime creationDate = new DateTime(0, 01, 01);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
@@ -192,22 +93,8 @@ namespace Test
         {
             double amount = 23;
             string description = "cuando fuimos al cine de punta carretas";
-            DateTime creationDate = new DateTime(2021, 2, 2); String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            DateTime creationDate = new DateTime(2021, 2, 2);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
@@ -215,23 +102,9 @@ namespace Test
         public void creatExpenseInvalidDescription()
         {
             double amount = 23;
-            string description = "aa";
-            DateTime creationDate = new DateTime(2021, 2, 2); String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            string description = "al";
+            DateTime creationDate = new DateTime(2021, 2, 2);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
@@ -240,39 +113,13 @@ namespace Test
             double amount = 23.55;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            String categoryName = "entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
-            keyWords.Add("salida");
-            keyWords.Add("libreria");
-            keyWords.Add("jugeteria");
-            keyWords.Add("shopping");
-            keyWords.Add("patinaje");
-            keyWords.Add("casino");
-            keyWords.Add("sala de juego");
-            Category category = new Category(categoryName, keyWords);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            Repository repository = new Repository(categories);
-            Expense expense = new Expense(amount, creationDate, description, repository);
+            Expense expense = new Expense(amount, creationDate, description);
             Assert.AreEqual(expense.Amount, amount);
             Assert.AreEqual(expense.CreationDate, creationDate);
             Assert.AreEqual(expense.Description, description);
-            Assert.AreEqual(expense.Category, category);
+
         }
 
-        [TestMethod]
-        public void asignCategory()
-        {
-            double amount = 23.55;
-            string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2020, 01, 01);
-            Repository repository = new Repository();
-            Expense expense = new Expense(amount, creationDate, description, repository);
-            Assert.IsNull(expense.Category);
-        }
+
     }
-
-
 }
