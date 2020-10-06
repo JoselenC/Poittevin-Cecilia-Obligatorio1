@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -19,8 +19,7 @@ namespace BusinessLogic
             Categories = new List<Category>();
             Expenses = new List<Expense>();
         }
-
-        
+             
 
         public Repository(List<Category> categoriesReceived)
         {
@@ -167,25 +166,18 @@ namespace BusinessLogic
             return validName;
         }
 
-        public void addCategory(string name, List<string> keyWords)
+        public void addCategory(Category category)
         {
-            if(isValidName(name)&& areValidKeywords(keyWords))
+            if (!isValidName(category.Name))
+                throw new ExcepcionInvalidRepeatedNameCategory();
+            if (!areValidKeywords(category.KeyWords))
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
+            if (isValidName(category.Name)&& areValidKeywords(category.KeyWords))
             {
-                Category category = new Category(name, keyWords);
                 this.Categories.Add(category);                
             }
            
         }
-
-        public void addExpense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
-        {
-            Expense expense = new Expense(amountPassed, creationDatePassed, descriptionPassed);
-            expense.Category= FindCategoryByDescription(descriptionPassed);
-            if(expense.Category!=null)
-            Expenses.Add(expense);
-           
-        }
-
         private bool  areValidKeywords(List<string> keyWords)
         {
             bool validKeywords = true;
@@ -206,6 +198,16 @@ namespace BusinessLogic
 
             }
             return validKeywords;
+        }
+
+
+        public void addExpense(Expense expense)
+        {
+            expense.Category = FindCategoryByDescription(expense.Description);
+            if (expense.Category == null)
+                throw new ExcepcionExpenseWithEmptyCategory();
+            Expenses.Add(expense);
+
         }
     }
 }
