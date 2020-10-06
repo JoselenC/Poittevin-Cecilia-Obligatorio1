@@ -9,49 +9,46 @@ namespace BusinessLogic
 {
     public class Expense
     {
-        public double amount { get; set; }
-        public DateTime creationDate { get; set; }
+        public double Amount { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        public string description { get; set; }
+        public string Description { get; set; }
 
-        public Category category { get; set; }
+        public Category Category { get; set; }
 
-        public bool validDate(DateTime date)
+        private void ValidDate(DateTime date)
         {
-            if (date.Year > 2030 || date.Year < 2018) { return false; }
-            return true;
+            if (date.Year > 2030 || date.Year < 2018)
+                throw new ExcepcionInvalidYearExpense();
         }
 
-        public bool validAmount(double amountPassed)
+        private void ValidAmount(double amountPassed)
         {
-            if (amountPassed <= 0) { return false; }
-            if (amountPassed != Math.Round(amountPassed,2)) { return false; }
-            else { return true; }
+            if (amountPassed <= 0)
+                throw new ExcepcionNegativeAmountExpense();
+
+            if (amountPassed != Math.Round(amountPassed, 2))
+                throw new ExcepcionInvalidAmountExpense();
         }
 
-        public bool validDescription(string description)
+        private void ValidDescription(string description)
         {
-            if (description.Length<3 || description.Length>20) { return false; }
-            else { return true; }
+            if (description.Length < 3 || description.Length > 20)
+                throw new ExcepcionInvalidDescriptionLengthExpense();            
+        }
+               
+        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
+        {
+            ValidAmount(amountPassed);
+            ValidDescription(descriptionPassed);          
+            ValidDate(creationDatePassed);            
+            this.Amount = amountPassed;
+            this.CreationDate = creationDatePassed;
+            this.Description = descriptionPassed;
+            this.Category = null;
+
+            
         }
 
-        
-        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed, Category category)
-        {
-            if (!validAmount(amountPassed) || !validDescription(descriptionPassed))
-            {
-                throw new InvalidOperationException();
-            }
-            else if (!validDate(creationDatePassed))
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            else
-            {
-                this.amount = amountPassed;
-                this.creationDate = creationDatePassed;
-                this.description = descriptionPassed;
-            }
-        }
     }
 }

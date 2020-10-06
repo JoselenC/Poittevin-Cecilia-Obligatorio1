@@ -9,119 +9,117 @@ namespace Test
     public class ExpenseTest
     {
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
+        [ExpectedException(typeof(ExcepcionNegativeAmountExpense), "")]
 
-        public void createEmptyExpense()
+        public void CreateEmptyExpense()
         {
 
             double amount = 0;
             string description = "";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate,description,category);
+            Expense expense = new Expense(amount, creationDate, description);
 
         }
 
         [TestMethod]
 
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createExpenseNegativeAmount()
+        [ExpectedException(typeof(ExcepcionNegativeAmountExpense), "")]
+        public void CreateExpenseNegativeAmount()
         {
 
             double amount = -10.5;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate, description, category);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
 
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createExpenseInvalidAmount()
+        [ExpectedException(typeof(ExcepcionInvalidAmountExpense), "")]
+        public void CreateExpenseInvalidDecimalAmount()
         {
 
             double amount = 23.555;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate, description, category);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
 
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void createExpenseInvalidAmount2()
+        [ExpectedException(typeof(ExcepcionInvalidAmountExpense), "")]
+        public void CreateExpenseInvalidDecimalAmount2()
         {
 
             double amount = 23.344;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate, description, category);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
-        public void creatExpenseInvalidDateYear()
+        [ExpectedException(typeof(ExcepcionInvalidYearExpense), "")]
+        public void CreatExpenseInvalidDateYear()
         {
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2031, 01, 01);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate, description, category);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
-        public void creatExpenseInvalidDateYear2()
+        [ExpectedException(typeof(ExcepcionInvalidYearExpense), "")]
+        public void CreatExpenseInvalidDateYear2()
         {
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2017, 2, 2);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate, description, category);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
-        public void creatExpenseInvalidDateYear3()
+        public void CreatExpenseInvalidDateYear3()
         {
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(0, 01, 01);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate, description, category);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException), "")]
-        public void creatExpenseInvalidDescription2()
+        [ExpectedException(typeof(ExcepcionInvalidDescriptionLengthExpense), "")]
+        public void CreatExpenseInvalidDescriptionLength2()
         {
             double amount = 23;
             string description = "cuando fuimos al cine de punta carretas";
             DateTime creationDate = new DateTime(2021, 2, 2);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate, description, category);
+            Expense expense = new Expense(amount, creationDate, description);
         }
 
         [TestMethod]
-        public void creatExpense()
+        [ExpectedException(typeof(ExcepcionInvalidDescriptionLengthExpense), "")]
+        public void CreatExpenseInvalidDescriptionLength()
+        {
+            double amount = 23;
+            string description = "al";
+            DateTime creationDate = new DateTime(2021, 2, 2);
+            Expense expense = new Expense(amount, creationDate, description);
+        }
+
+        [TestMethod]
+        public void CreatExpense()
         {
             double amount = 23.55;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Category category = repository.findCategory(description);
-            Expense expense = new Expense(amount, creationDate, description, category);
-            Assert.AreEqual(expense.amount, amount);
-            Assert.AreEqual(expense.creationDate, creationDate);
-            Assert.AreEqual(expense.description, description);
-            Assert.AreEqual(expense.category, category);
+            Expense expense = new Expense(amount, creationDate, description);
+            Assert.AreEqual(expense.Amount, amount);
+            Assert.AreEqual(expense.CreationDate, creationDate);
+            Assert.AreEqual(expense.Description, description);
 
         }
 
-        
-        }
 
-
+    }
 }

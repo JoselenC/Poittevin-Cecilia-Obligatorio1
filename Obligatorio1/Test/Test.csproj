@@ -52,7 +52,9 @@
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CategoryTest.cs" />
+    <Compile Include="repositoryTest.cs" />
     <Compile Include="ExpenseTest.cs" />
+    <Compile Include="BusinessLogicControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
