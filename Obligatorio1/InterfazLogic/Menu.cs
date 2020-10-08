@@ -23,8 +23,8 @@ namespace InterfazLogic
         private void btnRegisterCategory_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-            UserControl registerCategory = new RegisterCategory(repository);
-            mainPanel.Controls.Add(registerCategory);
+           // UserControl registerCategory = new RegisterCategory(repository);
+            //mainPanel.Controls.Add(registerCategory);
         }
     }
 }
