@@ -34,9 +34,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.tbKeyWord = new System.Windows.Forms.TextBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lstCategories = new System.Windows.Forms.ListBox();
             this.btnAddKeyWord = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.lblName = new System.Windows.Forms.Label();
+            this.lblKeyWords = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.tbEdit = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -53,7 +57,7 @@
             // btnRegisterCategory
             // 
             this.btnRegisterCategory.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterCategory.Location = new System.Drawing.Point(959, 647);
+            this.btnRegisterCategory.Location = new System.Drawing.Point(1003, 647);
             this.btnRegisterCategory.Name = "btnRegisterCategory";
             this.btnRegisterCategory.Size = new System.Drawing.Size(218, 63);
             this.btnRegisterCategory.TabIndex = 1;
@@ -93,19 +97,19 @@
             this.tbKeyWord.Size = new System.Drawing.Size(582, 38);
             this.tbKeyWord.TabIndex = 5;
             // 
-            // listBox1
+            // lstCategories
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 31;
-            this.listBox1.Location = new System.Drawing.Point(345, 407);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(582, 35);
-            this.listBox1.TabIndex = 6;
+            this.lstCategories.FormattingEnabled = true;
+            this.lstCategories.ItemHeight = 31;
+            this.lstCategories.Location = new System.Drawing.Point(345, 401);
+            this.lstCategories.Name = "lstCategories";
+            this.lstCategories.Size = new System.Drawing.Size(582, 35);
+            this.lstCategories.TabIndex = 6;
             // 
             // btnAddKeyWord
             // 
             this.btnAddKeyWord.BackColor = System.Drawing.Color.Tan;
-            this.btnAddKeyWord.Location = new System.Drawing.Point(959, 283);
+            this.btnAddKeyWord.Location = new System.Drawing.Point(1003, 283);
             this.btnAddKeyWord.Name = "btnAddKeyWord";
             this.btnAddKeyWord.Size = new System.Drawing.Size(218, 63);
             this.btnAddKeyWord.TabIndex = 7;
@@ -116,7 +120,7 @@
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.Tan;
-            this.btnEdit.Location = new System.Drawing.Point(959, 395);
+            this.btnEdit.Location = new System.Drawing.Point(376, 483);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(218, 63);
             this.btnEdit.TabIndex = 8;
@@ -124,14 +128,54 @@
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(339, 216);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(23, 32);
+            this.lblName.TabIndex = 9;
+            this.lblName.Text = ".";
+            // 
+            // lblKeyWords
+            // 
+            this.lblKeyWords.AutoSize = true;
+            this.lblKeyWords.Location = new System.Drawing.Point(339, 347);
+            this.lblKeyWords.Name = "lblKeyWords";
+            this.lblKeyWords.Size = new System.Drawing.Size(23, 32);
+            this.lblKeyWords.TabIndex = 10;
+            this.lblKeyWords.Text = ".";
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.Tan;
+            this.btnSave.Location = new System.Drawing.Point(646, 483);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(218, 63);
+            this.btnSave.TabIndex = 11;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // tbEdit
+            // 
+            this.tbEdit.Location = new System.Drawing.Point(325, 398);
+            this.tbEdit.Name = "tbEdit";
+            this.tbEdit.Size = new System.Drawing.Size(602, 38);
+            this.tbEdit.TabIndex = 12;
+            // 
             // RegisterCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.tbEdit);
+            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.lblKeyWords);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnAddKeyWord);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lstCategories);
             this.Controls.Add(this.tbKeyWord);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label3);
@@ -139,7 +183,7 @@
             this.Controls.Add(this.btnRegisterCategory);
             this.Controls.Add(this.label1);
             this.Name = "RegisterCategory";
-            this.Size = new System.Drawing.Size(1211, 739);
+            this.Size = new System.Drawing.Size(1253, 739);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,8 +197,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.TextBox tbKeyWord;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lstCategories;
         private System.Windows.Forms.Button btnAddKeyWord;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblKeyWords;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.TextBox tbEdit;
     }
 }

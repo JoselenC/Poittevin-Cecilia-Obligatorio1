@@ -60,7 +60,7 @@
             // 
             this.mainPanel.Location = new System.Drawing.Point(381, 21);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1042, 764);
+            this.mainPanel.Size = new System.Drawing.Size(1232, 897);
             this.mainPanel.TabIndex = 7;
             // 
             // btnRegisterExpense
@@ -103,7 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1450, 814);
+            this.ClientSize = new System.Drawing.Size(1625, 930);
             this.Controls.Add(this.btnBudgetReport);
             this.Controls.Add(this.btnExpenseReport);
             this.Controls.Add(this.btnRegisterBudget);
