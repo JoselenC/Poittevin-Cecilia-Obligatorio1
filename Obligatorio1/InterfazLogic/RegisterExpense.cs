@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace InterfazLogic
 {
-    public partial class RegisterCategory : UserControl
+    public partial class RegisterExpense : UserControl
     {
-        public RegisterCategory()
+        public RegisterExpense()
         {
             InitializeComponent();
         }
