@@ -22,10 +22,7 @@ namespace InterfazLogic
 
         private void CompleteCategories()
         {
-            if (repository.Categories.Count == 0)
-            {
-                lblCategories.Text = "There are no categories registered in the system";
-            }
+            
             for (int i = 0; i < repository.Categories.Count; i++)
             {
                 lstCategories.Items.Add(repository.Categories[i].Name);
@@ -42,35 +39,59 @@ namespace InterfazLogic
                 DateTime creationDate = dateTime.Value;
                 Expense expense = new Expense( amount, creationDate,description);
                 Category category = repository.FindCategoryByDescription(description);
-                if (expense.Category == null)
+                if (expense.Category == null && repository.Categories.Count>0)
                 {
                     CompleteCategories();
                     string categoryName= lstCategories.SelectedItem.ToString();
                     category = repository.FindCategoryByName(categoryName);
+                    repository.addExpense(expense);
+                    lbDescription.Text = "";
+                    lblAmount.Text = "";
+                    lblCategories.Text = "";
+                    lblDate.Text = "";
+                    MessageBox.Show("The expense was recorded successfully");
+                }
+                else {
+                    MessageBox.Show("There are no categories registered in the system");
                 }
                
-                repository.addExpense(expense);
-                lbDescription.Text = "";
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lblDate.Text = "";
+               
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
-                lbDescription.Text = "The name must be between 3 and 20 characters long.";
+                lbDescription.Text = "The name must be between 3 and 20 characters long.";            
+                lblAmount.Text = "";
+                lblCategories.Text = "";
+                lblDate.Text = "";
 
             }
             catch (ExcepcionNegativeAmountExpense)
             {
                 lblAmount.Text = "The amount must be positive";
+                lbDescription.Text = "";
+                lblCategories.Text = "";
+                lblDate.Text = "";
             }
             catch (ExcepcionInvalidYearExpense)
             {
                 lblDate.Text = "The year must be between 2018 and 2030.";
+                lbDescription.Text = "";
+                lblAmount.Text = "";
+                lblCategories.Text = "";
             }
             catch (ExcepcionExpenseWithEmptyCategory)
             {
                 lblCategories.Text = "The category should not be empty ";
+                lbDescription.Text = "";
+                lblAmount.Text = "";
+                lblDate.Text = "";
+            }
+            catch (ExcepcionInvalidAmountExpense)
+            {
+                lblAmount.Text= "The amount cannot have more than two decimal places";
+                lbDescription.Text = "";
+                lblCategories.Text = "";
+                lblDate.Text = "";
             }
         }
     }
