@@ -17,7 +17,7 @@ namespace InterfazLogic
         public RegisterExpense(Repository vRepository)
         {
             InitializeComponent();
-            repository = vRepository; e
+            repository = vRepository; 
         }
 
 
@@ -30,12 +30,12 @@ namespace InterfazLogic
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 Expense expense = new Expense( amount, creationDate,description);
-                Category category=repository.FindCategoryByDescription(description)
+                Category category = repository.FindCategoryByDescription(description);
                 if (expense.Category == null && repository.Categories.Count>0)
                 {
-                    CompleteCategories();
+                    //CompleteCategories();
                     string categoryName= lstCategories.SelectedItem.ToString();
-                    category = repository.findCategoryByNAme(categoryName);
+                    category = repository.FindCategoryByName(categoryName);
                 }
                
                 repository.addExpense(expense);
@@ -43,18 +43,21 @@ namespace InterfazLogic
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
-                lblErrorDescription.Text = "The name must be between 3 and 20 characters long.";
+                lbDescription.Text = "The name must be between 3 and 20 characters long.";
 
             }
             catch (ExcepcionNegativeAmountExpense)
             {
-                lblErrorDescription.Text = "The amount must be positive";
+                lblAmount.Text = "The amount must be positive";
             }
             catch (ExcepcionInvalidYearExpense)
             {
-                lblErrorDescription.Text = "The year must be between 2018 and 2030.";
+                lblDate.Text = "The year must be between 2018 and 2030.";
             }
-
+            catch (ExcepcionExpenseWithEmptyCategory)
+            {
+                lblCategories.Text = "The category should not be empty ";
+            }
         }
     }
 }
