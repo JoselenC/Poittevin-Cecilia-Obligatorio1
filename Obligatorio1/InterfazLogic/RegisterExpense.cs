@@ -20,6 +20,17 @@ namespace InterfazLogic
             repository = vRepository; 
         }
 
+        private void CompleteCategories()
+        {
+            if (repository.Categories.Count == 0)
+            {
+                lblCategories.Text = "There are no categories registered in the system";
+            }
+            for (int i = 0; i < repository.Categories.Count; i++)
+            {
+                lstCategories.Items.Add(repository.Categories[i].Name);
+            }
+        }
 
 
         private void btnRegistrExpense_Click(object sender, EventArgs e)
@@ -31,15 +42,18 @@ namespace InterfazLogic
                 DateTime creationDate = dateTime.Value;
                 Expense expense = new Expense( amount, creationDate,description);
                 Category category = repository.FindCategoryByDescription(description);
-                if (expense.Category == null && repository.Categories.Count>0)
+                if (expense.Category == null)
                 {
-                    //CompleteCategories();
+                    CompleteCategories();
                     string categoryName= lstCategories.SelectedItem.ToString();
                     category = repository.FindCategoryByName(categoryName);
                 }
                
                 repository.addExpense(expense);
                 lbDescription.Text = "";
+                lblAmount.Text = "";
+                lblCategories.Text = "";
+                lblDate.Text = "";
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
