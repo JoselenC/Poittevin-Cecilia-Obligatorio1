@@ -12,7 +12,8 @@ namespace Test
         {
             Category category = new Category("testCategory");
             double amount = 100;
-            new BudgetCategory(category, amount);
+            BudgetCategory budgetCategory =  new BudgetCategory(category, amount);
+            Assert.AreEqual(budgetCategory.Category, category);
         }
 
         [TestMethod]
@@ -28,8 +29,17 @@ namespace Test
         {
             Category category = new Category("testCategory");
             double amount = 100.23;
-            new BudgetCategory(category, amount);
+            BudgetCategory budgetCategory = new BudgetCategory(category, amount);
+            Assert.AreEqual(amount, budgetCategory.Amount);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(NegativeValueErrorAttribute))]
+        public void TestCreateBudgetCategoryAmountWithNegativeValue()
+        {
+            Category category = new Category("testCategory");
+            double amount = -1;
+            new BudgetCategory(category, amount);
+        }
     }
 }

@@ -4,20 +4,33 @@ namespace BusinessLogic
 {
     public class BudgetCategory
     {
-        public Category category { get => category; set => SetCategory(value); }
+        private Category category;
+        private double amount;
+        public Category Category { get => category; set => SetCategory(value) ; }
+        public double Amount { get => amount; set => SetAmount(value); }
+
 
         private void SetCategory(Category vCategory)
         {
-            if(vCategory == null) {
+            if (vCategory == null)
+            {
                 throw new ArgumentNullException();
             }
+            category = vCategory;
+        }
+        private void SetAmount(double vAmount)
+        {
+            if (vAmount < 0)
+            {
+                throw new NegativeValueErrorAttribute();
+            }
+            amount = vAmount;
         }
 
-        public double amount { get; }
         public BudgetCategory(Category vCategory, double vAmount)
         {
-            category = vCategory;
-            amount = vAmount;
+            Category = vCategory;
+            Amount = vAmount;
         }
 
     }
