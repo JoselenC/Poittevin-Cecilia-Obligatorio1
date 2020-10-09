@@ -89,6 +89,7 @@
             this.btnExpenseReport.TabIndex = 10;
             this.btnExpenseReport.Text = "Expense report";
             this.btnExpenseReport.UseVisualStyleBackColor = true;
+            this.btnExpenseReport.Click += new System.EventHandler(this.btnExpenseReport_Click);
             // 
             // btnBudgetReport
             // 

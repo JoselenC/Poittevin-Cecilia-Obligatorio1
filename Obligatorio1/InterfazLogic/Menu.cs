@@ -22,9 +22,17 @@ namespace InterfazLogic
 
         private void btnRegisterCategory_Click(object sender, EventArgs e)
         {
-            mainPanel.Controls.Clear();
-            UserControl registerCategory = new RegisterCategory(repository);
-            mainPanel.Controls.Add(registerCategory);
+           // mainPanel.Controls.Clear();
+           // UserControl registerCategory = new RegisterCategory(repository);
+           // mainPanel.Controls.Add(registerCategory);
         }
+
+        private void btnExpenseReport_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            UserControl expenseReport = new ExpenseReport(repository);
+            mainPanel.Controls.Add(expenseReport);
+        }
+    }
     }
 }
