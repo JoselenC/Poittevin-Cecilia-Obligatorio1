@@ -31,7 +31,7 @@ namespace BusinessLogic
         public Category(string nameReceived, List<string> keyWordsReceived)
         {
             ValidName(nameReceived);
-           ValidKeyWords(keyWordsReceived);          
+            ValidKeyWords(keyWordsReceived);          
             this.Name = nameReceived;
             this.KeyWords = keyWordsReceived;
         }

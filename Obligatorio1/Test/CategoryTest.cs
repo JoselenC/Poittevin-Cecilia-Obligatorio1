@@ -15,7 +15,7 @@ namespace Test
         {
             String categoryName = "";
             List<string> keyWords = new List<string>();          
-            Category emptyCategory = new Category(categoryName, keyWords);
+            new Category(categoryName, keyWords);
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace Test
         {
             String categoryName = "9999";
             List<string> keyWords = new List<string>();
-            Category category = new Category(categoryName, keyWords);
+            new Category(categoryName, keyWords);
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Test
         {
             String categoryName = "entretenimientos";
             List<string> keyWords = new List<string>();
-            Category category = new Category(categoryName, keyWords);
+            new Category(categoryName, keyWords);
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace Test
         {
             String categoryName = "la";
             List<string> keyWords = new List<string>();
-            Category category = new Category(categoryName, keyWords);
+            new Category(categoryName, keyWords);
         }       
 
         
@@ -63,7 +63,7 @@ namespace Test
             keyWords.Add("sala de juego");
             keyWords.Add("parque");
             keyWords.Add("shopping");
-            Category category = new Category(categoryName, keyWords);
+            new Category(categoryName, keyWords);
 
         }       
        
@@ -83,7 +83,9 @@ namespace Test
             keyWords.Add("casino");
             keyWords.Add("sala de juego");
             keyWords.Add("parque");
+            
             Category category = new Category(categoryName, keyWords);
+            
             Assert.AreEqual(category.Name, categoryName);
             Assert.AreEqual(category.KeyWords, keyWords);
         }
