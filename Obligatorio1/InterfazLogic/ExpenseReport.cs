@@ -34,7 +34,20 @@ namespace InterfazLogic
         private void btnConsult_Click(object sender, EventArgs e)
         {
            
+            string month = lstMonths.SelectedIndex.ToString();
+            List<string[]> report=repository.ExpenseReport(month);
+            listView1.Items.Clear();
+            ListViewItem item = new ListViewItem();
+            for (int i = 0; i < report.Count; i++)
+            {                
+                item = listView1.Items.Add(report[i][0]);
+                item.SubItems.Add(report[i][1]);
+                item.SubItems.Add(report[i][2]);
+                item.SubItems.Add(report[i][3]);
+            }         
 
         }
+
+       
     }
 }

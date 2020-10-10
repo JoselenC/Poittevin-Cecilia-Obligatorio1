@@ -34,5 +34,6 @@ namespace InterfazLogic
             mainPanel.Controls.Add(expenseReport);
         }
     }
-    }
+
 }
+

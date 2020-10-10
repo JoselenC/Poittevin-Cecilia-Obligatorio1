@@ -32,6 +32,11 @@
             this.lstMonths = new System.Windows.Forms.ListBox();
             this.Month = new System.Windows.Forms.Label();
             this.btnConsult = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.cCreationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -66,7 +71,7 @@
             // btnConsult
             // 
             this.btnConsult.BackColor = System.Drawing.Color.Tan;
-            this.btnConsult.Location = new System.Drawing.Point(835, 136);
+            this.btnConsult.Location = new System.Drawing.Point(672, 136);
             this.btnConsult.Name = "btnConsult";
             this.btnConsult.Size = new System.Drawing.Size(286, 52);
             this.btnConsult.TabIndex = 3;
@@ -74,17 +79,54 @@
             this.btnConsult.UseVisualStyleBackColor = false;
             this.btnConsult.Click += new System.EventHandler(this.btnConsult_Click);
             // 
+            // listView1
+            // 
+            this.listView1.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.cCreationDate,
+            this.cDescription,
+            this.cCategory,
+            this.cAmount});
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(85, 266);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(873, 362);
+            this.listView1.TabIndex = 4;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // cCreationDate
+            // 
+            this.cCreationDate.Text = "Date";
+            this.cCreationDate.Width = 150;
+            // 
+            // cDescription
+            // 
+            this.cDescription.Text = "Description";
+            this.cDescription.Width = 150;
+            // 
+            // cCategory
+            // 
+            this.cCategory.Text = "Category";
+            this.cCategory.Width = 150;
+            // 
+            // cAmount
+            // 
+            this.cAmount.Text = "Amount";
+            this.cAmount.Width = 150;
+            // 
             // ExpenseReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.btnConsult);
             this.Controls.Add(this.Month);
             this.Controls.Add(this.lstMonths);
             this.Controls.Add(this.label1);
             this.Name = "ExpenseReport";
-            this.Size = new System.Drawing.Size(1296, 680);
+            this.Size = new System.Drawing.Size(1011, 680);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,5 +138,10 @@
         private System.Windows.Forms.ListBox lstMonths;
         private System.Windows.Forms.Label Month;
         private System.Windows.Forms.Button btnConsult;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader cCreationDate;
+        private System.Windows.Forms.ColumnHeader cDescription;
+        private System.Windows.Forms.ColumnHeader cCategory;
+        private System.Windows.Forms.ColumnHeader cAmount;
     }
 }
