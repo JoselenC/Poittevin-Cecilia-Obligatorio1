@@ -17,15 +17,32 @@ namespace InterfazLogic
         public RegisterExpense(Repository vRepository)
         {
             InitializeComponent();
-            repository = vRepository; 
+            repository = vRepository;
         }
 
-        private void CompleteCategories()
+        private void CompleteCategories(string description)
         {
-            
-            for (int i = 0; i < repository.Categories.Count; i++)
+            List<string> key = new List<string>();
+            key.Add("dfsdf");
+            Category category = new Category("entretenimiento",key);
+            List<Category> categories = new List<Category>();
+            categories.Add(category);
+            string categorieName = repository.FindCategoryByDescription(description).Name;
+
+            if (categorieName.Length > 0)
             {
-                lstCategories.Items.Add(repository.Categories[i].Name);
+                lstCategories.Items.Add(categorieName);
+            }
+            else if(repository.Categories.Count>0)
+            {               
+                for (int i = 0; i < repository.Categories.Count; i++)
+                {
+                   lstCategories.Items.Add(repository.Categories[i].Name);
+                }
+            }
+            else
+            {
+                MessageBox.Show("There are no categories registered in the system");
             }
         }
 
@@ -35,27 +52,18 @@ namespace InterfazLogic
             try
             {
                 string description = tbDescription.Text;
+                CompleteCategories(description);
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 Expense expense = new Expense( amount, creationDate,description);
-                Category category = repository.FindCategoryByDescription(description);
-                if (expense.Category == null && repository.Categories.Count>0)
-                {
-                    CompleteCategories();
-                    string categoryName= lstCategories.SelectedItem.ToString();
-                    category = repository.FindCategoryByName(categoryName);
-                    repository.addExpense(expense);
-                    lbDescription.Text = "";
-                    lblAmount.Text = "";
-                    lblCategories.Text = "";
-                    lblDate.Text = "";
-                    MessageBox.Show("The expense was recorded successfully");
-                }
-                else {
-                    MessageBox.Show("There are no categories registered in the system");
-                }
-               
-               
+                Category category = repository.FindCategoryByName(lstCategories.SelectedItem.ToString());              
+                repository.addExpense(expense);
+                lbDescription.Text = "";
+                lblAmount.Text = "";
+                lblCategories.Text = "";
+                lblDate.Text = "";
+                MessageBox.Show("The expense was recorded successfully");           
+                              
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
