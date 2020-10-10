@@ -37,6 +37,7 @@
             this.cDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblMonths = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -64,9 +65,9 @@
             this.Month.AutoSize = true;
             this.Month.Location = new System.Drawing.Point(47, 147);
             this.Month.Name = "Month";
-            this.Month.Size = new System.Drawing.Size(94, 32);
+            this.Month.Size = new System.Drawing.Size(108, 32);
             this.Month.TabIndex = 2;
-            this.Month.Text = "Month";
+            this.Month.Text = "Months";
             // 
             // btnConsult
             // 
@@ -115,11 +116,20 @@
             this.cAmount.Text = "Amount";
             this.cAmount.Width = 150;
             // 
+            // lblMonths
+            // 
+            this.lblMonths.AutoSize = true;
+            this.lblMonths.Location = new System.Drawing.Point(186, 217);
+            this.lblMonths.Name = "lblMonths";
+            this.lblMonths.Size = new System.Drawing.Size(0, 32);
+            this.lblMonths.TabIndex = 5;
+            // 
             // ExpenseReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.lblMonths);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.btnConsult);
             this.Controls.Add(this.Month);
@@ -143,5 +153,6 @@
         private System.Windows.Forms.ColumnHeader cDescription;
         private System.Windows.Forms.ColumnHeader cCategory;
         private System.Windows.Forms.ColumnHeader cAmount;
+        private System.Windows.Forms.Label lblMonths;
     }
 }

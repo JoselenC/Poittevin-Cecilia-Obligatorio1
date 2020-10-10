@@ -23,7 +23,12 @@ namespace InterfazLogic
         }
 
         private void monthsWithExpenses(){
+            lblMonths.Text = "";
             List <string> months= repository.MonthsOrdered();
+            if (months.Count < 1)
+            {
+                lblMonths.Text = "There are no expenses registered in the system";
+            }
             for (int i = 0; i < months.Count; i++)
             {
                 lstMonths.Items.Add(months[i]);
@@ -33,8 +38,12 @@ namespace InterfazLogic
 
         private void btnConsult_Click(object sender, EventArgs e)
         {
-           
+            lblMonths.Text = "";
             string month = lstMonths.SelectedIndex.ToString();
+            if (month.Length == 0)
+            {
+                lblMonths.Text = "You must select a month to consult";
+            }
             List<string[]> report=repository.ExpenseReport(month);
             listView1.Items.Clear();
             ListViewItem item = new ListViewItem();
