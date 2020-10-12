@@ -71,6 +71,7 @@
             this.btnRegisterExpense.TabIndex = 8;
             this.btnRegisterExpense.Text = "Register Expense";
             this.btnRegisterExpense.UseVisualStyleBackColor = true;
+            this.btnRegisterExpense.Click += new System.EventHandler(this.btnRegisterExpense_Click);
             // 
             // btnRegisterBudget
             // 

@@ -54,6 +54,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterExpense.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegisterExpense.Designer.cs">
+      <DependentUpon>RegisterExpense.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegisterCategory.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -74,6 +80,9 @@
     </Compile>
     <EmbeddedResource Include="RegisterCategory.resx">
       <DependentUpon>RegisterCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegisterExpense.resx">
+      <DependentUpon>RegisterExpense.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
