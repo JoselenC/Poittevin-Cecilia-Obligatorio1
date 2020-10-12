@@ -25,6 +25,8 @@ namespace InterfazLogic
             tbEdit.Visible = false;
             this.MinimumSize = new Size(650, 300);
             this.MaximumSize= new Size(650, 300);
+            lstCategories.Items.Clear();
+            tbName.Clear();
         }
 
 
@@ -42,7 +44,7 @@ namespace InterfazLogic
                         lblKeyWords.Text = "You cannot add more than 10 keywords.";
                     }
                     else
-                    {
+                    {                     
                         this.keyWords.Add(keyWord);
                         lstCategories.Items.Add(keyWord);
                         tbKeyWord.Text = "";
@@ -83,15 +85,13 @@ namespace InterfazLogic
             try
             {
                 string name = tbName.Text;
-                Category category = new Category(name, this.keyWords);
+                List<string> kW = this.keyWords;
+                Category category = new Category(name, kW);
                 repository.addCategory(category);
-                MessageBox.Show("Category " + category.Name + " was added successfully");
-                tbKeyWord.Clear();
-                keyWords.Clear();
-                lstCategories.Items.Clear();
-                tbName.Clear();
+                MessageBox.Show("Category " + category.Name + " was added successfully");                
                 lblKeyWords.Text = "";
                 lblName.Text = "";
+                this.Visible = false;
             }
             catch (ExcepcionInvalidNameLengthCategory)
             {
@@ -118,6 +118,7 @@ namespace InterfazLogic
                 lblKeyWords.Text = "You cannot add more than 10 keywords.";
             }
 
+            
 
         }
 

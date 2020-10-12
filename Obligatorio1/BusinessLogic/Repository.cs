@@ -162,11 +162,9 @@ namespace BusinessLogic
             if (!isValidName(category.Name))
                 throw new ExcepcionInvalidRepeatedNameCategory();
             if (!areValidKeywords(category.KeyWords))
-                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
-            if (isValidName(category.Name)&& areValidKeywords(category.KeyWords))
-            {
-                this.Categories.Add(category);                
-            }
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();            
+            this.Categories.Add(category);                
+            
            
         }
         private bool  areValidKeywords(List<string> keyWords)

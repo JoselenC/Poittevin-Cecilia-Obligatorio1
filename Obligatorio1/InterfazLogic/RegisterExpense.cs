@@ -63,6 +63,7 @@ namespace InterfazLogic
                 lblAmount.Text = "";
                 lblCategories.Text = "";
                 lblDate.Text = "";
+               
                 MessageBox.Show("The expense was recorded successfully");           
                               
             }
