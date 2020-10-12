@@ -29,26 +29,28 @@ namespace InterfazLogic
 
 
         private void btnAddKeyWord_Click(object sender, EventArgs e)
-        {            
-            try
-            {
+        {
                 string keyWord = tbKeyWord.Text;
-                if (keyWord.Length>0)
+                if (keyWord.Length > 0)
                 {
-                    this.keyWords.Add(keyWord);
-                    lstCategories.Items.Add(keyWord);
-                    tbKeyWord.Text = "";
-                }            
+                    if (keyWords.Contains(keyWord.ToLower()))
+                    {
+                        lblKeyWords.Text = "You already entered that keyword";
+                    }
+                    else if (keyWords.Count > 10)
+                    {
+                        lblKeyWords.Text = "You cannot add more than 10 keywords.";
+                    }
+                    else
+                    {
+                        this.keyWords.Add(keyWord);
+                        lstCategories.Items.Add(keyWord);
+                        tbKeyWord.Text = "";
+                    }
+                }
                 else
                     lblKeyWords.Text = "The keyword cannot be empty.";
-
-            }           
-            catch (ExcepcionInvalidKeyWordsLengthCategory)
-            {
-                lblKeyWords.Text = "You cannot add more than 10 keywords.";
-            }
-
-
+            
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -111,6 +113,11 @@ namespace InterfazLogic
                 lblKeyWords.Text = "The entered keyword already exists in another category," +
                     " modify or delete it.";
             }
+            catch (ExcepcionInvalidKeyWordsLengthCategory)
+            {
+                lblKeyWords.Text = "You cannot add more than 10 keywords.";
+            }
+
 
         }
 
@@ -123,16 +130,24 @@ namespace InterfazLogic
             else
                 lblKeyWordToEdit.Text = "The keyword cannot be empty";
             tbEdit.Visible = false;
+            tbEdit.Text = "";
            
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int index = lstCategories.SelectedIndex;
-            keyWords.RemoveAt(index);
-            lstCategories.Items.RemoveAt(index);           
-            lblKeyWordToEdit.Text = "";
-            lblKeyWords.Text = "";
+            try
+            {
+                int index = lstCategories.SelectedIndex;
+                keyWords.RemoveAt(index);
+                lstCategories.Items.RemoveAt(index);
+                lblKeyWordToEdit.Text = "";
+                lblKeyWords.Text = "";
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                lblKeyWordToEdit.Text = "Select key word to delete";
+            }
         }
     }
 }
