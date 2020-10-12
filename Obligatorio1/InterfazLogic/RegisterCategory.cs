@@ -33,7 +33,7 @@ namespace InterfazLogic
             try
             {
                 string keyWord = tbKeyWord.Text;
-                if (keyWord != "")
+                if (keyWord.Length>0)
                 {
                     this.keyWords.Add(keyWord);
                     lstCategories.Items.Add(keyWord);
@@ -81,7 +81,7 @@ namespace InterfazLogic
             try
             {
                 string name = tbName.Text;
-                Category category = new Category(name, keyWords);
+                Category category = new Category(name, this.keyWords);
                 repository.addCategory(category);
                 MessageBox.Show("Category " + category.Name + " was added successfully");
                 tbKeyWord.Clear();

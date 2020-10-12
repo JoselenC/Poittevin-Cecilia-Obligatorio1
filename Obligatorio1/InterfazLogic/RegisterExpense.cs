@@ -53,11 +53,11 @@ namespace InterfazLogic
             try
             {
                 string description = tbDescription.Text;
-                CompleteCategories(description);
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 Expense expense = new Expense( amount, creationDate,description);
-                Category category = repository.FindCategoryByName(lstCategories.SelectedItem.ToString());              
+                Category category = repository.FindCategoryByName(lstCategories.SelectedItem.ToString());
+                expense.Category = category;
                 repository.addExpense(expense);
                 lbDescription.Text = "";
                 lblAmount.Text = "";
@@ -102,6 +102,16 @@ namespace InterfazLogic
                 lblCategories.Text = "";
                 lblDate.Text = "";
             }
+            catch (NullReferenceException)
+            {
+                lblCategories.Text = "Select Category";
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string description = tbDescription.Text;
+            CompleteCategories(description);
         }
     }
 }

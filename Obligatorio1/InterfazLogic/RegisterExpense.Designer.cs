@@ -42,6 +42,7 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.lblCategories = new System.Windows.Forms.Label();
             this.btnRegistrExpense = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,7 +193,7 @@
             // btnRegistrExpense
             // 
             this.btnRegistrExpense.BackColor = System.Drawing.Color.Tan;
-            this.btnRegistrExpense.Location = new System.Drawing.Point(437, 613);
+            this.btnRegistrExpense.Location = new System.Drawing.Point(421, 611);
             this.btnRegistrExpense.Name = "btnRegistrExpense";
             this.btnRegistrExpense.Size = new System.Drawing.Size(302, 55);
             this.btnRegistrExpense.TabIndex = 13;
@@ -200,11 +201,23 @@
             this.btnRegistrExpense.UseVisualStyleBackColor = false;
             this.btnRegistrExpense.Click += new System.EventHandler(this.btnRegistrExpense_Click);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.Tan;
+            this.btnSearch.Location = new System.Drawing.Point(845, 460);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(219, 55);
+            this.btnSearch.TabIndex = 14;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // RegisterExpense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnRegistrExpense);
             this.Controls.Add(this.lblCategories);
             this.Controls.Add(this.lblDate);
@@ -243,5 +256,6 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblCategories;
         private System.Windows.Forms.Button btnRegistrExpense;
+        private System.Windows.Forms.Button btnSearch;
     }
 }
