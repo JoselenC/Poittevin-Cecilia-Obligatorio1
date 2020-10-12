@@ -45,7 +45,7 @@ namespace InterfazLogic
 
         private void btnConsult_Click(object sender, EventArgs e)
         {
-            string month = lstMonths.SelectedIndex.ToString();
+            string month = lstMonths.SelectedItem.ToString();
             if (month.Length == 0)
             {
                 lblMonths.Text = "You must select a month to consult";
