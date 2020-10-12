@@ -19,6 +19,8 @@ namespace InterfazLogic
             InitializeComponent();
             repository = vRepository;
             monthsWithExpenses();
+            this.MaximumSize = new Size(450, 600);
+            this.MinimumSize = new Size(450, 600);
 
         }
 
@@ -27,18 +29,22 @@ namespace InterfazLogic
             List <string> months= repository.MonthsOrdered();
             if (months.Count < 1)
             {
-                lblMonths.Text = "There are no expenses registered in the system";
+                MessageBox.Show("There are no expenses registered in the system");
+                this.Visible = false;
             }
-            for (int i = 0; i < months.Count; i++)
+            else
             {
-                lstMonths.Items.Add(months[i]);
+                for (int i = 0; i < months.Count; i++)
+                {
+                    lstMonths.Items.Add(months[i]);
+                }
+                this.Visible = true;
             }
         }
 
 
         private void btnConsult_Click(object sender, EventArgs e)
         {
-            lblMonths.Text = "";
             string month = lstMonths.SelectedIndex.ToString();
             if (month.Length == 0)
             {

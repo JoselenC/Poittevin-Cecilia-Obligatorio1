@@ -89,9 +89,9 @@
             this.cCategory,
             this.cAmount});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(85, 266);
+            this.listView1.Location = new System.Drawing.Point(123, 252);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(873, 362);
+            this.listView1.Size = new System.Drawing.Size(806, 362);
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -99,22 +99,22 @@
             // cCreationDate
             // 
             this.cCreationDate.Text = "Date";
-            this.cCreationDate.Width = 150;
+            this.cCreationDate.Width = 200;
             // 
             // cDescription
             // 
             this.cDescription.Text = "Description";
-            this.cDescription.Width = 150;
+            this.cDescription.Width = 200;
             // 
             // cCategory
             // 
             this.cCategory.Text = "Category";
-            this.cCategory.Width = 150;
+            this.cCategory.Width = 200;
             // 
             // cAmount
             // 
             this.cAmount.Text = "Amount";
-            this.cAmount.Width = 150;
+            this.cAmount.Width = 200;
             // 
             // lblMonths
             // 
