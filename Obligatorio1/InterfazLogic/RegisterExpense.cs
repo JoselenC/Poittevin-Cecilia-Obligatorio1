@@ -18,26 +18,27 @@ namespace InterfazLogic
         {
             InitializeComponent();
             repository = vRepository;
+            this.MaximumSize = new Size(450, 600);
+            this.MinimumSize = new Size(450, 600);
         }
 
         private void CompleteCategories(string description)
         {
-            List<string> key = new List<string>();
-            key.Add("dfsdf");
-            Category category = new Category("entretenimiento",key);
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            string categorieName = repository.FindCategoryByDescription(description).Name;
+            Category category = repository.FindCategoryByDescription(description);
+            string categoryName = "";
 
-            if (categorieName.Length > 0)
+            if(category!=null)
+                categoryName = category.Name;
+
+            if (categoryName.Length > 0)
             {
-                lstCategories.Items.Add(categorieName);
+                lstCategories.Items.Add(categoryName);
             }
-            else if(repository.Categories.Count>0)
-            {               
+            else if (repository.Categories.Count > 0)
+            {
                 for (int i = 0; i < repository.Categories.Count; i++)
                 {
-                   lstCategories.Items.Add(repository.Categories[i].Name);
+                    lstCategories.Items.Add(repository.Categories[i].Name);
                 }
             }
             else
