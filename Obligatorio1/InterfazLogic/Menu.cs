@@ -37,8 +37,6 @@ namespace InterfazLogic
         private void btnExpenseReport_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-            UserControl registerExpense = new RegisterExpense(repository);
-            mainPanel.Controls.Add(registerExpense);
             UserControl expenseReport = new ExpenseReport(repository);
             mainPanel.Controls.Add(expenseReport);
         }
