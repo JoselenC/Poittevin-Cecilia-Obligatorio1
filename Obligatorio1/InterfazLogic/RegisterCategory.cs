@@ -86,7 +86,7 @@ namespace InterfazLogic
             {
                 string name = tbName.Text;
                 List<string> kW = this.keyWords;
-                Category category = new Category(name, kW);
+                Category category = new Category { Name = name, KeyWords = kW };
                 repository.AddCategoryToCategories(category);
                 MessageBox.Show("Category " + category.Name + " was added successfully");                
                 lblKeyWords.Text = "";
