@@ -53,9 +53,8 @@
     <Compile Include="BudgetTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CategoryTest.cs" />
-    <Compile Include="repositoryTest.cs" />
+    <Compile Include="RepositoryTest.cs" />
     <Compile Include="ExpenseTest.cs" />
-    <Compile Include="BusinessLogicControllerTest.cs" />
     <Compile Include="BudgetCategoryTest.cs" />
   </ItemGroup>
   <ItemGroup>

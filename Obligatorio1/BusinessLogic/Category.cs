@@ -11,7 +11,7 @@ namespace BusinessLogic
     {
         public string Name {get; set; }
 
-        public List<string> KeyWords { get; set; }
+        public List<string> KeyWords { get; set; } 
 
         private void ValidName(string nameReceived)
         {
@@ -27,17 +27,38 @@ namespace BusinessLogic
             if (keyWordsReceived.Count > 10)
                 throw new ExcepcionInvalidKeyWordsLengthCategory();
 
-        }   
+        }
+        public Category(string nameReceived)
+        {
+            ValidName(nameReceived);
+            this.Name = nameReceived;
+            this.KeyWords = new List<string>();
+        }
 
        
 
         public Category(string nameReceived, List<string> keyWordsReceived)
         {
             ValidName(nameReceived);
-           ValidKeyWords(keyWordsReceived);          
+            ValidKeyWords(keyWordsReceived);          
             this.Name = nameReceived;
             this.KeyWords = keyWordsReceived;
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Category category)
+            {
+                bool isEqualName = Name == category.Name;
+                bool isEqualKeyWords = KeyWords.OrderBy(t => t).SequenceEqual(category.KeyWords.OrderBy(t => t));
+                return isEqualName && isEqualKeyWords;
+            }
+            return false;
+        }
     }
 }

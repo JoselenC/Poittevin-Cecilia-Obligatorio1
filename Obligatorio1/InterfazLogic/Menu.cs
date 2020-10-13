@@ -1,12 +1,6 @@
 ﻿using BusinessLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InterfazLogic
@@ -41,6 +35,30 @@ namespace InterfazLogic
             mainPanel.Controls.Clear();
             UserControl expenseReport = new ExpenseReport(repository);
             mainPanel.Controls.Add(expenseReport);
+        }
+
+        private void btnExpenseReport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRegisterBudget_Click(object sender, EventArgs e)
+        {
+            var addBudgetForm = new AddBudgetForm(repository)
+            {
+                Location = new Point(300, 120)
+            };
+            addBudgetForm.Show();
+        }
+
+        private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Menu_Load(object sender, EventArgs e)
+        {
+
         }
     }
 
