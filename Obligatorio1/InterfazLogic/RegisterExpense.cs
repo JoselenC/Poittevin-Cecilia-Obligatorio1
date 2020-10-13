@@ -18,9 +18,9 @@ namespace InterfazLogic
         {
             InitializeComponent();
             repository = vRepository;
-            this.MaximumSize = new Size(450, 600);
-            this.MinimumSize = new Size(450, 600);
-            
+            this.MaximumSize = new Size(500, 600);
+            this.MinimumSize = new Size(500, 600);
+
             tbDescription.Clear();
             lstCategories.Items.Clear();
         }

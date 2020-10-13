@@ -23,8 +23,8 @@ namespace InterfazLogic
             repository = vRepository;
             keyWords = new List<string>();
             tbEdit.Visible = false;
-            this.MinimumSize = new Size(650, 300);
-            this.MaximumSize= new Size(650, 300);
+            this.MaximumSize = new Size(500, 600);
+            this.MinimumSize = new Size(500, 600);
             lstCategories.Items.Clear();
             tbName.Clear();
         }

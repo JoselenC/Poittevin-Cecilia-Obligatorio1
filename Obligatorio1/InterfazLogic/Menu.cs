@@ -18,6 +18,8 @@ namespace InterfazLogic
         {
             InitializeComponent();
             repository = new Repository();
+            this.MaximumSize = new Size(650, 400);
+            this.MinimumSize = new Size(650, 400);
         }
 
         private void btnRegisterCategory_Click(object sender, EventArgs e)

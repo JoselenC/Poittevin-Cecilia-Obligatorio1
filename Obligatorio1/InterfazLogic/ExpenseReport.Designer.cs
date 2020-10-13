@@ -129,7 +129,7 @@
             // lblMonth
             // 
             this.lblMonth.AutoSize = true;
-            this.lblMonth.Location = new System.Drawing.Point(177, 217);
+            this.lblMonth.Location = new System.Drawing.Point(192, 208);
             this.lblMonth.Name = "lblMonth";
             this.lblMonth.Size = new System.Drawing.Size(23, 32);
             this.lblMonth.TabIndex = 6;
