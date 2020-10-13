@@ -45,24 +45,35 @@ namespace InterfazLogic
 
         private void btnConsult_Click(object sender, EventArgs e)
         {
-            string month = lstMonths.SelectedItem.ToString();
-            if (month.Length == 0)
+            if (lstMonths.SelectedIndex >= 0)
             {
-                lblMonths.Text = "You must select a month to consult";
+                lblMonths.Text = "";
+                string month = lstMonths.SelectedItem.ToString();
+                if (month.Length == 0)
+                {
+                    lblMonths.Text = "You must select a month to consult";
+                }
+                List<string[]> report = repository.ExpenseReport(month);
+                listView1.Items.Clear();
+                ListViewItem item = new ListViewItem();
+                for (int i = 0; i < report.Count; i++)
+                {
+                    item = listView1.Items.Add(report[i][0]);
+                    item.SubItems.Add(report[i][1]);
+                    item.SubItems.Add(report[i][2]);
+                    item.SubItems.Add(report[i][3]);
+                }
             }
-            List<string[]> report=repository.ExpenseReport(month);
-            listView1.Items.Clear();
-            ListViewItem item = new ListViewItem();
-            for (int i = 0; i < report.Count; i++)
-            {                
-                item = listView1.Items.Add(report[i][0]);
-                item.SubItems.Add(report[i][1]);
-                item.SubItems.Add(report[i][2]);
-                item.SubItems.Add(report[i][3]);
-            }         
+            else
+            {
+                lblMonths.Text = "Select a month to consult";
+            }
 
         }
 
-       
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+        }
     }
 }

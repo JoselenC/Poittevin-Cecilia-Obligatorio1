@@ -38,6 +38,8 @@
             this.cCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblMonths = new System.Windows.Forms.Label();
+            this.lblMonth = new System.Windows.Forms.Label();
+            this.btnAccept = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -89,9 +91,9 @@
             this.cCategory,
             this.cAmount});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(123, 252);
+            this.listView1.Location = new System.Drawing.Point(39, 252);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(806, 362);
+            this.listView1.Size = new System.Drawing.Size(942, 362);
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -99,22 +101,22 @@
             // cCreationDate
             // 
             this.cCreationDate.Text = "Date";
-            this.cCreationDate.Width = 200;
+            this.cCreationDate.Width = 90;
             // 
             // cDescription
             // 
             this.cDescription.Text = "Description";
-            this.cDescription.Width = 200;
+            this.cDescription.Width = 90;
             // 
             // cCategory
             // 
             this.cCategory.Text = "Category";
-            this.cCategory.Width = 200;
+            this.cCategory.Width = 90;
             // 
             // cAmount
             // 
             this.cAmount.Text = "Amount";
-            this.cAmount.Width = 200;
+            this.cAmount.Width = 90;
             // 
             // lblMonths
             // 
@@ -124,11 +126,33 @@
             this.lblMonths.Size = new System.Drawing.Size(0, 32);
             this.lblMonths.TabIndex = 5;
             // 
+            // lblMonth
+            // 
+            this.lblMonth.AutoSize = true;
+            this.lblMonth.Location = new System.Drawing.Point(177, 217);
+            this.lblMonth.Name = "lblMonth";
+            this.lblMonth.Size = new System.Drawing.Size(23, 32);
+            this.lblMonth.TabIndex = 6;
+            this.lblMonth.Text = ".";
+            // 
+            // btnAccept
+            // 
+            this.btnAccept.BackColor = System.Drawing.Color.Tan;
+            this.btnAccept.Location = new System.Drawing.Point(375, 647);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(286, 52);
+            this.btnAccept.TabIndex = 7;
+            this.btnAccept.Text = "Accept";
+            this.btnAccept.UseVisualStyleBackColor = false;
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            // 
             // ExpenseReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.btnAccept);
+            this.Controls.Add(this.lblMonth);
             this.Controls.Add(this.lblMonths);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.btnConsult);
@@ -136,7 +160,7 @@
             this.Controls.Add(this.lstMonths);
             this.Controls.Add(this.label1);
             this.Name = "ExpenseReport";
-            this.Size = new System.Drawing.Size(1011, 680);
+            this.Size = new System.Drawing.Size(1144, 767);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,5 +178,7 @@
         private System.Windows.Forms.ColumnHeader cCategory;
         private System.Windows.Forms.ColumnHeader cAmount;
         private System.Windows.Forms.Label lblMonths;
+        private System.Windows.Forms.Label lblMonth;
+        private System.Windows.Forms.Button btnAccept;
     }
 }
