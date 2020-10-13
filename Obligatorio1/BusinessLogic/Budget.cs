@@ -59,7 +59,7 @@ namespace BusinessLogic
             List<BudgetCategory> returnList = new List<BudgetCategory>();
             foreach (var category in categories)
             {
-                returnList.Add(new BudgetCategory(category, 0));
+                returnList.Add(new BudgetCategory { Category = category, Amount = 0 });
             }
             return returnList;
 

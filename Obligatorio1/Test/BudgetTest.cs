@@ -166,7 +166,7 @@ namespace Test
         {
 
             Category category1 = new Category { Name = "Category 1" };
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 10);
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 10 };
             Budget budget = new Budget(1, 2020, 0);
             budget.AddBudgetCategory(budgetCategory1);
         }
@@ -189,8 +189,8 @@ namespace Test
             };
             Category category1 = new Category { Name = "Category 1" };
             Category category2 = new Category { Name = "Category 2" };
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 20);
-            BudgetCategory budgetCategory2 = new BudgetCategory(category2, 10);
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 20 };
+            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 10 };
             Budget budget = new Budget(1, 2020, 0);
             budget.AddBudgetCategory(budgetCategory1);
             budget.AddBudgetCategory(budgetCategory2);
@@ -223,8 +223,8 @@ namespace Test
             };
             Category category1 = new Category { Name = "Category 1" };
             Category category2 = new Category { Name = "Category 2" };
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 20);
-            BudgetCategory budgetCategory2 = new BudgetCategory(category2, 10);
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 20 };
+            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 10 };
             Budget budget = new Budget(1, 2020, 0);
             budget.AddBudgetCategory(budgetCategory1);
             budget.AddBudgetCategory(budgetCategory2);
@@ -383,7 +383,7 @@ namespace Test
             };
             Budget budget = new Budget(1, 2020, 0, Categories);
 
-            BudgetCategory expectedBudgetCategory = new BudgetCategory(carCategory, 0);
+            BudgetCategory expectedBudgetCategory = new BudgetCategory { Category = carCategory, Amount = 0 };
 
             string categoryName = "Car";
             BudgetCategory actualBudgetCategory = budget.GetBudgetCategoryByCategoryName(categoryName);

@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Budget.cs" />
     <Compile Include="BudgetCategory.cs" />
-    <Compile Include="NegativeValueError.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Expense.cs" />

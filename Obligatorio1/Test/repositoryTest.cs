@@ -399,7 +399,7 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetCategoryToRepository()
         {
-            BudgetCategory validBudgetCategory = new BudgetCategory(categoryFood, 1000);
+            BudgetCategory validBudgetCategory = new BudgetCategory { Category = categoryFood, Amount = 1000 };
             Repository EmptyRepository = new Repository();
             EmptyRepository.AddBudgetCategory(validBudgetCategory);
 
@@ -488,9 +488,11 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateCheckCategories()
         {
+            BudgetCategory budgetCategory = new BudgetCategory { Category = categoryEntertainment, Amount = 0 };
+            BudgetCategory budgetCategory2 = new BudgetCategory { Category = categoryFood, Amount = 0 };
             List<BudgetCategory> budgetCategories = new List<BudgetCategory>() {
-                new BudgetCategory(categoryEntertainment, 0),
-                new BudgetCategory(categoryFood, 0),
+            budgetCategory,
+            budgetCategory2
             };
 
             Budget actualBudget = repo.BudgetGetOrCreate("Enero", 2020);
