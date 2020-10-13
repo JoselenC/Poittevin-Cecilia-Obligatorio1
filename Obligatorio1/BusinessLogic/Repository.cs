@@ -52,22 +52,23 @@ namespace BusinessLogic
 
 
 
-        public Category FindCategoryByDescription(string description)
+        public Category FindCategoryByDescription(string vDescription)
         {
             Category category = null;
-            string[] desc = description.Split(' ');
+            string[] descriptionArray = vDescription.Split(' ');
             bool exist = false;
             int cont = 0;
-            for (int i = 0; i < Categories.Count; i++)
+            foreach (Category vCategory in Categories)
             {
                 exist = false;
-                for (int j = 0; j < desc.Length && !exist; j++)
+                foreach (String description in descriptionArray)
                 {
-                    exist = Categories[i].KeyWords.Contains(desc[j]);
+                    exist = vCategory.KeyWords.Contains(description);
                 }
+
                 if (exist)
                 {
-                    category = Categories[i];
+                    category = vCategory;
                     cont = cont + 1;
                 }
             }
@@ -84,10 +85,10 @@ namespace BusinessLogic
         private List<string> MonthsListStringToInt(List<int> months)
         {
             List<string> monthsString = new List<string>();
-            for (int i = 0; i < months.Count; i++)
+            foreach (int month in months)
             {
                 DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
-                string nombreMes = formatoFecha.GetMonthName(months[i]);
+                string nombreMes = formatoFecha.GetMonthName(month);
                 monthsString.Add(nombreMes);
             }
             return monthsString;
@@ -96,9 +97,8 @@ namespace BusinessLogic
         public List<string> OrderedMonthsInWhichThereAreExpenses()
         {
             List<int> orderedMonthsInt = new List<int>();
-            for (int i = 0; i < Expenses.Count; i++)
+            foreach (Expense expense in Expenses)
             {
-                Expense expense = Expenses[i];
                 if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
                     orderedMonthsInt.Add(expense.CreationDate.Month);
             }
@@ -114,13 +114,12 @@ namespace BusinessLogic
             return monthInBaseOne;
         }
 
-        public double ExpensesByMonth(string month)
+        public double AmountOfExpensesInAMonth(string month)
         {
             int monthInt = StringToIntMonth(month);
             double total = 0;
-            for (int i = 0; i < this.Expenses.Count; i++)
+            foreach (Expense expense in this.Expenses)
             {
-                Expense expense = this.Expenses[i];
                 if (expense.CreationDate.Month == monthInt)
                     total += expense.Amount;
             }
@@ -133,10 +132,10 @@ namespace BusinessLogic
             
             int monthInt = StringToIntMonth(month);
             List<string[]> reports = new List<string[]>();
-            for (int i = 0; i < this.Expenses.Count; i++)
+            foreach (Expense vExpense in Expenses)
             {
                 string[] report = new string[4];
-                Expense expense = this.Expenses[i];
+                Expense expense = vExpense;
                 if (expense.CreationDate.Month == monthInt )
                 {
                     string date = expense.CreationDate.ToString("dd/MM/yyyy");
@@ -159,9 +158,9 @@ namespace BusinessLogic
         private bool AlreadyExistTheCategoryName(string categoryName)
         {
             bool validName = true;
-            for (int i = 0; i < Categories.Count; i++)
+            foreach (Category category in Categories)
             {
-                if (categoryName.ToLower() == Categories[i].Name.ToLower())
+                if (categoryName.ToLower() == category.Name.ToLower())
                 {
                     validName= false;
                 }
@@ -170,17 +169,17 @@ namespace BusinessLogic
             return validName;
         }
 
-        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> keyWords)
+        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pKeyWords)
         {
             bool areValidKeyWords = true;
-            for (int i = 0; i < Categories.Count; i++)
+            foreach (Category category in Categories)
             {
-                for (int k = 0; k < Categories[i].KeyWords.Count; k++)
+                foreach (string vKeyWord in category.KeyWords)
                 {
-                    for (int j = 0; j < keyWords.Count; j++)
+                    foreach (string pKeyWord in pKeyWords)
                     {
-                        string keyWord = Categories[i].KeyWords[k];
-                        string vkeyWord = keyWords[j];
+                        string keyWord = vKeyWord;
+                        string vkeyWord = pKeyWord;
                         if (keyWord.ToLower() == vkeyWord.ToLower())
                         {
                             areValidKeyWords = false;

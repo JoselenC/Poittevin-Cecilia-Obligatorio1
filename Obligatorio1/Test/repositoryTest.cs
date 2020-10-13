@@ -79,7 +79,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void MonthsOrdered()
+        public void MonthsOrderedInWhichAreExpenses()
         {
 
             List<string> months = new List<string>();
@@ -95,61 +95,14 @@ namespace Test
             Repository repo = new Repository();
             repo.Expenses = expenses;
             List<string> monthsOrder = repo.OrderedMonthsInWhichThereAreExpenses();
-            for (int i = 0; i < months.Count; i++)
-            {
-                Assert.AreEqual(months[i], monthsOrder[i]);
-            }
+             Assert.AreEqual(months[0], monthsOrder[0]);
+                Assert.AreEqual(months[1], monthsOrder[1]);
+            
         }
 
-        [TestMethod]
-        public void MonthsOrdered2()
-        {
+       
 
-            List<string> months = new List<string>();
-            List<Expense> expenses = new List<Expense>();
-            months.Add("Enero");
-            DateTime month1 = new DateTime(2020, 1, 24);
-            DateTime month5 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
-            Expense expense2 = new Expense { Amount = 23, CreationDate = month5, Description = "cine" };
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            List<string> monthsOrder = repo.OrderedMonthsInWhichThereAreExpenses();
-            for (int i = 0; i < months.Count; i++)
-            {
-                Assert.AreEqual(months[i], monthsOrder[i]);
-            }
-        }
-
-        [TestMethod]
-        public void MonthsOrdered3()
-        {
-
-            List<string> months = new List<string>();
-            List<Expense> expenses = new List<Expense>();
-            months.Add("Enero");
-            months.Add("Mayo");
-            months.Add("Agosto");
-            DateTime month8 = new DateTime(2020, 8, 24);
-            DateTime month5 = new DateTime(2020, 5, 24);
-            DateTime month1 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
-            Expense expense2 = new Expense { Amount = 23, CreationDate = month8, Description = "cine" };
-            Expense expense3 = new Expense { Amount = 23, CreationDate = month5, Description = "cine" };
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            List<string> monthsOrder = repo.OrderedMonthsInWhichThereAreExpenses();
-            for (int i = 0; i < months.Count; i++)
-            {
-                Assert.AreEqual(months[i], monthsOrder[i]);
-            }
-        }
-
+       
         [TestMethod]
         public void ExpenseAmountByMonthInWhichAreExpenses()
         {
@@ -166,7 +119,7 @@ namespace Test
             expenses.Add(expense3);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            double totalAmount = repo.ExpensesByMonth(month);
+            double totalAmount = repo.AmountOfExpensesInAMonth(month);
             Assert.AreEqual(46, totalAmount);
 
         }
@@ -187,7 +140,7 @@ namespace Test
             expenses.Add(expense3);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            double totalAmount = repo.ExpensesByMonth(month);
+            double totalAmount = repo.AmountOfExpensesInAMonth(month);
             Assert.AreEqual(0, totalAmount);
 
         }
@@ -208,7 +161,7 @@ namespace Test
             expenses.Add(expense3);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            double totalAmount = repo.ExpensesByMonth(month);
+            double totalAmount = repo.AmountOfExpensesInAMonth(month);
             Assert.AreEqual(23.5, totalAmount);
 
         }      
