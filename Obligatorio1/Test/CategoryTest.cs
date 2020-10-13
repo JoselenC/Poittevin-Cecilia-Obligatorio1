@@ -20,7 +20,7 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidNameDigitCategory), "")]
-        public void CreateCategoryInvalidName()
+        public void CreateCategoryInvalidNameNumbers()
         {
             String categoryName = "9999";
             List<string> keyWords = new List<string>();
@@ -29,7 +29,7 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidNameLengthCategory), "")]
-        public void CreateCategoryInvalidName2()
+        public void CreateCategoryInvalidLengthName()
         {
             String categoryName = "entretenimientos";
             List<string> keyWords = new List<string>();
@@ -38,7 +38,7 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidNameLengthCategory), "")]
-        public void CreateCategoryInvalidName3()
+        public void CreateCategoryInvalidShortName()
         {
             String categoryName = "la";
             List<string> keyWords = new List<string>();
@@ -48,7 +48,7 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidKeyWordsLengthCategory), "")]
-        public void CreateCategoryInvalidKeyWords()
+        public void CreateCategoryInvalidLengthKeyWords()
         {
             String categoryName = "entretenimiento";
             List<string> keyWords = new List<string>() {
@@ -70,7 +70,7 @@ namespace Test
 
 
         [TestMethod]
-        public void CreateCategory()
+        public void CreateCategoryValidNameAndKeyWords()
         {
             String categoryName = "entretenimiento";
             List<string> keyWords = new List<string>() { 
@@ -85,34 +85,12 @@ namespace Test
             "sala de juego",
             "parque",
             };
-
-        Category category = new Category { Name = categoryName, KeyWords = keyWords };
-
-            Assert.AreEqual(category.Name, categoryName);
-            Assert.AreEqual(category.KeyWords, keyWords);
-        }
-
-        [TestMethod]
-        public void CreateCategory2()
-        {
-            String categoryName = "rent apartment";
-            List<string> keyWords = new List<string>() {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
-            "jugeteria",
-            "shopping",
-            "patinaje",
-            "casino",
-            "sala de juego",
-            "parque",
-            };
             Category category = new Category { Name = categoryName, KeyWords = keyWords };
             Assert.AreEqual(category.Name, categoryName);
             Assert.AreEqual(category.KeyWords, keyWords);
         }
 
+       
         [TestMethod]
 
         public void ToStringOnlyNameFormatValid()
