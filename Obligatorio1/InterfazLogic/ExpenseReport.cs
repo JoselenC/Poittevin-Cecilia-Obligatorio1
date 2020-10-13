@@ -45,6 +45,7 @@ namespace InterfazLogic
 
         private void btnConsult_Click(object sender, EventArgs e)
         {
+            double totalAmount = 0;
             if (lstMonths.SelectedIndex >= 0)
             {
                 lblMonths.Text = "";
@@ -58,11 +59,13 @@ namespace InterfazLogic
                 ListViewItem item = new ListViewItem();
                 for (int i = 0; i < report.Count; i++)
                 {
+                    totalAmount += Convert.ToDouble(report[i][3]);
                     item = listView1.Items.Add(report[i][0]);
                     item.SubItems.Add(report[i][1]);
                     item.SubItems.Add(report[i][2]);
-                    item.SubItems.Add(report[i][3]);
+                    item.SubItems.Add(report[i][3]);                    
                 }
+                lblTotalAmount.Text = "Total amount of the month " + month + " was " + totalAmount.ToString();
             }
             else
             {

@@ -40,6 +40,7 @@
             this.lblMonths = new System.Windows.Forms.Label();
             this.lblMonth = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
+            this.lblTotalAmount = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -138,7 +139,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(375, 647);
+            this.btnAccept.Location = new System.Drawing.Point(695, 645);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(286, 52);
             this.btnAccept.TabIndex = 7;
@@ -146,11 +147,20 @@
             this.btnAccept.UseVisualStyleBackColor = false;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
+            // lblTotalAmount
+            // 
+            this.lblTotalAmount.AutoSize = true;
+            this.lblTotalAmount.Location = new System.Drawing.Point(65, 658);
+            this.lblTotalAmount.Name = "lblTotalAmount";
+            this.lblTotalAmount.Size = new System.Drawing.Size(0, 32);
+            this.lblTotalAmount.TabIndex = 8;
+            // 
             // ExpenseReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.lblTotalAmount);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.lblMonth);
             this.Controls.Add(this.lblMonths);
@@ -180,5 +190,6 @@
         private System.Windows.Forms.Label lblMonths;
         private System.Windows.Forms.Label lblMonth;
         private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.Label lblTotalAmount;
     }
 }
