@@ -46,10 +46,10 @@ namespace Test
         [TestMethod]
         public void TestEqualsTrueCase()
         {
-            Category category1 = new Category { Name = "testCategory" };
+            Category category1 = new Category { Name = "testCategory", KeyWords = new List<string>() };
             BudgetCategory budgetCategory1 = new BudgetCategory(category1, 0);
 
-            Category category2 = new Category { Name = "testCategory" };
+            Category category2 = new Category { Name = "testCategory", KeyWords = new List<string>() };
             BudgetCategory budgetCategory2 = new BudgetCategory(category2, 0);
 
             Assert.AreEqual(budgetCategory1, budgetCategory2);
@@ -58,10 +58,10 @@ namespace Test
         [TestMethod]
         public void TestEqualsFalseCaseDiffAmount()
         {
-            Category category1 = new Category { Name = "testCategory" };
+            Category category1 = new Category { Name = "testCategory",KeyWords=new List<string>() };
             BudgetCategory budgetCategory1 = new BudgetCategory(category1, 0);
 
-            Category category2 = new Category { Name = "testCategory" };
+            Category category2 = new Category { Name = "testCategory", KeyWords = new List<string>() };
             BudgetCategory budgetCategory2 = new BudgetCategory(category2, 100);
 
             Assert.AreNotEqual(budgetCategory1, budgetCategory2);
@@ -71,10 +71,10 @@ namespace Test
         [TestMethod]
         public void TestEqualsFalseCaseDiffCategory()
         {
-            Category category1 =new Category { Name = "testCategory" };
+            Category category1 =new Category { Name = "testCategory", KeyWords = new List<string>() };
             BudgetCategory budgetCategory1 = new BudgetCategory(category1, 0);
 
-            Category category2 = new Category { Name = "testCategory" };
+            Category category2 = new Category { Name = "WrongCategory", KeyWords = new List<string>() };
             BudgetCategory budgetCategory2 = new BudgetCategory(category2, 0);
 
             Assert.AreNotEqual(budgetCategory1, budgetCategory2);

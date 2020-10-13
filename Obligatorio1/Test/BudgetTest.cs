@@ -246,13 +246,13 @@ namespace Test
         {
             List<Category> Categories1 = new List<Category>()
             {
-                new Category{Name="House" },
-                new Category{Name="Car" },
+                new Category{Name="House",KeyWords=new List<string>()  },
+                new Category{Name="Car",KeyWords=new List<string>()  },
             };
             List<Category> Categories2 = new List<Category>()
             {
-                new Category{Name="House" },
-                new Category{Name="Car"},
+                new Category{Name="House",KeyWords=new List<string>()  },
+                new Category{Name="Car",KeyWords=new List<string>() },
             };
             Budget budget1 = new Budget(1, 2020, 0, Categories1);
             Budget budget2 = new Budget(1, 2020, 0, Categories2);

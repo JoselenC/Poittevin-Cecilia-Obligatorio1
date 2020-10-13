@@ -397,7 +397,7 @@ namespace Test
             keyWords1.Add("cine");
             keyWords1.Add("teatro");
             keyWords1.Add("casino");
-            Category category1 = new Category { Name = "entretenimineto", KeyWords = keyWords1 };
+            Category category1 = new Category { Name = "entretenimiento", KeyWords = keyWords1 };
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurante");
             keyWords2.Add("McDonalds");

@@ -203,7 +203,6 @@ namespace BusinessLogic
            
         }    
 
-
         public void AddExpenseToExpenses(Expense expense)
         {
            if (expense.Category == null)
