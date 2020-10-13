@@ -8,21 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    enum Months
-    {
-        Enero,
-        Febrero,
-        Marzo,
-        Abril,
-        Mayo,
-        Junio,
-        Julio,
-        Agosto,
-        Setiembre,
-        Octubre,
-        Noviembre,
-        Diciembre
-    }
+   
     public class Repository
     {
         public List<Category> Categories = new List<Category>();
