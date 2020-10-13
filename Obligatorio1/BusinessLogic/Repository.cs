@@ -44,7 +44,10 @@ namespace BusinessLogic
 
         public Repository(List<Category> categoriesReceived)
         {
-            this.Expenses = new List<Expense>();
+            Expenses = new List<Expense>();
+            Budgets = new List<Budget>();
+            BudgetCategories = new List<BudgetCategory>();
+            Categories = categoriesReceived;
         }
 
 
@@ -211,12 +214,10 @@ namespace BusinessLogic
 
         public Category FindCategoryByName(string categoryName)
         {
-            for (int i = 0; i < Categories.Count; i++)
+            foreach (var category in Categories)
             {
-                if (Categories[i].Name == categoryName)
-                {
-                    return Categories[i];
-                }
+                if (category.Name == categoryName)
+                    return category;
             }
             return null;
         }

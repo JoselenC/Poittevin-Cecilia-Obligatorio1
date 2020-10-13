@@ -37,10 +37,6 @@ namespace InterfazLogic
             mainPanel.Controls.Add(expenseReport);
         }
 
-        private void btnExpenseReport_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnRegisterBudget_Click(object sender, EventArgs e)
         {

@@ -466,8 +466,8 @@ namespace Test
             Expense expense = new Expense(230, month1, "cine");            
             Category category = new Category(categoryName, keyWords);
             expense.Category = category;
-            repository.addCategory(category);
-            repository.addExpense(expense);
+            repository.AddCategory(category);
+            repository.AddExpense(expense);
             List<string[]> reports1 = repository.ExpenseReport(month1.Month.ToString());
             Assert.AreEqual(reports.ToArray()[0][0], reports1.ToArray()[0][0]);
             Assert.AreEqual(reports.ToArray()[0][1], reports1.ToArray()[0][1]);
@@ -618,7 +618,7 @@ namespace Test
             Expense expense = new Expense(23.5, month, "cine");
             expense.Category = category;
             Repository repository = new Repository();            
-            repository.addExpense(expense);
+            repository.AddExpense(expense);
             Assert.AreEqual(expense, repository.Expenses.ToArray()[0]);
         }
 
@@ -638,8 +638,8 @@ namespace Test
             Category category2 = new Category("comida", keyWords2);
             categoryList.Add(category1);
             categoryList.Add(category2);
-            Repository repo = new Repository(categoryList);
-            Category category3 = repo.FindCategoryByName("entretenimiento");
+            Repository respoitory = new Repository(categoryList);
+            Category category3 = respoitory.FindCategoryByName("entretenimiento");
             Assert.AreEqual(category1, category3);
         }
 
