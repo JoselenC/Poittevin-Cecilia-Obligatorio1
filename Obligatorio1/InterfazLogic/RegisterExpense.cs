@@ -20,6 +20,9 @@ namespace InterfazLogic
             repository = vRepository;
             this.MaximumSize = new Size(450, 600);
             this.MinimumSize = new Size(450, 600);
+            
+            tbDescription.Clear();
+            lstCategories.Items.Clear();
         }
 
         private void CompleteCategories(string description)
@@ -55,17 +58,24 @@ namespace InterfazLogic
                 string description = tbDescription.Text;
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
-                Expense expense = new Expense( amount, creationDate,description);
-                Category category = repository.FindCategoryByName(lstCategories.SelectedItem.ToString());
-                expense.Category = category;
-                repository.addExpense(expense);
-                lbDescription.Text = "";
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lblDate.Text = "";
-               
-                MessageBox.Show("The expense was recorded successfully");           
-                              
+                Expense expense = new Expense(amount, creationDate, description);
+                if (lstCategories.SelectedIndex >= 0)
+                {
+                    string nameCategory = lstCategories.SelectedItem.ToString();
+                    Category category = repository.FindCategoryByName(nameCategory);
+                    expense.Category = category;
+                    repository.addExpense(expense);
+                    lbDescription.Text = "";
+                    lblAmount.Text = "";
+                    lblCategories.Text = "";
+                    lblDate.Text = "";
+                    MessageBox.Show("The expense was recorded successfully");
+                    this.Visible = false;
+                }
+                else
+                {
+                    lblCategories.Text = "You must select a category";
+                }
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
@@ -103,10 +113,7 @@ namespace InterfazLogic
                 lblCategories.Text = "";
                 lblDate.Text = "";
             }
-            catch (NullReferenceException)
-            {
-                lblCategories.Text = "Select Category";
-            }
+            
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
