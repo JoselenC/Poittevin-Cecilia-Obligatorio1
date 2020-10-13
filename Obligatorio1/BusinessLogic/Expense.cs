@@ -44,7 +44,18 @@ namespace BusinessLogic
                 throw new ExcepcionInvalidDescriptionLengthExpense();
             description = vDescription;
         }
-       
 
+        public override bool Equals(object obj)
+        {
+            if (obj is Expense expense)
+            {
+                bool equalsAmount = amount == expense.amount;
+                bool equalsCreationDate = creationDate == expense.creationDate;
+                bool equalsDescription = description == expense.description;
+                return equalsAmount && equalsCreationDate && equalsDescription;
+
+            }
+            return false;
+        }
     }
 }

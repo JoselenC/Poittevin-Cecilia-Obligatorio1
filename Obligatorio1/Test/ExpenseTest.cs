@@ -102,13 +102,53 @@ namespace Test
             double amount = 23.55;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense { Amount = amount, CreationDate =new DateTime(2020, 01, 01), Description = description };
+            Expense expense = new Expense { Amount = amount, CreationDate =creationDate, Description = description };
             Assert.AreEqual(amount,expense.Amount);
             Assert.AreEqual(creationDate,expense.CreationDate);
             Assert.AreEqual(description,expense.Description);
 
         }
 
+        [TestMethod]
+        public void EqualFalseCaseDiffAmount()
+        {
+            string description = "cuando fui al cine";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense { Amount = 23, CreationDate = creationDate, Description = description };
+            Expense expense2 = new Expense { Amount = 23.5, CreationDate = creationDate, Description = description };
+            Assert.AreNotEqual(expense, expense2);
+        }
+
+        [TestMethod]
+        public void EqualFalseCaseDiffDescription()
+        {
+            double amount=23.5;
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = "Cuando fui al cine"};
+            Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = "Cuando fui a cenar" };
+            Assert.AreNotEqual(expense, expense2);
+        }
+
+        [TestMethod]
+        public void EqualFalseCaseDiffCreationDate()
+        {
+            double amount = 23.5;
+            string description = "cuando fui al cine";
+            Expense expense = new Expense { Amount = amount, CreationDate = new DateTime(2020, 01, 01), Description = description };
+            Expense expense2 = new Expense { Amount = amount, CreationDate = new DateTime(2021, 01, 01), Description = description};
+            Assert.AreNotEqual(expense, expense2);
+        }
+
+        [TestMethod]
+        public void EqualTrue()
+        {
+            double amount = 23.5;
+            string description = "cuando fui al cine";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+            Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+            Assert.AreEqual(expense, expense2);
+        }
 
     }
 }
