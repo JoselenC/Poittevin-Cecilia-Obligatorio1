@@ -81,21 +81,7 @@ namespace BusinessLogic
             }
         }
 
-        public List<string> MonthsOrdered()
-        {
-            List<int> months = new List<int>();
-            for (int i = 0; i < Expenses.Count; i++)
-            {
-                Expense expense = Expenses[i];
-                if (!months.Contains(expense.CreationDate.Month))
-                    months.Add(expense.CreationDate.Month);
-            }
-            months.Sort();
-            List<string> monthsString = GetMonthsString(months);
-            return monthsString;
-        }
-
-        private List<string> GetMonthsString(List<int> months)
+        private List<string> MonthsListStringToInt(List<int> months)
         {
             List<string> monthsString = new List<string>();
             for (int i = 0; i < months.Count; i++)
@@ -107,7 +93,28 @@ namespace BusinessLogic
             return monthsString;
         }
 
-        public double ExpenseByMonths(string month)
+        public List<string> OrderedMonthsInWhichThereAreExpenses()
+        {
+            List<int> orderedMonthsInt = new List<int>();
+            for (int i = 0; i < Expenses.Count; i++)
+            {
+                Expense expense = Expenses[i];
+                if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
+                    orderedMonthsInt.Add(expense.CreationDate.Month);
+            }
+            orderedMonthsInt.Sort();
+            List<string> orderedMonthsString = MonthsListStringToInt(orderedMonthsInt);
+            return orderedMonthsString;
+        }
+
+        private int StringToIntMonth(string month)
+        {
+            int monthInBaseCero = (int)Enum.Parse(typeof(Months), month);
+            int monthInBaseOne = monthInBaseCero + 1;
+            return monthInBaseOne;
+        }
+
+        public double ExpensesByMonth(string month)
         {
             int monthInt = StringToIntMonth(month);
             double total = 0;
@@ -118,17 +125,9 @@ namespace BusinessLogic
                     total += expense.Amount;
             }
             return total;
-        }
+        }   
 
-        private int StringToIntMonth(string month)
-        {
-            int monthInBaseCero = (int)Enum.Parse(typeof(Months), month);
-            int monthInBaseOne = monthInBaseCero + 1;
-            return monthInBaseOne;
-        }
-
-        //funciones de Reporte de Gastos:se muestran los gastos y el monto total del month. 
-        //obtener todo eso que tenemos que mostrar
+        
         public List<string[]> ExpenseReport(string month)
         {
             
@@ -157,7 +156,7 @@ namespace BusinessLogic
         }
 
 
-        private bool isValidName(string categoryName)
+        private bool AlreadyExistTheCategoryName(string categoryName)
         {
             bool validName = true;
             for (int i = 0; i < Categories.Count; i++)
@@ -171,19 +170,9 @@ namespace BusinessLogic
             return validName;
         }
 
-        public void AddCategory(Category category)
+        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> keyWords)
         {
-            if (!isValidName(category.Name))
-                throw new ExcepcionInvalidRepeatedNameCategory();
-            if (!areValidKeywords(category.KeyWords))
-                throw new ExcepcionInvalidRepeatedKeyWordsCategory();            
-            this.Categories.Add(category);                
-            
-           
-        }
-        private bool  areValidKeywords(List<string> keyWords)
-        {
-            bool validKeywords = true;
+            bool areValidKeyWords = true;
             for (int i = 0; i < Categories.Count; i++)
             {
                 for (int k = 0; k < Categories[i].KeyWords.Count; k++)
@@ -194,17 +183,28 @@ namespace BusinessLogic
                         string vkeyWord = keyWords[j];
                         if (keyWord.ToLower() == vkeyWord.ToLower())
                         {
-                            validKeywords = false;
+                            areValidKeyWords = false;
                         }
                     }
                 }
 
             }
-            return validKeywords;
+            return areValidKeyWords;
         }
 
+        public void AddCategoryToCategories(Category category)
+        {
+            if (!AlreadyExistTheCategoryName(category.Name))
+                throw new ExcepcionInvalidRepeatedNameCategory();
+            if (!AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();            
+            this.Categories.Add(category);                
+            
+           
+        }    
 
-        public void AddExpense(Expense expense)
+
+        public void AddExpenseToExpenses(Expense expense)
         {
            if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();

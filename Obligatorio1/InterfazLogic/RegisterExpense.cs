@@ -64,7 +64,7 @@ namespace InterfazLogic
                     string nameCategory = lstCategories.SelectedItem.ToString();
                     Category category = repository.FindCategoryByName(nameCategory);
                     expense.Category = category;
-                    repository.AddExpense(expense);
+                    repository.AddExpenseToExpenses(expense);
                     lbDescription.Text = "";
                     lblAmount.Text = "";
                     lblCategories.Text = "";

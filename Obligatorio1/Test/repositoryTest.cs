@@ -32,8 +32,8 @@ namespace Test
                 "cena"
             };
             categoryFood = new Category("comida", keyWords2);
-            repo.AddCategory(categoryEntertainment);
-            repo.AddCategory(categoryFood);
+            repo.AddCategoryToCategories(categoryEntertainment);
+            repo.AddCategoryToCategories(categoryFood);
 
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
@@ -94,7 +94,7 @@ namespace Test
             expenses.Add(expense2);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            List<string> monthsOrder = repo.MonthsOrdered();
+            List<string> monthsOrder = repo.OrderedMonthsInWhichThereAreExpenses();
             for (int i = 0; i < months.Count; i++)
             {
                 Assert.AreEqual(months[i], monthsOrder[i]);
@@ -116,7 +116,7 @@ namespace Test
             expenses.Add(expense2);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            List<string> monthsOrder = repo.MonthsOrdered();
+            List<string> monthsOrder = repo.OrderedMonthsInWhichThereAreExpenses();
             for (int i = 0; i < months.Count; i++)
             {
                 Assert.AreEqual(months[i], monthsOrder[i]);
@@ -143,7 +143,7 @@ namespace Test
             expenses.Add(expense3);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            List<string> monthsOrder = repo.MonthsOrdered();
+            List<string> monthsOrder = repo.OrderedMonthsInWhichThereAreExpenses();
             for (int i = 0; i < months.Count; i++)
             {
                 Assert.AreEqual(months[i], monthsOrder[i]);
@@ -151,7 +151,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void ExpenseByMonths()
+        public void ExpenseAmountByMonthInWhichAreExpenses()
         {
             string month = "Agosto";
             List<Expense> expenses = new List<Expense>();
@@ -166,13 +166,13 @@ namespace Test
             expenses.Add(expense3);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
+            double totalAmount = repo.ExpensesByMonth(month);
             Assert.AreEqual(46, totalAmount);
 
         }
 
         [TestMethod]
-        public void ExpenseByMonths2()
+        public void ExpenseAmountByMonthInWhichAreNoExpenses()
         {
             string month = "Agosto";
             List<Expense> expenses = new List<Expense>();
@@ -187,13 +187,13 @@ namespace Test
             expenses.Add(expense3);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
+            double totalAmount = repo.ExpensesByMonth(month);
             Assert.AreEqual(0, totalAmount);
 
         }
 
         [TestMethod]
-        public void ExpenseByMonths3()
+        public void ExpenseAmountByMonthInWhichIsAnExpense()
         {
             string month = "Agosto";
             List<Expense> expenses = new List<Expense>();
@@ -208,243 +208,10 @@ namespace Test
             expenses.Add(expense3);
             Repository repo = new Repository();
             repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
+            double totalAmount = repo.ExpensesByMonth(month);
             Assert.AreEqual(23.5, totalAmount);
 
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths4()
-        {
-            string month = "Enero";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 8, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(21, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths5()
-        {
-            string month = "Febrero";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 8, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths6()
-        {
-            string month = "Marzo";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 3, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths7()
-        {
-            string month = "Abril";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 4, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths8()
-        {
-            string month = "Mayo";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 5, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths9()
-        {
-            string month = "Junio";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 6, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths10()
-        {
-            string month = "Julio";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 7, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths11()
-        {
-            string month = "Setiembre";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 9, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-
-        [TestMethod]
-        public void ExpenseByMonths12()
-        {
-            string month = "Octubre";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 10, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-
-        [TestMethod]
-        public void ExpenseByMonths13()
-        {
-            string month = "Noviembre";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 11, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseByMonths14()
-        {
-            string month = "Diciembre";
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 12, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
-            expenses.Add(expense1);
-            expenses.Add(expense2);
-            expenses.Add(expense3);
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            double totalAmount = repo.ExpenseByMonths(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
+        }      
 
         [TestMethod]
         public void ExpenseReport()
@@ -466,8 +233,8 @@ namespace Test
             Expense expense = new Expense(230, month1, "cine");            
             Category category = new Category(categoryName, keyWords);
             expense.Category = category;
-            repository.AddCategory(category);
-            repository.AddExpense(expense);
+            repository.AddCategoryToCategories(category);
+            repository.AddExpenseToExpenses(expense);
             List<string[]> reports1 = repository.ExpenseReport(month1.Month.ToString());
             Assert.AreEqual(reports.ToArray()[0][0], reports1.ToArray()[0][0]);
             Assert.AreEqual(reports.ToArray()[0][1], reports1.ToArray()[0][1]);
@@ -484,8 +251,8 @@ namespace Test
             Repository emptyRepository = new Repository();
             string categoryName = "Hogar";
             Category category = new Category(categoryName);
-            emptyRepository.AddCategory(category);
-            emptyRepository.AddCategory(category);
+            emptyRepository.AddCategoryToCategories(category);
+            emptyRepository.AddCategoryToCategories(category);
 
         }
 
@@ -495,7 +262,7 @@ namespace Test
         {
             string categoryName = "Entretenimiento";
             Category category2 = new Category(categoryName);
-            repo.AddCategory(category2);
+            repo.AddCategoryToCategories(category2);
 
         }
 
@@ -508,13 +275,13 @@ namespace Test
             keyWords.Add("sala de juego");
             Category category = new Category(categoryName, keyWords);
             Repository repository = new Repository();
-            repository.AddCategory(category);
+            repository.AddCategoryToCategories(category);
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
             keyWords2.Add("cena");
             Category category2 = new Category(categoryName2, keyWords2);
-            repository.AddCategory(category2);
+            repository.AddCategoryToCategories(category2);
             Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
             Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
             Assert.AreEqual(category2.Name, repository.Categories.ToArray()[1].Name);
@@ -534,7 +301,7 @@ namespace Test
                 "teatro"
             };
             Category category = new Category(categoryName, keyWords);
-            repository.AddCategory(category);
+            repository.AddCategoryToCategories(category);
             String categoryName2 = "NameExample2";
             List<string> keyWords2 = new List<string>
             {
@@ -542,7 +309,7 @@ namespace Test
                 "teatro"
             };
             Category category2 = new Category(categoryName2, keyWords2);
-            repository.AddCategory(category2);
+            repository.AddCategoryToCategories(category2);
             Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
             Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
             Assert.AreEqual(1, repository.Categories.Count);
@@ -559,13 +326,13 @@ namespace Test
             keyWords.Add("cine");
             keyWords.Add("teatro");
             Category category = new Category(categoryName, keyWords);
-            repository.AddCategory(category);
+            repository.AddCategoryToCategories(category);
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("Cine");
             keyWords2.Add("Restaurante");
             Category category2 = new Category(categoryName2, keyWords2);
-            repository.AddCategory(category2);
+            repository.AddCategoryToCategories(category2);
             Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
             Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
             Assert.AreEqual(1, repository.Categories.Count);
@@ -581,12 +348,12 @@ namespace Test
             keyWords.Add("cine");
             keyWords.Add("sala de juego");
             Category category = new Category(categoryName, keyWords);
-            repository.AddCategory(category);
+            repository.AddCategoryToCategories(category);
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
             Category category2 = new Category(categoryName2, keyWords2);
-            repository.AddCategory(category2);
+            repository.AddCategoryToCategories(category2);
             Assert.AreEqual(category.Name, repository.Categories.ToArray()[0].Name);
             Assert.AreEqual(category.KeyWords, repository.Categories.ToArray()[0].KeyWords);
             Assert.AreEqual(category2.Name, repository.Categories.ToArray()[1].Name);
@@ -601,7 +368,7 @@ namespace Test
             DateTime month = new DateTime(2020, 1, 24);
             Repository repository = new Repository();
             Expense expense = new Expense(23.5, month, "cine");
-            repository.AddExpense(expense);
+            repository.AddExpenseToExpenses(expense);
         }
 
         [TestMethod]
@@ -618,7 +385,7 @@ namespace Test
             Expense expense = new Expense(23.5, month, "cine");
             expense.Category = category;
             Repository repository = new Repository();            
-            repository.AddExpense(expense);
+            repository.AddExpenseToExpenses(expense);
             Assert.AreEqual(expense, repository.Expenses.ToArray()[0]);
         }
 
