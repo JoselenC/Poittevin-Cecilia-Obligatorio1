@@ -88,8 +88,8 @@ namespace Test
             months.Add("Mayo");
             DateTime month1 = new DateTime(2020, 1, 24);
             DateTime month5 = new DateTime(2020, 5, 24);
-            Expense expense1 = new Expense(23, month1, "cine");
-            Expense expense2 = new Expense(23, month5, "cine");
+            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
+            Expense expense2 = new Expense { Amount = 23, CreationDate = month5, Description = "cine" };
             expenses.Add(expense1);
             expenses.Add(expense2);
             Repository repo = new Repository();
@@ -110,8 +110,8 @@ namespace Test
             months.Add("Enero");
             DateTime month1 = new DateTime(2020, 1, 24);
             DateTime month5 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23, month1, "cine");
-            Expense expense2 = new Expense(23, month5, "cine");
+            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
+            Expense expense2 = new Expense { Amount = 23, CreationDate = month5, Description = "cine" };
             expenses.Add(expense1);
             expenses.Add(expense2);
             Repository repo = new Repository();
@@ -135,9 +135,9 @@ namespace Test
             DateTime month8 = new DateTime(2020, 8, 24);
             DateTime month5 = new DateTime(2020, 5, 24);
             DateTime month1 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23, month8, "cine");
-            Expense expense2 = new Expense(23, month1, "cine");
-            Expense expense3 = new Expense(21, month5, "casino");
+            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
+            Expense expense2 = new Expense { Amount = 23, CreationDate = month8, Description = "cine" };
+            Expense expense3 = new Expense { Amount = 23, CreationDate = month5, Description = "cine" };
             expenses.Add(expense1);
             expenses.Add(expense2);
             expenses.Add(expense3);
@@ -158,9 +158,9 @@ namespace Test
             DateTime month1 = new DateTime(2020, 8, 24);
             DateTime month2 = new DateTime(2020, 8, 24);
             DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
+            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
+            Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
+            Expense expense3 = new Expense { Amount = 23, CreationDate = month3, Description = "casino" };
             expenses.Add(expense1);
             expenses.Add(expense2);
             expenses.Add(expense3);
@@ -179,9 +179,9 @@ namespace Test
             DateTime month1 = new DateTime(2020, 2, 24);
             DateTime month2 = new DateTime(2020, 3, 24);
             DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
+            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
+            Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
+            Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
             expenses.Add(expense1);
             expenses.Add(expense2);
             expenses.Add(expense3);
@@ -200,9 +200,9 @@ namespace Test
             DateTime month1 = new DateTime(2020, 8, 24);
             DateTime month2 = new DateTime(2020, 2, 24);
             DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense(23.5, month1, "cine");
-            Expense expense2 = new Expense(23, month2, "cine");
-            Expense expense3 = new Expense(21, month3, "casino");
+            Expense expense1 = new Expense { Amount = 23.5, CreationDate = month1, Description = "cine" };
+            Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
+            Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
             expenses.Add(expense1);
             expenses.Add(expense2);
             expenses.Add(expense3);
@@ -230,7 +230,7 @@ namespace Test
             keyWords.Add("cine");
             keyWords.Add("teatro");
             Repository repository = new Repository();
-            Expense expense = new Expense(230, month1, "cine");            
+            Expense expense = new Expense { Amount = 230, CreationDate = month1, Description = "cine" };            
             Category category = new Category { Name = categoryName, KeyWords = keyWords };
             expense.Category = category;
             repository.AddCategoryToCategories(category);
@@ -367,7 +367,7 @@ namespace Test
         {
             DateTime month = new DateTime(2020, 1, 24);
             Repository repository = new Repository();
-            Expense expense = new Expense(23.5, month, "cine");
+            Expense expense = new Expense { Amount = 23.5, CreationDate = month, Description="cine" };
             repository.AddExpenseToExpenses(expense);
         }
 
@@ -382,7 +382,7 @@ namespace Test
             List<Category> categories = new List<Category>();
             categories.Add(category);
             DateTime month = new DateTime(2020, 1, 24);
-            Expense expense = new Expense(23.5, month, "cine");
+            Expense expense = new Expense { Amount = 23.5, CreationDate = month, Description = "cine" };
             expense.Category = category;
             Repository repository = new Repository();            
             repository.AddExpenseToExpenses(expense);

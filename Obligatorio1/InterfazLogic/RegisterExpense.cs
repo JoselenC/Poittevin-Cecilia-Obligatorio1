@@ -58,7 +58,7 @@ namespace InterfazLogic
                 string description = tbDescription.Text;
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
-                Expense expense = new Expense(amount, creationDate, description);
+                Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
                 if (lstCategories.SelectedIndex >= 0)
                 {
                     string nameCategory = lstCategories.SelectedItem.ToString();
