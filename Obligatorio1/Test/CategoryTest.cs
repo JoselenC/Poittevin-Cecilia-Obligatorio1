@@ -92,7 +92,6 @@ namespace Test
 
        
         [TestMethod]
-
         public void ToStringOnlyNameFormatValid()
         {
             Category category = new Category { Name = "Test Categoria"};
@@ -120,7 +119,6 @@ namespace Test
 
         [TestMethod]
         public void EqualTrueCaseWithoutKeywords() {
-
             Category category1 = new Category { Name = "Test Categoria" , KeyWords=new List<string>()};
             Category category2 = new Category { Name = "Test Categoria", KeyWords = new List<string>() };
             Assert.AreEqual(category1, category2);
