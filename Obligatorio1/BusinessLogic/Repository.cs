@@ -126,7 +126,7 @@ namespace BusinessLogic
                 Expense expense = this.Expenses[i];
                 if (expense.CreationDate.Month == monthInt )
                 {
-                    string date = expense.CreationDate.ToString("dd/mm/yyyy");
+                    string date = expense.CreationDate.ToString("dd/MM/yyyy");
                     string description = expense.Description;
                     string name = expense.Category.Name;
                     string amount = expense.Amount.ToString();
@@ -162,11 +162,9 @@ namespace BusinessLogic
             if (!isValidName(category.Name))
                 throw new ExcepcionInvalidRepeatedNameCategory();
             if (!areValidKeywords(category.KeyWords))
-                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
-            if (isValidName(category.Name)&& areValidKeywords(category.KeyWords))
-            {
-                this.Categories.Add(category);                
-            }
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();            
+            this.Categories.Add(category);                
+            
            
         }
         private bool  areValidKeywords(List<string> keyWords)
@@ -194,11 +192,22 @@ namespace BusinessLogic
 
         public void addExpense(Expense expense)
         {
-            expense.Category = FindCategoryByDescription(expense.Description);
-            if (expense.Category == null)
+           if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();
             Expenses.Add(expense);
 
+        }
+
+        public Category FindCategoryByName(string categoryName)
+        {
+            for (int i = 0; i < Categories.Count; i++)
+            {
+                if (Categories[i].Name == categoryName)
+                {
+                    return Categories[i];
+                }
+            }
+            return null;
         }
     }
 }

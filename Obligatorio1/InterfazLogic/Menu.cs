@@ -18,13 +18,31 @@ namespace InterfazLogic
         {
             InitializeComponent();
             repository = new Repository();
+            this.MaximumSize = new Size(650, 400);
+            this.MinimumSize = new Size(650, 400);
         }
 
         private void btnRegisterCategory_Click(object sender, EventArgs e)
         {
-           // mainPanel.Controls.Clear();
-           // UserControl registerCategory = new RegisterCategory(repository);
-           // mainPanel.Controls.Add(registerCategory);
+            mainPanel.Controls.Clear();
+           UserControl registerCategory = new RegisterCategory(repository);
+            mainPanel.Controls.Add(registerCategory);
+        }
+
+        private void btnRegisterExpense_Click(object sender, EventArgs e)
+        {
+           mainPanel.Controls.Clear();
+           UserControl registerExpense = new RegisterExpense(repository);
+            mainPanel.Controls.Add(registerExpense);
+        }
+
+        private void btnExpenseReport_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            UserControl expenseReport = new ExpenseReport(repository);
+            mainPanel.Controls.Add(expenseReport);
         }
     }
+
 }
+

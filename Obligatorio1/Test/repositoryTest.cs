@@ -461,8 +461,9 @@ namespace Test
             keyWords.Add("cine");
             keyWords.Add("teatro");
             Repository repository = new Repository();
-            Expense expense = new Expense(230, month1, "cine");
+            Expense expense = new Expense(230, month1, "cine");            
             Category category = new Category(categoryName, keyWords);
+            expense.Category = category;
             repository.addCategory(category);
             repository.addExpense(expense);
             List<string[]> reports1 = repository.ExpenseReport(month1.Month.ToString());
@@ -620,19 +621,52 @@ namespace Test
             categories.Add(category);
             DateTime month = new DateTime(2020, 1, 24);
             Expense expense = new Expense(23.5, month, "cine");
-            List<Expense> expenses = new List<Expense>();
-            expenses.Add(expense);
             expense.Category = category;
-            Repository repository = new Repository();
-            repository.addCategory(category);
+            Repository repository = new Repository();            
             repository.addExpense(expense);
-            Expense expense1 = expenses.ToArray()[0];
-            Expense expense2 = repository.Expenses.ToArray()[0];
-            Assert.AreEqual(expense1.Amount, expense2.Amount);
-            Assert.AreEqual(expense1.Category.Name, expense2.Category.Name);
-            Assert.AreEqual(expense1.Category.KeyWords, expense2.Category.KeyWords);
-            Assert.AreEqual(expense1.CreationDate, expense2.CreationDate);
-            Assert.AreEqual(expense1.Description, expense2.Description);
+            Assert.AreEqual(expense, repository.Expenses.ToArray()[0]);
+        }
+
+        [TestMethod]
+        public void FindCategoryByName()
+        {
+            List<Category> categoryList = new List<Category>();
+            List<string> keyWords1 = new List<string>();
+            keyWords1.Add("cine");
+            keyWords1.Add("teatro");
+            keyWords1.Add("casino");
+            Category category1 = new Category("entretenimiento", keyWords1);
+            List<string> keyWords2 = new List<string>();
+            keyWords2.Add("restaurante");
+            keyWords2.Add("McDonalds");
+            keyWords2.Add("cena");
+            Category category2 = new Category("comida", keyWords2);
+            categoryList.Add(category1);
+            categoryList.Add(category2);
+            Repository repo = new Repository(categoryList);
+            Category category3 = repo.FindCategoryByName("entretenimiento");
+            Assert.AreEqual(category1, category3);
+        }
+
+        [TestMethod]
+        public void FindCategoryByName2()
+        {
+            List<Category> categoryList = new List<Category>();
+            List<string> keyWords1 = new List<string>();
+            keyWords1.Add("cine");
+            keyWords1.Add("teatro");
+            keyWords1.Add("casino");
+            Category category1 = new Category("diversion", keyWords1);
+            List<string> keyWords2 = new List<string>();
+            keyWords2.Add("restaurante");
+            keyWords2.Add("McDonalds");
+            keyWords2.Add("cena");
+            Category category2 = new Category("comida", keyWords2);
+            categoryList.Add(category1);
+            categoryList.Add(category2);
+            Repository repo = new Repository(categoryList);
+            Category category3 = repo.FindCategoryByName("entretenimiento");
+            Assert.IsNull(category3);
         }
     }
 }
