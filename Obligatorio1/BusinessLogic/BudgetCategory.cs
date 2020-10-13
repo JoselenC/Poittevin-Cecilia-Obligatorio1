@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -33,5 +34,21 @@ namespace BusinessLogic
             Amount = vAmount;
         }
 
+        public override string ToString()
+        {
+            return $"{Category}: {amount}";
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is BudgetCategory budgetCategory)
+            {
+                bool isEqualBudgetCategory = Category.Equals(budgetCategory.category);
+                bool isEqualAmounth = amount == budgetCategory.amount;
+                return isEqualBudgetCategory &&
+                       isEqualAmounth;
+            }
+            return false;
+        }
     }
 }

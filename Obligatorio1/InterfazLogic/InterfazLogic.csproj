@@ -46,6 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddBudgetForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddBudgetForm.Designer.cs">
+      <DependentUpon>AddBudgetForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditBudgetCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditBudgetCategory.Designer.cs">
+      <DependentUpon>EditBudgetCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +66,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AddBudgetForm.resx">
+      <DependentUpon>AddBudgetForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditBudgetCategory.resx">
+      <DependentUpon>EditBudgetCategory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>

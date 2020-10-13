@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -8,22 +8,42 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
+    enum Months
+    {
+        Enero,
+        Febrero,
+        Marzo,
+        Abril,
+        Mayo,
+        Junio,
+        Julio,
+        Agosto,
+        Setiembre,
+        Octubre,
+        Noviembre,
+        Diciembre
+    }
     public class Repository
     {
-        public List<Category> Categories { get; set; }
+        public List<Category> Categories = new List<Category>();
 
         public List<Expense> Expenses { get; set; }
+
+        public List<Budget> Budgets { get; set; }
+
+        public List<BudgetCategory> BudgetCategories { get; set; }
 
         public Repository()
         {
             Categories = new List<Category>();
             Expenses = new List<Expense>();
+            Budgets = new List<Budget>();
+            BudgetCategories = new List<BudgetCategory>();
         }
              
 
         public Repository(List<Category> categoriesReceived)
         {
-            this.Categories = categoriesReceived;
             this.Expenses = new List<Expense>();
         }
 
@@ -61,9 +81,9 @@ namespace BusinessLogic
         public List<string> MonthsOrdered()
         {
             List<int> months = new List<int>();
-            for (int i = 0; i < this.Expenses.Count; i++)
+            for (int i = 0; i < Expenses.Count; i++)
             {
-                Expense expense = this.Expenses[i];
+                Expense expense = Expenses[i];
                 if (!months.Contains(expense.CreationDate.Month))
                     months.Add(expense.CreationDate.Month);
             }
@@ -86,7 +106,7 @@ namespace BusinessLogic
 
         public double ExpenseByMonths(string month)
         {
-            int monthInt = ToIntMonth(month);
+            int monthInt = StringToIntMonth(month);
             double total = 0;
             for (int i = 0; i < this.Expenses.Count; i++)
             {
@@ -97,20 +117,11 @@ namespace BusinessLogic
             return total;
         }
 
-        private int ToIntMonth(string month)
+        private int StringToIntMonth(string month)
         {
-            if (month == "Enero") return 1;
-            if (month == "Febrero") return 2;
-            if (month == "Marzo") return 3;
-            if (month == "Abril") return 4;
-            if (month == "Mayo") return 5;
-            if (month == "Junio") return 6;
-            if (month == "Julio") return 7;
-            if (month == "Agosto") return 8;
-            if (month == "Setiembre") return 9;
-            if (month == "Octubre") return 10;
-            if (month == "Noviembre") return 11;
-            return 12;
+            int monthInBaseCero = (int)Enum.Parse(typeof(Months), month);
+            int monthInBaseOne = monthInBaseCero + 1;
+            return monthInBaseOne;
         }
 
         //funciones de Reporte de Gastos:se muestran los gastos y el monto total del month. 
@@ -118,7 +129,7 @@ namespace BusinessLogic
         public List<string[]> ExpenseReport(string month)
         {
             
-            int monthInt = ToIntMonth(month);
+            int monthInt = StringToIntMonth(month);
             List<string[]> reports = new List<string[]>();
             for (int i = 0; i < this.Expenses.Count; i++)
             {
@@ -126,7 +137,7 @@ namespace BusinessLogic
                 Expense expense = this.Expenses[i];
                 if (expense.CreationDate.Month == monthInt )
                 {
-                    string date = expense.CreationDate.ToString("dd/mm/yyyy");
+                    string date = expense.CreationDate.ToString("dd/MM/yyyy");
                     string description = expense.Description;
                     string name = expense.Category.Name;
                     string amount = expense.Amount.ToString();
@@ -157,7 +168,7 @@ namespace BusinessLogic
             return validName;
         }
 
-        public void addCategory(Category category)
+        public void AddCategory(Category category)
         {
             if (!isValidName(category.Name))
                 throw new ExcepcionInvalidRepeatedNameCategory();
@@ -192,7 +203,7 @@ namespace BusinessLogic
         }
 
 
-        public void addExpense(Expense expense)
+        public void AddExpense(Expense expense)
         {
             expense.Category = FindCategoryByDescription(expense.Description);
             if (expense.Category == null)
@@ -200,5 +211,62 @@ namespace BusinessLogic
             Expenses.Add(expense);
 
         }
+
+        public void AddBudget(Budget vBudget)
+        {
+            if (vBudget is null)
+            {
+                throw new ArgumentNullException();
+            }
+            Budgets.Add(vBudget);
+        }
+
+        public void AddBudgetCategory(BudgetCategory vCategory)
+        {
+            if (vCategory is null)
+            {
+                throw new ArgumentNullException();
+            }
+            BudgetCategories.Add(vCategory);
+        }
+
+        public string[] GetAllMonthsString()
+        {
+            return Enum.GetNames(typeof(Months)).ToArray();
+        }
+
+        public string[] GetAllCategoryStrings()
+        {
+            List<string> categoryNames = new List<string>();
+
+            foreach (var category in Categories)
+            {
+                categoryNames.Add(category.ToString());
+            }
+            return categoryNames.ToArray();
+        }
+
+        private Budget FindBudgetByDate(int month, int year)
+        {
+            foreach (var budget in Budgets)
+            {
+                if (budget.Month == month && budget.Year == year)
+                    return budget;
+            }
+            return null;
+        }
+
+        public Budget BudgetGetOrCreate(string month, int year)
+        {
+            int monthIndex = StringToIntMonth(month);
+            Budget returnBudget = FindBudgetByDate(monthIndex, year);
+            if (returnBudget is null)
+            {
+                returnBudget = new Budget(monthIndex, year, 0, Categories);
+                AddBudget(returnBudget);
+            }
+            return returnBudget;
+        }
+
     }
 }

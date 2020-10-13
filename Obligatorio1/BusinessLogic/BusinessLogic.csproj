@@ -41,12 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogicController.cs" />
     <Compile Include="Budget.cs" />
     <Compile Include="BudgetCategory.cs" />
     <Compile Include="NegativeValueError.cs" />
     <Compile Include="Category.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Expense.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
