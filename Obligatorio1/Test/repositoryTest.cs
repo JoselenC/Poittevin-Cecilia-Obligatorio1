@@ -13,6 +13,7 @@ namespace Test
         private static Repository repo = new Repository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
+        private static Category categoryHouse;
         private static Budget JanuaryBudget;
 
         [ClassInitialize()]
@@ -32,8 +33,15 @@ namespace Test
                 "cena"
             };
             categoryFood = new Category("comida", keyWords2);
+            List<string> keyWords3 = new List<string>
+            {
+                "CoffeMaker",
+                "toilet paper",
+            };
+            categoryHouse = new Category("House", keyWords3);
             repo.AddCategory(categoryEntertainment);
             repo.AddCategory(categoryFood);
+            repo.AddCategory(categoryHouse);
 
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
@@ -41,6 +49,22 @@ namespace Test
             };
             JanuaryBudget = new Budget(1, 2020, 0, categories);
             repo.AddBudget(JanuaryBudget);
+
+            Expense januaryExpenseFood = new Expense(200, new DateTime(2020, 1, 1), "sushi night")
+            {
+                Category = categoryFood
+            };
+            Expense januaryExpenseFood2 = new Expense(110.50, new DateTime(2020, 1, 1), "sushi night")
+            {
+                Category = categoryFood
+            };
+            Expense januaryExpenseEntertainment = new Expense(230.15, new DateTime(2020, 1, 1), "buy video game")
+            {
+                Category = categoryEntertainment
+            };
+            repo.AddExpense(januaryExpenseFood);
+            repo.AddExpense(januaryExpenseFood2);
+            repo.AddExpense(januaryExpenseEntertainment);
         }
 
         [TestMethod]
@@ -783,5 +807,34 @@ namespace Test
             List<BudgetCategory> actualBudgetCategories = actualBudget.BudgetCategories;
             CollectionAssert.AreEqual(budgetCategories, actualBudgetCategories);
         }
+
+        [TestMethod]
+
+        public void GetTotalSpentByMonthAndCategoryValidCase()
+        {
+            double expectedTotalSpentJanuary = 310.50;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Enero", categoryFood);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpenses()
+        {
+            double expectedTotalSpentJanuary = 0;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Marzo", categoryFood);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpensesInCategory()
+        {
+            double expectedTotalSpentJanuary = 0;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Enero", categoryHouse);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
     }
 }

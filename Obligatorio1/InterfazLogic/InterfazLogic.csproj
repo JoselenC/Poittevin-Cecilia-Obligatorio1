@@ -64,6 +64,12 @@
     <Compile Include="EditBudgetCategory.Designer.cs">
       <DependentUpon>EditBudgetCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="BudgetReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BudgetReport.Designer.cs">
+      <DependentUpon>BudgetReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     </Compile>
     <EmbeddedResource Include="ExpenseReport.resx">
       <DependentUpon>ExpenseReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BudgetReport.resx">
+      <DependentUpon>BudgetReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>

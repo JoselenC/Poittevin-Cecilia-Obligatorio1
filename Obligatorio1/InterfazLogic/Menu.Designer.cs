@@ -109,6 +109,7 @@
             this.btnBudgetReport.TabIndex = 11;
             this.btnBudgetReport.Text = "Budget Report";
             this.btnBudgetReport.UseVisualStyleBackColor = true;
+            this.btnBudgetReport.Click += new System.EventHandler(this.btnBudgetReport_Click);
             // 
             // Menu
             // 

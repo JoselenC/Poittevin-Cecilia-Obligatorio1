@@ -107,15 +107,24 @@ namespace BusinessLogic
             return monthsString;
         }
 
-        public double ExpenseByMonths(string month)
+        private List<Expense> GetAllExpenses(string month)
         {
             int monthInt = StringToIntMonth(month);
-            double total = 0;
-            for (int i = 0; i < this.Expenses.Count; i++)
+            List<Expense> returnExpenses = new List<Expense>();
+            foreach (Expense expense in Expenses)
             {
-                Expense expense = this.Expenses[i];
                 if (expense.CreationDate.Month == monthInt)
-                    total += expense.Amount;
+                    returnExpenses.Add(expense);
+            }
+            return returnExpenses;
+        }
+        public double ExpenseByMonths(string month)
+        {
+            double total = 0;
+            List<Expense> expensesByMonth = GetAllExpenses(month);
+            foreach (Expense expense in expensesByMonth)
+            {
+                total += expense.Amount;
             }
             return total;
         }
@@ -278,5 +287,16 @@ namespace BusinessLogic
             return returnBudget;
         }
 
+        public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
+        {
+            List<Expense> expenses = GetAllExpenses(vMonth);
+            double total = 0;
+            foreach (Expense expense in expenses)
+            {
+                if (expense.Category == vCategory)
+                    total += expense.Amount;
+            }
+            return total;
+        }
     }
 }
