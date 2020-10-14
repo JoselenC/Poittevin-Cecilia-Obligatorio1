@@ -381,6 +381,19 @@ namespace Test
             Assert.AreEqual(budget1, budget2);
         }
 
+
+        [TestMethod]
+        public void EqualFalseNoBudget()
+        {
+            List<Category> categories1 = new List<Category>()
+            {
+                new Category{Name="House" , KeyWords=new List<string>()},
+                new Category{Name="Car" , KeyWords=new List<string>()},
+            };
+            Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
+            Assert.AreNotEqual(budget1, categories1.ToArray()[0]);
+        }
+
         [TestMethod]
         public void GetBudgetCategoryValidGetCase() {
             Category carCategory = new Category { Name = "Car", KeyWords = new List<string>() };

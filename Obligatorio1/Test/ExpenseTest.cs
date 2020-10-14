@@ -140,7 +140,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void EqualTrue()
+        public void EqualTrueEqualsExpenses()
         {
             double amount = 23.5;
             string description = "cuando fui al cine";
@@ -149,6 +149,19 @@ namespace Test
             Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
             Assert.AreEqual(expense, expense2);
         }
+
+        [TestMethod]
+        public void EqualFalseNoExpense()
+        {
+            double amount = 23.5;
+            string description = "cuando fui al cine";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+            Category category = new Category() { KeyWords = new List<string>(), Name = "Entretenimiento" };
+            Assert.AreEqual(expense, category);
+        }
+
+
 
     }
 }

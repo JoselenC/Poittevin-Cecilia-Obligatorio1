@@ -93,5 +93,14 @@ namespace Test
             Assert.AreNotEqual(budgetCategory1, budgetCategory2);
 
         }
+
+        [TestMethod]
+        public void TestEqualsFalseNoBudgetCategory()
+        {
+            Category category1 = new Category { Name = "testCategory", KeyWords = new List<string>() { "Key1", "Key2" } };
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 0 };
+            Assert.AreNotEqual(budgetCategory1, category1);
+
+        }
     }
 }

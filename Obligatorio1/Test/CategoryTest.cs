@@ -194,5 +194,18 @@ namespace Test
             Category category2 = new Category { Name = "Test Categoria",KeyWords = new List<string>() };
             Assert.AreNotEqual(category1, category2);
         }
+
+        [TestMethod]
+        public void EqualFalseNoCategory()
+        {
+            Category category1 = new Category { Name = "Test Cate", KeyWords = new List<string>() };
+            List<string> keyWords = new List<string>
+            {
+                "cine",
+                "teatro",
+                "salida"
+            };
+            Assert.AreNotEqual(category1,keyWords);
+        }
     }
 }
