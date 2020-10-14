@@ -28,12 +28,12 @@ namespace BusinessLogic
         }
              
 
-        public Repository(List<Category> categoriesReceived)
+        public Repository(List<Category> vCategories)
         {
             Expenses = new List<Expense>();
             Budgets = new List<Budget>();
             BudgetCategories = new List<BudgetCategory>();
-            Categories = categoriesReceived;
+            Categories = vCategories;
         }
 
 
@@ -110,35 +110,20 @@ namespace BusinessLogic
                     total += expense.Amount;
             }
             return total;
-        }   
+        }
 
-        
-        public List<string[]> ExpenseReport(string month)
+        public List<Expense> ExpensesByMonthPassed(string month)
         {
-            
+
             int monthInt = StringToIntMonth(month);
-            List<string[]> reports = new List<string[]>();
+            List<Expense> expensesByMonth = new List<Expense>();
             foreach (Expense vExpense in Expenses)
             {
-                string[] report = new string[4];
-                Expense expense = vExpense;
-                if (expense.CreationDate.Month == monthInt )
-                {
-                    string date = expense.CreationDate.ToString("dd/MM/yyyy");
-                    string description = expense.Description;
-                    string name = expense.Category.Name;
-                    string amount = expense.Amount.ToString();
-
-                    report[0] = date;
-                    report[1] = description;
-                    report[2] = name;
-                    report[3] = amount;
-
-                }
-                reports.Add(report);
+                if (vExpense.CreationDate.Month == monthInt)
+                    expensesByMonth.Add(vExpense);
             }
-            return reports;
-        }
+            return expensesByMonth;
+        }    
 
 
         private bool AlreadyExistTheCategoryName(string categoryName)
@@ -256,7 +241,7 @@ namespace BusinessLogic
             Budget returnBudget = FindBudgetByDate(monthIndex, year);
             if (returnBudget is null)
             {
-                returnBudget = new Budget(monthIndex, year, 0, Categories);
+                returnBudget = new Budget(monthIndex, Categories) { Year = year, TotalAmount = 0 };
                 AddBudget(returnBudget);
             }
             return returnBudget;

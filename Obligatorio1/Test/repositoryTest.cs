@@ -39,8 +39,8 @@ namespace Test
                 categoryEntertainment,
                 categoryFood,
             };
-            JanuaryBudget = new Budget(1, 2020, 0, categories);
-            repo.AddBudget(JanuaryBudget);
+            Budget januaryBudget = new Budget(1, categories) { Year = 2020, TotalAmount = 0 };
+            repo.AddBudget(januaryBudget);
         }
 
         [TestMethod]
@@ -174,35 +174,35 @@ namespace Test
         }
 
         [TestMethod]
-        public void ExpenseReport()
+        public void ExpensesByMonth()
         {
-            List<string[]> reports = new List<string[]>();
-            string[] report = new string[4];
-            report[0] = "24/12/2020";
-            report[1] = "cine";
-            report[2] = "Entretenimiento";
-            report[3] = "230";
-            reports.Add(report);
-            List<Expense> expenses = new List<Expense>();
-            DateTime month1 = new DateTime(2020, 12, 24);
-            String categoryName = "Entretenimiento";
-            List<string> keyWords = new List<string>();
-            keyWords.Add("cine");
-            keyWords.Add("teatro");
+            string month = "Enero";
+            Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "Cuando fui al cine" };
+            Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "Cuando fui al cine" };
+            List<Expense> expenses = new List<Expense>(){
+                expense1,
+                expense2,
+            };
             Repository repository = new Repository();
-            Expense expense = new Expense { Amount = 230, CreationDate = month1, Description = "cine" };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
-            expense.Category = category;
-            repository.AddCategoryToCategories(category);
-            repository.AddExpenseToExpenses(expense);
-            List<string[]> reports1 = repository.ExpenseReport(month1.Month.ToString());
-            Assert.AreEqual(reports.ToArray()[0][0], reports1.ToArray()[0][0]);
-            Assert.AreEqual(reports.ToArray()[0][1], reports1.ToArray()[0][1]);
-            Assert.AreEqual(reports.ToArray()[0][2], reports1.ToArray()[0][2]);
-            Assert.AreEqual(reports.ToArray()[0][3], reports1.ToArray()[0][3]);
+            repository.Expenses = expenses;
+            Assert.AreEqual(expense1, repository.ExpensesByMonthPassed(month).ToArray()[0]);
+
         }
 
-
+        [TestMethod]
+        public void ExpensesByMonthEmpty()
+        {
+            string month = "Mayo";
+            Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "Cuando fui al cine" };
+            Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "Cuando fui al cine" };
+            List<Expense> expenses = new List<Expense>(){
+                expense1,
+                expense2,
+            };
+            Repository repository = new Repository();
+            repository.Expenses = expenses;
+            Assert.AreEqual(0, repository.ExpensesByMonthPassed(month).Count);
+        }
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
@@ -380,7 +380,7 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetToRepository()
         {
-            Budget validBudget = new Budget(DateTime.Now.Month, DateTime.Now.Year, 4000);
+            Budget validBudget = new Budget(DateTime.Now.Month) { TotalAmount = 4000, Year = DateTime.Now.Year };
             Repository EmptyRepository = new Repository();
             EmptyRepository.AddBudget(validBudget);
 
@@ -466,7 +466,7 @@ namespace Test
         {
             string month = "Diciembre";
             int year = 2020;
-            Budget expectedBudget = new Budget(12, 2020, 0, repo.Categories);
+            Budget expectedBudget = new Budget(12, repo.Categories) { Year = 2020, TotalAmount = 0 };
 
             Budget budget = repo.BudgetGetOrCreate(month, year);
             Assert.AreEqual(expectedBudget, budget);
@@ -478,7 +478,7 @@ namespace Test
             Repository emptyRepository = new Repository();
             int month = 12;
             int year = 2020;
-            Budget budget = new Budget(month, year, 0);
+            Budget budget = new Budget(month) { Year = year, TotalAmount = 0 };
             emptyRepository.AddBudget(budget);
 
             Budget actualBudget = emptyRepository.BudgetGetOrCreate("Diciembre", year);
