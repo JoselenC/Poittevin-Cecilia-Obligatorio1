@@ -62,13 +62,13 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.BackColor = System.Drawing.Color.Beige;
+            this.mainPanel.BackColor = System.Drawing.Color.OldLace;
             this.mainPanel.Location = new System.Drawing.Point(374, 15);
             this.mainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1299, 786);
             this.mainPanel.TabIndex = 7;
-            this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
+            
             // 
             // btnRegisterExpense
             // 
@@ -133,7 +133,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Menu";
             this.Text = "Menu";
-            this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
