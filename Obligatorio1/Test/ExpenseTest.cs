@@ -158,7 +158,7 @@ namespace Test
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
             Category category = new Category() { KeyWords = new List<string>(), Name = "Entretenimiento" };
-            Assert.AreEqual(expense, category);
+            Assert.AreNotEqual(expense, category);
         }
 
 
