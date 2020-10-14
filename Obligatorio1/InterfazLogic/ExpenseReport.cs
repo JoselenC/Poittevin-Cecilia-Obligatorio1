@@ -54,17 +54,26 @@ namespace InterfazLogic
                 {
                     lblMonths.Text = "You must select a month to consult";
                 }
-                List<string[]> report = repository.ExpenseReport(month);
+                List<Expense> expenseReportByMonth = repository.ExpensesByMonthPassed(month);
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
-                for (int i = 0; i < report.Count; i++)
+                foreach(Expense vExpense in expenseReportByMonth)
                 {
-                    totalAmount += Convert.ToDouble(report[i][3]);
-                    item = listView1.Items.Add(report[i][0]);
-                    item.SubItems.Add(report[i][1]);
-                    item.SubItems.Add(report[i][2]);
-                    item.SubItems.Add(report[i][3]);                    
+                    string date = vExpense.CreationDate.ToString("dd/MM/yyyy");
+                    string description = vExpense.Description;
+                    string name = vExpense.Category.Name;
+                    string amount = vExpense.Amount.ToString();
+
+                        totalAmount += Convert.ToDouble(vExpense.Amount);
+                        item = listView1.Items.Add(date);
+                        item.SubItems.Add(description);
+                        item.SubItems.Add(name);
+                        item.SubItems.Add(amount);
+                    
+
                 }
+
+                
                 lblTotalAmount.Text = "Total amount of the month " + month + " was " + totalAmount.ToString();
             }
             else
