@@ -49,20 +49,19 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkOliveGreen;
-            this.label1.Location = new System.Drawing.Point(415, 36);
+            this.label1.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.label1.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label1.Location = new System.Drawing.Point(40, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(353, 48);
+            this.label1.Size = new System.Drawing.Size(1127, 92);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Register Expense";
+            this.label1.Text = "              Register expense             ";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.label2.BackColor = System.Drawing.Color.OldLace;
             this.label2.Location = new System.Drawing.Point(46, 159);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(158, 32);
@@ -72,8 +71,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.label3.Location = new System.Drawing.Point(46, 267);
+            this.label3.BackColor = System.Drawing.Color.OldLace;
+            this.label3.Location = new System.Drawing.Point(46, 280);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 32);
             this.label3.TabIndex = 2;
@@ -82,8 +81,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.label4.Location = new System.Drawing.Point(46, 372);
+            this.label4.BackColor = System.Drawing.Color.OldLace;
+            this.label4.Location = new System.Drawing.Point(46, 389);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 32);
             this.label4.TabIndex = 3;
@@ -92,8 +91,8 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.AntiqueWhite;
-            this.label5.Location = new System.Drawing.Point(46, 472);
+            this.label5.BackColor = System.Drawing.Color.OldLace;
+            this.label5.Location = new System.Drawing.Point(46, 504);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(130, 32);
             this.label5.TabIndex = 4;
@@ -101,8 +100,8 @@
             // 
             // tbDescription
             // 
-            this.tbDescription.BackColor = System.Drawing.Color.OldLace;
-            this.tbDescription.Location = new System.Drawing.Point(367, 153);
+            this.tbDescription.BackColor = System.Drawing.Color.White;
+            this.tbDescription.Location = new System.Drawing.Point(367, 159);
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.Size = new System.Drawing.Size(451, 38);
             this.tbDescription.TabIndex = 5;
@@ -110,7 +109,7 @@
             // dateTime
             // 
             this.dateTime.CalendarMonthBackground = System.Drawing.Color.OldLace;
-            this.dateTime.Location = new System.Drawing.Point(371, 356);
+            this.dateTime.Location = new System.Drawing.Point(366, 383);
             this.dateTime.Name = "dateTime";
             this.dateTime.Size = new System.Drawing.Size(447, 38);
             this.dateTime.TabIndex = 6;
@@ -118,32 +117,31 @@
             // lbDescription
             // 
             this.lbDescription.AutoSize = true;
-            this.lbDescription.Location = new System.Drawing.Point(327, 194);
+            this.lbDescription.Location = new System.Drawing.Point(345, 211);
             this.lbDescription.Name = "lbDescription";
-            this.lbDescription.Size = new System.Drawing.Size(23, 32);
+            this.lbDescription.Size = new System.Drawing.Size(0, 32);
             this.lbDescription.TabIndex = 7;
-            this.lbDescription.Text = ".";
             // 
             // lstCategories
             // 
-            this.lstCategories.BackColor = System.Drawing.Color.OldLace;
+            this.lstCategories.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(372, 469);
+            this.lstCategories.Location = new System.Drawing.Point(367, 504);
             this.lstCategories.Name = "lstCategories";
-            this.lstCategories.Size = new System.Drawing.Size(446, 35);
+            this.lstCategories.Size = new System.Drawing.Size(446, 159);
             this.lstCategories.TabIndex = 8;
             // 
             // nAmount
             // 
-            this.nAmount.BackColor = System.Drawing.Color.OldLace;
+            this.nAmount.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.nAmount.DecimalPlaces = 2;
             this.nAmount.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.nAmount.Location = new System.Drawing.Point(455, 261);
+            this.nAmount.Location = new System.Drawing.Point(442, 278);
             this.nAmount.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -166,45 +164,42 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.Location = new System.Drawing.Point(327, 302);
+            this.lblAmount.Location = new System.Drawing.Point(345, 316);
             this.lblAmount.Name = "lblAmount";
-            this.lblAmount.Size = new System.Drawing.Size(23, 32);
+            this.lblAmount.Size = new System.Drawing.Size(0, 32);
             this.lblAmount.TabIndex = 10;
-            this.lblAmount.Text = ".";
             // 
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(330, 411);
+            this.lblDate.Location = new System.Drawing.Point(345, 439);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(23, 32);
+            this.lblDate.Size = new System.Drawing.Size(0, 32);
             this.lblDate.TabIndex = 11;
-            this.lblDate.Text = ".";
             // 
             // lblCategories
             // 
             this.lblCategories.AutoSize = true;
-            this.lblCategories.Location = new System.Drawing.Point(328, 519);
+            this.lblCategories.Location = new System.Drawing.Point(345, 684);
             this.lblCategories.Name = "lblCategories";
-            this.lblCategories.Size = new System.Drawing.Size(23, 32);
+            this.lblCategories.Size = new System.Drawing.Size(0, 32);
             this.lblCategories.TabIndex = 12;
-            this.lblCategories.Text = ".";
             // 
             // btnRegistrExpense
             // 
             this.btnRegistrExpense.BackColor = System.Drawing.Color.Tan;
-            this.btnRegistrExpense.Location = new System.Drawing.Point(421, 611);
+            this.btnRegistrExpense.Location = new System.Drawing.Point(491, 716);
             this.btnRegistrExpense.Name = "btnRegistrExpense";
-            this.btnRegistrExpense.Size = new System.Drawing.Size(302, 55);
+            this.btnRegistrExpense.Size = new System.Drawing.Size(219, 56);
             this.btnRegistrExpense.TabIndex = 13;
-            this.btnRegistrExpense.Text = "RegisterExpense";
+            this.btnRegistrExpense.Text = "Register";
             this.btnRegistrExpense.UseVisualStyleBackColor = false;
             this.btnRegistrExpense.Click += new System.EventHandler(this.btnRegistrExpense_Click);
             // 
             // btnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.Tan;
-            this.btnSearch.Location = new System.Drawing.Point(845, 460);
+            this.btnSearch.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnSearch.Location = new System.Drawing.Point(924, 504);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(219, 55);
             this.btnSearch.TabIndex = 14;
@@ -216,7 +211,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.AntiqueWhite;
+            this.BackColor = System.Drawing.Color.OldLace;
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnRegistrExpense);
             this.Controls.Add(this.lblCategories);
@@ -233,7 +228,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "RegisterExpense";
-            this.Size = new System.Drawing.Size(1120, 708);
+            this.Size = new System.Drawing.Size(1214, 800);
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

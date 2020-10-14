@@ -49,21 +49,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.OliveDrab;
-            this.label1.Location = new System.Drawing.Point(451, 49);
+            this.label1.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.label1.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label1.Location = new System.Drawing.Point(52, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(352, 48);
+            this.label1.Size = new System.Drawing.Size(1144, 92);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Register category";
+            this.label1.Text = "              Register category             ";
             // 
             // btnRegisterCategory
             // 
             this.btnRegisterCategory.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterCategory.Location = new System.Drawing.Point(477, 563);
+            this.btnRegisterCategory.Location = new System.Drawing.Point(537, 699);
             this.btnRegisterCategory.Name = "btnRegisterCategory";
-            this.btnRegisterCategory.Size = new System.Drawing.Size(285, 63);
+            this.btnRegisterCategory.Size = new System.Drawing.Size(227, 63);
             this.btnRegisterCategory.TabIndex = 1;
             this.btnRegisterCategory.Text = "Register";
             this.btnRegisterCategory.UseVisualStyleBackColor = false;
@@ -113,22 +113,22 @@
             // btnAddKeyWord
             // 
             this.btnAddKeyWord.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnAddKeyWord.Location = new System.Drawing.Point(1003, 283);
+            this.btnAddKeyWord.Location = new System.Drawing.Point(1025, 283);
             this.btnAddKeyWord.Name = "btnAddKeyWord";
             this.btnAddKeyWord.Size = new System.Drawing.Size(218, 63);
             this.btnAddKeyWord.TabIndex = 7;
-            this.btnAddKeyWord.Text = "Add";
+            this.btnAddKeyWord.Text = "Add key word";
             this.btnAddKeyWord.UseVisualStyleBackColor = false;
             this.btnAddKeyWord.Click += new System.EventHandler(this.btnAddKeyWord_Click);
             // 
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEdit.Location = new System.Drawing.Point(1003, 388);
+            this.btnEdit.Location = new System.Drawing.Point(372, 512);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(218, 63);
+            this.btnEdit.Size = new System.Drawing.Size(236, 63);
             this.btnEdit.TabIndex = 8;
-            this.btnEdit.Text = "Edit";
+            this.btnEdit.Text = "Edit key word";
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -137,27 +137,25 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(339, 216);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(23, 32);
+            this.lblName.Size = new System.Drawing.Size(0, 32);
             this.lblName.TabIndex = 9;
-            this.lblName.Text = ".";
             // 
             // lblKeyWords
             // 
             this.lblKeyWords.AutoSize = true;
             this.lblKeyWords.Location = new System.Drawing.Point(339, 347);
             this.lblKeyWords.Name = "lblKeyWords";
-            this.lblKeyWords.Size = new System.Drawing.Size(23, 32);
+            this.lblKeyWords.Size = new System.Drawing.Size(0, 32);
             this.lblKeyWords.TabIndex = 10;
-            this.lblKeyWords.Text = ".";
             // 
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSave.Location = new System.Drawing.Point(1003, 477);
+            this.btnSave.Location = new System.Drawing.Point(1025, 398);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(218, 63);
             this.btnSave.TabIndex = 11;
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "Save change";
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -173,18 +171,17 @@
             this.lblKeyWordToEdit.AutoSize = true;
             this.lblKeyWordToEdit.Location = new System.Drawing.Point(339, 452);
             this.lblKeyWordToEdit.Name = "lblKeyWordToEdit";
-            this.lblKeyWordToEdit.Size = new System.Drawing.Size(23, 32);
+            this.lblKeyWordToEdit.Size = new System.Drawing.Size(0, 32);
             this.lblKeyWordToEdit.TabIndex = 13;
-            this.lblKeyWordToEdit.Text = ".";
             // 
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDelete.Location = new System.Drawing.Point(1003, 563);
+            this.btnDelete.Location = new System.Drawing.Point(642, 512);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(218, 63);
+            this.btnDelete.Size = new System.Drawing.Size(229, 63);
             this.btnDelete.TabIndex = 14;
-            this.btnDelete.Text = "Delete";
+            this.btnDelete.Text = "Delete key word";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -219,7 +216,7 @@
             this.Controls.Add(this.btnRegisterCategory);
             this.Controls.Add(this.label1);
             this.Name = "RegisterCategory";
-            this.Size = new System.Drawing.Size(1253, 689);
+            this.Size = new System.Drawing.Size(1371, 804);
             this.ResumeLayout(false);
             this.PerformLayout();
 

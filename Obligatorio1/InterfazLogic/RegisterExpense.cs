@@ -18,8 +18,9 @@ namespace InterfazLogic
         {
             InitializeComponent();
             repository = vRepository;
-            this.MaximumSize = new Size(500, 600);
-            this.MinimumSize = new Size(500, 600);
+            this.MaximumSize = new Size(800, 800);
+            this.MinimumSize = new Size(800, 800);
+
 
             tbDescription.Clear();
             lstCategories.Items.Clear();
@@ -29,25 +30,28 @@ namespace InterfazLogic
         {
             Category category = repository.FindCategoryByDescription(description);
             string categoryName = "";
-
-            if(category!=null)
-                categoryName = category.Name;
-
-            if (categoryName.Length > 0)
+            if (category != null)
             {
+                categoryName = category.Name;
                 lstCategories.Items.Add(categoryName);
             }
             else if (repository.Categories.Count > 0)
             {
-                for (int i = 0; i < repository.Categories.Count; i++)
+                foreach (Category vCategory in repository.Categories)
                 {
-                    lstCategories.Items.Add(repository.Categories[i].Name);
+                    lstCategories.Items.Add(vCategory.Name);
                 }
             }
             else
             {
                 MessageBox.Show("There are no categories registered in the system");
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string description = tbDescription.Text;
+            CompleteCategories(description);
         }
 
 
@@ -64,62 +68,43 @@ namespace InterfazLogic
                     string nameCategory = lstCategories.SelectedItem.ToString();
                     Category category = repository.FindCategoryByName(nameCategory);
                     expense.Category = category;
-                    repository.AddExpenseToExpenses(expense);
-                    lbDescription.Text = "";
-                    lblAmount.Text = "";
-                    lblCategories.Text = "";
-                    lblDate.Text = "";
-                    MessageBox.Show("The expense was recorded successfully");
+                    repository.AddExpenseToExpenses(expense);                    
+                    MessageBox.Show("The expense was recorded successfully","",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     this.Visible = false;
                 }
                 else
                 {
                     lblCategories.Text = "You must select a category";
+                    lblCategories.ForeColor = Color.Red;
                 }
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
-                lbDescription.Text = "The name must be between 3 and 20 characters long.";            
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lblDate.Text = "";
-
+                lbDescription.Text = "The name must be between 3 and 20 characters long.";      
+                lbDescription.ForeColor = Color.Red;
             }
             catch (ExcepcionNegativeAmountExpense)
             {
                 lblAmount.Text = "The amount must be positive";
-                lbDescription.Text = "";
-                lblCategories.Text = "";
-                lblDate.Text = "";
+                lblAmount.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidAmountExpense)
+            {
+                lblAmount.Text = "The amount cannot have more than two decimal places";
+                lblAmount.ForeColor = Color.Red;
             }
             catch (ExcepcionInvalidYearExpense)
             {
                 lblDate.Text = "The year must be between 2018 and 2030.";
-                lbDescription.Text = "";
-                lblAmount.Text = "";
-                lblCategories.Text = "";
+                lblDate.ForeColor = Color.Red;
             }
             catch (ExcepcionExpenseWithEmptyCategory)
             {
                 lblCategories.Text = "The category should not be empty ";
-                lbDescription.Text = "";
-                lblAmount.Text = "";
-                lblDate.Text = "";
-            }
-            catch (ExcepcionInvalidAmountExpense)
-            {
-                lblAmount.Text= "The amount cannot have more than two decimal places";
-                lbDescription.Text = "";
-                lblCategories.Text = "";
-                lblDate.Text = "";
-            }
-            
+                lblCategories.ForeColor = Color.Red;
+            }         
         }
 
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            string description = tbDescription.Text;
-            CompleteCategories(description);
-        }
+       
     }
 }

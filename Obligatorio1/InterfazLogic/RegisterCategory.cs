@@ -23,36 +23,84 @@ namespace InterfazLogic
             repository = vRepository;
             keyWords = new List<string>();
             tbEdit.Visible = false;
-            this.MaximumSize = new Size(500, 600);
-            this.MinimumSize = new Size(500, 600);
+            this.MaximumSize = new Size(800, 800);
+            this.MinimumSize = new Size(800, 800);
             lstCategories.Items.Clear();
             tbName.Clear();
         }
 
 
+        private void btnRegisterCategory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string name = tbName.Text;
+                List<string> kW = this.keyWords;
+                Category category = new Category { Name = name, KeyWords = kW };
+                repository.AddCategoryToCategories(category);
+                lblKeyWords.Text = "";
+                lblKeyWordToEdit.Text = "";
+                lblName.Text = "";
+                MessageBox.Show("Category " + category.Name + " was added successfully","",MessageBoxButtons.OK,MessageBoxIcon.Information);                
+                this.Visible = false;
+            }
+            catch (ExcepcionInvalidNameLengthCategory)
+            {
+                lblName.Text = "The name must be between 3 and 15 characters long.";
+                lblName.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidNameDigitCategory)
+            {
+                lblName.Text = "The name of the category cannot be just numbers.";
+                lblName.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidRepeatedNameCategory)
+            {
+                lblName.Text = "The entered name already exists.";
+                lblName.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidRepeatedKeyWordsCategory)
+            {
+                lblKeyWords.Text = "The entered keyword already exists in another category, edit or delete it.";
+                lblKeyWords.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidKeyWordsLengthCategory)
+            {
+                lblKeyWords.Text = "You cannot add more than 10 keywords.";
+                lblKeyWords.ForeColor = Color.Red;
+            }           
+
+        }
+
+
         private void btnAddKeyWord_Click(object sender, EventArgs e)
         {
-                string keyWord = tbKeyWord.Text;
-                if (keyWord.Length > 0)
+            string keyWord = tbKeyWord.Text;
+            if (keyWord.Length > 0)
+            {
+                if (keyWords.Contains(keyWord.ToLower()))
                 {
-                    if (keyWords.Contains(keyWord.ToLower()))
-                    {
-                        lblKeyWords.Text = "You already entered that keyword";
-                    }
-                    else if (keyWords.Count > 10)
-                    {
-                        lblKeyWords.Text = "You cannot add more than 10 keywords.";
-                    }
-                    else
-                    {                     
-                        this.keyWords.Add(keyWord);
-                        lstCategories.Items.Add(keyWord);
-                        tbKeyWord.Text = "";
-                    }
+                    lblKeyWords.Text = "You already entered that keyword";
+                    lblKeyWords.ForeColor = Color.Red;
+                }
+                else if (keyWords.Count > 10)
+                {
+                    lblKeyWords.Text = "You cannot add more than 10 keywords.";
+                    lblKeyWords.ForeColor = Color.Red;
                 }
                 else
-                    lblKeyWords.Text = "The keyword cannot be empty.";
-            
+                {
+                    this.keyWords.Add(keyWord);
+                    lstCategories.Items.Add(keyWord);
+                    tbKeyWord.Text = "";
+                }
+            }
+            else
+            {
+                lblKeyWords.Text = "The keyword cannot be empty.";
+                lblKeyWords.ForeColor = Color.Red;
+            }
+
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -71,54 +119,14 @@ namespace InterfazLogic
                 else
                 {
                     lblKeyWordToEdit.Text = "There aren't key words to edit";
+                    lblKeyWords.ForeColor = Color.Red;
                 }
             }
             catch (ArgumentOutOfRangeException)
             {
                 lblKeyWordToEdit.Text = "Select key word to edit";
-            }          
-           
-        }
-
-        private void btnRegisterCategory_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string name = tbName.Text;
-                List<string> kW = this.keyWords;
-                Category category = new Category { Name = name, KeyWords = kW };
-                repository.AddCategoryToCategories(category);
-                MessageBox.Show("Category " + category.Name + " was added successfully");                
-                lblKeyWords.Text = "";
-                lblName.Text = "";
-                this.Visible = false;
+                lblKeyWords.ForeColor = Color.Red;
             }
-            catch (ExcepcionInvalidNameLengthCategory)
-            {
-                lblName.Text = "The name must be between 3 and 15 characters long.";
-                lblKeyWords.Text = "";
-            }
-            catch (ExcepcionInvalidNameDigitCategory)
-            {
-                lblName.Text = "The name of the category cannot be just numbers.";
-                lblKeyWords.Text = "";
-            }
-            catch (ExcepcionInvalidRepeatedNameCategory)
-            {
-                lblName.Text = "The entered name already exists.";
-                lblKeyWords.Text = "";
-            }
-            catch (ExcepcionInvalidRepeatedKeyWordsCategory)
-            {
-                lblKeyWords.Text = "The entered keyword already exists in another category," +
-                    " modify or delete it.";
-            }
-            catch (ExcepcionInvalidKeyWordsLengthCategory)
-            {
-                lblKeyWords.Text = "You cannot add more than 10 keywords.";
-            }
-
-            
 
         }
 
@@ -129,7 +137,10 @@ namespace InterfazLogic
             if (keyWordEdited != "")
                 lstCategories.Items.Add(keyWordEdited);
             else
+            {
                 lblKeyWordToEdit.Text = "The keyword cannot be empty";
+                lblKeyWordToEdit.ForeColor = Color.Red;
+            }
             tbEdit.Visible = false;
             tbEdit.Text = "";
            
@@ -148,6 +159,7 @@ namespace InterfazLogic
             catch (ArgumentOutOfRangeException)
             {
                 lblKeyWordToEdit.Text = "Select key word to delete";
+                lblKeyWordToEdit.ForeColor = Color.Red;
             }
         }
     }

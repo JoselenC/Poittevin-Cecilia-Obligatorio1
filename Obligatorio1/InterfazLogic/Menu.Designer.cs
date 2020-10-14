@@ -40,81 +40,89 @@
             // lblMenu
             // 
             this.lblMenu.AutoSize = true;
-            this.lblMenu.Location = new System.Drawing.Point(21, 22);
-            this.lblMenu.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblMenu.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMenu.ForeColor = System.Drawing.Color.DarkKhaki;
+            this.lblMenu.Location = new System.Drawing.Point(65, 21);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(34, 13);
+            this.lblMenu.Size = new System.Drawing.Size(194, 92);
             this.lblMenu.TabIndex = 1;
             this.lblMenu.Text = "Menu";
             // 
             // btnRegisterCategory
             // 
-            this.btnRegisterCategory.Location = new System.Drawing.Point(23, 52);
-            this.btnRegisterCategory.Margin = new System.Windows.Forms.Padding(1);
+            this.btnRegisterCategory.BackColor = System.Drawing.Color.Tan;
+            this.btnRegisterCategory.Location = new System.Drawing.Point(61, 121);
+            this.btnRegisterCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterCategory.Name = "btnRegisterCategory";
-            this.btnRegisterCategory.Size = new System.Drawing.Size(111, 24);
+            this.btnRegisterCategory.Size = new System.Drawing.Size(296, 115);
             this.btnRegisterCategory.TabIndex = 2;
             this.btnRegisterCategory.Text = "Register Category";
-            this.btnRegisterCategory.UseVisualStyleBackColor = true;
+            this.btnRegisterCategory.UseVisualStyleBackColor = false;
             this.btnRegisterCategory.Click += new System.EventHandler(this.btnRegisterCategory_Click);
             // 
             // mainPanel
             // 
-            this.mainPanel.Location = new System.Drawing.Point(143, 9);
-            this.mainPanel.Margin = new System.Windows.Forms.Padding(1);
+            this.mainPanel.BackColor = System.Drawing.Color.Beige;
+            this.mainPanel.Location = new System.Drawing.Point(374, 15);
+            this.mainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1232, 897);
+            this.mainPanel.Size = new System.Drawing.Size(1299, 786);
             this.mainPanel.TabIndex = 7;
             this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
             // btnRegisterExpense
             // 
-            this.btnRegisterExpense.Location = new System.Drawing.Point(23, 95);
-            this.btnRegisterExpense.Margin = new System.Windows.Forms.Padding(1);
+            this.btnRegisterExpense.BackColor = System.Drawing.Color.Tan;
+            this.btnRegisterExpense.Location = new System.Drawing.Point(62, 258);
+            this.btnRegisterExpense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterExpense.Name = "btnRegisterExpense";
-            this.btnRegisterExpense.Size = new System.Drawing.Size(111, 24);
+            this.btnRegisterExpense.Size = new System.Drawing.Size(296, 123);
             this.btnRegisterExpense.TabIndex = 8;
             this.btnRegisterExpense.Text = "Register Expense";
-            this.btnRegisterExpense.UseVisualStyleBackColor = true;
+            this.btnRegisterExpense.UseVisualStyleBackColor = false;
             this.btnRegisterExpense.Click += new System.EventHandler(this.btnRegisterExpense_Click);
             // 
             // btnRegisterBudget
             // 
-            this.btnRegisterBudget.Location = new System.Drawing.Point(23, 140);
-            this.btnRegisterBudget.Margin = new System.Windows.Forms.Padding(1);
+            this.btnRegisterBudget.BackColor = System.Drawing.Color.Tan;
+            this.btnRegisterBudget.Location = new System.Drawing.Point(61, 401);
+            this.btnRegisterBudget.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterBudget.Name = "btnRegisterBudget";
-            this.btnRegisterBudget.Size = new System.Drawing.Size(111, 24);
+            this.btnRegisterBudget.Size = new System.Drawing.Size(296, 123);
             this.btnRegisterBudget.TabIndex = 9;
             this.btnRegisterBudget.Text = "Register Budget";
-            this.btnRegisterBudget.UseVisualStyleBackColor = true;
+            this.btnRegisterBudget.UseVisualStyleBackColor = false;
             this.btnRegisterBudget.Click += new System.EventHandler(this.btnRegisterBudget_Click);
             // 
             // btnExpenseReport
             // 
-            this.btnExpenseReport.Location = new System.Drawing.Point(23, 187);
-            this.btnExpenseReport.Margin = new System.Windows.Forms.Padding(1);
+            this.btnExpenseReport.BackColor = System.Drawing.Color.Tan;
+            this.btnExpenseReport.Location = new System.Drawing.Point(62, 540);
+            this.btnExpenseReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExpenseReport.Name = "btnExpenseReport";
-            this.btnExpenseReport.Size = new System.Drawing.Size(111, 24);
+            this.btnExpenseReport.Size = new System.Drawing.Size(296, 117);
             this.btnExpenseReport.TabIndex = 10;
             this.btnExpenseReport.Text = "Expense Report";
-            this.btnExpenseReport.UseVisualStyleBackColor = true;
+            this.btnExpenseReport.UseVisualStyleBackColor = false;
             this.btnExpenseReport.Click += new System.EventHandler(this.btnExpenseReport_Click);
             // 
             // btnBudgetReport
             // 
-            this.btnBudgetReport.Location = new System.Drawing.Point(22, 232);
-            this.btnBudgetReport.Margin = new System.Windows.Forms.Padding(1);
+            this.btnBudgetReport.BackColor = System.Drawing.Color.Tan;
+            this.btnBudgetReport.Location = new System.Drawing.Point(61, 674);
+            this.btnBudgetReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBudgetReport.Name = "btnBudgetReport";
-            this.btnBudgetReport.Size = new System.Drawing.Size(111, 25);
+            this.btnBudgetReport.Size = new System.Drawing.Size(297, 116);
             this.btnBudgetReport.TabIndex = 11;
             this.btnBudgetReport.Text = "Budget Report";
-            this.btnBudgetReport.UseVisualStyleBackColor = true;
+            this.btnBudgetReport.UseVisualStyleBackColor = false;
             // 
             // Menu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1625, 930);
+            this.BackColor = System.Drawing.Color.OldLace;
+            this.ClientSize = new System.Drawing.Size(1686, 812);
             this.Controls.Add(this.btnBudgetReport);
             this.Controls.Add(this.btnExpenseReport);
             this.Controls.Add(this.btnRegisterBudget);
@@ -122,7 +130,7 @@
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.btnRegisterCategory);
             this.Controls.Add(this.lblMenu);
-            this.Margin = new System.Windows.Forms.Padding(1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Menu";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.Menu_Load);
