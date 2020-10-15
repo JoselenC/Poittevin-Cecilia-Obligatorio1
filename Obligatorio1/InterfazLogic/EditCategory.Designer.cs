@@ -82,7 +82,7 @@
             // lblKeyWords
             // 
             this.lblKeyWords.AutoSize = true;
-            this.lblKeyWords.Location = new System.Drawing.Point(55, 446);
+            this.lblKeyWords.Location = new System.Drawing.Point(55, 425);
             this.lblKeyWords.Name = "lblKeyWords";
             this.lblKeyWords.Size = new System.Drawing.Size(145, 32);
             this.lblKeyWords.TabIndex = 14;
@@ -128,14 +128,14 @@
             // 
             this.lstKwywords.FormattingEnabled = true;
             this.lstKwywords.ItemHeight = 31;
-            this.lstKwywords.Location = new System.Drawing.Point(235, 533);
+            this.lstKwywords.Location = new System.Drawing.Point(238, 504);
             this.lstKwywords.Name = "lstKwywords";
             this.lstKwywords.Size = new System.Drawing.Size(594, 35);
             this.lstKwywords.TabIndex = 20;
             // 
             // txtKeyWord
             // 
-            this.txtKeyWord.Location = new System.Drawing.Point(238, 446);
+            this.txtKeyWord.Location = new System.Drawing.Point(238, 425);
             this.txtKeyWord.Name = "txtKeyWord";
             this.txtKeyWord.Size = new System.Drawing.Size(591, 38);
             this.txtKeyWord.TabIndex = 22;
@@ -143,7 +143,7 @@
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEdit.Location = new System.Drawing.Point(235, 624);
+            this.btnEdit.Location = new System.Drawing.Point(235, 592);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(236, 63);
             this.btnEdit.TabIndex = 23;
@@ -154,7 +154,7 @@
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDelete.Location = new System.Drawing.Point(597, 624);
+            this.btnDelete.Location = new System.Drawing.Point(597, 592);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(229, 63);
             this.btnDelete.TabIndex = 24;
@@ -186,7 +186,7 @@
             // 
             // tbEdit
             // 
-            this.tbEdit.Location = new System.Drawing.Point(235, 533);
+            this.tbEdit.Location = new System.Drawing.Point(238, 501);
             this.tbEdit.Name = "tbEdit";
             this.tbEdit.Size = new System.Drawing.Size(594, 38);
             this.tbEdit.TabIndex = 27;
@@ -194,7 +194,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(449, 732);
+            this.btnAccept.Location = new System.Drawing.Point(448, 699);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 63);
             this.btnAccept.TabIndex = 28;
@@ -214,7 +214,7 @@
             // lblKeyWord
             // 
             this.lblKeyWord.AutoSize = true;
-            this.lblKeyWord.Location = new System.Drawing.Point(232, 487);
+            this.lblKeyWord.Location = new System.Drawing.Point(232, 466);
             this.lblKeyWord.Name = "lblKeyWord";
             this.lblKeyWord.Size = new System.Drawing.Size(23, 32);
             this.lblKeyWord.TabIndex = 30;
@@ -223,7 +223,7 @@
             // lblKyWords
             // 
             this.lblKyWords.AutoSize = true;
-            this.lblKyWords.Location = new System.Drawing.Point(232, 574);
+            this.lblKyWords.Location = new System.Drawing.Point(232, 549);
             this.lblKyWords.Name = "lblKyWords";
             this.lblKyWords.Size = new System.Drawing.Size(23, 32);
             this.lblKyWords.TabIndex = 31;

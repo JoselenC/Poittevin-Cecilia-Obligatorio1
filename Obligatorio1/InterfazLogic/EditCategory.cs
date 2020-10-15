@@ -163,21 +163,43 @@ namespace InterfazLogic
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            if (txtName.Text != "")
+
+            try
             {
                 category.Name = txtName.Text;
                 category.KeyWords = KeyWords;
-                repository.Categories.Add(category);
-                MessageBox.Show("the category was edited correctly");
-                Visible = false;
+                repository.AddCategoryToCategories(category);               
+                MessageBox.Show("Category " + category.Name + " was added successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Visible = false;
             }
-            else
+            catch (ExcepcionInvalidNameLengthCategory)
             {
-                lblName.Text = "The category name cannot be empty ";
+                lblName.Text = "The name must be between 3 and 15 characters long.";
                 lblName.ForeColor = Color.Red;
             }
+            catch (ExcepcionInvalidNameDigitCategory)
+            {
+                lblName.Text = "The name of the category cannot be just numbers.";
+                lblName.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidRepeatedNameCategory)
+            {
+                lblName.Text = "The entered name already exists.";
+                lblName.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidRepeatedKeyWordsCategory)
+            {
+                lblKeyWords.Text = "The entered keyword already exists in another category, edit or delete it.";
+                lblKeyWords.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidKeyWordsLengthCategory)
+            {
+                lblKeyWords.Text = "You cannot add more than 10 keywords.";
+                lblKeyWords.ForeColor = Color.Red;
+            }
+
         }
 
-       
+
     }
 }
