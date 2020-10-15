@@ -34,6 +34,7 @@ namespace BusinessLogic
             }
             year = vYear;
         }
+
         private bool ValidMonth(int vMonth)
         {
             if (vMonth > 12 || vMonth < 1)
@@ -43,13 +44,11 @@ namespace BusinessLogic
             return true;
         }
 
-        public Budget(int vCurrentMonth, int vCurrentYear, double vtotalAmount)
+        public Budget(int vCurrentMonth)
         {
             if (ValidMonth(vCurrentMonth))
             {
                 month = vCurrentMonth;
-                TotalAmount = vtotalAmount;
-                Year = vCurrentYear;
                 BudgetCategories = new List<BudgetCategory>();
             }
         }
@@ -59,18 +58,16 @@ namespace BusinessLogic
             List<BudgetCategory> returnList = new List<BudgetCategory>();
             foreach (var category in categories)
             {
-                returnList.Add(new BudgetCategory(category, 0));
+                returnList.Add(new BudgetCategory { Category = category, Amount = 0 });
             }
             return returnList;
 
         }
-        public Budget(int vCurrentMonth, int vCurrentYear, double vtotalAmount, List<Category> categories)
+        public Budget(int vCurrentMonth, List<Category> categories)
         {
             if (ValidMonth(vCurrentMonth))
             {
                 month = vCurrentMonth;
-                TotalAmount = vtotalAmount;
-                Year = vCurrentYear;
                 BudgetCategories = generateBudgetCategoryList(categories);
             }
         }

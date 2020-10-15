@@ -11,9 +11,9 @@ namespace Test
         [TestMethod]
         public void TestCreateBudgetCategory()
         {
-            Category category = new Category("testCategory");
+            Category category = new Category { Name = "testCategory" };
             double amount = 100;
-            BudgetCategory budgetCategory =  new BudgetCategory(category, amount);
+            BudgetCategory budgetCategory = new BudgetCategory { Category = category, Amount = amount };
             Assert.AreEqual(budgetCategory.Category, category);
         }
 
@@ -22,15 +22,15 @@ namespace Test
         public void TestCreateBudgetCategoryNullCategory()
         {
             double amount = 100;
-            new BudgetCategory(null, amount);
+            BudgetCategory budgetCategory = new BudgetCategory {Category=null, Amount = amount };
         }
 
         [TestMethod]
         public void TestCreateBudgetCategoryAmountWithDecimals()
         {
-            Category category = new Category("testCategory");
+            Category category = new Category { Name = "testCategory" };
             double amount = 100.23;
-            BudgetCategory budgetCategory = new BudgetCategory(category, amount);
+            BudgetCategory budgetCategory = new BudgetCategory { Category = category, Amount = amount };
             Assert.AreEqual(amount, budgetCategory.Amount);
         }
 
@@ -38,19 +38,19 @@ namespace Test
         [ExpectedException(typeof(NegativeValueErrorAttribute))]
         public void TestCreateBudgetCategoryAmountWithNegativeValue()
         {
-            Category category = new Category("testCategory");
+            Category category = new Category { Name = "testCategory" };
             double amount = -1;
-            new BudgetCategory(category, amount);
+            BudgetCategory budgetCategory = new BudgetCategory { Category = category, Amount = amount };
         }
 
         [TestMethod]
         public void TestEqualsTrueCase()
         {
-            Category category1 = new Category("testCategory");
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 0);
+            Category category1 = new Category { Name = "testCategory", KeyWords = new List<string>() };
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount =0};
 
-            Category category2 = new Category("testCategory");
-            BudgetCategory budgetCategory2 = new BudgetCategory(category2, 0);
+            Category category2 = new Category { Name = "testCategory", KeyWords = new List<string>() };
+            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 0};
 
             Assert.AreEqual(budgetCategory1, budgetCategory2);
 
@@ -58,11 +58,11 @@ namespace Test
         [TestMethod]
         public void TestEqualsFalseCaseDiffAmount()
         {
-            Category category1 = new Category("testCategory");
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 0);
+            Category category1 = new Category { Name = "testCategory",KeyWords=new List<string>() };
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 0 };
 
-            Category category2 = new Category("testCategory");
-            BudgetCategory budgetCategory2 = new BudgetCategory(category2, 100);
+            Category category2 = new Category { Name = "testCategory", KeyWords = new List<string>() };
+            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 100 };
 
             Assert.AreNotEqual(budgetCategory1, budgetCategory2);
 
@@ -71,11 +71,11 @@ namespace Test
         [TestMethod]
         public void TestEqualsFalseCaseDiffCategory()
         {
-            Category category1 = new Category("testCategory");
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 0);
+            Category category1 =new Category { Name = "testCategory", KeyWords = new List<string>() };
+            BudgetCategory budgetCategory1 =  new BudgetCategory { Category = category1, Amount = 0 };
 
-            Category category2 = new Category("WrongCategory");
-            BudgetCategory budgetCategory2 = new BudgetCategory(category2, 0);
+            Category category2 = new Category { Name = "WrongCategory", KeyWords = new List<string>() };
+            BudgetCategory budgetCategory2 =  new BudgetCategory { Category = category2, Amount = 0 };
 
             Assert.AreNotEqual(budgetCategory1, budgetCategory2);
 
@@ -84,13 +84,22 @@ namespace Test
         [TestMethod]
         public void TestEqualsFalseCaseDiffCategoryKeyWords()
         {
-            Category category1 = new Category("testCategory", new List<string>(){ "Key1", "Key2" });
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 0);
+            Category category1 = new Category { Name = "testCategory", KeyWords = new List<string>() { "Key1", "Key2" } };
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 0 };
 
-            Category category2 = new Category("WrongCategory",  new List<string>(){ "Key1", "Key3" });
-            BudgetCategory budgetCategory2 = new BudgetCategory(category2, 0);
+            Category category2 = new Category { Name = "WrongCategory", KeyWords = new List<string>() { "Key1", "Key3" } };
+            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 0 };
 
             Assert.AreNotEqual(budgetCategory1, budgetCategory2);
+
+        }
+
+        [TestMethod]
+        public void TestEqualsFalseNoBudgetCategory()
+        {
+            Category category1 = new Category { Name = "testCategory", KeyWords = new List<string>() { "Key1", "Key2" } };
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 0 };
+            Assert.AreNotEqual(budgetCategory1, category1);
 
         }
     }

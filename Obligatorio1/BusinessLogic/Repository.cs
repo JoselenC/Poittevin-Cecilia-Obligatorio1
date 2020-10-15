@@ -8,21 +8,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    enum Months
-    {
-        Enero,
-        Febrero,
-        Marzo,
-        Abril,
-        Mayo,
-        Junio,
-        Julio,
-        Agosto,
-        Setiembre,
-        Octubre,
-        Noviembre,
-        Diciembre
-    }
+   
     public class Repository
     {
         public List<Category> Categories = new List<Category>();
@@ -42,32 +28,33 @@ namespace BusinessLogic
         }
              
 
-        public Repository(List<Category> categoriesReceived)
+        public Repository(List<Category> vCategories)
         {
             Expenses = new List<Expense>();
             Budgets = new List<Budget>();
             BudgetCategories = new List<BudgetCategory>();
-            Categories = categoriesReceived;
+            Categories = vCategories;
         }
 
 
 
-        public Category FindCategoryByDescription(string description)
+        public Category FindCategoryByDescription(string vDescription)
         {
             Category category = null;
-            string[] desc = description.Split(' ');
+            string[] descriptionArray = vDescription.Split(' ');
             bool exist = false;
             int cont = 0;
-            for (int i = 0; i < Categories.Count; i++)
+            foreach (Category vCategory in Categories)
             {
                 exist = false;
-                for (int j = 0; j < desc.Length && !exist; j++)
+                foreach (String description in descriptionArray)
                 {
-                    exist = Categories[i].KeyWords.Contains(desc[j]);
+                    exist = vCategory.KeyWords.Contains(description);
                 }
+
                 if (exist)
                 {
-                    category = Categories[i];
+                    category = vCategory;
                     cont = cont + 1;
                 }
             }
@@ -81,43 +68,29 @@ namespace BusinessLogic
             }
         }
 
-        public List<string> MonthsOrdered()
-        {
-            List<int> months = new List<int>();
-            for (int i = 0; i < Expenses.Count; i++)
-            {
-                Expense expense = Expenses[i];
-                if (!months.Contains(expense.CreationDate.Month))
-                    months.Add(expense.CreationDate.Month);
-            }
-            months.Sort();
-            List<string> monthsString = GetMonthsString(months);
-            return monthsString;
-        }
-
-        private List<string> GetMonthsString(List<int> months)
+        private List<string> MonthsListStringToInt(List<int> months)
         {
             List<string> monthsString = new List<string>();
-            for (int i = 0; i < months.Count; i++)
+            foreach (int month in months)
             {
                 DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
-                string nombreMes = formatoFecha.GetMonthName(months[i]);
+                string nombreMes = formatoFecha.GetMonthName(month);
                 monthsString.Add(nombreMes);
             }
             return monthsString;
         }
 
-        public double ExpenseByMonths(string month)
+        public List<string> OrderedMonthsInWhichThereAreExpenses()
         {
-            int monthInt = StringToIntMonth(month);
-            double total = 0;
-            for (int i = 0; i < this.Expenses.Count; i++)
+            List<int> orderedMonthsInt = new List<int>();
+            foreach (Expense expense in Expenses)
             {
-                Expense expense = this.Expenses[i];
-                if (expense.CreationDate.Month == monthInt)
-                    total += expense.Amount;
+                if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
+                    orderedMonthsInt.Add(expense.CreationDate.Month);
             }
-            return total;
+            orderedMonthsInt.Sort();
+            List<string> orderedMonthsString = MonthsListStringToInt(orderedMonthsInt);
+            return orderedMonthsString;
         }
 
         private int StringToIntMonth(string month)
@@ -127,42 +100,38 @@ namespace BusinessLogic
             return monthInBaseOne;
         }
 
-        //funciones de Reporte de Gastos:se muestran los gastos y el monto total del month. 
-        //obtener todo eso que tenemos que mostrar
-        public List<string[]> ExpenseReport(string month)
+        public double AmountOfExpensesInAMonth(string month)
         {
-            
             int monthInt = StringToIntMonth(month);
-            List<string[]> reports = new List<string[]>();
-            for (int i = 0; i < this.Expenses.Count; i++)
+            double total = 0;
+            foreach (Expense expense in this.Expenses)
             {
-                string[] report = new string[4];
-                Expense expense = this.Expenses[i];
-                if (expense.CreationDate.Month == monthInt )
-                {
-                    string date = expense.CreationDate.ToString("dd/MM/yyyy");
-                    string description = expense.Description;
-                    string name = expense.Category.Name;
-                    string amount = expense.Amount.ToString();
-
-                    report[0] = date;
-                    report[1] = description;
-                    report[2] = name;
-                    report[3] = amount;
-
-                }
-                reports.Add(report);
+                if (expense.CreationDate.Month == monthInt)
+                    total += expense.Amount;
             }
-            return reports;
+            return total;
         }
 
+        public List<Expense> ExpensesByMonthPassed(string month)
+        {
 
-        private bool isValidName(string categoryName)
+            int monthInt = StringToIntMonth(month);
+            List<Expense> expensesByMonth = new List<Expense>();
+            foreach (Expense vExpense in Expenses)
+            {
+                if (vExpense.CreationDate.Month == monthInt)
+                    expensesByMonth.Add(vExpense);
+            }
+            return expensesByMonth;
+        }    
+
+
+        private bool AlreadyExistTheCategoryName(string categoryName)
         {
             bool validName = true;
-            for (int i = 0; i < Categories.Count; i++)
+            foreach (Category category in Categories)
             {
-                if (categoryName.ToLower() == Categories[i].Name.ToLower())
+                if (categoryName.ToLower() == category.Name.ToLower())
                 {
                     validName= false;
                 }
@@ -171,40 +140,57 @@ namespace BusinessLogic
             return validName;
         }
 
-        public void AddCategory(Category category)
-        {
-            if (!isValidName(category.Name))
-                throw new ExcepcionInvalidRepeatedNameCategory();
-            if (!areValidKeywords(category.KeyWords))
-                throw new ExcepcionInvalidRepeatedKeyWordsCategory();            
-            this.Categories.Add(category);                
-            
-           
-        }
-        private bool  areValidKeywords(List<string> keyWords)
-        {
-            bool validKeywords = true;
-            for (int i = 0; i < Categories.Count; i++)
+         public bool AlreadyExistThisKeyWordInAnoterCategory(string pKeyWord)
+         {
+            bool isValidKeyWord = false;
+            foreach (Category category in Categories)
             {
-                for (int k = 0; k < Categories[i].KeyWords.Count; k++)
+                foreach (string vKeyWord in category.KeyWords)
                 {
-                    for (int j = 0; j < keyWords.Count; j++)
+
+                    if (pKeyWord.ToLower() == vKeyWord.ToLower())
                     {
-                        string keyWord = Categories[i].KeyWords[k];
-                        string vkeyWord = keyWords[j];
+                        isValidKeyWord = true;
+                    }                    
+                }
+            }
+            return isValidKeyWord;
+        }
+
+        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pKeyWords)
+        {
+            bool areValidKeyWords = true;
+            foreach (Category category in Categories)
+            {
+                foreach (string vKeyWord in category.KeyWords)
+                {
+                    foreach (string pKeyWord in pKeyWords)
+                    {
+                        string keyWord = vKeyWord;
+                        string vkeyWord = pKeyWord;
                         if (keyWord.ToLower() == vkeyWord.ToLower())
                         {
-                            validKeywords = false;
+                            areValidKeyWords = false;
                         }
                     }
                 }
 
             }
-            return validKeywords;
+            return areValidKeyWords;
         }
 
+        public void AddCategoryToCategories(Category category)
+        {
+            if (!AlreadyExistTheCategoryName(category.Name))
+                throw new ExcepcionInvalidRepeatedNameCategory();
+            if (!AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();            
+            this.Categories.Add(category);                
+            
+           
+        }    
 
-        public void AddExpense(Expense expense)
+        public void AddExpenseToExpenses(Expense expense)
         {
            if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();
@@ -272,7 +258,7 @@ namespace BusinessLogic
             Budget returnBudget = FindBudgetByDate(monthIndex, year);
             if (returnBudget is null)
             {
-                returnBudget = new Budget(monthIndex, year, 0, Categories);
+                returnBudget = new Budget(monthIndex, Categories) { Year = year, TotalAmount = 0 };
                 AddBudget(returnBudget);
             }
             return returnBudget;

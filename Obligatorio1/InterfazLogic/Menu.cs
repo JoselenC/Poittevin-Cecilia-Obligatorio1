@@ -40,22 +40,12 @@ namespace InterfazLogic
 
         private void btnRegisterBudget_Click(object sender, EventArgs e)
         {
-            var addBudgetForm = new AddBudgetForm(repository)
-            {
-                Location = new Point(300, 120)
-            };
-            addBudgetForm.Show();
+            mainPanel.Controls.Clear();
+            UserControl addBudgetForm = new AddBudgetForm(repository);
+            mainPanel.Controls.Add(addBudgetForm);
         }
 
-        private void mainPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Menu_Load(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 
 }

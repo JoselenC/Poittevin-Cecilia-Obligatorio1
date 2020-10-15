@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,41 +10,29 @@ namespace BusinessLogic
 {
     public class Category
     {
-        public string Name {get; set; }
 
-        public List<string> KeyWords { get; set; } 
+        private string name;
+        private List<String> keyWords;
 
-        private void ValidName(string nameReceived)
+        public string Name {get=>name; set=>SetName(value); }
+        public List<string> KeyWords { get=>keyWords; set=>SetKeyWords(value); } 
+
+        private void SetName(string vName)
         {
-             if (nameReceived.Length > 15 || nameReceived.Length < 3)  
+             if (vName.Length > 15 || vName.Length < 3)  
                 throw new ExcepcionInvalidNameLengthCategory();
-            if (nameReceived.All(char.IsDigit))
+            if (vName.All(char.IsDigit))
                 throw new ExcepcionInvalidNameDigitCategory();
+            name = vName;
 
         }
 
-        private void ValidKeyWords(List<string> keyWordsReceived)
+        private void SetKeyWords(List<string> vKeyWords)
         {
-            if (keyWordsReceived.Count > 10)
+            if (vKeyWords.Count > 10)
                 throw new ExcepcionInvalidKeyWordsLengthCategory();
-
-        }
-        public Category(string nameReceived)
-        {
-            ValidName(nameReceived);
-            this.Name = nameReceived;
-            this.KeyWords = new List<string>();
-        }
-
-       
-
-        public Category(string nameReceived, List<string> keyWordsReceived)
-        {
-            ValidName(nameReceived);
-            ValidKeyWords(keyWordsReceived);          
-            this.Name = nameReceived;
-            this.KeyWords = keyWordsReceived;
-        }
+            keyWords = vKeyWords;
+        }      
 
         public override string ToString()
         {

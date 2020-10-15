@@ -17,7 +17,7 @@ namespace Test
             double amount = 0;
             string description = "";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
 
         }
 
@@ -30,7 +30,7 @@ namespace Test
             double amount = -10.5;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
 
         [TestMethod]
@@ -42,59 +42,38 @@ namespace Test
             double amount = 23.555;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
 
-        [TestMethod]
-
-        [ExpectedException(typeof(ExcepcionInvalidAmountExpense), "")]
-        public void CreateExpenseInvalidDecimalAmount2()
-        {
-
-            double amount = 23.344;
-            string description = "cuando fui al cine";
-            DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
-        }
-
+        
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidYearExpense), "")]
-        public void CreatExpenseInvalidDateYear()
+        public void CreatExpenseInvalidDateFutureYear()
         {
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2031, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidYearExpense), "")]
-        public void CreatExpenseInvalidDateYear2()
+        public void CreatExpenseInvalidDateLastYear()
         {
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2017, 2, 2);
-            Expense expense = new Expense(amount, creationDate, description);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException), "")]
-        public void CreatExpenseInvalidDateYear3()
+        public void CreatExpenseInvalidDateYearZero()
         {
             double amount = 23;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(0, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ExcepcionInvalidDescriptionLengthExpense), "")]
-        public void CreatExpenseInvalidDescriptionLength2()
-        {
-            double amount = 23;
-            string description = "cuando fuimos al cine de punta carretas";
-            DateTime creationDate = new DateTime(2021, 2, 2);
-            Expense expense = new Expense(amount, creationDate, description);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
 
         [TestMethod]
@@ -102,23 +81,86 @@ namespace Test
         public void CreatExpenseInvalidDescriptionLength()
         {
             double amount = 23;
-            string description = "al";
+            string description = "cuando fuimos al cine de punta carretas";
             DateTime creationDate = new DateTime(2021, 2, 2);
-            Expense expense = new Expense(amount, creationDate, description);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
 
         [TestMethod]
-        public void CreatExpense()
+        [ExpectedException(typeof(ExcepcionInvalidDescriptionLengthExpense), "")]
+        public void CreatExpenseShortDescription()
+        {
+            double amount = 23;
+            string description = "al";
+            DateTime creationDate = new DateTime(2021, 2, 2);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+        }
+
+        [TestMethod]
+        public void CreatExpenseValidData()
         {
             double amount = 23.55;
             string description = "cuando fui al cine";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense(amount, creationDate, description);
-            Assert.AreEqual(expense.Amount, amount);
-            Assert.AreEqual(expense.CreationDate, creationDate);
-            Assert.AreEqual(expense.Description, description);
+            Expense expense = new Expense { Amount = amount, CreationDate =creationDate, Description = description };
+            Assert.AreEqual(amount,expense.Amount);
+            Assert.AreEqual(creationDate,expense.CreationDate);
+            Assert.AreEqual(description,expense.Description);
 
         }
+
+        [TestMethod]
+        public void EqualFalseCaseDiffAmount()
+        {
+            string description = "cuando fui al cine";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense { Amount = 23, CreationDate = creationDate, Description = description };
+            Expense expense2 = new Expense { Amount = 23.5, CreationDate = creationDate, Description = description };
+            Assert.AreNotEqual(expense, expense2);
+        }
+
+        [TestMethod]
+        public void EqualFalseCaseDiffDescription()
+        {
+            double amount=23.5;
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = "Cuando fui al cine"};
+            Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = "Cuando fui a cenar" };
+            Assert.AreNotEqual(expense, expense2);
+        }
+
+        [TestMethod]
+        public void EqualFalseCaseDiffCreationDate()
+        {
+            double amount = 23.5;
+            string description = "cuando fui al cine";
+            Expense expense = new Expense { Amount = amount, CreationDate = new DateTime(2020, 01, 01), Description = description };
+            Expense expense2 = new Expense { Amount = amount, CreationDate = new DateTime(2021, 01, 01), Description = description};
+            Assert.AreNotEqual(expense, expense2);
+        }
+
+        [TestMethod]
+        public void EqualTrueEqualsExpenses()
+        {
+            double amount = 23.5;
+            string description = "cuando fui al cine";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+            Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+            Assert.AreEqual(expense, expense2);
+        }
+
+        [TestMethod]
+        public void EqualFalseNoExpense()
+        {
+            double amount = 23.5;
+            string description = "cuando fui al cine";
+            DateTime creationDate = new DateTime(2020, 01, 01);
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+            Category category = new Category() { KeyWords = new List<string>(), Name = "Entretenimiento" };
+            Assert.AreNotEqual(expense, category);
+        }
+
 
 
     }

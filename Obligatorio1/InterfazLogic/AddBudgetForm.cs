@@ -1,11 +1,16 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using BusinessLogic;
 namespace InterfazLogic
 {
-    public partial class AddBudgetForm : Form
+    public partial class AddBudgetForm : UserControl
     {
         private Repository Repository { get; set; }
         private Budget CurrentBudget { get; set; }
@@ -13,7 +18,8 @@ namespace InterfazLogic
         {
             InitializeComponent();
             Repository = vRepository;
-
+            this.MaximumSize = new Size(500, 600);
+            this.MinimumSize = new Size(500, 600);
             // TODO: Agregar control de que no se pueda crear un budget si no hay ninguna categoria en el sistema
             comboBoxMonth.Items.AddRange(Repository.GetAllMonthsString());
             comboBoxMonth.SelectedIndex = 0;
@@ -52,7 +58,7 @@ namespace InterfazLogic
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            Visible = false;
         }
 
         private void listBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -98,7 +104,7 @@ namespace InterfazLogic
         private void button2_Click(object sender, EventArgs e)
         {
             Repository.AddBudget(CurrentBudget);
-            Close();
+            Visible = false;
         }
     }
 }

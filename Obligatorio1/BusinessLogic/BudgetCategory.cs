@@ -28,11 +28,6 @@ namespace BusinessLogic
             amount = vAmount;
         }
 
-        public BudgetCategory(Category vCategory, double vAmount)
-        {
-            Category = vCategory;
-            Amount = vAmount;
-        }
 
         public override string ToString()
         {

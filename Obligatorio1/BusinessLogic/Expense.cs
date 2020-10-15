@@ -9,46 +9,53 @@ namespace BusinessLogic
 {
     public class Expense
     {
-        public double Amount { get; set; }
-        public DateTime CreationDate { get; set; }
+        private double amount;
+        private DateTime creationDate;
+        private string description;
+        private Category category;
 
-        public string Description { get; set; }
+        public double Amount { get=>amount; set=>SetAmount(value); }
+        public DateTime CreationDate { get=>creationDate; set=>SetdDate(value); }
 
-        public Category Category { get; set; }
+        public string Description { get=>description; set=>SetDescription(value); }
 
-        private void ValidDate(DateTime date)
+        public Category Category { get; set;}
+
+        private void SetdDate(DateTime vCreationdate)
         {
-            if (date.Year > 2030 || date.Year < 2018)
+            if (vCreationdate.Year > 2030 || vCreationdate.Year < 2018)
                 throw new ExcepcionInvalidYearExpense();
+            creationDate = vCreationdate;
         }
 
-        private void ValidAmount(double amountPassed)
+        private void SetAmount(double vAmount)
         {
-            if (amountPassed <= 0)
+            if (vAmount <= 0)
                 throw new ExcepcionNegativeAmountExpense();
 
-            if (amountPassed != Math.Round(amountPassed, 2))
+            if (vAmount!= Math.Round(vAmount, 2))
                 throw new ExcepcionInvalidAmountExpense();
+            amount = vAmount;
         }
 
-        private void ValidDescription(string description)
+        private void SetDescription(string vDescription)
         {
-            if (description.Length < 3 || description.Length > 20)
-                throw new ExcepcionInvalidDescriptionLengthExpense();            
+            if (vDescription.Length < 3 || vDescription.Length > 20)
+                throw new ExcepcionInvalidDescriptionLengthExpense();
+            description = vDescription;
         }
-               
-        public Expense(double amountPassed, DateTime creationDatePassed, string descriptionPassed)
+
+        public override bool Equals(object obj)
         {
-            ValidAmount(amountPassed);
-            ValidDescription(descriptionPassed);          
-            ValidDate(creationDatePassed);            
-            this.Amount = amountPassed;
-            this.CreationDate = creationDatePassed;
-            this.Description = descriptionPassed;
-            this.Category = null;
+            if (obj is Expense expense)
+            {
+                bool equalsAmount = amount == expense.amount;
+                bool equalsCreationDate = creationDate == expense.creationDate;
+                bool equalsDescription = description == expense.description;
+                return equalsAmount && equalsCreationDate && equalsDescription;
 
-            
+            }
+            return false;
         }
-
     }
 }

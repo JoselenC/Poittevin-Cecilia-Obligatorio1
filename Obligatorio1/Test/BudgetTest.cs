@@ -15,7 +15,7 @@ namespace Test
             int currentMonth = DateTime.Now.Month;
             int currentYear = DateTime.Now.Year;
             double totalAmount = 4000;
-            Budget budget = new Budget(currentMonth, currentYear, totalAmount);
+            Budget budget = new Budget(currentMonth) {TotalAmount=totalAmount,Year=currentYear};
             Assert.AreEqual(currentMonth, budget.Month);
         }
 
@@ -25,7 +25,7 @@ namespace Test
             int currentMonth = DateTime.Now.Month;
             int currentYear = DateTime.Now.Year;
             double totalAmount = 4000;
-            Budget budget = new Budget(currentMonth, currentYear, totalAmount);
+            Budget budget = new Budget(currentMonth) { TotalAmount = totalAmount, Year = currentYear };
             Assert.AreEqual(currentYear, budget.Year);
         }
 
@@ -35,7 +35,7 @@ namespace Test
             int passMonth = DateTime.Now.AddMonths(-1).Month;
             int currentYear = DateTime.Now.Year;
             double totalAmount = 4000;
-            Budget budget = new Budget(passMonth, currentYear, totalAmount);
+            Budget budget = new Budget(passMonth) { TotalAmount = totalAmount, Year = currentYear };
             Assert.AreEqual(passMonth, budget.Month);
         }
 
@@ -45,7 +45,7 @@ namespace Test
             int futureMonth = DateTime.Now.AddMonths(1).Month;
             int currentYear = DateTime.Now.Year;
             double totalAmount = 4000;
-            Budget budget = new Budget(futureMonth, currentYear, totalAmount);
+            Budget budget = new Budget(futureMonth) { TotalAmount = totalAmount, Year = currentYear };
             Assert.AreEqual(futureMonth, budget.Month);
         }
 
@@ -54,9 +54,9 @@ namespace Test
         public void TestCreateBudgetWithYearOverOfRange()
         {
             int currentMonth = DateTime.Now.Month;
-            int Year = 2031;
+            int year = 2031;
             double totalAmount = 4000;
-            new Budget(currentMonth, Year, totalAmount);
+            new Budget(currentMonth) { TotalAmount = totalAmount, Year = year };
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace Test
             int currentMonth = DateTime.Now.Month;
             int year = 2017;
             double totalAmount = 4000;
-            new Budget(currentMonth, year, totalAmount);
+           new Budget(currentMonth) { TotalAmount = totalAmount, Year = year };
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Test
             int currentMonth = DateTime.Now.Month;
             int year = 2030;
             double totalAmount = 4000;
-            Budget budget = new Budget(currentMonth, year, totalAmount);
+            Budget budget = new Budget(currentMonth) { TotalAmount = totalAmount, Year = year };
             Assert.AreEqual(budget.Year, year);
         }
 
@@ -85,7 +85,7 @@ namespace Test
             int currentMonth = DateTime.Now.Month;
             int year = 2018;
             double totalAmount = 4000;
-            Budget budget = new Budget(currentMonth, year, totalAmount);
+            Budget budget = new Budget(currentMonth) { TotalAmount = totalAmount, Year = year };
             Assert.AreEqual(budget.Year, year);
         }
 
@@ -93,8 +93,7 @@ namespace Test
         public void TestCreateBudgetTotalAmount()
         {
             double totalAmount = 4000;
-
-            Budget budget = new Budget(DateTime.Now.Month, DateTime.Now.Year, totalAmount);
+            Budget budget = new Budget(DateTime.Now.Month) { TotalAmount = totalAmount, Year = DateTime.Now.Year };
             Assert.AreEqual(4000, budget.TotalAmount);
         }
 
@@ -102,8 +101,7 @@ namespace Test
         public void TestCreateBudgetWithCeroTotalAmount()
         {
             double totalAmount = 0;
-
-            Budget budget = new Budget(DateTime.Now.Month, DateTime.Now.Year, totalAmount);
+            Budget budget = new Budget(DateTime.Now.Month) { TotalAmount = totalAmount, Year = DateTime.Now.Year };
             Assert.AreEqual(0, budget.TotalAmount);
         }
 
@@ -111,8 +109,7 @@ namespace Test
         public void TestCreateBudgetWithBigTotalAmount()
         {
             double totalAmount = int.MaxValue;
-
-            Budget budget = new Budget(DateTime.Now.Month, DateTime.Now.Year, totalAmount);
+            Budget budget = new Budget(DateTime.Now.Month) { TotalAmount = totalAmount, Year = DateTime.Now.Year };
             Assert.AreEqual(int.MaxValue, budget.TotalAmount);
         }
 
@@ -121,15 +118,14 @@ namespace Test
         public void TestCreateBudgetWithNegativeTotalAmount()
         {
             double totalAmount = -1;
-
-            new Budget(DateTime.Now.Month, DateTime.Now.Year, totalAmount);
+            new Budget(DateTime.Now.Month) { TotalAmount = totalAmount, Year = DateTime.Now.Year };
         }
 
         [TestMethod]
         [ExpectedException(typeof(NegativeValueErrorAttribute))]
         public void TestUpdateBudgetWithNegativeTotalAmount()
         {
-            Budget budget = new Budget(DateTime.Now.Month, DateTime.Now.Year, 10);
+            Budget budget = new Budget(DateTime.Now.Month) { TotalAmount =10, Year = DateTime.Now.Year };
             double totalAmount = -1;
             budget.TotalAmount = totalAmount;
 
@@ -137,9 +133,23 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestCreateBudgetMothOutOfRangeGreaterThanTwelve()
+        {
+            new Budget(13) { TotalAmount = 23, Year = DateTime.Now.Year };
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestCreateBudgetMothOutOfRangeLessThanOne()
+        {
+            new Budget(0) { TotalAmount = 23, Year = DateTime.Now.Year };
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestUpdateBudgetUpperOutOfRangeYear()
         {
-            Budget budget = new Budget(DateTime.Now.Month, DateTime.Now.Year, 10);
+            Budget budget = new Budget(DateTime.Now.Month) { TotalAmount = 10, Year = DateTime.Now.Year };
             budget.Year = 2031;
 
         }
@@ -148,7 +158,7 @@ namespace Test
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void TestUpdateBudgetDownOutOfRangeYear()
         {
-            Budget budget = new Budget(DateTime.Now.Month, DateTime.Now.Year, 10);
+            Budget budget = new Budget(DateTime.Now.Month) { TotalAmount = 10, Year = DateTime.Now.Year };
             budget.Year = 2017;
 
         }
@@ -157,7 +167,7 @@ namespace Test
         public void BudgetToStringValidFormat()
         {
             string expectedString = "mes: 1 anio: 2020 total: 40000";
-            Budget budget = new Budget(1, 2020, 40000);
+            Budget budget = new Budget(1) { TotalAmount = 40000, Year = 2020 };
             Assert.AreEqual(expectedString, budget.ToString());
         }
 
@@ -165,9 +175,9 @@ namespace Test
         public void BudgetAddBudgetCategory()
         {
 
-            Category category1 = new Category("Category 1");
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 10);
-            Budget budget = new Budget(1, 2020, 0);
+            Category category1 = new Category { Name = "Category 1" };
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 10 };
+            Budget budget = new Budget(1) { TotalAmount = 0, Year = 2020 };
             budget.AddBudgetCategory(budgetCategory1);
         }
 
@@ -175,7 +185,7 @@ namespace Test
         [ExpectedException(typeof(ArgumentNullException))]
         public void BudgetAddNullBudgetCategory()
         {
-            Budget budget = new Budget(1, 2020, 0);
+            Budget budget = new Budget(1) { TotalAmount = 0, Year = 2020 };
             budget.AddBudgetCategory(null);
         }
 
@@ -187,11 +197,11 @@ namespace Test
                 "Category 1",
                 "Category 2"
             };
-            Category category1 = new Category("Category 1");
-            Category category2 = new Category("Category 2");
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 20);
-            BudgetCategory budgetCategory2 = new BudgetCategory(category2, 10);
-            Budget budget = new Budget(1, 2020, 0);
+            Category category1 = new Category { Name = "Category 1" };
+            Category category2 = new Category { Name = "Category 2" };
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 20 };
+            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 10 };
+            Budget budget = new Budget(1) { TotalAmount = 0, Year = 2020 }; 
             budget.AddBudgetCategory(budgetCategory1);
             budget.AddBudgetCategory(budgetCategory2);
 
@@ -202,15 +212,14 @@ namespace Test
         [TestMethod]
         public void TestCreateBudgetWithBudgetCategories()
         {
-            Category category1 = new Category("Category 1");
-            Category category2 = new Category("Category 2");
+            Category category1 = new Category { Name = "Category 1" };
+            Category category2 = new Category { Name = "Category 2" };
             List<Category> categories = new List<Category>
             {
                 category1,
                 category2
             };
-            Budget budget = new Budget(1, 2020, 0, categories);
-
+            Budget budget = new Budget(1, categories) { Year = 2020, TotalAmount = 0 };
             Assert.AreEqual(budget.BudgetCategories.Count, 2);
         }
 
@@ -221,11 +230,11 @@ namespace Test
                 "Category 1: 20",
                 "Category 2: 10"
             };
-            Category category1 = new Category("Category 1");
-            Category category2 = new Category("Category 2");
-            BudgetCategory budgetCategory1 = new BudgetCategory(category1, 20);
-            BudgetCategory budgetCategory2 = new BudgetCategory(category2, 10);
-            Budget budget = new Budget(1, 2020, 0);
+            Category category1 = new Category { Name = "Category 1" };
+            Category category2 = new Category { Name = "Category 2" };
+            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 20 };
+            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 10 };
+            Budget budget = new Budget(1) { TotalAmount = 0, Year = 2020 };
             budget.AddBudgetCategory(budgetCategory1);
             budget.AddBudgetCategory(budgetCategory2);
 
@@ -236,68 +245,68 @@ namespace Test
         [TestMethod]
         public void EqualTrueCaseWithoutCategories()
         {
-            Budget budget1 = new Budget(1, 2020, 0);
-            Budget budget2 = new Budget(1, 2020, 0);
+            Budget budget1 = new Budget(1) { TotalAmount = 0, Year = 2020 };
+            Budget budget2 = new Budget(1) { TotalAmount = 0, Year = 2020 };
             Assert.AreEqual(budget1, budget2);
         }
 
         [TestMethod]
         public void EqualTrueCaseWithCategories()
         {
-            List<Category> Categories1 = new List<Category>()
+            List<Category> categories1 = new List<Category>()
             {
-                new Category("House"),
-                new Category("Car"),
+                new Category{Name="House",KeyWords=new List<string>()  },
+                new Category{Name="Car",KeyWords=new List<string>()  },
             };
-            List<Category> Categories2 = new List<Category>()
+            List<Category> categories2 = new List<Category>()
             {
-                new Category("House"),
-                new Category("Car"),
+                new Category{Name="House",KeyWords=new List<string>()  },
+                new Category{Name="Car",KeyWords=new List<string>() },
             };
-            Budget budget1 = new Budget(1, 2020, 0, Categories1);
-            Budget budget2 = new Budget(1, 2020, 0, Categories2);
+            Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
+            Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
             Assert.AreEqual(budget1, budget2);
         }
 
         [TestMethod]
         public void EqualTrueCaseWithCategoriesInDiffOrder()
         {
-            List<Category> Categories1 = new List<Category>()
+            List<Category> categories1 = new List<Category>()
             {
-                new Category("House"),
-                new Category("Car"),
+                new Category{Name="House" , KeyWords=new List<string>()},
+                new Category{Name="Car", KeyWords=new List<string>() },
             };
-            List<Category> Categories2 = new List<Category>()
+            List<Category> categories2 = new List<Category>()
             {
-                new Category("Car"),
-                new Category("House"),
+                 new Category{Name="Car", KeyWords=new List<string>() },
+                new Category{Name="House", KeyWords=new List<string>()},
             };
-            Budget budget1 = new Budget(1, 2020, 0, Categories1);
-            Budget budget2 = new Budget(1, 2020, 0, Categories2);
+            Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
+            Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
             Assert.AreEqual(budget1, budget2);
         }
 
         [TestMethod]
         public void EqualFalseCaseDiffAmount()
         {
-            Budget budget1 = new Budget(1, 2020, 3000);
-            Budget budget2 = new Budget(1, 2020, 0);
+            Budget budget1 = new Budget(1) { TotalAmount = 3000, Year = 2020 };
+            Budget budget2 = new Budget(1) { TotalAmount = 0, Year = 2020 };
             Assert.AreNotEqual(budget1, budget2);
         }
 
         [TestMethod]
         public void EqualFalseCaseDiffMonth()
         {
-            Budget budget1 = new Budget(3, 2020, 0);
-            Budget budget2 = new Budget(1, 2020, 0);
+            Budget budget1 = new Budget(3) { TotalAmount = 0, Year = 2020 };
+            Budget budget2 = new Budget(1) { TotalAmount = 0, Year = 2020 };
             Assert.AreNotEqual(budget1, budget2);
         }
 
         [TestMethod]
         public void EqualFalseCaseDiffYear()
         {
-            Budget budget1 = new Budget(1, 2021, 0);
-            Budget budget2 = new Budget(1, 2020, 0);
+            Budget budget1 = new Budget(1) { TotalAmount = 0, Year = 2021 };
+            Budget budget2 = new Budget(1) { TotalAmount = 0, Year = 2020 };
             Assert.AreNotEqual(budget1, budget2);
         }
 
@@ -305,49 +314,49 @@ namespace Test
         [TestMethod]
         public void EqualFalseCaseDiffCategories()
         {
-            List<Category> Categories1 = new List<Category>()
+            List<Category> categories1 = new List<Category>()
             {
-                new Category("House"),
-                new Category("Car"),
+                new Category{Name="House", KeyWords=new List<string>() },
+                new Category{Name="Car", KeyWords=new List<string>() },
             };
-            List<Category> Categories2 = new List<Category>()
+            List<Category> categories2 = new List<Category>()
             {
-                new Category("House"),
-                new Category("School"),
+                 new Category{Name="House", KeyWords=new List<string>() },
+                new Category{Name="School", KeyWords=new List<string>() },
             };
-            Budget budget1 = new Budget(1, 2020, 0, Categories1);
-            Budget budget2 = new Budget(1, 2020, 0, Categories2);
+            Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
+            Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
             Assert.AreNotEqual(budget1, budget2);
         }
 
         [TestMethod]
         public void EqualFalseCaseDiffEmptyCategory()
         {
-            List<Category> Categories1 = new List<Category>()
+            List<Category> categories = new List<Category>()
             {
-                new Category("House"),
-                new Category("Car"),
+                 new Category{Name="House" },
+                new Category{Name="Car" },
             };
-            Budget budget1 = new Budget(1, 2020, 0, Categories1);
-            Budget budget2 = new Budget(1, 2020, 0);
+            Budget budget1 = new Budget(1, categories) { Year = 2020, TotalAmount = 0 };
+            Budget budget2 = new Budget(1) { TotalAmount = 0, Year = 2020 };
             Assert.AreNotEqual(budget1, budget2);
         }
 
         [TestMethod]
         public void EqualFalseCaseDiffBudgetCategories()
         {
-            List<Category> Categories1 = new List<Category>()
+            List<Category> categories1 = new List<Category>()
             {
-                new Category("House"),
-                new Category("Car"),
+               new Category{Name="House", KeyWords=new List<string>()},
+                new Category{Name="Car", KeyWords=new List<string>()},
             };
-            List<Category> Categories2 = new List<Category>()
+            List<Category> categories2 = new List<Category>()
             {
-                new Category("House"),
-                new Category("Car"),
+              new Category{Name="House", KeyWords=new List<string>()},
+                new Category{Name="Car", KeyWords=new List<string>()},
             };
-            Budget budget1 = new Budget(1, 2020, 0, Categories1);
-            Budget budget2 = new Budget(1, 2020, 0, Categories2);
+            Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
+            Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
             budget1.BudgetCategories[0].Amount = 10;
             Assert.AreNotEqual(budget1, budget2);
         }
@@ -355,35 +364,48 @@ namespace Test
         [TestMethod]
         public void EqualFalseCaseDiffBudgetCategoriesOrder()
         {
-            List<Category> Categories1 = new List<Category>()
+            List<Category> categories1 = new List<Category>()
             {
-                new Category("House"),
-                new Category("Car"),
+                new Category{Name="House" , KeyWords=new List<string>()},
+                new Category{Name="Car" , KeyWords=new List<string>()},
             };
-            List<Category> Categories2 = new List<Category>()
+            List<Category> categories2 = new List<Category>()
             {
-                new Category("Car"),
-                new Category("House"),
+                 new Category{Name="Car", KeyWords=new List<string>()},
+                new Category{Name="House", KeyWords=new List<string>()},
             };
-            Budget budget1 = new Budget(1, 2020, 0, Categories1);
-            Budget budget2 = new Budget(1, 2020, 0, Categories2);
+            Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
+            Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
             budget1.BudgetCategories[0].Amount = 10;
             budget2.BudgetCategories[1].Amount = 10;
             Assert.AreEqual(budget1, budget2);
         }
 
+
+        [TestMethod]
+        public void EqualFalseNoBudget()
+        {
+            List<Category> categories1 = new List<Category>()
+            {
+                new Category{Name="House" , KeyWords=new List<string>()},
+                new Category{Name="Car" , KeyWords=new List<string>()},
+            };
+            Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
+            Assert.AreNotEqual(budget1, categories1.ToArray()[0]);
+        }
+
         [TestMethod]
         public void GetBudgetCategoryValidGetCase() {
-            Category carCategory = new Category("Car");
-            Category houseCategory = new Category("House");
-            List<Category> Categories = new List<Category>()
+            Category carCategory = new Category { Name = "Car", KeyWords = new List<string>() };
+            Category houseCategory = new Category { Name = "House", KeyWords = new List<string>() };
+            List<Category> categories = new List<Category>()
             {
                carCategory,
                houseCategory,
             };
-            Budget budget = new Budget(1, 2020, 0, Categories);
+            Budget budget = new Budget(1, categories) { Year = 2020, TotalAmount = 0 };
 
-            BudgetCategory expectedBudgetCategory = new BudgetCategory(carCategory, 0);
+            BudgetCategory expectedBudgetCategory = new BudgetCategory { Category = carCategory, Amount = 0 };
 
             string categoryName = "Car";
             BudgetCategory actualBudgetCategory = budget.GetBudgetCategoryByCategoryName(categoryName);
@@ -394,14 +416,14 @@ namespace Test
         [TestMethod]
         public void GetBudgetCategoryNullGetCase()
         {
-            Category carCategory = new Category("Car");
-            Category houseCategory = new Category("House");
-            List<Category> Categories = new List<Category>()
+            Category carCategory = new Category { Name = "Car" };
+            Category houseCategory = new Category { Name = "House" };
+            List<Category> categories = new List<Category>()
             {
                carCategory,
                houseCategory,
             };
-            Budget budget = new Budget(1, 2020, 0, Categories);
+            Budget budget = new Budget(1, categories) { Year = 2020, TotalAmount = 0 };
 
             string categoryName = "Cartoon";
             BudgetCategory actualBudgetCategory = budget.GetBudgetCategoryByCategoryName(categoryName);
