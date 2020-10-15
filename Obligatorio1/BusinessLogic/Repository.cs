@@ -208,6 +208,17 @@ namespace BusinessLogic
             return null;
         }
 
+
+        public Expense FindExpenseByDescription(string expenseDescription)
+        {
+            foreach (var expense in Expenses)
+            {
+                if (expense.Description == expenseDescription)
+                    return expense;
+            }
+            return null;
+        }
+
         public void AddBudget(Budget vBudget)
         {
             if (vBudget is null)

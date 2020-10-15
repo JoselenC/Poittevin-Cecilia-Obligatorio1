@@ -45,7 +45,12 @@ namespace InterfazLogic
             mainPanel.Controls.Add(addBudgetForm);
         }
 
-       
+        private void btnEditExpenses_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            UserControl editExpense = new EditExpense(repository);
+            mainPanel.Controls.Add(editExpense);
+        }
     }
 
 }

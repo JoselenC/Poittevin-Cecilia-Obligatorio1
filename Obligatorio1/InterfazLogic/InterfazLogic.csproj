@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EditExpense.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditExpense.Designer.cs">
+      <DependentUpon>EditExpense.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpenseReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="RegisterCategory.Designer.cs">
       <DependentUpon>RegisterCategory.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EditExpense.resx">
+      <DependentUpon>EditExpense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExpenseReport.resx">
       <DependentUpon>ExpenseReport.cs</DependentUpon>
     </EmbeddedResource>

@@ -35,6 +35,7 @@
             this.btnRegisterBudget = new System.Windows.Forms.Button();
             this.btnExpenseReport = new System.Windows.Forms.Button();
             this.btnBudgetReport = new System.Windows.Forms.Button();
+            this.btnEditExpenses = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblMenu
@@ -54,7 +55,7 @@
             this.btnRegisterCategory.Location = new System.Drawing.Point(61, 121);
             this.btnRegisterCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterCategory.Name = "btnRegisterCategory";
-            this.btnRegisterCategory.Size = new System.Drawing.Size(296, 115);
+            this.btnRegisterCategory.Size = new System.Drawing.Size(296, 82);
             this.btnRegisterCategory.TabIndex = 2;
             this.btnRegisterCategory.Text = "Register Category";
             this.btnRegisterCategory.UseVisualStyleBackColor = false;
@@ -68,15 +69,14 @@
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(1299, 786);
             this.mainPanel.TabIndex = 7;
-            
             // 
             // btnRegisterExpense
             // 
             this.btnRegisterExpense.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterExpense.Location = new System.Drawing.Point(62, 258);
+            this.btnRegisterExpense.Location = new System.Drawing.Point(62, 207);
             this.btnRegisterExpense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterExpense.Name = "btnRegisterExpense";
-            this.btnRegisterExpense.Size = new System.Drawing.Size(296, 123);
+            this.btnRegisterExpense.Size = new System.Drawing.Size(296, 85);
             this.btnRegisterExpense.TabIndex = 8;
             this.btnRegisterExpense.Text = "Register Expense";
             this.btnRegisterExpense.UseVisualStyleBackColor = false;
@@ -85,10 +85,10 @@
             // btnRegisterBudget
             // 
             this.btnRegisterBudget.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterBudget.Location = new System.Drawing.Point(61, 401);
+            this.btnRegisterBudget.Location = new System.Drawing.Point(61, 296);
             this.btnRegisterBudget.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterBudget.Name = "btnRegisterBudget";
-            this.btnRegisterBudget.Size = new System.Drawing.Size(296, 123);
+            this.btnRegisterBudget.Size = new System.Drawing.Size(296, 88);
             this.btnRegisterBudget.TabIndex = 9;
             this.btnRegisterBudget.Text = "Register Budget";
             this.btnRegisterBudget.UseVisualStyleBackColor = false;
@@ -97,10 +97,10 @@
             // btnExpenseReport
             // 
             this.btnExpenseReport.BackColor = System.Drawing.Color.Tan;
-            this.btnExpenseReport.Location = new System.Drawing.Point(62, 540);
+            this.btnExpenseReport.Location = new System.Drawing.Point(62, 388);
             this.btnExpenseReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExpenseReport.Name = "btnExpenseReport";
-            this.btnExpenseReport.Size = new System.Drawing.Size(296, 117);
+            this.btnExpenseReport.Size = new System.Drawing.Size(296, 78);
             this.btnExpenseReport.TabIndex = 10;
             this.btnExpenseReport.Text = "Expense Report";
             this.btnExpenseReport.UseVisualStyleBackColor = false;
@@ -109,13 +109,25 @@
             // btnBudgetReport
             // 
             this.btnBudgetReport.BackColor = System.Drawing.Color.Tan;
-            this.btnBudgetReport.Location = new System.Drawing.Point(61, 674);
+            this.btnBudgetReport.Location = new System.Drawing.Point(62, 470);
             this.btnBudgetReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBudgetReport.Name = "btnBudgetReport";
-            this.btnBudgetReport.Size = new System.Drawing.Size(297, 116);
+            this.btnBudgetReport.Size = new System.Drawing.Size(297, 76);
             this.btnBudgetReport.TabIndex = 11;
             this.btnBudgetReport.Text = "Budget Report";
             this.btnBudgetReport.UseVisualStyleBackColor = false;
+            // 
+            // btnEditExpenses
+            // 
+            this.btnEditExpenses.BackColor = System.Drawing.Color.Tan;
+            this.btnEditExpenses.Location = new System.Drawing.Point(61, 550);
+            this.btnEditExpenses.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEditExpenses.Name = "btnEditExpenses";
+            this.btnEditExpenses.Size = new System.Drawing.Size(297, 76);
+            this.btnEditExpenses.TabIndex = 12;
+            this.btnEditExpenses.Text = "Edit expenses";
+            this.btnEditExpenses.UseVisualStyleBackColor = false;
+            this.btnEditExpenses.Click += new System.EventHandler(this.btnEditExpenses_Click);
             // 
             // Menu
             // 
@@ -123,6 +135,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.ClientSize = new System.Drawing.Size(1686, 812);
+            this.Controls.Add(this.btnEditExpenses);
             this.Controls.Add(this.btnBudgetReport);
             this.Controls.Add(this.btnExpenseReport);
             this.Controls.Add(this.btnRegisterBudget);
@@ -147,5 +160,6 @@
         private System.Windows.Forms.Button btnRegisterBudget;
         private System.Windows.Forms.Button btnExpenseReport;
         private System.Windows.Forms.Button btnBudgetReport;
+        private System.Windows.Forms.Button btnEditExpenses;
     }
 }
