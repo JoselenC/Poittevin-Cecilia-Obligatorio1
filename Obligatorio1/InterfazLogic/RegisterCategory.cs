@@ -88,11 +88,17 @@ namespace InterfazLogic
                     lblKeyWords.Text = "You cannot add more than 10 keywords.";
                     lblKeyWords.ForeColor = Color.Red;
                 }
+                else if (repository.AlreadyExistThisKeyWordInAnoterCategory(keyWord))
+                {
+                    lblKeyWords.Text = "You already entered that keyword in another category";
+                    lblKeyWords.ForeColor = Color.Red;
+                }
                 else
                 {
                     this.keyWords.Add(keyWord);
                     lstCategories.Items.Add(keyWord);
                     tbKeyWord.Text = "";
+                    lblKeyWords.Text = "";
                 }
             }
             else

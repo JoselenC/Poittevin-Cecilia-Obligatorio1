@@ -140,6 +140,23 @@ namespace BusinessLogic
             return validName;
         }
 
+         public bool AlreadyExistThisKeyWordInAnoterCategory(string pKeyWord)
+         {
+            bool isValidKeyWord = false;
+            foreach (Category category in Categories)
+            {
+                foreach (string vKeyWord in category.KeyWords)
+                {
+
+                    if (pKeyWord.ToLower() == vKeyWord.ToLower())
+                    {
+                        isValidKeyWord = true;
+                    }                    
+                }
+            }
+            return isValidKeyWord;
+        }
+
         private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pKeyWords)
         {
             bool areValidKeyWords = true;

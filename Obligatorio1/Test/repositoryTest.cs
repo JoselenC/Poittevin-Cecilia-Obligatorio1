@@ -327,6 +327,23 @@ namespace Test
         }
 
         [TestMethod]
+        public void AddRepeatedKeyWordToCategory()
+        {
+
+            bool alreadyExistKW=repo.AlreadyExistThisKeyWordInAnoterCategory("cine");
+            Assert.IsTrue(alreadyExistKW);
+        }
+
+
+        [TestMethod]
+        public void AddValidKeyWordToCategory()
+        {
+
+            bool alreadyExistKW = repo.AlreadyExistThisKeyWordInAnoterCategory("casino");
+            Assert.IsTrue(alreadyExistKW);
+        }
+
+        [TestMethod]
         public void FindCategoryByName()
         {
             List<Category> categoryList = new List<Category>();
