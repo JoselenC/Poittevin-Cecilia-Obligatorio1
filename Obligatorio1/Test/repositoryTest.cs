@@ -763,11 +763,9 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateFindCase()
         {
-            string expectedString = "mes: 1 anio: 2020 total: 0";
-            string month = "Enero";
-            int year = 2020;
-            Budget budget = repo.BudgetGetOrCreate(month, year);
-            Assert.AreEqual(expectedString, budget.ToString());
+            Budget expectedBudget = new Budget(1, 2020, 0);
+            Budget actualBudget = repo.BudgetGetOrCreate("Enero", 2020);
+            Assert.AreEqual(expectedBudget, actualBudget);
         }
 
         [TestMethod]
@@ -836,5 +834,19 @@ namespace Test
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
 
+        [TestMethod]
+        public void FindBudgetFoundCase()
+        {
+            Budget actualBudget = repo.FindBudget(1, 2020);
+            Assert.AreEqual(JanuaryBudget, actualBudget);
+        }
+
+
+        [TestMethod]
+        public void FindBudgetNotFoundCase()
+        {
+            Budget actualBudget = repo.FindBudget(2, 2020);
+            Assert.IsNull(actualBudget);
+        }
     }
 }

@@ -35,19 +35,22 @@
             this.cPlanned = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cReal = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cDifference = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.numYear = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             this.SuspendLayout();
             // 
             // cboxMonth
             // 
             this.cboxMonth.FormattingEnabled = true;
-            this.cboxMonth.Location = new System.Drawing.Point(12, 14);
+            this.cboxMonth.Location = new System.Drawing.Point(12, 16);
             this.cboxMonth.Name = "cboxMonth";
-            this.cboxMonth.Size = new System.Drawing.Size(148, 21);
+            this.cboxMonth.Size = new System.Drawing.Size(115, 21);
             this.cboxMonth.TabIndex = 0;
+            this.cboxMonth.SelectedIndexChanged += new System.EventHandler(this.cboxMonth_SelectedIndexChanged);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(191, 12);
+            this.btnSearch.Location = new System.Drawing.Point(288, 14);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(81, 23);
             this.btnSearch.TabIndex = 1;
@@ -71,7 +74,6 @@
             this.lstVReport.TabIndex = 4;
             this.lstVReport.UseCompatibleStateImageBehavior = false;
             this.lstVReport.View = System.Windows.Forms.View.Details;
-            this.lstVReport.SelectedIndexChanged += new System.EventHandler(this.lstVReport_SelectedIndexChanged);
             // 
             // cCategory
             // 
@@ -89,17 +91,41 @@
             // 
             this.cDifference.Text = "Difference";
             // 
+            // numYear
+            // 
+            this.numYear.Location = new System.Drawing.Point(145, 17);
+            this.numYear.Maximum = new decimal(new int[] {
+            2030,
+            0,
+            0,
+            0});
+            this.numYear.Minimum = new decimal(new int[] {
+            2018,
+            0,
+            0,
+            0});
+            this.numYear.Name = "numYear";
+            this.numYear.Size = new System.Drawing.Size(115, 20);
+            this.numYear.TabIndex = 5;
+            this.numYear.Value = new decimal(new int[] {
+            2018,
+            0,
+            0,
+            0});
+            this.numYear.ValueChanged += new System.EventHandler(this.numYear_ValueChanged);
+            // 
             // BudgetReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(443, 273);
+            this.Controls.Add(this.numYear);
             this.Controls.Add(this.lstVReport);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.cboxMonth);
             this.Name = "BudgetReport";
             this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numYear)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -113,5 +139,6 @@
         private System.Windows.Forms.ColumnHeader cPlanned;
         private System.Windows.Forms.ColumnHeader cReal;
         private System.Windows.Forms.ColumnHeader cDifference;
+        private System.Windows.Forms.NumericUpDown numYear;
     }
 }

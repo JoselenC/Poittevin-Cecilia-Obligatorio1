@@ -16,7 +16,7 @@ namespace InterfazLogic
 
             // TODO: Agregar control de que no se pueda crear un budget si no hay ninguna categoria en el sistema
             comboBoxMonth.Items.AddRange(Repository.GetAllMonthsString());
-            comboBoxMonth.SelectedIndex = 0;
+            comboBoxMonth.SelectedIndex = DateTime.Now.Month - 1;
         }
 
         private void label1_Click(object sender, EventArgs e)

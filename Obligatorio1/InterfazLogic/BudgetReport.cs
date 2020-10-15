@@ -13,41 +13,81 @@ namespace InterfazLogic
 {
     public partial class BudgetReport : Form
     {
+        private bool initializingForm = true;
         private Repository repository;
+        private int oldMonthIndex = DateTime.Now.Month - 1;
+        private int oldYearValue = DateTime.Now.Year;
         public BudgetReport(Repository vRepository)
         {
             repository = vRepository;
             InitializeComponent();
+            numYear.Value = oldYearValue;
             cboxMonth.Items.AddRange(repository.GetAllMonthsString());
-
+            cboxMonth.SelectedIndex = oldMonthIndex;
+            initializingForm = false;
+            LoadBudgetReport();
         }
 
-        private void lstVReport_SelectedIndexChanged(object sender, EventArgs e)
+        private bool LoadBudgetReport()
         {
+            if (!initializingForm)
+            {
+                Budget budget = repository.FindBudget(cboxMonth.SelectedIndex + 1, (int)numYear.Value);
+                if (budget is null)
+                {
+                    MessageBox.Show("There is not budget created for the selected date");
+                    return false;
+                }
+                else
+                {
+                    lstVReport.Items.Clear();
+                    foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
+                    {
+                        Category category = budgetCategory.Category;
+                        ListViewItem item = new ListViewItem(category.Name);
+                        double planeedAmount = budgetCategory.Amount;
+                        double realAmount = repository.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
+                        double diffAmount = planeedAmount - realAmount;
+                        item.SubItems.Add(planeedAmount.ToString());
+                        item.SubItems.Add(realAmount.ToString());
+                        item.SubItems.Add(diffAmount.ToString());
+                        lstVReport.Items.Add(item);
 
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+                    }
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string workingMonth = cboxMonth.Text;
-            Budget budget = repository.BudgetGetOrCreate(workingMonth, DateTime.Now.Year);
-            foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
-            {
-                Category category = budgetCategory.Category;
-                ListViewItem item = new ListViewItem(category.Name);
-                double planeedAmount = budgetCategory.Amount;
-                double realAmount = repository.GetTotalSpentByMonthAndCategory(workingMonth, category);
-                double diffAmount = planeedAmount - realAmount;
-                item.SubItems.Add(planeedAmount.ToString());
-                item.SubItems.Add(realAmount.ToString());
-                item.SubItems.Add(diffAmount.ToString());
-                lstVReport.Items.Add(item);
+            LoadBudgetReport();
+        }
 
+        private void cboxMonth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!LoadBudgetReport()) {
+                cboxMonth.SelectedIndex = oldMonthIndex;
+            }
+            else
+            {
+                oldMonthIndex = cboxMonth.SelectedIndex;
+            }
+        }
+
+        private void numYear_ValueChanged(object sender, EventArgs e)
+        {
+            if (!LoadBudgetReport())
+            {
+                numYear.Value = oldYearValue;
+            }
+            else
+            {
+                oldYearValue = (int) numYear.Value;
             }
         }
     }

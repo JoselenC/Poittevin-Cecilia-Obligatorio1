@@ -265,7 +265,7 @@ namespace BusinessLogic
             return categoryNames.ToArray();
         }
 
-        private Budget FindBudgetByDate(int month, int year)
+        public Budget FindBudget(int month, int year)
         {
             foreach (var budget in Budgets)
             {
@@ -278,7 +278,7 @@ namespace BusinessLogic
         public Budget BudgetGetOrCreate(string month, int year)
         {
             int monthIndex = StringToIntMonth(month);
-            Budget returnBudget = FindBudgetByDate(monthIndex, year);
+            Budget returnBudget = FindBudget(monthIndex, year);
             if (returnBudget is null)
             {
                 returnBudget = new Budget(monthIndex, year, 0, Categories);
