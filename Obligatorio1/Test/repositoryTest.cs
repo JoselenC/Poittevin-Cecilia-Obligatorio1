@@ -13,6 +13,7 @@ namespace Test
         private static Repository repo = new Repository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
+        private static Category categoryHouse;
         private static Budget JanuaryBudget;
 
         [ClassInitialize()]
@@ -31,15 +32,39 @@ namespace Test
                 "McDonalds",
                 "cena"
             };
-            categoryFood = new Category { Name = "comida", KeyWords = keyWords2 };
-            repo.AddCategoryToCategories(categoryEntertainment);
-            repo.AddCategoryToCategories(categoryFood);         
+            categoryFood = new Category("comida", keyWords2);
+            List<string> keyWords3 = new List<string>
+            {
+                "CoffeMaker",
+                "toilet paper",
+            };
+            categoryHouse = new Category("House", keyWords3);
+            repo.AddCategory(categoryEntertainment);
+            repo.AddCategory(categoryFood);
+            repo.AddCategory(categoryHouse);
+
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
                 categoryFood,
             };
-            Budget januaryBudget = new Budget(1, categories) { Year = 2020, TotalAmount = 0 };
-            repo.AddBudget(januaryBudget);
+            JanuaryBudget = new Budget(1, 2020, 0, categories);
+            repo.AddBudget(JanuaryBudget);
+
+            Expense januaryExpenseFood = new Expense(200, new DateTime(2020, 1, 1), "sushi night")
+            {
+                Category = categoryFood
+            };
+            Expense januaryExpenseFood2 = new Expense(110.50, new DateTime(2020, 1, 1), "sushi night")
+            {
+                Category = categoryFood
+            };
+            Expense januaryExpenseEntertainment = new Expense(230.15, new DateTime(2020, 1, 1), "buy video game")
+            {
+                Category = categoryEntertainment
+            };
+            repo.AddExpense(januaryExpenseFood);
+            repo.AddExpense(januaryExpenseFood2);
+            repo.AddExpense(januaryExpenseEntertainment);
         }
 
         [TestMethod]
@@ -490,11 +515,9 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateFindCase()
         {
-            string expectedString = "mes: 1 anio: 2020 total: 0";
-            string month = "Enero";
-            int year = 2020;
-            Budget budget = repo.BudgetGetOrCreate(month, year);
-            Assert.AreEqual(expectedString, budget.ToString());
+            Budget expectedBudget = new Budget(1, 2020, 0);
+            Budget actualBudget = repo.BudgetGetOrCreate("Enero", 2020);
+            Assert.AreEqual(expectedBudget, actualBudget);
         }
 
 
@@ -537,6 +560,49 @@ namespace Test
 
             List<BudgetCategory> actualBudgetCategories = actualBudget.BudgetCategories;
             CollectionAssert.AreEqual(budgetCategories, actualBudgetCategories);
+        }
+
+        [TestMethod]
+
+        public void GetTotalSpentByMonthAndCategoryValidCase()
+        {
+            double expectedTotalSpentJanuary = 310.50;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Enero", categoryFood);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpenses()
+        {
+            double expectedTotalSpentJanuary = 0;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Marzo", categoryFood);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpensesInCategory()
+        {
+            double expectedTotalSpentJanuary = 0;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Enero", categoryHouse);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void FindBudgetFoundCase()
+        {
+            Budget actualBudget = repo.FindBudget(1, 2020);
+            Assert.AreEqual(JanuaryBudget, actualBudget);
+        }
+
+
+        [TestMethod]
+        public void FindBudgetNotFoundCase()
+        {
+            Budget actualBudget = repo.FindBudget(2, 2020);
+            Assert.IsNull(actualBudget);
         }
     }
 }
