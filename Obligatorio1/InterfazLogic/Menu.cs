@@ -45,7 +45,12 @@ namespace InterfazLogic
             mainPanel.Controls.Add(addBudgetForm);
         }
 
-       
+        private void btnEditCategory_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            UserControl editCategory= new EditCategory(repository);
+            mainPanel.Controls.Add(editCategory);
+        }
     }
 
 }
