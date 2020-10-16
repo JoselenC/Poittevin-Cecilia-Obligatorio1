@@ -52,6 +52,12 @@
     <Compile Include="EditCategory.Designer.cs">
       <DependentUpon>EditCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditExpense.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditExpense.Designer.cs">
+      <DependentUpon>EditExpense.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpenseReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     <Compile Include="RegisterCategory.Designer.cs">
       <DependentUpon>RegisterCategory.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="EditExpense.resx">
+      <DependentUpon>EditExpense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EditCategory.resx">
       <DependentUpon>EditCategory.cs</DependentUpon>
     </EmbeddedResource>

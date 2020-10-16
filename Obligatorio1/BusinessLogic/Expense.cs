@@ -45,6 +45,8 @@ namespace BusinessLogic
             description = vDescription;
         }
 
+       
+
         public override bool Equals(object obj)
         {
             if (obj is Expense expense)
@@ -56,6 +58,11 @@ namespace BusinessLogic
 
             }
             return false;
+        }
+
+        public override string ToString()
+        {
+            return description;
         }
     }
 }

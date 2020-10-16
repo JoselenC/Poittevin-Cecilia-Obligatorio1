@@ -33,8 +33,7 @@ namespace Test
             };
             categoryFood = new Category { Name = "comida", KeyWords = keyWords2 };
             repo.AddCategoryToCategories(categoryEntertainment);
-            repo.AddCategoryToCategories(categoryFood);
-
+            repo.AddCategoryToCategories(categoryFood);         
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
                 categoryFood,
@@ -70,13 +69,35 @@ namespace Test
         }
 
         [TestMethod]
-        public void FindCategoryNullValueResultForFood()
+        public void FindCategoryValueResultForFood()
         {
             string description = "cuando fuimos a comer a McDonalds";
             Category expectedCategory = repo.FindCategoryByDescription(description);
             Assert.AreEqual(categoryFood, expectedCategory);
 
         }
+
+        [TestMethod]
+        public void FindExpenseByDescription()
+        {
+            string description = "cine";
+            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020,01,01)};
+            repo.AddExpenseToExpenses(expense);
+            Expense expectedExpense = repo.FindExpenseByDescription(description);
+            Assert.AreEqual(expense, expectedExpense);
+
+        }
+
+        [TestMethod]
+        public void FindExpenseNullByDescription()
+        {
+            string description = "cine";
+            Expense expectedExpense = repo.FindExpenseByDescription(description);
+            Assert.IsNull(expectedExpense);
+
+        }
+
+
 
         [TestMethod]
         public void MonthsOrderedInWhichAreExpenses()
