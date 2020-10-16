@@ -161,6 +161,16 @@ namespace Test
             Assert.AreNotEqual(expense, category);
         }
 
+        [TestMethod]
+        public void ToStringOnlyNameFormatValid()
+        {
+            Expense expense = new Expense { Description = "cena", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
+            string expectedFormat = "cena";
+            string actualFormat = expense.ToString();
+            Assert.AreEqual(expectedFormat, actualFormat);
+
+        }
+
 
 
     }

@@ -20,8 +20,6 @@ namespace InterfazLogic
             repository = vRepository;
             this.MaximumSize = new Size(800, 800);
             this.MinimumSize = new Size(800, 800);
-
-
             tbDescription.Clear();
             lstCategories.Items.Clear();
         }
@@ -58,17 +56,15 @@ namespace InterfazLogic
         private void btnRegistrExpense_Click(object sender, EventArgs e)
         {
             try
-            {
-                string description = tbDescription.Text;
-                double amount = decimal.ToDouble(nAmount.Value);
-                DateTime creationDate = dateTime.Value;
-                Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+            {                
                 if (lstCategories.SelectedIndex >= 0)
-                {
+                {                    
+                    string description = tbDescription.Text;
+                    double amount = decimal.ToDouble(nAmount.Value);
+                    DateTime creationDate = dateTime.Value;                   
                     string nameCategory = lstCategories.SelectedItem.ToString();
                     Category category = repository.FindCategoryByName(nameCategory);
-                    expense.Category = category;
-                    repository.AddExpenseToExpenses(expense);                    
+                    repository.CreateAddExpense(amount, creationDate, description, category);                
                     MessageBox.Show("The expense was recorded successfully","",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     this.Visible = false;
                 }

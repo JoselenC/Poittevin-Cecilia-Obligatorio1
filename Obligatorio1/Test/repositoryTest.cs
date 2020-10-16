@@ -91,7 +91,7 @@ namespace Test
         [TestMethod]
         public void FindExpenseNullByDescription()
         {
-            string description = "cine";
+            string description = "cena";
             Expense expectedExpense = repo.FindExpenseByDescription(description);
             Assert.IsNull(expectedExpense);
 
@@ -537,6 +537,39 @@ namespace Test
 
             List<BudgetCategory> actualBudgetCategories = actualBudget.BudgetCategories;
             CollectionAssert.AreEqual(budgetCategories, actualBudgetCategories);
+        }
+
+        [TestMethod]
+        public void CreateAddExpense()
+        {
+            Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
+            Repository repository = new Repository();
+            repository.CreateAddExpense(23, new DateTime(2020, 01, 01), "cena", categoryFood);
+            Assert.AreEqual(expectedExpense, repository.Expenses.ToArray()[0]);
+        }
+
+        [TestMethod]
+        public void CreateAddCategoty()
+        {
+            List<string> keyWords2 = new List<string>
+            {
+                "restaurante",
+                "McDonalds",
+                "cena"
+            };
+            Repository repository = new Repository();
+            repository.CreateAddCategory("comida", keyWords2);
+            Assert.AreEqual(categoryFood, repository.Categories.ToArray()[0]);
+        }
+
+        [TestMethod]
+        public void FindRemoveExpennse()
+        {
+            Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
+            Repository repository = new Repository();
+            repository.AddExpenseToExpenses(expense);
+            repository.FindRemoveExpense("cena");
+            Assert.AreEqual(0,repository.Expenses.Count);
         }
     }
 }

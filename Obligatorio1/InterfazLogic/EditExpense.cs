@@ -44,14 +44,13 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-               Expense expense =repository.FindExpenseByDescription(lstExpenses.SelectedItem.ToString());
+               Expense expense = repository.FindRemoveExpense(lstExpenses.SelectedItem.ToString());
                tbDescription.Text = expense.Description;
                nAmount.Value = (decimal)(expense.Amount);
                dateTime.Value = expense.CreationDate;
                lblCategory.Text = expense.Category.ToString();
-                repository.Expenses.Remove(repository.FindExpenseByDescription(lstExpenses.SelectedItem.ToString()));
-                int index = lstExpenses.SelectedIndex;
-                lstExpenses.Items.RemoveAt(index);
+               int index = lstExpenses.SelectedIndex;
+               lstExpenses.Items.RemoveAt(index);
             }
             else if (repository.Expenses.Count == 0)
             {
@@ -69,7 +68,7 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-                repository.Expenses.Remove(repository.FindExpenseByDescription(lstExpenses.SelectedItem.ToString()));
+                repository.FindRemoveExpense(lstExpenses.SelectedItem.ToString());
                 int index = lstExpenses.SelectedIndex;
                 lstExpenses.Items.RemoveAt(index);
             }
@@ -89,16 +88,15 @@ namespace InterfazLogic
         {
             try
             {
-                string description = tbDescription.Text;
-                double amount = decimal.ToDouble(nAmount.Value);
-                DateTime creationDate = dateTime.Value;
-                Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+               
                 if (lstCategories.SelectedIndex >= 0)
                 {
+                    string description = tbDescription.Text;
+                    double amount = decimal.ToDouble(nAmount.Value);
+                    DateTime creationDate = dateTime.Value;
                     string nameCategory = lstCategories.SelectedItem.ToString();
                     Category category = repository.FindCategoryByName(nameCategory);
-                    expense.Category = category;
-                    repository.AddExpenseToExpenses(expense);
+                    repository.CreateAddExpense(amount,creationDate,description, category);
                     MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Visible = false;
                 }

@@ -275,5 +275,23 @@ namespace BusinessLogic
             return returnBudget;
         }
 
+        public void CreateAddExpense(double amount, DateTime creationDate, string description, Category category)
+        {
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category };
+            AddExpenseToExpenses(expense);
+        }
+
+        public void CreateAddCategory(string vName,List<string> vKeyWords )
+        {
+            Category category = new Category { Name = vName, KeyWords = vKeyWords };
+            AddCategoryToCategories(category);
+        }
+
+        public Expense FindRemoveExpense(string description)
+        {
+            Expense expense = FindExpenseByDescription(description);
+            Expenses.Remove(expense);
+            return expense;
+        }
     }
 }

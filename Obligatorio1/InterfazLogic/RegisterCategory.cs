@@ -34,14 +34,11 @@ namespace InterfazLogic
         {
             try
             {
-                string name = tbName.Text;
-                List<string> kW = this.keyWords;
-                Category category = new Category { Name = name, KeyWords = kW };
-                repository.AddCategoryToCategories(category);
+                repository.CreateAddCategory(tbName.Text, keyWords);                
                 lblKeyWords.Text = "";
                 lblKeyWordToEdit.Text = "";
                 lblName.Text = "";
-                MessageBox.Show("Category " + category.Name + " was added successfully","",MessageBoxButtons.OK,MessageBoxIcon.Information);                
+                MessageBox.Show("Category " + tbName.Text + " was added successfully","",MessageBoxButtons.OK,MessageBoxIcon.Information);                
                 this.Visible = false;
             }
             catch (ExcepcionInvalidNameLengthCategory)

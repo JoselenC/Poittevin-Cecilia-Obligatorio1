@@ -82,7 +82,7 @@
             // lblKeyWords
             // 
             this.lblKeyWords.AutoSize = true;
-            this.lblKeyWords.Location = new System.Drawing.Point(55, 425);
+            this.lblKeyWords.Location = new System.Drawing.Point(55, 419);
             this.lblKeyWords.Name = "lblKeyWords";
             this.lblKeyWords.Size = new System.Drawing.Size(145, 32);
             this.lblKeyWords.TabIndex = 14;
@@ -104,9 +104,8 @@
             this.lblEditCategories.AutoSize = true;
             this.lblEditCategories.Location = new System.Drawing.Point(229, 230);
             this.lblEditCategories.Name = "lblEditCategories";
-            this.lblEditCategories.Size = new System.Drawing.Size(23, 32);
+            this.lblEditCategories.Size = new System.Drawing.Size(0, 32);
             this.lblEditCategories.TabIndex = 17;
-            this.lblEditCategories.Text = ".";
             // 
             // txtName
             // 
@@ -135,7 +134,7 @@
             // 
             // txtKeyWord
             // 
-            this.txtKeyWord.Location = new System.Drawing.Point(238, 425);
+            this.txtKeyWord.Location = new System.Drawing.Point(238, 419);
             this.txtKeyWord.Name = "txtKeyWord";
             this.txtKeyWord.Size = new System.Drawing.Size(591, 38);
             this.txtKeyWord.TabIndex = 22;
@@ -207,27 +206,24 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(232, 366);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(23, 32);
+            this.lblName.Size = new System.Drawing.Size(0, 32);
             this.lblName.TabIndex = 29;
-            this.lblName.Text = ".";
             // 
             // lblKeyWord
             // 
             this.lblKeyWord.AutoSize = true;
-            this.lblKeyWord.Location = new System.Drawing.Point(232, 466);
+            this.lblKeyWord.Location = new System.Drawing.Point(232, 460);
             this.lblKeyWord.Name = "lblKeyWord";
-            this.lblKeyWord.Size = new System.Drawing.Size(23, 32);
+            this.lblKeyWord.Size = new System.Drawing.Size(0, 32);
             this.lblKeyWord.TabIndex = 30;
-            this.lblKeyWord.Text = ".";
             // 
             // lblKyWords
             // 
             this.lblKyWords.AutoSize = true;
             this.lblKyWords.Location = new System.Drawing.Point(232, 549);
             this.lblKyWords.Name = "lblKyWords";
-            this.lblKyWords.Size = new System.Drawing.Size(23, 32);
+            this.lblKyWords.Size = new System.Drawing.Size(0, 32);
             this.lblKyWords.TabIndex = 31;
-            this.lblKyWords.Text = ".";
             // 
             // EditCategory
             // 
