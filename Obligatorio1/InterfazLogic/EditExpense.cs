@@ -36,6 +36,7 @@ namespace InterfazLogic
             else
             {
                 MessageBox.Show("There are no expenses registered in the system");
+                Visible = false;
             }
         }
 

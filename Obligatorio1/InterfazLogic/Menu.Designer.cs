@@ -44,7 +44,7 @@
             this.lblMenu.AutoSize = true;
             this.lblMenu.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.ForeColor = System.Drawing.Color.DarkKhaki;
-            this.lblMenu.Location = new System.Drawing.Point(65, 21);
+            this.lblMenu.Location = new System.Drawing.Point(69, 45);
             this.lblMenu.Name = "lblMenu";
             this.lblMenu.Size = new System.Drawing.Size(194, 92);
             this.lblMenu.TabIndex = 1;
@@ -53,11 +53,10 @@
             // btnRegisterCategory
             // 
             this.btnRegisterCategory.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterCategory.Location = new System.Drawing.Point(61, 121);
+            this.btnRegisterCategory.Location = new System.Drawing.Point(61, 148);
             this.btnRegisterCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterCategory.Name = "btnRegisterCategory";
-            this.btnRegisterCategory.Size = new System.Drawing.Size(296, 87);
-            this.btnRegisterCategory.Size = new System.Drawing.Size(296, 82);
+            this.btnRegisterCategory.Size = new System.Drawing.Size(296, 94);
             this.btnRegisterCategory.TabIndex = 2;
             this.btnRegisterCategory.Text = "Register Category";
             this.btnRegisterCategory.UseVisualStyleBackColor = false;
@@ -75,12 +74,10 @@
             // btnRegisterExpense
             // 
             this.btnRegisterExpense.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterExpense.Location = new System.Drawing.Point(62, 212);
-            this.btnRegisterExpense.Location = new System.Drawing.Point(62, 207);
+            this.btnRegisterExpense.Location = new System.Drawing.Point(61, 246);
             this.btnRegisterExpense.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterExpense.Name = "btnRegisterExpense";
-            this.btnRegisterExpense.Size = new System.Drawing.Size(296, 84);
-            this.btnRegisterExpense.Size = new System.Drawing.Size(296, 85);
+            this.btnRegisterExpense.Size = new System.Drawing.Size(296, 95);
             this.btnRegisterExpense.TabIndex = 8;
             this.btnRegisterExpense.Text = "Register Expense";
             this.btnRegisterExpense.UseVisualStyleBackColor = false;
@@ -89,12 +86,10 @@
             // btnRegisterBudget
             // 
             this.btnRegisterBudget.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterBudget.Location = new System.Drawing.Point(62, 300);
-            this.btnRegisterBudget.Location = new System.Drawing.Point(61, 296);
+            this.btnRegisterBudget.Location = new System.Drawing.Point(60, 345);
             this.btnRegisterBudget.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRegisterBudget.Name = "btnRegisterBudget";
-            this.btnRegisterBudget.Size = new System.Drawing.Size(296, 86);
-            this.btnRegisterBudget.Size = new System.Drawing.Size(296, 88);
+            this.btnRegisterBudget.Size = new System.Drawing.Size(296, 97);
             this.btnRegisterBudget.TabIndex = 9;
             this.btnRegisterBudget.Text = "Register Budget";
             this.btnRegisterBudget.UseVisualStyleBackColor = false;
@@ -103,12 +98,10 @@
             // btnExpenseReport
             // 
             this.btnExpenseReport.BackColor = System.Drawing.Color.Tan;
-            this.btnExpenseReport.Location = new System.Drawing.Point(61, 390);
-            this.btnExpenseReport.Location = new System.Drawing.Point(62, 388);
+            this.btnExpenseReport.Location = new System.Drawing.Point(60, 446);
             this.btnExpenseReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExpenseReport.Name = "btnExpenseReport";
-            this.btnExpenseReport.Size = new System.Drawing.Size(296, 90);
-            this.btnExpenseReport.Size = new System.Drawing.Size(296, 78);
+            this.btnExpenseReport.Size = new System.Drawing.Size(296, 100);
             this.btnExpenseReport.TabIndex = 10;
             this.btnExpenseReport.Text = "Expense Report";
             this.btnExpenseReport.UseVisualStyleBackColor = false;
@@ -117,12 +110,10 @@
             // btnBudgetReport
             // 
             this.btnBudgetReport.BackColor = System.Drawing.Color.Tan;
-            this.btnBudgetReport.Location = new System.Drawing.Point(60, 484);
-            this.btnBudgetReport.Location = new System.Drawing.Point(62, 470);
+            this.btnBudgetReport.Location = new System.Drawing.Point(60, 550);
             this.btnBudgetReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnBudgetReport.Name = "btnBudgetReport";
-            this.btnBudgetReport.Size = new System.Drawing.Size(297, 81);
-            this.btnBudgetReport.Size = new System.Drawing.Size(297, 76);
+            this.btnBudgetReport.Size = new System.Drawing.Size(297, 92);
             this.btnBudgetReport.TabIndex = 11;
             this.btnBudgetReport.Text = "Budget Report";
             this.btnBudgetReport.UseVisualStyleBackColor = false;
@@ -130,10 +121,10 @@
             // btnEditCategory
             // 
             this.btnEditCategory.BackColor = System.Drawing.Color.Tan;
-            this.btnEditCategory.Location = new System.Drawing.Point(60, 569);
+            this.btnEditCategory.Location = new System.Drawing.Point(60, 743);
             this.btnEditCategory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEditCategory.Name = "btnEditCategory";
-            this.btnEditCategory.Size = new System.Drawing.Size(297, 81);
+            this.btnEditCategory.Size = new System.Drawing.Size(297, 93);
             this.btnEditCategory.TabIndex = 12;
             this.btnEditCategory.Text = "Edit Category";
             this.btnEditCategory.UseVisualStyleBackColor = false;
@@ -142,10 +133,10 @@
             // btnEditExpenses
             // 
             this.btnEditExpenses.BackColor = System.Drawing.Color.Tan;
-            this.btnEditExpenses.Location = new System.Drawing.Point(61, 550);
+            this.btnEditExpenses.Location = new System.Drawing.Point(60, 646);
             this.btnEditExpenses.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEditExpenses.Name = "btnEditExpenses";
-            this.btnEditExpenses.Size = new System.Drawing.Size(297, 76);
+            this.btnEditExpenses.Size = new System.Drawing.Size(297, 93);
             this.btnEditExpenses.TabIndex = 12;
             this.btnEditExpenses.Text = "Edit expenses";
             this.btnEditExpenses.UseVisualStyleBackColor = false;
@@ -156,9 +147,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
-            this.ClientSize = new System.Drawing.Size(1686, 852);
+            this.ClientSize = new System.Drawing.Size(1686, 847);
             this.Controls.Add(this.btnEditCategory);
-            this.ClientSize = new System.Drawing.Size(1686, 812);
             this.Controls.Add(this.btnEditExpenses);
             this.Controls.Add(this.btnBudgetReport);
             this.Controls.Add(this.btnExpenseReport);
