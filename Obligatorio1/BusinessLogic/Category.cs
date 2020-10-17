@@ -13,7 +13,6 @@ namespace BusinessLogic
 
         private string name;
         private List<String> keyWords;
-
         public string Name {get=>name; set=>SetName(value); }
         public List<string> KeyWords { get=>keyWords; set=>SetKeyWords(value); } 
 
@@ -24,7 +23,6 @@ namespace BusinessLogic
             if (vName.All(char.IsDigit))
                 throw new ExcepcionInvalidNameDigitCategory();
             name = vName;
-
         }
 
         private void SetKeyWords(List<string> vKeyWords)
@@ -32,13 +30,7 @@ namespace BusinessLogic
             if (vKeyWords.Count > 10)
                 throw new ExcepcionInvalidKeyWordsLengthCategory();
             keyWords = vKeyWords;
-        }      
-
-        public override string ToString()
-        {
-            return Name;
-        }
-
+        }            
         public override bool Equals(object obj)
         {
             if (obj is Category category)
@@ -48,6 +40,10 @@ namespace BusinessLogic
                 return isEqualName && isEqualKeyWords;
             }
             return false;
+        }
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

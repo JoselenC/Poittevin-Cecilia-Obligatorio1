@@ -12,9 +12,8 @@ namespace BusinessLogic
         private double amount;
         private DateTime creationDate;
         private string description;
-        private Category category;
 
-        public double Amount { get=>amount; set=>SetAmount(value); }
+        public double Amount{get=>amount; set=>SetAmount(value); }
         public DateTime CreationDate { get=>creationDate; set=>SetdDate(value); }
 
         public string Description { get=>description; set=>SetDescription(value); }
@@ -32,7 +31,6 @@ namespace BusinessLogic
         {
             if (vAmount <= 0)
                 throw new ExcepcionNegativeAmountExpense();
-
             if (vAmount!= Math.Round(vAmount, 2))
                 throw new ExcepcionInvalidAmountExpense();
             amount = vAmount;
@@ -43,9 +41,7 @@ namespace BusinessLogic
             if (vDescription.Length < 3 || vDescription.Length > 20)
                 throw new ExcepcionInvalidDescriptionLengthExpense();
             description = vDescription;
-        }
-
-       
+        }            
 
         public override bool Equals(object obj)
         {
@@ -55,7 +51,6 @@ namespace BusinessLogic
                 bool equalsCreationDate = creationDate == expense.creationDate;
                 bool equalsDescription = description == expense.description;
                 return equalsAmount && equalsCreationDate && equalsDescription;
-
             }
             return false;
         }

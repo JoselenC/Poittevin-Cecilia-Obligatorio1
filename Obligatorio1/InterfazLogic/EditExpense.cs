@@ -44,7 +44,7 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-               Expense expense = repository.FindRemoveExpense(lstExpenses.SelectedItem.ToString());
+               Expense expense = repository.DeleteExpense(lstExpenses.SelectedItem.ToString());
                tbDescription.Text = expense.Description;
                nAmount.Value = (decimal)(expense.Amount);
                dateTime.Value = expense.CreationDate;
@@ -68,7 +68,7 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-                repository.FindRemoveExpense(lstExpenses.SelectedItem.ToString());
+                repository.DeleteExpense(lstExpenses.SelectedItem.ToString());
                 int index = lstExpenses.SelectedIndex;
                 lstExpenses.Items.RemoveAt(index);
             }
@@ -96,7 +96,7 @@ namespace InterfazLogic
                     DateTime creationDate = dateTime.Value;
                     string nameCategory = lstCategories.SelectedItem.ToString();
                     Category category = repository.FindCategoryByName(nameCategory);
-                    repository.CreateAddExpense(amount,creationDate,description, category);
+                    repository.SetExpense(amount,creationDate,description, category);
                     MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Visible = false;
                 }

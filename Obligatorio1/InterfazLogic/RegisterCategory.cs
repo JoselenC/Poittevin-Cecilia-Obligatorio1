@@ -34,7 +34,7 @@ namespace InterfazLogic
         {
             try
             {
-                repository.CreateAddCategory(tbName.Text, keyWords);                
+                repository.SetCategory(tbName.Text, keyWords);                
                 lblKeyWords.Text = "";
                 lblKeyWordToEdit.Text = "";
                 lblName.Text = "";

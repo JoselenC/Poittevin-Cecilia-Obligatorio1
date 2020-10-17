@@ -64,7 +64,7 @@ namespace InterfazLogic
                     DateTime creationDate = dateTime.Value;                   
                     string nameCategory = lstCategories.SelectedItem.ToString();
                     Category category = repository.FindCategoryByName(nameCategory);
-                    repository.CreateAddExpense(amount, creationDate, description, category);                
+                    repository.SetExpense(amount, creationDate, description, category);                
                     MessageBox.Show("The expense was recorded successfully","",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     this.Visible = false;
                 }
