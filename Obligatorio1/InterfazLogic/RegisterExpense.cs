@@ -27,11 +27,9 @@ namespace InterfazLogic
         private void CompleteCategories(string description)
         {
             Category category = repository.FindCategoryByDescription(description);
-            string categoryName = "";
             if (category != null)
             {
-                categoryName = category.Name;
-                lstCategories.Items.Add(categoryName);
+                lstCategories.Items.Add(category);
             }
             else if (repository.Categories.Count > 0)
             {

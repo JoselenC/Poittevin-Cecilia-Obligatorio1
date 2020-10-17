@@ -34,9 +34,9 @@ namespace InterfazLogic
             }
             else
             {
-                for (int i = 0; i < months.Count; i++)
+                foreach (string month in months)
                 {
-                    lstMonths.Items.Add(months[i]);
+                    lstMonths.Items.Add(month);
                 }
                 this.Visible = true;
             }
@@ -63,17 +63,13 @@ namespace InterfazLogic
                     string description = vExpense.Description;
                     string name = vExpense.Category.Name;
                     string amount = vExpense.Amount.ToString();
-
                         totalAmount += Convert.ToDouble(vExpense.Amount);
                         item = listView1.Items.Add(date);
                         item.SubItems.Add(description);
                         item.SubItems.Add(name);
-                        item.SubItems.Add(amount);
-                    
+                        item.SubItems.Add(amount);                   
 
-                }
-
-                
+                }                
                 lblTotalAmount.Text = "Total amount of the month " + month + " was " + totalAmount.ToString();
             }
             else
