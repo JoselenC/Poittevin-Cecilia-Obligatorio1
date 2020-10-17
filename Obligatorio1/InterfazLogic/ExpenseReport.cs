@@ -54,7 +54,7 @@ namespace InterfazLogic
                 {
                     lblMonths.Text = "You must select a month to consult";
                 }
-                List<Expense> expenseReportByMonth = repository.GetExpensesByMonth(month);
+                List<Expense> expenseReportByMonth = repository.GetExpense(month);
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
                 foreach(Expense vExpense in expenseReportByMonth)

@@ -206,7 +206,7 @@ namespace Test
             };
             Repository repository = new Repository();
             repository.Expenses = expenses;
-            Assert.AreEqual(expense1, repository.GetExpensesByMonth(month).ToArray()[0]);
+            Assert.AreEqual(expense1, repository.GetExpense(month).ToArray()[0]);
 
         }
 
@@ -222,7 +222,7 @@ namespace Test
             };
             Repository repository = new Repository();
             repository.Expenses = expenses;
-            Assert.AreEqual(0, repository.GetExpensesByMonth(month).Count);
+            Assert.AreEqual(0, repository.GetExpense(month).Count);
         }
 
         [TestMethod]

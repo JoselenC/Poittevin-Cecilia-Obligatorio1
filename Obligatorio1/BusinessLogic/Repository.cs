@@ -107,7 +107,7 @@ namespace BusinessLogic
             return total;
         }
 
-        public List<Expense> GetExpensesByMonth(string month)
+        public List<Expense> GetExpense(string month)
         {
 
             int monthInt = StringToIntMonth(month);
