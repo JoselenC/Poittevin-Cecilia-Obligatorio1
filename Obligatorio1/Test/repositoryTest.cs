@@ -25,46 +25,71 @@ namespace Test
                 "teatro",
                 "casino"
             };
-            categoryEntertainment = new Category { Name = "entretenimiento", KeyWords = keyWords1 };
+            categoryEntertainment = new Category()
+            {
+                Name = "entretenimiento",
+                KeyWords = keyWords1
+            };
             List<string> keyWords2 = new List<string>
             {
                 "restaurante",
                 "McDonalds",
                 "cena"
             };
-            categoryFood = new Category("comida", keyWords2);
+            categoryFood = new Category()
+            {
+                Name = "comida",
+                KeyWords = keyWords2
+            };
             List<string> keyWords3 = new List<string>
             {
                 "CoffeMaker",
                 "toilet paper",
             };
-            categoryHouse = new Category("House", keyWords3);
-            repo.AddCategory(categoryEntertainment);
-            repo.AddCategory(categoryFood);
-            repo.AddCategory(categoryHouse);
+            categoryHouse = new Category()
+            {
+                Name = "House",
+                KeyWords = keyWords3
+            };
+            repo.AddCategoryToCategories(categoryEntertainment);
+            repo.AddCategoryToCategories(categoryFood);
+            repo.AddCategoryToCategories(categoryHouse);
 
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
                 categoryFood,
             };
-            JanuaryBudget = new Budget(1, 2020, 0, categories);
+            JanuaryBudget = new Budget(1, categories)
+            {
+                Year = 2020,
+                TotalAmount = 0
+            };
             repo.AddBudget(JanuaryBudget);
 
-            Expense januaryExpenseFood = new Expense(200, new DateTime(2020, 1, 1), "sushi night")
-            {
+            Expense januaryExpenseFood = new Expense()
+            {  
+                Amount = 200,
+                CreationDate = new DateTime(2020, 1, 1),
+                Description = "sushi night",
                 Category = categoryFood
             };
-            Expense januaryExpenseFood2 = new Expense(110.50, new DateTime(2020, 1, 1), "sushi night")
+            Expense januaryExpenseFood2 = new Expense()
             {
+                Amount = 110.50,
+                CreationDate = new DateTime(2020, 1, 1),
+                Description = "sushi night",
                 Category = categoryFood
             };
-            Expense januaryExpenseEntertainment = new Expense(230.15, new DateTime(2020, 1, 1), "buy video game")
+            Expense januaryExpenseEntertainment = new Expense()
             {
+                Amount = 230.15,
+                CreationDate = new DateTime(2020, 1, 1),
+                Description = "buy video game",
                 Category = categoryEntertainment
             };
-            repo.AddExpense(januaryExpenseFood);
-            repo.AddExpense(januaryExpenseFood2);
-            repo.AddExpense(januaryExpenseEntertainment);
+            repo.AddExpenseToExpenses(januaryExpenseFood);
+            repo.AddExpenseToExpenses(januaryExpenseFood2);
+            repo.AddExpenseToExpenses(januaryExpenseEntertainment);
         }
 
         [TestMethod]
@@ -94,7 +119,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void FindCategoryValueResultForFood()
+        public void FindCategoryNullValueResultForFood()
         {
             string description = "cuando fuimos a comer a McDonalds";
             Category expectedCategory = repo.FindCategoryByDescription(description);
@@ -102,153 +127,7 @@ namespace Test
 
         }
 
-        [TestMethod]
-        public void FindExpenseByDescription()
-        {
-            string description = "cine";
-            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020,01,01)};
-            repo.AddExpenseToExpenses(expense);
-            Expense expectedExpense = repo.FindExpenseByDescription(description);
-            Assert.AreEqual(expense, expectedExpense);
 
-        }
-
-        [TestMethod]
-        public void FindExpenseNullByDescription()
-        {
-            string description = "cine";
-            Expense expectedExpense = repo.FindExpenseByDescription(description);
-            Assert.IsNull(expectedExpense);
-
-        }
-
-
-
-        [TestMethod]
-        public void MonthsOrderedInWhichAreExpenses()
-        {
-
-            List<string> months = new List<string>()
-            {
-            "Enero",
-            "Mayo",
-            };
-            DateTime month1 = new DateTime(2020, 1, 24);
-            DateTime month5 = new DateTime(2020, 5, 24);
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
-            Expense expense2 = new Expense { Amount = 23, CreationDate = month5, Description = "cine" };
-            List<Expense> expenses = new List<Expense>()
-            {
-                expense1,
-                expense2,
-            };
-            Repository repo = new Repository();
-            repo.Expenses = expenses;
-            List<string> monthsOrder = repo.OrderedMonthsInWhichThereAreExpenses();
-            Assert.AreEqual(months[0], monthsOrder[0]);
-            Assert.AreEqual(months[1], monthsOrder[1]);
-
-        }
-
-
-        [TestMethod]
-        public void ExpenseAmountByMonthInWhichAreExpenses()
-        {
-            string month = "Agosto";
-
-            DateTime month1 = new DateTime(2020, 8, 24);
-            DateTime month2 = new DateTime(2020, 8, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
-            Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
-            Expense expense3 = new Expense { Amount = 23, CreationDate = month3, Description = "casino" };
-            List<Expense> expenses = new List<Expense>() {
-            expense1,
-            expense2,
-            expense3,
-            };
-            Repository repository = new Repository();
-            repository.Expenses = expenses;
-            double totalAmount = repository.AmountOfExpensesInAMonth(month);
-            Assert.AreEqual(46, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseAmountByMonthInWhichAreNoExpenses()
-        {
-            string month = "Agosto";
-            DateTime month1 = new DateTime(2020, 2, 24);
-            DateTime month2 = new DateTime(2020, 3, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
-            Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
-            Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
-            List<Expense> expenses = new List<Expense>()
-            {
-                expense1,
-                expense2,
-                expense3,
-            };
-            Repository repository = new Repository();
-            repository.Expenses = expenses;
-            double totalAmount = repository.AmountOfExpensesInAMonth(month);
-            Assert.AreEqual(0, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpenseAmountByMonthInWhichIsAnExpense()
-        {
-            string month = "Agosto";
-            DateTime month1 = new DateTime(2020, 8, 24);
-            DateTime month2 = new DateTime(2020, 2, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense { Amount = 23.5, CreationDate = month1, Description = "cine" };
-            Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
-            Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
-            List<Expense> expenses = new List<Expense>() {
-            expense1,
-            expense2,
-            expense3,
-            };
-            Repository repository = new Repository();
-            repository.Expenses = expenses;
-            double totalAmount = repository.AmountOfExpensesInAMonth(month);
-            Assert.AreEqual(23.5, totalAmount);
-
-        }
-
-        [TestMethod]
-        public void ExpensesByMonth()
-        {
-            string month = "Enero";
-            Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "Cuando fui al cine" };
-            Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "Cuando fui al cine" };
-            List<Expense> expenses = new List<Expense>(){
-                expense1,
-                expense2,
-            };
-            Repository repository = new Repository();
-            repository.Expenses = expenses;
-            Assert.AreEqual(expense1, repository.ExpensesByMonthPassed(month).ToArray()[0]);
-
-        }
-
-        [TestMethod]
-        public void ExpensesByMonthEmpty()
-        {
-            string month = "Mayo";
-            Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "Cuando fui al cine" };
-            Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "Cuando fui al cine" };
-            List<Expense> expenses = new List<Expense>(){
-                expense1,
-                expense2,
-            };
-            Repository repository = new Repository();
-            repository.Expenses = expenses;
-            Assert.AreEqual(0, repository.ExpensesByMonthPassed(month).Count);
-        }
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
@@ -319,7 +198,6 @@ namespace Test
             Assert.AreEqual(category, repository.Categories.ToArray()[0]);
         }
 
-
         [TestMethod]
         public void AddCategoryValidKeyWords()
         {
@@ -375,8 +253,7 @@ namespace Test
         [TestMethod]
         public void AddRepeatedKeyWordToCategory()
         {
-
-            bool alreadyExistKW=repo.AlreadyExistThisKeyWordInAnoterCategory("cine");
+            bool alreadyExistKW = repo.AlreadyExistThisKeyWordInAnoterCategory("cine");
             Assert.IsTrue(alreadyExistKW);
         }
 
@@ -384,7 +261,6 @@ namespace Test
         [TestMethod]
         public void AddValidKeyWordToCategory()
         {
-
             bool alreadyExistKW = repo.AlreadyExistThisKeyWordInAnoterCategory("casino");
             Assert.IsTrue(alreadyExistKW);
         }
@@ -443,7 +319,10 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetToRepository()
         {
-            Budget validBudget = new Budget(DateTime.Now.Month) { TotalAmount = 4000, Year = DateTime.Now.Year };
+            Budget validBudget = new Budget(DateTime.Now.Month) { 
+                TotalAmount = 4000, 
+                Year = DateTime.Now.Year 
+            };
             Repository EmptyRepository = new Repository();
             EmptyRepository.AddBudget(validBudget);
 
@@ -462,7 +341,10 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetCategoryToRepository()
         {
-            BudgetCategory validBudgetCategory = new BudgetCategory { Category = categoryFood, Amount = 1000 };
+            BudgetCategory validBudgetCategory = new BudgetCategory { 
+                Category = categoryFood, 
+                Amount = 1000 
+            };
             Repository EmptyRepository = new Repository();
             EmptyRepository.AddBudgetCategory(validBudgetCategory);
 
@@ -505,8 +387,9 @@ namespace Test
         {
             string[] ExpectedCategoryNames = new string[]
             {
-                categoryEntertainment.ToString(),
-                categoryFood.ToString(),
+                categoryEntertainment.Name,
+                categoryFood.Name,
+                categoryHouse.Name
             };
             string[] RealCategoryNames = repo.GetAllCategoryStrings();
             CollectionAssert.AreEqual(ExpectedCategoryNames, RealCategoryNames);
@@ -515,19 +398,22 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateFindCase()
         {
-            Budget expectedBudget = new Budget(1, 2020, 0);
-            Budget actualBudget = repo.BudgetGetOrCreate("Enero", 2020);
-            Assert.AreEqual(expectedBudget, actualBudget);
+            string expectedString = "mes: 1 anio: 2020 total: 0";
+            string month = "Enero";
+            int year = 2020;
+            Budget budget = repo.BudgetGetOrCreate(month, year);
+            Assert.AreEqual(expectedString, budget.ToString());
         }
-
-
 
         [TestMethod]
         public void BudgetGetOrCreateCreateCase()
         {
             string month = "Diciembre";
             int year = 2020;
-            Budget expectedBudget = new Budget(12, repo.Categories) { Year = 2020, TotalAmount = 0 };
+            Budget expectedBudget = new Budget(12, repo.Categories) { 
+                Year = 2020, 
+                TotalAmount = 0 
+            };
 
             Budget budget = repo.BudgetGetOrCreate(month, year);
             Assert.AreEqual(expectedBudget, budget);
@@ -549,8 +435,14 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateCheckCategories()
         {
-            BudgetCategory budgetCategory = new BudgetCategory { Category = categoryEntertainment, Amount = 0 };
-            BudgetCategory budgetCategory2 = new BudgetCategory { Category = categoryFood, Amount = 0 };
+            BudgetCategory budgetCategory = new BudgetCategory { 
+                Category = categoryEntertainment,
+                Amount = 0 
+            };
+            BudgetCategory budgetCategory2 = new BudgetCategory { 
+                Category = categoryFood, 
+                Amount = 0 
+            };
             List<BudgetCategory> budgetCategories = new List<BudgetCategory>() {
             budgetCategory,
             budgetCategory2

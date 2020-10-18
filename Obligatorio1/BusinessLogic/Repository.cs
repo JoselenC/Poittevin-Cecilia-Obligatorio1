@@ -277,7 +277,7 @@ namespace BusinessLogic
 
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
         {
-            List<Expense> expenses = GetAllExpenses(vMonth);
+            List<Expense> expenses = ExpensesByMonthPassed(vMonth);
             double total = 0;
             foreach (Expense expense in expenses)
             {
