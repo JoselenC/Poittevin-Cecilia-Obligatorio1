@@ -1,17 +1,17 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLogic;
 
 namespace InterfazLogic
 {
-    public partial class BudgetReport : Form
+    public partial class BudgetReport : UserControl
     {
         private bool initializingForm = true;
         private Repository repository;
@@ -26,6 +26,7 @@ namespace InterfazLogic
             cboxMonth.SelectedIndex = oldMonthIndex;
             initializingForm = false;
             LoadBudgetReport();
+            
         }
 
         private bool LoadBudgetReport()
@@ -36,6 +37,7 @@ namespace InterfazLogic
                 if (budget is null)
                 {
                     MessageBox.Show("There is not budget created for the selected date");
+                    Visible = false;
                     return false;
                 }
                 else
