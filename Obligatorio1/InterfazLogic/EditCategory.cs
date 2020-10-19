@@ -166,9 +166,7 @@ namespace InterfazLogic
 
             try
             {
-                category.Name = txtName.Text;
-                category.KeyWords = KeyWords;
-                repository.AddCategoryToCategories(category);               
+                repository.SetCategory(txtName.Text, KeyWords);
                 MessageBox.Show("Category " + category.Name + " was added successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Visible = false;
             }

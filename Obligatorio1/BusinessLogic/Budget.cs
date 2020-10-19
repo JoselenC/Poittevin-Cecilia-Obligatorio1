@@ -14,7 +14,6 @@ namespace BusinessLogic
         public double TotalAmount { get => totalAmount; set => SetTotalAmount(value); }
         public int Month { get => month ; }
         public int Year { get => year; set => SetYear(value); }
-
         public List<BudgetCategory> BudgetCategories { get; set; }
 
         private void SetTotalAmount(double vTotalAmount)
@@ -29,18 +28,14 @@ namespace BusinessLogic
         private void SetYear(int vYear)
         {
             if (vYear > 2030 || vYear < 2018 )
-            {
                 throw new ArgumentOutOfRangeException();
-            }
             year = vYear;
         }
 
         private bool ValidMonth(int vMonth)
         {
             if (vMonth > 12 || vMonth < 1)
-            {
                 throw new ArgumentOutOfRangeException();
-            }
             return true;
         }
 
@@ -57,9 +52,7 @@ namespace BusinessLogic
         {
             List<BudgetCategory> returnList = new List<BudgetCategory>();
             foreach (var category in categories)
-            {
                 returnList.Add(new BudgetCategory { Category = category, Amount = 0 });
-            }
             return returnList;
 
         }
@@ -80,9 +73,7 @@ namespace BusinessLogic
         public void AddBudgetCategory(BudgetCategory budgetCategory)
         {
             if (budgetCategory is null)
-            {
                 throw new ArgumentNullException();
-            }
             BudgetCategories.Add(budgetCategory);
         }
 
@@ -111,9 +102,7 @@ namespace BusinessLogic
             foreach (var budgetCategory in BudgetCategories)
             {
                 if (budgetCategory.Category.Name == categoryName)
-                {
                     return budgetCategory;
-                }
             }
             return null;
         }
@@ -121,9 +110,7 @@ namespace BusinessLogic
         {
             BudgetCategory budgetCategory = FindBudgetCategoryByCategoryName(categoryName);
             if (budgetCategory != null)
-            {
                 return budgetCategory;
-            }
             return null;
         }
 

@@ -51,7 +51,6 @@ namespace BusinessLogic
                 {
                     exist = vCategory.KeyWords.Contains(description);
                 }
-
                 if (exist)
                 {
                     category = vCategory;
@@ -59,13 +58,9 @@ namespace BusinessLogic
                 }
             }
             if (cont == 1)
-            {
                 return category;
-            }
             else
-            {
                 return null;
-            }
         }
 
         private List<string> MonthsListStringToInt(List<int> months)
@@ -112,7 +107,7 @@ namespace BusinessLogic
             return total;
         }
 
-        public List<Expense> ExpensesByMonthPassed(string month)
+        public List<Expense> GetExpense(string month)
         {
 
             int monthInt = StringToIntMonth(month);
@@ -123,79 +118,6 @@ namespace BusinessLogic
                     expensesByMonth.Add(vExpense);
             }
             return expensesByMonth;
-        }    
-
-
-        private bool AlreadyExistTheCategoryName(string categoryName)
-        {
-            bool validName = true;
-            foreach (Category category in Categories)
-            {
-                if (categoryName.ToLower() == category.Name.ToLower())
-                {
-                    validName= false;
-                }
-
-            }
-            return validName;
-        }
-
-         public bool AlreadyExistThisKeyWordInAnoterCategory(string pKeyWord)
-         {
-            bool isValidKeyWord = false;
-            foreach (Category category in Categories)
-            {
-                foreach (string vKeyWord in category.KeyWords)
-                {
-
-                    if (pKeyWord.ToLower() == vKeyWord.ToLower())
-                    {
-                        isValidKeyWord = true;
-                    }                    
-                }
-            }
-            return isValidKeyWord;
-        }
-
-        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pKeyWords)
-        {
-            bool areValidKeyWords = true;
-            foreach (Category category in Categories)
-            {
-                foreach (string vKeyWord in category.KeyWords)
-                {
-                    foreach (string pKeyWord in pKeyWords)
-                    {
-                        string keyWord = vKeyWord;
-                        string vkeyWord = pKeyWord;
-                        if (keyWord.ToLower() == vkeyWord.ToLower())
-                        {
-                            areValidKeyWords = false;
-                        }
-                    }
-                }
-
-            }
-            return areValidKeyWords;
-        }
-
-        public void AddCategoryToCategories(Category category)
-        {
-            if (!AlreadyExistTheCategoryName(category.Name))
-                throw new ExcepcionInvalidRepeatedNameCategory();
-            if (!AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
-                throw new ExcepcionInvalidRepeatedKeyWordsCategory();            
-            this.Categories.Add(category);                
-            
-           
-        }    
-
-        public void AddExpenseToExpenses(Expense expense)
-        {
-           if (expense.Category == null)
-                throw new ExcepcionExpenseWithEmptyCategory();
-            Expenses.Add(expense);
-
         }
 
         public Category FindCategoryByName(string categoryName)
@@ -209,7 +131,7 @@ namespace BusinessLogic
         }
 
 
-        public Expense FindExpenseByDescription(string expenseDescription)
+        public Expense FindExpense(string expenseDescription)
         {
             foreach (var expense in Expenses)
             {
@@ -219,6 +141,54 @@ namespace BusinessLogic
             return null;
         }
 
+        private bool AlreadyExistTheCategoryName(string categoryName)
+        {
+            foreach (Category category in Categories)
+            {
+                if (categoryName.ToLower() == category.Name.ToLower())
+                    return false;
+            }
+            return true;
+        }
+
+         public bool AlreadyExistThisKeyWordInAnoterCategory(string pKeyWord)
+         {
+            foreach (Category category in Categories)
+            {
+                foreach (string vKeyWord in category.KeyWords)
+                {
+                    if (pKeyWord.ToLower() == vKeyWord.ToLower())
+                        return true;                                
+                }
+            }
+            return false;
+         }
+
+        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pKeyWords)
+        {
+            foreach (Category category in Categories)
+            {
+                foreach (string vKeyWord in category.KeyWords)
+                {
+                    foreach (string pKeyWord in pKeyWords)
+                    {
+                        if (vKeyWord.ToLower() == pKeyWord.ToLower())
+                            return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        public void AddCategory(Category category)
+        {
+            if (!AlreadyExistTheCategoryName(category.Name))
+                throw new ExcepcionInvalidRepeatedNameCategory();
+            if (!AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();            
+            this.Categories.Add(category);
+        }                
+      
         public void AddBudget(Budget vBudget)
         {
             if (vBudget is null)
@@ -235,6 +205,13 @@ namespace BusinessLogic
                 throw new ArgumentNullException();
             }
             BudgetCategories.Add(vCategory);
+        }
+
+        public void AddExpense(Expense expense)
+        {
+            if (expense.Category == null)
+                throw new ExcepcionExpenseWithEmptyCategory();
+            Expenses.Add(expense);
         }
 
         public string[] GetAllMonthsString()
@@ -275,5 +252,23 @@ namespace BusinessLogic
             return returnBudget;
         }
 
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category)
+        {
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category };
+            AddExpense(expense);
+        }
+
+        public void SetCategory(string vName,List<string> vKeyWords )
+        {
+            Category category = new Category { Name = vName, KeyWords = vKeyWords };
+            AddCategory(category);
+        }
+
+        public Expense DeleteExpense(string description)
+        {
+            Expense expense = FindExpense(description);
+            Expenses.Remove(expense);
+            return expense;
+        }
     }
 }
