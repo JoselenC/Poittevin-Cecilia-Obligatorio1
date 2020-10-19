@@ -51,9 +51,9 @@ namespace Test
                 Name = "House",
                 KeyWords = keyWords3
             };
-            repo.AddCategoryToCategories(categoryEntertainment);
-            repo.AddCategoryToCategories(categoryFood);
-            repo.AddCategoryToCategories(categoryHouse);
+            repo.AddCategory(categoryEntertainment);
+            repo.AddCategory(categoryFood);
+            repo.AddCategory(categoryHouse);
 
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
@@ -87,9 +87,9 @@ namespace Test
                 Description = "buy video game",
                 Category = categoryEntertainment
             };
-            repo.AddExpenseToExpenses(januaryExpenseFood);
-            repo.AddExpenseToExpenses(januaryExpenseFood2);
-            repo.AddExpenseToExpenses(januaryExpenseEntertainment);
+            repo.AddExpense(januaryExpenseFood);
+            repo.AddExpense(januaryExpenseFood2);
+            repo.AddExpense(januaryExpenseEntertainment);
         }
 
         [TestMethod]
@@ -131,11 +131,12 @@ namespace Test
         public void FindExpenseByDescription()
         {
             string description = "cine";
-            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020,01,01)};
+            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             repo.AddExpense(expense);
             Expense expectedExpense = repo.FindExpense(description);
             Assert.AreEqual(expense, expectedExpense);
 
+        }
 
         [TestMethod]
         public void FindExpenseNullByDescription()
