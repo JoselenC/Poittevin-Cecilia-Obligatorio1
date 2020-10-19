@@ -13,6 +13,7 @@ namespace Test
         private static Repository repo = new Repository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
+        private static Category categoryHouse;
         private static Budget JanuaryBudget;
 
         [ClassInitialize()]
@@ -24,22 +25,71 @@ namespace Test
                 "teatro",
                 "casino"
             };
-            categoryEntertainment = new Category { Name = "entretenimiento", KeyWords = keyWords1 };
+            categoryEntertainment = new Category()
+            {
+                Name = "entretenimiento",
+                KeyWords = keyWords1
+            };
             List<string> keyWords2 = new List<string>
             {
                 "restaurante",
                 "McDonalds",
                 "cena"
             };
-            categoryFood = new Category { Name = "comida", KeyWords = keyWords2 };
-            repo.AddCategory(categoryEntertainment);
-            repo.AddCategory(categoryFood);         
+            categoryFood = new Category()
+            {
+                Name = "comida",
+                KeyWords = keyWords2
+            };
+            List<string> keyWords3 = new List<string>
+            {
+                "CoffeMaker",
+                "toilet paper",
+            };
+            categoryHouse = new Category()
+            {
+                Name = "House",
+                KeyWords = keyWords3
+            };
+            repo.AddCategoryToCategories(categoryEntertainment);
+            repo.AddCategoryToCategories(categoryFood);
+            repo.AddCategoryToCategories(categoryHouse);
+
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
                 categoryFood,
             };
-            Budget januaryBudget = new Budget(1, categories) { Year = 2020, TotalAmount = 0 };
-            repo.AddBudget(januaryBudget);
+            JanuaryBudget = new Budget(1, categories)
+            {
+                Year = 2020,
+                TotalAmount = 0
+            };
+            repo.AddBudget(JanuaryBudget);
+
+            Expense januaryExpenseFood = new Expense()
+            {  
+                Amount = 200,
+                CreationDate = new DateTime(2020, 1, 1),
+                Description = "sushi night",
+                Category = categoryFood
+            };
+            Expense januaryExpenseFood2 = new Expense()
+            {
+                Amount = 110.50,
+                CreationDate = new DateTime(2020, 1, 1),
+                Description = "sushi night",
+                Category = categoryFood
+            };
+            Expense januaryExpenseEntertainment = new Expense()
+            {
+                Amount = 230.15,
+                CreationDate = new DateTime(2020, 1, 1),
+                Description = "buy video game",
+                Category = categoryEntertainment
+            };
+            repo.AddExpenseToExpenses(januaryExpenseFood);
+            repo.AddExpenseToExpenses(januaryExpenseFood2);
+            repo.AddExpenseToExpenses(januaryExpenseEntertainment);
         }
 
         [TestMethod]
@@ -69,7 +119,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void FindCategoryValueResultForFood()
+        public void FindCategoryNullValueResultForFood()
         {
             string description = "cuando fuimos a comer a McDonalds";
             Category expectedCategory = repo.FindCategoryByDescription(description);
@@ -86,7 +136,6 @@ namespace Test
             Expense expectedExpense = repo.FindExpense(description);
             Assert.AreEqual(expense, expectedExpense);
 
-        }
 
         [TestMethod]
         public void FindExpenseNullByDescription()
@@ -294,7 +343,6 @@ namespace Test
             Assert.AreEqual(category, repository.Categories.ToArray()[0]);
         }
 
-
         [TestMethod]
         public void AddCategoryValidKeyWords()
         {
@@ -350,8 +398,7 @@ namespace Test
         [TestMethod]
         public void AddRepeatedKeyWordToCategory()
         {
-
-            bool alreadyExistKW=repo.AlreadyExistThisKeyWordInAnoterCategory("cine");
+            bool alreadyExistKW = repo.AlreadyExistThisKeyWordInAnoterCategory("cine");
             Assert.IsTrue(alreadyExistKW);
         }
 
@@ -359,7 +406,6 @@ namespace Test
         [TestMethod]
         public void AddValidKeyWordToCategory()
         {
-
             bool alreadyExistKW = repo.AlreadyExistThisKeyWordInAnoterCategory("casino");
             Assert.IsTrue(alreadyExistKW);
         }
@@ -418,7 +464,10 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetToRepository()
         {
-            Budget validBudget = new Budget(DateTime.Now.Month) { TotalAmount = 4000, Year = DateTime.Now.Year };
+            Budget validBudget = new Budget(DateTime.Now.Month) { 
+                TotalAmount = 4000, 
+                Year = DateTime.Now.Year 
+            };
             Repository EmptyRepository = new Repository();
             EmptyRepository.AddBudget(validBudget);
 
@@ -437,7 +486,10 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetCategoryToRepository()
         {
-            BudgetCategory validBudgetCategory = new BudgetCategory { Category = categoryFood, Amount = 1000 };
+            BudgetCategory validBudgetCategory = new BudgetCategory { 
+                Category = categoryFood, 
+                Amount = 1000 
+            };
             Repository EmptyRepository = new Repository();
             EmptyRepository.AddBudgetCategory(validBudgetCategory);
 
@@ -480,8 +532,9 @@ namespace Test
         {
             string[] ExpectedCategoryNames = new string[]
             {
-                categoryEntertainment.ToString(),
-                categoryFood.ToString(),
+                categoryEntertainment.Name,
+                categoryFood.Name,
+                categoryHouse.Name
             };
             string[] RealCategoryNames = repo.GetAllCategoryStrings();
             CollectionAssert.AreEqual(ExpectedCategoryNames, RealCategoryNames);
@@ -497,14 +550,15 @@ namespace Test
             Assert.AreEqual(expectedString, budget.ToString());
         }
 
-
-
         [TestMethod]
         public void BudgetGetOrCreateCreateCase()
         {
             string month = "Diciembre";
             int year = 2020;
-            Budget expectedBudget = new Budget(12, repo.Categories) { Year = 2020, TotalAmount = 0 };
+            Budget expectedBudget = new Budget(12, repo.Categories) { 
+                Year = 2020, 
+                TotalAmount = 0 
+            };
 
             Budget budget = repo.BudgetGetOrCreate(month, year);
             Assert.AreEqual(expectedBudget, budget);
@@ -526,8 +580,14 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateCheckCategories()
         {
-            BudgetCategory budgetCategory = new BudgetCategory { Category = categoryEntertainment, Amount = 0 };
-            BudgetCategory budgetCategory2 = new BudgetCategory { Category = categoryFood, Amount = 0 };
+            BudgetCategory budgetCategory = new BudgetCategory { 
+                Category = categoryEntertainment,
+                Amount = 0 
+            };
+            BudgetCategory budgetCategory2 = new BudgetCategory { 
+                Category = categoryFood, 
+                Amount = 0 
+            };
             List<BudgetCategory> budgetCategories = new List<BudgetCategory>() {
             budgetCategory,
             budgetCategory2
@@ -537,6 +597,49 @@ namespace Test
 
             List<BudgetCategory> actualBudgetCategories = actualBudget.BudgetCategories;
             CollectionAssert.AreEqual(budgetCategories, actualBudgetCategories);
+        }
+
+        [TestMethod]
+
+        public void GetTotalSpentByMonthAndCategoryValidCase()
+        {
+            double expectedTotalSpentJanuary = 310.50;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Enero", categoryFood);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpenses()
+        {
+            double expectedTotalSpentJanuary = 0;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Marzo", categoryFood);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpensesInCategory()
+        {
+            double expectedTotalSpentJanuary = 0;
+            double actualTotalSpentJanuary = repo.GetTotalSpentByMonthAndCategory("Enero", categoryHouse);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void FindBudgetFoundCase()
+        {
+            Budget actualBudget = repo.FindBudget(1, 2020);
+            Assert.AreEqual(JanuaryBudget, actualBudget);
+        }
+
+
+        [TestMethod]
+        public void FindBudgetNotFoundCase()
+        {
+            Budget actualBudget = repo.FindBudget(2, 2020);
+            Assert.IsNull(actualBudget);
         }
 
         [TestMethod]

@@ -230,7 +230,7 @@ namespace BusinessLogic
             return categoryNames.ToArray();
         }
 
-        private Budget FindBudgetByDate(int month, int year)
+        public Budget FindBudget(int month, int year)
         {
             foreach (var budget in Budgets)
             {
@@ -243,7 +243,7 @@ namespace BusinessLogic
         public Budget BudgetGetOrCreate(string month, int year)
         {
             int monthIndex = StringToIntMonth(month);
-            Budget returnBudget = FindBudgetByDate(monthIndex, year);
+            Budget returnBudget = FindBudget(monthIndex, year);
             if (returnBudget is null)
             {
                 returnBudget = new Budget(monthIndex, Categories) { Year = year, TotalAmount = 0 };
@@ -269,6 +269,17 @@ namespace BusinessLogic
             Expense expense = FindExpense(description);
             Expenses.Remove(expense);
             return expense;
+        }
+        public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
+        {
+            List<Expense> expenses = ExpensesByMonthPassed(vMonth);
+            double total = 0;
+            foreach (Expense expense in expenses)
+            {
+                if (expense.Category == vCategory)
+                    total += expense.Amount;
+            }
+            return total;
         }
     }
 }

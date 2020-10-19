@@ -49,7 +49,7 @@
             this.lstMonths.ItemHeight = 31;
             this.lstMonths.Location = new System.Drawing.Point(236, 162);
             this.lstMonths.Name = "lstMonths";
-            this.lstMonths.Size = new System.Drawing.Size(457, 66);
+            this.lstMonths.Size = new System.Drawing.Size(174, 30);
             this.lstMonths.TabIndex = 1;
             // 
             // Month
@@ -57,7 +57,7 @@
             this.Month.AutoSize = true;
             this.Month.Location = new System.Drawing.Point(78, 162);
             this.Month.Name = "Month";
-            this.Month.Size = new System.Drawing.Size(108, 32);
+            this.Month.Size = new System.Drawing.Size(42, 13);
             this.Month.TabIndex = 2;
             this.Month.Text = "Months";
             // 
@@ -87,6 +87,7 @@
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // cCreationDate
             // 
@@ -111,15 +112,17 @@
             // lblMonths
             // 
             this.lblMonths.AutoSize = true;
-            this.lblMonths.Location = new System.Drawing.Point(186, 217);
+            this.lblMonths.Location = new System.Drawing.Point(70, 91);
+            this.lblMonths.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblMonths.Name = "lblMonths";
-            this.lblMonths.Size = new System.Drawing.Size(0, 32);
+            this.lblMonths.Size = new System.Drawing.Size(0, 13);
             this.lblMonths.TabIndex = 5;
             // 
             // lblMonth
             // 
             this.lblMonth.AutoSize = true;
-            this.lblMonth.Location = new System.Drawing.Point(192, 208);
+            this.lblMonth.Location = new System.Drawing.Point(72, 87);
+            this.lblMonth.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblMonth.Name = "lblMonth";
             this.lblMonth.Size = new System.Drawing.Size(0, 32);
             this.lblMonth.TabIndex = 6;
@@ -138,9 +141,10 @@
             // lblTotalAmount
             // 
             this.lblTotalAmount.AutoSize = true;
-            this.lblTotalAmount.Location = new System.Drawing.Point(65, 658);
+            this.lblTotalAmount.Location = new System.Drawing.Point(24, 276);
+            this.lblTotalAmount.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(0, 32);
+            this.lblTotalAmount.Size = new System.Drawing.Size(0, 13);
             this.lblTotalAmount.TabIndex = 8;
             // 
             // label2
@@ -157,7 +161,7 @@
             // 
             // ExpenseReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.Controls.Add(this.label2);

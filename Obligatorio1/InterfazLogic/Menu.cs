@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -56,6 +57,15 @@ namespace InterfazLogic
             mainPanel.Controls.Clear();
             UserControl editCategory= new EditCategory(repository);
             mainPanel.Controls.Add(editCategory);
+        }
+
+        private void btnBudgetReport_Click(object sender, EventArgs e)
+        {
+            var addBudgetReportForm = new BudgetReport(repository)
+            {
+                Location = new Point(300, 120)
+            };
+            addBudgetReportForm.Show();
         }
     }
 
