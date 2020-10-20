@@ -284,8 +284,7 @@ namespace BusinessLogic
         public void AddExpense(Expense expense)
         {
             Repository.AddExpense(expense);
-        }  
-        
+        }        
         public string[] GetAllCategoryStrings()
         {
             return Repository.GetAllCategoryStrings();
@@ -297,7 +296,6 @@ namespace BusinessLogic
             Repository.GetExpenses().Remove(expense);
             return expense;
         }
-
         public List<Category> GetCategories()
         {
             return Repository.GetCategories();

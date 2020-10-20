@@ -8,12 +8,17 @@ namespace BusinessLogic
     {
 
         private double totalAmount;
+
         private readonly int month;
+
         private int year;
 
         public double TotalAmount { get => totalAmount; set => SetTotalAmount(value); }
+
         public int Month { get => month ; }
+
         public int Year { get => year; set => SetYear(value); }
+
         public List<BudgetCategory> BudgetCategories { get; set; }
 
         private void SetTotalAmount(double vTotalAmount)
@@ -54,8 +59,8 @@ namespace BusinessLogic
             foreach (var category in categories)
                 returnList.Add(new BudgetCategory { Category = category, Amount = 0 });
             return returnList;
-
         }
+
         public Budget(int vCurrentMonth, List<Category> categories)
         {
             if (ValidMonth(vCurrentMonth))
@@ -106,6 +111,7 @@ namespace BusinessLogic
             }
             return null;
         }
+
         public BudgetCategory GetBudgetCategoryByCategoryName(string categoryName)
         {
             BudgetCategory budgetCategory = FindBudgetCategoryByCategoryName(categoryName);
