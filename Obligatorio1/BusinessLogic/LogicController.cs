@@ -24,14 +24,15 @@ namespace BusinessLogic
             return monthInBaseOne;
         }
 
-        public Budget BudgetGetOrCreate(string month, int year)
+        public Budget FindBudget(int month, int year)
         {
-            List<Category> categories = Repository.GetCategories();
-            int monthIndex = StringToIntMonth(month);
-            Budget returnBudget = FindBudget(monthIndex, year);
-            returnBudget = CreateBudget(year, categories, monthIndex, returnBudget);
-            return returnBudget;
-
+            List<Budget> budgets = Repository.GetBudgets();
+            foreach (var budget in budgets)
+            {
+                if (SameCreationDate(budget, month, year))
+                    return budget;
+            }
+            return null;
         }
 
         private Budget CreateBudget(int year, List<Category> categories, int monthIndex, Budget returnBudget)
@@ -42,6 +43,28 @@ namespace BusinessLogic
                 AddBudget(returnBudget);
             }
             return returnBudget;
+        }
+
+
+        public Budget BudgetGetOrCreate(string month, int year)
+        {
+            List<Category> categories = Repository.GetCategories();
+            int monthIndex = StringToIntMonth(month);
+            Budget returnBudget = FindBudget(monthIndex, year);
+            returnBudget = CreateBudget(year, categories, monthIndex, returnBudget);
+            return returnBudget;
+
+        }
+
+        public List<Expense> GetExpenses()
+        {
+            return Repository.GetExpenses();
+        }
+
+        private static void AddExpenseSameMonth(int monthInt, List<Expense> expensesByMonth, Expense vExpense)
+        {
+            if (vExpense.CreationDate.Month == monthInt)
+                expensesByMonth.Add(vExpense);
         }
 
         public List<Expense> GetExpenseByMonth(string month)
@@ -57,10 +80,11 @@ namespace BusinessLogic
             return expensesByMonth;
         }
 
-        private static void AddExpenseSameMonth(int monthInt, List<Expense> expensesByMonth, Expense vExpense)
+        private static double AmountOfExpenseWithCategory(Category vCategory, double total, Expense expense)
         {
-            if (vExpense.CreationDate.Month == monthInt)
-                expensesByMonth.Add(vExpense);
+            if (expense.Category == vCategory)
+                total += expense.Amount;
+            return total;
         }
 
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
@@ -73,14 +97,7 @@ namespace BusinessLogic
             }
             return total;
         }
-
-        private static double AmountOfExpenseWithCategory(Category vCategory, double total, Expense expense)
-        {
-            if (expense.Category == vCategory)
-                total += expense.Amount;
-            return total;
-        }
-
+      
         public void SetCategory(string vName, List<string> vKeyWords)
         {
             Repository.SetCategory(vName, vKeyWords);
@@ -91,37 +108,11 @@ namespace BusinessLogic
             Repository.SetExpense(amount, creationDate, description, category);
         }
       
-
-       
-        public Budget FindBudget(int month, int year)
-        {
-            List<Budget> budgets = Repository.GetBudgets();
-            foreach (var budget in budgets)
-            {
-                if (SameCreationDate(budget,month,year))
-                    return budget;
-            }
-            return null;
-        }
-
         private bool SameCreationDate(Budget budget,int month,int year)
         {
             if (budget.Month == month && budget.Year == year)
                 return true;
             return false;
-        }
-
-        public Category AsignCategoryByDescriptionExpense(string vDescription)
-        {
-            Category category = null;
-            string[] descriptionArray = vDescription.Split(' ');
-            bool exist = false;
-            int cont = 0;
-            List<Category> categories = Repository.GetCategories();
-            exist = FindCategoryByDescription(ref category, descriptionArray, exist, ref cont, categories);
-            if (cont == 1)
-                return category;
-            return null;
         }
 
         private bool FindCategoryByDescription(ref Category category, string[] descriptionArray, bool exist, ref int cont, List<Category> categories)
@@ -142,6 +133,19 @@ namespace BusinessLogic
                 cont = cont + 1;
             }
         }
+
+        public Category AsignCategoryByDescriptionExpense(string vDescription)
+        {
+            Category category = null;
+            string[] descriptionArray = vDescription.Split(' ');
+            bool exist = false;
+            int cont = 0;
+            List<Category> categories = Repository.GetCategories();
+            exist = FindCategoryByDescription(ref category, descriptionArray, exist, ref cont, categories);
+            if (cont == 1)
+                return category;
+            return null;
+        }     
 
         private bool ExistCategoryInDescriptionExpense(string[] descriptionArray,Category vCategory)
         {
@@ -166,6 +170,13 @@ namespace BusinessLogic
             }
             return monthsString;
         }
+
+        private void AddMonthExpense(List<int> orderedMonthsInt, Expense expense)
+        {
+            if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
+                orderedMonthsInt.Add(expense.CreationDate.Month);
+        }
+
         public List<string> OrderedMonthsInWhichThereAreExpenses()
         {
             List<int> orderedMonthsInt = new List<int>();
@@ -179,10 +190,11 @@ namespace BusinessLogic
             return orderedMonthsString;
         }
 
-        private void AddMonthExpense(List<int> orderedMonthsInt, Expense expense)
+        private static double AmountOfExpenseInAMonth(int monthInt, double total, Expense expense)
         {
-            if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
-                orderedMonthsInt.Add(expense.CreationDate.Month);
+            if (expense.CreationDate.Month == monthInt)
+                total += expense.Amount;
+            return total;
         }
 
         public double AmountOfExpensesInAMonth(string month)
@@ -197,11 +209,11 @@ namespace BusinessLogic
             return total;
         }
 
-        private static double AmountOfExpenseInAMonth(int monthInt, double total, Expense expense)
+        private bool SameCategoryName(Category category, string categoryName)
         {
-            if (expense.CreationDate.Month == monthInt)
-                total += expense.Amount;
-            return total;
+            if (category.Name == categoryName)
+                return true;
+            return false;
         }
 
         public Category FindCategoryByName(string categoryName)
@@ -215,9 +227,9 @@ namespace BusinessLogic
             return null;
         }
 
-        private bool SameCategoryName(Category category, string categoryName)
+        private bool SameDescriptionExpense(Expense expense, string expenseDescription)
         {
-            if (category.Name == categoryName)
+            if (expense.Description == expenseDescription)
                 return true;
             return false;
         }
@@ -233,11 +245,14 @@ namespace BusinessLogic
             return null;
         }
 
-        private bool SameDescriptionExpense(Expense expense,string expenseDescription)
+        private bool ExistKeyWord(string pKeyWord, bool exist, Category category)
         {
-            if (expense.Description == expenseDescription)
-                return true;
-            return false;
+            foreach (string vKeyWord in category.KeyWords)
+            {
+                if (pKeyWord.ToLower() == vKeyWord.ToLower())
+                    exist = true;
+            }
+            return exist;
         }
 
         public bool AlreadyExistThisKeyWordInAnoterCategory(string pKeyWord)
@@ -249,17 +264,7 @@ namespace BusinessLogic
                 exist = ExistKeyWord(pKeyWord, exist, category);
             }
             return exist;
-        }
-
-        private bool ExistKeyWord(string pKeyWord, bool exist, Category category)
-        {
-            foreach (string vKeyWord in category.KeyWords)
-            {
-                if (pKeyWord.ToLower() == vKeyWord.ToLower())
-                    exist = true;
-            }
-            return exist;
-        }
+        }       
 
         public void AddBudget(Budget vBudget)
         {
@@ -275,10 +280,12 @@ namespace BusinessLogic
         {
             Repository.AddCategory(category);
         }
+
         public void AddExpense(Expense expense)
         {
             Repository.AddExpense(expense);
-        }        
+        }  
+        
         public string[] GetAllCategoryStrings()
         {
             return Repository.GetAllCategoryStrings();
@@ -290,6 +297,7 @@ namespace BusinessLogic
             Repository.GetExpenses().Remove(expense);
             return expense;
         }
+
         public List<Category> GetCategories()
         {
             return Repository.GetCategories();
@@ -299,10 +307,7 @@ namespace BusinessLogic
         {
             return Repository.GetAllMonthsString();
         }
-        public List<Expense> GetExpenses()
-        {
-            return Repository.GetExpenses();
-        }
+       
 
     }
 
