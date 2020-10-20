@@ -37,12 +37,13 @@ namespace BusinessLogic
 
         private bool AlreadyExistTheCategoryName(string categoryName)
         {
+            bool exist = true ;
             foreach (Category category in Categories)
             {
                 if (categoryName.ToLower() == category.Name.ToLower())
-                    return false;
+                   exist= false;
             }
-            return true;
+            return exist;
         }
 
         private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pKeyWords)

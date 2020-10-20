@@ -226,7 +226,7 @@ namespace Test
         public void FindCategoryEntertainment()
         {
             string description = "cuando fuimos al cine";
-            Category expectedCategory = logicController.FindCategoryByDescription(description);
+            Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
             Assert.AreEqual(categoryEntertainment, expectedCategory);
 
         }
@@ -235,7 +235,7 @@ namespace Test
         public void FindCategoryNullValueResultForEntertainment()
         {
             string description = "noche de videojuegos";
-            Category expectedCategory = logicController.FindCategoryByDescription(description);
+            Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
             Assert.IsNull(expectedCategory);
         }
 
@@ -243,16 +243,16 @@ namespace Test
         public void FindCategoryNullValueResultFood()
         {
             string description = "cuando fuimos a comer";
-            Category expectedCategory = logicController.FindCategoryByDescription(description);
+            Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
             Assert.IsNull(expectedCategory);
 
         }
 
         [TestMethod]
-        public void FindCategoryNullValueResultForFood()
+        public void FindCategoryValueResultForFood()
         {
-            string description = "cuando fuimos a comer a McDonalds";
-            Category expectedCategory = logicController.FindCategoryByDescription(description);
+            string description = "cuando fuimos a McDonalds anoche";
+            Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
             Assert.AreEqual(categoryFood, expectedCategory);
 
         }
