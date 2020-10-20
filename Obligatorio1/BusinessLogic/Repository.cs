@@ -46,22 +46,22 @@ namespace BusinessLogic
             return exist;
         }
 
-        private bool ExistKeyWordInAnotherCategory(List<string> pKeyWords, bool exist, Category category)
-        {
-            foreach (string vKeyWord in category.KeyWords)
-            {
-                exist = ExistKeyWord(pKeyWords, exist, vKeyWord);
-            }
-
-            return exist;
-        }
-
         private bool ExistKeyWord(List<string> pKeyWords, bool exist, string vKeyWord)
         {
             foreach (string pKeyWord in pKeyWords)
             {
                 if (vKeyWord.ToLower() == pKeyWord.ToLower())
                     exist = false;
+            }
+
+            return exist;
+        }
+
+        private bool ExistKeyWordInAnotherCategory(List<string> pKeyWords, bool exist, Category category)
+        {
+            foreach (string vKeyWord in category.KeyWords)
+            {
+                exist = ExistKeyWord(pKeyWords, exist, vKeyWord);
             }
 
             return exist;
@@ -111,21 +111,7 @@ namespace BusinessLogic
             Expenses.Add(expense);
         }
 
-        public string[] GetAllMonthsString()
-        {
-            return Enum.GetNames(typeof(Months)).ToArray();
-        }
-
-        public string[] GetAllCategoryStrings()
-        {
-            List<string> categoryNames = new List<string>();
-
-            foreach (var category in Categories)
-            {
-                categoryNames.Add(category.ToString());
-            }
-            return categoryNames.ToArray();
-        }
+       
 
         public void SetExpense(double amount, DateTime creationDate, string description, Category category)
         {

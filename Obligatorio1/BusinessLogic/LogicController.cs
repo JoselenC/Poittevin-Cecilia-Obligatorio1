@@ -264,7 +264,22 @@ namespace BusinessLogic
                 exist = ExistKeyWord(pKeyWord, exist, category);
             }
             return exist;
-        }       
+        }
+        public string[] GetAllMonthsString()
+        {
+            return Enum.GetNames(typeof(Months)).ToArray();
+        }
+
+        public string[] GetAllCategoryStrings()
+        {
+            List<string> categoryNames = new List<string>();
+            List<Category> categories = GetCategories();
+            foreach (var category in categories)
+            {
+                categoryNames.Add(category.ToString());
+            }
+            return categoryNames.ToArray();
+        }
 
         public void AddBudget(Budget vBudget)
         {
@@ -285,10 +300,7 @@ namespace BusinessLogic
         {
             Repository.AddExpense(expense);
         }        
-        public string[] GetAllCategoryStrings()
-        {
-            return Repository.GetAllCategoryStrings();
-        }
+        
 
         public Expense DeleteExpense(string description)
         {
@@ -301,10 +313,7 @@ namespace BusinessLogic
             return Repository.GetCategories();
         }
 
-        public string[] GetAllMonthsString()
-        {
-            return Repository.GetAllMonthsString();
-        }
+        
        
 
     }

@@ -239,41 +239,6 @@ namespace Test
         }
 
         [TestMethod]
-        public void GetAllMonthsString()
-        {
-            string[] expectedMonthStrings = new string[]
-            {
-                "Enero",
-                "Febrero",
-                "Marzo",
-                "Abril",
-                "Mayo",
-                "Junio",
-                "Julio",
-                "Agosto",
-                "Setiembre",
-                "Octubre",
-                "Noviembre",
-                "Diciembre"
-            };
-            string[] allMonths = repo.GetAllMonthsString();
-            CollectionAssert.AreEqual(expectedMonthStrings, allMonths);
-        }
-
-        [TestMethod]
-        public void GetAllCategoryNamesValidFormat()
-        {
-            string[] ExpectedCategoryNames = new string[]
-            {
-                categoryEntertainment.Name,
-                categoryFood.Name,
-                categoryHouse.Name
-            };
-            string[] RealCategoryNames = repo.GetAllCategoryStrings();
-            CollectionAssert.AreEqual(ExpectedCategoryNames, RealCategoryNames);
-        }
-
-        [TestMethod]
         public void CreateAddExpense()
         {
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
