@@ -12,16 +12,16 @@ namespace InterfazLogic
 {
     public partial class AddBudgetForm : UserControl
     {
-        private Repository Repository { get; set; }
+        private LogicController logicController { get; set; }
         private Budget CurrentBudget { get; set; }
         public AddBudgetForm(Repository vRepository)
         {
             InitializeComponent();
-            Repository = vRepository;
+            logicController = new LogicController(vRepository);
             this.MaximumSize = new Size(500, 600);
             this.MinimumSize = new Size(500, 600);
             // TODO: Agregar control de que no se pueda crear un budget si no hay ninguna categoria en el sistema
-            comboBoxMonth.Items.AddRange(Repository.GetAllMonthsString());
+            comboBoxMonth.Items.AddRange(logicController.GetAllMonthsString());
             comboBoxMonth.SelectedIndex = DateTime.Now.Month - 1;
         }
 
@@ -81,7 +81,7 @@ namespace InterfazLogic
         {
             string month = comboBoxMonth.SelectedItem.ToString();
             int year = (int) numericYear.Value;
-            return Repository.BudgetGetOrCreate(month, year);
+            return logicController.BudgetGetOrCreate(month, year);
         }
         private void LoadBudgetData(Budget budget)
         {
@@ -103,7 +103,7 @@ namespace InterfazLogic
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Repository.AddBudget(CurrentBudget);
+            logicController.AddBudget(CurrentBudget);
             Visible = false;
         }
     }

@@ -14,13 +14,13 @@ namespace InterfazLogic
     public partial class EditCategory : UserControl
     {
         public List<string> KeyWords { get; set; }
-        private Repository repository;
+        private LogicController logicController;
         Category category;
 
         public EditCategory(Repository vRepository)
         {
             InitializeComponent();
-            repository = vRepository;
+            logicController = new LogicController(vRepository);
             this.MaximumSize = new Size(500, 600);
             this.MinimumSize = new Size(500, 600);
             CompleteCategories();
@@ -29,9 +29,9 @@ namespace InterfazLogic
 
         private void CompleteCategories()
         {
-            if (repository.Categories.Count > 0)
+            if (logicController.GetCategories().Count > 0)
             {
-                foreach (Category category in repository.Categories)
+                foreach (Category category in logicController.GetCategories())
                 {
                     lstCatgories.Items.Add(category);
                 }
@@ -53,7 +53,7 @@ namespace InterfazLogic
             }
             else {
                 string nameCategory = lstCatgories.SelectedItem.ToString();
-                this.category = repository.FindCategoryByName(nameCategory);
+                this.category = logicController.FindCategoryByName(nameCategory);
                 txtName.Text=category.Name;
                 List<string> keyWords = category.KeyWords;
                 KeyWords = keyWords;
@@ -61,7 +61,7 @@ namespace InterfazLogic
                 {
                     lstKwywords.Items.Add(keyWord);
                 }
-                repository.Categories.Remove(category);
+                logicController.GetCategories().Remove(category);
             }
         }
 
@@ -81,7 +81,7 @@ namespace InterfazLogic
                     lblKyWords.Text = "You cannot add more than 10 keywords.";
                     lblKyWords.ForeColor = Color.Red;
                 }
-                else if (repository.AlreadyExistThisKeyWordInAnoterCategory(keyWord))
+                else if (logicController.AlreadyExistThisKeyWordInAnoterCategory(keyWord))
                 {
                     lblKyWords.Text = "You already entered that keyword in another category";
                     lblKyWords.ForeColor = Color.Red;
@@ -166,7 +166,7 @@ namespace InterfazLogic
 
             try
             {
-                repository.SetCategory(txtName.Text, KeyWords);
+                logicController.SetCategory(txtName.Text, KeyWords);
                 MessageBox.Show("Category " + category.Name + " was added successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Visible = false;
             }

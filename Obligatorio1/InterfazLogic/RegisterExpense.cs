@@ -13,11 +13,11 @@ namespace InterfazLogic
 {
     public partial class RegisterExpense : UserControl
     {
-        private Repository repository;
+        private LogicController logicController;
         public RegisterExpense(Repository vRepository)
         {
             InitializeComponent();
-            repository = vRepository;
+            logicController = new LogicController(vRepository);
             this.MaximumSize = new Size(800, 800);
             this.MinimumSize = new Size(800, 800);
             tbDescription.Clear();
@@ -26,14 +26,14 @@ namespace InterfazLogic
 
         private void CompleteCategories(string description)
         {
-            Category category = repository.FindCategoryByDescription(description);
+            Category category = logicController.FindCategoryByDescription(description);
             if (category != null)
             {
                 lstCategories.Items.Add(category);
             }
-            else if (repository.Categories.Count > 0)
+            else if (logicController.GetCategories().Count > 0)
             {
-                foreach (Category vCategory in repository.Categories)
+                foreach (Category vCategory in logicController.GetCategories())
                 {
                     lstCategories.Items.Add(vCategory.Name);
                 }
@@ -61,8 +61,8 @@ namespace InterfazLogic
                     double amount = decimal.ToDouble(nAmount.Value);
                     DateTime creationDate = dateTime.Value;                   
                     string nameCategory = lstCategories.SelectedItem.ToString();
-                    Category category = repository.FindCategoryByName(nameCategory);
-                    repository.SetExpense(amount, creationDate, description, category);                
+                    Category category = logicController.FindCategoryByName(nameCategory);
+                    logicController.SetExpense(amount, creationDate, description, category);                
                     MessageBox.Show("The expense was recorded successfully","",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     this.Visible = false;
                 }

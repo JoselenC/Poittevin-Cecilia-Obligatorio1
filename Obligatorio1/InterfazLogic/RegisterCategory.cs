@@ -13,14 +13,14 @@ namespace InterfazLogic
 {
     public partial class RegisterCategory : UserControl
     {
-        private Repository repository;
+        private LogicController logicController;
 
         public string keyWordToEdit { get; set; }
         public List<string> keyWords { get; set; }
         public RegisterCategory(Repository vRepository)
         {
             InitializeComponent();
-            repository = vRepository;
+            logicController = new LogicController(vRepository);
             keyWords = new List<string>();
             tbEdit.Visible = false;
             this.MaximumSize = new Size(800, 800);
@@ -34,7 +34,7 @@ namespace InterfazLogic
         {
             try
             {
-                repository.SetCategory(tbName.Text, keyWords);                
+                logicController.SetCategory(tbName.Text, keyWords);                
                 lblKeyWords.Text = "";
                 lblKeyWordToEdit.Text = "";
                 lblName.Text = "";
@@ -85,7 +85,7 @@ namespace InterfazLogic
                     lblKeyWords.Text = "You cannot add more than 10 keywords.";
                     lblKeyWords.ForeColor = Color.Red;
                 }
-                else if (repository.AlreadyExistThisKeyWordInAnoterCategory(keyWord))
+                else if (logicController.AlreadyExistThisKeyWordInAnoterCategory(keyWord))
                 {
                     lblKeyWords.Text = "You already entered that keyword in another category";
                     lblKeyWords.ForeColor = Color.Red;

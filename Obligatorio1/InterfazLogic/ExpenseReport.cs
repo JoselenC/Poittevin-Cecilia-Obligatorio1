@@ -13,11 +13,11 @@ namespace InterfazLogic
 {
     public partial class ExpenseReport : UserControl
     {
-        private Repository repository;
+        private LogicController logicController;
         public ExpenseReport(Repository vRepository)
         {
             InitializeComponent();
-            repository = vRepository;
+            logicController = new LogicController(vRepository);
             monthsWithExpenses();
             this.MaximumSize = new Size(500, 600);
             this.MinimumSize = new Size(500, 600);
@@ -26,7 +26,7 @@ namespace InterfazLogic
 
         private void monthsWithExpenses(){
             lblMonths.Text = "";
-            List <string> months= repository.OrderedMonthsInWhichThereAreExpenses();
+            List <string> months= logicController.OrderedMonthsInWhichThereAreExpenses();
             if (months.Count < 1)
             {
                 MessageBox.Show("There are no expenses registered in the system");
@@ -54,7 +54,7 @@ namespace InterfazLogic
                 {
                     lblMonths.Text = "You must select a month to consult";
                 }
-                List<Expense> expenseReportByMonth = repository.GetExpense(month);
+                List<Expense> expenseReportByMonth = logicController.GetExpenseByMonth(month);
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
                 foreach(Expense vExpense in expenseReportByMonth)
@@ -84,14 +84,6 @@ namespace InterfazLogic
             this.Visible = false;
         }
 
-        private void ExpenseReport_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }
