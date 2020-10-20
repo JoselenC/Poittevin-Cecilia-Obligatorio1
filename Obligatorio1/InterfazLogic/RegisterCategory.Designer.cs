@@ -60,7 +60,7 @@
             // btnRegisterCategory
             // 
             this.btnRegisterCategory.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterCategory.Location = new System.Drawing.Point(509, 714);
+            this.btnRegisterCategory.Location = new System.Drawing.Point(533, 690);
             this.btnRegisterCategory.Name = "btnRegisterCategory";
             this.btnRegisterCategory.Size = new System.Drawing.Size(227, 73);
             this.btnRegisterCategory.TabIndex = 1;

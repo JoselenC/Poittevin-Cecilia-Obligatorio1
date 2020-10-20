@@ -109,9 +109,7 @@ namespace BusinessLogic
             if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();           
             Expenses.Add(expense);
-        }
-
-       
+        }       
 
         public void SetExpense(double amount, DateTime creationDate, string description, Category category)
         {

@@ -1,6 +1,6 @@
 ﻿namespace InterfazLogic
 {
-    partial class AddBudgetForm
+    partial class AddAndEditBudget
     {
         /// <summary>
         /// Required designer variable.
@@ -39,6 +39,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblCategories = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nYear)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +59,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(293, 704);
+            this.btnAccept.Location = new System.Drawing.Point(299, 695);
             this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);
@@ -79,7 +81,7 @@
             // nMonth
             // 
             this.nMonth.FormattingEnabled = true;
-            this.nMonth.Location = new System.Drawing.Point(338, 167);
+            this.nMonth.Location = new System.Drawing.Point(338, 170);
             this.nMonth.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.nMonth.Name = "nMonth";
             this.nMonth.Size = new System.Drawing.Size(589, 39);
@@ -100,10 +102,10 @@
             // 
             this.lstCategory.FormattingEnabled = true;
             this.lstCategory.ItemHeight = 31;
-            this.lstCategory.Location = new System.Drawing.Point(329, 357);
+            this.lstCategory.Location = new System.Drawing.Point(338, 405);
             this.lstCategory.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lstCategory.Name = "lstCategory";
-            this.lstCategory.Size = new System.Drawing.Size(598, 221);
+            this.lstCategory.Size = new System.Drawing.Size(598, 190);
             this.lstCategory.TabIndex = 6;
             this.lstCategory.DoubleClick += new System.EventHandler(this.listBoxCategory_DoubleClick);
             // 
@@ -134,7 +136,7 @@
             // btnEditBudget
             // 
             this.btnEditBudget.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditBudget.Location = new System.Drawing.Point(957, 357);
+            this.btnEditBudget.Location = new System.Drawing.Point(955, 380);
             this.btnEditBudget.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnEditBudget.Name = "btnEditBudget";
             this.btnEditBudget.Size = new System.Drawing.Size(283, 55);
@@ -166,18 +168,42 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(85, 357);
+            this.label4.Location = new System.Drawing.Point(85, 380);
             this.label4.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(222, 32);
             this.label4.TabIndex = 12;
             this.label4.Text = "Budget category";
             // 
-            // AddBudgetForm
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.Location = new System.Drawing.Point(338, 364);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(328, 34);
+            this.label5.TabIndex = 13;
+            this.label5.Text = " Category                           ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label6.Location = new System.Drawing.Point(658, 364);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(269, 34);
+            this.label6.TabIndex = 14;
+            this.label6.Text = " Amount                     ";
+            // 
+            // AddAndEditBudget
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblCategories);
             this.Controls.Add(this.label3);
@@ -190,7 +216,7 @@
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.btnCancel);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.Name = "AddBudgetForm";
+            this.Name = "AddAndEditBudget";
             this.Size = new System.Drawing.Size(1288, 811);
             ((System.ComponentModel.ISupportInitialize)(this.nYear)).EndInit();
             this.ResumeLayout(false);
@@ -211,5 +237,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblCategories;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -227,8 +227,8 @@ namespace Test
         public void GetAllBudgetCategoriesStringsValidData()
         {
             string[] expectedCategories = new string[]{
-                "Category 1: 20",
-                "Category 2: 10"
+                "Category 1                      20",
+                "Category 2                      10"
             };
             Category category1 = new Category { Name = "Category 1" };
             Category category2 = new Category { Name = "Category 2" };

@@ -90,9 +90,7 @@ namespace Test
             repo.Expenses.Add(januaryExpenseFood);
             repo.Expenses.Add(januaryExpenseFood2);
             repo.Expenses.Add(januaryExpenseEntertainment);
-        }
-
-      
+        }      
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]

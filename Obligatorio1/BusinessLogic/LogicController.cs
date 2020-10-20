@@ -40,7 +40,7 @@ namespace BusinessLogic
             if (returnBudget is null)
             {
                 returnBudget = new Budget(monthIndex, categories) { Year = year, TotalAmount = 0 };
-                AddBudget(returnBudget);
+               
             }
             return returnBudget;
         }
@@ -184,6 +184,25 @@ namespace BusinessLogic
             foreach (Expense expense in expenses)
             {
                 AddMonthExpense(orderedMonthsInt, expense);
+            }
+            orderedMonthsInt.Sort();
+            List<string> orderedMonthsString = MonthsListStringToInt(orderedMonthsInt);
+            return orderedMonthsString;
+        }
+
+        private void AddMonthBudget(List<int> orderedMonthsInt, Budget budget)
+        {
+            if (!orderedMonthsInt.Contains(budget.Month))
+                orderedMonthsInt.Add(budget.Month);
+        }
+
+        public List<string> OrderedMonthsInWhichThereAreBudget()
+        {
+            List<int> orderedMonthsInt = new List<int>();
+            List<Budget> budgets = Repository.GetBudgets();
+            foreach (Budget budget in budgets)
+            {
+                AddMonthBudget(orderedMonthsInt, budget);
             }
             orderedMonthsInt.Sort();
             List<string> orderedMonthsString = MonthsListStringToInt(orderedMonthsInt);

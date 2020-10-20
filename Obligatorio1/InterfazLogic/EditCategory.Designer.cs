@@ -108,7 +108,7 @@
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(235, 314);
+            this.txtName.Location = new System.Drawing.Point(236, 314);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(591, 38);
             this.txtName.TabIndex = 18;
@@ -126,14 +126,14 @@
             // 
             this.lstKwywords.FormattingEnabled = true;
             this.lstKwywords.ItemHeight = 31;
-            this.lstKwywords.Location = new System.Drawing.Point(238, 515);
+            this.lstKwywords.Location = new System.Drawing.Point(236, 515);
             this.lstKwywords.Name = "lstKwywords";
             this.lstKwywords.Size = new System.Drawing.Size(594, 97);
             this.lstKwywords.TabIndex = 20;
             // 
             // txtKeyWord
             // 
-            this.txtKeyWord.Location = new System.Drawing.Point(238, 419);
+            this.txtKeyWord.Location = new System.Drawing.Point(237, 419);
             this.txtKeyWord.Name = "txtKeyWord";
             this.txtKeyWord.Size = new System.Drawing.Size(591, 38);
             this.txtKeyWord.TabIndex = 22;

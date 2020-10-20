@@ -88,12 +88,12 @@
             // cCategory
             // 
             this.cCategory.Text = "Category";
-            this.cCategory.Width = 90;
+            this.cCategory.Width = 85;
             // 
             // cPlanned
             // 
             this.cPlanned.Text = "Planned";
-            this.cPlanned.Width = 90;
+            this.cPlanned.Width = 85;
             // 
             // cReal
             // 

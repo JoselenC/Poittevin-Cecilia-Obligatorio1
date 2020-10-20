@@ -15,8 +15,8 @@ namespace InterfazLogic
     public partial class EditBudgetCategory : Form
     {
         private BudgetCategory CurrentBudgetCategory { get; set; }
-        private AddBudgetForm OriginForm { get; set; }
-        public EditBudgetCategory(BudgetCategory budgetCategory, AddBudgetForm originForm)
+        private AddAndEditBudget OriginForm { get; set; }
+        public EditBudgetCategory(BudgetCategory budgetCategory, AddAndEditBudget originForm)
         {
             InitializeComponent();
             OriginForm = originForm;

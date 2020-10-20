@@ -42,7 +42,7 @@ namespace InterfazLogic
         private void btnRegisterBudget_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-            UserControl addBudgetForm = new AddBudgetForm(repository);
+            UserControl addBudgetForm = new AddAndEditBudget(repository);
             mainPanel.Controls.Add(addBudgetForm);
         }
 

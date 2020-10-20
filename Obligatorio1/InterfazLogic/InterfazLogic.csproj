@@ -70,11 +70,11 @@
     <Compile Include="ExpenseReport.Designer.cs">
       <DependentUpon>ExpenseReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddBudgetForm.cs">
-      <SubType>Form</SubType>
+    <Compile Include="AddAndEditBudget.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AddBudgetForm.Designer.cs">
-      <DependentUpon>AddBudgetForm.cs</DependentUpon>
+    <Compile Include="AddAndEditBudget.Designer.cs">
+      <DependentUpon>AddAndEditBudget.cs</DependentUpon>
     </Compile>
     <Compile Include="EditBudgetCategory.cs">
       <SubType>Form</SubType>
@@ -96,8 +96,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddBudgetForm.resx">
-      <DependentUpon>AddBudgetForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddAndEditBudget.resx">
+      <DependentUpon>AddAndEditBudget.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditBudgetCategory.resx">
       <DependentUpon>EditBudgetCategory.cs</DependentUpon>

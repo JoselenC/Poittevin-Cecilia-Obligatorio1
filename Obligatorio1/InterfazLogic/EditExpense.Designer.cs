@@ -78,15 +78,15 @@
             // 
             this.lstExpenses.FormattingEnabled = true;
             this.lstExpenses.ItemHeight = 31;
-            this.lstExpenses.Location = new System.Drawing.Point(337, 146);
+            this.lstExpenses.Location = new System.Drawing.Point(262, 146);
             this.lstExpenses.Name = "lstExpenses";
-            this.lstExpenses.Size = new System.Drawing.Size(479, 66);
+            this.lstExpenses.Size = new System.Drawing.Size(589, 66);
             this.lstExpenses.TabIndex = 3;
             // 
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEdit.Location = new System.Drawing.Point(876, 134);
+            this.btnEdit.Location = new System.Drawing.Point(866, 134);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(219, 55);
             this.btnEdit.TabIndex = 15;
@@ -97,7 +97,7 @@
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDelete.Location = new System.Drawing.Point(876, 212);
+            this.btnDelete.Location = new System.Drawing.Point(866, 195);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(219, 55);
             this.btnDelete.TabIndex = 16;
@@ -129,9 +129,9 @@
             // tbDescription
             // 
             this.tbDescription.BackColor = System.Drawing.Color.White;
-            this.tbDescription.Location = new System.Drawing.Point(337, 289);
+            this.tbDescription.Location = new System.Drawing.Point(262, 289);
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(451, 38);
+            this.tbDescription.Size = new System.Drawing.Size(589, 38);
             this.tbDescription.TabIndex = 19;
             // 
             // label4
@@ -153,7 +153,7 @@
             0,
             0,
             65536});
-            this.nAmount.Location = new System.Drawing.Point(421, 400);
+            this.nAmount.Location = new System.Drawing.Point(262, 412);
             this.nAmount.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -165,7 +165,7 @@
             0,
             0});
             this.nAmount.Name = "nAmount";
-            this.nAmount.Size = new System.Drawing.Size(268, 38);
+            this.nAmount.Size = new System.Drawing.Size(589, 38);
             this.nAmount.TabIndex = 21;
             this.nAmount.Value = new decimal(new int[] {
             1,
@@ -176,9 +176,9 @@
             // dateTime
             // 
             this.dateTime.CalendarMonthBackground = System.Drawing.Color.OldLace;
-            this.dateTime.Location = new System.Drawing.Point(341, 503);
+            this.dateTime.Location = new System.Drawing.Point(262, 514);
             this.dateTime.Name = "dateTime";
-            this.dateTime.Size = new System.Drawing.Size(447, 38);
+            this.dateTime.Size = new System.Drawing.Size(589, 38);
             this.dateTime.TabIndex = 22;
             // 
             // label5
@@ -213,10 +213,11 @@
             // 
             this.lblCategory.AutoSize = true;
             this.lblCategory.BackColor = System.Drawing.Color.White;
+            this.lblCategory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(370, 611);
+            this.lblCategory.Location = new System.Drawing.Point(262, 612);
             this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(359, 36);
+            this.lblCategory.Size = new System.Drawing.Size(361, 38);
             this.lblCategory.TabIndex = 27;
             this.lblCategory.Text = "                                           ";
             // 
@@ -267,9 +268,9 @@
             // 
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(349, 612);
+            this.lstCategories.Location = new System.Drawing.Point(262, 604);
             this.lstCategories.Name = "lstCategories";
-            this.lstCategories.Size = new System.Drawing.Size(446, 35);
+            this.lstCategories.Size = new System.Drawing.Size(589, 66);
             this.lstCategories.TabIndex = 33;
             // 
             // EditExpense

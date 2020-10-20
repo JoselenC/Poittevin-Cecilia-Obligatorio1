@@ -24,15 +24,27 @@ namespace InterfazLogic
             this.MaximumSize = new Size(800, 800);
             this.MinimumSize = new Size(800, 800);
             numYear.Value = oldYearValue;
-            cboxMonth.Items.AddRange(logicController.GetAllMonthsString());
-            cboxMonth.SelectedIndex = oldMonthIndex;
             initializingForm = false;
             LoadBudgetReport();
+            GetMonths();
             
+        }
+
+        private void GetMonths()
+        {
+            cboxMonth.Items.Clear();
+            List<string> monthsWithBudget = logicController.OrderedMonthsInWhichThereAreBudget();
+            foreach (string month in monthsWithBudget)
+            {
+                cboxMonth.Items.Add(month);
+            }
         }
 
         private bool LoadBudgetReport()
         {
+            double totalPlanedAmount = 0;
+            double totalRealAmount = 0;
+            double totalDiffAmount = 0;
             if (!initializingForm)
             {
                 Budget budget = logicController.FindBudget(cboxMonth.SelectedIndex + 1, (int)numYear.Value);
@@ -52,19 +64,43 @@ namespace InterfazLogic
                         double planeedAmount = budgetCategory.Amount;
                         double realAmount = logicController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
                         double diffAmount = planeedAmount - realAmount;
-                        item.SubItems.Add(planeedAmount.ToString());
-                        item.SubItems.Add(realAmount.ToString());
-                        item.SubItems.Add(diffAmount.ToString());
+                        totalPlanedAmount += planeedAmount;
+                        totalRealAmount += realAmount;
+                        totalDiffAmount += diffAmount;
+                        if(totalPlanedAmount<0)
+                           item.SubItems.Add("(" + (Math.Abs(planeedAmount)).ToString() + ")").ForeColor = Color.Red;
+                        else
+                            item.SubItems.Add(planeedAmount.ToString());
+                        if (realAmount<0)
+                            item.SubItems.Add("(" + (Math.Abs(realAmount)).ToString() + ")").ForeColor = Color.Red;
+                        else
+                            item.SubItems.Add(realAmount.ToString());
+                        if (diffAmount<0)
+                            item.SubItems.Add("(" + (Math.Abs(diffAmount)).ToString() + ")").ForeColor = Color.Red;
+                        else
+                            item.SubItems.Add(diffAmount.ToString());
                         lstVReport.Items.Add(item);
-
                     }
+                    ListViewItem total = new ListViewItem("TOTAL");
+                    if(totalPlanedAmount<0)
+                        total.SubItems.Add("(" + (Math.Abs(totalPlanedAmount)).ToString() + ")").ForeColor=Color.Red;
+                    else
+                        total.SubItems.Add(totalPlanedAmount.ToString());
+                    if(totalRealAmount<0)
+                        total.SubItems.Add("(" + (Math.Abs(totalRealAmount)).ToString() + ")").ForeColor = Color.Red;
+                    else
+                        total.SubItems.Add(totalRealAmount.ToString());
+                    if(totalDiffAmount<0)
+                        total.SubItems.Add("("+ (Math.Abs(totalDiffAmount)).ToString()+")").ForeColor = Color.Red;
+                    else
+                        total.SubItems.Add(totalDiffAmount.ToString());
+
+                    lstVReport.Items.Add(total);         
                     return true;
                 }
             }
             else
-            {
                 return false;
-            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
