@@ -14,6 +14,10 @@ namespace InterfazLogic
     public partial class EditExpense : UserControl
     {
         private LogicController logicController;
+        private int indexToEdit;
+        private string descriptionExpense;
+        private bool edit;
+        private Expense expenseToEdit;
         public EditExpense(Repository vRepository)
         {
             InitializeComponent();
@@ -21,6 +25,9 @@ namespace InterfazLogic
             this.MaximumSize = new Size(800, 800);
             this.MinimumSize = new Size(800, 800);
             lstCategories.Visible = false;
+            indexToEdit = -1;
+            descriptionExpense="";
+            edit = false;
             CompleteExpense();
 
         }
@@ -44,13 +51,14 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-               Expense expense = logicController.DeleteAndGetExpense(lstExpenses.SelectedItem.ToString());
-               tbDescription.Text = expense.Description;
-               nAmount.Value = (decimal)(expense.Amount);
-               dateTime.Value = expense.CreationDate;
-               lblCategory.Text = expense.Category.ToString();
-               int index = lstExpenses.SelectedIndex;
-               lstExpenses.Items.RemoveAt(index);
+               descriptionExpense = lstExpenses.SelectedItem.ToString();
+               expenseToEdit = logicController.FindExpense(descriptionExpense);
+               tbDescription.Text = expenseToEdit.Description;
+               nAmount.Value = (decimal)(expenseToEdit.Amount);
+               dateTime.Value = expenseToEdit.CreationDate;
+               lblCategory.Text = expenseToEdit.Category.ToString();
+               indexToEdit = lstExpenses.SelectedIndex;
+               
             }
             else if (logicController.GetExpenses().Count == 0)
             {
@@ -68,7 +76,7 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-                logicController.DeleteAndGetExpense(lstExpenses.SelectedItem.ToString());
+                logicController.DeleteExpense(lstExpenses.SelectedItem.ToString());
                 int index = lstExpenses.SelectedIndex;
                 lstExpenses.Items.RemoveAt(index);
             }
@@ -88,24 +96,44 @@ namespace InterfazLogic
         {
             try
             {
-               
-                if (lstCategories.SelectedIndex >= 0)
-                {
-                    string description = tbDescription.Text;
-                    double amount = decimal.ToDouble(nAmount.Value);
-                    DateTime creationDate = dateTime.Value;
-                    string nameCategory = lstCategories.SelectedItem.ToString();
-                    Category category = logicController.FindCategoryByName(nameCategory);
-                    logicController.SetExpense(amount,creationDate,description, category);
-                    MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Visible = false;
-                }
-                else
+                Category category=new Category();
+                if (lstCategories.SelectedIndex < 0 && edit)
                 {
                     lblCategories.Text = "You must select a category";
                     lblCategories.ForeColor = Color.Red;
                 }
-            }
+                else if (lstCategories.SelectedIndex >= 0 && edit)
+                {
+                    string nameCategory = lstCategories.SelectedItem.ToString();
+                    category = logicController.FindCategoryByName(nameCategory);
+                    string description = tbDescription.Text;
+                    double amount = decimal.ToDouble(nAmount.Value);
+                    DateTime creationDate = dateTime.Value;
+                    logicController.SetExpense(amount, creationDate, description, category);
+                    MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Visible = false;
+                    if (indexToEdit >= 0)
+                    {
+                        lstExpenses.Items.RemoveAt(indexToEdit);
+                        logicController.DeleteExpense(descriptionExpense);
+                    }
+                }
+                else
+                {
+                    category = expenseToEdit.Category;
+                    string description = tbDescription.Text;
+                    double amount = decimal.ToDouble(nAmount.Value);
+                    DateTime creationDate = dateTime.Value;
+                    logicController.SetExpense(amount, creationDate, description, category);
+                    MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Visible = false;
+                    if (indexToEdit >= 0)
+                    {
+                        lstExpenses.Items.RemoveAt(indexToEdit);
+                        logicController.DeleteExpense(descriptionExpense);
+                    }
+                }         
+             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
                 lbDescription.Text = "The name must be between 3 and 20 characters long.";
@@ -140,6 +168,7 @@ namespace InterfazLogic
             {
                 lstCategories.Items.Add(category);
             }
+            edit = true;
         }
     }
 }

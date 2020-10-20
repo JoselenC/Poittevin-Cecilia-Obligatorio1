@@ -78,6 +78,7 @@ namespace BusinessLogic
             }
             Budgets.Add(vBudget);
         }
+
         public void AddBudgetCategory(BudgetCategory vCategory)
         {
             if (vCategory is null)
@@ -86,16 +87,19 @@ namespace BusinessLogic
             }
             BudgetCategories.Add(vCategory);
         }
+
         public void AddExpense(Expense expense)
         {
             if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();           
             Expenses.Add(expense);
         }
+
         public string[] GetAllMonthsString()
         {
             return Enum.GetNames(typeof(Months)).ToArray();
         }
+
         public string[] GetAllCategoryStrings()
         {
             List<string> categoryNames = new List<string>();
@@ -118,14 +122,17 @@ namespace BusinessLogic
             Category category = new Category { Name = vName, KeyWords = vKeyWords };
             Categories.Add(category);
         }
+
         public List<Category> GetCategories()
         {
             return Categories;
         }
+
         public List<Expense> GetExpenses()
         {
             return Expenses;
         }
+
         public List<Budget> GetBudgets()
         {
             return Budgets;

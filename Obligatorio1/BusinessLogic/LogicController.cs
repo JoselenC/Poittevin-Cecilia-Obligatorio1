@@ -17,6 +17,41 @@ namespace BusinessLogic
             Repository = repository;
         }
 
+        private int StringToIntMonth(string month)
+        {
+            int monthInBaseCero = (int)Enum.Parse(typeof(Months), month);
+            int monthInBaseOne = monthInBaseCero + 1;
+            return monthInBaseOne;
+        }
+
+        public Budget BudgetGetOrCreate(string month, int year)
+        {
+            List<Category> categories = Repository.GetCategories();
+            int monthIndex = StringToIntMonth(month);
+            Budget returnBudget = FindBudget(monthIndex, year);
+            if (returnBudget is null)
+            {
+                returnBudget = new Budget(monthIndex, categories) { Year = year, TotalAmount = 0 };
+                AddBudget(returnBudget);
+            }
+            return returnBudget;
+
+        }
+
+        public List<Expense> GetExpenseByMonth(string month)
+        {
+
+            int monthInt = StringToIntMonth(month);
+            List<Expense> expensesByMonth = new List<Expense>();
+            List<Expense> expenses = Repository.GetExpenses();
+            foreach (Expense vExpense in expenses)
+            {
+                if (vExpense.CreationDate.Month == monthInt)
+                    expensesByMonth.Add(vExpense);
+            }
+            return expensesByMonth;
+        }
+
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
         {
             List<Expense> expenses = GetExpenseByMonth(vMonth);
@@ -37,26 +72,7 @@ namespace BusinessLogic
         {
             Repository.SetExpense(amount, creationDate, description, category);
         }
-        private int StringToIntMonth(string month)
-        {
-            int monthInBaseCero = (int)Enum.Parse(typeof(Months), month);
-            int monthInBaseOne = monthInBaseCero + 1;
-            return monthInBaseOne;
-        }
-
-        public Budget BudgetGetOrCreate(string month, int year)
-        {
-                List<Category> categories = Repository.GetCategories();
-                int monthIndex = StringToIntMonth(month);
-                Budget returnBudget = FindBudget(monthIndex, year);
-                if (returnBudget is null)
-                {
-                    returnBudget = new Budget(monthIndex, categories) { Year = year, TotalAmount = 0 };
-                    AddBudget(returnBudget);
-                }
-                return returnBudget;
-            
-        }
+      
 
        
         public Budget FindBudget(int month, int year)
@@ -134,19 +150,6 @@ namespace BusinessLogic
             return total;
         }
 
-        public List<Expense> GetExpenseByMonth(string month)
-        {
-
-            int monthInt = StringToIntMonth(month);
-            List<Expense> expensesByMonth = new List<Expense>();
-            List<Expense> expenses = Repository.GetExpenses();
-            foreach (Expense vExpense in expenses)
-            {
-                if (vExpense.CreationDate.Month == monthInt)
-                    expensesByMonth.Add(vExpense);
-            }
-            return expensesByMonth;
-        }
         public Category FindCategoryByName(string categoryName)
         {
             List<Category> categories = Repository.GetCategories();
@@ -203,7 +206,7 @@ namespace BusinessLogic
             return Repository.GetAllCategoryStrings();
         }
 
-        public Expense DeleteAndGetExpense(string description)
+        public Expense DeleteExpense(string description)
         {
             Expense expense = FindExpense(description);
             Repository.GetExpenses().Remove(expense);

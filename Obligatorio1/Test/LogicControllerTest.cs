@@ -219,7 +219,7 @@ namespace Test
             Repository repository = new Repository();
             repository.SetExpense(23, new DateTime(2020, 01, 01), "cena",categoryFood);
             LogicController controller = new LogicController(repository);
-            controller.DeleteAndGetExpense("cena");
+            controller.DeleteExpense("cena");
             Assert.AreEqual(0, controller.GetExpenses().Count);
         }
         [TestMethod]

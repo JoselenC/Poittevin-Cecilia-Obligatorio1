@@ -47,26 +47,29 @@
             // 
             this.lstMonths.FormattingEnabled = true;
             this.lstMonths.ItemHeight = 31;
-            this.lstMonths.Location = new System.Drawing.Point(236, 162);
+            this.lstMonths.Location = new System.Drawing.Point(317, 137);
+            this.lstMonths.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lstMonths.Name = "lstMonths";
-            this.lstMonths.Size = new System.Drawing.Size(174, 30);
+            this.lstMonths.Size = new System.Drawing.Size(457, 66);
             this.lstMonths.TabIndex = 1;
             // 
             // Month
             // 
             this.Month.AutoSize = true;
-            this.Month.Location = new System.Drawing.Point(78, 162);
+            this.Month.Location = new System.Drawing.Point(157, 137);
+            this.Month.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.Month.Name = "Month";
-            this.Month.Size = new System.Drawing.Size(42, 13);
+            this.Month.Size = new System.Drawing.Size(108, 32);
             this.Month.TabIndex = 2;
             this.Month.Text = "Months";
             // 
             // btnConsult
             // 
             this.btnConsult.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnConsult.Location = new System.Drawing.Point(731, 176);
+            this.btnConsult.Location = new System.Drawing.Point(806, 137);
+            this.btnConsult.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnConsult.Name = "btnConsult";
-            this.btnConsult.Size = new System.Drawing.Size(228, 52);
+            this.btnConsult.Size = new System.Drawing.Size(219, 56);
             this.btnConsult.TabIndex = 3;
             this.btnConsult.Text = "Consult";
             this.btnConsult.UseVisualStyleBackColor = false;
@@ -81,9 +84,10 @@
             this.cCategory,
             this.cAmount});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(107, 296);
+            this.listView1.Location = new System.Drawing.Point(90, 281);
+            this.listView1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(960, 362);
+            this.listView1.Size = new System.Drawing.Size(995, 358);
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -111,17 +115,15 @@
             // lblMonths
             // 
             this.lblMonths.AutoSize = true;
-            this.lblMonths.Location = new System.Drawing.Point(70, 91);
-            this.lblMonths.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblMonths.Location = new System.Drawing.Point(187, 217);
             this.lblMonths.Name = "lblMonths";
-            this.lblMonths.Size = new System.Drawing.Size(0, 13);
+            this.lblMonths.Size = new System.Drawing.Size(0, 32);
             this.lblMonths.TabIndex = 5;
             // 
             // lblMonth
             // 
             this.lblMonth.AutoSize = true;
-            this.lblMonth.Location = new System.Drawing.Point(72, 87);
-            this.lblMonth.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblMonth.Location = new System.Drawing.Point(192, 207);
             this.lblMonth.Name = "lblMonth";
             this.lblMonth.Size = new System.Drawing.Size(0, 32);
             this.lblMonth.TabIndex = 6;
@@ -129,9 +131,10 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(451, 688);
+            this.btnAccept.Location = new System.Drawing.Point(473, 707);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(242, 52);
+            this.btnAccept.Size = new System.Drawing.Size(219, 56);
             this.btnAccept.TabIndex = 7;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = false;
@@ -140,10 +143,9 @@
             // lblTotalAmount
             // 
             this.lblTotalAmount.AutoSize = true;
-            this.lblTotalAmount.Location = new System.Drawing.Point(24, 276);
-            this.lblTotalAmount.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
+            this.lblTotalAmount.Location = new System.Drawing.Point(64, 658);
             this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(0, 13);
+            this.lblTotalAmount.Size = new System.Drawing.Size(0, 32);
             this.lblTotalAmount.TabIndex = 8;
             // 
             // label2
@@ -152,7 +154,8 @@
             this.label2.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label2.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(24, 22);
+            this.label2.Location = new System.Drawing.Point(64, 28);
+            this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(1089, 92);
             this.label2.TabIndex = 9;
@@ -160,7 +163,7 @@
             // 
             // ExpenseReport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.Controls.Add(this.label2);
@@ -172,8 +175,9 @@
             this.Controls.Add(this.btnConsult);
             this.Controls.Add(this.Month);
             this.Controls.Add(this.lstMonths);
+            this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "ExpenseReport";
-            this.Size = new System.Drawing.Size(1196, 767);
+            this.Size = new System.Drawing.Size(1209, 786);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -21,6 +21,8 @@ namespace InterfazLogic
         {
             logicController = new LogicController(vRepository);
             InitializeComponent();
+            this.MaximumSize = new Size(800, 800);
+            this.MinimumSize = new Size(800, 800);
             numYear.Value = oldYearValue;
             cboxMonth.Items.AddRange(logicController.GetAllMonthsString());
             cboxMonth.SelectedIndex = oldMonthIndex;
