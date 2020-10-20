@@ -52,7 +52,7 @@
             this.label1.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label1.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label1.Location = new System.Drawing.Point(40, 25);
+            this.label1.Location = new System.Drawing.Point(52, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(1127, 92);
             this.label1.TabIndex = 0;
@@ -62,7 +62,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.OldLace;
-            this.label2.Location = new System.Drawing.Point(46, 159);
+            this.label2.Location = new System.Drawing.Point(85, 173);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(158, 32);
             this.label2.TabIndex = 1;
@@ -72,7 +72,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.OldLace;
-            this.label3.Location = new System.Drawing.Point(46, 280);
+            this.label3.Location = new System.Drawing.Point(85, 286);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 32);
             this.label3.TabIndex = 2;
@@ -82,7 +82,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.OldLace;
-            this.label4.Location = new System.Drawing.Point(46, 389);
+            this.label4.Location = new System.Drawing.Point(85, 375);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(75, 32);
             this.label4.TabIndex = 3;
@@ -92,7 +92,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.OldLace;
-            this.label5.Location = new System.Drawing.Point(46, 504);
+            this.label5.Location = new System.Drawing.Point(85, 485);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(130, 32);
             this.label5.TabIndex = 4;
@@ -103,15 +103,15 @@
             this.tbDescription.BackColor = System.Drawing.Color.White;
             this.tbDescription.Location = new System.Drawing.Point(367, 159);
             this.tbDescription.Name = "tbDescription";
-            this.tbDescription.Size = new System.Drawing.Size(451, 38);
+            this.tbDescription.Size = new System.Drawing.Size(589, 38);
             this.tbDescription.TabIndex = 5;
             // 
             // dateTime
             // 
             this.dateTime.CalendarMonthBackground = System.Drawing.Color.OldLace;
-            this.dateTime.Location = new System.Drawing.Point(366, 383);
+            this.dateTime.Location = new System.Drawing.Point(367, 369);
             this.dateTime.Name = "dateTime";
-            this.dateTime.Size = new System.Drawing.Size(447, 38);
+            this.dateTime.Size = new System.Drawing.Size(589, 38);
             this.dateTime.TabIndex = 6;
             // 
             // lbDescription
@@ -127,9 +127,9 @@
             this.lstCategories.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(367, 504);
+            this.lstCategories.Location = new System.Drawing.Point(367, 473);
             this.lstCategories.Name = "lstCategories";
-            this.lstCategories.Size = new System.Drawing.Size(446, 159);
+            this.lstCategories.Size = new System.Drawing.Size(589, 159);
             this.lstCategories.TabIndex = 8;
             // 
             // nAmount
@@ -141,7 +141,7 @@
             0,
             0,
             65536});
-            this.nAmount.Location = new System.Drawing.Point(442, 278);
+            this.nAmount.Location = new System.Drawing.Point(367, 268);
             this.nAmount.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -153,7 +153,7 @@
             0,
             0});
             this.nAmount.Name = "nAmount";
-            this.nAmount.Size = new System.Drawing.Size(268, 38);
+            this.nAmount.Size = new System.Drawing.Size(589, 38);
             this.nAmount.TabIndex = 9;
             this.nAmount.Value = new decimal(new int[] {
             1,
@@ -188,9 +188,9 @@
             // btnRegistrExpense
             // 
             this.btnRegistrExpense.BackColor = System.Drawing.Color.Tan;
-            this.btnRegistrExpense.Location = new System.Drawing.Point(491, 716);
+            this.btnRegistrExpense.Location = new System.Drawing.Point(509, 747);
             this.btnRegistrExpense.Name = "btnRegistrExpense";
-            this.btnRegistrExpense.Size = new System.Drawing.Size(219, 56);
+            this.btnRegistrExpense.Size = new System.Drawing.Size(227, 73);
             this.btnRegistrExpense.TabIndex = 13;
             this.btnRegistrExpense.Text = "Register";
             this.btnRegistrExpense.UseVisualStyleBackColor = false;
@@ -199,9 +199,9 @@
             // btnSearch
             // 
             this.btnSearch.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSearch.Location = new System.Drawing.Point(924, 504);
+            this.btnSearch.Location = new System.Drawing.Point(972, 473);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(219, 55);
+            this.btnSearch.Size = new System.Drawing.Size(207, 55);
             this.btnSearch.TabIndex = 14;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = false;
@@ -228,7 +228,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "RegisterExpense";
-            this.Size = new System.Drawing.Size(1214, 800);
+            this.Size = new System.Drawing.Size(1214, 835);
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

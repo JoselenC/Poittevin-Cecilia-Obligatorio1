@@ -20,25 +20,28 @@ namespace InterfazLogic
             logicController = new LogicController(vRepository);
             this.MaximumSize = new Size(500, 600);
             this.MinimumSize = new Size(500, 600);
-            // TODO: Agregar control de que no se pueda crear un budget si no hay ninguna categoria en el sistema
-            comboBoxMonth.Items.AddRange(logicController.GetAllMonthsString());
-            comboBoxMonth.SelectedIndex = DateTime.Now.Month - 1;
+            nMonth.Items.AddRange(logicController.GetAllMonthsString());
+            nMonth.SelectedIndex = DateTime.Now.Month - 1;
+            CategoriesCount();
+
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void CategoriesCount()
         {
-
+            if (logicController.GetCategories().Count == 0)
+                MessageBox.Show("There are no categories registered in the system");
         }
 
         private void EditBudgetCategory()
         {
-            if (CurrentBudget is null || listBoxCategory.SelectedItem is null)
+            if (CurrentBudget is null || lstCategory.SelectedItem is null)
             {
-                MessageBox.Show("Por favor seleccione una categoria de la lista de categorias para editar");
+                lblCategories.Text="Select a category from the category list to edit";
+                lblCategories.ForeColor = Color.Red;
             }
             else
             {
-                EditBudgetCategory budgetCategory = new EditBudgetCategory((BudgetCategory) listBoxCategory.SelectedItem, this);
+                EditBudgetCategory budgetCategory = new EditBudgetCategory((BudgetCategory) lstCategory.SelectedItem, this);
                 budgetCategory.Show(); 
                 budgetCategory.FormClosing += (sender, eventArgs) =>
                 {
@@ -54,17 +57,7 @@ namespace InterfazLogic
         private void ChangeBudgetCategory_Click(object sender, EventArgs e)
         {
             EditBudgetCategory();
-        }
-
-        private void buttonCancel_Click(object sender, EventArgs e)
-        {
-            Visible = false;
-        }
-
-        private void listBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        }       
 
         private void comboBoxMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -72,27 +65,22 @@ namespace InterfazLogic
             LoadBudgetData(CurrentBudget);
         }
 
-        private void AddBudgetForm_Load(object sender, EventArgs e)
-        {
-            
-        }
-
         private Budget GetBudget()
         {
-            string month = comboBoxMonth.SelectedItem.ToString();
-            int year = (int) numericYear.Value;
+            string month = nMonth.SelectedItem.ToString();
+            int year = (int) nYear.Value;
             return logicController.BudgetGetOrCreate(month, year);
         }
+
         private void LoadBudgetData(Budget budget)
         {
             List<BudgetCategory> budgetCategories = budget.BudgetCategories;
-            listBoxCategory.Items.Clear();
+            lstCategory.Items.Clear();
 
             foreach (var budgetCategory in budgetCategories)
             {
-                listBoxCategory.Items.Add(budgetCategory);
-            }
-            
+                lstCategory.Items.Add(budgetCategory);
+            }            
         }
 
         private void numericYear_ValueChanged(object sender, EventArgs e)
@@ -106,5 +94,11 @@ namespace InterfazLogic
             logicController.AddBudget(CurrentBudget);
             Visible = false;
         }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
+
+       
     }
 }

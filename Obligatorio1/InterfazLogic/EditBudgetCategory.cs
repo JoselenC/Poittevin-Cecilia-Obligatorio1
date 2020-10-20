@@ -23,6 +23,8 @@ namespace InterfazLogic
             CurrentBudgetCategory = budgetCategory;
             labelCategoryName.Text = budgetCategory.Category.Name;
             numericAmount.Value = (decimal) budgetCategory.Amount;
+            this.MaximumSize = new Size(380, 200);
+            this.MinimumSize = new Size(380, 200);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -32,9 +34,5 @@ namespace InterfazLogic
             Close();
         }
 
-        private void EditBudgetCategory_Load(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

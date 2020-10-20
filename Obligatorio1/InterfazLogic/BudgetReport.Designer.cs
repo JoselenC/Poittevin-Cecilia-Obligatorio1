@@ -37,23 +37,27 @@
             this.cDifference = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.numYear = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblReport = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnAccept = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             this.SuspendLayout();
             // 
             // cboxMonth
             // 
             this.cboxMonth.FormattingEnabled = true;
-            this.cboxMonth.Location = new System.Drawing.Point(111, 183);
+            this.cboxMonth.Location = new System.Drawing.Point(272, 137);
             this.cboxMonth.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.cboxMonth.Name = "cboxMonth";
-            this.cboxMonth.Size = new System.Drawing.Size(300, 39);
+            this.cboxMonth.Size = new System.Drawing.Size(589, 39);
             this.cboxMonth.TabIndex = 0;
             this.cboxMonth.SelectedIndexChanged += new System.EventHandler(this.cboxMonth_SelectedIndexChanged);
             // 
             // btnSearch
             // 
             this.btnSearch.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSearch.Location = new System.Drawing.Point(806, 174);
+            this.btnSearch.Location = new System.Drawing.Point(893, 171);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(216, 55);
@@ -73,7 +77,7 @@
             this.cDifference});
             this.lstVReport.HideSelection = false;
             this.lstVReport.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lstVReport.Location = new System.Drawing.Point(144, 267);
+            this.lstVReport.Location = new System.Drawing.Point(147, 292);
             this.lstVReport.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lstVReport.Name = "lstVReport";
             this.lstVReport.Size = new System.Drawing.Size(945, 381);
@@ -103,7 +107,7 @@
             // 
             // numYear
             // 
-            this.numYear.Location = new System.Drawing.Point(427, 183);
+            this.numYear.Location = new System.Drawing.Point(272, 190);
             this.numYear.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.numYear.Maximum = new decimal(new int[] {
             2030,
@@ -116,7 +120,7 @@
             0,
             0});
             this.numYear.Name = "numYear";
-            this.numYear.Size = new System.Drawing.Size(307, 38);
+            this.numYear.Size = new System.Drawing.Size(589, 38);
             this.numYear.TabIndex = 5;
             this.numYear.Value = new decimal(new int[] {
             2018,
@@ -131,18 +135,59 @@
             this.label2.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label2.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(95, 23);
+            this.label2.Location = new System.Drawing.Point(52, 25);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(1101, 92);
             this.label2.TabIndex = 10;
             this.label2.Text = "                Budget report              ";
             // 
+            // lblReport
+            // 
+            this.lblReport.AutoSize = true;
+            this.lblReport.Location = new System.Drawing.Point(105, 248);
+            this.lblReport.Name = "lblReport";
+            this.lblReport.Size = new System.Drawing.Size(0, 32);
+            this.lblReport.TabIndex = 11;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(141, 137);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 32);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Month";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(141, 190);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(75, 32);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Year";
+            // 
+            // btnAccept
+            // 
+            this.btnAccept.BackColor = System.Drawing.Color.Tan;
+            this.btnAccept.Location = new System.Drawing.Point(506, 719);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(227, 73);
+            this.btnAccept.TabIndex = 14;
+            this.btnAccept.Text = "Accept";
+            this.btnAccept.UseVisualStyleBackColor = false;
+            // 
             // BudgetReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.btnAccept);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblReport);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numYear);
             this.Controls.Add(this.lstVReport);
@@ -150,7 +195,7 @@
             this.Controls.Add(this.cboxMonth);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "BudgetReport";
-            this.Size = new System.Drawing.Size(1286, 773);
+            this.Size = new System.Drawing.Size(1286, 799);
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -168,5 +213,9 @@
         private System.Windows.Forms.ColumnHeader cDifference;
         private System.Windows.Forms.NumericUpDown numYear;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblReport;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnAccept;
     }
 }

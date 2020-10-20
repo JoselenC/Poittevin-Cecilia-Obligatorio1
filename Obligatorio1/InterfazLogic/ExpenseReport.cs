@@ -53,6 +53,7 @@ namespace InterfazLogic
                 if (month.Length == 0)
                 {
                     lblMonths.Text = "You must select a month to consult";
+                    lblMonth.ForeColor = Color.Red;
                 }
                 List<Expense> expenseReportByMonth = logicController.GetExpenseByMonth(month);
                 listView1.Items.Clear();
@@ -75,6 +76,7 @@ namespace InterfazLogic
             else
             {
                 lblMonths.Text = "Select a month to consult";
+                lblMonth.ForeColor = Color.Red;
             }
 
         }

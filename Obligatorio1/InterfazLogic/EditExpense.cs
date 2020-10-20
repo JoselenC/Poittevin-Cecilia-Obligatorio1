@@ -31,7 +31,6 @@ namespace InterfazLogic
             CompleteExpense();
 
         }
-
         private void CompleteExpense()
         {
             if (logicController.GetExpenses().Count > 0)
@@ -96,44 +95,8 @@ namespace InterfazLogic
         {
             try
             {
-                Category category=new Category();
-                if (lstCategories.SelectedIndex < 0 && edit)
-                {
-                    lblCategories.Text = "You must select a category";
-                    lblCategories.ForeColor = Color.Red;
-                }
-                else if (lstCategories.SelectedIndex >= 0 && edit)
-                {
-                    string nameCategory = lstCategories.SelectedItem.ToString();
-                    category = logicController.FindCategoryByName(nameCategory);
-                    string description = tbDescription.Text;
-                    double amount = decimal.ToDouble(nAmount.Value);
-                    DateTime creationDate = dateTime.Value;
-                    logicController.SetExpense(amount, creationDate, description, category);
-                    MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Visible = false;
-                    if (indexToEdit >= 0)
-                    {
-                        lstExpenses.Items.RemoveAt(indexToEdit);
-                        logicController.DeleteExpense(descriptionExpense);
-                    }
-                }
-                else
-                {
-                    category = expenseToEdit.Category;
-                    string description = tbDescription.Text;
-                    double amount = decimal.ToDouble(nAmount.Value);
-                    DateTime creationDate = dateTime.Value;
-                    logicController.SetExpense(amount, creationDate, description, category);
-                    MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Visible = false;
-                    if (indexToEdit >= 0)
-                    {
-                        lstExpenses.Items.RemoveAt(indexToEdit);
-                        logicController.DeleteExpense(descriptionExpense);
-                    }
-                }         
-             }
+                TryRegisterNewExpense();
+            }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
                 lbDescription.Text = "The name must be between 3 and 20 characters long.";
@@ -158,6 +121,47 @@ namespace InterfazLogic
             {
                 lblCategories.Text = "The category should not be empty ";
                 lblCategories.ForeColor = Color.Red;
+            }
+        }
+
+        private void TryRegisterNewExpense()
+        {
+            Category category = new Category();
+            if (lstCategories.SelectedIndex < 0 && edit)
+            {
+                lblCategories.Text = "You must select a category";
+                lblCategories.ForeColor = Color.Red;
+            }
+            else if (lstCategories.SelectedIndex >= 0 && edit)
+            {
+                string nameCategory = lstCategories.SelectedItem.ToString();
+                category = logicController.FindCategoryByName(nameCategory);
+                string description = tbDescription.Text;
+                double amount = decimal.ToDouble(nAmount.Value);
+                DateTime creationDate = dateTime.Value;
+                logicController.SetExpense(amount, creationDate, description, category);
+                MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Visible = false;
+                if (indexToEdit >= 0)
+                {
+                    lstExpenses.Items.RemoveAt(indexToEdit);
+                    logicController.DeleteExpense(descriptionExpense);
+                }
+            }
+            else
+            {
+                category = expenseToEdit.Category;
+                string description = tbDescription.Text;
+                double amount = decimal.ToDouble(nAmount.Value);
+                DateTime creationDate = dateTime.Value;
+                logicController.SetExpense(amount, creationDate, description, category);
+                MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Visible = false;
+                if (indexToEdit >= 0)
+                {
+                    lstExpenses.Items.RemoveAt(indexToEdit);
+                    logicController.DeleteExpense(descriptionExpense);
+                }
             }
         }
 

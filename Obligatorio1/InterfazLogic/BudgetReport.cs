@@ -38,8 +38,8 @@ namespace InterfazLogic
                 Budget budget = logicController.FindBudget(cboxMonth.SelectedIndex + 1, (int)numYear.Value);
                 if (budget is null)
                 {
-                    MessageBox.Show("There is not budget created for the selected date");
-                    Visible = false;
+                    lblReport.Text="There is not budget created for the selected date";
+                    lblReport.ForeColor = Color.Red;
                     return false;
                 }
                 else

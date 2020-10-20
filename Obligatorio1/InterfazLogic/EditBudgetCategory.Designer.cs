@@ -93,8 +93,7 @@
             this.Controls.Add(this.labelCategoryName);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "EditBudgetCategory";
-            this.Text = "Editar Budget De Categoria";
-            this.Load += new System.EventHandler(this.EditBudgetCategory_Load);
+            this.Text = "Edit budget category";
             ((System.ComponentModel.ISupportInitialize)(this.numericAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

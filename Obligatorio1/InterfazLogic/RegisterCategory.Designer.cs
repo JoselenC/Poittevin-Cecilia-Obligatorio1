@@ -39,11 +39,10 @@
             this.btnEdit = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
             this.lblKeyWords = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.tbEdit = new System.Windows.Forms.TextBox();
             this.lblKeyWordToEdit = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.lblEdit = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -61,9 +60,9 @@
             // btnRegisterCategory
             // 
             this.btnRegisterCategory.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterCategory.Location = new System.Drawing.Point(537, 699);
+            this.btnRegisterCategory.Location = new System.Drawing.Point(509, 714);
             this.btnRegisterCategory.Name = "btnRegisterCategory";
-            this.btnRegisterCategory.Size = new System.Drawing.Size(227, 63);
+            this.btnRegisterCategory.Size = new System.Drawing.Size(227, 73);
             this.btnRegisterCategory.TabIndex = 1;
             this.btnRegisterCategory.Text = "Register";
             this.btnRegisterCategory.UseVisualStyleBackColor = false;
@@ -72,7 +71,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(43, 170);
+            this.label2.Location = new System.Drawing.Point(85, 173);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(90, 32);
             this.label2.TabIndex = 2;
@@ -81,7 +80,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(43, 286);
+            this.label3.Location = new System.Drawing.Point(85, 298);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 32);
             this.label3.TabIndex = 3;
@@ -89,14 +88,14 @@
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(345, 167);
+            this.tbName.Location = new System.Drawing.Point(338, 167);
             this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(582, 38);
+            this.tbName.Size = new System.Drawing.Size(589, 38);
             this.tbName.TabIndex = 4;
             // 
             // tbKeyWord
             // 
-            this.tbKeyWord.Location = new System.Drawing.Point(345, 283);
+            this.tbKeyWord.Location = new System.Drawing.Point(338, 295);
             this.tbKeyWord.Name = "tbKeyWord";
             this.tbKeyWord.Size = new System.Drawing.Size(582, 38);
             this.tbKeyWord.TabIndex = 5;
@@ -105,17 +104,17 @@
             // 
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(345, 401);
+            this.lstCategories.Location = new System.Drawing.Point(338, 437);
             this.lstCategories.Name = "lstCategories";
-            this.lstCategories.Size = new System.Drawing.Size(582, 35);
+            this.lstCategories.Size = new System.Drawing.Size(582, 128);
             this.lstCategories.TabIndex = 6;
             // 
             // btnAddKeyWord
             // 
             this.btnAddKeyWord.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnAddKeyWord.Location = new System.Drawing.Point(1025, 283);
+            this.btnAddKeyWord.Location = new System.Drawing.Point(960, 282);
             this.btnAddKeyWord.Name = "btnAddKeyWord";
-            this.btnAddKeyWord.Size = new System.Drawing.Size(218, 63);
+            this.btnAddKeyWord.Size = new System.Drawing.Size(237, 63);
             this.btnAddKeyWord.TabIndex = 7;
             this.btnAddKeyWord.Text = "Add key word";
             this.btnAddKeyWord.UseVisualStyleBackColor = false;
@@ -124,7 +123,7 @@
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEdit.Location = new System.Drawing.Point(372, 512);
+            this.btnEdit.Location = new System.Drawing.Point(960, 421);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(236, 63);
             this.btnEdit.TabIndex = 8;
@@ -148,24 +147,6 @@
             this.lblKeyWords.Size = new System.Drawing.Size(0, 32);
             this.lblKeyWords.TabIndex = 10;
             // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSave.Location = new System.Drawing.Point(1025, 398);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(218, 63);
-            this.btnSave.TabIndex = 11;
-            this.btnSave.Text = "Save change";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // tbEdit
-            // 
-            this.tbEdit.Location = new System.Drawing.Point(345, 401);
-            this.tbEdit.Name = "tbEdit";
-            this.tbEdit.Size = new System.Drawing.Size(582, 38);
-            this.tbEdit.TabIndex = 12;
-            // 
             // lblKeyWordToEdit
             // 
             this.lblKeyWordToEdit.AutoSize = true;
@@ -177,9 +158,9 @@
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDelete.Location = new System.Drawing.Point(642, 512);
+            this.btnDelete.Location = new System.Drawing.Point(960, 522);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(229, 63);
+            this.btnDelete.Size = new System.Drawing.Size(236, 63);
             this.btnDelete.TabIndex = 14;
             this.btnDelete.Text = "Delete key word";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -188,22 +169,29 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 414);
+            this.label4.Location = new System.Drawing.Point(85, 437);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(210, 32);
             this.label4.TabIndex = 15;
             this.label4.Text = "List of key word";
+            // 
+            // lblEdit
+            // 
+            this.lblEdit.AutoSize = true;
+            this.lblEdit.Location = new System.Drawing.Point(339, 581);
+            this.lblEdit.Name = "lblEdit";
+            this.lblEdit.Size = new System.Drawing.Size(0, 32);
+            this.lblEdit.TabIndex = 16;
             // 
             // RegisterCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.lblEdit);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.lblKeyWordToEdit);
-            this.Controls.Add(this.tbEdit);
-            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblKeyWords);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.btnEdit);
@@ -235,10 +223,9 @@
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblKeyWords;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.TextBox tbEdit;
         private System.Windows.Forms.Label lblKeyWordToEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblEdit;
     }
 }

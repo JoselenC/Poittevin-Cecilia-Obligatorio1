@@ -22,11 +22,20 @@ namespace InterfazLogic
             this.MinimumSize = new Size(800, 800);
             tbDescription.Clear();
             lstCategories.Items.Clear();
+            AreCategories();
         }
 
+        private void AreCategories()
+        {
+            if(logicController.GetCategories().Count == 0)
+            {
+                MessageBox.Show("There are no categories registered in the system");
+                Visible = false;
+            }
+        }
         private void CompleteCategories(string description)
         {
-            Category category = logicController.FindCategoryByDescription(description);
+            Category category = logicController.AsignCategoryByDescriptionExpense(description);
             if (category != null)
             {
                 lstCategories.Items.Add(category);
@@ -38,10 +47,7 @@ namespace InterfazLogic
                     lstCategories.Items.Add(vCategory.Name);
                 }
             }
-            else
-            {
-                MessageBox.Show("There are no categories registered in the system");
-            }
+            
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

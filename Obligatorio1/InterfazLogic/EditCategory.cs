@@ -16,6 +16,7 @@ namespace InterfazLogic
         public List<string> KeyWords { get; set; }
         private LogicController logicController;
         Category category;
+        private int indexKeyWordToEdit;
 
         public EditCategory(Repository vRepository)
         {
@@ -24,7 +25,7 @@ namespace InterfazLogic
             this.MaximumSize = new Size(500, 600);
             this.MinimumSize = new Size(500, 600);
             CompleteCategories();
-            tbEdit.Visible = false;
+            indexKeyWordToEdit = -1;
         }
 
         private void CompleteCategories()
@@ -34,8 +35,7 @@ namespace InterfazLogic
                 foreach (Category category in logicController.GetCategories())
                 {
                     lstCatgories.Items.Add(category);
-                }
-                
+                }                
             }
             else
             {
@@ -53,7 +53,7 @@ namespace InterfazLogic
             }
             else {
                 string nameCategory = lstCatgories.SelectedItem.ToString();
-                this.category = logicController.FindCategoryByName(nameCategory);
+                category = logicController.FindCategoryByName(nameCategory);
                 txtName.Text=category.Name;
                 List<string> keyWords = category.KeyWords;
                 KeyWords = keyWords;
@@ -61,7 +61,7 @@ namespace InterfazLogic
                 {
                     lstKwywords.Items.Add(keyWord);
                 }
-                logicController.GetCategories().Remove(category);
+               
             }
         }
 
@@ -102,73 +102,65 @@ namespace InterfazLogic
 
         }
 
+        private void TryDeleteKeyWord()
+        {
+            int index = lstKwywords.SelectedIndex;
+            KeyWords.RemoveAt(index);
+            lstKwywords.Items.RemoveAt(index);
+            lblKyWords.Text = "";
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                int index = lstKwywords.SelectedIndex;
-                KeyWords.RemoveAt(index);
-                lstKwywords.Items.RemoveAt(index);
-                lblKyWords.Text = "";
+                TryDeleteKeyWord();
             }
             catch (ArgumentOutOfRangeException)
             {
                 lblKyWords.Text = "Select key word to delete";
                 lblKyWords.ForeColor = Color.Red;
             }
-        }
+        }       
 
-        private void btnSave_Click(object sender, EventArgs e)
+         private void btnEdit_Click(object sender, EventArgs e)
         {
-
-            string keyWordEdited = tbEdit.Text;
-            if (keyWordEdited != "")
-                lstKwywords.Items.Add(keyWordEdited);
-            else
+            if (KeyWords.Count > 0)
             {
-                lblKyWords.Text = "The keyword cannot be empty";
-                lblKyWords.ForeColor = Color.Red;
-            }
-            tbEdit.Visible = false;
-            tbEdit.Text = "";
-
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (KeyWords.Count > 0)
+                indexKeyWordToEdit = lstKwywords.SelectedIndex;
+                if (indexKeyWordToEdit >= 0)
                 {
-                    int index = lstKwywords.SelectedIndex;
-                    lstKwywords.Items.RemoveAt(index);
-                    this.KeyWords.RemoveAt(index);
-                    tbEdit.Visible = true;
-                    lblKyWords.Text = "";
-                    lblKyWords.Text = "";
+                    EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstKwywords);
+                    editKeyWord.Show();
+                    lblKeyWords.Text = "";
                 }
                 else
                 {
-                    lblKyWords.Text = "There aren't key words to edit";
+                    lblKyWords.Text = "Select key word to edit";
                     lblKyWords.ForeColor = Color.Red;
                 }
             }
-            catch (ArgumentOutOfRangeException)
+            else if (KeyWords.Count <= 0)
             {
-                lblKyWords.Text = "Select key word to edit";
+                lblKyWords.Text = "There aren't key words to edit";
                 lblKyWords.ForeColor = Color.Red;
             }
+        }
 
+        private void TryRegisterCategory()
+        {
+            logicController.GetCategories().Remove(category);
+            lstCatgories.Items.Remove(category);
+            logicController.SetCategory(txtName.Text, KeyWords);
+            MessageBox.Show("Category " + category.Name + " was added successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Visible = false;
         }
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-
             try
             {
-                logicController.SetCategory(txtName.Text, KeyWords);
-                MessageBox.Show("Category " + category.Name + " was added successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Visible = false;
+                TryRegisterCategory();
             }
             catch (ExcepcionInvalidNameLengthCategory)
             {
@@ -197,7 +189,6 @@ namespace InterfazLogic
             }
 
         }
-
 
     }
 }
