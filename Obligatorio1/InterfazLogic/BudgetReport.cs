@@ -1,41 +1,45 @@
-﻿using BusinessLogic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessLogic;
 
 namespace InterfazLogic
 {
-    public partial class BudgetReport : Form
+    public partial class BudgetReport : UserControl
     {
         private bool initializingForm = true;
-        private Repository repository;
+        private LogicController logicController;
         private int oldMonthIndex = DateTime.Now.Month - 1;
         private int oldYearValue = DateTime.Now.Year;
         public BudgetReport(Repository vRepository)
         {
-            repository = vRepository;
+            logicController = new LogicController(vRepository);
             InitializeComponent();
+            this.MaximumSize = new Size(800, 800);
+            this.MinimumSize = new Size(800, 800);
             numYear.Value = oldYearValue;
-            cboxMonth.Items.AddRange(repository.GetAllMonthsString());
+            cboxMonth.Items.AddRange(logicController.GetAllMonthsString());
             cboxMonth.SelectedIndex = oldMonthIndex;
             initializingForm = false;
             LoadBudgetReport();
+            
         }
 
         private bool LoadBudgetReport()
         {
             if (!initializingForm)
             {
-                Budget budget = repository.FindBudget(cboxMonth.SelectedIndex + 1, (int)numYear.Value);
+                Budget budget = logicController.FindBudget(cboxMonth.SelectedIndex + 1, (int)numYear.Value);
                 if (budget is null)
                 {
-                    MessageBox.Show("There is not budget created for the selected date");
+                    lblReport.Text="There is not budget created for the selected date";
+                    lblReport.ForeColor = Color.Red;
                     return false;
                 }
                 else
@@ -46,7 +50,7 @@ namespace InterfazLogic
                         Category category = budgetCategory.Category;
                         ListViewItem item = new ListViewItem(category.Name);
                         double planeedAmount = budgetCategory.Amount;
-                        double realAmount = repository.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
+                        double realAmount = logicController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
                         double diffAmount = planeedAmount - realAmount;
                         item.SubItems.Add(planeedAmount.ToString());
                         item.SubItems.Add(realAmount.ToString());

@@ -13,23 +13,29 @@ namespace InterfazLogic
 {
     public partial class EditExpense : UserControl
     {
-        private Repository repository;
+        private LogicController logicController;
+        private int indexToEdit;
+        private string descriptionExpense;
+        private bool edit;
+        private Expense expenseToEdit;
         public EditExpense(Repository vRepository)
         {
             InitializeComponent();
-            repository = vRepository;
+            logicController = new LogicController(vRepository);
             this.MaximumSize = new Size(800, 800);
             this.MinimumSize = new Size(800, 800);
             lstCategories.Visible = false;
+            indexToEdit = -1;
+            descriptionExpense="";
+            edit = false;
             CompleteExpense();
 
         }
-
         private void CompleteExpense()
         {
-            if (repository.Expenses.Count > 0)
+            if (logicController.GetExpenses().Count > 0)
             {
-                foreach (Expense expense in repository.Expenses) {
+                foreach (Expense expense in logicController.GetExpenses()) {
                     lstExpenses.Items.Add(expense);
                 }
             }
@@ -44,15 +50,16 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-               Expense expense = repository.DeleteExpense(lstExpenses.SelectedItem.ToString());
-               tbDescription.Text = expense.Description;
-               nAmount.Value = (decimal)(expense.Amount);
-               dateTime.Value = expense.CreationDate;
-               lblCategory.Text = expense.Category.ToString();
-               int index = lstExpenses.SelectedIndex;
-               lstExpenses.Items.RemoveAt(index);
+               descriptionExpense = lstExpenses.SelectedItem.ToString();
+               expenseToEdit = logicController.FindExpense(descriptionExpense);
+               tbDescription.Text = expenseToEdit.Description;
+               nAmount.Value = (decimal)(expenseToEdit.Amount);
+               dateTime.Value = expenseToEdit.CreationDate;
+               lblCategory.Text = expenseToEdit.Category.ToString();
+               indexToEdit = lstExpenses.SelectedIndex;
+               
             }
-            else if (repository.Expenses.Count == 0)
+            else if (logicController.GetExpenses().Count == 0)
             {
                 lblExpenses.Text = "There are no more expenses to edit";
                 lblExpenses.ForeColor = Color.Red;
@@ -68,11 +75,11 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-                repository.DeleteExpense(lstExpenses.SelectedItem.ToString());
+                logicController.DeleteExpense(lstExpenses.SelectedItem.ToString());
                 int index = lstExpenses.SelectedIndex;
                 lstExpenses.Items.RemoveAt(index);
             }
-            else if (repository.Expenses.Count == 0)
+            else if (logicController.GetExpenses().Count == 0)
             {
                 lblExpenses.Text = "There are no more expenses to delete";
                 lblExpenses.ForeColor = Color.Red;
@@ -88,23 +95,7 @@ namespace InterfazLogic
         {
             try
             {
-               
-                if (lstCategories.SelectedIndex >= 0)
-                {
-                    string description = tbDescription.Text;
-                    double amount = decimal.ToDouble(nAmount.Value);
-                    DateTime creationDate = dateTime.Value;
-                    string nameCategory = lstCategories.SelectedItem.ToString();
-                    Category category = repository.FindCategoryByName(nameCategory);
-                    repository.SetExpense(amount,creationDate,description, category);
-                    MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Visible = false;
-                }
-                else
-                {
-                    lblCategories.Text = "You must select a category";
-                    lblCategories.ForeColor = Color.Red;
-                }
+                TryRegisterNewExpense();
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
@@ -133,13 +124,55 @@ namespace InterfazLogic
             }
         }
 
+        private void TryRegisterNewExpense()
+        {
+            Category category = new Category();
+            if (lstCategories.SelectedIndex < 0 && edit)
+            {
+                lblCategories.Text = "You must select a category";
+                lblCategories.ForeColor = Color.Red;
+            }
+            else if (lstCategories.SelectedIndex >= 0 && edit)
+            {
+                string nameCategory = lstCategories.SelectedItem.ToString();
+                category = logicController.FindCategoryByName(nameCategory);
+                string description = tbDescription.Text;
+                double amount = decimal.ToDouble(nAmount.Value);
+                DateTime creationDate = dateTime.Value;
+                logicController.SetExpense(amount, creationDate, description, category);
+                MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Visible = false;
+                if (indexToEdit >= 0)
+                {
+                    lstExpenses.Items.RemoveAt(indexToEdit);
+                    logicController.DeleteExpense(descriptionExpense);
+                }
+            }
+            else
+            {
+                category = expenseToEdit.Category;
+                string description = tbDescription.Text;
+                double amount = decimal.ToDouble(nAmount.Value);
+                DateTime creationDate = dateTime.Value;
+                logicController.SetExpense(amount, creationDate, description, category);
+                MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Visible = false;
+                if (indexToEdit >= 0)
+                {
+                    lstExpenses.Items.RemoveAt(indexToEdit);
+                    logicController.DeleteExpense(descriptionExpense);
+                }
+            }
+        }
+
         private void btnEditCategory_Click(object sender, EventArgs e)
         {
             lstCategories.Visible = true;
-            foreach (Category category in repository.Categories)
+            foreach (Category category in logicController.GetCategories())
             {
                 lstCategories.Items.Add(category);
             }
+            edit = true;
         }
     }
 }

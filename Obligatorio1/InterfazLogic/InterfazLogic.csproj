@@ -58,6 +58,12 @@
     <Compile Include="EditExpense.Designer.cs">
       <DependentUpon>EditExpense.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditKeyWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditKeyWord.Designer.cs">
+      <DependentUpon>EditKeyWord.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpenseReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditCategory.resx">
       <DependentUpon>EditCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditKeyWord.resx">
+      <DependentUpon>EditKeyWord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExpenseReport.resx">
       <DependentUpon>ExpenseReport.cs</DependentUpon>

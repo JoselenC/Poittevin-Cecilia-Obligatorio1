@@ -10,10 +10,13 @@ namespace BusinessLogic
     public class Expense
     {
         private double amount;
+
         private DateTime creationDate;
+
         private string description;
 
         public double Amount{get=>amount; set=>SetAmount(value); }
+
         public DateTime CreationDate { get=>creationDate; set=>SetdDate(value); }
 
         public string Description { get=>description; set=>SetDescription(value); }

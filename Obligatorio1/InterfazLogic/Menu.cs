@@ -59,13 +59,13 @@ namespace InterfazLogic
             mainPanel.Controls.Add(editCategory);
         }
 
-        private void btnBudgetReport_Click(object sender, EventArgs e)
+      
+
+        private void btnBudgetReport_Click_1(object sender, EventArgs e)
         {
-            var addBudgetReportForm = new BudgetReport(repository)
-            {
-                Location = new Point(300, 120)
-            };
-            addBudgetReportForm.Show();
+            mainPanel.Controls.Clear();
+            UserControl budgetReport = new BudgetReport(repository);
+            mainPanel.Controls.Add(budgetReport);
         }
     }
 
