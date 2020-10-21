@@ -18,8 +18,8 @@ namespace InterfazLogic
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);
-            this.MaximumSize = new Size(800, 800);
-            this.MinimumSize = new Size(800, 800);
+            this.MaximumSize = new Size(890, 890);
+            this.MinimumSize = new Size(890, 890);
             tbDescription.Clear();
             lstCategories.Items.Clear();
             AreCategories();
@@ -99,6 +99,7 @@ namespace InterfazLogic
             catch (ExcepcionInvalidAmountExpense)
             {
                 lblAmount.Text = "The amount cannot have more than two decimal places";
+                nAmount.Value = 1;
                 lblAmount.ForeColor = Color.Red;
                 lblDate.Text = "";
                 lblCategories.Text = "";

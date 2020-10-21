@@ -17,17 +17,19 @@ namespace InterfazLogic
         private int indexToEdit;
         private string descriptionExpense;
         private bool edit;
+        private bool selectExpense;
         private Expense expenseToEdit;
         public EditExpense(Repository vRepository)
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);
-            this.MaximumSize = new Size(800, 800);
-            this.MinimumSize = new Size(800, 800);
+            this.MaximumSize = new Size(800, 850);
+            this.MinimumSize = new Size(800, 850);
             lstCategories.Visible = false;
             indexToEdit = -1;
             descriptionExpense="";
             edit = false;
+            selectExpense = false;
             CompleteExpense();
 
         }
@@ -57,17 +59,28 @@ namespace InterfazLogic
                dateTime.Value = expenseToEdit.CreationDate;
                lblCategory.Text = expenseToEdit.Category.ToString();
                indexToEdit = lstExpenses.SelectedIndex;
-               
+                selectExpense = true;
             }
             else if (logicController.GetExpenses().Count == 0)
             {
                 lblExpenses.Text = "There are no more expenses to edit";
                 lblExpenses.ForeColor = Color.Red;
+                lblAmount.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
             }
             else
             {
                 lblExpenses.Text = "Select expense to edit";
                 lblExpenses.ForeColor = Color.Red;
+                lblAmount.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
+                
+
+
             }
         }
 
@@ -78,16 +91,25 @@ namespace InterfazLogic
                 logicController.DeleteExpense(lstExpenses.SelectedItem.ToString());
                 int index = lstExpenses.SelectedIndex;
                 lstExpenses.Items.RemoveAt(index);
+                lblExpenses.Text = "";
             }
             else if (logicController.GetExpenses().Count == 0)
             {
                 lblExpenses.Text = "There are no more expenses to delete";
                 lblExpenses.ForeColor = Color.Red;
+                lblAmount.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
             }
             else
             {
                 lblExpenses.Text = "Select expense to delete";
                 lblExpenses.ForeColor = Color.Red;
+                lblAmount.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
             }
         }
 
@@ -101,26 +123,47 @@ namespace InterfazLogic
             {
                 lbDescription.Text = "The name must be between 3 and 20 characters long.";
                 lbDescription.ForeColor = Color.Red;
+                lblAmount.Text = "";
+                lblCategories.Text = "";
+                lblExpenses.Text = "";
+                lblDate.Text = "";
             }
             catch (ExcepcionNegativeAmountExpense)
             {
                 lblAmount.Text = "The amount must be positive";
                 lblAmount.ForeColor = Color.Red;
+                lblExpenses.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
             }
             catch (ExcepcionInvalidAmountExpense)
             {
                 lblAmount.Text = "The amount cannot have more than two decimal places";
+                nAmount.Value = 1;
                 lblAmount.ForeColor = Color.Red;
+                lblExpenses.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
             }
             catch (ExcepcionInvalidYearExpense)
             {
                 lblDate.Text = "The year must be between 2018 and 2030.";
                 lblDate.ForeColor = Color.Red;
+                lblExpenses.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
+                lblAmount.Text = "";
             }
             catch (ExcepcionExpenseWithEmptyCategory)
             {
                 lblCategories.Text = "The category should not be empty ";
                 lblCategories.ForeColor = Color.Red;
+                lblExpenses.Text = "";
+                lblAmount.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
             }
         }
 
@@ -131,6 +174,10 @@ namespace InterfazLogic
             {
                 lblCategories.Text = "You must select a category";
                 lblCategories.ForeColor = Color.Red;
+                lblExpenses.Text = "";
+                lblAmount.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
             }
             else if (lstCategories.SelectedIndex >= 0 && edit)
             {
@@ -140,7 +187,7 @@ namespace InterfazLogic
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 logicController.SetExpense(amount, creationDate, description, category);
-                MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Visible = false;
                 if (indexToEdit >= 0)
                 {
@@ -167,12 +214,21 @@ namespace InterfazLogic
 
         private void btnEditCategory_Click(object sender, EventArgs e)
         {
-            lstCategories.Visible = true;
-            foreach (Category category in logicController.GetCategories())
+
+            if (selectExpense)
             {
-                lstCategories.Items.Add(category);
+                lstCategories.Visible = true;
+                foreach (Category category in logicController.GetCategories())
+                {
+                    lstCategories.Items.Add(category);
+                }
+                edit = true;
             }
-            edit = true;
+            else
+            {
+                lblCategories.Text = "Select a expense to edit";
+                lblCategories.ForeColor = Color.Red;
+            }
         }
     }
 }

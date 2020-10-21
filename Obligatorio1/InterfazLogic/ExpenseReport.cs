@@ -19,8 +19,8 @@ namespace InterfazLogic
             InitializeComponent();
             logicController = new LogicController(vRepository);
             monthsWithExpenses();
-            this.MaximumSize = new Size(500, 600);
-            this.MinimumSize = new Size(500, 600);
+            this.MaximumSize = new Size(500, 650);
+            this.MinimumSize = new Size(500, 650);
 
         }
 

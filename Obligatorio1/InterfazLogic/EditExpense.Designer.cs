@@ -138,7 +138,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.OldLace;
-            this.label4.Location = new System.Drawing.Point(87, 400);
+            this.label4.Location = new System.Drawing.Point(87, 388);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 32);
             this.label4.TabIndex = 20;
@@ -153,7 +153,7 @@
             0,
             0,
             65536});
-            this.nAmount.Location = new System.Drawing.Point(262, 412);
+            this.nAmount.Location = new System.Drawing.Point(262, 385);
             this.nAmount.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -176,7 +176,7 @@
             // dateTime
             // 
             this.dateTime.CalendarMonthBackground = System.Drawing.Color.OldLace;
-            this.dateTime.Location = new System.Drawing.Point(262, 514);
+            this.dateTime.Location = new System.Drawing.Point(262, 495);
             this.dateTime.Name = "dateTime";
             this.dateTime.Size = new System.Drawing.Size(589, 38);
             this.dateTime.TabIndex = 22;
@@ -185,7 +185,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.OldLace;
-            this.label5.Location = new System.Drawing.Point(87, 509);
+            this.label5.Location = new System.Drawing.Point(87, 499);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 32);
             this.label5.TabIndex = 23;
