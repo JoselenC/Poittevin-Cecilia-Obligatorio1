@@ -47,7 +47,7 @@
             // 
             this.lstMonths.FormattingEnabled = true;
             this.lstMonths.ItemHeight = 31;
-            this.lstMonths.Location = new System.Drawing.Point(317, 142);
+            this.lstMonths.Location = new System.Drawing.Point(345, 137);
             this.lstMonths.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lstMonths.Name = "lstMonths";
             this.lstMonths.Size = new System.Drawing.Size(457, 66);
@@ -56,7 +56,7 @@
             // Month
             // 
             this.Month.AutoSize = true;
-            this.Month.Location = new System.Drawing.Point(167, 142);
+            this.Month.Location = new System.Drawing.Point(187, 137);
             this.Month.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.Month.Name = "Month";
             this.Month.Size = new System.Drawing.Size(108, 32);
@@ -66,7 +66,7 @@
             // btnConsult
             // 
             this.btnConsult.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnConsult.Location = new System.Drawing.Point(800, 142);
+            this.btnConsult.Location = new System.Drawing.Point(839, 137);
             this.btnConsult.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnConsult.Name = "btnConsult";
             this.btnConsult.Size = new System.Drawing.Size(219, 56);
@@ -84,7 +84,7 @@
             this.cCategory,
             this.cAmount});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(102, 284);
+            this.listView1.Location = new System.Drawing.Point(113, 256);
             this.listView1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(945, 381);
@@ -131,7 +131,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(463, 765);
+            this.btnAccept.Location = new System.Drawing.Point(502, 722);
             this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);

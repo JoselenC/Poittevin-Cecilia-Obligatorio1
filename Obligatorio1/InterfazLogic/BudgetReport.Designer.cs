@@ -170,7 +170,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(506, 708);
+            this.btnAccept.Location = new System.Drawing.Point(547, 719);
             this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);
@@ -194,7 +194,7 @@
             this.Controls.Add(this.cboxMonth);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "BudgetReport";
-            this.Size = new System.Drawing.Size(1286, 799);
+            this.Size = new System.Drawing.Size(1286, 813);
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

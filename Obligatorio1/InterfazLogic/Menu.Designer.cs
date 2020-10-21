@@ -68,7 +68,7 @@
             this.mainPanel.Location = new System.Drawing.Point(374, 15);
             this.mainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1299, 786);
+            this.mainPanel.Size = new System.Drawing.Size(1299, 821);
             this.mainPanel.TabIndex = 7;
             // 
             // btnRegisterExpense
@@ -148,7 +148,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
-            this.ClientSize = new System.Drawing.Size(1686, 847);
+            this.ClientSize = new System.Drawing.Size(1686, 871);
             this.Controls.Add(this.btnEditCategory);
             this.Controls.Add(this.btnEditExpenses);
             this.Controls.Add(this.btnBudgetReport);
