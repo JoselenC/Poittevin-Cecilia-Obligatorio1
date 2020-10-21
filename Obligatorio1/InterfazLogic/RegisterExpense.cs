@@ -99,6 +99,7 @@ namespace InterfazLogic
             catch (ExcepcionInvalidAmountExpense)
             {
                 lblAmount.Text = "The amount cannot have more than two decimal places";
+                nAmount.Value = 1;
                 lblAmount.ForeColor = Color.Red;
                 lblDate.Text = "";
                 lblCategories.Text = "";

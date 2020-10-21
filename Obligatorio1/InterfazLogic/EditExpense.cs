@@ -140,6 +140,7 @@ namespace InterfazLogic
             catch (ExcepcionInvalidAmountExpense)
             {
                 lblAmount.Text = "The amount cannot have more than two decimal places";
+                nAmount.Value = 1;
                 lblAmount.ForeColor = Color.Red;
                 lblExpenses.Text = "";
                 lblCategories.Text = "";
@@ -186,7 +187,7 @@ namespace InterfazLogic
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 logicController.SetExpense(amount, creationDate, description, category);
-                MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Visible = false;
                 if (indexToEdit >= 0)
                 {

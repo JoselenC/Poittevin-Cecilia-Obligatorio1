@@ -137,7 +137,7 @@
             this.nAmount.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.nAmount.DecimalPlaces = 2;
             this.nAmount.Increment = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             65536});
@@ -156,10 +156,10 @@
             this.nAmount.Size = new System.Drawing.Size(589, 38);
             this.nAmount.TabIndex = 9;
             this.nAmount.Value = new decimal(new int[] {
-            1,
+            11,
             0,
             0,
-            0});
+            65536});
             // 
             // lblAmount
             // 

@@ -185,23 +185,26 @@ namespace Test
                 Category = categoryFood, 
                 Amount = 0 
             };
-            List<BudgetCategory> budgetCategories = new List<BudgetCategory>() {
-            budgetCategory,
-            budgetCategory2
+            BudgetCategory budgetCategory3 = new BudgetCategory
+            {
+                Category = categoryHouse,
+                Amount = 0
             };
-
+            List<BudgetCategory> budgetCategories = new List<BudgetCategory>() {
+            budgetCategory3,
+            budgetCategory,
+            budgetCategory2,            
+            };
             Budget actualBudget = logicController.BudgetGetOrCreate("Enero", 2020);
-
             List<BudgetCategory> actualBudgetCategories = actualBudget.BudgetCategories;
             CollectionAssert.AreEqual(budgetCategories, actualBudgetCategories);
         }
 
 
-
         [TestMethod]
         public void FindBudgetFoundCase()
         {
-            Budget actualBudget = logicController.FindBudget("enero", 2020);
+            Budget actualBudget = logicController.FindBudget("Enero", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
         }
 
@@ -209,7 +212,7 @@ namespace Test
         [TestMethod]
         public void FindBudgetNotFoundCase()
         {
-            Budget actualBudget = logicController.FindBudget("febrero", 2020);
+            Budget actualBudget = logicController.FindBudget("Febrero", 2020);
             Assert.IsNull(actualBudget);
         }
 
