@@ -10,18 +10,17 @@ using System.Windows.Forms;
 using BusinessLogic;
 namespace InterfazLogic
 {
-    public partial class AddBudgetForm : UserControl
+    public partial class AddAndEditBudget : UserControl
     {
         private LogicController logicController { get; set; }
         private Budget CurrentBudget { get; set; }
-        public AddBudgetForm(Repository vRepository)
+        public AddAndEditBudget(Repository vRepository)
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);
             this.MaximumSize = new Size(500, 600);
             this.MinimumSize = new Size(500, 600);
             nMonth.Items.AddRange(logicController.GetAllMonthsString());
-            nMonth.SelectedIndex = DateTime.Now.Month - 1;
             CategoriesCount();
 
         }
@@ -29,9 +28,11 @@ namespace InterfazLogic
         private void CategoriesCount()
         {
             if (logicController.GetCategories().Count == 0)
+            {
                 MessageBox.Show("There are no categories registered in the system");
+                Visible = false;
+            }
         }
-
         private void EditBudgetCategory()
         {
             if (CurrentBudget is null || lstCategory.SelectedItem is null)
@@ -41,6 +42,7 @@ namespace InterfazLogic
             }
             else
             {
+                lblCategories.Text = "";
                 EditBudgetCategory budgetCategory = new EditBudgetCategory((BudgetCategory) lstCategory.SelectedItem, this);
                 budgetCategory.Show(); 
                 budgetCategory.FormClosing += (sender, eventArgs) =>
@@ -94,6 +96,7 @@ namespace InterfazLogic
             logicController.AddBudget(CurrentBudget);
             Visible = false;
         }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;

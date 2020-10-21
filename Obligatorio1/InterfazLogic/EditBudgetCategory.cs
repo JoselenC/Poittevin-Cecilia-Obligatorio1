@@ -15,13 +15,12 @@ namespace InterfazLogic
     public partial class EditBudgetCategory : Form
     {
         private BudgetCategory CurrentBudgetCategory { get; set; }
-        private AddBudgetForm OriginForm { get; set; }
-        public EditBudgetCategory(BudgetCategory budgetCategory, AddBudgetForm originForm)
+        private AddAndEditBudget OriginForm { get; set; }
+        public EditBudgetCategory(BudgetCategory budgetCategory, AddAndEditBudget originForm)
         {
             InitializeComponent();
             OriginForm = originForm;
             CurrentBudgetCategory = budgetCategory;
-            labelCategoryName.Text = budgetCategory.Category.Name;
             numericAmount.Value = (decimal) budgetCategory.Amount;
             this.MaximumSize = new Size(380, 200);
             this.MinimumSize = new Size(380, 200);
@@ -34,5 +33,9 @@ namespace InterfazLogic
             Close();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

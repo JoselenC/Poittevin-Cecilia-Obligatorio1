@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelCategoryName = new System.Windows.Forms.Label();
+            this.lblAmount = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.numericAmount = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericAmount)).BeginInit();
             this.SuspendLayout();
             // 
-            // labelCategoryName
+            // lblAmount
             // 
-            this.labelCategoryName.AutoSize = true;
-            this.labelCategoryName.Location = new System.Drawing.Point(67, 107);
-            this.labelCategoryName.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.labelCategoryName.Name = "labelCategoryName";
-            this.labelCategoryName.Size = new System.Drawing.Size(113, 32);
-            this.labelCategoryName.TabIndex = 0;
-            this.labelCategoryName.Text = "Amount";
+            this.lblAmount.AutoSize = true;
+            this.lblAmount.Location = new System.Drawing.Point(67, 107);
+            this.lblAmount.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblAmount.Name = "lblAmount";
+            this.lblAmount.Size = new System.Drawing.Size(106, 32);
+            this.lblAmount.TabIndex = 0;
+            this.lblAmount.Text = "Budget";
             // 
             // button1
             // 
@@ -67,6 +67,7 @@
             this.button2.TabIndex = 3;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // numericAmount
             // 
@@ -90,7 +91,7 @@
             this.Controls.Add(this.numericAmount);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.labelCategoryName);
+            this.Controls.Add(this.lblAmount);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "EditBudgetCategory";
             this.Text = "Edit budget category";
@@ -102,7 +103,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelCategoryName;
+        private System.Windows.Forms.Label lblAmount;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.NumericUpDown numericAmount;

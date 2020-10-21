@@ -14,17 +14,22 @@ namespace InterfazLogic
     public partial class EditKeyWord : Form
     {
         public List<string> keyWords { get; set; }
+
         public int index { get; set; }
 
+        private LogicController logicController;
+
         public bool edited { get; set; } = false;
+
         private ListBox lstkw;
-        public EditKeyWord(List<string> vKeyWords,int indexToEdit,ListBox lstkeyWords)
-        {
-            
+
+        public EditKeyWord(List<string> vKeyWords,int indexToEdit,ListBox lstkeyWords, LogicController vLogicController)
+        {            
             InitializeComponent();
             keyWords = vKeyWords;
             index = indexToEdit;
             lstkw = lstkeyWords;
+            logicController = vLogicController;
             this.MaximumSize = new Size(380, 200);
             this.MinimumSize = new Size(380, 200);
         }
@@ -34,13 +39,24 @@ namespace InterfazLogic
             string keyWordEdited = tbEdit.Text;
             if (keyWordEdited != "")
             {
-
-                keyWords.RemoveAt(index);
-                keyWords.Add(tbEdit.Text);
-               lstkw.Items.RemoveAt(index);
-                lstkw.Items.Add(keyWords[index]);
-                
-                Close();
+                if (keyWords.Contains(keyWordEdited))
+                {
+                    lblKeyWord.Text = "You already entered that keyword";
+                    lblKeyWord.ForeColor = Color.Red;
+                }
+                else if (logicController.AlreadyExistThisKeyWordInAnoterCategory(keyWordEdited))
+                {
+                    lblKeyWord.Text = "You already entered that keyword in another category";
+                    lblKeyWord.ForeColor = Color.Red;
+                }
+                else
+                {
+                    keyWords.RemoveAt(index);
+                    keyWords.Add(tbEdit.Text);
+                    lstkw.Items.RemoveAt(index);
+                    lstkw.Items.Add(keyWords[index]);
+                    Close();
+                }
             }
             else
             {

@@ -29,7 +29,7 @@ namespace BusinessLogic
 
         public override string ToString()
         {
-            return $"{Category}: {amount}";
+            return $"{Category}                      {amount}";
         }
         
         public override bool Equals(object obj)

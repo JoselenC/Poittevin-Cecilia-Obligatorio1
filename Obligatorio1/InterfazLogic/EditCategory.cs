@@ -130,7 +130,7 @@ namespace InterfazLogic
                 indexKeyWordToEdit = lstKwywords.SelectedIndex;
                 if (indexKeyWordToEdit >= 0)
                 {
-                    EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstKwywords);
+                    EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstKwywords,logicController);
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
                 }

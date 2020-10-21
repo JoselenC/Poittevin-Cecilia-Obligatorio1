@@ -201,7 +201,7 @@ namespace Test
         [TestMethod]
         public void FindBudgetFoundCase()
         {
-            Budget actualBudget = logicController.FindBudget(1, 2020);
+            Budget actualBudget = logicController.FindBudget("enero", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
         }
 
@@ -209,7 +209,7 @@ namespace Test
         [TestMethod]
         public void FindBudgetNotFoundCase()
         {
-            Budget actualBudget = logicController.FindBudget(2, 2020);
+            Budget actualBudget = logicController.FindBudget("febrero", 2020);
             Assert.IsNull(actualBudget);
         }
 
@@ -279,8 +279,8 @@ namespace Test
             repo.Expenses = expenses;
             LogicController controller = new LogicController(repo);
             List<string> monthsOrder = controller.OrderedMonthsInWhichThereAreExpenses();
-            Assert.AreEqual(months[0], monthsOrder[0]);
-            Assert.AreEqual(months[1], monthsOrder[1]);
+            CollectionAssert.AreEqual(months, monthsOrder);
+            
 
         }
 
@@ -512,7 +512,7 @@ namespace Test
             };
             Repository EmptyRepository = new Repository();
             LogicController controller = new LogicController(EmptyRepository);
-           controller.AddBudgetCategory(validBudgetCategory);
+            controller.AddBudgetCategory(validBudgetCategory);
             BudgetCategory currentBudgetCategory = EmptyRepository.BudgetCategories.First();
             Assert.AreEqual(validBudgetCategory, currentBudgetCategory);
         }
@@ -663,8 +663,51 @@ namespace Test
             CollectionAssert.AreEqual(categories, controller.GetCategories().ToArray());
         }
 
+        [TestMethod]
+        public void AddValidBudgetToRepository()
+        {
+            Budget validBudget = new Budget(DateTime.Now.Month)
+            {
+                TotalAmount = 4000,
+                Year = DateTime.Now.Year
+            };
+            Repository EmptyRepository = new Repository();
+            LogicController controller = new LogicController(EmptyRepository);
+            controller.AddBudget(validBudget);
+            Budget currentBudget =controller.Repository.Budgets.First();
+            Assert.AreEqual(validBudget, currentBudget);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void AddInvalidNullBudgetToRepository()
+        {
+            Budget invalidBudget = null;
+            logicController.AddBudget(invalidBudget);
+        }
 
+        [TestMethod]
+        public void MonthsOrderedInWhichAreBudget()
+        {
+            List<string> months = new List<string>()
+            {
+            "Enero",
+            "Mayo",
+            };
+            Budget budget1 = new Budget(1) { TotalAmount = 23, Year = 2020 };
+            Budget budget2 = new Budget(5) { TotalAmount = 23, Year = 2020 };
+            List<Budget> budgets = new List<Budget>()
+            {
+                budget1,
+                budget2,
+            };
+            Repository repo = new Repository();
+            repo.Budgets = budgets;
+            LogicController controller = new LogicController(repo);
+            List<string> monthsOrder = controller.OrderedMonthsInWhichThereAreBudget();
+            CollectionAssert.AreEqual(months, monthsOrder);
+
+        }
 
     }
 }
