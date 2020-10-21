@@ -25,19 +25,28 @@ namespace InterfazLogic
             this.MinimumSize = new Size(800, 800);
             numYear.Value = oldYearValue;
             initializingForm = false;
-            LoadBudgetReport();
+           
             GetMonths();
             
         }
 
         private void GetMonths()
         {
-            cboxMonth.Items.Clear();
-            List<string> monthsWithBudget = logicController.OrderedMonthsInWhichThereAreBudget();
-            foreach (string month in monthsWithBudget)
+            if (logicController.Repository.Budgets.Count == 0)
             {
-                cboxMonth.Items.Add(month);
+                MessageBox.Show("There are no budgets registered in the system");
+                this.Visible = false;
             }
+            else
+            {
+                cboxMonth.Items.Clear();
+                List<string> monthsWithBudget = logicController.OrderedMonthsInWhichThereAreBudget();
+                foreach (string month in monthsWithBudget)
+                {
+                    cboxMonth.Items.Add(month);
+                }
+            }
+           
         }
 
         private bool LoadBudgetReport()
@@ -47,7 +56,8 @@ namespace InterfazLogic
             double totalDiffAmount = 0;
             if (!initializingForm)
             {
-                Budget budget = logicController.FindBudget(cboxMonth.SelectedIndex + 1, (int)numYear.Value);
+                
+                Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), (int)numYear.Value);
                 if (budget is null)
                 {
                     lblReport.Text="There is not budget created for the selected date";
@@ -56,6 +66,7 @@ namespace InterfazLogic
                 }
                 else
                 {
+                    lblReport.Text = "";
                     lstVReport.Items.Clear();
                     foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
                     {
@@ -110,13 +121,9 @@ namespace InterfazLogic
 
         private void cboxMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!LoadBudgetReport()) {
-                cboxMonth.SelectedIndex = oldMonthIndex;
-            }
-            else
-            {
+           
                 oldMonthIndex = cboxMonth.SelectedIndex;
-            }
+            
         }
 
         private void numYear_ValueChanged(object sender, EventArgs e)

@@ -47,30 +47,36 @@ namespace InterfazLogic
             {
                 TryRegisterCategoty();
             }
+            catch (ExcepcionInvalidRepeatedNameCategory)
+            {
+                lblName.Text = "The entered name already exists.";
+                lblName.ForeColor = Color.Red;
+                lblKeyWords.Text = "";
+            }
             catch (ExcepcionInvalidNameLengthCategory)
             {
                 lblName.Text = "The name must be between 3 and 15 characters long.";
                 lblName.ForeColor = Color.Red;
+                lblKeyWords.Text = "";
             }
             catch (ExcepcionInvalidNameDigitCategory)
             {
                 lblName.Text = "The name of the category cannot be just numbers.";
                 lblName.ForeColor = Color.Red;
+                lblKeyWords.Text = "";
             }
-            catch (ExcepcionInvalidRepeatedNameCategory)
-            {
-                lblName.Text = "The entered name already exists.";
-                lblName.ForeColor = Color.Red;
-            }
+           
             catch (ExcepcionInvalidRepeatedKeyWordsCategory)
             {
                 lblKeyWords.Text = "The entered keyword already exists in another category, edit or delete it.";
                 lblKeyWords.ForeColor = Color.Red;
+                lblName.Text = "";
             }
             catch (ExcepcionInvalidKeyWordsLengthCategory)
             {
                 lblKeyWords.Text = "You cannot add more than 10 keywords.";
                 lblKeyWords.ForeColor = Color.Red;
+                lblName.Text = "";
             }           
 
         }
@@ -86,7 +92,7 @@ namespace InterfazLogic
                     lblKeyWords.Text = "You already entered that keyword";
                     lblKeyWords.ForeColor = Color.Red;
                 }
-                else if (keyWords.Count > 10)
+                else if (keyWords.Count > 9)
                 {
                     lblKeyWords.Text = "You cannot add more than 10 keywords.";
                     lblKeyWords.ForeColor = Color.Red;
@@ -121,7 +127,7 @@ namespace InterfazLogic
                 indexKeyWordToEdit = lstCategories.SelectedIndex;
                 if (indexKeyWordToEdit >= 0)
                 {
-                    EditKeyWord editKeyWord = new EditKeyWord(keyWords, indexKeyWordToEdit, lstCategories);
+                    EditKeyWord editKeyWord = new EditKeyWord(keyWords, indexKeyWordToEdit, lstCategories,logicController);
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
                 }

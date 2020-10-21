@@ -114,13 +114,13 @@ namespace BusinessLogic
         public void SetExpense(double amount, DateTime creationDate, string description, Category category)
         {
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category };
-            Expenses.Add(expense);
+            AddExpense(expense);
         }
 
         public void SetCategory(string vName,List<string> vKeyWords )
         {
             Category category = new Category { Name = vName, KeyWords = vKeyWords };
-            Categories.Add(category);
+            AddCategory(category);
         }
 
         public List<Category> GetCategories()

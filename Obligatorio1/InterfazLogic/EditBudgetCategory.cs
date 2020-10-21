@@ -21,7 +21,6 @@ namespace InterfazLogic
             InitializeComponent();
             OriginForm = originForm;
             CurrentBudgetCategory = budgetCategory;
-            labelCategoryName.Text = budgetCategory.Category.Name;
             numericAmount.Value = (decimal) budgetCategory.Amount;
             this.MaximumSize = new Size(380, 200);
             this.MinimumSize = new Size(380, 200);
@@ -34,5 +33,9 @@ namespace InterfazLogic
             Close();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

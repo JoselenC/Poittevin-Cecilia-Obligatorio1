@@ -52,7 +52,6 @@
             this.cboxMonth.Name = "cboxMonth";
             this.cboxMonth.Size = new System.Drawing.Size(589, 39);
             this.cboxMonth.TabIndex = 0;
-            this.cboxMonth.SelectedIndexChanged += new System.EventHandler(this.cboxMonth_SelectedIndexChanged);
             // 
             // btnSearch
             // 

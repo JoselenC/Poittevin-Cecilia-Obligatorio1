@@ -102,10 +102,10 @@
             // 
             this.lstCategory.FormattingEnabled = true;
             this.lstCategory.ItemHeight = 31;
-            this.lstCategory.Location = new System.Drawing.Point(338, 405);
+            this.lstCategory.Location = new System.Drawing.Point(336, 405);
             this.lstCategory.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.lstCategory.Name = "lstCategory";
-            this.lstCategory.Size = new System.Drawing.Size(598, 190);
+            this.lstCategory.Size = new System.Drawing.Size(575, 190);
             this.lstCategory.TabIndex = 6;
             this.lstCategory.DoubleClick += new System.EventHandler(this.listBoxCategory_DoubleClick);
             // 
@@ -136,7 +136,7 @@
             // btnEditBudget
             // 
             this.btnEditBudget.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditBudget.Location = new System.Drawing.Point(955, 380);
+            this.btnEditBudget.Location = new System.Drawing.Point(978, 405);
             this.btnEditBudget.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnEditBudget.Name = "btnEditBudget";
             this.btnEditBudget.Size = new System.Drawing.Size(283, 55);
@@ -180,7 +180,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Location = new System.Drawing.Point(338, 364);
+            this.label5.Location = new System.Drawing.Point(337, 364);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(328, 34);
             this.label5.TabIndex = 13;
@@ -191,11 +191,11 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.Location = new System.Drawing.Point(658, 364);
+            this.label6.Location = new System.Drawing.Point(592, 364);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(269, 34);
+            this.label6.Size = new System.Drawing.Size(290, 34);
             this.label6.TabIndex = 14;
-            this.label6.Text = " Amount                     ";
+            this.label6.Text = "Budget                          ";
             // 
             // AddAndEditBudget
             // 

@@ -22,15 +22,16 @@ namespace InterfazLogic
             this.MinimumSize = new Size(500, 600);
             nMonth.Items.AddRange(logicController.GetAllMonthsString());
             CategoriesCount();
-            Visible = true;
 
         }
 
         private void CategoriesCount()
         {
             if (logicController.GetCategories().Count == 0)
+            {
                 MessageBox.Show("There are no categories registered in the system");
-            Visible = false;
+                Visible = false;
+            }
         }
         private void EditBudgetCategory()
         {
@@ -41,6 +42,7 @@ namespace InterfazLogic
             }
             else
             {
+                lblCategories.Text = "";
                 EditBudgetCategory budgetCategory = new EditBudgetCategory((BudgetCategory) lstCategory.SelectedItem, this);
                 budgetCategory.Show(); 
                 budgetCategory.FormClosing += (sender, eventArgs) =>

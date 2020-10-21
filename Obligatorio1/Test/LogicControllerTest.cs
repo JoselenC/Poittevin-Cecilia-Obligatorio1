@@ -201,7 +201,7 @@ namespace Test
         [TestMethod]
         public void FindBudgetFoundCase()
         {
-            Budget actualBudget = logicController.FindBudget(1, 2020);
+            Budget actualBudget = logicController.FindBudget("enero", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
         }
 
@@ -209,7 +209,7 @@ namespace Test
         [TestMethod]
         public void FindBudgetNotFoundCase()
         {
-            Budget actualBudget = logicController.FindBudget(2, 2020);
+            Budget actualBudget = logicController.FindBudget("febrero", 2020);
             Assert.IsNull(actualBudget);
         }
 

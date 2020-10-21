@@ -24,24 +24,59 @@ namespace BusinessLogic
             return monthInBaseOne;
         }
 
-        public Budget FindBudget(int month, int year)
+        public Budget FindBudget(string month, int year)
         {
+            int vMonth = StringToIntMonth(month);
             List<Budget> budgets = Repository.GetBudgets();
             foreach (var budget in budgets)
             {
-                if (SameCreationDate(budget, month, year))
+                if (SameCreationDate(budget, vMonth, year))
                     return budget;
             }
             return null;
         }
 
+        private List<Category> BudgetCategories(List<Category> repoCategories, List<BudgetCategory> budgetCategories)
+        {
+            bool alreadyExist = false;
+            List<Category> newBudgetCategories = new List<Category>();
+            foreach (var repoCategory in repoCategories)
+            {
+                alreadyExist = false;
+                foreach (var category in budgetCategories)
+                {
+                    if (!alreadyExist)
+                    {
+                        if (repoCategory == category.Category)
+                            alreadyExist = true;
+                    }
+                }
+                if (!alreadyExist)
+                    newBudgetCategories.Add(repoCategory);
+            }
+            return newBudgetCategories;
+        }
         private Budget CreateBudget(int year, List<Category> categories, int monthIndex, Budget returnBudget)
         {
             if (returnBudget is null)
             {
-                returnBudget = new Budget(monthIndex, categories) { Year = year, TotalAmount = 0 };
+                returnBudget = new Budget(monthIndex, categories) { Year = year, TotalAmount = 0 };               
                
             }
+            else
+            {
+                Budget oldBudget = returnBudget;
+                Repository.GetBudgets().Remove(returnBudget);
+                List<Category> budgetCategories = BudgetCategories(categories, oldBudget.BudgetCategories);
+                returnBudget = new Budget(monthIndex, budgetCategories) { Year = year, TotalAmount = 0 };
+                foreach (var category in oldBudget.BudgetCategories)
+                {
+                    returnBudget.BudgetCategories.Add(category);
+                }
+
+                Repository.GetBudgets().Add(returnBudget);
+            }
+            
             return returnBudget;
         }
 
@@ -49,8 +84,8 @@ namespace BusinessLogic
         public Budget BudgetGetOrCreate(string month, int year)
         {
             List<Category> categories = Repository.GetCategories();
-            int monthIndex = StringToIntMonth(month);
-            Budget returnBudget = FindBudget(monthIndex, year);
+           int monthIndex = StringToIntMonth(month);
+            Budget returnBudget = FindBudget(month, year);
             returnBudget = CreateBudget(year, categories, monthIndex, returnBudget);
             return returnBudget;
 

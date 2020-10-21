@@ -52,6 +52,7 @@ namespace InterfazLogic
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
+            lstCategories.Items.Clear();
             string description = tbDescription.Text;
             CompleteCategories(description);
         }
@@ -76,32 +77,48 @@ namespace InterfazLogic
                 {
                     lblCategories.Text = "You must select a category";
                     lblCategories.ForeColor = Color.Red;
+                    lbDescription.Text = "";
                 }
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
                 lbDescription.Text = "The name must be between 3 and 20 characters long.";      
                 lbDescription.ForeColor = Color.Red;
+                lblCategories.Text = "";
+                lblAmount.Text = "";
+                lblDate.Text = "";
             }
             catch (ExcepcionNegativeAmountExpense)
             {
                 lblAmount.Text = "The amount must be positive";
                 lblAmount.ForeColor = Color.Red;
+                lblDate.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
             }
             catch (ExcepcionInvalidAmountExpense)
             {
                 lblAmount.Text = "The amount cannot have more than two decimal places";
                 lblAmount.ForeColor = Color.Red;
+                lblDate.Text = "";
+                lblCategories.Text = "";
+                lbDescription.Text = "";
             }
             catch (ExcepcionInvalidYearExpense)
             {
                 lblDate.Text = "The year must be between 2018 and 2030.";
                 lblDate.ForeColor = Color.Red;
+                lblCategories.Text = "";
+                lblAmount.Text = "";
+                lbDescription.Text = "";
             }
             catch (ExcepcionExpenseWithEmptyCategory)
             {
                 lblCategories.Text = "The category should not be empty ";
                 lblCategories.ForeColor = Color.Red;
+                lblDate.Text = "";
+                lbDescription.Text = "";
+                lblAmount.Text = "";
             }         
         }
 
