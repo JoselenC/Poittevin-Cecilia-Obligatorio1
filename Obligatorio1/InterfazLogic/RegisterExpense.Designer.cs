@@ -156,7 +156,7 @@
             this.nAmount.Size = new System.Drawing.Size(589, 38);
             this.nAmount.TabIndex = 9;
             this.nAmount.Value = new decimal(new int[] {
-            11,
+            10,
             0,
             0,
             65536});
