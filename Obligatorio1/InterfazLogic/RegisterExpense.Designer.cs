@@ -188,7 +188,7 @@
             // btnRegistrExpense
             // 
             this.btnRegistrExpense.BackColor = System.Drawing.Color.Tan;
-            this.btnRegistrExpense.Location = new System.Drawing.Point(547, 731);
+            this.btnRegistrExpense.Location = new System.Drawing.Point(547, 719);
             this.btnRegistrExpense.Name = "btnRegistrExpense";
             this.btnRegistrExpense.Size = new System.Drawing.Size(227, 73);
             this.btnRegistrExpense.TabIndex = 13;
