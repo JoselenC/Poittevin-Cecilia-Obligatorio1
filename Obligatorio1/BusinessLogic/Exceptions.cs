@@ -53,4 +53,26 @@ namespace BusinessLogic
     public class NegativeValueErrorAttribute : Exception
     {
     }
+
+    public class NoFindBudgetCategoryByCategoryName : Exception
+    {
+    }
+
+    public class NoFindCategoryByName : Exception
+    {
+    }
+
+    public class NoFindExpenseByDescription : Exception
+    {
+    }
+
+    public class NoFindBudget : Exception
+    {
+    }
+
+    public class NoAsignCategoryByDescriptionExpense : Exception
+    {
+    }
+
 }
+

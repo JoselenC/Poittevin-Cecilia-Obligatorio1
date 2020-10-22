@@ -49,6 +49,55 @@ namespace InterfazLogic
            
         }
 
+        private bool CompleteReport(ref double totalPlanedAmount, ref double totalRealAmount, ref double totalDiffAmount, Budget budget)
+        {
+            lblReport.Text = "";
+            lstVReport.Items.Clear();
+            foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
+            {
+                Category category = budgetCategory.Category;
+                ListViewItem item = new ListViewItem(category.Name);
+                item.UseItemStyleForSubItems = false;
+                double planeedAmount = budgetCategory.Amount;
+                double realAmount = logicController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
+                double diffAmount = planeedAmount - realAmount;
+                totalPlanedAmount += planeedAmount;
+                totalRealAmount += realAmount;
+                totalDiffAmount += diffAmount;
+                if (totalPlanedAmount < 0)
+                    item.SubItems.Add("(" + (Math.Abs(planeedAmount)).ToString() + ")").ForeColor = Color.Red;
+                else
+                    item.SubItems.Add(planeedAmount.ToString());
+                if (realAmount < 0)
+                    item.SubItems.Add("(" + (Math.Abs(realAmount)).ToString() + ")").ForeColor = Color.Red;
+                else
+                    item.SubItems.Add(realAmount.ToString());
+                if (diffAmount < 0)
+                    item.SubItems.Add("(" + (Math.Abs(diffAmount)).ToString() + ")").ForeColor = Color.Red;
+                else
+                    item.SubItems.Add(diffAmount.ToString());
+                lstVReport.Items.Add(item);
+
+            }
+            ListViewItem total = new ListViewItem("TOTAL");
+            total.UseItemStyleForSubItems = false;
+            if (totalPlanedAmount < 0)
+                total.SubItems.Add("(" + (Math.Abs(totalPlanedAmount)).ToString() + ")").ForeColor = Color.Red;
+            else
+                total.SubItems.Add(totalPlanedAmount.ToString());
+            if (totalRealAmount < 0)
+                total.SubItems.Add("(" + (Math.Abs(totalRealAmount)).ToString() + ")").ForeColor = Color.Red;
+            else
+                total.SubItems.Add(totalRealAmount.ToString());
+            if (totalDiffAmount < 0)
+                total.SubItems.Add("(" + (Math.Abs(totalDiffAmount)).ToString() + ")").ForeColor = Color.Red;
+            else
+                total.SubItems.Add(totalDiffAmount.ToString());
+
+            lstVReport.Items.Add(total);
+            return true;
+        }
+
         private bool LoadBudgetReport()
         {
             double totalPlanedAmount = 0;
@@ -58,63 +107,24 @@ namespace InterfazLogic
             {
                 
                 Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), (int)numYear.Value);
-                if (budget is null)
+                try
                 {
-                    lblReport.Text="There is not budget created for the selected date";
+                    return CompleteReport(ref totalPlanedAmount, ref totalRealAmount, ref totalDiffAmount, budget);
+
+                }
+                catch (NoFindBudget)
+                {
+                    lblReport.Text = "There is not budget created for the selected date";
                     lblReport.ForeColor = Color.Red;
                     return false;
-                }
-                else
-                {
-                    lblReport.Text = "";
-                    lstVReport.Items.Clear();
-                    foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
-                    {
-                        Category category = budgetCategory.Category;
-                        ListViewItem item = new ListViewItem(category.Name);
-                        item.UseItemStyleForSubItems = false;
-                        double planeedAmount = budgetCategory.Amount;
-                        double realAmount = logicController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
-                        double diffAmount = planeedAmount - realAmount;
-                        totalPlanedAmount += planeedAmount;
-                        totalRealAmount += realAmount;
-                        totalDiffAmount += diffAmount;
-                        if(totalPlanedAmount<0)
-                           item.SubItems.Add("(" + (Math.Abs(planeedAmount)).ToString() + ")").ForeColor = Color.Red;
-                        else
-                            item.SubItems.Add(planeedAmount.ToString());
-                        if (realAmount<0)
-                            item.SubItems.Add("(" + (Math.Abs(realAmount)).ToString() + ")").ForeColor = Color.Red;
-                        else
-                            item.SubItems.Add(realAmount.ToString());
-                        if (diffAmount<0)
-                            item.SubItems.Add("(" + (Math.Abs(diffAmount)).ToString() + ")").ForeColor = Color.Red;
-                        else
-                            item.SubItems.Add(diffAmount.ToString());
-                        lstVReport.Items.Add(item);
-                    }
-                    ListViewItem total = new ListViewItem("TOTAL");
-                    total.UseItemStyleForSubItems = false;
-                    if (totalPlanedAmount<0)
-                        total.SubItems.Add("(" + (Math.Abs(totalPlanedAmount)).ToString() + ")").ForeColor=Color.Red;
-                    else
-                        total.SubItems.Add(totalPlanedAmount.ToString());
-                    if(totalRealAmount<0)
-                        total.SubItems.Add("(" + (Math.Abs(totalRealAmount)).ToString() + ")").ForeColor = Color.Red;
-                    else
-                        total.SubItems.Add(totalRealAmount.ToString());
-                    if(totalDiffAmount<0)
-                        total.SubItems.Add("("+ (Math.Abs(totalDiffAmount)).ToString()+")").ForeColor = Color.Red;
-                    else
-                        total.SubItems.Add(totalDiffAmount.ToString());
+                }              
 
-                    lstVReport.Items.Add(total);         
-                    return true;
-                }
             }
             else
                 return false;
         }
+
+      
 
         private void btnSearch_Click(object sender, EventArgs e)
         {

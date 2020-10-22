@@ -36,18 +36,20 @@ namespace InterfazLogic
         private void CompleteCategories(string description)
         {
             Category category = logicController.AsignCategoryByDescriptionExpense(description);
-            if (category != null)
-            {
+            try
+            {                
                 lstCategories.Items.Add(category);
             }
-            else if (logicController.GetCategories().Count > 0)
+            catch (NoAsignCategoryByDescriptionExpense)
             {
-                foreach (Category vCategory in logicController.GetCategories())
+                if (logicController.GetCategories().Count > 0)
                 {
-                    lstCategories.Items.Add(vCategory.Name);
+                    foreach (Category vCategory in logicController.GetCategories())
+                    {
+                        lstCategories.Items.Add(vCategory.Name);
+                    }
                 }
             }
-            
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

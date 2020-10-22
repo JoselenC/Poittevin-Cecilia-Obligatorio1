@@ -37,7 +37,7 @@
             // 
             // tbEdit
             // 
-            this.tbEdit.Location = new System.Drawing.Point(209, 115);
+            this.tbEdit.Location = new System.Drawing.Point(247, 115);
             this.tbEdit.Name = "tbEdit";
             this.tbEdit.Size = new System.Drawing.Size(582, 38);
             this.tbEdit.TabIndex = 13;
@@ -45,7 +45,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 115);
+            this.label3.Location = new System.Drawing.Point(97, 115);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 32);
             this.label3.TabIndex = 14;
@@ -54,7 +54,7 @@
             // btnSave
             // 
             this.btnSave.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSave.Location = new System.Drawing.Point(222, 218);
+            this.btnSave.Location = new System.Drawing.Point(247, 218);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(218, 63);
             this.btnSave.TabIndex = 15;
@@ -73,7 +73,7 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.DarkKhaki;
-            this.button1.Location = new System.Drawing.Point(553, 218);
+            this.button1.Location = new System.Drawing.Point(611, 218);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(218, 63);
             this.button1.TabIndex = 17;

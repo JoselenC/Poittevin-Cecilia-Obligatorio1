@@ -33,7 +33,7 @@ namespace BusinessLogic
                 if (SameCreationDate(budget, vMonth, year))
                     return budget;
             }
-            return null;
+            throw new NoFindBudget();
         }
 
         private List<Category> BudgetCategories(List<Category> repoCategories, List<BudgetCategory> budgetCategories)
@@ -84,7 +84,7 @@ namespace BusinessLogic
         public Budget BudgetGetOrCreate(string month, int year)
         {
             List<Category> categories = Repository.GetCategories();
-           int monthIndex = StringToIntMonth(month);
+            int monthIndex = StringToIntMonth(month);
             Budget returnBudget = FindBudget(month, year);
             returnBudget = CreateBudget(year, categories, monthIndex, returnBudget);
             return returnBudget;
@@ -179,7 +179,7 @@ namespace BusinessLogic
             exist = FindCategoryByDescription(ref category, descriptionArray, exist, ref cont, categories);
             if (cont == 1)
                 return category;
-            return null;
+            throw new NoAsignCategoryByDescriptionExpense();
         }     
 
         private bool ExistCategoryInDescriptionExpense(string[] descriptionArray,Category vCategory)
@@ -278,7 +278,7 @@ namespace BusinessLogic
                 if (SameCategoryName(category, categoryName))
                     return category;
             }
-            return null;
+            throw new NoFindCategoryByName();
         }
 
         private bool SameDescriptionExpense(Expense expense, string expenseDescription)
@@ -293,10 +293,10 @@ namespace BusinessLogic
             List<Expense> expenses = Repository.GetExpenses();
             foreach (var expense in expenses)
             {
-                if (SameDescriptionExpense(expense,expenseDescription))
+                if (SameDescriptionExpense(expense, expenseDescription))
                     return expense;
             }
-            return null;
+            throw new NoFindExpenseByDescription();
         }
 
         private bool ExistKeyWord(string pKeyWord, bool exist, Category category)

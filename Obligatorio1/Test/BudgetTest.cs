@@ -414,6 +414,7 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NoFindBudgetCategoryByCategoryName))]
         public void GetBudgetCategoryNullGetCase()
         {
             Category carCategory = new Category { Name = "Car" };

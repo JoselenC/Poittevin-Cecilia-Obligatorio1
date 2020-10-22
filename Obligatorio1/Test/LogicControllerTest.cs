@@ -131,6 +131,7 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NoFindExpenseByDescription), "")]
         public void FindExpenseNullByDescription()
         {
             string description = "cena";
@@ -159,8 +160,10 @@ namespace Test
                 Year = 2020, 
                 TotalAmount = 0 
             };
-
-            Budget budget = logicController.BudgetGetOrCreate(month, year);
+            Repository repository = new Repository();
+            repository.GetBudgets().Add(expectedBudget);
+            LogicController controller = new LogicController(repository);
+            Budget budget = controller.BudgetGetOrCreate(month, year);
             Assert.AreEqual(expectedBudget, budget);
         }
 
@@ -221,10 +224,10 @@ namespace Test
 
 
         [TestMethod]
+        [ExpectedException(typeof(NoFindBudget), "")]
         public void FindBudgetNotFoundCase()
         {
             Budget actualBudget = logicController.FindBudget("Febrero", 2020);
-            Assert.IsNull(actualBudget);
         }
 
         [TestMethod]
@@ -246,14 +249,15 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NoAsignCategoryByDescriptionExpense), "")]
         public void FindCategoryNullValueResultForEntertainment()
         {
             string description = "noche de videojuegos";
             Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
-            Assert.IsNull(expectedCategory);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NoAsignCategoryByDescriptionExpense), "")]
         public void FindCategoryNullValueResultFood()
         {
             string description = "cuando fuimos a comer";
@@ -407,6 +411,7 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NoFindCategoryByName), "")]
         public void FindCategoryByNameNull()
         {
             List<Category> categoryList = new List<Category>();
@@ -431,6 +436,7 @@ namespace Test
             Category category3 = controller.FindCategoryByName("entretenimiento");
             Assert.IsNull(category3);
         }
+
         [TestMethod]
         [ExpectedException(typeof(ExcepcionExpenseWithEmptyCategory), "")]
         public void AddExpenseNullCategory()

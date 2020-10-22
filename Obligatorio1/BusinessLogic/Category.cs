@@ -33,7 +33,8 @@ namespace BusinessLogic
             if (vKeyWords.Count > 10)
                 throw new ExcepcionInvalidKeyWordsLengthCategory();
             keyWords = vKeyWords;
-        }            
+        }   
+        
         public override bool Equals(object obj)
         {
             if (obj is Category category)
@@ -44,6 +45,7 @@ namespace BusinessLogic
             }
             return false;
         }
+
         public override string ToString()
         {
             return Name;
