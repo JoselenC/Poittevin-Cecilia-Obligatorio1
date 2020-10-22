@@ -32,7 +32,7 @@ namespace InterfazLogic
 
         private void GetMonths()
         {
-            if (logicController.Repository.Budgets.Count == 0)
+            if (logicController.Repository.GetBudgets().Count == 0)
             {
                 MessageBox.Show("There are no budgets registered in the system");
                 this.Visible = false;
@@ -72,6 +72,7 @@ namespace InterfazLogic
                     {
                         Category category = budgetCategory.Category;
                         ListViewItem item = new ListViewItem(category.Name);
+                        item.UseItemStyleForSubItems = false;
                         double planeedAmount = budgetCategory.Amount;
                         double realAmount = logicController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
                         double diffAmount = planeedAmount - realAmount;
@@ -93,7 +94,8 @@ namespace InterfazLogic
                         lstVReport.Items.Add(item);
                     }
                     ListViewItem total = new ListViewItem("TOTAL");
-                    if(totalPlanedAmount<0)
+                    total.UseItemStyleForSubItems = false;
+                    if (totalPlanedAmount<0)
                         total.SubItems.Add("(" + (Math.Abs(totalPlanedAmount)).ToString() + ")").ForeColor=Color.Red;
                     else
                         total.SubItems.Add(totalPlanedAmount.ToString());
@@ -136,6 +138,12 @@ namespace InterfazLogic
             {
                 oldYearValue = (int) numYear.Value;
             }
+        }
+
+        private void btnAccept_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+
         }
     }
 }

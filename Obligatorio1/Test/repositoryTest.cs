@@ -87,9 +87,9 @@ namespace Test
                 Description = "buy video game",
                 Category = categoryEntertainment
             };
-            repo.Expenses.Add(januaryExpenseFood);
-            repo.Expenses.Add(januaryExpenseFood2);
-            repo.Expenses.Add(januaryExpenseEntertainment);
+            repo.GetExpenses().Add(januaryExpenseFood);
+            repo.GetExpenses().Add(januaryExpenseFood2);
+            repo.GetExpenses().Add(januaryExpenseEntertainment);
         }      
 
         [TestMethod]
@@ -162,7 +162,7 @@ namespace Test
             };
             Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
             repository.AddCategory(category2);
-            Assert.AreEqual(category, repository.Categories.ToArray()[0]);
+            Assert.AreEqual(category, repository.GetCategories().ToArray()[0]);
         }
 
         [TestMethod]
@@ -202,7 +202,7 @@ namespace Test
             Repository EmptyRepository = new Repository();
             EmptyRepository.AddBudget(validBudget);
 
-            Budget currentBudget = EmptyRepository.Budgets.First();
+            Budget currentBudget = EmptyRepository.GetBudgets().First();
             Assert.AreEqual(validBudget, currentBudget);
         }
 
@@ -224,7 +224,7 @@ namespace Test
             Repository EmptyRepository = new Repository();
             EmptyRepository.AddBudgetCategory(validBudgetCategory);
 
-            BudgetCategory currentBudgetCategory = EmptyRepository.BudgetCategories.First();
+            BudgetCategory currentBudgetCategory = EmptyRepository.GetBudgetsCategory().First();
             Assert.AreEqual(validBudgetCategory, currentBudgetCategory);
         }
 
@@ -242,7 +242,7 @@ namespace Test
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
             Repository repository = new Repository();
             repository.SetExpense(23, new DateTime(2020, 01, 01), "cena", categoryFood);
-            Assert.AreEqual(expectedExpense, repository.Expenses.ToArray()[0]);
+            Assert.AreEqual(expectedExpense, repository.GetExpenses().ToArray()[0]);
         }
 
         [TestMethod]
@@ -256,7 +256,7 @@ namespace Test
             };
             Repository repository = new Repository();
             repository.SetCategory("comida", keyWords2);
-            Assert.AreEqual(categoryFood, repository.Categories.ToArray()[0]);
+            Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
         }
 
 

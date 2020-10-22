@@ -37,14 +37,14 @@ namespace InterfazLogic
         {
             if (CurrentBudget is null || lstCategory.SelectedItem is null)
             {
-                lblCategories.Text="Select a category from the category list to edit";
+                lblCategories.Text = "Select a category from the category list to edit";
                 lblCategories.ForeColor = Color.Red;
             }
             else
             {
                 lblCategories.Text = "";
-                EditBudgetCategory budgetCategory = new EditBudgetCategory((BudgetCategory) lstCategory.SelectedItem, this);
-                budgetCategory.Show(); 
+                EditBudgetCategory budgetCategory = new EditBudgetCategory((BudgetCategory)lstCategory.SelectedItem, this);
+                budgetCategory.Show();
                 budgetCategory.FormClosing += (sender, eventArgs) =>
                 {
                     LoadBudgetData(CurrentBudget);
@@ -59,7 +59,7 @@ namespace InterfazLogic
         private void ChangeBudgetCategory_Click(object sender, EventArgs e)
         {
             EditBudgetCategory();
-        }       
+        }
 
         private void comboBoxMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -70,7 +70,7 @@ namespace InterfazLogic
         private Budget GetBudget()
         {
             string month = nMonth.SelectedItem.ToString();
-            int year = (int) nYear.Value;
+            int year = (int)nYear.Value;
             return logicController.BudgetGetOrCreate(month, year);
         }
 
@@ -82,7 +82,7 @@ namespace InterfazLogic
             foreach (var budgetCategory in budgetCategories)
             {
                 lstCategory.Items.Add(budgetCategory);
-            }            
+            }
         }
 
         private void numericYear_ValueChanged(object sender, EventArgs e)
@@ -93,15 +93,22 @@ namespace InterfazLogic
 
         private void button2_Click(object sender, EventArgs e)
         {
-            logicController.AddBudget(CurrentBudget);
-            Visible = false;
+            try
+            {
+                logicController.AddBudget(CurrentBudget);
+                Visible = false;
+            }
+            catch (ArgumentNullException){
+                lblMonth.Text = "Selecct a correct month";
+                lblMonth.ForeColor = Color.Red;
+            }
+
         }
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
         }
-
-       
     }
-}
+    }

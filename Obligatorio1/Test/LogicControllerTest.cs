@@ -155,7 +155,7 @@ namespace Test
         {
             string month = "Diciembre";
             int year = 2020;
-            Budget expectedBudget = new Budget(12, repo.Categories) { 
+            Budget expectedBudget = new Budget(12, repo.GetCategories()) { 
                 Year = 2020, 
                 TotalAmount = 0 
             };
@@ -284,13 +284,9 @@ namespace Test
             DateTime month5 = new DateTime(2020, 5, 24);
             Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
             Expense expense2 = new Expense { Amount = 23, CreationDate = month5, Description = "cine" };
-            List<Expense> expenses = new List<Expense>()
-            {
-                expense1,
-                expense2,
-            };
             Repository repo = new Repository();
-            repo.Expenses = expenses;
+            repo.GetExpenses().Add(expense1);
+            repo.GetExpenses().Add(expense2);
             LogicController controller = new LogicController(repo);
             List<string> monthsOrder = controller.OrderedMonthsInWhichThereAreExpenses();
             CollectionAssert.AreEqual(months, monthsOrder);
@@ -308,14 +304,11 @@ namespace Test
             DateTime month3 = new DateTime(2020, 1, 24);
             Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
             Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
-            Expense expense3 = new Expense { Amount = 23, CreationDate = month3, Description = "casino" };
-            List<Expense> expenses = new List<Expense>() {
-            expense1,
-            expense2,
-            expense3,
-            };
+            Expense expense3 = new Expense { Amount = 23, CreationDate = month3, Description = "casino" };           
             Repository repository = new Repository();
-            repository.Expenses = expenses;
+            repository.GetExpenses().Add(expense1);
+            repository.GetExpenses().Add(expense2);
+            repository.GetExpenses().Add(expense3);
             LogicController controller = new LogicController(repository);
             double totalAmount = controller.AmountOfExpensesInAMonth(month);
             Assert.AreEqual(46, totalAmount);
@@ -332,14 +325,10 @@ namespace Test
             Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "cine" };
             Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
             Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
-            List<Expense> expenses = new List<Expense>()
-            {
-                expense1,
-                expense2,
-                expense3,
-            };
             Repository repository = new Repository();
-            repository.Expenses = expenses;
+            repository.GetExpenses().Add(expense1);
+            repository.GetExpenses().Add(expense2);
+            repository.GetExpenses().Add(expense3);
             double totalAmount = logicController.AmountOfExpensesInAMonth(month);
             Assert.AreEqual(0, totalAmount);
 
@@ -355,13 +344,10 @@ namespace Test
             Expense expense1 = new Expense { Amount = 23.5, CreationDate = month1, Description = "cine" };
             Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "cine" };
             Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
-            List<Expense> expenses = new List<Expense>() {
-            expense1,
-            expense2,
-            expense3,
-            };
             Repository repository = new Repository();
-            repository.Expenses = expenses;
+            repository.GetExpenses().Add(expense1);
+            repository.GetExpenses().Add(expense2);
+            repository.GetExpenses().Add(expense3);
             LogicController controller = new LogicController(repository);
             double totalAmount = controller.AmountOfExpensesInAMonth(month);
             Assert.AreEqual(23.5, totalAmount);
@@ -374,12 +360,9 @@ namespace Test
             string month = "Enero";
             Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "Cuando fui al cine" };
             Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "Cuando fui al cine" };
-            List<Expense> expenses = new List<Expense>(){
-                expense1,
-                expense2,
-            };
             Repository repository = new Repository();
-            repository.Expenses = expenses;
+            repository.GetExpenses().Add(expense1);
+            repository.GetExpenses().Add(expense2);
             LogicController controller = new LogicController(repository);
             Assert.AreEqual(expense1, controller.GetExpenseByMonth(month).ToArray()[0]);
 
@@ -391,12 +374,9 @@ namespace Test
             string month = "Mayo";
             Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "Cuando fui al cine" };
             Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "Cuando fui al cine" };
-            List<Expense> expenses = new List<Expense>(){
-                expense1,
-                expense2,
-            };
             Repository repository = new Repository();
-            repository.Expenses = expenses;
+            repository.GetExpenses().Add(expense1);
+            repository.GetExpenses().Add(expense2);
             Assert.AreEqual(0, logicController.GetExpenseByMonth(month).Count);
         }
 
@@ -478,7 +458,7 @@ namespace Test
             expense.Category = category;
             Repository repository = new Repository();
             repository.AddExpense(expense);
-            Assert.AreEqual(expense, repository.Expenses.ToArray()[0]);
+            Assert.AreEqual(expense, repository.GetExpenses().ToArray()[0]);
         }
 
         [TestMethod]
@@ -527,7 +507,7 @@ namespace Test
             Repository EmptyRepository = new Repository();
             LogicController controller = new LogicController(EmptyRepository);
             controller.AddBudgetCategory(validBudgetCategory);
-            BudgetCategory currentBudgetCategory = EmptyRepository.BudgetCategories.First();
+            BudgetCategory currentBudgetCategory = EmptyRepository.GetBudgetsCategory().First();
             Assert.AreEqual(validBudgetCategory, currentBudgetCategory);
         }
 
@@ -551,7 +531,7 @@ namespace Test
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
             controller.SetCategory("comida", keyWords2);
-            Assert.AreEqual(categoryFood, repository.Categories.ToArray()[0]);
+            Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
         }
         [TestMethod]
         public void CreateAddExpense()
@@ -560,7 +540,7 @@ namespace Test
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
             controller.SetExpense(23, new DateTime(2020, 01, 01), "cena", categoryFood);
-            Assert.AreEqual(expectedExpense, repository.Expenses.ToArray()[0]);
+            Assert.AreEqual(expectedExpense, repository.GetExpenses().ToArray()[0]);
         }
 
         [TestMethod]
@@ -688,7 +668,7 @@ namespace Test
             Repository EmptyRepository = new Repository();
             LogicController controller = new LogicController(EmptyRepository);
             controller.AddBudget(validBudget);
-            Budget currentBudget =controller.Repository.Budgets.First();
+            Budget currentBudget =controller.Repository.GetBudgets().First();
             Assert.AreEqual(validBudget, currentBudget);
         }
 
@@ -710,13 +690,9 @@ namespace Test
             };
             Budget budget1 = new Budget(1) { TotalAmount = 23, Year = 2020 };
             Budget budget2 = new Budget(5) { TotalAmount = 23, Year = 2020 };
-            List<Budget> budgets = new List<Budget>()
-            {
-                budget1,
-                budget2,
-            };
             Repository repo = new Repository();
-            repo.Budgets = budgets;
+            repo.GetBudgets().Add(budget1);
+            repo.GetBudgets().Add(budget2);
             LogicController controller = new LogicController(repo);
             List<string> monthsOrder = controller.OrderedMonthsInWhichThereAreBudget();
             CollectionAssert.AreEqual(months, monthsOrder);

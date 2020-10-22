@@ -11,13 +11,13 @@ namespace BusinessLogic
    
     public class Repository
     {
-        public List<Category> Categories = new List<Category>();
+        private List<Category> Categories;
 
-        public List<Expense> Expenses { get; set; }
+        private List<Expense> Expenses;
 
-        public List<Budget> Budgets { get; set; }
+        private List<Budget> Budgets;
 
-        public List<BudgetCategory> BudgetCategories { get; set; }
+        private List<BudgetCategory> BudgetCategories;
 
         public Repository()
         {
@@ -137,6 +137,12 @@ namespace BusinessLogic
         {
             return Budgets;
         }
+
+        public List<BudgetCategory> GetBudgetsCategory()
+        {
+            return BudgetCategories;
+        }
+
 
     }
 }

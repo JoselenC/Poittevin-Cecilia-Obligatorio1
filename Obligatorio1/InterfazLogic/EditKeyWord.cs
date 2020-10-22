@@ -32,6 +32,7 @@ namespace InterfazLogic
             logicController = vLogicController;
             this.MaximumSize = new Size(380, 200);
             this.MinimumSize = new Size(380, 200);
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
