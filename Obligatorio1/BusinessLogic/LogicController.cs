@@ -24,6 +24,13 @@ namespace BusinessLogic
             return monthInBaseOne;
         }
 
+        private bool SameCreationDate(Budget budget, int month, int year)
+        {
+            if (budget.Month == month && budget.Year == year)
+                return true;
+            return false;
+        }
+
         public Budget FindBudget(string month, int year)
         {
             int vMonth = StringToIntMonth(month);
@@ -83,9 +90,17 @@ namespace BusinessLogic
 
         public Budget BudgetGetOrCreate(string month, int year)
         {
+            Budget returnBudget;
             List<Category> categories = Repository.GetCategories();
             int monthIndex = StringToIntMonth(month);
-            Budget returnBudget = FindBudget(month, year);
+            try
+            {               
+                returnBudget = FindBudget(month, year);                
+            }
+            catch (NoFindBudget)
+            {
+                returnBudget=null;
+            }
             returnBudget = CreateBudget(year, categories, monthIndex, returnBudget);
             return returnBudget;
 
@@ -143,12 +158,7 @@ namespace BusinessLogic
             Repository.SetExpense(amount, creationDate, description, category);
         }
       
-        private bool SameCreationDate(Budget budget,int month,int year)
-        {
-            if (budget.Month == month && budget.Year == year)
-                return true;
-            return false;
-        }
+        
 
         private bool FindCategoryByDescription(ref Category category, string[] descriptionArray, bool exist, ref int cont, List<Category> categories)
         {
@@ -205,6 +215,8 @@ namespace BusinessLogic
             }
             return monthsString;
         }
+
+        
 
         private void AddMonthExpense(List<int> orderedMonthsInt, Expense expense)
         {

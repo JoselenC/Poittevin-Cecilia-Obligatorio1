@@ -161,9 +161,8 @@ namespace Test
                 TotalAmount = 0 
             };
             Repository repository = new Repository();
-            repository.GetBudgets().Add(expectedBudget);
             LogicController controller = new LogicController(repository);
-            Budget budget = controller.BudgetGetOrCreate(month, year);
+            Budget budget = logicController.BudgetGetOrCreate(month, year);
             Assert.AreEqual(expectedBudget, budget);
         }
 
