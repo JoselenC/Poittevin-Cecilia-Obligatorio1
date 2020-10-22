@@ -121,8 +121,11 @@ namespace Test
         {
             string description = "cine";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            logicController.AddExpense(expense);
-            Expense expectedExpense = logicController.FindExpense(description);
+            Repository repository = new Repository();
+            repository.AddExpense(expense);
+            LogicController controller = new LogicController(repository);
+            controller.AddExpense(expense);
+            Expense expectedExpense = controller.FindExpense(description);
             Assert.AreEqual(expense, expectedExpense);
 
         }
@@ -204,7 +207,15 @@ namespace Test
         [TestMethod]
         public void FindBudgetFoundCase()
         {
-            Budget actualBudget = logicController.FindBudget("Enero", 2020);
+            JanuaryBudget = new Budget(1)
+            {
+                Year = 2020,
+                TotalAmount = 0
+            };
+            Repository repository = new Repository();
+            repository.AddBudget(JanuaryBudget);
+            LogicController controller = new LogicController(repository);
+            Budget actualBudget = controller.FindBudget("Enero", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
         }
 
