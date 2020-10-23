@@ -33,6 +33,7 @@ namespace InterfazLogic
             this.MaximumSize = new Size(380, 200);
             this.MinimumSize = new Size(380, 200);
             StartPosition = FormStartPosition.CenterScreen;
+            tbEdit.Clear();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -55,7 +56,7 @@ namespace InterfazLogic
                     keyWords.RemoveAt(index);
                     keyWords.Add(tbEdit.Text);
                     lstkw.Items.RemoveAt(index);
-                    lstkw.Items.Add(keyWords[index]);
+                    lstkw.Items.Add(keyWordEdited);
                     Close();
                 }
             }

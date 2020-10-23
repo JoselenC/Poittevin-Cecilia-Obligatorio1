@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.cboxMonth = new System.Windows.Forms.ComboBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.lstVReport = new System.Windows.Forms.ListView();
             this.cCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cPlanned = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,6 +41,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
             this.lblMonth = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,18 +53,6 @@
             this.cboxMonth.Name = "cboxMonth";
             this.cboxMonth.Size = new System.Drawing.Size(589, 39);
             this.cboxMonth.TabIndex = 0;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSearch.Location = new System.Drawing.Point(893, 171);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(216, 55);
-            this.btnSearch.TabIndex = 1;
-            this.btnSearch.Text = "Consult";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // lstVReport
             // 
@@ -127,7 +115,6 @@
             0,
             0,
             0});
-            this.numYear.ValueChanged += new System.EventHandler(this.numYear_ValueChanged);
             // 
             // label2
             // 
@@ -188,6 +175,18 @@
             this.lblMonth.Size = new System.Drawing.Size(0, 32);
             this.lblMonth.TabIndex = 15;
             // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnSearch.Location = new System.Drawing.Point(893, 171);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(216, 55);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.Text = "Consult";
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // BudgetReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
@@ -215,7 +214,6 @@
         #endregion
 
         private System.Windows.Forms.ComboBox cboxMonth;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ListView lstVReport;
         private System.Windows.Forms.ColumnHeader cCategory;
         private System.Windows.Forms.ColumnHeader cPlanned;
@@ -228,5 +226,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Label lblMonth;
+        private System.Windows.Forms.Button btnSearch;
     }
 }

@@ -17,6 +17,7 @@ namespace InterfazLogic
         private LogicController logicController;
         private int oldMonthIndex = DateTime.Now.Month - 1;
         private int oldYearValue = DateTime.Now.Year;
+
         public BudgetReport(Repository vRepository)
         {
             logicController = new LogicController(vRepository);
@@ -39,20 +40,23 @@ namespace InterfazLogic
             }
             else
             {
+                
                 cboxMonth.Items.Clear();
                 List<string> monthsWithBudget = logicController.OrderedMonthsInWhichThereAreBudget();
                 foreach (string month in monthsWithBudget)
                 {
+                   
                     cboxMonth.Items.Add(month);
+                    cboxMonth.SelectedIndex = 0;
                 }
+                
             }
            
         }
 
         private bool CompleteReport(ref double totalPlanedAmount, ref double totalRealAmount, ref double totalDiffAmount, Budget budget)
         {
-            lblReport.Text = "";
-            lstVReport.Items.Clear();
+           
             foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
             {
                 Category category = budgetCategory.Category;
@@ -108,16 +112,25 @@ namespace InterfazLogic
                 if (!initializingForm)
                 {
 
-                    Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), (int)numYear.Value);
+                   
                     try
                     {
-                        return CompleteReport(ref totalPlanedAmount, ref totalRealAmount, ref totalDiffAmount, budget);
+                        int year=(int)numYear.Value;
+                        Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
+                        return CompleteReport(ref totalPlanedAmount, ref totalRealAmount, ref totalDiffAmount, budget);                       
+                        
 
                     }
                     catch (NoFindBudget)
                     {
-                        lblReport.Text = "There is not budget created for the selected date";
-                        lblReport.ForeColor = Color.Red;
+                        MessageBox.Show("There is not budget created for the selected date");
+                        Visible = false;
+                        return false;
+                    }
+                    catch (System.NullReferenceException)
+                    {
+                        lblMonth.Text = "Select a month to consult";
+                        lblMonth.ForeColor = Color.Red;
                         return false;
                     }
 
@@ -133,7 +146,7 @@ namespace InterfazLogic
             }
         }
 
-      
+
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -142,9 +155,9 @@ namespace InterfazLogic
 
         private void cboxMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
-                oldMonthIndex = cboxMonth.SelectedIndex;
-            
+
+            oldMonthIndex = cboxMonth.SelectedIndex;
+
         }
 
         private void numYear_ValueChanged(object sender, EventArgs e)
@@ -155,10 +168,11 @@ namespace InterfazLogic
             }
             else
             {
-                oldYearValue = (int) numYear.Value;
+                oldYearValue = (int)numYear.Value;
             }
         }
 
+     
         private void btnAccept_Click(object sender, EventArgs e)
         {
             Visible = false;

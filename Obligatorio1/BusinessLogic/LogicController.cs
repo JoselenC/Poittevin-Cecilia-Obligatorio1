@@ -257,6 +257,17 @@ namespace BusinessLogic
             return orderedMonthsString;
         }
 
+        public bool ExistBudgetInThisYear(int year)
+        {
+            List<Budget> budgets = Repository.GetBudgets();
+            foreach (Budget budget in budgets)
+            {
+                if (budget.Year == year)
+                    return true;
+            }
+            return false;
+        }
+
         private static double AmountOfExpenseInAMonth(int monthInt, double total, Expense expense)
         {
             if (expense.CreationDate.Month == monthInt)

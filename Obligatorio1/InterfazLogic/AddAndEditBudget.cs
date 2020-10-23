@@ -22,7 +22,7 @@ namespace InterfazLogic
             this.MinimumSize = new Size(500, 600);
             nMonth.Items.AddRange(logicController.GetAllMonthsString());
             CategoriesCount();
-
+            nMonth.SelectedIndex = 0;
         }
 
         private void CategoriesCount()
@@ -69,9 +69,11 @@ namespace InterfazLogic
 
         private Budget GetBudget()
         {
+           
             string month = nMonth.SelectedItem.ToString();
             int year = (int)nYear.Value;
             return logicController.BudgetGetOrCreate(month, year);
+
         }
 
         private void LoadBudgetData(Budget budget)
