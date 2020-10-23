@@ -35,9 +35,10 @@ namespace InterfazLogic
         }
         private void CompleteCategories(string description)
         {
-            Category category = logicController.AsignCategoryByDescriptionExpense(description);
+            
             try
-            {                
+            {
+                Category category = logicController.AsignCategoryByDescriptionExpense(description);
                 lstCategories.Items.Add(category);
             }
             catch (NoAsignCategoryByDescriptionExpense)

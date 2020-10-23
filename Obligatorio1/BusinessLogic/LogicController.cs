@@ -189,6 +189,7 @@ namespace BusinessLogic
             exist = FindCategoryByDescription(ref category, descriptionArray, exist, ref cont, categories);
             if (cont == 1)
                 return category;
+            else
             throw new NoAsignCategoryByDescriptionExpense();
         }     
 
@@ -293,22 +294,18 @@ namespace BusinessLogic
             throw new NoFindCategoryByName();
         }
 
-        private bool SameDescriptionExpense(Expense expense, string expenseDescription)
-        {
-            if (expense.Description == expenseDescription)
-                return true;
-            return false;
-        }
 
-        public Expense FindExpense(string expenseDescription)
+        public Expense FindExpense(Expense expense)
         {
             List<Expense> expenses = Repository.GetExpenses();
-            foreach (var expense in expenses)
-            {
-                if (SameDescriptionExpense(expense, expenseDescription))
-                    return expense;
-            }
-            throw new NoFindExpenseByDescription();
+          
+                foreach (var expense2 in expenses)
+                {
+                    if (expense.Equals(expense2))
+                        return expense;
+                }
+            
+            return null;
         }
 
         private bool ExistKeyWord(string pKeyWord, bool exist, Category category)
@@ -368,9 +365,9 @@ namespace BusinessLogic
         }        
         
 
-        public Expense DeleteExpense(string description)
+        public Expense DeleteExpense(Expense expenseToDelete)
         {
-            Expense expense = FindExpense(description);
+            Expense expense = FindExpense(expenseToDelete);
             Repository.GetExpenses().Remove(expense);
             return expense;
         }

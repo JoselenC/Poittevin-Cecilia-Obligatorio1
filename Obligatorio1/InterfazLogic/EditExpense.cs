@@ -50,36 +50,43 @@ namespace InterfazLogic
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (lstExpenses.SelectedIndex >= 0)
+            try
             {
-               descriptionExpense = lstExpenses.SelectedItem.ToString();
-               expenseToEdit = logicController.FindExpense(descriptionExpense);
-               tbDescription.Text = expenseToEdit.Description;
-               nAmount.Value = (decimal)(expenseToEdit.Amount);
-               dateTime.Value = expenseToEdit.CreationDate;
-               lblCategory.Text = expenseToEdit.Category.ToString();
-               indexToEdit = lstExpenses.SelectedIndex;
-                selectExpense = true;
-            }
-            else if (logicController.GetExpenses().Count == 0)
-            {
-                lblExpenses.Text = "There are no more expenses to edit";
-                lblExpenses.ForeColor = Color.Red;
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
-            }
-            else
-            {
-                lblExpenses.Text = "Select expense to edit";
-                lblExpenses.ForeColor = Color.Red;
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
-                
+                if (lstExpenses.SelectedIndex >= 0)
+                {
+                    expenseToEdit = logicController.FindExpense((Expense)lstExpenses.SelectedItem);
+                    tbDescription.Text = expenseToEdit.Description;
+                    nAmount.Value = (decimal)(expenseToEdit.Amount);
+                    dateTime.Value = expenseToEdit.CreationDate;
+                    lblCategory.Text = expenseToEdit.Category.ToString();
+                    indexToEdit = lstExpenses.SelectedIndex;
+                    selectExpense = true;
+                    btnDelete.Enabled = false;
+                }
+                else if (logicController.GetExpenses().Count == 0)
+                {
+                    lblExpenses.Text = "There are no more expenses to edit";
+                    lblExpenses.ForeColor = Color.Red;
+                    lblAmount.Text = "";
+                    lblCategories.Text = "";
+                    lbDescription.Text = "";
+                    lblDate.Text = "";
+                }
+                else
+                {
+                    lblExpenses.Text = "Select expense to edit";
+                    lblExpenses.ForeColor = Color.Red;
+                    lblAmount.Text = "";
+                    lblCategories.Text = "";
+                    lbDescription.Text = "";
+                    lblDate.Text = "";
 
+
+
+                }
+            }
+            catch (NoFindEqualsExpense)
+            {
 
             }
         }
@@ -88,7 +95,10 @@ namespace InterfazLogic
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
-                logicController.DeleteExpense(lstExpenses.SelectedItem.ToString());
+                tbDescription.Clear();
+                nAmount.Value = 1;
+                lstCategories.Items.Clear();
+                logicController.DeleteExpense((Expense)lstExpenses.SelectedItem);
                 int index = lstExpenses.SelectedIndex;
                 lstExpenses.Items.RemoveAt(index);
                 lblExpenses.Text = "";
@@ -117,6 +127,7 @@ namespace InterfazLogic
         {
             try
             {
+                btnDelete.Enabled = true;
                 TryRegisterNewExpense();
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
@@ -165,6 +176,7 @@ namespace InterfazLogic
                 lbDescription.Text = "";
                 lblDate.Text = "";
             }
+          
         }
 
         private void TryRegisterNewExpense()
@@ -192,22 +204,29 @@ namespace InterfazLogic
                 if (indexToEdit >= 0)
                 {
                     lstExpenses.Items.RemoveAt(indexToEdit);
-                    logicController.DeleteExpense(descriptionExpense);
+                    logicController.DeleteExpense(expenseToEdit);
                 }
             }
             else
             {
-                category = expenseToEdit.Category;
-                string description = tbDescription.Text;
-                double amount = decimal.ToDouble(nAmount.Value);
-                DateTime creationDate = dateTime.Value;
-                logicController.SetExpense(amount, creationDate, description, category);
-                MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Visible = false;
-                if (indexToEdit >= 0)
+                if (expenseToEdit != null)
                 {
-                    lstExpenses.Items.RemoveAt(indexToEdit);
-                    logicController.DeleteExpense(descriptionExpense);
+                    category = expenseToEdit.Category;
+                    string description = tbDescription.Text;
+                    double amount = decimal.ToDouble(nAmount.Value);
+                    DateTime creationDate = dateTime.Value;
+                    logicController.SetExpense(amount, creationDate, description, category);
+                    MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Visible = false;
+                    if (indexToEdit >= 0)
+                    {
+                        lstExpenses.Items.RemoveAt(indexToEdit);
+                        logicController.DeleteExpense(expenseToEdit);
+                    }
+                }
+                else
+                {
+                    Visible = false;
                 }
             }
         }

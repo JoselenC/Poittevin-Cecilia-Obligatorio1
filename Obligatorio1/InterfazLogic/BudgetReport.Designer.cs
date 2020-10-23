@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnAccept = new System.Windows.Forms.Button();
+            this.lblMonth = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).BeginInit();
             this.SuspendLayout();
             // 
@@ -179,11 +180,20 @@
             this.btnAccept.UseVisualStyleBackColor = false;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
+            // lblMonth
+            // 
+            this.lblMonth.AutoSize = true;
+            this.lblMonth.Location = new System.Drawing.Point(202, 248);
+            this.lblMonth.Name = "lblMonth";
+            this.lblMonth.Size = new System.Drawing.Size(0, 32);
+            this.lblMonth.TabIndex = 15;
+            // 
             // BudgetReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.lblMonth);
             this.Controls.Add(this.btnAccept);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
@@ -217,5 +227,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.Label lblMonth;
     }
 }

@@ -100,28 +100,37 @@ namespace InterfazLogic
 
         private bool LoadBudgetReport()
         {
-            double totalPlanedAmount = 0;
-            double totalRealAmount = 0;
-            double totalDiffAmount = 0;
-            if (!initializingForm)
+            try
             {
-                
-                Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), (int)numYear.Value);
-                try
+                double totalPlanedAmount = 0;
+                double totalRealAmount = 0;
+                double totalDiffAmount = 0;
+                if (!initializingForm)
                 {
-                    return CompleteReport(ref totalPlanedAmount, ref totalRealAmount, ref totalDiffAmount, budget);
+
+                    Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), (int)numYear.Value);
+                    try
+                    {
+                        return CompleteReport(ref totalPlanedAmount, ref totalRealAmount, ref totalDiffAmount, budget);
+
+                    }
+                    catch (NoFindBudget)
+                    {
+                        lblReport.Text = "There is not budget created for the selected date";
+                        lblReport.ForeColor = Color.Red;
+                        return false;
+                    }
 
                 }
-                catch (NoFindBudget)
-                {
-                    lblReport.Text = "There is not budget created for the selected date";
-                    lblReport.ForeColor = Color.Red;
+                else
                     return false;
-                }              
-
             }
-            else
+            catch (ArgumentNullException)
+            {
+                lblMonth.Text = "Selecct a correct month";
+                lblMonth.ForeColor = Color.Red;
                 return false;
+            }
         }
 
       

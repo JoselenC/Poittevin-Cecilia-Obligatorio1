@@ -65,6 +65,9 @@ namespace BusinessLogic
     public class NoFindExpenseByDescription : Exception
     {
     }
+    public class NoFindEqualsExpense: Exception
+    {
+    }
 
     public class NoFindBudget : Exception
     {

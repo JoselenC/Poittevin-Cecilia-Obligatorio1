@@ -117,30 +117,75 @@ namespace Test
 
 
         [TestMethod]
-        public void FindExpenseByDescription()
+        public void FindExpense()
         {
             string description = "cine";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Repository repository = new Repository();
             repository.AddExpense(expense);
             LogicController controller = new LogicController(repository);
-            controller.AddExpense(expense);
-            Expense expectedExpense = controller.FindExpense(description);
+            Expense expectedExpense = controller.FindExpense(expense);
+            Assert.AreEqual(expense, expectedExpense);
+
+
+        }
+
+        [TestMethod]
+        public void FindEqualsExpense()
+        {
+            string description = "cine";
+            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Repository repository = new Repository();
+            repository.AddExpense(expense);
+            LogicController controller = new LogicController(repository);
+            Expense expectedExpense = controller.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
 
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NoFindExpenseByDescription), "")]
-        public void FindExpenseNullByDescription()
+        public void FindNullExpense()
         {
-            string description = "cena";
-            Expense expectedExpense =logicController.FindExpense(description);
+            string description = "cine";
+            Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Repository repository = new Repository();
+            repository.AddExpense(expense);
+            LogicController controller = new LogicController(repository);
+            Expense expectedExpense = controller.FindExpense(expense2);
             Assert.IsNull(expectedExpense);
 
         }
 
-        
+        [TestMethod]
+        public void FindNullExpenseEmtyRepository()
+        {
+            string description = "cine";
+            Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Repository repository = new Repository();
+            LogicController controller = new LogicController(repository);
+            Expense expectedExpense = controller.FindExpense(expense);
+            Assert.IsNull(expectedExpense);
+
+        }
+
+
+        [TestMethod]
+        public void AddExpense()
+        {
+            string description = "cine";
+            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Repository repository = new Repository();
+            LogicController controllerExpected = new LogicController(repository);
+            controllerExpected.GetExpenses().Add(expense);
+            LogicController controller = new LogicController(repository);
+            controller.AddExpense(expense);
+            CollectionAssert.AreEqual(controllerExpected.GetExpenses(), controller.GetExpenses());
+
+        }
+
         [TestMethod]
         public void BudgetGetOrCreateFindCase()
         {
@@ -233,9 +278,10 @@ namespace Test
         public void FindRemoveExpennse()
         {            
             Repository repository = new Repository();
-            repository.SetExpense(23, new DateTime(2020, 01, 01), "cena",categoryFood);
+            Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
+            repository.AddExpense(expense);
             LogicController controller = new LogicController(repository);
-            controller.DeleteExpense("cena");
+            controller.DeleteExpense(expense);
             Assert.AreEqual(0, controller.GetExpenses().Count);
         }
         [TestMethod]
