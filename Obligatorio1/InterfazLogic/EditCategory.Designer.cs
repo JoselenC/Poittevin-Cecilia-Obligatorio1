@@ -46,6 +46,7 @@
             this.lblKeyWord = new System.Windows.Forms.Label();
             this.lblKyWords = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -174,9 +175,9 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(427, 701);
+            this.btnAccept.Location = new System.Drawing.Point(235, 727);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(227, 63);
+            this.btnAccept.Size = new System.Drawing.Size(227, 73);
             this.btnAccept.TabIndex = 28;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = false;
@@ -215,11 +216,23 @@
             this.label3.TabIndex = 32;
             this.label3.Text = "Key word";
             // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.Tan;
+            this.btnCancel.Location = new System.Drawing.Point(600, 727);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(227, 73);
+            this.btnCancel.TabIndex = 35;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // EditCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblKyWords);
             this.Controls.Add(this.lblKeyWord);
@@ -265,5 +278,6 @@
         private System.Windows.Forms.Label lblKeyWord;
         private System.Windows.Forms.Label lblKyWords;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

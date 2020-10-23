@@ -377,7 +377,30 @@ namespace BusinessLogic
         }
 
         
-       
+        public void EditCategoryExpense(Category category, string name, List<string> keywords)
+        {
+            Category newCategory = new Category { Name = name, KeyWords = keywords };
+            List<Expense> expenses = GetExpenses();
+            foreach (Expense expense in expenses)
+            {
+                if (expense.Category.Equals(category))
+                    expense.Category = newCategory;
+            }
+        }
+        public void EditCategoryBudget(Category category, string name, List<string> keywords)
+        {
+            Category newCategory = new Category { Name = name, KeyWords = keywords };
+            List<Budget> budgets = Repository.GetBudgets();
+            foreach (Budget budget in budgets)
+            {
+                foreach(BudgetCategory budgetCategory in budget.BudgetCategories)
+                {
+                    if(budgetCategory.Category.Equals(category)){
+                        budgetCategory.Category = newCategory;
+                    }
+                }
+            }
+        }
 
     }
 

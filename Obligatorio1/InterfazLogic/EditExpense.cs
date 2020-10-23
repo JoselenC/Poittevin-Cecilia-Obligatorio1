@@ -249,5 +249,10 @@ namespace InterfazLogic
                 lblCategories.ForeColor = Color.Red;
             }
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
     }
 }

@@ -750,5 +750,101 @@ namespace Test
 
         }
 
+        [TestMethod]
+        public void EditCategoryExpense()
+        {
+            Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
+            Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
+            Repository repository = new Repository();
+            LogicController controller = new LogicController(repository);
+            controller.AddExpense(expense);
+            List <string> keyWords = new List<string>
+            {
+                "cine",
+                "teatro",
+                "casino"
+            };
+            controller.EditCategoryExpense(categoryFood, "entretenimiento", keyWords);
+            CollectionAssert.Equals(expectedExpense, expense);
+        }
+
+        [TestMethod]
+        public void NoEditCategoryExpense()
+        {
+            Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
+            Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "cena", Category = categoryFood };
+            Repository repository = new Repository();
+            LogicController controller = new LogicController(repository);
+            controller.AddExpense(expense);
+            List<string> keyWords = new List<string>
+            {
+                "cine",
+                "teatro",
+                "casino"
+            };
+            controller.EditCategoryExpense(categoryFood, "cena", keyWords);
+            CollectionAssert.Equals(expectedExpense, expense);
+        }
+
+        [TestMethod]
+        public void EditCategoryBudget()
+        {
+            List<Category> categories = new List<Category>
+            {
+                categoryEntertainment,
+                categoryFood,
+            };
+            Budget budget = new Budget(12, categories)
+            {
+                Year = 2020,
+                TotalAmount = 0
+            };
+            List<Category> categories2 = new List<Category>
+            {
+                categoryEntertainment,
+                categoryHouse
+            };
+            Budget expectedBudget = new Budget(12, categories2)
+            {
+                Year = 2020,
+                TotalAmount = 0
+            };
+            List<string> keyWords = new List<string>
+            {
+                "CoffeMaker",
+                "toilet paper",
+            };
+            Repository repository = new Repository();
+            LogicController controller = new LogicController(repository);
+            controller.AddBudget(budget); 
+            controller.EditCategoryBudget(categoryFood, "House", keyWords);
+            CollectionAssert.Equals(expectedBudget, budget);
+        }
+
+        [TestMethod]
+        public void NoEditCategoryBudget()
+        {
+            List<Category> categories = new List<Category>
+            {
+                categoryEntertainment,
+                categoryFood,
+            };
+            Budget budget = new Budget(12, categories)
+            {
+                Year = 2020,
+                TotalAmount = 0
+            };
+            List<string> keyWords = new List<string>
+            {
+                "CoffeMaker",
+                "toilet paper",
+            };
+            Repository repository = new Repository();
+            LogicController controller = new LogicController(repository);
+            controller.AddBudget(budget);
+            controller.EditCategoryBudget(categoryFood, "House", keyWords);
+            CollectionAssert.Equals(budget, budget);
+        }
+
     }
 }

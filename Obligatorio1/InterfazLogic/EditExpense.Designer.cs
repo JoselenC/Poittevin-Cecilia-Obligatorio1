@@ -49,6 +49,7 @@
             this.lblDate = new System.Windows.Forms.Label();
             this.lblCategories = new System.Windows.Forms.Label();
             this.lstCategories = new System.Windows.Forms.ListBox();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,9 +109,9 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(461, 723);
+            this.btnAccept.Location = new System.Drawing.Point(262, 737);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(219, 56);
+            this.btnAccept.Size = new System.Drawing.Size(227, 73);
             this.btnAccept.TabIndex = 17;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = false;
@@ -273,11 +274,23 @@
             this.lstCategories.Size = new System.Drawing.Size(589, 66);
             this.lstCategories.TabIndex = 33;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.Tan;
+            this.btnCancel.Location = new System.Drawing.Point(624, 737);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(227, 73);
+            this.btnCancel.TabIndex = 34;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // EditExpense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lstCategories);
             this.Controls.Add(this.lblCategories);
             this.Controls.Add(this.lblDate);
@@ -300,7 +313,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "EditExpense";
-            this.Size = new System.Drawing.Size(1171, 791);
+            this.Size = new System.Drawing.Size(1171, 852);
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -330,5 +343,6 @@
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblCategories;
         private System.Windows.Forms.ListBox lstCategories;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
