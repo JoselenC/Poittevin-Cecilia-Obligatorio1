@@ -198,7 +198,7 @@ namespace BusinessLogic
             bool exist = false;
             foreach (string description in descriptionArray)
             {
-                exist = vCategory.KeyWords.Contiene(description);
+                exist = vCategory.KeyWords.KeywordContainsAPartOfDescription(description);
                 if (exist == true)
                     return true;
             }         

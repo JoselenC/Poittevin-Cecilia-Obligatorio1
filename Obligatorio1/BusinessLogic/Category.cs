@@ -28,13 +28,11 @@ namespace BusinessLogic
             name = vName;
         }
 
-
         private void SetKeyWords(KeyWord vKeyWords)
         {
             keyWords = new KeyWord();
             keyWords.SetKeyWord(vKeyWords);
         }
-
 
         public override bool Equals(object obj)
         {

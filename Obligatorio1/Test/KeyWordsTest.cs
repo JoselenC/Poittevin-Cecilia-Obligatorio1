@@ -141,7 +141,7 @@ namespace Test
             };
             string description = "cine";
             KeyWord keyWord = new KeyWord(keyWords);
-            Assert.IsTrue(keyWord.Contiene(description));
+            Assert.IsTrue(keyWord.KeywordContainsAPartOfDescription(description));
         }
 
         [TestMethod]
@@ -161,7 +161,7 @@ namespace Test
             };
             string description = "Salida";
             KeyWord keyWord = new KeyWord(keyWords);
-            Assert.IsFalse(keyWord.Contiene(description));
+            Assert.IsFalse(keyWord.KeywordContainsAPartOfDescription(description));
         }
 
 

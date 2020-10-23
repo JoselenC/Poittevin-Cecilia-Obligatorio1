@@ -37,10 +37,9 @@ namespace BusinessLogic
             return false;
         }
 
-        public bool Contiene(string description) {
+        public bool KeywordContainsAPartOfDescription(string description) {
             return keyWords.Contains(description);
-         }
-
+        }
 
         private bool ExistKeyWord(List<string> pKeyWords, ref bool exist, string vKeyWord)
         {           
