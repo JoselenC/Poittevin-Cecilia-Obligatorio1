@@ -14,16 +14,16 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
-            "parque",
+            "game room",
+            "Park",
             "shopping",
             };
             KeyWord keyWord = new KeyWord(keyWords);
@@ -35,15 +35,15 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             KeyWord expectedKeyWord = new KeyWord(keyWords);
             KeyWord keyWord = new KeyWord(keyWords);
@@ -56,15 +56,15 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             KeyWord expectedKeyWord = new KeyWord(keyWords);
             KeyWord keyWord = new KeyWord(keyWords);
@@ -77,21 +77,21 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             List<string> keyWords2 = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
+            "movie theater",
+            "theater",
+            "departure",
             };
             KeyWord expectedKeyWord = new KeyWord(keyWords);
             KeyWord keyWord = new KeyWord(keyWords2);
@@ -103,21 +103,21 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             List<string> keyWords2 = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
+            "movie theater",
+            "theater",
+            "departure",
             };
             KeyWord expectedKeyWord = new KeyWord(keyWords);
             KeyWord keyWord = new KeyWord(keyWords2);
@@ -129,17 +129,17 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
-            string description = "cine";
+            string description = "movie theater";
             KeyWord keyWord = new KeyWord(keyWords);
             Assert.IsTrue(keyWord.KeywordContainsAPartOfDescription(description));
         }
@@ -149,17 +149,17 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
-            string description = "Salida";
+            string description = "food";
             KeyWord keyWord = new KeyWord(keyWords);
             Assert.IsFalse(keyWord.KeywordContainsAPartOfDescription(description));
         }
@@ -170,15 +170,15 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+             "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             List<string> keyWords2 = new List<string>()
             {
@@ -186,7 +186,7 @@ namespace Test
             };
             KeyWord keyWord = new KeyWord(keyWords);
             KeyWord keyWord2 = new KeyWord(keyWords2);
-            Category category = new Category { Name = "entrtenimiento", KeyWords = keyWord };
+            Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = true;
             Assert.IsTrue(keyWord.ExistKeyWordInAnotherCategory(keyWord2,ref exist,category));
         }
@@ -196,15 +196,15 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+             "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             List<string> keyWords2 = new List<string>()
             {
@@ -214,7 +214,7 @@ namespace Test
             };
             KeyWord keyWord = new KeyWord(keyWords);
             KeyWord keyWord2 = new KeyWord(keyWords2);
-            Category category = new Category { Name = "entrtenimiento", KeyWords = keyWord };
+            Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist =true;
             Assert.IsFalse(keyWord.ExistKeyWordInAnotherCategory(keyWord2, ref exist, category));
         }
@@ -225,20 +225,20 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+             "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             KeyWord keyWord = new KeyWord(keyWords);
-            Category category = new Category { Name = "entrtenimiento", KeyWords = keyWord };
+            Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = false;
-            Assert.IsTrue(keyWord.ExistThisKey("cine", ref exist, category));
+            Assert.IsTrue(keyWord.ExistThisKey("movie theater", ref exist, category));
         }
 
 
@@ -247,20 +247,20 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+             "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             KeyWord keyWord = new KeyWord(keyWords);
-            Category category = new Category { Name = "entrtenimiento", KeyWords = keyWord };
+            Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = false;
-            Assert.IsFalse(keyWord.ExistThisKey("comida", ref exist, category));
+            Assert.IsFalse(keyWord.ExistThisKey("food", ref exist, category));
         }
 
         [TestMethod]
@@ -268,15 +268,15 @@ namespace Test
         {
             List<string> keyWords = new List<string>()
             {
-            "cine",
-            "teatro",
-            "salida",
-            "libreria",
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
             "jugeteria",
             "shopping",
-            "patinaje",
+            "skating",
             "casino",
-            "sala de juego",
+            "game room",
             };
             KeyWord keyWord = new KeyWord(keyWords);
             List<string> keyWords2 = new List<string>();

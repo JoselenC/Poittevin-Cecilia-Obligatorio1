@@ -166,7 +166,7 @@ namespace Test
         [TestMethod]
         public void BudgetToStringValidFormat()
         {
-            string expectedString = "mes: 1 anio: 2020 total: 40000";
+            string expectedString = "month: 1 year: 2020 total: 40000";
             Budget budget = new Budget(1) { TotalAmount = 40000, Year = 2020 };
             Assert.AreEqual(expectedString, budget.ToString());
         }

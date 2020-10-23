@@ -28,7 +28,7 @@ namespace Test
         {
 
             double amount = -10.5;
-            string description = "cuando fui al cine";
+            string description ="when I went to the movies";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
@@ -40,7 +40,7 @@ namespace Test
         {
 
             double amount = 23.555;
-            string description = "cuando fui al cine";
+            string description ="when I went to the movies";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
@@ -51,7 +51,7 @@ namespace Test
         public void CreatExpenseInvalidDateFutureYear()
         {
             double amount = 23;
-            string description = "cuando fui al cine";
+            string description = "when I went to the movies";
             DateTime creationDate = new DateTime(2031, 01, 01);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
@@ -61,7 +61,7 @@ namespace Test
         public void CreatExpenseInvalidDateLastYear()
         {
             double amount = 23;
-            string description = "cuando fui al cine";
+            string description = "when I went to the movies";
             DateTime creationDate = new DateTime(2017, 2, 2);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
@@ -71,7 +71,7 @@ namespace Test
         public void CreatExpenseInvalidDateYearZero()
         {
             double amount = 23;
-            string description = "cuando fui al cine";
+            string description = "when I went to the movies";
             DateTime creationDate = new DateTime(0, 01, 01);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
@@ -81,7 +81,7 @@ namespace Test
         public void CreatExpenseInvalidDescriptionLength()
         {
             double amount = 23;
-            string description = "cuando fuimos al cine de punta carretas";
+            string description ="when we went to the Punta Carretas cinema";
             DateTime creationDate = new DateTime(2021, 2, 2);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
         }
@@ -100,7 +100,7 @@ namespace Test
         public void CreatExpenseValidData()
         {
             double amount = 23.55;
-            string description = "cuando fui al cine";
+            string description = "when go to the movie";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense { Amount = amount, CreationDate =creationDate, Description = description };
             Assert.AreEqual(amount,expense.Amount);
@@ -112,7 +112,7 @@ namespace Test
         [TestMethod]
         public void EqualFalseCaseDiffAmount()
         {
-            string description = "cuando fui al cine";
+            string description = "when go to the movie";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense { Amount = 23, CreationDate = creationDate, Description = description };
             Expense expense2 = new Expense { Amount = 23.5, CreationDate = creationDate, Description = description };
@@ -124,8 +124,8 @@ namespace Test
         {
             double amount=23.5;
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = "Cuando fui al cine"};
-            Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = "Cuando fui a cenar" };
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = "when go to the movie"};
+            Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = "when I went to eat"};
             Assert.AreNotEqual(expense, expense2);
         }
 
@@ -133,7 +133,7 @@ namespace Test
         public void EqualFalseCaseDiffCreationDate()
         {
             double amount = 23.5;
-            string description = "cuando fui al cine";
+            string description = "when go to the movie";
             Expense expense = new Expense { Amount = amount, CreationDate = new DateTime(2020, 01, 01), Description = description };
             Expense expense2 = new Expense { Amount = amount, CreationDate = new DateTime(2021, 01, 01), Description = description};
             Assert.AreNotEqual(expense, expense2);
@@ -143,7 +143,7 @@ namespace Test
         public void EqualTrueEqualsExpenses()
         {
             double amount = 23.5;
-            string description = "cuando fui al cine";
+            string description = "when go to the movie";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
             Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
@@ -154,18 +154,18 @@ namespace Test
         public void EqualFalseNoExpense()
         {
             double amount = 23.5;
-            string description = "cuando fui al cine";
+            string description = "when go to the movie";
             DateTime creationDate = new DateTime(2020, 01, 01);
             Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
-            Category category = new Category() { KeyWords = new KeyWord(), Name = "Entretenimiento" };
+            Category category = new Category() { KeyWords = new KeyWord(), Name = "Entertainment" };
             Assert.AreNotEqual(expense, category);
         }
 
         [TestMethod]
         public void ToStringOnlyNameFormatValid()
         {
-            Expense expense = new Expense { Description = "cena", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
-            string expectedFormat = "cena";
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
+            string expectedFormat = "Dinner";
             string actualFormat = expense.ToString();
             Assert.AreEqual(expectedFormat, actualFormat);
 

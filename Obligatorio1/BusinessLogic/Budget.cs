@@ -72,7 +72,7 @@ namespace BusinessLogic
 
         public override string ToString()
         {
-            return $"mes: {month} anio: {Year} total: {totalAmount}";
+            return $"month: {month} year: {Year} total: {totalAmount}";
         }
 
         public void AddBudgetCategory(BudgetCategory budgetCategory)
