@@ -29,7 +29,7 @@ namespace Test
             categoryEntertainment = new Category()
             {
                 Name = "entretenimiento",
-                KeyWords = keyWords1
+                KeyWords = new KeyWord(keyWords1)
             };
             List<string> keyWords2 = new List<string>
             {
@@ -40,7 +40,7 @@ namespace Test
             categoryFood = new Category()
             {
                 Name = "comida",
-                KeyWords = keyWords2
+                KeyWords = new KeyWord(keyWords2)
             };
             List<string> keyWords3 = new List<string>
             {
@@ -50,7 +50,7 @@ namespace Test
             categoryHouse = new Category()
             {
                 Name = "House",
-                KeyWords = keyWords3
+                KeyWords = new KeyWord(keyWords3)
             };
             repo.AddCategory(categoryEntertainment);
             repo.AddCategory(categoryFood);
@@ -439,7 +439,7 @@ namespace Test
                "teatro",
                "casino",
             };
-            Category category1 = new Category { Name = "entretenimiento", KeyWords = keyWords1 };
+            Category category1 = new Category { Name = "entretenimiento", KeyWords = new KeyWord(keyWords1) };
             List<string> keyWords2 = new List<string>()
             {
                 "restaurante",
@@ -447,7 +447,7 @@ namespace Test
                 "cena",
 
             };
-            Category category2 = new Category { Name = "comida", KeyWords = keyWords2 };
+            Category category2 = new Category { Name = "comida", KeyWords = new KeyWord(keyWords2) };
             categoryList.Add(category1);
             categoryList.Add(category2);
             Repository respoitory = new Repository(categoryList);
@@ -466,14 +466,14 @@ namespace Test
                "teatro",
                "casino",
             };
-            Category category1 = new Category { Name = "diversion", KeyWords = keyWords1 };
+            Category category1 = new Category { Name = "diversion", KeyWords = new KeyWord(keyWords1) };
             List<string> keyWords2 = new List<string>()
              {
                 "restaurante",
                 "McDonalds",
                 "cena",
             };
-            Category category2 = new Category { Name = "comida", KeyWords = keyWords2 };
+            Category category2 = new Category { Name = "comida", KeyWords = new KeyWord(keyWords2) };
             categoryList.Add(category1);
             categoryList.Add(category2);
             Repository repo = new Repository(categoryList);
@@ -501,7 +501,7 @@ namespace Test
                 "cine",
                 "teatro",
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords)};
             List<Category> categories = new List<Category>();
             categories.Add(category);
             DateTime month = new DateTime(2020, 1, 24);
@@ -637,7 +637,7 @@ namespace Test
                 "cine",
                 "sala de juegos",
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
             controller.AddCategory(category);
@@ -646,7 +646,7 @@ namespace Test
             {
                 "restaurant",
             };
-            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
+            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2)};
             controller.AddCategory(category2);
             List<Category> categories = new List<Category>()
             {
@@ -667,7 +667,7 @@ namespace Test
                 "cine",
                 "teatro"
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             LogicController controller = new LogicController(repository);
             controller.AddCategory(category);
             String categoryName2 = "NameExample2";
@@ -676,7 +676,7 @@ namespace Test
                 "cine",
                 "teatro"
             };
-            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
+            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
             controller.AddCategory(category2);
             Assert.AreEqual(category, controller.GetCategories().ToArray()[0]);
         }
@@ -692,13 +692,13 @@ namespace Test
                 "cine",
                 "sala de juego",
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             LogicController controller = new LogicController(repository);
             controller.AddCategory(category);
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
-            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
+            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
             controller.AddCategory(category2);
             List<Category> categories = new List<Category>()
             {

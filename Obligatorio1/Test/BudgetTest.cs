@@ -255,13 +255,13 @@ namespace Test
         {
             List<Category> categories1 = new List<Category>()
             {
-                new Category{Name="House",KeyWords=new List<string>()  },
-                new Category{Name="Car",KeyWords=new List<string>()  },
+                new Category{Name="House",KeyWords=new KeyWord() },
+                new Category{Name="Car",KeyWords=new KeyWord()},
             };
             List<Category> categories2 = new List<Category>()
             {
-                new Category{Name="House",KeyWords=new List<string>()  },
-                new Category{Name="Car",KeyWords=new List<string>() },
+                new Category{Name="House",KeyWords=new KeyWord()},
+                new Category{Name="Car",KeyWords=new KeyWord()},
             };
             Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
             Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
@@ -273,13 +273,13 @@ namespace Test
         {
             List<Category> categories1 = new List<Category>()
             {
-                new Category{Name="House" , KeyWords=new List<string>()},
-                new Category{Name="Car", KeyWords=new List<string>() },
+                new Category{Name="House" , KeyWords=new KeyWord()},
+                new Category{Name="Car", KeyWords=new KeyWord()},
             };
             List<Category> categories2 = new List<Category>()
             {
-                 new Category{Name="Car", KeyWords=new List<string>() },
-                new Category{Name="House", KeyWords=new List<string>()},
+                 new Category{Name="Car", KeyWords=new KeyWord()},
+                new Category{Name="House", KeyWords=new KeyWord()},
             };
             Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
             Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
@@ -316,13 +316,13 @@ namespace Test
         {
             List<Category> categories1 = new List<Category>()
             {
-                new Category{Name="House", KeyWords=new List<string>() },
-                new Category{Name="Car", KeyWords=new List<string>() },
+                new Category{Name="House", KeyWords=new KeyWord()},
+                new Category{Name="Car", KeyWords=new KeyWord()},
             };
             List<Category> categories2 = new List<Category>()
             {
-                 new Category{Name="House", KeyWords=new List<string>() },
-                new Category{Name="School", KeyWords=new List<string>() },
+                 new Category{Name="House", KeyWords=new KeyWord()},
+                new Category{Name="School", KeyWords=new KeyWord()},
             };
             Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
             Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
@@ -347,13 +347,13 @@ namespace Test
         {
             List<Category> categories1 = new List<Category>()
             {
-               new Category{Name="House", KeyWords=new List<string>()},
-                new Category{Name="Car", KeyWords=new List<string>()},
+               new Category{Name="House", KeyWords=new KeyWord()},
+                new Category{Name="Car", KeyWords=new KeyWord()},
             };
             List<Category> categories2 = new List<Category>()
             {
-              new Category{Name="House", KeyWords=new List<string>()},
-                new Category{Name="Car", KeyWords=new List<string>()},
+              new Category{Name="House", KeyWords=new KeyWord()},
+                new Category{Name="Car", KeyWords=new KeyWord()},
             };
             Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
             Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
@@ -366,13 +366,13 @@ namespace Test
         {
             List<Category> categories1 = new List<Category>()
             {
-                new Category{Name="House" , KeyWords=new List<string>()},
-                new Category{Name="Car" , KeyWords=new List<string>()},
+                new Category{Name="House" , KeyWords=new KeyWord()},
+                new Category{Name="Car" , KeyWords=new KeyWord()},
             };
             List<Category> categories2 = new List<Category>()
             {
-                 new Category{Name="Car", KeyWords=new List<string>()},
-                new Category{Name="House", KeyWords=new List<string>()},
+                 new Category{Name="Car", KeyWords=new KeyWord()},
+                new Category{Name="House", KeyWords=new KeyWord()},
             };
             Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
             Budget budget2 = new Budget(1, categories2) { Year = 2020, TotalAmount = 0 };
@@ -387,8 +387,8 @@ namespace Test
         {
             List<Category> categories1 = new List<Category>()
             {
-                new Category{Name="House" , KeyWords=new List<string>()},
-                new Category{Name="Car" , KeyWords=new List<string>()},
+                new Category{Name="House" , KeyWords=new KeyWord()},
+                new Category{Name="Car" , KeyWords=new KeyWord()},
             };
             Budget budget1 = new Budget(1, categories1) { Year = 2020, TotalAmount = 0 };
             Assert.AreNotEqual(budget1, categories1.ToArray()[0]);
@@ -396,8 +396,8 @@ namespace Test
 
         [TestMethod]
         public void GetBudgetCategoryValidGetCase() {
-            Category carCategory = new Category { Name = "Car", KeyWords = new List<string>() };
-            Category houseCategory = new Category { Name = "House", KeyWords = new List<string>() };
+            Category carCategory = new Category { Name = "Car", KeyWords = new KeyWord() };
+            Category houseCategory = new Category { Name = "House", KeyWords = new KeyWord() };
             List<Category> categories = new List<Category>()
             {
                carCategory,

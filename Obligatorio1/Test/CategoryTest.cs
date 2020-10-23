@@ -12,10 +12,10 @@ namespace Test
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidNameLengthCategory), "")]
         public void CreateCategoryEmptyName()
-        {
+        {           
             String categoryName = "";
             List<string> keyWords = new List<string>();
-            Category category = new Category{Name=categoryName, KeyWords=keyWords};
+            Category category = new Category{Name=categoryName, KeyWords=new KeyWord(keyWords)};
         }
 
         [TestMethod]
@@ -24,7 +24,7 @@ namespace Test
         {
             String categoryName = "9999";
             List<string> keyWords = new List<string>();
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Test
         {
             String categoryName = "entretenimientos";
             List<string> keyWords = new List<string>();
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace Test
         {
             String categoryName = "la";
             List<string> keyWords = new List<string>();
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
         }
 
 
@@ -64,7 +64,7 @@ namespace Test
             "parque",
             "shopping",
             };
-        Category category = new Category { Name = categoryName, KeyWords = keyWords };
+        Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
 
         }
 
@@ -83,11 +83,11 @@ namespace Test
             "patinaje",
             "casino",
             "sala de juego",
-            "parque",
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            KeyWord expectedKeyWord = new KeyWord(keyWords);
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             Assert.AreEqual(category.Name, categoryName);
-            Assert.AreEqual(category.KeyWords, keyWords);
+            Assert.AreEqual(category.KeyWords,expectedKeyWord);
         }
 
        
@@ -110,7 +110,7 @@ namespace Test
                 "teatro",
                 "salida"
             };
-            Category category = new Category { Name = "Test Categoria",KeyWords=keyWords };
+            Category category = new Category { Name = "Test Categoria",KeyWords = new KeyWord(keyWords) };
             string expectedFormat = "Test Categoria";
             string actualFormat = category.ToString();
             Assert.AreEqual(expectedFormat, actualFormat);
@@ -119,8 +119,8 @@ namespace Test
 
         [TestMethod]
         public void EqualTrueCaseWithoutKeywords() {
-            Category category1 = new Category { Name = "Test Categoria" , KeyWords=new List<string>()};
-            Category category2 = new Category { Name = "Test Categoria", KeyWords = new List<string>() };
+            Category category1 = new Category { Name = "Test Categoria" , KeyWords=new KeyWord() };
+            Category category2 = new Category { Name = "Test Categoria", KeyWords = new KeyWord() };
             Assert.AreEqual(category1, category2);
         }
 
@@ -133,7 +133,7 @@ namespace Test
                 "teatro",
                 "salida"
             };
-            Category category1 = new Category { Name = "Test Categoria", KeyWords = keyWords1 };
+            Category category1 = new Category { Name = "Test Categoria", KeyWords = new KeyWord(keyWords1) };
 
             List<string> keyWords2 = new List<string>
             {
@@ -141,7 +141,7 @@ namespace Test
                 "teatro",
                 "salida"
             };
-            Category category2 = new Category { Name = "Test Categoria", KeyWords = keyWords2 };
+            Category category2 = new Category { Name = "Test Categoria", KeyWords = new KeyWord(keyWords2) };
 
             Assert.AreEqual(category1, category2);
         }
@@ -154,7 +154,7 @@ namespace Test
                 "cine",
                 "teatro",
             };
-            Category category1 = new Category { Name = "Test Categoria", KeyWords = keyWords1 };
+            Category category1 = new Category { Name = "Test Categoria", KeyWords = new KeyWord(keyWords1) };
 
             List<string> keyWords2 = new List<string>
             {
@@ -162,7 +162,7 @@ namespace Test
                 "teatro",
                 "salida"
             };
-            Category category2 = new Category { Name = "Test Categoria", KeyWords = keyWords2 };
+            Category category2 = new Category { Name = "Test Categoria", KeyWords = new KeyWord(keyWords2)};
 
             Assert.AreNotEqual(category1, category2);
         }
@@ -176,29 +176,29 @@ namespace Test
                 "teatro",
                 "comida"
             };
-            Category category1 = new Category { Name = "Test Categoria", KeyWords=keyWords1 };
+            Category category1 = new Category { Name = "Test Categoria", KeyWords= new KeyWord(keyWords1)};
             List<string> keyWords2 = new List<string>
             {
                 "cine",
                 "teatro",
                 "salida"
             };
-            Category category2 = new Category { Name = "Test Categoria", KeyWords = keyWords2 };
+            Category category2 = new Category { Name = "Test Categoria", KeyWords = new KeyWord(keyWords2)};
             Assert.AreNotEqual(category1, category2);
         }
 
         [TestMethod]
         public void EqualFalseCaseDiffName()
         {
-            Category category1 = new Category { Name = "Test Cate", KeyWords = new List<string>() };
-            Category category2 = new Category { Name = "Test Categoria",KeyWords = new List<string>() };
+            Category category1 = new Category { Name = "Test Cate", KeyWords = new KeyWord()};
+            Category category2 = new Category { Name = "Test Categoria",KeyWords = new KeyWord() };
             Assert.AreNotEqual(category1, category2);
         }
 
         [TestMethod]
         public void EqualFalseNoCategory()
         {
-            Category category1 = new Category { Name = "Test Cate", KeyWords = new List<string>() };
+            Category category1 = new Category { Name = "Test Cate", KeyWords = new KeyWord() };
             List<string> keyWords = new List<string>
             {
                 "cine",

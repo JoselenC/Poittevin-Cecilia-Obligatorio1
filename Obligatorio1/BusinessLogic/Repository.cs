@@ -45,34 +45,20 @@ namespace BusinessLogic
             }
             return exist;
         }
-
-        private bool ExistKeyWord(List<string> pKeyWords, bool exist, string vKeyWord)
+     
+        private bool ExistKeyWordInAnotherCategory(KeyWord pkeyWords, ref bool exist,Category category)
         {
-            foreach (string pKeyWord in pKeyWords)
-            {
-                if (vKeyWord.ToLower() == pKeyWord.ToLower())
-                    exist = false;
-            }
-
+            pkeyWords.ExistKeyWordInAnotherCategory(pkeyWords, ref exist, category);
             return exist;
         }
 
-        private bool ExistKeyWordInAnotherCategory(List<string> pKeyWords, bool exist, Category category)
-        {
-            foreach (string vKeyWord in category.KeyWords)
-            {
-                exist = ExistKeyWord(pKeyWords, exist, vKeyWord);
-            }
-
-            return exist;
-        }
-
-        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pKeyWords)
+        private bool AlreadyExistTheKeyWordsInAnoterCategory(KeyWord pkeyWords)
         {
             bool exist = true;
+
             foreach (Category category in Categories)
             {
-                exist = ExistKeyWordInAnotherCategory(pKeyWords, exist, category);
+                exist=ExistKeyWordInAnotherCategory(pkeyWords, ref exist, category);
             }
             return exist;
         }        
@@ -119,7 +105,8 @@ namespace BusinessLogic
 
         public void SetCategory(string vName,List<string> vKeyWords )
         {
-            Category category = new Category { Name = vName, KeyWords = vKeyWords };
+            KeyWord pKeyWord = new KeyWord(vKeyWords);
+            Category category = new Category { Name = vName, KeyWords = pKeyWord };
             AddCategory(category);
         }
 

@@ -198,7 +198,7 @@ namespace BusinessLogic
             bool exist = false;
             foreach (string description in descriptionArray)
             {
-                exist = vCategory.KeyWords.Contains(description);
+                exist = vCategory.KeyWords.Contiene(description);
                 if (exist == true)
                     return true;
             }         
@@ -308,14 +308,9 @@ namespace BusinessLogic
             return null;
         }
 
-        private bool ExistKeyWord(string pKeyWord, bool exist, Category category)
+        private bool ExistKeyWord(string pKeyWord, ref bool exist, Category category)
         {
-            foreach (string vKeyWord in category.KeyWords)
-            {
-                if (pKeyWord.ToLower() == vKeyWord.ToLower())
-                    exist = true;
-            }
-            return exist;
+            return category.KeyWords.ExistThisKey(pKeyWord, ref exist, category);
         }
 
         public bool AlreadyExistThisKeyWordInAnoterCategory(string pKeyWord)
@@ -324,7 +319,7 @@ namespace BusinessLogic
             List<Category> categories = Repository.GetCategories();
             foreach (Category category in categories)
             {
-                exist = ExistKeyWord(pKeyWord, exist, category);
+                exist = ExistKeyWord(pKeyWord, ref exist, category);
             }
             return exist;
         }
@@ -379,7 +374,8 @@ namespace BusinessLogic
         
         public void EditCategoryExpense(Category category, string name, List<string> keywords)
         {
-            Category newCategory = new Category { Name = name, KeyWords = keywords };
+            KeyWord pKeyWord = new KeyWord(keywords);
+            Category newCategory = new Category { Name = name, KeyWords = pKeyWord };
             List<Expense> expenses = GetExpenses();
             foreach (Expense expense in expenses)
             {
@@ -389,7 +385,8 @@ namespace BusinessLogic
         }
         public void EditCategoryBudget(Category category, string name, List<string> keywords)
         {
-            Category newCategory = new Category { Name = name, KeyWords = keywords };
+            KeyWord pKeyWord = new KeyWord(keywords);
+            Category newCategory = new Category { Name = name, KeyWords = pKeyWord };
             List<Budget> budgets = Repository.GetBudgets();
             foreach (Budget budget in budgets)
             {

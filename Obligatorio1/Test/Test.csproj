@@ -57,6 +57,7 @@
     <Compile Include="RepositoryTest.cs" />
     <Compile Include="ExpenseTest.cs" />
     <Compile Include="BudgetCategoryTest.cs" />
+    <Compile Include="KeyWordsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

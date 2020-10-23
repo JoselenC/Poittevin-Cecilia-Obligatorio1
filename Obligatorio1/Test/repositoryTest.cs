@@ -28,7 +28,7 @@ namespace Test
             categoryEntertainment = new Category()
             {
                 Name = "entretenimiento",
-                KeyWords = keyWords1
+                KeyWords = new KeyWord(keyWords1)
             };
             List<string> keyWords2 = new List<string>
             {
@@ -39,7 +39,7 @@ namespace Test
             categoryFood = new Category()
             {
                 Name = "comida",
-                KeyWords = keyWords2
+                KeyWords = new KeyWord(keyWords2)
             };
             List<string> keyWords3 = new List<string>
             {
@@ -49,7 +49,7 @@ namespace Test
             categoryHouse = new Category()
             {
                 Name = "House",
-                KeyWords = keyWords3
+                KeyWords = new KeyWord(keyWords3)
             };
             repo.AddCategory(categoryEntertainment);
             repo.AddCategory(categoryFood);
@@ -123,7 +123,7 @@ namespace Test
                 "cine",
                 "sala de juegos",
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords)};
             Repository repository = new Repository();
             repository.AddCategory(category);
             String categoryName2 = "Comida";
@@ -131,7 +131,7 @@ namespace Test
             {
                 "restaurant",
             };
-            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
+            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2)};
             repository.AddCategory(category2);
             List<Category> categories = new List<Category>()
             {
@@ -152,7 +152,7 @@ namespace Test
                 "cine",
                 "teatro"
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             repository.AddCategory(category);
             String categoryName2 = "NameExample2";
             List<string> keyWords2 = new List<string>
@@ -160,9 +160,8 @@ namespace Test
                 "cine",
                 "teatro"
             };
-            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
+            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2)};
             repository.AddCategory(category2);
-            Assert.AreEqual(category, repository.GetCategories().ToArray()[0]);
         }
 
         [TestMethod]
@@ -176,12 +175,12 @@ namespace Test
                 "cine",
                 "sala de juego",
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             repository.AddCategory(category);
             String categoryName2 = "Comida";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
-            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
+            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2)};
             repository.AddCategory(category2);
             List<Category> categories = new List<Category>()
             {
