@@ -24,6 +24,7 @@ namespace InterfazLogic
             numericAmount.Value = (decimal) budgetCategory.Amount;
             this.MaximumSize = new Size(380, 200);
             this.MinimumSize = new Size(380, 200);
+            StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void button1_Click(object sender, EventArgs e)

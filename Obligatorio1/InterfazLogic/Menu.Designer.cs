@@ -91,7 +91,7 @@
             this.btnRegisterBudget.Name = "btnRegisterBudget";
             this.btnRegisterBudget.Size = new System.Drawing.Size(296, 97);
             this.btnRegisterBudget.TabIndex = 9;
-            this.btnRegisterBudget.Text = "Register Budget";
+            this.btnRegisterBudget.Text = "Register edit Budget";
             this.btnRegisterBudget.UseVisualStyleBackColor = false;
             this.btnRegisterBudget.Click += new System.EventHandler(this.btnRegisterBudget_Click);
             // 

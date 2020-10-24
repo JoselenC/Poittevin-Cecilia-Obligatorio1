@@ -87,7 +87,7 @@ namespace InterfazLogic
             string keyWord = tbKeyWord.Text;
             if (keyWord.Length > 0)
             {
-                if (keyWords.Contains(keyWord.ToLower()))
+                if (keyWords.Contains(keyWord.ToLower()) || keyWords.Contains(keyWord.ToUpper()))
                 {
                     lblKeyWords.Text = "You already entered that keyword";
                     lblKeyWords.ForeColor = Color.Red;

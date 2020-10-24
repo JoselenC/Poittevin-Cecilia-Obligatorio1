@@ -8,11 +8,11 @@ namespace InterfazLogic
 {
     public partial class Menu : Form
     {
-        public Repository repository { get; set; }
-        public Menu()
+        private LogicController controller;
+        public Menu(Repository repository)
         {
             InitializeComponent();
-            repository = new Repository();
+            this.controller = new LogicController(repository);
             this.MaximumSize = new Size(650, 400);
             this.MinimumSize = new Size(650, 400);
         }
@@ -20,51 +20,49 @@ namespace InterfazLogic
         private void btnRegisterCategory_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-           UserControl registerCategory = new RegisterCategory(repository);
+           UserControl registerCategory = new RegisterCategory(controller.Repository);
             mainPanel.Controls.Add(registerCategory);
         }
 
         private void btnRegisterExpense_Click(object sender, EventArgs e)
         {
            mainPanel.Controls.Clear();
-           UserControl registerExpense = new RegisterExpense(repository);
+           UserControl registerExpense = new RegisterExpense(controller.Repository);
             mainPanel.Controls.Add(registerExpense);
         }
 
         private void btnExpenseReport_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-            UserControl expenseReport = new ExpenseReport(repository);
+            UserControl expenseReport = new ExpenseReport(controller.Repository);
             mainPanel.Controls.Add(expenseReport);
         }
-
 
         private void btnRegisterBudget_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-            UserControl addBudgetForm = new AddAndEditBudget(repository);
+            UserControl addBudgetForm = new AddAndEditBudget(controller.Repository);
             mainPanel.Controls.Add(addBudgetForm);
         }
 
         private void btnEditExpenses_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-            UserControl editExpense = new EditExpense(repository);
+            UserControl editExpense = new EditExpense(controller.Repository);
             mainPanel.Controls.Add(editExpense);
         }
+
         private void btnEditCategory_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-            UserControl editCategory= new EditCategory(repository);
+            UserControl editCategory= new EditCategory(controller.Repository);
             mainPanel.Controls.Add(editCategory);
-        }
-
-      
+        }     
 
         private void btnBudgetReport_Click_1(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-            UserControl budgetReport = new BudgetReport(repository);
+            UserControl budgetReport = new BudgetReport(controller.Repository);
             mainPanel.Controls.Add(budgetReport);
         }
     }

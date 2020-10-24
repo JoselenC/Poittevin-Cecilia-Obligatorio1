@@ -13,11 +13,11 @@ namespace BusinessLogic
 
         private string name;
 
-        private List<String> keyWords;
+        private KeyWord keyWords;
 
         public string Name {get=>name; set=>SetName(value); }
 
-        public List<string> KeyWords { get=>keyWords; set=>SetKeyWords(value); } 
+        public KeyWord KeyWords { get=>keyWords; set=>SetKeyWords(value); } 
 
         private void SetName(string vName)
         {
@@ -28,22 +28,23 @@ namespace BusinessLogic
             name = vName;
         }
 
-        private void SetKeyWords(List<string> vKeyWords)
+        private void SetKeyWords(KeyWord vKeyWords)
         {
-            if (vKeyWords.Count > 10)
-                throw new ExcepcionInvalidKeyWordsLengthCategory();
-            keyWords = vKeyWords;
-        }            
+            keyWords = new KeyWord();
+            keyWords.SetKeyWord(vKeyWords);
+        }
+
         public override bool Equals(object obj)
         {
             if (obj is Category category)
             {
                 bool isEqualName = Name == category.Name;
-                bool isEqualKeyWords = KeyWords.OrderBy(t => t).SequenceEqual(category.KeyWords.OrderBy(t => t));
+                bool isEqualKeyWords = keyWords.Equals(category.keyWords);
                 return isEqualName && isEqualKeyWords;
             }
             return false;
         }
+
         public override string ToString()
         {
             return Name;

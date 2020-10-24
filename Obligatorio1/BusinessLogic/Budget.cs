@@ -72,7 +72,7 @@ namespace BusinessLogic
 
         public override string ToString()
         {
-            return $"mes: {month} anio: {Year} total: {totalAmount}";
+            return $"month: {month} year: {Year} total: {totalAmount}";
         }
 
         public void AddBudgetCategory(BudgetCategory budgetCategory)
@@ -109,15 +109,13 @@ namespace BusinessLogic
                 if (budgetCategory.Category.Name == categoryName)
                     return budgetCategory;
             }
-            return null;
+            throw new NoFindBudgetCategoryByCategoryName();
         }
 
         public BudgetCategory GetBudgetCategoryByCategoryName(string categoryName)
         {
             BudgetCategory budgetCategory = FindBudgetCategoryByCategoryName(categoryName);
-            if (budgetCategory != null)
-                return budgetCategory;
-            return null;
+            return budgetCategory;
         }
 
         public override bool Equals(object obj)

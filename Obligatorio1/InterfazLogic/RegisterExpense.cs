@@ -35,19 +35,22 @@ namespace InterfazLogic
         }
         private void CompleteCategories(string description)
         {
-            Category category = logicController.AsignCategoryByDescriptionExpense(description);
-            if (category != null)
+            
+            try
             {
+                Category category = logicController.AsignCategoryByDescriptionExpense(description);
                 lstCategories.Items.Add(category);
             }
-            else if (logicController.GetCategories().Count > 0)
+            catch (NoAsignCategoryByDescriptionExpense)
             {
-                foreach (Category vCategory in logicController.GetCategories())
+                if (logicController.GetCategories().Count > 0)
                 {
-                    lstCategories.Items.Add(vCategory.Name);
+                    foreach (Category vCategory in logicController.GetCategories())
+                    {
+                        lstCategories.Items.Add(vCategory.Name);
+                    }
                 }
             }
-            
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -58,31 +61,36 @@ namespace InterfazLogic
         }
 
 
+        private void TryRegisterExpense()
+        {
+            if (lstCategories.SelectedIndex >= 0)
+            {
+                string description = tbDescription.Text;
+                double amount = decimal.ToDouble(nAmount.Value);
+                DateTime creationDate = dateTime.Value;
+                string nameCategory = lstCategories.SelectedItem.ToString();
+                Category category = logicController.FindCategoryByName(nameCategory);
+                logicController.SetExpense(amount, creationDate, description, category);
+                MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Visible = false;
+            }
+            else
+            {
+                lblCategories.Text = "You must select a category";
+                lblCategories.ForeColor = Color.Red;
+                lbDescription.Text = "";
+            }
+        }
+
         private void btnRegistrExpense_Click(object sender, EventArgs e)
         {
             try
-            {                
-                if (lstCategories.SelectedIndex >= 0)
-                {                    
-                    string description = tbDescription.Text;
-                    double amount = decimal.ToDouble(nAmount.Value);
-                    DateTime creationDate = dateTime.Value;                   
-                    string nameCategory = lstCategories.SelectedItem.ToString();
-                    Category category = logicController.FindCategoryByName(nameCategory);
-                    logicController.SetExpense(amount, creationDate, description, category);                
-                    MessageBox.Show("The expense was recorded successfully","",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                    this.Visible = false;
-                }
-                else
-                {
-                    lblCategories.Text = "You must select a category";
-                    lblCategories.ForeColor = Color.Red;
-                    lbDescription.Text = "";
-                }
+            {
+                TryRegisterExpense();
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
-                lbDescription.Text = "The name must be between 3 and 20 characters long.";      
+                lbDescription.Text = "The description must be between 3 and 20 characters long.";      
                 lbDescription.ForeColor = Color.Red;
                 lblCategories.Text = "";
                 lblAmount.Text = "";
@@ -123,6 +131,7 @@ namespace InterfazLogic
             }         
         }
 
-       
+        
+
     }
 }
