@@ -39,8 +39,7 @@ namespace InterfazLogic
                 this.Visible = false;
             }
             else
-            {
-                
+            {                
                 cboxMonth.Items.Clear();
                 List<string> monthsWithBudget = logicController.OrderedMonthsInWhichThereAreBudget();
                 foreach (string month in monthsWithBudget)
@@ -48,10 +47,8 @@ namespace InterfazLogic
                    
                     cboxMonth.Items.Add(month);
                     cboxMonth.SelectedIndex = 0;
-                }
-                
-            }
-           
+                }                
+            }           
         }
 
         private bool CompleteReport(ref double totalPlanedAmount, ref double totalRealAmount, ref double totalDiffAmount, Budget budget)
@@ -110,16 +107,13 @@ namespace InterfazLogic
                 double totalRealAmount = 0;
                 double totalDiffAmount = 0;
                 if (!initializingForm)
-                {
-
-                   
+                {                   
                     try
                     {
                         int year=(int)numYear.Value;
                         Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
                         return CompleteReport(ref totalPlanedAmount, ref totalRealAmount, ref totalDiffAmount, budget);                       
                         
-
                     }
                     catch (NoFindBudget)
                     {
@@ -146,8 +140,6 @@ namespace InterfazLogic
             }
         }
 
-
-
         private void btnSearch_Click(object sender, EventArgs e)
         {
             LoadBudgetReport();
@@ -171,8 +163,7 @@ namespace InterfazLogic
                 oldYearValue = (int)numYear.Value;
             }
         }
-
-     
+        
         private void btnAccept_Click(object sender, EventArgs e)
         {
             Visible = false;

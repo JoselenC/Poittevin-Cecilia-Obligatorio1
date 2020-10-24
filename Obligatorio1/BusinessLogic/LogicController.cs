@@ -156,9 +156,7 @@ namespace BusinessLogic
         public void SetExpense(double amount, DateTime creationDate, string description, Category category)
         {
             Repository.SetExpense(amount, creationDate, description, category);
-        }
-      
-        
+        }        
 
         private bool FindCategoryByDescription(ref Category category, string[] descriptionArray, bool exist, ref int cont, List<Category> categories)
         {
@@ -255,20 +253,9 @@ namespace BusinessLogic
             orderedMonthsInt.Sort();
             List<string> orderedMonthsString = MonthsListStringToInt(orderedMonthsInt);
             return orderedMonthsString;
-        }
+        }      
 
-        public bool ExistBudgetInThisYear(int year)
-        {
-            List<Budget> budgets = Repository.GetBudgets();
-            foreach (Budget budget in budgets)
-            {
-                if (budget.Year == year)
-                    return true;
-            }
-            return false;
-        }
-
-        private static double AmountOfExpenseInAMonth(int monthInt, double total, Expense expense)
+        private double AmountOfExpenseInAMonth(int monthInt, double total, Expense expense)
         {
             if (expense.CreationDate.Month == monthInt)
                 total += expense.Amount;
