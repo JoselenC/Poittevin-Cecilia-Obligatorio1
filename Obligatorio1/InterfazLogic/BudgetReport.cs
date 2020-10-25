@@ -110,15 +110,16 @@ namespace InterfazLogic
                 {                   
                     try
                     {
-                        int year=(int)numYear.Value;
+                        int year=(int)numYear.Value;                       
                         Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
+                        oldYearValue = year;
                         return CompleteReport(ref totalPlanedAmount, ref totalRealAmount, ref totalDiffAmount, budget);                       
                         
                     }
                     catch (NoFindBudget)
                     {
                         MessageBox.Show("There is not budget created for the selected date");
-                        Visible = false;
+                        numYear.Value = oldYearValue;
                         return false;
                     }
                     catch (System.NullReferenceException)
@@ -158,10 +159,9 @@ namespace InterfazLogic
             {
                 numYear.Value = oldYearValue;
             }
-            else
-            {
+           
                 oldYearValue = (int)numYear.Value;
-            }
+            
         }
         
         private void btnAccept_Click(object sender, EventArgs e)

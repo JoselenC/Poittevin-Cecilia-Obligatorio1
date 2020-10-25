@@ -26,6 +26,8 @@ namespace InterfazLogic
             this.MinimumSize = new Size(500, 600);
             CompleteCategories();
             indexKeyWordToEdit = -1;
+            txtKeyWord.Enabled = false;
+            txtName.Enabled = false;
         }
 
         private void CompleteCategories()
@@ -60,11 +62,12 @@ namespace InterfazLogic
                 {
                     lstKwywords.Items.Add(keyWord);
                 }
+                txtKeyWord.Enabled = true;
+                txtName.Enabled = true;
+
             }
             else
             {
-                txtKeyWord.Enabled = false;
-                txtName.Enabled = false;
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
             }
@@ -107,12 +110,12 @@ namespace InterfazLogic
                     lblKyWords.Text = "The keyword cannot be empty.";
                     lblKyWords.ForeColor = Color.Red;
                 }
-               
+                txtKeyWord.Enabled = true;
+                txtName.Enabled = true;
+
             }
             else
             {
-                txtKeyWord.Enabled = false;
-                txtName.Enabled = false;
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
             }
@@ -139,17 +142,12 @@ namespace InterfazLogic
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    
-                    txtKeyWord.Enabled = false;
-                    txtName.Enabled = false;
                     lblKyWords.Text = "Select key word to delete";
                     lblKyWords.ForeColor = Color.Red;
                 }
             }
             else
             {
-                txtKeyWord.Enabled = false;
-                txtName.Enabled = false;
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
             }
@@ -167,6 +165,8 @@ namespace InterfazLogic
                         EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstKwywords, logicController);
                         editKeyWord.Show();
                         lblKyWords.Text = "";
+                        txtKeyWord.Enabled = true;
+                        txtName.Enabled = true;
                     }
                     else
                     {
@@ -182,8 +182,7 @@ namespace InterfazLogic
             }
             else
             {
-                txtKeyWord.Enabled = false;
-                txtName.Enabled = false;
+               
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
             }

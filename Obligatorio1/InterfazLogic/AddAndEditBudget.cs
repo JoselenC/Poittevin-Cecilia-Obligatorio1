@@ -91,6 +91,7 @@ namespace InterfazLogic
         {
             Budget newBudget = GetBudget();
             LoadBudgetData(newBudget);
+            CurrentBudget = newBudget;
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -23,6 +23,8 @@ namespace InterfazLogic
 
         private ListBox lstkw;
 
+        private string editKeyWord;
+
         public EditKeyWord(List<string> vKeyWords,int indexToEdit,ListBox lstkeyWords, LogicController vLogicController)
         {            
             InitializeComponent();
@@ -34,6 +36,8 @@ namespace InterfazLogic
             this.MinimumSize = new Size(380, 200);
             StartPosition = FormStartPosition.CenterScreen;
             tbEdit.Clear();
+            editKeyWord= lstkeyWords.SelectedItem.ToString();
+            tbEdit.Text = editKeyWord;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -41,7 +45,8 @@ namespace InterfazLogic
             string keyWordEdited = tbEdit.Text;
             if (keyWordEdited != "")
             {
-                if (keyWords.Contains(keyWordEdited))
+               
+                if (keyWords.Contains(keyWordEdited) && keyWordEdited!= editKeyWord)
                 {
                     lblKeyWord.Text = "You already entered that keyword";
                     lblKeyWord.ForeColor = Color.Red;

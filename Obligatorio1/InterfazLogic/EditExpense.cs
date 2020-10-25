@@ -31,6 +31,10 @@ namespace InterfazLogic
             edit = false;
             selectExpense = false;
             CompleteExpense();
+            tbDescription.Enabled = false;
+            nAmount.Enabled = false;
+            dateTime.Enabled = false;
+            lstCategories.Enabled = false;
 
         }
         private void CompleteExpense()
@@ -62,6 +66,10 @@ namespace InterfazLogic
                     indexToEdit = lstExpenses.SelectedIndex;
                     selectExpense = true;
                     btnDelete.Enabled = false;
+                    tbDescription.Enabled =true;
+                    nAmount.Enabled = true;
+                    dateTime.Enabled = true;
+                    lstCategories.Enabled = true;
                 }
                 else if (logicController.GetExpenses().Count == 0)
                 {
