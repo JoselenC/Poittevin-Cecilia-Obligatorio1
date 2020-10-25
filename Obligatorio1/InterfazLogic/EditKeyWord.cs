@@ -51,7 +51,7 @@ namespace InterfazLogic
                     lblKeyWord.Text = "You already entered that keyword";
                     lblKeyWord.ForeColor = Color.Red;
                 }
-                else if (logicController.AlreadyExistThisKeyWordInAnoterCategory(keyWordEdited))
+                else if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited))
                 {
                     lblKeyWord.Text = "You already entered that keyword in another category";
                     lblKeyWord.ForeColor = Color.Red;

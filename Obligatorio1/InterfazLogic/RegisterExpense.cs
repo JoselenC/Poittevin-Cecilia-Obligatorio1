@@ -37,7 +37,7 @@ namespace InterfazLogic
         {            
             try
             {
-                Category category = logicController.AsignCategoryByDescriptionExpense(description);
+                Category category = logicController.FindCategoryByDescription(description);
                 lstCategories.Items.Add(category);
             }
             catch (NoAsignCategoryByDescriptionExpense)

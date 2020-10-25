@@ -17,14 +17,13 @@ namespace BusinessLogic
             Repository = repository;
         }
 
-        private int StringToIntMonth(string month)
+        private Months StringToMonthsEnum(string month)
         {
-            int monthInBaseCero = (int)Enum.Parse(typeof(Months), month);
-            int monthInBaseOne = monthInBaseCero + 1;
-            return monthInBaseOne;
+            return (Months)Enum.Parse(typeof(Months), month);
         }
 
-        private bool SameCreationDate(Budget budget, int month, int year)
+
+        private bool IsSameCreationDate(Budget budget, Months month, int year)
         {
             if (budget.Month == month && budget.Year == year)
                 return true;
@@ -33,11 +32,11 @@ namespace BusinessLogic
 
         public Budget FindBudget(string month, int year)
         {
-            int vMonth = StringToIntMonth(month);
+            Months mMonth = StringToMonthsEnum(month);
             List<Budget> budgets = Repository.GetBudgets();
             foreach (var budget in budgets)
             {
-                if (SameCreationDate(budget, vMonth, year))
+                if (IsSameCreationDate(budget, mMonth, year))
                     return budget;
             }
             throw new NoFindBudget();
@@ -45,7 +44,7 @@ namespace BusinessLogic
 
         private List<Category> BudgetCategories(List<Category> repoCategories, List<BudgetCategory> budgetCategories)
         {
-            bool alreadyExist = false;
+            bool alreadyExist;
             List<Category> newBudgetCategories = new List<Category>();
             foreach (var repoCategory in repoCategories)
             {
@@ -63,11 +62,11 @@ namespace BusinessLogic
             }
             return newBudgetCategories;
         }
-        private Budget CreateBudget(int year, List<Category> categories, int monthIndex, Budget returnBudget)
+        private Budget CreateBudget(int year, List<Category> categories, Months month, Budget returnBudget)
         {
             if (returnBudget is null)
             {
-                returnBudget = new Budget(monthIndex, categories) { Year = year, TotalAmount = 0 };               
+                returnBudget = new Budget(month, categories) { Year = year, TotalAmount = 0 };               
                
             }
             else
@@ -75,7 +74,7 @@ namespace BusinessLogic
                 Budget oldBudget = returnBudget;
                 Repository.GetBudgets().Remove(returnBudget);
                 List<Category> budgetCategories = BudgetCategories(categories, oldBudget.BudgetCategories);
-                returnBudget = new Budget(monthIndex, budgetCategories) { Year = year, TotalAmount = 0 };
+                returnBudget = new Budget(month, budgetCategories) { Year = year, TotalAmount = 0 };
                 foreach (var category in oldBudget.BudgetCategories)
                 {
                     returnBudget.BudgetCategories.Add(category);
@@ -90,9 +89,9 @@ namespace BusinessLogic
 
         public Budget BudgetGetOrCreate(string month, int year)
         {
+            Months mMonth = StringToMonthsEnum(month);
             Budget returnBudget;
             List<Category> categories = Repository.GetCategories();
-            int monthIndex = StringToIntMonth(month);
             try
             {               
                 returnBudget = FindBudget(month, year);                
@@ -101,7 +100,7 @@ namespace BusinessLogic
             {
                 returnBudget=null;
             }
-            returnBudget = CreateBudget(year, categories, monthIndex, returnBudget);
+            returnBudget = CreateBudget(year, categories, mMonth, returnBudget);
             return returnBudget;
 
         }
@@ -111,39 +110,47 @@ namespace BusinessLogic
             return Repository.GetExpenses();
         }
 
-        private static void AddExpenseSameMonth(int monthInt, List<Expense> expensesByMonth, Expense vExpense)
+        private static bool IsExpenseSameMonth(Months month, Expense vExpense)
         {
-            if (vExpense.CreationDate.Month == monthInt)
-                expensesByMonth.Add(vExpense);
+            int expected = vExpense.CreationDate.Month;
+            int actual = (int)month;
+            return expected == actual;
+                
         }
 
-        public List<Expense> GetExpenseByMonth(string month)
+        public List<Expense> GetExpenseByMonth(Months month)
         {
-
-            int monthInt = StringToIntMonth(month);
             List<Expense> expensesByMonth = new List<Expense>();
             List<Expense> expenses = Repository.GetExpenses();
             foreach (Expense vExpense in expenses)
             {
-                AddExpenseSameMonth(monthInt, expensesByMonth, vExpense);
+                if (IsExpenseSameMonth(month, vExpense))
+                    expensesByMonth.Add(vExpense);
             }
             return expensesByMonth;
         }
 
-        private static double AmountOfExpenseWithCategory(Category vCategory, double total, Expense expense)
+        public List<Expense> GetExpenseByMonth(string month)
         {
-            if (expense.Category == vCategory)
-                total += expense.Amount;
-            return total;
+            Months mMonth = StringToMonthsEnum(month);
+            return GetExpenseByMonth(mMonth);
+        }
+
+        private static bool IsSameCategory(Category vCategory, Expense expense)
+        {
+            return expense.Category == vCategory;
+
         }
 
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
         {
-            List<Expense> expenses = GetExpenseByMonth(vMonth);
+            Months mMonths = StringToMonthsEnum(vMonth);
+            List<Expense> expenses = GetExpenseByMonth(mMonths);
             double total = 0;
             foreach (Expense expense in expenses)
             {
-                total = AmountOfExpenseWithCategory(vCategory, total, expense);
+                if (IsSameCategory(vCategory, expense))
+                    total += expense.Amount;
             }
             return total;
         }
@@ -158,40 +165,35 @@ namespace BusinessLogic
             Repository.SetExpense(amount, creationDate, description, category);
         }        
 
-        private bool FindCategoryByDescription(ref Category category, string[] descriptionArray, bool exist, ref int cont, List<Category> categories)
+        private Category FindCategoryByDescription(string[] descriptionArray)
         {
+            List<Category> categories = Repository.GetCategories();
+            bool categoryFound = false;
+            Category category = null;
             foreach (Category vCategory in categories)
             {
-                exist = ExistCategoryInDescriptionExpense(descriptionArray, vCategory);
-                AsignCategory(ref category, exist, ref cont, vCategory);
+                if (IsDescriptionOfCategory(descriptionArray, vCategory))
+                {
+                    if(categoryFound)
+                        throw new NoAsignCategoryByDescriptionExpense();
+                    categoryFound = true;
+                    category = vCategory;
+                }
             }
-            return exist;
+            if(!categoryFound)
+                throw new NoAsignCategoryByDescriptionExpense();
+            return category;
         }
 
-        private void AsignCategory(ref Category category, bool exist, ref int cont, Category vCategory)
-        {
-            if (exist)
-            {
-                category = vCategory;
-                cont = cont + 1;
-            }
-        }
 
-        public Category AsignCategoryByDescriptionExpense(string vDescription)
+        public Category FindCategoryByDescription(string vDescription)
         {
-            Category category = null;
             string[] descriptionArray = vDescription.Split(' ');
-            bool exist = false;
-            int cont = 0;
-            List<Category> categories = Repository.GetCategories();
-            exist = FindCategoryByDescription(ref category, descriptionArray, exist, ref cont, categories);
-            if (cont == 1)
-                return category;
-            else
-            throw new NoAsignCategoryByDescriptionExpense();
-        }     
 
-        private bool ExistCategoryInDescriptionExpense(string[] descriptionArray,Category vCategory)
+            return FindCategoryByDescription(descriptionArray);
+        }
+
+        private bool IsDescriptionOfCategory(string[] descriptionArray,Category vCategory)
         {
             bool exist = false;
             foreach (string description in descriptionArray)
@@ -203,82 +205,63 @@ namespace BusinessLogic
             return exist;
         }
 
-        private List<string> MonthsListStringToInt(List<int> months)
+        private List<string> MonthsListIntToString(List<int> months)
         {
             List<string> monthsString = new List<string>();
             foreach (int month in months)
             {
-                DateTimeFormatInfo formatoFecha = CultureInfo.CurrentCulture.DateTimeFormat;
-                string nombreMes = formatoFecha.GetMonthName(month);
+                Months vMonth = (Months)month;
+                string nombreMes = vMonth.ToString();
                 monthsString.Add(nombreMes);
             }
             return monthsString;
         }
 
-        
 
-        private void AddMonthExpense(List<int> orderedMonthsInt, Expense expense)
-        {
-            if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
-                orderedMonthsInt.Add(expense.CreationDate.Month);
-        }
-
-        public List<string> OrderedMonthsInWhichThereAreExpenses()
+        public List<string> OrderedMonthsWithExpenses()
         {
             List<int> orderedMonthsInt = new List<int>();
             List<Expense> expenses = Repository.GetExpenses();
             foreach (Expense expense in expenses)
             {
-                AddMonthExpense(orderedMonthsInt, expense);
+                if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
+                    orderedMonthsInt.Add(expense.CreationDate.Month);
             }
             orderedMonthsInt.Sort();
-            List<string> orderedMonthsString = MonthsListStringToInt(orderedMonthsInt);
+            List<string> orderedMonthsString = MonthsListIntToString(orderedMonthsInt);
             return orderedMonthsString;
         }
 
-        private void AddMonthBudget(List<int> orderedMonthsInt, Budget budget)
-        {
-            if (!orderedMonthsInt.Contains(budget.Month))
-                orderedMonthsInt.Add(budget.Month);
-        }
 
         public List<string> OrderedMonthsInWhichThereAreBudget()
         {
-            List<int> orderedMonthsInt = new List<int>();
+            List<Months> monthsWithBudget = new List<Months>();
             List<Budget> budgets = Repository.GetBudgets();
             foreach (Budget budget in budgets)
             {
-                AddMonthBudget(orderedMonthsInt, budget);
+                if (!monthsWithBudget.Contains(budget.Month))
+                    monthsWithBudget.Add(budget.Month);
             }
-            orderedMonthsInt.Sort();
-            List<string> orderedMonthsString = MonthsListStringToInt(orderedMonthsInt);
+            monthsWithBudget.Sort();
+            List<string> orderedMonthsString = MonthsEnumToStrings(monthsWithBudget);
             return orderedMonthsString;
-        }      
-
-        private double AmountOfExpenseInAMonth(int monthInt, double total, Expense expense)
-        {
-            if (expense.CreationDate.Month == monthInt)
-                total += expense.Amount;
-            return total;
         }
 
-        public double AmountOfExpensesInAMonth(string month)
+        public double AmountOfExpensesInAMonth(Months month)
         {
-            int monthInt = StringToIntMonth(month);
             double total = 0;
             List<Expense> expenses = Repository.GetExpenses();
             foreach (Expense expense in expenses)
             {
-                total = AmountOfExpenseInAMonth(monthInt, total, expense);
+                if(IsExpenseSameMonth(month, expense))
+                    total += expense.Amount;
             }
             return total;
         }
 
-        private bool SameCategoryName(Category category, string categoryName)
+        private bool IsSameCategoryName(Category category, string categoryName)
         {
-            if (category.Name == categoryName)
-                return true;
-            return false;
+            return category.Name == categoryName;
         }
 
         public Category FindCategoryByName(string categoryName)
@@ -286,7 +269,7 @@ namespace BusinessLogic
             List<Category> categories = Repository.GetCategories();
             foreach (var category in categories)
             {
-                if (SameCategoryName(category, categoryName))
+                if (IsSameCategoryName(category, categoryName))
                     return category;
             }
             throw new NoFindCategoryByName();
@@ -306,21 +289,32 @@ namespace BusinessLogic
             return null;
         }
 
-        private bool ExistKeyWord(string pKeyWord, ref bool exist, Category category)
+        private bool KeyWordExists(string pKeyWord, ref bool exist, Category category)
         {
             return category.KeyWords.ExistThisKey(pKeyWord, ref exist, category);
         }
 
-        public bool AlreadyExistThisKeyWordInAnoterCategory(string pKeyWord)
+        public bool AlreadyExistKeyWordInAnoterCategory(string pKeyWord)
         {
             bool exist = false;
             List<Category> categories = Repository.GetCategories();
             foreach (Category category in categories)
             {
-                exist = ExistKeyWord(pKeyWord, ref exist, category);
+                exist = KeyWordExists(pKeyWord, ref exist, category);
             }
             return exist;
         }
+
+        private List<string> MonthsEnumToStrings(List<Months> months)
+        {
+            List<string> monthStrings = new List<string>();
+            foreach (Months month in months)
+            {
+                monthStrings.Add(month.ToString());
+            }
+            return monthStrings;
+        }
+
         public string[] GetAllMonthsString()
         {
             return Enum.GetNames(typeof(Months)).ToArray();

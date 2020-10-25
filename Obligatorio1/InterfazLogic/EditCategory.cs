@@ -88,7 +88,7 @@ namespace InterfazLogic
                         lblKyWords.Text = "You cannot add more than 10 keywords.";
                         lblKyWords.ForeColor = Color.Red;
                     }
-                    else if (logicController.AlreadyExistThisKeyWordInAnoterCategory(keyWord))
+                    else if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWord))
                     {
                         lblKyWords.Text = "You already entered that keyword in another category";
                         lblKyWords.ForeColor = Color.Red;

@@ -59,7 +59,7 @@ namespace Test
                 categoryEntertainment,
                 categoryFood,
             };
-            JanuaryBudget = new Budget(1, categories)
+            JanuaryBudget = new Budget(Months.January, categories)
             {
                 Year = 2020,
                 TotalAmount = 0
@@ -194,7 +194,7 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetToRepository()
         {
-            Budget validBudget = new Budget(DateTime.Now.Month) { 
+            Budget validBudget = new Budget((Months) DateTime.Now.Month) { 
                 TotalAmount = 4000, 
                 Year = DateTime.Now.Year 
             };
