@@ -148,9 +148,7 @@ namespace InterfazLogic
 
         private void cboxMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             oldMonthIndex = cboxMonth.SelectedIndex;
-
         }
 
         private void numYear_ValueChanged(object sender, EventArgs e)
@@ -158,16 +156,13 @@ namespace InterfazLogic
             if (!LoadBudgetReport())
             {
                 numYear.Value = oldYearValue;
-            }
-           
-                oldYearValue = (int)numYear.Value;
-            
+            }           
+            oldYearValue = (int)numYear.Value;            
         }
         
         private void btnAccept_Click(object sender, EventArgs e)
         {
             Visible = false;
-
         }
     }
 }

@@ -15,14 +15,14 @@ namespace InterfazLogic
     {
         private LogicController logicController;
 
-        public string keyWordToEdit { get; set; }
-        public List<string> keyWords { get; set; }
+        public string KeyWordToEdit { get; set; }
+        public List<string> KeyWords { get; set; }
         private int indexKeyWordToEdit;
         public RegisterCategory(Repository vRepository)
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);
-            keyWords = new List<string>();
+            KeyWords = new List<string>();
             this.MaximumSize = new Size(800, 800);
             this.MinimumSize = new Size(800, 800);
             indexKeyWordToEdit = -1;
@@ -33,7 +33,7 @@ namespace InterfazLogic
 
         private void TryRegisterCategoty()
         {
-            logicController.SetCategory(tbName.Text, keyWords);
+            logicController.SetCategory(tbName.Text, KeyWords);
             lblKeyWords.Text = "";
             lblEdit.Text = "";
             lblName.Text = "";
@@ -87,12 +87,12 @@ namespace InterfazLogic
             string keyWord = tbKeyWord.Text;
             if (keyWord.Length > 0)
             {
-                if (keyWords.Contains(keyWord.ToLower()) || keyWords.Contains(keyWord.ToUpper()))
+                if (KeyWords.Contains(keyWord.ToLower()) || KeyWords.Contains(keyWord.ToUpper()))
                 {
                     lblKeyWords.Text = "You already entered that keyword";
                     lblKeyWords.ForeColor = Color.Red;
                 }
-                else if (keyWords.Count > 9)
+                else if (KeyWords.Count > 9)
                 {
                     lblKeyWords.Text = "You cannot add more than 10 keywords.";
                     lblKeyWords.ForeColor = Color.Red;
@@ -104,7 +104,7 @@ namespace InterfazLogic
                 }
                 else
                 {
-                    this.keyWords.Add(keyWord);
+                    this.KeyWords.Add(keyWord);
                     lstCategories.Items.Add(keyWord);
                     tbKeyWord.Text = "";
                     lblKeyWords.Text = "";
@@ -122,12 +122,12 @@ namespace InterfazLogic
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (keyWords.Count > 0)
+            if (KeyWords.Count > 0)
             {
                 indexKeyWordToEdit = lstCategories.SelectedIndex;
                 if (indexKeyWordToEdit >= 0)
                 {
-                    EditKeyWord editKeyWord = new EditKeyWord(keyWords, indexKeyWordToEdit, lstCategories,logicController);
+                    EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstCategories,logicController);
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
                 }
@@ -137,7 +137,7 @@ namespace InterfazLogic
                     lblEdit.ForeColor = Color.Red;
                 }
             }
-            else if (keyWords.Count <= 0)
+            else if (KeyWords.Count <= 0)
             {
                 lblEdit.Text = "There aren't key words to edit";
                 lblEdit.ForeColor = Color.Red;
@@ -148,7 +148,7 @@ namespace InterfazLogic
         private void TryDeleteKyWord()
         {
             int index = lstCategories.SelectedIndex;
-            keyWords.RemoveAt(index);
+            KeyWords.RemoveAt(index);
             lstCategories.Items.RemoveAt(index);
             lblEdit.Text = "";
             lblKeyWords.Text = "";

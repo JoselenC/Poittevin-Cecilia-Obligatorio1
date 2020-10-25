@@ -34,8 +34,7 @@ namespace InterfazLogic
             }
         }
         private void CompleteCategories(string description)
-        {
-            
+        {            
             try
             {
                 Category category = logicController.AsignCategoryByDescriptionExpense(description);
@@ -129,9 +128,7 @@ namespace InterfazLogic
                 lbDescription.Text = "";
                 lblAmount.Text = "";
             }         
-        }
-
-        
+        }       
 
     }
 }

@@ -67,7 +67,7 @@
             this.btnAccept.TabIndex = 1;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = false;
-            this.btnAccept.Click += new System.EventHandler(this.button2_Click);
+            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
             // label1
             // 

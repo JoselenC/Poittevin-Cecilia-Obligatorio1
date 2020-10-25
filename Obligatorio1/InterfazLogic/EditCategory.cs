@@ -15,7 +15,7 @@ namespace InterfazLogic
     {
         public List<string> KeyWords { get; set; }
         private LogicController logicController;
-        Category category;
+        private Category category;
         private int indexKeyWordToEdit;
 
         public EditCategory(Repository vRepository)
@@ -48,7 +48,6 @@ namespace InterfazLogic
 
         private void btnEditCategory_Click(object sender, EventArgs e)
         {
-
             if (lstCatgories.SelectedIndex >= 0)
             {
                 txtKeyWord.Enabled = true;
@@ -64,19 +63,16 @@ namespace InterfazLogic
                 }
                 txtKeyWord.Enabled = true;
                 txtName.Enabled = true;
-
             }
             else
             {
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
-            }
-           
+            }           
         }
 
         private void btnAddKeyWord_Click(object sender, EventArgs e)
         {
-
             if (lstCatgories.SelectedIndex >= 0)
             {
                 string keyWord = txtKeyWord.Text;
@@ -124,12 +120,13 @@ namespace InterfazLogic
 
         private void TryDeleteKeyWord()
         {
-            if (lstKwywords.SelectedIndex >= 0) { 
+            if (lstKwywords.SelectedIndex >= 0)
+            {
                 int index = lstKwywords.SelectedIndex;
-            KeyWords.RemoveAt(index);
-            lstKwywords.Items.RemoveAt(index);
-            lblKyWords.Text = "";
-        }
+                KeyWords.RemoveAt(index);
+                lstKwywords.Items.RemoveAt(index);
+                lblKyWords.Text = "";
+            }        
         }
 
         private void btnDelete_Click(object sender, EventArgs e)

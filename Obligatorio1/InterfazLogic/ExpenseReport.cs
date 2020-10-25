@@ -42,7 +42,6 @@ namespace InterfazLogic
             }
         }
 
-
         private void btnConsult_Click(object sender, EventArgs e)
         {
             double totalAmount = 0;

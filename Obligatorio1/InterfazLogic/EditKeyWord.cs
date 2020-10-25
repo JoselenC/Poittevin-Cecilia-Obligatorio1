@@ -13,24 +13,24 @@ namespace InterfazLogic
 {
     public partial class EditKeyWord : Form
     {
-        public List<string> keyWords { get; set; }
+        public List<string> KeyWords { get; set; }
 
-        public int index { get; set; }
+        public int Index { get; set; }
 
         private LogicController logicController;
 
-        public bool edited { get; set; } = false;
+        public bool Edited { get; set; } = false;
 
-        private ListBox lstkw;
+        private ListBox listKeyWords;
 
         private string editKeyWord;
 
         public EditKeyWord(List<string> vKeyWords,int indexToEdit,ListBox lstkeyWords, LogicController vLogicController)
         {            
             InitializeComponent();
-            keyWords = vKeyWords;
-            index = indexToEdit;
-            lstkw = lstkeyWords;
+            KeyWords = vKeyWords;
+            Index = indexToEdit;
+            listKeyWords = lstkeyWords;
             logicController = vLogicController;
             this.MaximumSize = new Size(380, 200);
             this.MinimumSize = new Size(380, 200);
@@ -46,7 +46,7 @@ namespace InterfazLogic
             if (keyWordEdited != "")
             {
                
-                if (keyWords.Contains(keyWordEdited) && keyWordEdited!= editKeyWord)
+                if (KeyWords.Contains(keyWordEdited) && keyWordEdited!= editKeyWord)
                 {
                     lblKeyWord.Text = "You already entered that keyword";
                     lblKeyWord.ForeColor = Color.Red;
@@ -58,10 +58,10 @@ namespace InterfazLogic
                 }
                 else
                 {
-                    keyWords.RemoveAt(index);
-                    keyWords.Add(tbEdit.Text);
-                    lstkw.Items.RemoveAt(index);
-                    lstkw.Items.Add(keyWordEdited);
+                    KeyWords.RemoveAt(Index);
+                    KeyWords.Add(tbEdit.Text);
+                    listKeyWords.Items.RemoveAt(Index);
+                    listKeyWords.Items.Add(keyWordEdited);
                     Close();
                 }
             }
@@ -72,7 +72,7 @@ namespace InterfazLogic
             }           
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }

@@ -15,10 +15,10 @@ namespace InterfazLogic
     {
         private LogicController logicController;
         private int indexToEdit;
-        private string descriptionExpense;
         private bool edit;
         private bool selectExpense;
         private Expense expenseToEdit;
+
         public EditExpense(Repository vRepository)
         {
             InitializeComponent();
@@ -26,8 +26,7 @@ namespace InterfazLogic
             this.MaximumSize = new Size(800, 850);
             this.MinimumSize = new Size(800, 850);
             lstCategories.Visible = false;
-            indexToEdit = -1;
-            descriptionExpense="";
+            indexToEdit = -1;            
             edit = false;
             selectExpense = false;
             CompleteExpense();
@@ -37,6 +36,7 @@ namespace InterfazLogic
             lstCategories.Enabled = false;
 
         }
+
         private void CompleteExpense()
         {
             if (logicController.GetExpenses().Count > 0)
@@ -88,9 +88,6 @@ namespace InterfazLogic
                     lblCategories.Text = "";
                     lbDescription.Text = "";
                     lblDate.Text = "";
-
-
-
                 }
             }
             catch (NoFindEqualsExpense)
