@@ -60,7 +60,7 @@ namespace Test
                 categoryEntertainment,
                 categoryFood,
             };
-            JanuaryBudget = new Budget(1, categories)
+            JanuaryBudget = new Budget(Months.January, categories)
             {
                 Year = 2020,
                 TotalAmount = 0
@@ -77,7 +77,7 @@ namespace Test
         public void GetTotalSpentByMonthAndCategoryValidCase()
         {
             double expectedTotalSpentJanuary = 330.50;
-            double actualTotalSpentJanuary = logicController.GetTotalSpentByMonthAndCategory("Enero", categoryFood);
+            double actualTotalSpentJanuary = logicController.GetTotalSpentByMonthAndCategory("January", categoryFood);
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
 
@@ -85,7 +85,7 @@ namespace Test
         public void GetTotalSpentByMonthAndCategoryMonthWithoutExpenses()
         {
             double expectedTotalSpentJanuary = 0;
-            double actualTotalSpentJanuary = logicController.GetTotalSpentByMonthAndCategory("Marzo", categoryFood);
+            double actualTotalSpentJanuary = logicController.GetTotalSpentByMonthAndCategory("March", categoryFood);
 
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
@@ -94,7 +94,7 @@ namespace Test
         public void GetTotalSpentByMonthAndCategoryMonthWithoutExpensesInCategory()
         {
             double expectedTotalSpentJanuary = 0;
-            double actualTotalSpentJanuary =logicController.GetTotalSpentByMonthAndCategory("Enero", categoryHouse);
+            double actualTotalSpentJanuary =logicController.GetTotalSpentByMonthAndCategory("January", categoryHouse);
 
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
@@ -102,7 +102,7 @@ namespace Test
         [TestMethod]
         public void AddRepeatedKeyWordToCategory()
         {
-            bool alreadyExistKW = logicController.AlreadyExistThisKeyWordInAnoterCategory("movie theater");
+            bool alreadyExistKW = logicController.AlreadyExistKeyWordInAnoterCategory("movie theater");
             Assert.IsTrue(alreadyExistKW);
         }
 
@@ -111,7 +111,7 @@ namespace Test
         [TestMethod]
         public void AddValidKeyWordToCategory()
         {
-            bool alreadyExistKW = logicController.AlreadyExistThisKeyWordInAnoterCategory("departure");
+            bool alreadyExistKW = logicController.AlreadyExistKeyWordInAnoterCategory("departure");
             Assert.IsFalse(alreadyExistKW);
         }
 
@@ -189,8 +189,8 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateFindCase()
         {
-            string expectedString = "month: 1 year: 2020 total: 0";
-            string month = "Enero";
+            string expectedString = "month: January year: 2020 total: 0";
+            string month = "January";
             int year = 2020;
             Budget budget = logicController.BudgetGetOrCreate(month, year);
             Assert.AreEqual(expectedString, budget.ToString());
@@ -199,9 +199,9 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateCreateCase()
         {
-            string month = "Diciembre";
+            string month = "December";
             int year = 2020;
-            Budget expectedBudget = new Budget(12, repo.GetCategories()) { 
+            Budget expectedBudget = new Budget(Months.December, repo.GetCategories()) { 
                 Year = 2020, 
                 TotalAmount = 0 
             };
@@ -215,12 +215,12 @@ namespace Test
         public void BudgetGetOrCreateAddAndFind()
         {
             Repository emptyRepository = new Repository();
-            int month = 12;
+            Months month = Months.December;
             int year = 2020;
             Budget budget = new Budget(month) { Year = year, TotalAmount = 0 };
             emptyRepository.AddBudget(budget);
             LogicController controller = new LogicController(emptyRepository);
-            Budget actualBudget = controller.BudgetGetOrCreate("Diciembre", year);
+            Budget actualBudget = controller.BudgetGetOrCreate("December", year);
             Assert.AreEqual(budget, actualBudget);
         }
 
@@ -245,7 +245,7 @@ namespace Test
             budgetCategory,
             budgetCategory2,            
             };
-            Budget actualBudget = logicController.BudgetGetOrCreate("Enero", 2020);
+            Budget actualBudget = logicController.BudgetGetOrCreate("January", 2020);
             List<BudgetCategory> actualBudgetCategories = actualBudget.BudgetCategories;
             CollectionAssert.AreEqual(budgetCategories, actualBudgetCategories);
         }
@@ -254,7 +254,7 @@ namespace Test
         [TestMethod]
         public void FindBudgetFoundCase()
         {
-            JanuaryBudget = new Budget(1)
+            JanuaryBudget = new Budget(Months.January)
             {
                 Year = 2020,
                 TotalAmount = 0
@@ -262,7 +262,7 @@ namespace Test
             Repository repository = new Repository();
             repository.AddBudget(JanuaryBudget);
             LogicController controller = new LogicController(repository);
-            Budget actualBudget = controller.FindBudget("Enero", 2020);
+            Budget actualBudget = controller.FindBudget("January", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
         }
 
@@ -271,7 +271,7 @@ namespace Test
         [ExpectedException(typeof(NoFindBudget), "")]
         public void FindBudgetNotFoundCase()
         {
-            Budget actualBudget = logicController.FindBudget("Febrero", 2020);
+            Budget actualBudget = logicController.FindBudget("February", 2020);
         }
 
         [TestMethod]
@@ -288,7 +288,7 @@ namespace Test
         public void FindCategoryEntertainment()
         {
             string description = "movie theater";
-            Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
+            Category expectedCategory = logicController.FindCategoryByDescription(description);
             Assert.AreEqual(categoryEntertainment, expectedCategory);
 
         }
@@ -298,7 +298,7 @@ namespace Test
         public void FindCategoryNullValueResultForEntertainment()
         {
             string description ="video game night";
-            Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
+            Category expectedCategory = logicController.FindCategoryByDescription(description);
         }
 
         [TestMethod]
@@ -306,7 +306,7 @@ namespace Test
         public void FindCategoryNullValueResultFood()
         {
             string description ="when we went to eat"; 
-            Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
+            Category expectedCategory = logicController.FindCategoryByDescription(description);
             Assert.IsNull(expectedCategory);
 
         }
@@ -315,7 +315,7 @@ namespace Test
         public void FindCategoryValueResultForFood()
         {
             string description ="when we went to McDonalds last night";
-            Category expectedCategory = logicController.AsignCategoryByDescriptionExpense(description);
+            Category expectedCategory = logicController.FindCategoryByDescription(description);
             Assert.AreEqual(categoryFood, expectedCategory);
 
         }
@@ -326,8 +326,8 @@ namespace Test
 
             List<string> months = new List<string>()
             {
-            "Enero",
-            "Mayo",
+            "January",
+            "May",
             };
             DateTime month1 = new DateTime(2020, 1, 24);
             DateTime month5 = new DateTime(2020, 5, 24);
@@ -337,7 +337,7 @@ namespace Test
             repo.GetExpenses().Add(expense1);
             repo.GetExpenses().Add(expense2);
             LogicController controller = new LogicController(repo);
-            List<string> monthsOrder = controller.OrderedMonthsInWhichThereAreExpenses();
+            List<string> monthsOrder = controller.OrderedMonthsWithExpenses();
             CollectionAssert.AreEqual(months, monthsOrder);
             
 
@@ -346,7 +346,7 @@ namespace Test
         [TestMethod]
         public void ExpenseAmountByMonthInWhichAreExpenses()
         {
-            string month = "Agosto";
+            Months month = Months.August;
 
             DateTime month1 = new DateTime(2020, 8, 24);
             DateTime month2 = new DateTime(2020, 8, 24);
@@ -367,7 +367,7 @@ namespace Test
         [TestMethod]
         public void ExpenseAmountByMonthInWhichAreNoExpenses()
         {
-            string month = "Agosto";
+            Months month = Months.August;
             DateTime month1 = new DateTime(2020, 2, 24);
             DateTime month2 = new DateTime(2020, 3, 24);
             DateTime month3 = new DateTime(2020, 1, 24);
@@ -386,7 +386,7 @@ namespace Test
         [TestMethod]
         public void ExpenseAmountByMonthInWhichIsAnExpense()
         {
-            string month = "Agosto";
+            Months month = Months.August;
             DateTime month1 = new DateTime(2020, 8, 24);
             DateTime month2 = new DateTime(2020, 2, 24);
             DateTime month3 = new DateTime(2020, 1, 24);
@@ -406,7 +406,7 @@ namespace Test
         [TestMethod]
         public void ExpensesByMonth()
         {
-            string month = "Enero";
+            Months month = Months.January;
             Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "when we go movies" };
             Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "when we go movies" };
             Repository repository = new Repository();
@@ -420,7 +420,7 @@ namespace Test
         [TestMethod]
         public void ExpensesByMonthEmpty()
         {
-            string month = "Mayo";
+            Months month = Months.May;
             Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "when we go movies" };
             Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "when we go movies" };
             Repository repository = new Repository();
@@ -518,18 +518,18 @@ namespace Test
         {
             string[] expectedMonthStrings = new string[]
             {
-                "Enero",
-                "Febrero",
-                "Marzo",
-                "Abril",
-                "Mayo",
-                "Junio",
-                "Julio",
-                "Agosto",
-                "Setiembre",
-                "Octubre",
-                "Noviembre",
-                "Diciembre"
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
             };
             string[] allMonths = logicController.GetAllMonthsString();
             CollectionAssert.AreEqual(allMonths, expectedMonthStrings);
@@ -712,7 +712,7 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetToRepository()
         {
-            Budget validBudget = new Budget(DateTime.Now.Month)
+            Budget validBudget = new Budget((Months) DateTime.Now.Month)
             {
                 TotalAmount = 4000,
                 Year = DateTime.Now.Year
@@ -737,11 +737,11 @@ namespace Test
         {
             List<string> months = new List<string>()
             {
-            "Enero",
-            "Mayo",
+            "January",
+            "May",
             };
-            Budget budget1 = new Budget(1) { TotalAmount = 23, Year = 2020 };
-            Budget budget2 = new Budget(5) { TotalAmount = 23, Year = 2020 };
+            Budget budget1 = new Budget(Months.January) { TotalAmount = 23, Year = 2020 };
+            Budget budget2 = new Budget(Months.May) { TotalAmount = 23, Year = 2020 };
             Repository repo = new Repository();
             repo.GetBudgets().Add(budget1);
             repo.GetBudgets().Add(budget2);
@@ -795,7 +795,7 @@ namespace Test
                 categoryEntertainment,
                 categoryFood,
             };
-            Budget budget = new Budget(12, categories)
+            Budget budget = new Budget(Months.December, categories)
             {
                 Year = 2020,
                 TotalAmount = 0
@@ -805,7 +805,7 @@ namespace Test
                 categoryEntertainment,
                 categoryHouse
             };
-            Budget expectedBudget = new Budget(12, categories2)
+            Budget expectedBudget = new Budget(Months.December, categories2)
             {
                 Year = 2020,
                 TotalAmount = 0
@@ -830,7 +830,7 @@ namespace Test
                 categoryEntertainment,
                 categoryFood,
             };
-            Budget budget = new Budget(12, categories)
+            Budget budget = new Budget(Months.December, categories)
             {
                 Year = 2020,
                 TotalAmount = 0

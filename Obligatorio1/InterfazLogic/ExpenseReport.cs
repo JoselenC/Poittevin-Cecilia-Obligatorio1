@@ -26,7 +26,7 @@ namespace InterfazLogic
 
         private void monthsWithExpenses(){
             lblMonths.Text = "";
-            List <string> months= logicController.OrderedMonthsInWhichThereAreExpenses();
+            List <string> months= logicController.OrderedMonthsWithExpenses();
             if (months.Count < 1)
             {
                 MessageBox.Show("There are no expenses registered in the system");

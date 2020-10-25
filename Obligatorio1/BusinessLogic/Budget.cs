@@ -9,13 +9,13 @@ namespace BusinessLogic
 
         private double totalAmount;
 
-        private readonly int month;
+        private readonly Months month;
 
         private int year;
 
         public double TotalAmount { get => totalAmount; set => SetTotalAmount(value); }
 
-        public int Month { get => month ; }
+        public Months Month { get => month ; }
 
         public int Year { get => year; set => SetYear(value); }
 
@@ -37,14 +37,14 @@ namespace BusinessLogic
             year = vYear;
         }
 
-        private bool ValidMonth(int vMonth)
+        private bool ValidMonth(Months vMonth)
         {
-            if (vMonth > 12 || vMonth < 1)
+            if ((int) vMonth > 12 || (int) vMonth < 1)
                 throw new ArgumentOutOfRangeException();
             return true;
         }
 
-        public Budget(int vCurrentMonth)
+        public Budget(Months vCurrentMonth)
         {
             if (ValidMonth(vCurrentMonth))
             {
@@ -61,7 +61,7 @@ namespace BusinessLogic
             return returnList;
         }
 
-        public Budget(int vCurrentMonth, List<Category> categories)
+        public Budget(Months vCurrentMonth, List<Category> categories)
         {
             if (ValidMonth(vCurrentMonth))
             {
