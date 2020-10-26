@@ -64,11 +64,9 @@ namespace BusinessLogic
             return exist;
         }
 
-        public bool ExistThisKey(string pKeyWord, ref bool exist, Category category)
+        public bool ExistThisKey(string pKeyWord)
         {
-            if (category.KeyWords.keyWords.Contains(pKeyWord.ToLower()))
-                exist = true;
-            return exist;
+            return keyWords.Contains(pKeyWord.ToLower());
         }
 
         public List<string> AsignKeyWordToList(KeyWord keyWordsCategory)

@@ -25,7 +25,12 @@ namespace BusinessLogic
             Expenses = new List<Expense>();
             Budgets = new List<Budget>();
             BudgetCategories = new List<BudgetCategory>();
-        }             
+        }
+
+        internal void DeleteCategory(Category category)
+        {
+            Categories.Remove(category);
+        }
 
         public Repository(List<Category> vCategories)
         {
@@ -69,7 +74,7 @@ namespace BusinessLogic
                 throw new ExcepcionInvalidRepeatedNameCategory();
             if (!AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
                 throw new ExcepcionInvalidRepeatedKeyWordsCategory();
-            this.Categories.Add(category);
+            Categories.Add(category);
         }
 
         public void AddBudget(Budget vBudget)
@@ -79,15 +84,6 @@ namespace BusinessLogic
                 throw new ArgumentNullException();
             }
             Budgets.Add(vBudget);
-        }
-
-        public void AddBudgetCategory(BudgetCategory vCategory)
-        {
-            if (vCategory is null)
-            {
-                throw new ArgumentNullException();
-            }
-            BudgetCategories.Add(vCategory);
         }
 
         public void AddExpense(Expense expense)
@@ -103,11 +99,12 @@ namespace BusinessLogic
             AddExpense(expense);
         }
 
-        public void SetCategory(string vName,List<string> vKeyWords )
+        public Category SetCategory(string vName,List<string> vKeyWords )
         {
             KeyWord pKeyWord = new KeyWord(vKeyWords);
             Category category = new Category { Name = vName, KeyWords = pKeyWord };
             AddCategory(category);
+            return category;
         }
 
         public List<Category> GetCategories()

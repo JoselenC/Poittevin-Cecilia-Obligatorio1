@@ -195,10 +195,7 @@ namespace InterfazLogic
                 lblEditCategories.Text = "Select a category to edit o delete";
                 lblEditCategories.ForeColor = Color.Red;
             }
-            logicController.DeleteCategory(category);
-            logicController.SetCategory(txtName.Text, KeyWords);         
-            logicController.EditCategoryExpense(category, txtName.Text, KeyWords);
-            logicController.EditCategoryBudget(category, txtName.Text, KeyWords);
+            logicController.EditCategory(category, txtName.Text, KeyWords);
             MessageBox.Show("Category " + txtName.Text + " was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             lstCatgories.Items.Remove(category);
             this.Visible = false;

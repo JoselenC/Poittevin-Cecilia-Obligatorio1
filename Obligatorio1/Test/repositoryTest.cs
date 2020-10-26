@@ -213,27 +213,6 @@ namespace Test
             repo.AddBudget(invalidBudget);
         }
 
-        [TestMethod]
-        public void AddValidBudgetCategoryToRepository()
-        {
-            BudgetCategory validBudgetCategory = new BudgetCategory { 
-                Category = categoryFood, 
-                Amount = 1000 
-            };
-            Repository EmptyRepository = new Repository();
-            EmptyRepository.AddBudgetCategory(validBudgetCategory);
-
-            BudgetCategory currentBudgetCategory = EmptyRepository.GetBudgetsCategory().First();
-            Assert.AreEqual(validBudgetCategory, currentBudgetCategory);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void AddInvalidNullBudgetCategoryToRepository()
-        {
-            BudgetCategory invalidBudgetCategory = null;
-            repo.AddBudgetCategory(invalidBudgetCategory);
-        }
 
         [TestMethod]
         public void CreateAddExpense()

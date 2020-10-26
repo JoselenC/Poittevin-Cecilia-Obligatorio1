@@ -75,10 +75,16 @@ namespace BusinessLogic
             return $"month: {month} year: {Year} total: {totalAmount}";
         }
 
-        public void AddBudgetCategory(BudgetCategory budgetCategory)
+        private void AddBudgetCategory(BudgetCategory budgetCategory)
         {
             if (budgetCategory is null)
                 throw new ArgumentNullException();
+            BudgetCategories.Add(budgetCategory);
+        }
+
+        public void AddBudgetCategory(Category category)
+        {
+            BudgetCategory budgetCategory = new BudgetCategory() { Amount = 0, Category = category };
             BudgetCategories.Add(budgetCategory);
         }
 

@@ -559,42 +559,6 @@ namespace Test
         }
 
         [TestMethod]
-        public void GetAllCategoryNamesValidFormat()
-        {
-            string[] ExpectedCategoryNames = new string[]
-            {
-                categoryEntertainment.Name,
-                categoryFood.Name,
-                categoryHouse.Name
-            };
-            string[] RealCategoryNames = logicController.GetAllCategoryStrings();
-            CollectionAssert.AreEqual(ExpectedCategoryNames, RealCategoryNames);
-        }
-
-        [TestMethod]
-        public void AddValidBudgetCategoryToRepository()
-        {
-            BudgetCategory validBudgetCategory = new BudgetCategory
-            {
-                Category = categoryFood,
-                Amount = 1000
-            };
-            Repository EmptyRepository = new Repository();
-            LogicController controller = new LogicController(EmptyRepository);
-            controller.AddBudgetCategory(validBudgetCategory);
-            BudgetCategory currentBudgetCategory = EmptyRepository.GetBudgetsCategory().First();
-            Assert.AreEqual(validBudgetCategory, currentBudgetCategory);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void AddInvalidNullBudgetCategoryToRepository()
-        {
-            BudgetCategory invalidBudgetCategory = null;
-            logicController.AddBudgetCategory(invalidBudgetCategory);
-        }
-
-        [TestMethod]
         public void CreateAddCategoty()
         {
             List<string> keyWords2 = new List<string>
@@ -769,7 +733,7 @@ namespace Test
             repo.GetBudgets().Add(budget1);
             repo.GetBudgets().Add(budget2);
             LogicController controller = new LogicController(repo);
-            List<string> monthsOrder = controller.OrderedMonthsInWhichThereAreBudget();
+            List<string> monthsOrder = controller.OrderedMonthsWithBudget();
             CollectionAssert.AreEqual(months, monthsOrder);
 
         }
@@ -778,7 +742,7 @@ namespace Test
         public void EditCategoryExpense()
         {
             Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-            Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
+            Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryEntertainment };
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
             controller.AddExpense(expense);
@@ -788,7 +752,7 @@ namespace Test
                 "theater",
                 "casino"
             };
-            controller.EditCategoryExpense(categoryFood,"entertainment", keyWords);
+            controller.EditCategory(categoryFood, "entertainment", keyWords);
             CollectionAssert.Equals(expectedExpense, expense);
         }
 
@@ -806,7 +770,7 @@ namespace Test
                 "theater",
                 "casino"
             };
-            controller.EditCategoryExpense(categoryFood, "dinner", keyWords);
+            controller.EditCategory(categoryFood, "dinner", keyWords);
             CollectionAssert.Equals(expectedExpense, expense);
         }
 
@@ -841,7 +805,7 @@ namespace Test
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
             controller.AddBudget(budget); 
-            controller.EditCategoryBudget(categoryFood, "House", keyWords);
+            controller.EditCategory(categoryFood, "House", keyWords);
             CollectionAssert.Equals(expectedBudget, budget);
         }
 
@@ -866,7 +830,7 @@ namespace Test
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
             controller.AddBudget(budget);
-            controller.EditCategoryBudget(categoryFood, "House", keyWords);
+            controller.EditCategory(categoryFood, "House", keyWords);
             CollectionAssert.Equals(budget, budget);
         }
 

@@ -176,9 +176,8 @@ namespace Test
         {
 
             Category category1 = new Category { Name = "Category 1" };
-            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 10 };
             Budget budget = new Budget(Months.January) { TotalAmount = 0, Year = 2020 };
-            budget.AddBudgetCategory(budgetCategory1);
+            budget.AddBudgetCategory(category1);
         }
 
         [TestMethod]
@@ -199,11 +198,9 @@ namespace Test
             };
             Category category1 = new Category { Name = "Category 1" };
             Category category2 = new Category { Name = "Category 2" };
-            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 20 };
-            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 10 };
             Budget budget = new Budget(Months.January) { TotalAmount = 0, Year = 2020 }; 
-            budget.AddBudgetCategory(budgetCategory1);
-            budget.AddBudgetCategory(budgetCategory2);
+            budget.AddBudgetCategory(category1);
+            budget.AddBudgetCategory(category2);
 
             string[] actualCategories = budget.GetAllCategoryNames();
             CollectionAssert.AreEqual(expectedCategories, actualCategories);
@@ -232,11 +229,9 @@ namespace Test
             };
             Category category1 = new Category { Name = "Category 1" };
             Category category2 = new Category { Name = "Category 2" };
-            BudgetCategory budgetCategory1 = new BudgetCategory { Category = category1, Amount = 20 };
-            BudgetCategory budgetCategory2 = new BudgetCategory { Category = category2, Amount = 10 };
             Budget budget = new Budget(Months.January) { TotalAmount = 0, Year = 2020 };
-            budget.AddBudgetCategory(budgetCategory1);
-            budget.AddBudgetCategory(budgetCategory2);
+            budget.AddBudgetCategory(category1);
+            budget.AddBudgetCategory(category2);
 
             string[] actualCategories = budget.GetAllBudgetCategoryStrings();
             CollectionAssert.AreEqual(expectedCategories, actualCategories);

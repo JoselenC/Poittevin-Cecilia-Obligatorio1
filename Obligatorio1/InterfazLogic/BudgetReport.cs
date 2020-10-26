@@ -41,7 +41,7 @@ namespace InterfazLogic
             else
             {                
                 cboxMonth.Items.Clear();
-                List<string> monthsWithBudget = logicController.OrderedMonthsInWhichThereAreBudget();
+                List<string> monthsWithBudget = logicController.OrderedMonthsWithBudget();
                 foreach (string month in monthsWithBudget)
                 {
                    

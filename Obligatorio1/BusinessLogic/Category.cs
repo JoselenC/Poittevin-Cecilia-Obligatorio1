@@ -49,5 +49,10 @@ namespace BusinessLogic
         {
             return Name;
         }
+
+        internal bool ExistThisKey(string pKeyWord)
+        {
+            return KeyWords.ExistThisKey(pKeyWord);
+        }
     }
 }
