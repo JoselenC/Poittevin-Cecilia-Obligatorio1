@@ -85,35 +85,36 @@ namespace InterfazLogic
         private void btnAddKeyWord_Click(object sender, EventArgs e)
         {
             string keyWord = tbKeyWord.Text;
-            if (keyWord.Length > 0)
+            if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWord))
             {
-                if (KeyWords.Contains(keyWord.ToLower()) || KeyWords.Contains(keyWord.ToUpper()))
+                lblKeyWords.Text = "You already entered that keyword in another category";
+                lblKeyWords.ForeColor = Color.Red;
+            }
+            else
+            {
+                try
                 {
-                    lblKeyWords.Text = "You already entered that keyword";
-                    lblKeyWords.ForeColor = Color.Red;
-                }
-                else if (KeyWords.Count > 9)
-                {
-                    lblKeyWords.Text = "You cannot add more than 10 keywords.";
-                    lblKeyWords.ForeColor = Color.Red;
-                }
-                else if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWord))
-                {
-                    lblKeyWords.Text = "You already entered that keyword in another category";
-                    lblKeyWords.ForeColor = Color.Red;
-                }
-                else
-                {
-                    this.KeyWords.Add(keyWord);
+                    KeyWord key = new KeyWord(KeyWords);
+                    key.AddKeyWord(keyWord);
                     lstCategories.Items.Add(keyWord);
                     tbKeyWord.Text = "";
                     lblKeyWords.Text = "";
                 }
-            }
-            else
-            {
-                lblKeyWords.Text = "The keyword cannot be empty.";
-                lblKeyWords.ForeColor = Color.Red;
+                catch (ExcepcionInvalidKeyWordsLengthCategory)
+                {
+                    lblKeyWords.Text = "You cannot add more than 10 keywords.";
+                    lblKeyWords.ForeColor = Color.Red;
+                }
+                catch (ExcepcionInvalidRepeatedKeyWordsCategory)
+                {
+                    lblKeyWords.Text = "You already entered that keyword";
+                    lblKeyWords.ForeColor = Color.Red;
+                }
+                catch (InvalidKeyWord)
+                {
+                    lblKeyWords.Text = "The keyword cannot be empty.";
+                    lblKeyWords.ForeColor = Color.Red;
+                }
             }
 
         }

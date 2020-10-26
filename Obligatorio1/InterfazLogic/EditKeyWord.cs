@@ -43,37 +43,44 @@ namespace InterfazLogic
         private void btnSave_Click(object sender, EventArgs e)
         {
             string keyWordEdited = tbEdit.Text;
-            if (keyWordEdited != "")
+            if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited))
             {
-               
-                if (KeyWords.Contains(keyWordEdited) && keyWordEdited!= editKeyWord)
+                lblKeyWord.Text = "You already entered that keyword in another category";
+                lblKeyWord.ForeColor = Color.Red;
+            }
+            else
+            {
+                try
                 {
-                    lblKeyWord.Text = "You already entered that keyword";
-                    lblKeyWord.ForeColor = Color.Red;
-                }
-                else if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited))
-                {
-                    lblKeyWord.Text = "You already entered that keyword in another category";
-                    lblKeyWord.ForeColor = Color.Red;
-                }
-                else
-                {
-                    KeyWords.RemoveAt(Index);
-                    KeyWords.Add(tbEdit.Text);
+                    KeyWord key = new KeyWord(KeyWords);
+                    key.DeleteKeyWord(editKeyWord);
+                    key.AddKeyWord(keyWordEdited);                    
                     listKeyWords.Items.RemoveAt(Index);
                     listKeyWords.Items.Add(keyWordEdited);
                     Close();
                 }
+                catch (ExcepcionInvalidKeyWordsLengthCategory)
+                {
+                    lblKeyWord.Text = "You cannot add more than 10 keywords.";
+                    lblKeyWord.ForeColor = Color.Red;
+                }
+                catch (ExcepcionInvalidRepeatedKeyWordsCategory)
+                {
+                    lblKeyWord.Text = "You already entered that keyword";
+                    lblKeyWord.ForeColor = Color.Red;
+                }
+                catch (InvalidKeyWord)
+                {
+                    lblKeyWord.Text = "The keyword cannot be empty.";
+                    lblKeyWord.ForeColor = Color.Red;
+                }
             }
-            else
-            {
-                lblKeyWord.Text = "The keyword cannot be empty";
-                lblKeyWord.ForeColor = Color.Red;
-            }           
+                 
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            KeyWords.Add(editKeyWord);
             Close();
         }
     }

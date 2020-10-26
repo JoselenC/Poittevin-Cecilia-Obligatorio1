@@ -77,5 +77,9 @@ namespace BusinessLogic
     {
     }
 
+    public class InvalidKeyWord : Exception
+    {
+    }
+
 }
 

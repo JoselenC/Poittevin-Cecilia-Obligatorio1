@@ -358,6 +358,12 @@ namespace BusinessLogic
             Repository.GetExpenses().Remove(expense);
             return expense;
         }
+
+        public void DeleteCategory(Category vCategory)
+        {
+            Repository.GetCategories().Remove(vCategory);        
+        }
+
         public List<Category> GetCategories()
         {
             return Repository.GetCategories();

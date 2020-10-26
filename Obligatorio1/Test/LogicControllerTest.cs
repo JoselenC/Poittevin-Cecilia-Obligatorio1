@@ -297,7 +297,7 @@ namespace Test
         [ExpectedException(typeof(NoAsignCategoryByDescriptionExpense), "")]
         public void FindCategoryNullValueResultForEntertainment()
         {
-            string description ="video game night";
+            string description = "movie theater and CoffeMaker";
             Category expectedCategory = logicController.FindCategoryByDescription(description);
         }
 
@@ -305,9 +305,8 @@ namespace Test
         [ExpectedException(typeof(NoAsignCategoryByDescriptionExpense), "")]
         public void FindCategoryNullValueResultFood()
         {
-            string description ="when we went to eat"; 
-            Category expectedCategory = logicController.FindCategoryByDescription(description);
-            Assert.IsNull(expectedCategory);
+            string description =""; 
+            Category expectedCategory = logicController.FindCategoryByDescription(description);           
 
         }
 
@@ -427,6 +426,30 @@ namespace Test
             repository.GetExpenses().Add(expense1);
             repository.GetExpenses().Add(expense2);
             Assert.AreEqual(0, logicController.GetExpenseByMonth(month).Count);
+        }
+
+        [TestMethod]
+        public void ExpensesByMonthString()
+        {           
+            Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 05, 01), Description = "when we go movies" };
+            Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "when we go movies" };
+            Repository repository = new Repository();
+            repository.GetExpenses().Add(expense1);
+            repository.GetExpenses().Add(expense2);
+            LogicController controller = new LogicController(repository);
+            Assert.AreEqual(expense1, controller.GetExpenseByMonth("May").ToArray()[0]);
+
+        }
+
+        [TestMethod]
+        public void ExpensesByMonthEmptyString()
+        {
+            Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "when we go movies" };
+            Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "when we go movies" };
+            Repository repository = new Repository();
+            repository.GetExpenses().Add(expense1);
+            repository.GetExpenses().Add(expense2);
+            Assert.AreEqual(0, logicController.GetExpenseByMonth("May").Count);
         }
 
         [TestMethod]
@@ -845,6 +868,17 @@ namespace Test
             controller.AddBudget(budget);
             controller.EditCategoryBudget(categoryFood, "House", keyWords);
             CollectionAssert.Equals(budget, budget);
+        }
+
+        [TestMethod]
+        public void DeleteCategory()
+        {
+            Repository repository = new Repository();
+            Category category = new Category { Name = "entertainment",KeyWords=new KeyWord() };
+            repository.AddCategory(category);
+            LogicController controller = new LogicController(repository);
+            controller.DeleteCategory(category);
+            Assert.AreEqual(0, controller.GetCategories().Count);
         }
 
     }

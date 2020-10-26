@@ -13,7 +13,11 @@ namespace BusinessLogic
     
         public KeyWord(List<string> vKeyWords)
         {
+            if(vKeyWords.Count>10)
+                throw new ExcepcionInvalidKeyWordsLengthCategory();
             keyWords = vKeyWords;
+
+
         }
 
         public KeyWord()
@@ -23,7 +27,7 @@ namespace BusinessLogic
 
         public void SetKeyWord(KeyWord vKeyWord)
         {
-            if (vKeyWord.keyWords.Count >= 10)
+            if (vKeyWord.keyWords.Count > 10)
                 throw new ExcepcionInvalidKeyWordsLengthCategory();
             keyWords = vKeyWord.keyWords;
         }
@@ -74,6 +78,22 @@ namespace BusinessLogic
             return vKwyWords;
         }
 
-       
+        public void AddKeyWord(string vKeyWord)
+        {
+            if (vKeyWord != "" && !keyWords.Contains(vKeyWord.ToLower()) && !keyWords.Contains(vKeyWord.ToUpper()) && keyWords.Count<10)
+                keyWords.Add(vKeyWord);
+            else if (keyWords.Contains(vKeyWord.ToLower()) || keyWords.Contains(vKeyWord.ToUpper()))
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
+            else if(keyWords.Count>=10)
+                throw new ExcepcionInvalidKeyWordsLengthCategory();
+            else
+                throw new InvalidKeyWord();
+        }
+
+        public void DeleteKeyWord(string vKeyWord)
+        {
+            keyWords.Remove(vKeyWord);
+        }
+
     }
 }

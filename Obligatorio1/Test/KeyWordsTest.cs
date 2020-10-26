@@ -24,9 +24,10 @@ namespace Test
             "casino",
             "game room",
             "Park",
-            "shopping",
+            
             };
             KeyWord keyWord = new KeyWord(keyWords);
+            keyWords.Add("shopping");
             keyWord.SetKeyWord(keyWord);
         }
 
@@ -284,7 +285,128 @@ namespace Test
             Assert.AreEqual(keyWords, keyWords2);
         }
 
+        [TestMethod]
+        public void AddValidKeyWord()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            };
+            List<string> keyWords2 = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            "game room"
+            };
+            KeyWord expectedKeyWord = new KeyWord(keyWords2);
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.AddKeyWord("game room");
+            Assert.AreEqual(expectedKeyWord, keyWord);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidKeyWord))]
+        public void AddEmptyKeyWord()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            };
+            KeyWord expectedKeyWord = new KeyWord(keyWords);
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.AddKeyWord("");
+            Assert.AreEqual(expectedKeyWord, keyWord);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory))]
+        public void AddRepetedKeyWord()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.AddKeyWord("casino");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidKeyWordsLengthCategory))]
+        public void AddKeyWordInvalidLength()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            "game room",
+            "Park",
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.AddKeyWord("keyword");
+        }
+
+        [TestMethod]
+        public void DeleteKeyWord()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            };
+            List<string> keyWords2 = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating"
+            };
+            KeyWord expectedKeyWord = new KeyWord(keyWords2);
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.DeleteKeyWord("casino");
+            Assert.AreEqual(expectedKeyWord, keyWord);
+        }
 
 
     }

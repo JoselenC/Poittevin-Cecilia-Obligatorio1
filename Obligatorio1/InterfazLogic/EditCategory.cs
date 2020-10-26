@@ -46,76 +46,79 @@ namespace InterfazLogic
             }
         }
 
+
+        private void EditTheCategory()
+        {
+            txtKeyWord.Enabled = true;
+            txtName.Enabled = true;
+            string nameCategory = lstCatgories.SelectedItem.ToString();
+            category = logicController.FindCategoryByName(nameCategory);
+            txtName.Text = category.Name;
+            List<string> keyWords = category.KeyWords.AsignKeyWordToList(category.KeyWords);
+            KeyWords = keyWords;
+            foreach (var keyWord in keyWords)
+            {
+                lstKwywords.Items.Add(keyWord);
+            }
+            txtKeyWord.Enabled = true;
+            txtName.Enabled = true;
+        }
+
         private void btnEditCategory_Click(object sender, EventArgs e)
         {
             if (lstCatgories.SelectedIndex >= 0)
-            {
-                txtKeyWord.Enabled = true;
-                txtName.Enabled = true;
-                string nameCategory = lstCatgories.SelectedItem.ToString();
-                category = logicController.FindCategoryByName(nameCategory);
-                txtName.Text = category.Name;
-                List<string> keyWords =category.KeyWords.AsignKeyWordToList(category.KeyWords);                   
-                KeyWords = keyWords;
-                foreach (var keyWord in keyWords)
-                {
-                    lstKwywords.Items.Add(keyWord);
-                }
-                txtKeyWord.Enabled = true;
-                txtName.Enabled = true;
-            }
+                EditTheCategory();
             else
             {
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
-            }           
+            }
         }
+
 
         private void btnAddKeyWord_Click(object sender, EventArgs e)
         {
+            string keyWord = txtKeyWord.Text;
             if (lstCatgories.SelectedIndex >= 0)
             {
-                string keyWord = txtKeyWord.Text;
-                if (keyWord.Length > 0)
+                if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWord))
                 {
-                    if (KeyWords.Contains(keyWord.ToLower()))
-                    {
-                        lblKyWords.Text = "You already entered that keyword";
-                        lblKyWords.ForeColor = Color.Red;
+                    lblKyWords.Text = "You already entered that keyword in another category";
+                    lblKyWords.ForeColor = Color.Red;
+                    txtKeyWord.Enabled = true;
+                    txtName.Enabled = true;
+                }
+                else
+                {
+                    try
+                    {                      
+                       
+                        KeyWord key = new KeyWord(KeyWords);
+                        key.AddKeyWord(keyWord);
+                        lstCatgories.Items.Add(keyWord);
                     }
-                    else if (KeyWords.Count >= 10)
+                    catch (ExcepcionInvalidKeyWordsLengthCategory)
                     {
                         lblKyWords.Text = "You cannot add more than 10 keywords.";
                         lblKyWords.ForeColor = Color.Red;
                     }
-                    else if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWord))
+                    catch (ExcepcionInvalidRepeatedKeyWordsCategory)
                     {
-                        lblKyWords.Text = "You already entered that keyword in another category";
+                        lblKyWords.Text = "You already entered that keyword";
                         lblKyWords.ForeColor = Color.Red;
                     }
-                    else
+                    catch (InvalidKeyWord)
                     {
-                        this.KeyWords.Add(keyWord);
-                        lstKwywords.Items.Add(keyWord);
-                        txtKeyWord.Text = "";
-                        lblKyWords.Text = "";
+                        lblKyWords.Text = "The keyword cannot be empty.";
+                        lblKyWords.ForeColor = Color.Red;
                     }
                 }
-                else
-                {
-                    lblKyWords.Text = "The keyword cannot be empty.";
-                    lblKyWords.ForeColor = Color.Red;
-                }
-                txtKeyWord.Enabled = true;
-                txtName.Enabled = true;
-
             }
             else
             {
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
             }
-
         }
 
         private void TryDeleteKeyWord()
@@ -192,7 +195,7 @@ namespace InterfazLogic
                 lblEditCategories.Text = "Select a category to edit o delete";
                 lblEditCategories.ForeColor = Color.Red;
             }
-            logicController.GetCategories().Remove(category);
+            logicController.DeleteCategory(category);
             logicController.SetCategory(txtName.Text, KeyWords);         
             logicController.EditCategoryExpense(category, txtName.Text, KeyWords);
             logicController.EditCategoryBudget(category, txtName.Text, KeyWords);
