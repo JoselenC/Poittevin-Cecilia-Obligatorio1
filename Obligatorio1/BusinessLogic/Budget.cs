@@ -132,5 +132,10 @@ namespace BusinessLogic
             }
             return false;
         }
+
+       public bool IsSameCreationDate(Months month, int year)
+        {
+            return Month == month && Year == year;
+        }
     }
 }

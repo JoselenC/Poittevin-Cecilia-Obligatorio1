@@ -14,7 +14,7 @@ namespace InterfazLogic
         private int oldYearValue = DateTime.Now.Year;
         private bool changeMonth = false;
 
-        public BudgetReport(Repository vRepository)
+        public BudgetReport(MemoryRepository vRepository)
         {
             logicController = new LogicController(vRepository);
             InitializeComponent();

@@ -13,7 +13,7 @@ namespace InterfazLogic
         private Category category;
         private int indexKeyWordToEdit;
 
-        public EditCategory(Repository vRepository)
+        public EditCategory(MemoryRepository vRepository)
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);

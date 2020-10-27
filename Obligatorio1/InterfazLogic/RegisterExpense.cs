@@ -8,7 +8,7 @@ namespace InterfazLogic
     public partial class RegisterExpense : UserControl
     {
         private LogicController logicController;
-        public RegisterExpense(Repository vRepository)
+        public RegisterExpense(MemoryRepository vRepository)
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);

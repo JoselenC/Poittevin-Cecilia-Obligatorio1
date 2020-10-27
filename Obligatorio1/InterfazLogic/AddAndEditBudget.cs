@@ -9,7 +9,7 @@ namespace InterfazLogic
     {
         private LogicController logicController { get; set; }
         private Budget currentBudget { get; set; }
-        public AddAndEditBudget(Repository vRepository)
+        public AddAndEditBudget(MemoryRepository vRepository)
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);

@@ -9,7 +9,7 @@ namespace InterfazLogic
     public partial class ExpenseReport : UserControl
     {
         private LogicController logicController;
-        public ExpenseReport(Repository vRepository)
+        public ExpenseReport(MemoryRepository vRepository)
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);

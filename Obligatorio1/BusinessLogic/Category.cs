@@ -65,5 +65,24 @@ namespace BusinessLogic
         {
            return KeyWords.DescriptionContainAPartOfDescription(description);
         }
+
+        public bool IsSameCategoryName(string categoryName)
+        {
+            return Name == categoryName;
+        }
+
+        public bool IsKeyWordInDescription(string[] descriptionArray)
+        {
+            bool exist = false;
+            foreach (string description in descriptionArray)
+            {
+                exist = ExistKeyWordInDscription(description);
+                if (exist == true)
+                    return true;
+            }
+            return exist;
+        }
+
+
     }
 }

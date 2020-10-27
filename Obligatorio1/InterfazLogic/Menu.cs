@@ -8,7 +8,7 @@ namespace InterfazLogic
     public partial class Menu : Form
     {
         private LogicController controller;
-        public Menu(Repository repository)
+        public Menu(MemoryRepository repository)
         {
             InitializeComponent();
             controller = new LogicController(repository);

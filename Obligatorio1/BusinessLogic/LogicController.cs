@@ -61,24 +61,9 @@ namespace BusinessLogic
             return (Months)Enum.Parse(typeof(Months), month);
         }
 
-
-        private bool IsSameCreationDate(Budget budget, Months month, int year)
-        {
-            if (budget.Month == month && budget.Year == year)
-                return true;
-            return false;
-        }
-
         public Budget FindBudget(string month, int year)
         {
-            Months mMonth = StringToMonthsEnum(month);
-            List<Budget> budgets = Repository.GetBudgets();
-            foreach (var budget in budgets)
-            {
-                if (IsSameCreationDate(budget, mMonth, year))
-                    return budget;
-            }
-            throw new NoFindBudget();
+            return Repository.FindBudget(month, year);
         }
 
         private Budget CreateBudget(int year, List<Category> categories, Months month)
@@ -150,7 +135,7 @@ namespace BusinessLogic
             double total = 0;
             foreach (Expense expense in expenses)
             {
-                if (IsSameCategory(vCategory, expense))
+                if (IsSameCategory(vCategory,expense))
                     total += expense.Amount;
             }
             return total;
@@ -175,43 +160,11 @@ namespace BusinessLogic
         public void SetExpense(double amount, DateTime creationDate, string description, Category category)
         {
             Repository.SetExpense(amount, creationDate, description, category);
-        }
-
-        private bool IsKeyWordInDescription(string[] descriptionArray, Category vCategory)
-        {
-            bool exist = false;
-            foreach (string description in descriptionArray)
-            {
-                exist = vCategory.ExistKeyWordInDscription(description);
-                if (exist == true)
-                    return true;
-            }
-            return exist;
-        }
-
-        private Category FindCategoryByDescription(string[] descriptionArray)
-        {
-            List<Category> categories = Repository.GetCategories();
-            Category category = null;
-            foreach (Category vCategory in categories)
-            {
-                if (IsKeyWordInDescription(descriptionArray, vCategory))
-                {
-                    if(!(category is null))
-                        throw new NoAsignCategoryByDescriptionExpense();
-                    category = vCategory;
-                }
-            }
-            if(category is null)
-                throw new NoAsignCategoryByDescriptionExpense();
-            return category;
-        }
-
+        }   
 
         public Category FindCategoryByDescription(string vDescription)
         {
-            string[] descriptionArray = vDescription.Split(' ');
-            return FindCategoryByDescription(descriptionArray);
+            return Repository.FindCategoryByDescription(vDescription);
         }      
 
         private List<string> MonthsListIntToString(List<int> months)
@@ -225,7 +178,6 @@ namespace BusinessLogic
             }
             return monthsString;
         }
-
 
         public List<string> OrderedMonthsWithExpenses()
         {
@@ -275,35 +227,16 @@ namespace BusinessLogic
                     total += expense.Amount;
             }
             return total;
-        }
-
-        private bool IsSameCategoryName(Category category, string categoryName)
-        {
-            return category.Name == categoryName;
-        }
+        }      
 
         public Category FindCategoryByName(string categoryName)
         {
-            List<Category> categories = Repository.GetCategories();
-            foreach (var category in categories)
-            {
-                if (IsSameCategoryName(category, categoryName))
-                    return category;
-            }
-            throw new NoFindCategoryByName();       
+            return Repository.FindCategoryByName(categoryName);      
         }
 
         public Expense FindExpense(Expense expense)
         {
-            List<Expense> expenses = Repository.GetExpenses();
-          
-            foreach (var expense2 in expenses)
-            {
-                if (expense.Equals(expense2))
-                    return expense;
-            }
-
-            return null;
+           return  Repository.FindExpense(expense);
         }
 
         public void AlreadyExistKeyWordInAnoterCategory(string pKeyWord)

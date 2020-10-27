@@ -13,7 +13,7 @@ namespace InterfazLogic
         private bool selectExpense;
         private Expense expenseToEdit;
 
-        public EditExpense(Repository vRepository)
+        public EditExpense(MemoryRepository vRepository)
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);

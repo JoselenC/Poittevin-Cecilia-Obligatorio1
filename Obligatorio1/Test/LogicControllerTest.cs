@@ -141,6 +141,7 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NoFindEqualsExpense), "")]
         public void FindNullExpense()
         {
             string description = "movie theater";
@@ -150,11 +151,10 @@ namespace Test
             repository.AddExpense(expense);
             LogicController controller = new LogicController(repository);
             Expense expectedExpense = controller.FindExpense(expense2);
-            Assert.IsNull(expectedExpense);
-
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NoFindEqualsExpense), "")]
         public void FindNullExpenseEmtyRepository()
         {
             string description = "movie theater";
@@ -162,8 +162,6 @@ namespace Test
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
             Expense expectedExpense = controller.FindExpense(expense);
-            Assert.IsNull(expectedExpense);
-
         }
 
 
@@ -442,18 +440,7 @@ namespace Test
                "theater",
                "casino",
             };
-            Category category1 = new Category { Name = "entertainment", KeyWords = new KeyWord(keyWords1) };
-            List<string> keyWords2 = new List<string>()
-            {
-                "restaurant",
-                "McDonalds",
-                "Dinner",
-
-            };
-            Category category2 = new Category { Name = "food", KeyWords = new KeyWord(keyWords2) };
-            categoryList.Add(category1);
-            categoryList.Add(category2);
-            Repository respoitory = new Repository(categoryList);
+            Category category1 = new Category { Name = "entertainment", KeyWords = new KeyWord(keyWords1) };           
             Category category3 = logicController.FindCategoryByName("entertainment");
             Assert.AreEqual(category1, category3);
         }
