@@ -175,7 +175,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(235, 727);
+            this.btnAccept.Location = new System.Drawing.Point(238, 736);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);
             this.btnAccept.TabIndex = 28;
@@ -219,7 +219,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(600, 727);
+            this.btnCancel.Location = new System.Drawing.Point(600, 736);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(227, 73);
             this.btnCancel.TabIndex = 35;

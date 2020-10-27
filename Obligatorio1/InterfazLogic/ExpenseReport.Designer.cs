@@ -84,7 +84,7 @@
             this.cCategory,
             this.cAmount});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(113, 256);
+            this.listView1.Location = new System.Drawing.Point(142, 270);
             this.listView1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(945, 381);
@@ -131,7 +131,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(502, 722);
+            this.btnAccept.Location = new System.Drawing.Point(485, 747);
             this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);

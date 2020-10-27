@@ -122,7 +122,11 @@ namespace InterfazLogic
                 lbDescription.Text = "";
                 lblAmount.Text = "";
             }         
-        }       
+        }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
     }
 }

@@ -122,6 +122,7 @@ namespace InterfazLogic
                     EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstCategories,logicController);
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
+                    lblEdit.Text = "";
                 }
                 else
                 {
@@ -159,6 +160,10 @@ namespace InterfazLogic
             }
         }
 
-       
+        private void btnCanel_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
+
     }
 }

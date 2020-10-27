@@ -43,6 +43,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lblEdit = new System.Windows.Forms.Label();
+            this.btnCanel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -60,11 +61,11 @@
             // btnRegisterCategory
             // 
             this.btnRegisterCategory.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterCategory.Location = new System.Drawing.Point(547, 719);
+            this.btnRegisterCategory.Location = new System.Drawing.Point(338, 720);
             this.btnRegisterCategory.Name = "btnRegisterCategory";
             this.btnRegisterCategory.Size = new System.Drawing.Size(227, 73);
             this.btnRegisterCategory.TabIndex = 1;
-            this.btnRegisterCategory.Text = "Register";
+            this.btnRegisterCategory.Text = "Accept";
             this.btnRegisterCategory.UseVisualStyleBackColor = false;
             this.btnRegisterCategory.Click += new System.EventHandler(this.btnRegisterCategory_Click);
             // 
@@ -183,11 +184,23 @@
             this.lblEdit.Size = new System.Drawing.Size(0, 32);
             this.lblEdit.TabIndex = 16;
             // 
+            // btnCanel
+            // 
+            this.btnCanel.BackColor = System.Drawing.Color.Tan;
+            this.btnCanel.Location = new System.Drawing.Point(669, 720);
+            this.btnCanel.Name = "btnCanel";
+            this.btnCanel.Size = new System.Drawing.Size(227, 73);
+            this.btnCanel.TabIndex = 17;
+            this.btnCanel.Text = "Cancel";
+            this.btnCanel.UseVisualStyleBackColor = false;
+            this.btnCanel.Click += new System.EventHandler(this.btnCanel_Click);
+            // 
             // RegisterCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.btnCanel);
             this.Controls.Add(this.lblEdit);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnDelete);
@@ -204,7 +217,7 @@
             this.Controls.Add(this.btnRegisterCategory);
             this.Controls.Add(this.label1);
             this.Name = "RegisterCategory";
-            this.Size = new System.Drawing.Size(1371, 804);
+            this.Size = new System.Drawing.Size(1254, 840);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +240,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblEdit;
+        private System.Windows.Forms.Button btnCanel;
     }
 }

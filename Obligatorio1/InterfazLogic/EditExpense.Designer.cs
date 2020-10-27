@@ -59,7 +59,7 @@
             this.label1.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label1.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label1.Location = new System.Drawing.Point(39, 17);
+            this.label1.Location = new System.Drawing.Point(26, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(1074, 92);
             this.label1.TabIndex = 1;
@@ -277,7 +277,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(624, 737);
+            this.btnCancel.Location = new System.Drawing.Point(600, 736);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(227, 73);
             this.btnCancel.TabIndex = 34;

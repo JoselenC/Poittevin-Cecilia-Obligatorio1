@@ -48,7 +48,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(755, 695);
+            this.btnCancel.Location = new System.Drawing.Point(684, 715);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(227, 73);
@@ -60,7 +60,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(299, 695);
+            this.btnAccept.Location = new System.Drawing.Point(336, 715);
             this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);
@@ -137,7 +137,7 @@
             // btnEditBudget
             // 
             this.btnEditBudget.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditBudget.Location = new System.Drawing.Point(978, 405);
+            this.btnEditBudget.Location = new System.Drawing.Point(954, 405);
             this.btnEditBudget.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnEditBudget.Name = "btnEditBudget";
             this.btnEditBudget.Size = new System.Drawing.Size(283, 55);
@@ -152,7 +152,7 @@
             this.label3.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label3.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label3.Location = new System.Drawing.Point(52, 25);
+            this.label3.Location = new System.Drawing.Point(28, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(1209, 92);
             this.label3.TabIndex = 10;
@@ -227,7 +227,7 @@
             this.Controls.Add(this.btnCancel);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "AddAndEditBudget";
-            this.Size = new System.Drawing.Size(1288, 811);
+            this.Size = new System.Drawing.Size(1263, 886);
             ((System.ComponentModel.ISupportInitialize)(this.nYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
