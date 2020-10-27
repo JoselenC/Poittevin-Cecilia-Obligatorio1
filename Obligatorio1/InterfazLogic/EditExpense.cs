@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 
@@ -23,8 +17,8 @@ namespace InterfazLogic
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);
-            this.MaximumSize = new Size(800, 850);
-            this.MinimumSize = new Size(800, 850);
+            MaximumSize = new Size(800, 850);
+            MinimumSize = new Size(800, 850);
             lstCategories.Visible = false;
             indexToEdit = -1;            
             edit = false;
@@ -203,7 +197,7 @@ namespace InterfazLogic
             DateTime creationDate = dateTime.Value;
             logicController.SetExpense(amount, creationDate, description, category);
             MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Visible = false;
+            Visible = false;
             if (indexToEdit >= 0)
             {
                 lstExpenses.Items.RemoveAt(indexToEdit);

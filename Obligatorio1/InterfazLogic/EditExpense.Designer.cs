@@ -225,7 +225,7 @@
             // btnEditCategory
             // 
             this.btnEditCategory.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditCategory.Location = new System.Drawing.Point(866, 612);
+            this.btnEditCategory.Location = new System.Drawing.Point(866, 603);
             this.btnEditCategory.Name = "btnEditCategory";
             this.btnEditCategory.Size = new System.Drawing.Size(219, 55);
             this.btnEditCategory.TabIndex = 28;
@@ -269,7 +269,7 @@
             // 
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(262, 604);
+            this.lstCategories.Location = new System.Drawing.Point(262, 596);
             this.lstCategories.Name = "lstCategories";
             this.lstCategories.Size = new System.Drawing.Size(589, 66);
             this.lstCategories.TabIndex = 33;

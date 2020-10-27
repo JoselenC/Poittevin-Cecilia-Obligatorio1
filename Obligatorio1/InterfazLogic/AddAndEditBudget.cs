@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 namespace InterfazLogic
@@ -18,8 +13,8 @@ namespace InterfazLogic
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);
-            this.MaximumSize = new Size(500, 600);
-            this.MinimumSize = new Size(500, 600);
+            MaximumSize = new Size(500, 600);
+            MinimumSize = new Size(500, 600);
             nMonth.Items.AddRange(logicController.GetAllMonthsString());
             CategoriesCount();
             nMonth.SelectedIndex = 0;

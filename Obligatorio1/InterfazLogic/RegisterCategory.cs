@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 
@@ -23,8 +18,8 @@ namespace InterfazLogic
             InitializeComponent();
             logicController = new LogicController(vRepository);
             KeyWords = new List<string>();
-            this.MaximumSize = new Size(800, 800);
-            this.MinimumSize = new Size(800, 800);
+            MaximumSize = new Size(800, 800);
+            MinimumSize = new Size(800, 800);
             indexKeyWordToEdit = -1;
             lstCategories.Items.Clear();
             tbName.Clear();
@@ -38,7 +33,7 @@ namespace InterfazLogic
             lblEdit.Text = "";
             lblName.Text = "";
             MessageBox.Show("Category " + tbName.Text + " was added successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Visible = false;
+            Visible = false;
         }
 
         private void btnRegisterCategory_Click(object sender, EventArgs e)

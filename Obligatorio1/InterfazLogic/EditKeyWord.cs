@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 
@@ -32,8 +27,8 @@ namespace InterfazLogic
             Index = indexToEdit;
             listKeyWords = lstkeyWords;
             logicController = vLogicController;
-            this.MaximumSize = new Size(380, 200);
-            this.MinimumSize = new Size(380, 200);
+            MaximumSize = new Size(380, 200);
+            MinimumSize = new Size(380, 200);
             StartPosition = FormStartPosition.CenterScreen;
             tbEdit.Clear();
             editKeyWord= lstkeyWords.SelectedItem.ToString();

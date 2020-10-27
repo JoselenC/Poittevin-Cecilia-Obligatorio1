@@ -78,6 +78,12 @@ namespace BusinessLogic
             return Repository.GetExpenses();
         }
 
+        public List<Budget> GetBudgets()
+        {
+            return Repository.GetBudgets();
+        }
+
+
         private static bool IsExpenseSameMonth(Months month, Expense vExpense)
         {
             int expected = vExpense.CreationDate.Month;

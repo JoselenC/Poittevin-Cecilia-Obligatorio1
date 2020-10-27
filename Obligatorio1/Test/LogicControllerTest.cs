@@ -793,7 +793,24 @@ namespace Test
             CollectionAssert.Equals(budget, budget);
         }
 
-     
+        [TestMethod]
+        public void GetBudgets()
+        {
+            List<Category> categories = new List<Category>() {
+                categoryEntertainment,
+                categoryFood,
+            };            
+            JanuaryBudget = new Budget(Months.January, categories)
+            {
+                Year = 2020,
+                TotalAmount = 0
+            };
+            List<Budget> budgets = new List<Budget>()
+            {
+                 JanuaryBudget
+            };
+            CollectionAssert.AreEqual(budgets,logicController.GetBudgets());
+        }
 
     }
 }

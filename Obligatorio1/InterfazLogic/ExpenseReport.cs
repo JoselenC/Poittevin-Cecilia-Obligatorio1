@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 
@@ -19,8 +14,8 @@ namespace InterfazLogic
             InitializeComponent();
             logicController = new LogicController(vRepository);
             monthsWithExpenses();
-            this.MaximumSize = new Size(500, 650);
-            this.MinimumSize = new Size(500, 650);
+            MaximumSize = new Size(500, 650);
+            MinimumSize = new Size(500, 650);
 
         }
 
@@ -30,7 +25,7 @@ namespace InterfazLogic
             if (months.Count < 1)
             {
                 MessageBox.Show("There are no expenses registered in the system");
-                this.Visible = false;
+                Visible = false;
             }
             else
             {
@@ -38,7 +33,7 @@ namespace InterfazLogic
                 {
                     lstMonths.Items.Add(month);
                 }
-                this.Visible = true;
+                Visible = true;
             }
         }
 
@@ -82,7 +77,7 @@ namespace InterfazLogic
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
+           Visible = false;
         }
 
       

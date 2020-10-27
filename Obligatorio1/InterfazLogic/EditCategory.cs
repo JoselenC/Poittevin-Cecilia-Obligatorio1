@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
-using System.Linq.Expressions;
 
 namespace InterfazLogic
 {
@@ -23,8 +17,8 @@ namespace InterfazLogic
         {
             InitializeComponent();
             logicController = new LogicController(vRepository);
-            this.MaximumSize = new Size(500, 600);
-            this.MinimumSize = new Size(500, 600);
+            MaximumSize = new Size(500, 600);
+            MinimumSize = new Size(500, 600);
             CompleteCategories();
             indexKeyWordToEdit = -1;
             txtKeyWord.Enabled = false;
@@ -196,7 +190,7 @@ namespace InterfazLogic
             logicController.EditCategory(category, txtName.Text, KeyWords);
             MessageBox.Show("Category " + txtName.Text + " was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             lstCatgories.Items.Remove(category);
-            this.Visible = false;
+            Visible = false;
             
         }
 

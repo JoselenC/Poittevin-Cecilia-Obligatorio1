@@ -1,12 +1,6 @@
 ﻿using BusinessLogic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -22,8 +16,8 @@ namespace InterfazLogic
             originForm = vOriginForm;
             currentBudgetCategory = budgetCategory;
             numericAmount.Value = (decimal) budgetCategory.Amount;
-            this.MaximumSize = new Size(380, 200);
-            this.MinimumSize = new Size(380, 200);
+            MaximumSize = new Size(380, 200);
+            MinimumSize = new Size(380, 200);
             StartPosition = FormStartPosition.CenterScreen;
         }
 
