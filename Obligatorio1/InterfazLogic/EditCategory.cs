@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
+using System.Linq.Expressions;
 
 namespace InterfazLogic
 {
@@ -81,38 +82,35 @@ namespace InterfazLogic
             string keyWord = txtKeyWord.Text;
             if (lstCatgories.SelectedIndex >= 0)
             {
-                if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWord))
+                try
+                {
+                    logicController.AlreadyExistKeyWordInAnoterCategory(keyWord);
+                    KeyWord key = new KeyWord(KeyWords);
+                    key.AddKeyWord(keyWord);
+                    lstCatgories.Items.Add(keyWord);
+                }
+                catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
                 {
                     lblKyWords.Text = "You already entered that keyword in another category";
                     lblKyWords.ForeColor = Color.Red;
                     txtKeyWord.Enabled = true;
                     txtName.Enabled = true;
                 }
-                else
+                catch (ExcepcionInvalidKeyWordsLengthCategory)
                 {
-                    try
-                    {                      
-                       
-                        KeyWord key = new KeyWord(KeyWords);
-                        key.AddKeyWord(keyWord);
-                        lstCatgories.Items.Add(keyWord);
-                    }
-                    catch (ExcepcionInvalidKeyWordsLengthCategory)
-                    {
-                        lblKyWords.Text = "You cannot add more than 10 keywords.";
-                        lblKyWords.ForeColor = Color.Red;
-                    }
-                    catch (ExcepcionInvalidRepeatedKeyWordsCategory)
-                    {
-                        lblKyWords.Text = "You already entered that keyword";
-                        lblKyWords.ForeColor = Color.Red;
-                    }
-                    catch (InvalidKeyWord)
-                    {
-                        lblKyWords.Text = "The keyword cannot be empty.";
-                        lblKyWords.ForeColor = Color.Red;
-                    }
+                    lblKyWords.Text = "You cannot add more than 10 keywords.";
+                    lblKyWords.ForeColor = Color.Red;
                 }
+                catch (ExcepcionInvalidRepeatedKeyWordsCategory)
+                {
+                    lblKyWords.Text = "You already entered that keyword";
+                    lblKyWords.ForeColor = Color.Red;
+                }
+                catch (InvalidKeyWord)
+                {
+                    lblKyWords.Text = "The keyword cannot be empty.";
+                    lblKyWords.ForeColor = Color.Red;
+                }                
             }
             else
             {

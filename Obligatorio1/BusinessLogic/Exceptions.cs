@@ -30,6 +30,9 @@ namespace BusinessLogic
     {
     }
 
+    public class ExcepcionInvalidRepeatedKeyWordsInAnotherCategory : Exception
+    {
+    }
     public class ExcepcionInvalidYearExpense : Exception
     {
     }

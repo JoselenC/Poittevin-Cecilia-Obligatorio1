@@ -142,7 +142,7 @@ namespace Test
             };
             string description = "movie theater";
             KeyWord keyWord = new KeyWord(keyWords);
-            Assert.IsTrue(keyWord.KeywordContainsAPartOfDescription(description));
+            Assert.IsTrue(keyWord.DescriptionContainAPartOfDescription(description));
         }
 
         [TestMethod]
@@ -162,7 +162,7 @@ namespace Test
             };
             string description = "food";
             KeyWord keyWord = new KeyWord(keyWords);
-            Assert.IsFalse(keyWord.KeywordContainsAPartOfDescription(description));
+            Assert.IsFalse(keyWord.DescriptionContainAPartOfDescription(description));
         }
 
 
@@ -189,7 +189,7 @@ namespace Test
             KeyWord keyWord2 = new KeyWord(keyWords2);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = true;
-            Assert.IsTrue(keyWord.ExistKeyWordInAnotherCategory(keyWord2,ref exist,category));
+            Assert.IsFalse(keyWord.ExistKeyWords(keyWord2));
         }
 
         [TestMethod]
@@ -217,7 +217,7 @@ namespace Test
             KeyWord keyWord2 = new KeyWord(keyWords2);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist =true;
-            Assert.IsFalse(keyWord.ExistKeyWordInAnotherCategory(keyWord2, ref exist, category));
+            Assert.IsTrue(keyWord.ExistKeyWords(keyWord2));
         }
 
 
@@ -239,7 +239,7 @@ namespace Test
             KeyWord keyWord = new KeyWord(keyWords);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = false;
-            Assert.IsTrue(keyWord.ExistThisKey("movie theater", ref exist, category));
+            Assert.IsTrue(keyWord.ExistThisKey("movie theater"));
         }
 
 
@@ -261,7 +261,7 @@ namespace Test
             KeyWord keyWord = new KeyWord(keyWords);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = false;
-            Assert.IsFalse(keyWord.ExistThisKey("food", ref exist, category));
+            Assert.IsFalse(keyWord.ExistThisKey("food"));
         }
 
         [TestMethod]

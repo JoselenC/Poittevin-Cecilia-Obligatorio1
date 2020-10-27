@@ -50,9 +50,20 @@ namespace BusinessLogic
             return Name;
         }
 
-        internal bool ExistThisKey(string pKeyWord)
+        public bool ExistThisKey(string pKeyWord)
         {
             return KeyWords.ExistThisKey(pKeyWord);
+        }
+
+        public bool ExistKeyWordInAnotherCategory(KeyWord pKeyWords)
+        {
+            return KeyWords.ExistKeyWords(pKeyWords);          
+            
+        }
+
+        public bool ExistKeyWordInDscription(string description)
+        {
+           return KeyWords.DescriptionContainAPartOfDescription(description);
         }
     }
 }

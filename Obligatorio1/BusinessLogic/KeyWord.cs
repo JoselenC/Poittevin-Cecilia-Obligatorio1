@@ -41,32 +41,25 @@ namespace BusinessLogic
             return false;
         }
 
-        public bool KeywordContainsAPartOfDescription(string description) {
+        public bool DescriptionContainAPartOfDescription(string description) {
             return keyWords.Contains(description);
         }
 
-        private bool ExistKeyWord(List<string> pKeyWords, ref bool exist, string vKeyWord)
-        {           
-            foreach (string keyWords in pKeyWords)
-            {
-                if (vKeyWord.ToLower() == keyWords.ToLower())
-                    exist = false;
-            }
-            return exist;
-        }
-
-        public bool ExistKeyWordInAnotherCategory(KeyWord pKeyWords, ref bool exist,Category category)
-        {
-            foreach (string vKeyWord in category.KeyWords.keyWords)
-            {
-                exist= ExistKeyWord(pKeyWords.keyWords, ref exist, vKeyWord);
-            }
-            return exist;
-        }
+       
 
         public bool ExistThisKey(string pKeyWord)
         {
             return keyWords.Contains(pKeyWord.ToLower());
+        }
+
+        public bool ExistKeyWords(KeyWord pKeyWords)
+        {
+            foreach (string keyWord in keyWords)
+            {
+                if (pKeyWords.keyWords.Contains(keyWord))
+                    return true;
+            }
+            return false;
         }
 
         public List<string> AsignKeyWordToList(KeyWord keyWordsCategory)

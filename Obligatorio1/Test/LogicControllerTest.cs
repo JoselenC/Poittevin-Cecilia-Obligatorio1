@@ -100,21 +100,17 @@ namespace Test
         }
 
         [TestMethod]
-        public void AddRepeatedKeyWordToCategory()
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsInAnotherCategory), "")]
+        public void RepeatedKeyWordToCategory()
         {
-            bool alreadyExistKW = logicController.AlreadyExistKeyWordInAnoterCategory("movie theater");
-            Assert.IsTrue(alreadyExistKW);
+            logicController.AlreadyExistKeyWordInAnoterCategory("movie theater");
         }
-
-
 
         [TestMethod]
-        public void AddValidKeyWordToCategory()
+        public void NoRepeatedKeyWordToCategory()
         {
-            bool alreadyExistKW = logicController.AlreadyExistKeyWordInAnoterCategory("departure");
-            Assert.IsFalse(alreadyExistKW);
+            logicController.AlreadyExistKeyWordInAnoterCategory("bowling");
         }
-
 
         [TestMethod]
         public void FindExpense()
@@ -172,21 +168,6 @@ namespace Test
 
 
         [TestMethod]
-        public void AddExpense()
-        {
-            string description = "movie theater";
-            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            Repository repository = new Repository();
-            LogicController controllerExpected = new LogicController(repository);
-            controllerExpected.GetExpenses().Add(expense);
-            LogicController controller = new LogicController(repository);
-            controller.AddExpense(expense);
-            CollectionAssert.AreEqual(controllerExpected.GetExpenses(), controller.GetExpenses());
-
-        }
-
-        [TestMethod]
         public void BudgetGetOrCreateFindCase()
         {
             string expectedString = "month: January year: 2020 total: 0";
@@ -241,9 +222,8 @@ namespace Test
                 Amount = 0
             };
             List<BudgetCategory> budgetCategories = new List<BudgetCategory>() {
-            budgetCategory3,
             budgetCategory,
-            budgetCategory2,            
+            budgetCategory2,                    
             };
             Budget actualBudget = logicController.BudgetGetOrCreate("January", 2020);
             List<BudgetCategory> actualBudgetCategories = actualBudget.BudgetCategories;
@@ -593,28 +573,8 @@ namespace Test
             List<Category> categories2 = controller.GetCategories();
             Assert.AreEqual(categories, categories2);
         }
-        [TestMethod]
-        [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
-        public void AddCategoryInvalidAddingTwice()
-        {
-            Repository emptyRepository = new Repository();
-            LogicController controller = new LogicController(emptyRepository);
-            string categoryName = "House";
-            Category category = new Category { Name = categoryName };
-            controller.AddCategory(category);
-            controller.AddCategory(category);
+        
 
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
-        public void AddCategoryAlreadyUsedName()
-        {
-            string categoryName = "Entertainment";
-            Category category2 = new Category { Name = categoryName };
-            logicController.AddCategory(category2);
-
-        }
 
         [TestMethod]
         public void AddCategoryValidData()
@@ -628,14 +588,14 @@ namespace Test
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
-            controller.AddCategory(category);
+            controller.SetCategory(categoryName, keyWords);
             String categoryName2 = "food";
             List<string> keyWords2 = new List<string>()
             {
                 "restaurant",
             };
             Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2)};
-            controller.AddCategory(category2);
+            controller.SetCategory(categoryName2,keyWords2);
             List<Category> categories = new List<Category>()
             {
                 category,
@@ -657,7 +617,7 @@ namespace Test
             };
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             LogicController controller = new LogicController(repository);
-            controller.AddCategory(category);
+            controller.SetCategory(categoryName, keyWords);
             String categoryName2 = "NameExample2";
             List<string> keyWords2 = new List<string>
             {
@@ -665,8 +625,7 @@ namespace Test
                 "theater"
             };
             Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
-            controller.AddCategory(category2);
-            Assert.AreEqual(category, controller.GetCategories().ToArray()[0]);
+            controller.SetCategory(categoryName2, keyWords2);
         }
 
         [TestMethod]
@@ -682,12 +641,12 @@ namespace Test
             };
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
             LogicController controller = new LogicController(repository);
-            controller.AddCategory(category);
+            controller.SetCategory(categoryName, keyWords);
             String categoryName2 = "food";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
             Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
-            controller.AddCategory(category2);
+            controller.SetCategory(categoryName2, keyWords2);
             List<Category> categories = new List<Category>()
             {
                 category,
@@ -706,7 +665,7 @@ namespace Test
             };
             Repository EmptyRepository = new Repository();
             LogicController controller = new LogicController(EmptyRepository);
-            controller.AddBudget(validBudget);
+            controller.SetBudget(validBudget);
             Budget currentBudget =controller.Repository.GetBudgets().First();
             Assert.AreEqual(validBudget, currentBudget);
         }
@@ -716,7 +675,7 @@ namespace Test
         public void AddInvalidNullBudgetToRepository()
         {
             Budget invalidBudget = null;
-            logicController.AddBudget(invalidBudget);
+            logicController.SetBudget(invalidBudget);
         }
 
         [TestMethod]
@@ -745,7 +704,7 @@ namespace Test
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryEntertainment };
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
-            controller.AddExpense(expense);
+            controller.SetExpense(23, new DateTime(2020, 01, 01),"dinner",categoryFood);
             List <string> keyWords = new List<string>
             {
                 "movie theater",
@@ -763,7 +722,7 @@ namespace Test
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
-            controller.AddExpense(expense);
+            controller.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
             List<string> keyWords = new List<string>
             {
                 "movie theater",
@@ -804,7 +763,7 @@ namespace Test
             };
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
-            controller.AddBudget(budget); 
+            controller.SetBudget(budget); 
             controller.EditCategory(categoryFood, "House", keyWords);
             CollectionAssert.Equals(expectedBudget, budget);
         }
@@ -829,21 +788,12 @@ namespace Test
             };
             Repository repository = new Repository();
             LogicController controller = new LogicController(repository);
-            controller.AddBudget(budget);
+            controller.SetBudget(budget);
             controller.EditCategory(categoryFood, "House", keyWords);
             CollectionAssert.Equals(budget, budget);
         }
 
-        [TestMethod]
-        public void DeleteCategory()
-        {
-            Repository repository = new Repository();
-            Category category = new Category { Name = "entertainment",KeyWords=new KeyWord() };
-            repository.AddCategory(category);
-            LogicController controller = new LogicController(repository);
-            controller.DeleteCategory(category);
-            Assert.AreEqual(0, controller.GetCategories().Count);
-        }
+     
 
     }
 }

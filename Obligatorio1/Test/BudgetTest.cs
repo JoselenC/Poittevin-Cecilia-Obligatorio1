@@ -224,15 +224,14 @@ namespace Test
         public void GetAllBudgetCategoriesStringsValidData()
         {
             string[] expectedCategories = new string[]{
-                "Category 1                      20",
-                "Category 2                      10"
+                "Category 1                      0",
+                "Category 2                      0"
             };
             Category category1 = new Category { Name = "Category 1" };
             Category category2 = new Category { Name = "Category 2" };
             Budget budget = new Budget(Months.January) { TotalAmount = 0, Year = 2020 };
             budget.AddBudgetCategory(category1);
             budget.AddBudgetCategory(category2);
-
             string[] actualCategories = budget.GetAllBudgetCategoryStrings();
             CollectionAssert.AreEqual(expectedCategories, actualCategories);
         }

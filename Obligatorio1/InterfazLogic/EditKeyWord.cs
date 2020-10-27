@@ -43,39 +43,37 @@ namespace InterfazLogic
         private void btnSave_Click(object sender, EventArgs e)
         {
             string keyWordEdited = tbEdit.Text;
-            if (logicController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited))
+            try
+            {
+                logicController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
+                KeyWord key = new KeyWord(KeyWords);
+                key.DeleteKeyWord(editKeyWord);
+                key.AddKeyWord(keyWordEdited);
+                listKeyWords.Items.RemoveAt(Index);
+                listKeyWords.Items.Add(keyWordEdited);
+                Close();
+            }
+            catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
             {
                 lblKeyWord.Text = "You already entered that keyword in another category";
                 lblKeyWord.ForeColor = Color.Red;
             }
-            else
+
+            catch (ExcepcionInvalidKeyWordsLengthCategory)
             {
-                try
-                {
-                    KeyWord key = new KeyWord(KeyWords);
-                    key.DeleteKeyWord(editKeyWord);
-                    key.AddKeyWord(keyWordEdited);                    
-                    listKeyWords.Items.RemoveAt(Index);
-                    listKeyWords.Items.Add(keyWordEdited);
-                    Close();
-                }
-                catch (ExcepcionInvalidKeyWordsLengthCategory)
-                {
-                    lblKeyWord.Text = "You cannot add more than 10 keywords.";
-                    lblKeyWord.ForeColor = Color.Red;
-                }
-                catch (ExcepcionInvalidRepeatedKeyWordsCategory)
-                {
-                    lblKeyWord.Text = "You already entered that keyword";
-                    lblKeyWord.ForeColor = Color.Red;
-                }
-                catch (InvalidKeyWord)
-                {
-                    lblKeyWord.Text = "The keyword cannot be empty.";
-                    lblKeyWord.ForeColor = Color.Red;
-                }
+                lblKeyWord.Text = "You cannot add more than 10 keywords.";
+                lblKeyWord.ForeColor = Color.Red;
             }
-                 
+            catch (ExcepcionInvalidRepeatedKeyWordsCategory)
+            {
+                lblKeyWord.Text = "You already entered that keyword";
+                lblKeyWord.ForeColor = Color.Red;
+            }
+            catch (InvalidKeyWord)
+            {
+                lblKeyWord.Text = "The keyword cannot be empty.";
+                lblKeyWord.ForeColor = Color.Red;
+            }          
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

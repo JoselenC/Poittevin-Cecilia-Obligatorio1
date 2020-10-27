@@ -243,30 +243,32 @@ namespace InterfazLogic
             }
         }
 
-       
+        private void CompleteCategories()
+        {
+            lstCategories.Visible = true;
+            try
+            {
+                Category category = logicController.FindCategoryByDescription(tbDescription.Text);
+                lstCategories.Items.Add(category);
+            }
+            catch (NoAsignCategoryByDescriptionExpense)
+            {
+                if (logicController.GetCategories().Count > 0)
+                {
+                    foreach (Category vCategory in logicController.GetCategories())
+                    {
+                        lstCategories.Items.Add(vCategory.Name);
+                    }
+                }
+            }
+            edit = true;
+        }
 
         private void btnEditCategory_Click(object sender, EventArgs e)
         {
-
             if (selectExpense)
             {
-                lstCategories.Visible = true;
-                try
-                {
-                    Category category = logicController.FindCategoryByDescription(tbDescription.Text);
-                    lstCategories.Items.Add(category);
-                }
-                catch (NoAsignCategoryByDescriptionExpense)
-                {
-                    if (logicController.GetCategories().Count > 0)
-                    {
-                        foreach (Category vCategory in logicController.GetCategories())
-                        {
-                            lstCategories.Items.Add(vCategory.Name);
-                        }
-                    }
-                }
-                edit = true;
+                CompleteCategories();
             }
             else
             {

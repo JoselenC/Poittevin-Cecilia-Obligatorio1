@@ -50,29 +50,23 @@ namespace BusinessLogic
             }
             return exist;
         }
-     
-        private bool ExistKeyWordInAnotherCategory(KeyWord pkeyWords, ref bool exist,Category category)
-        {
-            pkeyWords.ExistKeyWordInAnotherCategory(pkeyWords, ref exist, category);
-            return exist;
-        }
+
 
         private bool AlreadyExistTheKeyWordsInAnoterCategory(KeyWord pkeyWords)
-        {
-            bool exist = true;
-
+        {            
             foreach (Category category in Categories)
             {
-                exist=ExistKeyWordInAnotherCategory(pkeyWords, ref exist, category);
+                if (category.ExistKeyWordInAnotherCategory(pkeyWords))
+                    return true;
             }
-            return exist;
+            return false;
         }        
 
         public void AddCategory(Category category)
         {
             if (!AlreadyExistTheCategoryName(category.Name))
                 throw new ExcepcionInvalidRepeatedNameCategory();
-            if (!AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
+            if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
                 throw new ExcepcionInvalidRepeatedKeyWordsCategory();
             Categories.Add(category);
         }
@@ -122,11 +116,9 @@ namespace BusinessLogic
             return Budgets;
         }
 
-        public List<BudgetCategory> GetBudgetsCategory()
+        internal void DeleteExpense(Expense expense)
         {
-            return BudgetCategories;
+            Expenses.Remove(expense);
         }
-
-
     }
 }

@@ -105,7 +105,7 @@ namespace InterfazLogic
         {
             try
             {
-                logicController.AddBudget(currentBudget);
+                logicController.SetBudget(currentBudget);
                 Visible = false;
             }
             catch (ArgumentNullException)

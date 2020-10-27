@@ -51,10 +51,9 @@ namespace BusinessLogic
             throw new NoFindBudget();
         }
 
-        private Budget CreateAndSaveBudget(int year, List<Category> categories, Months month)
+        private Budget CreateBudget(int year, List<Category> categories, Months month)
         {
             Budget budget = new Budget(month, categories) { Year = year, TotalAmount = 0 };
-            AddBudget(budget);
             return budget;
         }
 
@@ -69,7 +68,7 @@ namespace BusinessLogic
             }
             catch (NoFindBudget)
             {
-                returnBudget = CreateAndSaveBudget(year, categories, mMonth);
+                returnBudget = CreateBudget(year, categories, mMonth);
             }
             return returnBudget;
         }
@@ -107,7 +106,6 @@ namespace BusinessLogic
         private static bool IsSameCategory(Category vCategory, Expense expense)
         {
             return expense.Category == vCategory;
-
         }
 
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
@@ -129,15 +127,24 @@ namespace BusinessLogic
             Category category = Repository.SetCategory(vName, vKeyWords);
             AddCategoryInAllBudgets(category);
             return category;
-            // Category category = new Category() { Name = vName, KeyWords = vKeyWords};
-            // AddCategory(category);
-            //return category;
         }
 
         public void SetExpense(double amount, DateTime creationDate, string description, Category category)
         {
             Repository.SetExpense(amount, creationDate, description, category);
-        } 
+        }
+
+        private bool IsKeyWordInDescription(string[] descriptionArray, Category vCategory)
+        {
+            bool exist = false;
+            foreach (string description in descriptionArray)
+            {
+                exist = vCategory.ExistKeyWordInDscription(description);
+                if (exist == true)
+                    return true;
+            }
+            return exist;
+        }
 
         private Category FindCategoryByDescription(string[] descriptionArray)
         {
@@ -145,7 +152,7 @@ namespace BusinessLogic
             Category category = null;
             foreach (Category vCategory in categories)
             {
-                if (IsDescriptionInCategory(descriptionArray, vCategory))
+                if (IsKeyWordInDescription(descriptionArray, vCategory))
                 {
                     if(!(category is null))
                         throw new NoAsignCategoryByDescriptionExpense();
@@ -162,19 +169,7 @@ namespace BusinessLogic
         {
             string[] descriptionArray = vDescription.Split(' ');
             return FindCategoryByDescription(descriptionArray);
-        }
-
-        private bool IsDescriptionInCategory(string[] descriptionArray, Category vCategory)
-        {
-            bool exist = false;
-            foreach (string description in descriptionArray)
-            {
-                exist = vCategory.KeyWords.KeywordContainsAPartOfDescription(description);
-                if (exist == true)
-                    return true;
-            }         
-            return exist;
-        }
+        }      
 
         private List<string> MonthsListIntToString(List<int> months)
         {
@@ -243,7 +238,7 @@ namespace BusinessLogic
                 if (IsSameCategoryName(category, categoryName))
                     return category;
             }
-            throw new NoFindCategoryByName();
+            throw new NoFindCategoryByName();       
         }
 
 
@@ -260,16 +255,14 @@ namespace BusinessLogic
             return null;
         }
 
-        public bool AlreadyExistKeyWordInAnoterCategory(string pKeyWord)
+        public void AlreadyExistKeyWordInAnoterCategory(string pKeyWord)
         {
-            bool exist = false;
             List<Category> categories = Repository.GetCategories();
             foreach (Category category in categories)
             {
                 if (category.ExistThisKey(pKeyWord))
-                    throw new ExcepcionInvalidRepeatedKeyWordsCategory();
-            }
-            return exist;
+                    throw new ExcepcionInvalidRepeatedKeyWordsInAnotherCategory();
+            }           
         }
 
         private List<string> MonthsEnumToStrings(List<Months> months)
@@ -287,26 +280,15 @@ namespace BusinessLogic
             return Enum.GetNames(typeof(Months)).ToArray();
         }
 
-        public void AddBudget(Budget vBudget)
+        public void SetBudget(Budget vBudget)
         {
             Repository.AddBudget(vBudget);
         }
-
-        public void AddCategory(Category category)
-        {
-            AddCategoryInAllBudgets(category);
-            Repository.AddCategory(category);
-        }
-
-        public void AddExpense(Expense expense)
-        {
-            Repository.AddExpense(expense);
-        }        
-        
+                
         public Expense DeleteExpense(Expense expenseToDelete)
         {
             Expense expense = FindExpense(expenseToDelete);
-            Repository.GetExpenses().Remove(expense);
+            Repository.DeleteExpense(expense);
             return expense;
         }
 
@@ -325,17 +307,25 @@ namespace BusinessLogic
                     expense.Category = newCategory;
             }
         }
+
+
+        private void EditBudgetCategory(Category oldCategory, Category newCategory, Budget budget)
+        {
+            foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
+            {
+                if (budgetCategory.Category.Equals(oldCategory))
+                {
+                    budgetCategory.Category = newCategory;
+                }
+            }
+        }
+
         private void EditCategoryInAllBudgets(Category oldCategory, Category newCategory)
         {
             List<Budget> budgets = Repository.GetBudgets();
             foreach (Budget budget in budgets)
             {
-                foreach(BudgetCategory budgetCategory in budget.BudgetCategories)
-                {
-                    if(budgetCategory.Category.Equals(oldCategory)){
-                        budgetCategory.Category = newCategory;
-                    }
-                }
+                EditBudgetCategory(oldCategory, newCategory, budget);
             }
         }
 
