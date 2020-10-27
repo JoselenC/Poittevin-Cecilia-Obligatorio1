@@ -38,8 +38,7 @@ namespace InterfazLogic
                 cboxMonth.Items.Clear();
                 List<string> monthsWithBudget = logicController.OrderedMonthsWithBudget();
                 foreach (string month in monthsWithBudget)
-                {
-                   
+                {                   
                     cboxMonth.Items.Add(month);
                     cboxMonth.SelectedIndex = 0;
                 }                

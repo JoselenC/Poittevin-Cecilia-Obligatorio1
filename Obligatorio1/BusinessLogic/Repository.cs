@@ -25,12 +25,7 @@ namespace BusinessLogic
             Expenses = new List<Expense>();
             Budgets = new List<Budget>();
             BudgetCategories = new List<BudgetCategory>();
-        }
-
-        internal void DeleteCategory(Category category)
-        {
-            Categories.Remove(category);
-        }
+        }     
 
         public Repository(List<Category> vCategories)
         {
@@ -60,7 +55,7 @@ namespace BusinessLogic
                     return true;
             }
             return false;
-        }        
+        }       
 
         public void AddCategory(Category category)
         {
@@ -116,9 +111,14 @@ namespace BusinessLogic
             return Budgets;
         }
 
-        internal void DeleteExpense(Expense expense)
+        public void DeleteExpense(Expense expense)
         {
             Expenses.Remove(expense);
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            Categories.Remove(category);
         }
     }
 }
