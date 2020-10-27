@@ -1,124 +1,47 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-   
-    public class Repository
+    public class Repository <T>
     {
-        private List<Category> Categories;
+        List<T> repository = new List<T>();
 
-        private List<Expense> Expenses;
-
-        private List<Budget> Budgets;
-
-        private List<BudgetCategory> BudgetCategories;
-
-        public Repository()
+        public T Find(Predicate<T> condition)
         {
-            Categories = new List<Category>();
-            Expenses = new List<Expense>();
-            Budgets = new List<Budget>();
-            BudgetCategories = new List<BudgetCategory>();
-        }     
-
-        public Repository(List<Category> vCategories)
-        {
-            Expenses = new List<Expense>();
-            Budgets = new List<Budget>();
-            BudgetCategories = new List<BudgetCategory>();
-            Categories = vCategories;
-        }
-
-        private bool AlreadyExistTheCategoryName(string categoryName)
-        {
-            bool exist = true ;
-            foreach (Category category in Categories)
+            T retorno = repository.Find(condition);
+            if (retorno == null)
             {
-                if (categoryName.ToLower() == category.Name.ToLower())
-                   exist= false;
+                throw new ValueNotFound();
             }
-            return exist;
+            return retorno;
         }
 
-
-        private bool AlreadyExistTheKeyWordsInAnoterCategory(KeyWord pkeyWords)
-        {            
-            foreach (Category category in Categories)
-            {
-                if (category.ExistKeyWordInAnotherCategory(pkeyWords))
-                    return true;
-            }
-            return false;
-        }       
-
-        public void AddCategory(Category category)
+        public void Add(T objectToAdd)
         {
-            if (!AlreadyExistTheCategoryName(category.Name))
-                throw new ExcepcionInvalidRepeatedNameCategory();
-            if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
-                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
-            Categories.Add(category);
+            if(objectToAdd==null)
+                throw new ValueNotFound();
+            repository.Add(objectToAdd);
         }
 
-        public void AddBudget(Budget vBudget)
+        public List<T> Get()
         {
-            if (vBudget is null)
-            {
-                throw new ArgumentNullException();
-            }
-            Budgets.Add(vBudget);
+            return repository;
         }
 
-        public void AddExpense(Expense expense)
+        public void Delete(T objectToDelete)
         {
-            if (expense.Category == null)
-                throw new ExcepcionExpenseWithEmptyCategory();           
-            Expenses.Add(expense);
-        }       
-
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category)
-        {
-            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category };
-            AddExpense(expense);
+            repository.Remove(objectToDelete);
         }
 
-        public Category SetCategory(string vName,List<string> vKeyWords )
+        public void Set(List<T> objectToAdd)
         {
-            KeyWord pKeyWord = new KeyWord(vKeyWords);
-            Category category = new Category { Name = vName, KeyWords = pKeyWord };
-            AddCategory(category);
-            return category;
+            repository = objectToAdd;
         }
 
-        public List<Category> GetCategories()
-        {
-            return Categories;
-        }
-
-        public List<Expense> GetExpenses()
-        {
-            return Expenses;
-        }
-
-        public List<Budget> GetBudgets()
-        {
-            return Budgets;
-        }
-
-        public void DeleteExpense(Expense expense)
-        {
-            Expenses.Remove(expense);
-        }
-
-        public void DeleteCategory(Category category)
-        {
-            Categories.Remove(category);
-        }
     }
 }

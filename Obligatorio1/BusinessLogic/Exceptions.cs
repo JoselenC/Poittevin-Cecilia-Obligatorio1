@@ -84,5 +84,9 @@ namespace BusinessLogic
     {
     }
 
+    public class ValueNotFound : Exception
+    {
+    }
+
 }
 

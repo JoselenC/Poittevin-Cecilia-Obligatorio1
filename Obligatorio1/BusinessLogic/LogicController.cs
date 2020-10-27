@@ -10,9 +10,9 @@ namespace BusinessLogic
     public class LogicController
     {
 
-        public Repository Repository { get; private set; }
+        public MemoryRepository Repository { get; private set; }
 
-        public LogicController(Repository repository)
+        public LogicController(MemoryRepository repository)
         {
             Repository = repository;
         }

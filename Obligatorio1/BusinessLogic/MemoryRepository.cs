@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading;
@@ -10,36 +11,37 @@ using System.Threading.Tasks;
 namespace BusinessLogic
 {
    
-    public class Repository
+    public class MemoryRepository
     {
-        private List<Category> Categories;
+        private Repository<Category> Categories;
 
-        private List<Expense> Expenses;
+        private Repository<Expense> Expenses;
 
-        private List<Budget> Budgets;
+        private Repository<Budget> Budgets;
 
-        private List<BudgetCategory> BudgetCategories;
+        private Repository<BudgetCategory> BudgetCategories;
 
-        public Repository()
+        public MemoryRepository()
         {
-            Categories = new List<Category>();
-            Expenses = new List<Expense>();
-            Budgets = new List<Budget>();
-            BudgetCategories = new List<BudgetCategory>();
+            Categories = new Repository<Category>();
+            Expenses = new Repository<Expense>();
+            Budgets = new Repository<Budget>();
+            BudgetCategories = new Repository<BudgetCategory>();
         }     
 
-        public Repository(List<Category> vCategories)
+        public MemoryRepository(List<Category> vCategories)
         {
-            Expenses = new List<Expense>();
-            Budgets = new List<Budget>();
-            BudgetCategories = new List<BudgetCategory>();
-            Categories = vCategories;
+            Categories = new Repository<Category>();
+            Expenses = new Repository<Expense>();
+            Budgets = new Repository<Budget>();
+            BudgetCategories = new Repository<BudgetCategory>();
+            Categories.Set(vCategories);
         }
 
         private bool AlreadyExistTheCategoryName(string categoryName)
         {
             bool exist = true ;
-            foreach (Category category in Categories)
+            foreach (Category category in GetCategories())
             {
                 if (categoryName.ToLower() == category.Name.ToLower())
                    exist= false;
@@ -47,10 +49,9 @@ namespace BusinessLogic
             return exist;
         }
 
-
         private bool AlreadyExistTheKeyWordsInAnoterCategory(KeyWord pkeyWords)
         {            
-            foreach (Category category in Categories)
+            foreach (Category category in GetCategories())
             {
                 if (category.ExistKeyWordInAnotherCategory(pkeyWords))
                     return true;
@@ -69,17 +70,21 @@ namespace BusinessLogic
 
         public void AddBudget(Budget vBudget)
         {
-            if (vBudget is null)
+            try
             {
-                throw new ArgumentNullException();
+               Budgets.Add(vBudget);
+
             }
-            Budgets.Add(vBudget);
+            catch (ValueNotFound)
+            {
+               throw new ArgumentNullException();
+            }
         }
 
         public void AddExpense(Expense expense)
         {
             if (expense.Category == null)
-                throw new ExcepcionExpenseWithEmptyCategory();           
+                throw new ExcepcionExpenseWithEmptyCategory();
             Expenses.Add(expense);
         }       
 
@@ -99,27 +104,27 @@ namespace BusinessLogic
 
         public List<Category> GetCategories()
         {
-            return Categories;
+            return Categories.Get();
         }
 
         public List<Expense> GetExpenses()
         {
-            return Expenses;
+            return Expenses.Get();
         }
 
         public List<Budget> GetBudgets()
         {
-            return Budgets;
+            return Budgets.Get();
         }
 
         public void DeleteExpense(Expense expense)
         {
-            Expenses.Remove(expense);
+            Expenses.Delete(expense);
         }
 
         public void DeleteCategory(Category category)
         {
-            Categories.Remove(category);
+            Categories.Delete(category);
         }
 
         private Months StringToMonthsEnum(string month)
@@ -127,20 +132,24 @@ namespace BusinessLogic
             return (Months)Enum.Parse(typeof(Months), month);
         }
 
-
         public Budget FindBudget(string month, int year)
         {
             Months mMonth = StringToMonthsEnum(month);
-            Budget budget = Budgets.Find(e => e.IsSameCreationDate(mMonth, year));
-            if (budget==null)
-                     throw new NoFindBudget();
-            return budget;
+            try
+            {
+               return Budgets.Find(e => e.IsSameCreationDate(mMonth, year));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindBudget();
+            }
+           
         }      
 
         private Category FindCategoryByDescription(string[] descriptionArray)
         {
             Category category = null;
-            foreach (Category vCategory in Categories)
+            foreach (Category vCategory in GetCategories())
             {
                 if (vCategory.IsKeyWordInDescription(descriptionArray))
                 {
@@ -162,18 +171,25 @@ namespace BusinessLogic
 
         public Category FindCategoryByName(string categoryName)
         {
-            Category category= Categories.Find(e => e.IsSameCategoryName(categoryName));      
-            if(category==null)
-            throw new NoFindCategoryByName();
-            return category;
+            try
+            {
+                return Categories.Find(e => e.IsSameCategoryName(categoryName));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindCategoryByName();
+            }
         }
 
         public Expense FindExpense(Expense vExpense)
         {
-            Expense expense = Expenses.Find(e => e.Equals(vExpense));
-            if (expense == null)
-            throw new NoFindEqualsExpense();
-            return expense;
+            try
+            {
+                return Expenses.Find(e => e.Equals(vExpense));
+            }
+            catch (ValueNotFound) {
+                throw new NoFindEqualsExpense();
+            }
         }
 
     }

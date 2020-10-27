@@ -10,7 +10,7 @@ namespace Test
     public class LogicControllerTest
     {
         private static List<string> keyWords1 = new List<string>();
-        private static Repository repo = new Repository();
+        private static MemoryRepository repo = new MemoryRepository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
         private static Category categoryHouse;
@@ -117,7 +117,7 @@ namespace Test
         {
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.AddExpense(expense);
             LogicController controller = new LogicController(repository);
             Expense expectedExpense = controller.FindExpense(expense);
@@ -132,7 +132,7 @@ namespace Test
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.AddExpense(expense);
             LogicController controller = new LogicController(repository);
             Expense expectedExpense = controller.FindExpense(expense);
@@ -147,7 +147,7 @@ namespace Test
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.AddExpense(expense);
             LogicController controller = new LogicController(repository);
             Expense expectedExpense = controller.FindExpense(expense2);
@@ -159,7 +159,7 @@ namespace Test
         {
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             Expense expectedExpense = controller.FindExpense(expense);
         }
@@ -184,7 +184,7 @@ namespace Test
                 Year = 2020, 
                 TotalAmount = 0 
             };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             Budget budget = logicController.BudgetGetOrCreate(month, year);
             Assert.AreEqual(expectedBudget, budget);
@@ -193,7 +193,7 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateAddAndFind()
         {
-            Repository emptyRepository = new Repository();
+            MemoryRepository emptyRepository = new MemoryRepository();
             Months month = Months.December;
             int year = 2020;
             Budget budget = new Budget(month) { Year = year, TotalAmount = 0 };
@@ -237,7 +237,7 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.AddBudget(JanuaryBudget);
             LogicController controller = new LogicController(repository);
             Budget actualBudget = controller.FindBudget("January", 2020);
@@ -255,7 +255,7 @@ namespace Test
         [TestMethod]
         public void FindRemoveExpennse()
         {            
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
             repository.AddExpense(expense);
             LogicController controller = new LogicController(repository);
@@ -310,7 +310,7 @@ namespace Test
             DateTime month5 = new DateTime(2020, 5, 24);
             Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "movie theater" };
             Expense expense2 = new Expense { Amount = 23, CreationDate = month5, Description = "movie theater" };
-            Repository repo = new Repository();
+            MemoryRepository repo = new MemoryRepository();
             repo.GetExpenses().Add(expense1);
             repo.GetExpenses().Add(expense2);
             LogicController controller = new LogicController(repo);
@@ -331,7 +331,7 @@ namespace Test
             Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "movie theater" };
             Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "movie theater" };
             Expense expense3 = new Expense { Amount = 23, CreationDate = month3, Description = "casino" };           
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.GetExpenses().Add(expense1);
             repository.GetExpenses().Add(expense2);
             repository.GetExpenses().Add(expense3);
@@ -351,7 +351,7 @@ namespace Test
             Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "movie theater" };
             Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "movie theater"};
             Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.GetExpenses().Add(expense1);
             repository.GetExpenses().Add(expense2);
             repository.GetExpenses().Add(expense3);
@@ -370,7 +370,7 @@ namespace Test
             Expense expense1 = new Expense { Amount = 23.5, CreationDate = month1, Description = "movie theater" };
             Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "movie theater" };
             Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.GetExpenses().Add(expense1);
             repository.GetExpenses().Add(expense2);
             repository.GetExpenses().Add(expense3);
@@ -386,7 +386,7 @@ namespace Test
             Months month = Months.January;
             Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "when we go movies" };
             Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "when we go movies" };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.GetExpenses().Add(expense1);
             repository.GetExpenses().Add(expense2);
             LogicController controller = new LogicController(repository);
@@ -400,7 +400,7 @@ namespace Test
             Months month = Months.May;
             Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "when we go movies" };
             Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "when we go movies" };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.GetExpenses().Add(expense1);
             repository.GetExpenses().Add(expense2);
             Assert.AreEqual(0, logicController.GetExpenseByMonth(month).Count);
@@ -411,7 +411,7 @@ namespace Test
         {           
             Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 05, 01), Description = "when we go movies" };
             Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "when we go movies" };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.GetExpenses().Add(expense1);
             repository.GetExpenses().Add(expense2);
             LogicController controller = new LogicController(repository);
@@ -424,7 +424,7 @@ namespace Test
         {
             Expense expense1 = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "when we go movies" };
             Expense expense2 = new Expense { Amount = 19, CreationDate = new DateTime(2020, 11, 01), Description = "when we go movies" };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.GetExpenses().Add(expense1);
             repository.GetExpenses().Add(expense2);
             Assert.AreEqual(0, logicController.GetExpenseByMonth("May").Count);
@@ -467,7 +467,7 @@ namespace Test
             Category category2 = new Category { Name = "food", KeyWords = new KeyWord(keyWords2) };
             categoryList.Add(category1);
             categoryList.Add(category2);
-            Repository repo = new Repository(categoryList);
+            MemoryRepository repo = new MemoryRepository(categoryList);
             LogicController controller = new LogicController(repo);
             Category category3 = controller.FindCategoryByName("entertainment");
             Assert.IsNull(category3);
@@ -478,7 +478,7 @@ namespace Test
         public void AddExpenseNullCategory()
         {
             DateTime month = new DateTime(2020, 1, 24);
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             Expense expense = new Expense { Amount = 23.5, CreationDate = month, Description = "movie theater" };
             repository.AddExpense(expense);
         }
@@ -498,7 +498,7 @@ namespace Test
             DateTime month = new DateTime(2020, 1, 24);
             Expense expense = new Expense { Amount = 23.5, CreationDate = month, Description = "movie theater"};
             expense.Category = category;
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.AddExpense(expense);
             Assert.AreEqual(expense, repository.GetExpenses().ToArray()[0]);
         }
@@ -534,7 +534,7 @@ namespace Test
                 "McDonalds",
                 "Dinner"
             };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             controller.SetCategory("food", keyWords2);
             Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
@@ -543,7 +543,7 @@ namespace Test
         public void CreateAddExpense()
         {
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             controller.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
             Assert.AreEqual(expectedExpense, repository.GetExpenses().ToArray()[0]);
@@ -555,7 +555,7 @@ namespace Test
             Category category = new Category { Name = "food" };
             List<Category> categories = new List<Category>();
             categories.Add(category);
-            Repository repository = new Repository(categories);
+            MemoryRepository repository = new MemoryRepository(categories);
             LogicController controller = new LogicController(repository);
             List<Category> categories2 = controller.GetCategories();
             Assert.AreEqual(categories, categories2);
@@ -573,7 +573,7 @@ namespace Test
                 "game room",
             };
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             controller.SetCategory(categoryName, keyWords);
             String categoryName2 = "food";
@@ -595,7 +595,7 @@ namespace Test
         [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory), "")]
         public void AddCategoryInvalidKeyWords()
         {
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             String categoryName = "NameExample";
             List<string> keyWords = new List<string>
             {
@@ -618,7 +618,7 @@ namespace Test
         [TestMethod]
         public void AddCategoryValidKeyWords()
         {
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
 
             String categoryName = "Entertainment";
             List<string> keyWords = new List<string>()
@@ -650,7 +650,7 @@ namespace Test
                 TotalAmount = 4000,
                 Year = DateTime.Now.Year
             };
-            Repository EmptyRepository = new Repository();
+            MemoryRepository EmptyRepository = new MemoryRepository();
             LogicController controller = new LogicController(EmptyRepository);
             controller.SetBudget(validBudget);
             Budget currentBudget =controller.Repository.GetBudgets().First();
@@ -675,7 +675,7 @@ namespace Test
             };
             Budget budget1 = new Budget(Months.January) { TotalAmount = 23, Year = 2020 };
             Budget budget2 = new Budget(Months.May) { TotalAmount = 23, Year = 2020 };
-            Repository repo = new Repository();
+            MemoryRepository repo = new MemoryRepository();
             repo.GetBudgets().Add(budget1);
             repo.GetBudgets().Add(budget2);
             LogicController controller = new LogicController(repo);
@@ -689,7 +689,7 @@ namespace Test
         {
             Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryEntertainment };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             controller.SetExpense(23, new DateTime(2020, 01, 01),"dinner",categoryFood);
             List <string> keyWords = new List<string>
@@ -707,7 +707,7 @@ namespace Test
         {
             Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             controller.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
             List<string> keyWords = new List<string>
@@ -748,7 +748,7 @@ namespace Test
                 "CoffeMaker",
                 "toilet paper",
             };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             controller.SetBudget(budget); 
             controller.EditCategory(categoryFood, "House", keyWords);
@@ -773,7 +773,7 @@ namespace Test
                 "CoffeMaker",
                 "toilet paper",
             };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             LogicController controller = new LogicController(repository);
             controller.SetBudget(budget);
             controller.EditCategory(categoryFood, "House", keyWords);
