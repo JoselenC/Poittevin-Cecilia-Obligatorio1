@@ -253,10 +253,6 @@ namespace BusinessLogic
             return Repository.GetCategories();
         }       
 
-       
-
-        
-       
     }
 
 }
