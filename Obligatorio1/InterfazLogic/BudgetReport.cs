@@ -45,12 +45,11 @@ namespace InterfazLogic
             }           
         }
 
-        private bool CompleteReport(ref double totalPlanedAmount, ref double totalRealAmount, ref double totalDiffAmount, Budget budget)
+        private bool CompleteReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount, Budget budget)
         {
-           
+            lstVReport.Items.Clear();
             foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
             {
-                lstVReport.Items.Clear();
                 Category category = budgetCategory.Category;
                 ListViewItem item = new ListViewItem(category.Name);
                 item.UseItemStyleForSubItems = false;
@@ -73,7 +72,6 @@ namespace InterfazLogic
                 else
                     item.SubItems.Add(diffAmount.ToString());
                 lstVReport.Items.Add(item);
-
             }
             ListViewItem total = new ListViewItem("TOTAL");
             total.UseItemStyleForSubItems = false;
@@ -108,7 +106,7 @@ namespace InterfazLogic
                         int year=(int)numYear.Value;                       
                         Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
                         oldYearValue = year;
-                        return CompleteReport(ref totalPlanedAmount, ref totalRealAmount, ref totalDiffAmount, budget);                       
+                        return CompleteReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budget);                       
                         
                     }
                     catch (NoFindBudget)
@@ -119,7 +117,7 @@ namespace InterfazLogic
                     }
                     catch (System.NullReferenceException)
                     {
-                        lblMonth.Text = "Select a month to consult";
+                        lblMonth.Text = "Select a month";
                         lblMonth.ForeColor = Color.Red;
                         return false;
                     }
@@ -138,9 +136,10 @@ namespace InterfazLogic
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-           
-            btnSearch.Enabled = false;
-           
+            if (LoadBudgetReport())
+            {
+                btnSearch.Enabled = false;
+            }
         }
 
         public void cboxMonth_SelectedIndexChanged(object sender, EventArgs e)

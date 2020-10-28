@@ -108,13 +108,27 @@ namespace BusinessLogic
                 if (budgetCategory.Category.Name == categoryName)
                     return budgetCategory;
             }
-            throw new NoFindBudgetCategoryByCategoryName();
+            throw new NoFindBudgetCategory();
         }
 
         public BudgetCategory GetBudgetCategoryByCategoryName(string categoryName)
         {
             BudgetCategory budgetCategory = FindBudgetCategoryByCategoryName(categoryName);
             return budgetCategory;
+        }
+        
+        private BudgetCategory FindBudgetCategory(Category category)
+        {
+            BudgetCategory budgetCategory = BudgetCategories.Find(e => e.Category == category);
+            if(budgetCategory is null)
+                throw new NoFindBudgetCategory();
+            return budgetCategory;
+        }
+
+        public void EditBudgetCategory(Category oldCategory, Category newCategory)
+        {
+            BudgetCategory budgetCategory = FindBudgetCategory(oldCategory);
+            budgetCategory.Category = newCategory;
         }
 
         public override bool Equals(object obj)

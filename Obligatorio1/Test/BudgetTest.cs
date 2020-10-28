@@ -408,7 +408,7 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NoFindBudgetCategoryByCategoryName))]
+        [ExpectedException(typeof(NoFindBudgetCategory))]
         public void GetBudgetCategoryNullGetCase()
         {
             Category carCategory = new Category { Name = "Car" };
@@ -456,6 +456,62 @@ namespace Test
             Assert.IsTrue(sameCreationDate);
         }
 
+        [TestMethod]
+        public void EditBudgetCategoryCaseTrue()
+        {
+            Category carCategory = new Category { Name = "Car" };
+            Category houseCategory = new Category { Name = "House" };
+            List<Category> categories = new List<Category>()
+            {
+               carCategory,
+            };
+            Budget budget = new Budget(Months.January, categories) { Year = 2020, TotalAmount = 0 };
+            budget.EditBudgetCategory(carCategory, houseCategory);
+            Assert.AreEqual(houseCategory, budget.BudgetCategories[0].Category);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void EditBudgetCategoryCaseNull()
+        {
+            Category carCategory = new Category { Name = "Car" };
+            List<Category> categories = new List<Category>()
+            {
+               carCategory,
+            };
+            Budget budget = new Budget(Months.January, categories) { Year = 2020, TotalAmount = 0 };
+            budget.EditBudgetCategory(carCategory, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoFindBudgetCategory))]
+        public void EditBudgetCategoryCaseWrongSearch()
+        {
+            Category carCategory = new Category { Name = "Car" };
+            Category foodCategory = new Category { Name = "Food" };
+            Category houseCategory = new Category { Name = "House" };
+
+            List<Category> categories = new List<Category>()
+            {
+               carCategory,
+            };
+            Budget budget = new Budget(Months.January, categories) { Year = 2020, TotalAmount = 0 };
+            budget.EditBudgetCategory(foodCategory, houseCategory);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoFindBudgetCategory))]
+        public void EditBudgetCategoryCaseNullSearch()
+        {
+            Category carCategory = new Category { Name = "Car" };
+            Category houseCategory = new Category { Name = "House" };
+
+            List<Category> categories = new List<Category>()
+            {
+               carCategory,
+            };
+            Budget budget = new Budget(Months.January, categories) { Year = 2020, TotalAmount = 0 };
+            budget.EditBudgetCategory(null, houseCategory);
+        }
     }
 }

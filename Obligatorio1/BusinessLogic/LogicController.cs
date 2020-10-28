@@ -17,23 +17,12 @@ namespace BusinessLogic
             Repository = repository;
         }
 
-        private void EditBudgetCategory(Category oldCategory, Category newCategory, Budget budget)
-        {
-            foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
-            {
-                if (budgetCategory.Category.Equals(oldCategory))
-                {
-                    budgetCategory.Category = newCategory;
-                }
-            }
-        }
-
         private void EditCategoryInAllBudgets(Category oldCategory, Category newCategory)
         {
             List<Budget> budgets = Repository.GetBudgets();
             foreach (Budget budget in budgets)
             {
-                EditBudgetCategory(oldCategory, newCategory, budget);
+                budget.EditBudgetCategory(oldCategory, newCategory);
             }
         }
 
@@ -264,10 +253,6 @@ namespace BusinessLogic
             return Repository.GetCategories();
         }       
 
-       
-
-        
-       
     }
 
 }
