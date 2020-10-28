@@ -57,7 +57,7 @@ namespace BusinessLogic
     {
     }
 
-    public class NoFindBudgetCategoryByCategoryName : Exception
+    public class NoFindBudgetCategory : Exception
     {
     }
 
