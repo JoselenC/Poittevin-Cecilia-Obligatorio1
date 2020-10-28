@@ -62,5 +62,12 @@ namespace BusinessLogic
         {
             return description;
         }
+
+        public bool IsExpenseSameMonth(Months month)
+        {
+            int expected = CreationDate.Month;
+            int actual = (int)month;
+            return expected == actual;
+        }
     }
 }

@@ -17,19 +17,11 @@ namespace BusinessLogic
                 throw new ExcepcionInvalidKeyWordsLengthCategory();
             keyWords = vKeyWords;
 
-
         }
 
         public KeyWord()
         {
             keyWords = new List<string>();
-        }
-
-        public void SetKeyWord(KeyWord vKeyWord)
-        {
-            if (vKeyWord.keyWords.Count > 10)
-                throw new ExcepcionInvalidKeyWordsLengthCategory();
-            keyWords = vKeyWord.keyWords;
         }
 
         public override bool Equals(object obj)
@@ -43,9 +35,7 @@ namespace BusinessLogic
 
         public bool DescriptionContainAPartOfDescription(string description) {
             return keyWords.Contains(description);
-        }
-
-       
+        }       
 
         public bool ExistThisKey(string pKeyWord)
         {

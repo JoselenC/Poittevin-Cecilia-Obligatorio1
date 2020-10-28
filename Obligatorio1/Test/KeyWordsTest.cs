@@ -24,11 +24,10 @@ namespace Test
             "casino",
             "game room",
             "Park",
-            
+            "shopping"
+
             };
             KeyWord keyWord = new KeyWord(keyWords);
-            keyWords.Add("shopping");
-            keyWord.SetKeyWord(keyWord);
         }
 
         [TestMethod]
@@ -47,8 +46,7 @@ namespace Test
             "game room",
             };
             KeyWord expectedKeyWord = new KeyWord(keyWords);
-            KeyWord keyWord = new KeyWord(keyWords);
-            keyWord.SetKeyWord(keyWord);
+            KeyWord keyWord = new KeyWord(keyWords);            
             Assert.AreEqual(expectedKeyWord, keyWord);
         }
 

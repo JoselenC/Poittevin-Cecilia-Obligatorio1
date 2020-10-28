@@ -171,6 +171,21 @@ namespace Test
 
         }
 
+        [TestMethod]
+        public void ISameCreationDateCaseTrue()
+        {
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
+            bool sameCreationDate = expense.IsExpenseSameMonth(Months.January);
+            Assert.IsTrue(sameCreationDate);
+        }
+
+        [TestMethod]
+        public void ISameCreationDateCaseFalse()
+        {
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
+            bool sameCreationDate = expense.IsExpenseSameMonth(Months.February);
+            Assert.IsFalse(sameCreationDate);
+        }
 
 
     }

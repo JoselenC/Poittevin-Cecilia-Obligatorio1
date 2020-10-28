@@ -98,20 +98,13 @@ namespace BusinessLogic
             return Repository.GetBudgets();
         }
 
-        private bool IsExpenseSameMonth(Months month, Expense vExpense)
-        {
-            int expected = vExpense.CreationDate.Month;
-            int actual = (int)month;
-            return expected == actual;
-        }
-
         public List<Expense> GetExpenseByMonth(Months month)
         {
             List<Expense> expensesByMonth = new List<Expense>();
             List<Expense> expenses = Repository.GetExpenses();
             foreach (Expense vExpense in expenses)
             {
-                if (IsExpenseSameMonth(month, vExpense))
+                if (vExpense.IsExpenseSameMonth(month))
                     expensesByMonth.Add(vExpense);
             }
             return expensesByMonth;
@@ -223,7 +216,7 @@ namespace BusinessLogic
             List<Expense> expenses = Repository.GetExpenses();
             foreach (Expense expense in expenses)
             {
-                if(IsExpenseSameMonth(month, expense))
+                if(expense.IsExpenseSameMonth(month))
                     total += expense.Amount;
             }
             return total;

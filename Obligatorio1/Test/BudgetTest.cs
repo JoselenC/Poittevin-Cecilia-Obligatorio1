@@ -425,5 +425,37 @@ namespace Test
 
             Assert.IsNull(actualBudgetCategory);
         }
+
+        [TestMethod]
+        public void IsSameCreationDateCaseFalse()
+        {
+            Category carCategory = new Category { Name = "Car" };
+            Category houseCategory = new Category { Name = "House" };
+            List<Category> categories = new List<Category>()
+            {
+               carCategory,
+               houseCategory,
+            };
+            Budget budget = new Budget(Months.January, categories) { Year = 2020, TotalAmount = 0 };
+            bool sameCreationDate = budget.IsSameCreationDate(Months.February, 2021);
+            Assert.IsFalse(sameCreationDate);
+        }
+
+        [TestMethod]
+        public void IsSameCreationDateCaseTrue()
+        {
+            Category carCategory = new Category { Name = "Car" };
+            Category houseCategory = new Category { Name = "House" };
+            List<Category> categories = new List<Category>()
+            {
+               carCategory,
+               houseCategory,
+            };
+            Budget budget = new Budget(Months.January, categories) { Year = 2020, TotalAmount = 0 };
+            bool sameCreationDate = budget.IsSameCreationDate(Months.January, 2020);
+            Assert.IsTrue(sameCreationDate);
+        }
+
+
     }
 }

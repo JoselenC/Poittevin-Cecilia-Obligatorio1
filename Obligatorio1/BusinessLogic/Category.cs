@@ -10,7 +10,6 @@ namespace BusinessLogic
 {
     public class Category
     {
-
         private string name;
 
         private KeyWord keyWords;
@@ -30,8 +29,7 @@ namespace BusinessLogic
 
         private void SetKeyWords(KeyWord vKeyWords)
         {
-            keyWords = new KeyWord();
-            keyWords.SetKeyWord(vKeyWords);
+            keyWords = vKeyWords;
         }
 
         public override bool Equals(object obj)
@@ -57,8 +55,7 @@ namespace BusinessLogic
 
         public bool ExistKeyWordInAnotherCategory(KeyWord pKeyWords)
         {
-            return KeyWords.ExistKeyWords(pKeyWords);          
-            
+            return KeyWords.ExistKeyWords(pKeyWords); 
         }
 
         public bool ExistKeyWordInDscription(string description)
