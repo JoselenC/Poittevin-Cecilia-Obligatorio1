@@ -7,10 +7,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Test
 {
     [TestClass]
-    public class RepositoryTest
+    public class MemoryRepositoryTest
     {
         private static List<string> keyWords1 = new List<string>();
-        private static Repository repo = new Repository();
+        private static MemoryRepository repo = new MemoryRepository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
         private static Category categoryHouse;
@@ -59,7 +59,7 @@ namespace Test
                 categoryEntertainment,
                 categoryFood,
             };
-            JanuaryBudget = new Budget(1, categories)
+            JanuaryBudget = new Budget(Months.January, categories)
             {
                 Year = 2020,
                 TotalAmount = 0
@@ -96,7 +96,7 @@ namespace Test
         [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
         public void AddCategoryInvalidAddingTwice()
         {
-            Repository emptyRepository = new Repository();
+            MemoryRepository emptyRepository = new MemoryRepository();
             string categoryName = "House";
             Category category = new Category { Name = categoryName };
             emptyRepository.AddCategory(category);
@@ -124,7 +124,7 @@ namespace Test
                 "game room",
             };
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords)};
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.AddCategory(category);
             String categoryName2 = "Food";
             List<string> keyWords2 = new List<string>()
@@ -145,7 +145,7 @@ namespace Test
         [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory), "")]
         public void AddCategoryInvalidKeyWords()
         {
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             String categoryName = "NameExample";
             List<string> keyWords = new List<string>
             {
@@ -167,7 +167,7 @@ namespace Test
         [TestMethod]
         public void AddCategoryValidKeyWords()
         {
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
 
             String categoryName ="Entertainment";
             List<string> keyWords = new List<string>()
@@ -194,11 +194,11 @@ namespace Test
         [TestMethod]
         public void AddValidBudgetToRepository()
         {
-            Budget validBudget = new Budget(DateTime.Now.Month) { 
+            Budget validBudget = new Budget((Months) DateTime.Now.Month) { 
                 TotalAmount = 4000, 
                 Year = DateTime.Now.Year 
             };
-            Repository EmptyRepository = new Repository();
+            MemoryRepository EmptyRepository = new MemoryRepository();
             EmptyRepository.AddBudget(validBudget);
 
             Budget currentBudget = EmptyRepository.GetBudgets().First();
@@ -213,33 +213,12 @@ namespace Test
             repo.AddBudget(invalidBudget);
         }
 
-        [TestMethod]
-        public void AddValidBudgetCategoryToRepository()
-        {
-            BudgetCategory validBudgetCategory = new BudgetCategory { 
-                Category = categoryFood, 
-                Amount = 1000 
-            };
-            Repository EmptyRepository = new Repository();
-            EmptyRepository.AddBudgetCategory(validBudgetCategory);
-
-            BudgetCategory currentBudgetCategory = EmptyRepository.GetBudgetsCategory().First();
-            Assert.AreEqual(validBudgetCategory, currentBudgetCategory);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void AddInvalidNullBudgetCategoryToRepository()
-        {
-            BudgetCategory invalidBudgetCategory = null;
-            repo.AddBudgetCategory(invalidBudgetCategory);
-        }
 
         [TestMethod]
         public void CreateAddExpense()
         {
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
             Assert.AreEqual(expectedExpense, repository.GetExpenses().ToArray()[0]);
         }
@@ -253,13 +232,170 @@ namespace Test
                 "McDonalds",
                 "Dinner"
             };
-            Repository repository = new Repository();
+            MemoryRepository repository = new MemoryRepository();
             repository.SetCategory("food", keyWords2);
             Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
         }
 
+        [TestMethod]
+        public void FindCategoryEntertainment()
+        {
+            string description = "movie theater";
+            Category expectedCategory = repo.FindCategoryByDescription(description);
+            Assert.AreEqual(categoryEntertainment, expectedCategory);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoAsignCategoryByDescriptionExpense), "")]
+        public void FindCategoryNullValueResultForEntertainment()
+        {
+            string description = "movie theater and CoffeMaker";
+           repo.FindCategoryByDescription(description);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoAsignCategoryByDescriptionExpense), "")]
+        public void FindCategoryNullValueResultFood()
+        {
+            string description = "";
+           repo.FindCategoryByDescription(description);
+
+        }
+
+        [TestMethod]
+        public void FindCategoryNullValueResultForFood()
+        {
+            string description = "cuando fuimos a comer a McDonalds";
+            Category expectedCategory = repo.FindCategoryByDescription(description);
+            Assert.AreEqual(categoryFood, expectedCategory);
+
+        }
+
+        [TestMethod]
+        public void FindBudgetFoundCase()
+        {
+            JanuaryBudget = new Budget(Months.January)
+            {
+                Year = 2020,
+                TotalAmount = 0
+            };
+            MemoryRepository repository = new MemoryRepository();
+            repository.AddBudget(JanuaryBudget);
+            Budget actualBudget = repository.FindBudget("January", 2020);
+            Assert.AreEqual(JanuaryBudget, actualBudget);
+        }
 
 
-      
+        [TestMethod]
+        [ExpectedException(typeof(NoFindBudget), "")]
+        public void FindBudgetNotFoundCase()
+        {
+            Budget actualBudget = repo.FindBudget("February", 2020);
+        }
+
+        [TestMethod]
+        public void FindCategoryByName()
+        {
+            List<Category> categoryList = new List<Category>();
+            List<string> keyWords1 = new List<string>()
+            {
+               "movie theater",
+               "theater",
+               "casino",
+            };
+            Category category1 = new Category { Name = "entertainment", KeyWords = new KeyWord(keyWords1) };
+            List<string> keyWords2 = new List<string>()
+            {
+                "restaurant",
+                "McDonalds",
+                "Dinner",
+
+            };
+            Category category2 = new Category { Name = "food", KeyWords = new KeyWord(keyWords2) };
+            categoryList.Add(category1);
+            categoryList.Add(category2);
+            MemoryRepository respoitory = new MemoryRepository(categoryList);
+            Category category3 = respoitory.FindCategoryByName("entertainment");
+            Assert.AreEqual(category1, category3);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoFindCategoryByName), "")]
+        public void FindCategoryByNameNull()
+        {
+            List<Category> categoryList = new List<Category>();
+            List<string> keyWords1 = new List<string>()
+            {
+
+               "movie theater",
+               "theater",
+               "casino",
+            };
+            Category category1 = new Category { Name = "fun", KeyWords = new KeyWord(keyWords1) };
+            List<string> keyWords2 = new List<string>()
+             {
+                "restaurant",
+                "McDonalds",
+                "Dinner",
+            };
+            Category category2 = new Category { Name = "food", KeyWords = new KeyWord(keyWords2) };
+            categoryList.Add(category1);
+            categoryList.Add(category2);
+            MemoryRepository repository = new MemoryRepository(categoryList);
+            repository.FindCategoryByName("entertainment");
+        }
+
+        [TestMethod]
+        public void FindExpense()
+        {
+            string description = "movie theater";
+            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            MemoryRepository repository = new MemoryRepository();
+            repository.AddExpense(expense);
+            Expense expectedExpense = repository.FindExpense(expense);
+            Assert.AreEqual(expense, expectedExpense);
+
+
+        }
+
+        [TestMethod]
+        public void FindEqualsExpense()
+        {
+            string description = "movie theater";
+            Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            MemoryRepository repository = new MemoryRepository();
+            repository.AddExpense(expense);
+            Expense expectedExpense = repository.FindExpense(expense);
+            Assert.AreEqual(expense, expectedExpense);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoFindEqualsExpense), "")]
+        public void FindNullExpense()
+        {
+            string description = "movie theater";
+            Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            MemoryRepository repository = new MemoryRepository();
+            repository.AddExpense(expense);
+            Expense expectedExpense = repository.FindExpense(expense2);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoFindEqualsExpense), "")]
+        public void FindNullExpenseEmtyRepository()
+        {
+            string description = "movie theater";
+            Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            MemoryRepository repository = new MemoryRepository();
+            Expense expectedExpense = repository.FindExpense(expense);
+            Assert.IsNull(expectedExpense);
+
+        }
+
     }
 }

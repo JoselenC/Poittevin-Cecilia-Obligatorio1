@@ -1,6 +1,5 @@
 ﻿using BusinessLogic;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,18 +8,18 @@ namespace InterfazLogic
     public partial class Menu : Form
     {
         private LogicController controller;
-        public Menu(Repository repository)
+        public Menu(MemoryRepository repository)
         {
             InitializeComponent();
-            this.controller = new LogicController(repository);
-            this.MaximumSize = new Size(650, 400);
-            this.MinimumSize = new Size(650, 400);
+            controller = new LogicController(repository);
+            MaximumSize = new Size(650, 400);
+            MinimumSize = new Size(650, 400);
         }
 
         private void btnRegisterCategory_Click(object sender, EventArgs e)
         {
             mainPanel.Controls.Clear();
-           UserControl registerCategory = new RegisterCategory(controller.Repository);
+            UserControl registerCategory = new RegisterCategory(controller.Repository);
             mainPanel.Controls.Add(registerCategory);
         }
 
@@ -28,7 +27,7 @@ namespace InterfazLogic
         {
            mainPanel.Controls.Clear();
            UserControl registerExpense = new RegisterExpense(controller.Repository);
-            mainPanel.Controls.Add(registerExpense);
+           mainPanel.Controls.Add(registerExpense);
         }
 
         private void btnExpenseReport_Click(object sender, EventArgs e)

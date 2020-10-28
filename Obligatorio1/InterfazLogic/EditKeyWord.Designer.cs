@@ -32,7 +32,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblKeyWord = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbEdit
@@ -70,16 +70,16 @@
             this.lblKeyWord.Size = new System.Drawing.Size(0, 32);
             this.lblKeyWord.TabIndex = 16;
             // 
-            // button1
+            // btnCancel
             // 
-            this.button1.BackColor = System.Drawing.Color.DarkKhaki;
-            this.button1.Location = new System.Drawing.Point(611, 218);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(218, 63);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Cancel";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCancel.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnCancel.Location = new System.Drawing.Point(611, 218);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(218, 63);
+            this.btnCancel.TabIndex = 17;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // EditKeyWord
             // 
@@ -87,7 +87,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.ClientSize = new System.Drawing.Size(915, 325);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblKeyWord);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label3);
@@ -105,6 +105,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblKeyWord;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

@@ -59,7 +59,7 @@
             this.label1.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label1.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label1.Location = new System.Drawing.Point(39, 17);
+            this.label1.Location = new System.Drawing.Point(26, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(1074, 92);
             this.label1.TabIndex = 1;
@@ -225,7 +225,7 @@
             // btnEditCategory
             // 
             this.btnEditCategory.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditCategory.Location = new System.Drawing.Point(866, 612);
+            this.btnEditCategory.Location = new System.Drawing.Point(866, 603);
             this.btnEditCategory.Name = "btnEditCategory";
             this.btnEditCategory.Size = new System.Drawing.Size(219, 55);
             this.btnEditCategory.TabIndex = 28;
@@ -269,7 +269,7 @@
             // 
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(262, 604);
+            this.lstCategories.Location = new System.Drawing.Point(262, 596);
             this.lstCategories.Name = "lstCategories";
             this.lstCategories.Size = new System.Drawing.Size(589, 66);
             this.lstCategories.TabIndex = 33;
@@ -277,7 +277,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(624, 737);
+            this.btnCancel.Location = new System.Drawing.Point(600, 736);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(227, 73);
             this.btnCancel.TabIndex = 34;

@@ -30,6 +30,9 @@ namespace BusinessLogic
     {
     }
 
+    public class ExcepcionInvalidRepeatedKeyWordsInAnotherCategory : Exception
+    {
+    }
     public class ExcepcionInvalidYearExpense : Exception
     {
     }
@@ -54,7 +57,7 @@ namespace BusinessLogic
     {
     }
 
-    public class NoFindBudgetCategoryByCategoryName : Exception
+    public class NoFindBudgetCategory : Exception
     {
     }
 
@@ -74,6 +77,14 @@ namespace BusinessLogic
     }
 
     public class NoAsignCategoryByDescriptionExpense : Exception
+    {
+    }
+
+    public class InvalidKeyWord : Exception
+    {
+    }
+
+    public class ValueNotFound : Exception
     {
     }
 

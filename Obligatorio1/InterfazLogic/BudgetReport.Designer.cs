@@ -53,6 +53,7 @@
             this.cboxMonth.Name = "cboxMonth";
             this.cboxMonth.Size = new System.Drawing.Size(589, 39);
             this.cboxMonth.TabIndex = 0;
+            this.cboxMonth.SelectedIndexChanged += new System.EventHandler(this.cboxMonth_SelectedIndexChanged);
             // 
             // lstVReport
             // 
@@ -115,6 +116,7 @@
             0,
             0,
             0});
+            this.numYear.ValueChanged += new System.EventHandler(this.numYear_ValueChanged);
             // 
             // label2
             // 
@@ -158,7 +160,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(547, 719);
+            this.btnAccept.Location = new System.Drawing.Point(485, 747);
             this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);
@@ -204,7 +206,7 @@
             this.Controls.Add(this.cboxMonth);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "BudgetReport";
-            this.Size = new System.Drawing.Size(1286, 813);
+            this.Size = new System.Drawing.Size(1286, 878);
             ((System.ComponentModel.ISupportInitialize)(this.numYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

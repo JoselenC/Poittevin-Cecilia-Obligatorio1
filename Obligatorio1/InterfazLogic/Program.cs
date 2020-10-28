@@ -17,7 +17,7 @@ namespace InterfazLogic
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Menu(new Repository()));
+            Application.Run(new Menu(new MemoryRepository()));
         }
     }
 }
