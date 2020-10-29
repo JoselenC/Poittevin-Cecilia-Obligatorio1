@@ -187,6 +187,24 @@ namespace Test
             Assert.IsFalse(sameCreationDate);
         }
 
+        [TestMethod]
+        public void ISameCategoryCaseTrue()
+        {
+            Category category = new Category() { Name = "food" };
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01), Category = category };
+            bool sameCreationDate = expense.IsSameCategory(category);
+            Assert.IsTrue(sameCreationDate);
+        }
+
+        [TestMethod]
+        public void ISameCategoryCaseFalse()
+        {
+            Category category = new Category() { Name = "food" };
+            Category category2 = new Category() { Name = "entertainment" };
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01), Category=category};
+            bool sameCreationDate = expense.IsSameCategory(category2);
+            Assert.IsFalse(sameCreationDate);
+        }
 
     }
 }

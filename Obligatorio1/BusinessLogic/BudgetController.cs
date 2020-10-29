@@ -11,36 +11,7 @@ namespace BusinessLogic
         public BudgetController(MemoryRepository repository)
         {
             Repository = repository;
-        }
-       
-        public List<Expense> GetExpenseByMonth(Months month)
-        {
-            List<Expense> expensesByMonth = new List<Expense>();
-            List<Expense> expenses = Repository.GetExpenses();
-            foreach (Expense vExpense in expenses)
-            {
-                if (vExpense.IsExpenseSameMonth(month))
-                    expensesByMonth.Add(vExpense);
-            }
-            return expensesByMonth;
-        }        
-
-        public List<Category> GetCategories()
-        {
-            return Repository.GetCategories();
-        }
-
-        public double AmountOfExpensesInAMonth(Months month)
-        {
-            double total = 0;
-            List<Expense> expenses = Repository.GetExpenses();
-            foreach (Expense expense in expenses)
-            {
-                if (expense.IsExpenseSameMonth(month))
-                    total += expense.Amount;
-            }
-            return total;
-        }
+        }           
 
         public List<Budget> GetBudgets()
         {
@@ -49,29 +20,8 @@ namespace BusinessLogic
 
         public void SetBudget(Budget vBudget)
         {
-            Repository.AddBudget(vBudget);
-        }
-
-        private void AddCategoryInAllBudgets(Category category)
-        {
-            foreach (Budget budget in Repository.GetBudgets())
-            {
-                budget.AddBudgetCategory(category);
-            }
-        }
-
-        public Category SetCategory(string vName, List<string> vKeyWords)
-        {
-
-            Category category = Repository.SetCategory(vName, vKeyWords);
-            AddCategoryInAllBudgets(category);
-            return category;
-        }
-
-        private static bool IsSameCategory(Category vCategory, Expense expense)
-        {
-            return expense.Category == vCategory;
-        }
+            Repository.SetBudget(vBudget);
+        }      
 
         private Months StringToMonthsEnum(string month)
         {
@@ -81,11 +31,11 @@ namespace BusinessLogic
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
         {
             Months mMonths = StringToMonthsEnum(vMonth);
-            List<Expense> expenses = GetExpenseByMonth(mMonths);
+            List<Expense> expenses = Repository.GetExpenseByMonth(mMonths);
             double total = 0;
             foreach (Expense expense in expenses)
             {
-                if (IsSameCategory(vCategory, expense))
+                if (expense.IsSameCategory(vCategory))
                     total += expense.Amount;
             }
             return total;
@@ -93,6 +43,8 @@ namespace BusinessLogic
 
         private Budget CreateBudget(int year, List<Category> categories, Months month)
         {
+            if (categories.Count==0)
+                throw new ExceptionBudgetWithEmptyCategory();
             Budget budget = new Budget(month, categories) { Year = year, TotalAmount = 0 };
             return budget;
         }

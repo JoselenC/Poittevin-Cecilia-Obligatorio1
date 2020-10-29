@@ -16,19 +16,11 @@ namespace InterfazLogic
             budgetController = new BudgetController(vRepository);
             MaximumSize = new Size(500, 600);
             MinimumSize = new Size(500, 600);
-            nMonth.Items.AddRange(budgetController.GetAllMonthsString());
-            CategoriesCount();
+            nMonth.Items.AddRange(budgetController.GetAllMonthsString());           
             nMonth.SelectedIndex = 0;
         }
 
-        private void CategoriesCount()
-        {
-            if (budgetController.GetCategories().Count == 0)
-            {
-                MessageBox.Show("There are no categories registered in the system");
-                Visible = false;
-            }
-        }
+
         private void EditBudgetCategory()
         {
             if (currentBudget is null || lstCategory.SelectedItem is null)
@@ -59,8 +51,15 @@ namespace InterfazLogic
 
         private void comboBoxMonth_SelectedIndexChanged(object sender, EventArgs e)
         {
-            currentBudget = GetBudget();
-            LoadBudgetData(currentBudget);
+            try
+            {
+                currentBudget = GetBudget();
+                LoadBudgetData(currentBudget);
+            }
+            catch (ExceptionBudgetWithEmptyCategory){
+                MessageBox.Show("There are no categories registered in the system");
+                Visible = false;
+            }
         }
 
         private Budget GetBudget()
@@ -74,7 +73,9 @@ namespace InterfazLogic
 
         private void LoadBudgetData(Budget budget)
         {
+
             List<BudgetCategory> budgetCategories = budget.BudgetCategories;
+            
             lstCategory.Items.Clear();
 
             foreach (var budgetCategory in budgetCategories)
@@ -85,9 +86,17 @@ namespace InterfazLogic
 
         private void numericYear_ValueChanged(object sender, EventArgs e)
         {
-            Budget newBudget = GetBudget();
-            LoadBudgetData(newBudget);
-            currentBudget = newBudget;
+            try
+            {
+                Budget newBudget = GetBudget();
+                LoadBudgetData(newBudget);
+                currentBudget = newBudget;
+            }
+            catch (ExceptionBudgetWithEmptyCategory)
+            {
+                MessageBox.Show("There are no categories registered in the system");
+                Visible = false;
+            }
         } 
 
         private void btnCancel_Click(object sender, EventArgs e)

@@ -64,10 +64,10 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            repo.AddBudget(JanuaryBudget);
-            repo.AddCategory(categoryEntertainment);
-            repo.AddCategory(categoryFood);
-            repo.AddCategory(categoryHouse);
+            repo.SetBudget(JanuaryBudget);
+            repo.SetCategory("entertainment",keyWords1);
+            repo.SetCategory("food",keyWords2);
+            repo.SetCategory("House",keyWords3);
             repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood);
             repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood);
             repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment);
@@ -112,7 +112,7 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateCreateCase()
         {
-            string month = "December";
+            string month = "January";
             int year = 2020;
             Budget expectedBudget = new Budget(Months.December)
             {
@@ -121,8 +121,8 @@ namespace Test
             };
             MemoryRepository repository = new MemoryRepository();
             BudgetController controller = new BudgetController(repository);
-            Budget budget = controller.BudgetGetOrCreate(month, year);
-            Assert.AreEqual(expectedBudget, budget);
+            Budget budget = budgetController.BudgetGetOrCreate(month, year);
+            Assert.AreEqual(JanuaryBudget, budget);
         }
 
         [TestMethod]
@@ -132,11 +132,43 @@ namespace Test
             Months month = Months.December;
             int year = 2020;
             Budget budget = new Budget(month) { Year = year, TotalAmount = 0 };
-            emptyRepository.AddBudget(budget);
+            emptyRepository.SetBudget(budget);
             BudgetController controller = new BudgetController(emptyRepository);
             Budget actualBudget = controller.BudgetGetOrCreate("December", year);
             Assert.AreEqual(budget, actualBudget);
         }
+
+      
+
+        [TestMethod]
+        [ExpectedException(typeof(ExceptionBudgetWithEmptyCategory), "")]
+        public void BudgetGetOrCreateNodFind()
+        {         
+            
+            Months month = Months.December;
+            int year = 2020;
+            MemoryRepository repo = new MemoryRepository();
+            BudgetController controller = new BudgetController(repo);
+            Budget actualBudget =controller.BudgetGetOrCreate("December", year);
+        }
+
+        [TestMethod]
+        public void BudgetGetOrCreateNoFind()
+        {
+
+            Months month = Months.December;
+            int year = 2020;
+            List<Category> categories = new List<Category>() {
+                categoryEntertainment,
+                categoryFood,
+                categoryHouse
+            };
+
+            Budget budget = new Budget(month,categories) { Year = 2020,TotalAmount=0};
+            Budget actualBudget = budgetController.BudgetGetOrCreate("December", year);
+            Assert.AreEqual(actualBudget, budget);
+        }
+
 
         [TestMethod]
         public void BudgetGetOrCreateCheckCategories()
@@ -175,7 +207,7 @@ namespace Test
                 TotalAmount = 0
             };
             MemoryRepository repository = new MemoryRepository();
-            repository.AddBudget(JanuaryBudget);
+            repository.SetBudget(JanuaryBudget);
             BudgetController controller = new BudgetController(repository);
             Budget actualBudget = controller.FindBudget("January", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
@@ -252,150 +284,7 @@ namespace Test
             CollectionAssert.AreEqual(months, monthsOrder);
         }
 
-        [TestMethod]
-        public void ExpenseAmountByMonthInWhichAreExpenses()
-        {
-            Months month = Months.August;
 
-            DateTime month1 = new DateTime(2020, 8, 24);
-            DateTime month2 = new DateTime(2020, 8, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "movie theater" };
-            Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "movie theater" };
-            Expense expense3 = new Expense { Amount = 23, CreationDate = month3, Description = "casino" };
-            MemoryRepository repository = new MemoryRepository();
-            repository.GetExpenses().Add(expense1);
-            repository.GetExpenses().Add(expense2);
-            repository.GetExpenses().Add(expense3);
-            BudgetController controller = new BudgetController(repository);
-            double totalAmount = controller.AmountOfExpensesInAMonth(month);
-            Assert.AreEqual(46, totalAmount);
-        }
-
-        [TestMethod]
-        public void ExpenseAmountByMonthInWhichAreNoExpenses()
-        {
-            Months month = Months.August;
-            DateTime month1 = new DateTime(2020, 2, 24);
-            DateTime month2 = new DateTime(2020, 3, 24);
-            DateTime month3 = new DateTime(2020, 1, 24);
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month1, Description = "movie theater" };
-            Expense expense2 = new Expense { Amount = 23, CreationDate = month2, Description = "movie theater" };
-            Expense expense3 = new Expense { Amount = 21, CreationDate = month3, Description = "casino" };
-            MemoryRepository repository = new MemoryRepository();
-            repository.GetExpenses().Add(expense1);
-            repository.GetExpenses().Add(expense2);
-            repository.GetExpenses().Add(expense3);
-            double totalAmount = budgetController.AmountOfExpensesInAMonth(month);
-            Assert.AreEqual(0, totalAmount);
-        }
-
-        [TestMethod]
-        public void CreateAddCategoty()
-        {
-            List<string> keyWords2 = new List<string>
-            {
-                "restaurant",
-                "McDonalds",
-                "Dinner"
-            };
-            MemoryRepository repository = new MemoryRepository();
-            repository.AddBudget(JanuaryBudget);
-            BudgetController controller = new BudgetController(repository);
-            controller.SetCategory("food", keyWords2);
-            Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
-        }
-
-        [TestMethod]
-        public void AddCategoryValidData()
-        {
-            String categoryName = "Entertainment";
-            List<string> keyWords = new List<string>()
-            {
-                "movie theater",
-                "game room",
-            };
-            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
-            MemoryRepository repository = new MemoryRepository();
-            BudgetController controller = new BudgetController(repository);
-            controller.SetCategory(categoryName, keyWords);
-            String categoryName2 = "food";
-            List<string> keyWords2 = new List<string>()
-            {
-                "restaurant",
-            };
-            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
-            controller.SetCategory(categoryName2, keyWords2);
-            List<Category> categories = new List<Category>()
-            {
-                category,
-                category2
-            };
-            CollectionAssert.AreEqual(categories, controller.GetCategories().ToArray());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory), "")]
-        public void AddCategoryInvalidKeyWords()
-        {
-            MemoryRepository repository = new MemoryRepository();
-            String categoryName = "NameExample";
-            List<string> keyWords = new List<string>
-            {
-                "movie theater",
-                "theater"
-            };
-            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
-            BudgetController controller = new BudgetController(repository);
-            controller.SetCategory(categoryName, keyWords);
-            String categoryName2 = "NameExample2";
-            List<string> keyWords2 = new List<string>
-            {
-                 "movie theater",
-                "theater"
-            };
-            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
-            controller.SetCategory(categoryName2, keyWords2);
-        }
-
-        [TestMethod]
-        public void AddCategoryValidKeyWords()
-        {
-            MemoryRepository repository = new MemoryRepository();
-
-            String categoryName = "Entertainment";
-            List<string> keyWords = new List<string>()
-            {
-                "movie theater",
-                "game room",
-            };
-            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
-            BudgetController controller = new BudgetController(repository);
-            controller.SetCategory(categoryName, keyWords);
-            String categoryName2 = "food";
-            List<string> keyWords2 = new List<string>();
-            keyWords2.Add("restaurant");
-            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
-            controller.SetCategory(categoryName2, keyWords2);
-            List<Category> categories = new List<Category>()
-            {
-                category,
-                category2
-            };
-            CollectionAssert.AreEqual(categories, controller.GetCategories().ToArray());
-        }
-
-        [TestMethod]
-        public void GetCategories()
-        {
-            Category category = new Category { Name = "food" };
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            MemoryRepository repository = new MemoryRepository(categories);
-            BudgetController controller = new BudgetController(repository);
-            List<Category> categories2 = controller.GetCategories();
-            Assert.AreEqual(categories, categories2);
-        }
 
 
     }

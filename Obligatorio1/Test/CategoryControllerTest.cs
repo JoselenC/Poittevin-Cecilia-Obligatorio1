@@ -51,9 +51,9 @@ namespace Test
                 Name = "House",
                 KeyWords = new KeyWord(keyWords3)
             };
-            repo.AddCategory(categoryEntertainment);
-            repo.AddCategory(categoryFood);
-            repo.AddCategory(categoryHouse);
+            repo.SetCategory("entertainment", keyWords1);
+            repo.SetCategory("Food",keyWords2);
+            repo.SetCategory("House",keyWords3);
             categoryController = new CategoryController(repo);
         }
         
@@ -286,7 +286,7 @@ namespace Test
             };
             MemoryRepository repository = new MemoryRepository();
             CategoryController controller = new CategoryController(repository);
-            controller.Repository.AddBudget(budget);
+            controller.Repository.SetBudget(budget);
             controller.EditCategory(categoryFood, "House", keyWords);
             CollectionAssert.Equals(expectedBudget, budget);
         }
@@ -311,7 +311,7 @@ namespace Test
             };
             MemoryRepository repository = new MemoryRepository();
             CategoryController controller = new CategoryController(repository);
-            controller.Repository.AddBudget(budget);
+            controller.Repository.SetBudget(budget);
             controller.EditCategory(categoryFood, "House", keyWords);
             CollectionAssert.Equals(budget, budget);
         }

@@ -64,5 +64,10 @@ namespace BusinessLogic
             int actual = (int)month;
             return expected == actual;
         }
+
+        public bool IsSameCategory(Category vCategory)
+        {
+            return Category == vCategory;
+        }
     }
 }

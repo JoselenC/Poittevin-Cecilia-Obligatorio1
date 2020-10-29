@@ -41,7 +41,7 @@ namespace BusinessLogic
             return category;
         } 
 
-        public List<Expense> GetExpenses()
+        private List<Expense> GetExpenses()
         {
             return Repository.GetExpenses();
         }

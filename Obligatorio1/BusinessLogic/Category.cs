@@ -59,7 +59,7 @@ namespace BusinessLogic
 
         public bool IsSameCategoryName(string categoryName)
         {
-            return Name == categoryName;
+            return Name.ToLower() == categoryName.ToLower();
         }
 
         public bool IsKeyWordInDescription(string[] descriptionArray)

@@ -52,7 +52,7 @@ namespace BusinessLogic
             return false;
         }       
 
-        public void AddCategory(Category category)
+        private void AddCategory(Category category)
         {
             if (!AlreadyExistTheCategoryName(category.Name))
                 throw new ExcepcionInvalidRepeatedNameCategory();
@@ -61,7 +61,7 @@ namespace BusinessLogic
             Categories.Add(category);
         }
 
-        public void AddBudget(Budget vBudget)
+        public void SetBudget(Budget vBudget)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace BusinessLogic
             }
         }
 
-        public void AddExpense(Expense expense)
+        private void AddExpense(Expense expense)
         {
             if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();
@@ -182,6 +182,17 @@ namespace BusinessLogic
             catch (ValueNotFound) {
                 throw new NoFindEqualsExpense();
             }
+        }
+
+        public List<Expense> GetExpenseByMonth(Months month)
+        {
+            List<Expense> expensesByMonth = new List<Expense>();          
+            foreach (Expense vExpense in Expenses.Get())
+            {
+                if (vExpense.IsExpenseSameMonth(month))
+                    expensesByMonth.Add(vExpense);
+            }
+            return expensesByMonth;
         }
 
     }

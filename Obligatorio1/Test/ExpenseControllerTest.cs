@@ -51,9 +51,9 @@ namespace Test
                 Name = "House",
                 KeyWords = new KeyWord(keyWords3)
             };
-            repo.AddCategory(categoryEntertainment);
-            repo.AddCategory(categoryFood);
-            repo.AddCategory(categoryHouse);
+            repo.SetCategory("entertainment", keyWords1);
+            repo.SetCategory("food", keyWords2);
+            repo.SetCategory("house", keyWords3);
             repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood);
             repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood);
             repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment);
@@ -66,7 +66,7 @@ namespace Test
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.AddExpense(expense);
+            repository.SetExpense(23,new DateTime(2020,01,01), description,categoryFood);
             ExpenseController controller = new ExpenseController(repository);
             Expense expectedExpense = controller.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
@@ -79,7 +79,7 @@ namespace Test
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.AddExpense(expense);
+            repository.SetExpense(23, new DateTime(2020, 01, 01), description, categoryFood);
             ExpenseController controller = new ExpenseController(repository);
             Expense expectedExpense = controller.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
@@ -94,7 +94,7 @@ namespace Test
             Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.AddExpense(expense);
+            repository.SetExpense(24, new DateTime(2020, 01, 01), description, categoryFood);
             ExpenseController controller = new ExpenseController(repository);
             Expense expectedExpense = controller.FindExpense(expense2);
         }
@@ -150,7 +150,7 @@ namespace Test
         {
             MemoryRepository repository = new MemoryRepository();
             Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-            repository.AddExpense(expense);
+            repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
             ExpenseController controller = new ExpenseController(repository);
             controller.DeleteExpense(expense);
             Assert.AreEqual(0, controller.GetExpenses().Count);

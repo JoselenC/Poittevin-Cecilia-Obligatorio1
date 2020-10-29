@@ -49,6 +49,10 @@ namespace BusinessLogic
     {
     }
 
+    public class ExceptionBudgetWithEmptyCategory : Exception
+    {
+    }
+
     public class NegativeValueErrorAttribute : Exception
     {
     }
