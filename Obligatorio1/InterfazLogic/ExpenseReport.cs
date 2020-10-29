@@ -8,11 +8,11 @@ namespace InterfazLogic
 {
     public partial class ExpenseReport : UserControl
     {
-        private LogicController logicController;
+        private ExpenseController expenseController;
         public ExpenseReport(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
+            expenseController = new ExpenseController(vRepository);
             monthsWithExpenses();
             MaximumSize = new Size(500, 650);
             MinimumSize = new Size(500, 650);
@@ -21,7 +21,7 @@ namespace InterfazLogic
 
         private void monthsWithExpenses(){
             lblMonths.Text = "";
-            List <string> months= logicController.OrderedMonthsWithExpenses();
+            List <string> months= expenseController.OrderedMonthsWithExpenses();
             if (months.Count < 1)
             {
                 MessageBox.Show("There are no expenses registered in the system");
@@ -49,7 +49,7 @@ namespace InterfazLogic
                     lblMonths.Text = "You must select a month to consult";
                     lblMonth.ForeColor = Color.Red;
                 }
-                List<Expense> expenseReportByMonth = logicController.GetExpenseByMonth(month);
+                List<Expense> expenseReportByMonth = expenseController.GetExpenseByMonth(month);
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
                 foreach(Expense vExpense in expenseReportByMonth)

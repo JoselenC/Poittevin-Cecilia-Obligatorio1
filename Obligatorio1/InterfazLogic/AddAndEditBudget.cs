@@ -7,22 +7,22 @@ namespace InterfazLogic
 {
     public partial class AddAndEditBudget : UserControl
     {
-        private LogicController logicController { get; set; }
+        private BudgetController budgetController { get; set; }
         private Budget currentBudget { get; set; }
         public AddAndEditBudget(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
+            budgetController = new BudgetController(vRepository);
             MaximumSize = new Size(500, 600);
             MinimumSize = new Size(500, 600);
-            nMonth.Items.AddRange(logicController.GetAllMonthsString());
+            nMonth.Items.AddRange(budgetController.GetAllMonthsString());
             CategoriesCount();
             nMonth.SelectedIndex = 0;
         }
 
         private void CategoriesCount()
         {
-            if (logicController.GetCategories().Count == 0)
+            if (budgetController.GetCategories().Count == 0)
             {
                 MessageBox.Show("There are no categories registered in the system");
                 Visible = false;
@@ -67,7 +67,7 @@ namespace InterfazLogic
            
             string month = nMonth.SelectedItem.ToString();
             int year = (int)nYear.Value;
-            return logicController.BudgetGetOrCreate(month, year);
+            return budgetController.BudgetGetOrCreate(month, year);
 
         }
 
@@ -100,7 +100,7 @@ namespace InterfazLogic
         {
             try
             {
-                logicController.SetBudget(currentBudget);
+                budgetController.SetBudget(currentBudget);
                 Visible = false;
             }
             catch (ArgumentNullException)

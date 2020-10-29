@@ -9,14 +9,14 @@ namespace InterfazLogic
     public partial class EditCategory : UserControl
     {
         public List<string> KeyWords { get; set; }
-        private LogicController logicController;
+        private CategoryController categoryController;
         private Category category;
         private int indexKeyWordToEdit;
 
         public EditCategory(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
+            categoryController = new CategoryController(vRepository);
             MaximumSize = new Size(500, 600);
             MinimumSize = new Size(500, 600);
             CompleteCategories();
@@ -27,9 +27,9 @@ namespace InterfazLogic
 
         private void CompleteCategories()
         {
-            if (logicController.GetCategories().Count > 0)
+            if (categoryController.GetCategories().Count > 0)
             {
-                foreach (Category category in logicController.GetCategories())
+                foreach (Category category in categoryController.GetCategories())
                 {
                     lstCatgories.Items.Add(category);
                 }                
@@ -47,7 +47,7 @@ namespace InterfazLogic
             txtKeyWord.Enabled = true;
             txtName.Enabled = true;
             string nameCategory = lstCatgories.SelectedItem.ToString();
-            category = logicController.FindCategoryByName(nameCategory);
+            category = categoryController.FindCategoryByName(nameCategory);
             txtName.Text = category.Name;
             List<string> keyWords = category.KeyWords.AsignKeyWordToList(category.KeyWords);
             KeyWords = keyWords;
@@ -61,6 +61,7 @@ namespace InterfazLogic
 
         private void btnEditCategory_Click(object sender, EventArgs e)
         {
+            lstKwywords.Items.Clear();
             if (lstCatgories.SelectedIndex >= 0)
                 EditTheCategory();
             else
@@ -78,7 +79,7 @@ namespace InterfazLogic
             {
                 try
                 {
-                    logicController.AlreadyExistKeyWordInAnoterCategory(keyWord);
+                    categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
                     KeyWord key = new KeyWord(KeyWords);
                     key.AddKeyWord(keyWord);
                     lstCatgories.Items.Add(keyWord);
@@ -149,12 +150,13 @@ namespace InterfazLogic
         {
             if (lstCatgories.SelectedIndex >= 0)
             {
+
                 if (KeyWords.Count > 0)
                 {
                     indexKeyWordToEdit = lstKwywords.SelectedIndex;
                     if (indexKeyWordToEdit >= 0)
                     {
-                        EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstKwywords, logicController);
+                        EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstKwywords, categoryController);
                         editKeyWord.Show();
                         lblKyWords.Text = "";
                         txtKeyWord.Enabled = true;
@@ -187,7 +189,7 @@ namespace InterfazLogic
                 lblEditCategories.Text = "Select a category to edit o delete";
                 lblEditCategories.ForeColor = Color.Red;
             }
-            logicController.EditCategory(category, txtName.Text, KeyWords);
+            categoryController.EditCategory(category, txtName.Text, KeyWords);
             MessageBox.Show("Category " + txtName.Text + " was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             lstCatgories.Items.Remove(category);
             Visible = false;

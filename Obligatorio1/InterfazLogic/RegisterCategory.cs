@@ -8,7 +8,7 @@ namespace InterfazLogic
 {
     public partial class RegisterCategory : UserControl
     {
-        private LogicController logicController;
+        private CategoryController categoryController;
 
         public string KeyWordToEdit { get; set; }
         public List<string> KeyWords { get; set; }
@@ -16,7 +16,7 @@ namespace InterfazLogic
         public RegisterCategory(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
+            categoryController = new CategoryController(vRepository);
             KeyWords = new List<string>();
             MaximumSize = new Size(800, 800);
             MinimumSize = new Size(800, 800);
@@ -28,7 +28,7 @@ namespace InterfazLogic
 
         private void TryRegisterCategoty()
         {
-            logicController.SetCategory(tbName.Text, KeyWords);
+            categoryController.SetCategory(tbName.Text, KeyWords);
             lblKeyWords.Text = "";
             lblEdit.Text = "";
             lblName.Text = "";
@@ -82,7 +82,7 @@ namespace InterfazLogic
             string keyWord = tbKeyWord.Text;
             try
             {
-                logicController.AlreadyExistKeyWordInAnoterCategory(keyWord);
+                categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
                 KeyWord key = new KeyWord(KeyWords);
                 key.AddKeyWord(keyWord);
                 lstCategories.Items.Add(keyWord);
@@ -119,7 +119,7 @@ namespace InterfazLogic
                 indexKeyWordToEdit = lstCategories.SelectedIndex;
                 if (indexKeyWordToEdit >= 0)
                 {
-                    EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstCategories,logicController);
+                    EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstCategories,categoryController);
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
                     lblEdit.Text = "";

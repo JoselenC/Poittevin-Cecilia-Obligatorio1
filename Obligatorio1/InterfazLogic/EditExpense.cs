@@ -7,7 +7,7 @@ namespace InterfazLogic
 {
     public partial class EditExpense : UserControl
     {
-        private LogicController logicController;
+        private ExpenseController expenseController;
         private int indexToEdit;
         private bool edit;
         private bool selectExpense;
@@ -16,7 +16,7 @@ namespace InterfazLogic
         public EditExpense(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
+            expenseController = new ExpenseController(vRepository);
             MaximumSize = new Size(800, 850);
             MinimumSize = new Size(800, 850);
             lstCategories.Visible = false;
@@ -33,9 +33,9 @@ namespace InterfazLogic
 
         private void CompleteExpenses()
         {
-            if (logicController.GetExpenses().Count > 0)
+            if (expenseController.GetExpenses().Count > 0)
             {
-                foreach (Expense expense in logicController.GetExpenses()) {
+                foreach (Expense expense in expenseController.GetExpenses()) {
                     lstExpenses.Items.Add(expense);
                 }
             }
@@ -48,7 +48,7 @@ namespace InterfazLogic
 
         private void CompleteExpenseToEdit()
         {
-            expenseToEdit = logicController.FindExpense((Expense)lstExpenses.SelectedItem);
+            expenseToEdit = expenseController.FindExpense((Expense)lstExpenses.SelectedItem);
             tbDescription.Text = expenseToEdit.Description;
             nAmount.Value = (decimal)(expenseToEdit.Amount);
             dateTime.Value = expenseToEdit.CreationDate;
@@ -70,7 +70,7 @@ namespace InterfazLogic
                 {
                     CompleteExpenseToEdit();
                 }
-                else if (logicController.GetExpenses().Count == 0)
+                else if (expenseController.GetExpenses().Count == 0)
                 {
                     lblExpenses.Text = "There are no more expenses to edit";
                     lblExpenses.ForeColor = Color.Red;
@@ -100,7 +100,7 @@ namespace InterfazLogic
             tbDescription.Clear();
             nAmount.Value = 1;
             lstCategories.Items.Clear();
-            logicController.DeleteExpense((Expense)lstExpenses.SelectedItem);
+            expenseController.DeleteExpense((Expense)lstExpenses.SelectedItem);
             int index = lstExpenses.SelectedIndex;
             lstExpenses.Items.RemoveAt(index);
             lblExpenses.Text = "";
@@ -112,7 +112,7 @@ namespace InterfazLogic
             {
                 DeleteExpense();
             }
-            else if (logicController.GetExpenses().Count == 0)
+            else if (expenseController.GetExpenses().Count == 0)
             {
                 lblExpenses.Text = "There are no more expenses to delete";
                 lblExpenses.ForeColor = Color.Red;
@@ -130,9 +130,7 @@ namespace InterfazLogic
                 lbDescription.Text = "";
                 lblDate.Text = "";
             }
-        }
-
-      
+        }      
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
@@ -195,13 +193,13 @@ namespace InterfazLogic
             string description = tbDescription.Text;
             double amount = decimal.ToDouble(nAmount.Value);
             DateTime creationDate = dateTime.Value;
-            logicController.SetExpense(amount, creationDate, description, category);
+            expenseController.SetExpense(amount, creationDate, description, category);
             MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Visible = false;
             if (indexToEdit >= 0)
             {
                 lstExpenses.Items.RemoveAt(indexToEdit);
-                logicController.DeleteExpense(expenseToEdit);
+                expenseController.DeleteExpense(expenseToEdit);
             }
         }
 
@@ -220,7 +218,7 @@ namespace InterfazLogic
             else if (lstCategories.SelectedIndex >= 0 && edit)
             {
                 string nameCategory = lstCategories.SelectedItem.ToString();
-                category = logicController.FindCategoryByName(nameCategory);
+                category = expenseController.FindCategoryByName(nameCategory);
                 NewExpense(category);
             }
             else
@@ -242,14 +240,14 @@ namespace InterfazLogic
             lstCategories.Visible = true;
             try
             {
-                Category category = logicController.FindCategoryByDescription(tbDescription.Text);
+                Category category = expenseController.FindCategoryByDescription(tbDescription.Text);
                 lstCategories.Items.Add(category);
             }
             catch (NoAsignCategoryByDescriptionExpense)
             {
-                if (logicController.GetCategories().Count > 0)
+                if (expenseController.GetCategories().Count > 0)
                 {
-                    foreach (Category vCategory in logicController.GetCategories())
+                    foreach (Category vCategory in expenseController.GetCategories())
                     {
                         lstCategories.Items.Add(vCategory.Name);
                     }

@@ -9,14 +9,14 @@ namespace InterfazLogic
     public partial class BudgetReport : UserControl
     {
         private bool initializingForm = true;
-        private LogicController logicController;
+        private BudgetController budgetController;
         private int oldMonthIndex = DateTime.Now.Month - 1;
         private int oldYearValue = DateTime.Now.Year;
         private bool changeMonth = false;
 
         public BudgetReport(MemoryRepository vRepository)
         {
-            logicController = new LogicController(vRepository);
+            budgetController = new BudgetController(vRepository);
             InitializeComponent();
             MaximumSize = new Size(800, 800);
             MinimumSize = new Size(800, 800);
@@ -28,7 +28,7 @@ namespace InterfazLogic
 
         private void GetMonths()
         {
-            if (logicController.GetBudgets().Count == 0)
+            if (budgetController.GetBudgets().Count == 0)
             {
                 MessageBox.Show("There are no budgets registered in the system");
                 Visible = false;
@@ -36,7 +36,7 @@ namespace InterfazLogic
             else
             {                
                 cboxMonth.Items.Clear();
-                List<string> monthsWithBudget = logicController.OrderedMonthsWithBudget();
+                List<string> monthsWithBudget = budgetController.OrderedMonthsWithBudget();
                 foreach (string month in monthsWithBudget)
                 {                   
                     cboxMonth.Items.Add(month);
@@ -54,7 +54,7 @@ namespace InterfazLogic
                 ListViewItem item = new ListViewItem(category.Name);
                 item.UseItemStyleForSubItems = false;
                 double planeedAmount = budgetCategory.Amount;
-                double realAmount = logicController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
+                double realAmount = budgetController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
                 double diffAmount = planeedAmount - realAmount;
                 totalPlanedAmount += planeedAmount;
                 totalRealAmount += realAmount;
@@ -104,7 +104,7 @@ namespace InterfazLogic
                     try
                     {
                         int year=(int)numYear.Value;                       
-                        Budget budget = logicController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
+                        Budget budget = budgetController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
                         oldYearValue = year;
                         return CompleteReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budget);                       
                         
