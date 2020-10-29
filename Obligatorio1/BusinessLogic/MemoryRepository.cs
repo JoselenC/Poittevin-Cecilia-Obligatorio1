@@ -12,14 +12,12 @@ namespace BusinessLogic
 
         private Repository<Budget> Budgets;
 
-        private Repository<BudgetCategory> BudgetCategories;
 
         public MemoryRepository()
         {
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
-            BudgetCategories = new Repository<BudgetCategory>();
         }     
 
         public MemoryRepository(List<Category> vCategories)
@@ -27,7 +25,6 @@ namespace BusinessLogic
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
-            BudgetCategories = new Repository<BudgetCategory>();
             Categories.Set(vCategories);
         }
 
@@ -46,7 +43,7 @@ namespace BusinessLogic
         {            
             foreach (Category category in GetCategories())
             {
-                if (category.ExistKeyWordInAnotherCategory(pkeyWords))
+                if (category.CategoryContainKeyword(pkeyWords))
                     return true;
             }
             return false;

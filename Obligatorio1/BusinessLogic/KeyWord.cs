@@ -28,11 +28,11 @@ namespace BusinessLogic
             return false;
         }
 
-        public bool DescriptionContainAPartOfDescription(string description) {
-            return keyWords.Contains(description);
+        public bool DescriptionContainAPartOfText(string text) {
+            return keyWords.Contains(text);
         }       
 
-        public bool ExistThisKey(string pKeyWord)
+        public bool ContainKey(string pKeyWord)
         {
             return keyWords.Contains(pKeyWord.ToLower());
         }
@@ -41,7 +41,7 @@ namespace BusinessLogic
         {
             foreach (string keyWord in keyWords)
             {
-                if (pKeyWords.keyWords.Contains(keyWord))
+                if (pKeyWords.ContainKey(keyWord))
                     return true;
             }
             return false;

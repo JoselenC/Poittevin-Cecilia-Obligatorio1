@@ -44,17 +44,17 @@ namespace BusinessLogic
 
         public bool ExistThisKey(string pKeyWord)
         {
-            return KeyWords.ExistThisKey(pKeyWord);
+            return KeyWords.ContainKey(pKeyWord);
         }
 
-        public bool ExistKeyWordInAnotherCategory(KeyWord pKeyWords)
+        public bool CategoryContainKeyword(KeyWord pKeyWords)
         {
             return KeyWords.ExistKeyWords(pKeyWords); 
         }
 
         public bool ExistKeyWordInDscription(string description)
         {
-           return KeyWords.DescriptionContainAPartOfDescription(description);
+           return KeyWords.DescriptionContainAPartOfText(description);
         }
 
         public bool IsSameCategoryName(string categoryName)

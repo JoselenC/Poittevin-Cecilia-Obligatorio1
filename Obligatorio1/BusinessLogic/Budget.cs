@@ -101,20 +101,14 @@ namespace BusinessLogic
             return returnNames.ToArray();
         }
 
-        private BudgetCategory FindBudgetCategoryByCategoryName(string categoryName) {
-
+        public BudgetCategory GetBudgetCategoryByCategoryName(string categoryName)
+        {
             foreach (var budgetCategory in BudgetCategories)
             {
                 if (budgetCategory.Category.Name == categoryName)
                     return budgetCategory;
             }
             throw new NoFindBudgetCategory();
-        }
-
-        public BudgetCategory GetBudgetCategoryByCategoryName(string categoryName)
-        {
-            BudgetCategory budgetCategory = FindBudgetCategoryByCategoryName(categoryName);
-            return budgetCategory;
         }
         
         private BudgetCategory FindBudgetCategory(Category category)

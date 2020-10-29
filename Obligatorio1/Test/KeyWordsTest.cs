@@ -140,7 +140,7 @@ namespace Test
             };
             string description = "movie theater";
             KeyWord keyWord = new KeyWord(keyWords);
-            Assert.IsTrue(keyWord.DescriptionContainAPartOfDescription(description));
+            Assert.IsTrue(keyWord.DescriptionContainAPartOfText(description));
         }
 
         [TestMethod]
@@ -160,7 +160,7 @@ namespace Test
             };
             string description = "food";
             KeyWord keyWord = new KeyWord(keyWords);
-            Assert.IsFalse(keyWord.DescriptionContainAPartOfDescription(description));
+            Assert.IsFalse(keyWord.DescriptionContainAPartOfText(description));
         }
 
 
@@ -237,7 +237,7 @@ namespace Test
             KeyWord keyWord = new KeyWord(keyWords);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = false;
-            Assert.IsTrue(keyWord.ExistThisKey("movie theater"));
+            Assert.IsTrue(keyWord.ContainKey("movie theater"));
         }
 
 
@@ -259,7 +259,7 @@ namespace Test
             KeyWord keyWord = new KeyWord(keyWords);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = false;
-            Assert.IsFalse(keyWord.ExistThisKey("food"));
+            Assert.IsFalse(keyWord.ContainKey("food"));
         }
 
         [TestMethod]

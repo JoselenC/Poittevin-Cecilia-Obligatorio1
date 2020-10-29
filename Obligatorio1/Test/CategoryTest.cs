@@ -250,7 +250,7 @@ namespace Test
             };
             KeyWord keyWord = new KeyWord(keyWords);
             Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
-            bool exist = category1.ExistKeyWordInAnotherCategory(keyWord);
+            bool exist = category1.CategoryContainKeyword(keyWord);
             Assert.IsTrue(exist);
         }
 
@@ -265,7 +265,7 @@ namespace Test
             };
             KeyWord keyWord = new KeyWord(keyWords);
             Category category1 = new Category { Name = "Test Category", KeyWords = new KeyWord()};
-            bool exist = category1.ExistKeyWordInAnotherCategory(keyWord);
+            bool exist = category1.CategoryContainKeyword(keyWord);
             Assert.IsFalse(exist);
         }
 
