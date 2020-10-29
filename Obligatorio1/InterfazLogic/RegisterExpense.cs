@@ -7,11 +7,11 @@ namespace InterfazLogic
 {
     public partial class RegisterExpense : UserControl
     {
-        private LogicController logicController;
+        private ExpenseController expenseController;
         public RegisterExpense(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
+            expenseController = new ExpenseController(vRepository);
             MaximumSize = new Size(890, 890);
             MinimumSize = new Size(890, 890);
             tbDescription.Clear();
@@ -21,7 +21,7 @@ namespace InterfazLogic
 
         private void AreCategories()
         {
-            if(logicController.GetCategories().Count == 0)
+            if(expenseController.GetCategories().Count == 0)
             {
                 MessageBox.Show("There are no categories registered in the system");
                 Visible = false;
@@ -31,14 +31,14 @@ namespace InterfazLogic
         {            
             try
             {
-                Category category = logicController.FindCategoryByDescription(description);
+                Category category = expenseController.FindCategoryByDescription(description);
                 lstCategories.Items.Add(category);
             }
             catch (NoAsignCategoryByDescriptionExpense)
             {
-                if (logicController.GetCategories().Count > 0)
+                if (expenseController.GetCategories().Count > 0)
                 {
-                    foreach (Category vCategory in logicController.GetCategories())
+                    foreach (Category vCategory in expenseController.GetCategories())
                     {
                         lstCategories.Items.Add(vCategory.Name);
                     }
@@ -62,8 +62,8 @@ namespace InterfazLogic
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 string nameCategory = lstCategories.SelectedItem.ToString();
-                Category category = logicController.FindCategoryByName(lstCategories.SelectedItem.ToString());
-                logicController.SetExpense(amount, creationDate, description,category);
+                Category category = expenseController.FindCategoryByName(lstCategories.SelectedItem.ToString());
+                expenseController.SetExpense(amount, creationDate, description,category);
                 MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Visible = false;
             }

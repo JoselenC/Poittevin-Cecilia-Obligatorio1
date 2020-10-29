@@ -51,9 +51,9 @@ namespace Test
                 Name = "House",
                 KeyWords = new KeyWord(keyWords3)
             };
-            repo.AddCategory(categoryEntertainment);
-            repo.AddCategory(categoryFood);
-            repo.AddCategory(categoryHouse);
+            repo.SetCategory("entertainment", keyWords1);
+            repo.SetCategory("food",keyWords2);
+            repo.SetCategory("House",keyWords3);
 
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
@@ -64,7 +64,7 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            repo.AddBudget(JanuaryBudget);
+            repo.SetBudget(JanuaryBudget);
 
             Expense januaryExpenseFood = new Expense()
             {  
@@ -97,10 +97,10 @@ namespace Test
         public void AddCategoryInvalidAddingTwice()
         {
             MemoryRepository emptyRepository = new MemoryRepository();
-            string categoryName = "House";
+            string categoryName = "house";
             Category category = new Category { Name = categoryName };
-            emptyRepository.AddCategory(category);
-            emptyRepository.AddCategory(category);
+            emptyRepository.SetCategory(categoryName,new List<string>());
+            emptyRepository.SetCategory(categoryName, new List<string>());
 
         }
 
@@ -110,7 +110,7 @@ namespace Test
         {
             string categoryName ="Entertainment";
             Category category2 = new Category { Name = categoryName };
-            repo.AddCategory(category2);
+            repo.SetCategory(categoryName,new List<string>());
 
         }
 
@@ -125,14 +125,14 @@ namespace Test
             };
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords)};
             MemoryRepository repository = new MemoryRepository();
-            repository.AddCategory(category);
+            repository.SetCategory(categoryName, keyWords);
             String categoryName2 = "Food";
             List<string> keyWords2 = new List<string>()
             {
                 "restaurant",
             };
             Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2)};
-            repository.AddCategory(category2);
+            repository.SetCategory(categoryName2,keyWords2);
             List<Category> categories = new List<Category>()
             {
                 category,
@@ -153,7 +153,7 @@ namespace Test
                 "theater"
             };
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
-            repository.AddCategory(category);
+            repository.SetCategory(categoryName,keyWords);
             String categoryName2 = "NameExample2";
             List<string> keyWords2 = new List<string>
             {
@@ -161,7 +161,7 @@ namespace Test
                 "theater"
             };
             Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2)};
-            repository.AddCategory(category2);
+            repository.SetCategory(categoryName2,keyWords2);
         }
 
         [TestMethod]
@@ -176,12 +176,12 @@ namespace Test
                 "game room",
             };
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
-            repository.AddCategory(category);
+            repository.SetCategory(categoryName,keyWords);
             String categoryName2 ="Food";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
             Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2)};
-            repository.AddCategory(category2);
+            repository.SetCategory(categoryName2,keyWords2);
             List<Category> categories = new List<Category>()
             {
                 category,
@@ -199,7 +199,7 @@ namespace Test
                 Year = DateTime.Now.Year 
             };
             MemoryRepository EmptyRepository = new MemoryRepository();
-            EmptyRepository.AddBudget(validBudget);
+            EmptyRepository.SetBudget(validBudget);
 
             Budget currentBudget = EmptyRepository.GetBudgets().First();
             Assert.AreEqual(validBudget, currentBudget);
@@ -210,7 +210,7 @@ namespace Test
         public void AddInvalidNullBudgetToRepository()
         {
             Budget invalidBudget = null;
-            repo.AddBudget(invalidBudget);
+            repo.SetBudget(invalidBudget);
         }
 
 
@@ -222,6 +222,17 @@ namespace Test
             repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
             Assert.AreEqual(expectedExpense, repository.GetExpenses().ToArray()[0]);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionExpenseWithEmptyCategory))]
+        public void CreateAddExpenseCateogryNull()
+        {
+            Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner",Category=null };
+            MemoryRepository repository = new MemoryRepository();
+            repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", null);
+        }
+
+
 
         [TestMethod]
         public void CreateAddCategoty()
@@ -281,7 +292,7 @@ namespace Test
                 TotalAmount = 0
             };
             MemoryRepository repository = new MemoryRepository();
-            repository.AddBudget(JanuaryBudget);
+            repository.SetBudget(JanuaryBudget);
             Budget actualBudget = repository.FindBudget("January", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
         }
@@ -352,7 +363,7 @@ namespace Test
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.AddExpense(expense);
+            repository.SetExpense(23, new DateTime(2020, 01, 01),description,categoryFood);
             Expense expectedExpense = repository.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
 
@@ -366,7 +377,7 @@ namespace Test
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.AddExpense(expense);
+            repository.SetExpense(23, new DateTime(2020, 01, 01), description, categoryFood);
             Expense expectedExpense = repository.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
 
@@ -380,7 +391,7 @@ namespace Test
             Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.AddExpense(expense);
+            repository.SetExpense(24, new DateTime(2020, 01, 01), description, categoryFood);
             Expense expectedExpense = repository.FindExpense(expense2);
 
         }

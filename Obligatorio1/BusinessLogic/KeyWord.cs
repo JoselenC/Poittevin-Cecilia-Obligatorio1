@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
     public class KeyWord
     {
         private List<string> keyWords;
-
     
         public KeyWord(List<string> vKeyWords)
         {
             if(vKeyWords.Count>10)
                 throw new ExcepcionInvalidKeyWordsLengthCategory();
             keyWords = vKeyWords;
-
         }
 
         public KeyWord()
@@ -33,11 +28,11 @@ namespace BusinessLogic
             return false;
         }
 
-        public bool DescriptionContainAPartOfDescription(string description) {
-            return keyWords.Contains(description);
+        public bool DescriptionContainAPartOfText(string text) {
+            return keyWords.Contains(text);
         }       
 
-        public bool ExistThisKey(string pKeyWord)
+        public bool ContainKey(string pKeyWord)
         {
             return keyWords.Contains(pKeyWord.ToLower());
         }
@@ -46,7 +41,7 @@ namespace BusinessLogic
         {
             foreach (string keyWord in keyWords)
             {
-                if (pKeyWords.keyWords.Contains(keyWord))
+                if (pKeyWords.ContainKey(keyWord))
                     return true;
             }
             return false;

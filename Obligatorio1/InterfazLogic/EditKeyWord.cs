@@ -12,7 +12,7 @@ namespace InterfazLogic
 
         public int Index { get; set; }
 
-        private LogicController logicController;
+        private CategoryController categoryController;
 
         public bool Edited { get; set; } = false;
 
@@ -20,13 +20,13 @@ namespace InterfazLogic
 
         private string editKeyWord;
 
-        public EditKeyWord(List<string> vKeyWords,int indexToEdit,ListBox lstkeyWords, LogicController vLogicController)
+        public EditKeyWord(List<string> vKeyWords,int indexToEdit,ListBox lstkeyWords, CategoryController vCategoryController)
         {            
             InitializeComponent();
             KeyWords = vKeyWords;
             Index = indexToEdit;
             listKeyWords = lstkeyWords;
-            logicController = vLogicController;
+            categoryController = vCategoryController;
             MaximumSize = new Size(380, 200);
             MinimumSize = new Size(380, 200);
             StartPosition = FormStartPosition.CenterScreen;
@@ -40,7 +40,7 @@ namespace InterfazLogic
             string keyWordEdited = tbEdit.Text;
             try
             {
-                logicController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
+                categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
                 KeyWord key = new KeyWord(KeyWords);
                 key.DeleteKeyWord(editKeyWord);
                 key.AddKeyWord(keyWordEdited);

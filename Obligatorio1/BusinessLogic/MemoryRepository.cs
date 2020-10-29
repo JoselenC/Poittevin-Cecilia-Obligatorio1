@@ -1,12 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -19,14 +12,12 @@ namespace BusinessLogic
 
         private Repository<Budget> Budgets;
 
-        private Repository<BudgetCategory> BudgetCategories;
 
         public MemoryRepository()
         {
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
-            BudgetCategories = new Repository<BudgetCategory>();
         }     
 
         public MemoryRepository(List<Category> vCategories)
@@ -34,7 +25,6 @@ namespace BusinessLogic
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
-            BudgetCategories = new Repository<BudgetCategory>();
             Categories.Set(vCategories);
         }
 
@@ -53,13 +43,13 @@ namespace BusinessLogic
         {            
             foreach (Category category in GetCategories())
             {
-                if (category.ExistKeyWordInAnotherCategory(pkeyWords))
+                if (category.CategoryContainKeyword(pkeyWords))
                     return true;
             }
             return false;
         }       
 
-        public void AddCategory(Category category)
+        private void AddCategory(Category category)
         {
             if (!AlreadyExistTheCategoryName(category.Name))
                 throw new ExcepcionInvalidRepeatedNameCategory();
@@ -68,12 +58,11 @@ namespace BusinessLogic
             Categories.Add(category);
         }
 
-        public void AddBudget(Budget vBudget)
+        public void SetBudget(Budget vBudget)
         {
             try
             {
                Budgets.Add(vBudget);
-
             }
             catch (ValueNotFound)
             {
@@ -81,7 +70,7 @@ namespace BusinessLogic
             }
         }
 
-        public void AddExpense(Expense expense)
+        private void AddExpense(Expense expense)
         {
             if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();
@@ -190,6 +179,17 @@ namespace BusinessLogic
             catch (ValueNotFound) {
                 throw new NoFindEqualsExpense();
             }
+        }
+
+        public List<Expense> GetExpenseByMonth(Months month)
+        {
+            List<Expense> expensesByMonth = new List<Expense>();          
+            foreach (Expense vExpense in Expenses.Get())
+            {
+                if (vExpense.IsExpenseSameMonth(month))
+                    expensesByMonth.Add(vExpense);
+            }
+            return expensesByMonth;
         }
 
     }

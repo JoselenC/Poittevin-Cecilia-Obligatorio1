@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
+﻿using System.Linq;
 
 namespace BusinessLogic
 {
@@ -50,22 +44,22 @@ namespace BusinessLogic
 
         public bool ExistThisKey(string pKeyWord)
         {
-            return KeyWords.ExistThisKey(pKeyWord);
+            return KeyWords.ContainKey(pKeyWord);
         }
 
-        public bool ExistKeyWordInAnotherCategory(KeyWord pKeyWords)
+        public bool CategoryContainKeyword(KeyWord pKeyWords)
         {
             return KeyWords.ExistKeyWords(pKeyWords); 
         }
 
         public bool ExistKeyWordInDscription(string description)
         {
-           return KeyWords.DescriptionContainAPartOfDescription(description);
+           return KeyWords.DescriptionContainAPartOfText(description);
         }
 
         public bool IsSameCategoryName(string categoryName)
         {
-            return Name == categoryName;
+            return Name.ToLower() == categoryName.ToLower();
         }
 
         public bool IsKeyWordInDescription(string[] descriptionArray)
