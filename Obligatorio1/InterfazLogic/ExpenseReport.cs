@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 
@@ -13,24 +8,23 @@ namespace InterfazLogic
 {
     public partial class ExpenseReport : UserControl
     {
-        private LogicController logicController;
-        public ExpenseReport(Repository vRepository)
+        private ExpenseController expenseController;
+        public ExpenseReport(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
+            expenseController = new ExpenseController(vRepository);
             monthsWithExpenses();
-            this.MaximumSize = new Size(500, 650);
-            this.MinimumSize = new Size(500, 650);
-
+            MaximumSize = new Size(500, 650);
+            MinimumSize = new Size(500, 650);
         }
 
         private void monthsWithExpenses(){
             lblMonths.Text = "";
-            List <string> months= logicController.OrderedMonthsInWhichThereAreExpenses();
+            List <string> months= expenseController.OrderedMonthsWithExpenses();
             if (months.Count < 1)
             {
                 MessageBox.Show("There are no expenses registered in the system");
-                this.Visible = false;
+                Visible = false;
             }
             else
             {
@@ -38,10 +32,9 @@ namespace InterfazLogic
                 {
                     lstMonths.Items.Add(month);
                 }
-                this.Visible = true;
+                Visible = true;
             }
         }
-
 
         private void btnConsult_Click(object sender, EventArgs e)
         {
@@ -55,7 +48,7 @@ namespace InterfazLogic
                     lblMonths.Text = "You must select a month to consult";
                     lblMonth.ForeColor = Color.Red;
                 }
-                List<Expense> expenseReportByMonth = logicController.GetExpenseByMonth(month);
+                List<Expense> expenseReportByMonth = expenseController.GetExpenseByMonth(month);
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
                 foreach(Expense vExpense in expenseReportByMonth)
@@ -83,7 +76,7 @@ namespace InterfazLogic
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-            this.Visible = false;
+           Visible = false;
         }
 
       

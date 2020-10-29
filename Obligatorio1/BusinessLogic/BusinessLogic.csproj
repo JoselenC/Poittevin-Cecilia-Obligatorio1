@@ -44,12 +44,16 @@
     <Compile Include="Budget.cs" />
     <Compile Include="BudgetCategory.cs" />
     <Compile Include="Category.cs" />
+    <Compile Include="CategoryController.cs" />
     <Compile Include="EnumMonths.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Expense.cs" />
+    <Compile Include="BudgetController.cs" />
+    <Compile Include="ExpenseController.cs" />
+    <Compile Include="IRepository.cs" />
     <Compile Include="KeyWord.cs" />
-    <Compile Include="LogicController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MemoryRepository.cs" />
     <Compile Include="Repository.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -9,13 +9,13 @@ namespace BusinessLogic
 
         private double totalAmount;
 
-        private readonly int month;
+        private readonly Months month;
 
         private int year;
 
         public double TotalAmount { get => totalAmount; set => SetTotalAmount(value); }
 
-        public int Month { get => month ; }
+        public Months Month { get => month ; }
 
         public int Year { get => year; set => SetYear(value); }
 
@@ -37,14 +37,14 @@ namespace BusinessLogic
             year = vYear;
         }
 
-        private bool ValidMonth(int vMonth)
+        private bool ValidMonth(Months vMonth)
         {
-            if (vMonth > 12 || vMonth < 1)
+            if ((int) vMonth > 12 || (int) vMonth < 1)
                 throw new ArgumentOutOfRangeException();
             return true;
         }
 
-        public Budget(int vCurrentMonth)
+        public Budget(Months vCurrentMonth)
         {
             if (ValidMonth(vCurrentMonth))
             {
@@ -61,7 +61,7 @@ namespace BusinessLogic
             return returnList;
         }
 
-        public Budget(int vCurrentMonth, List<Category> categories)
+        public Budget(Months vCurrentMonth, List<Category> categories)
         {
             if (ValidMonth(vCurrentMonth))
             {
@@ -75,10 +75,9 @@ namespace BusinessLogic
             return $"month: {month} year: {Year} total: {totalAmount}";
         }
 
-        public void AddBudgetCategory(BudgetCategory budgetCategory)
+        public void AddBudgetCategory(Category category)
         {
-            if (budgetCategory is null)
-                throw new ArgumentNullException();
+            BudgetCategory budgetCategory = new BudgetCategory() { Amount = 0, Category = category };
             BudgetCategories.Add(budgetCategory);
         }
 
@@ -102,20 +101,28 @@ namespace BusinessLogic
             return returnNames.ToArray();
         }
 
-        private BudgetCategory FindBudgetCategoryByCategoryName(string categoryName) {
-
+        public BudgetCategory GetBudgetCategoryByCategoryName(string categoryName)
+        {
             foreach (var budgetCategory in BudgetCategories)
             {
                 if (budgetCategory.Category.Name == categoryName)
                     return budgetCategory;
             }
-            throw new NoFindBudgetCategoryByCategoryName();
+            throw new NoFindBudgetCategory();
+        }
+        
+        private BudgetCategory FindBudgetCategory(Category category)
+        {
+            BudgetCategory budgetCategory = BudgetCategories.Find(e => e.Category == category);
+            if(budgetCategory is null)
+                throw new NoFindBudgetCategory();
+            return budgetCategory;
         }
 
-        public BudgetCategory GetBudgetCategoryByCategoryName(string categoryName)
+        public void EditBudgetCategory(Category oldCategory, Category newCategory)
         {
-            BudgetCategory budgetCategory = FindBudgetCategoryByCategoryName(categoryName);
-            return budgetCategory;
+            BudgetCategory budgetCategory = FindBudgetCategory(oldCategory);
+            budgetCategory.Category = newCategory;
         }
 
         public override bool Equals(object obj)
@@ -133,5 +140,11 @@ namespace BusinessLogic
             }
             return false;
         }
+
+       public bool IsSameCreationDate(Months month, int year)
+        {
+            return Month == month && Year == year;
+        }
+
     }
 }

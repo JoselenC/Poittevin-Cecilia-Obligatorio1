@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
+﻿using System.Linq;
 
 namespace BusinessLogic
 {
     public class Category
     {
-
         private string name;
 
         private KeyWord keyWords;
@@ -30,8 +23,7 @@ namespace BusinessLogic
 
         private void SetKeyWords(KeyWord vKeyWords)
         {
-            keyWords = new KeyWord();
-            keyWords.SetKeyWord(vKeyWords);
+            keyWords = vKeyWords;
         }
 
         public override bool Equals(object obj)
@@ -49,5 +41,39 @@ namespace BusinessLogic
         {
             return Name;
         }
+
+        public bool ExistThisKey(string pKeyWord)
+        {
+            return KeyWords.ContainKey(pKeyWord);
+        }
+
+        public bool CategoryContainKeyword(KeyWord pKeyWords)
+        {
+            return KeyWords.ExistKeyWords(pKeyWords); 
+        }
+
+        public bool ExistKeyWordInDscription(string description)
+        {
+           return KeyWords.DescriptionContainAPartOfText(description);
+        }
+
+        public bool IsSameCategoryName(string categoryName)
+        {
+            return Name.ToLower() == categoryName.ToLower();
+        }
+
+        public bool IsKeyWordInDescription(string[] descriptionArray)
+        {
+            bool exist = false;
+            foreach (string description in descriptionArray)
+            {
+                exist = ExistKeyWordInDscription(description);
+                if (exist == true)
+                    return true;
+            }
+            return exist;
+        }
+
+      
     }
 }

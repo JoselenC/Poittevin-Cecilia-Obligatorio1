@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 
@@ -13,18 +8,18 @@ namespace InterfazLogic
 {
     public partial class RegisterCategory : UserControl
     {
-        private LogicController logicController;
+        private CategoryController categoryController;
 
-        public string keyWordToEdit { get; set; }
-        public List<string> keyWords { get; set; }
+        public string KeyWordToEdit { get; set; }
+        public List<string> KeyWords { get; set; }
         private int indexKeyWordToEdit;
-        public RegisterCategory(Repository vRepository)
+        public RegisterCategory(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
-            keyWords = new List<string>();
-            this.MaximumSize = new Size(800, 800);
-            this.MinimumSize = new Size(800, 800);
+            categoryController = new CategoryController(vRepository);
+            KeyWords = new List<string>();
+            MaximumSize = new Size(800, 800);
+            MinimumSize = new Size(800, 800);
             indexKeyWordToEdit = -1;
             lstCategories.Items.Clear();
             tbName.Clear();
@@ -33,12 +28,12 @@ namespace InterfazLogic
 
         private void TryRegisterCategoty()
         {
-            logicController.SetCategory(tbName.Text, keyWords);
+            categoryController.SetCategory(tbName.Text, KeyWords);
             lblKeyWords.Text = "";
             lblEdit.Text = "";
             lblName.Text = "";
             MessageBox.Show("Category " + tbName.Text + " was added successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Visible = false;
+            Visible = false;
         }
 
         private void btnRegisterCategory_Click(object sender, EventArgs e)
@@ -81,55 +76,52 @@ namespace InterfazLogic
 
         }
 
-
         private void btnAddKeyWord_Click(object sender, EventArgs e)
         {
             string keyWord = tbKeyWord.Text;
-            if (keyWord.Length > 0)
+            try
             {
-                if (keyWords.Contains(keyWord.ToLower()) || keyWords.Contains(keyWord.ToUpper()))
-                {
-                    lblKeyWords.Text = "You already entered that keyword";
-                    lblKeyWords.ForeColor = Color.Red;
-                }
-                else if (keyWords.Count > 9)
-                {
-                    lblKeyWords.Text = "You cannot add more than 10 keywords.";
-                    lblKeyWords.ForeColor = Color.Red;
-                }
-                else if (logicController.AlreadyExistThisKeyWordInAnoterCategory(keyWord))
-                {
-                    lblKeyWords.Text = "You already entered that keyword in another category";
-                    lblKeyWords.ForeColor = Color.Red;
-                }
-                else
-                {
-                    this.keyWords.Add(keyWord);
-                    lstCategories.Items.Add(keyWord);
-                    tbKeyWord.Text = "";
-                    lblKeyWords.Text = "";
-                }
+                categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
+                KeyWord key = new KeyWord(KeyWords);
+                key.AddKeyWord(keyWord);
+                lstCategories.Items.Add(keyWord);
+                tbKeyWord.Text = "";
+                lblKeyWords.Text = "";
             }
-            else
+            catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory) {
+                lblKeyWords.Text = "You already entered that keyword in another category";
+                lblKeyWords.ForeColor = Color.Red;
+            }
+            catch (ExcepcionInvalidKeyWordsLengthCategory)
+            {
+                lblKeyWords.Text = "You cannot add more than 10 keywords.";
+                lblKeyWords.ForeColor = Color.Red; 
+            }
+            catch (ExcepcionInvalidRepeatedKeyWordsCategory)
+            {
+                lblKeyWords.Text = "You already entered that keyword";
+                lblKeyWords.ForeColor = Color.Red;
+            }
+            catch (InvalidKeyWord)
             {
                 lblKeyWords.Text = "The keyword cannot be empty.";
                 lblKeyWords.ForeColor = Color.Red;
-            }
-
+            }    
         }
 
      
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            if (keyWords.Count > 0)
+            if (KeyWords.Count > 0)
             {
                 indexKeyWordToEdit = lstCategories.SelectedIndex;
                 if (indexKeyWordToEdit >= 0)
                 {
-                    EditKeyWord editKeyWord = new EditKeyWord(keyWords, indexKeyWordToEdit, lstCategories,logicController);
+                    EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstCategories,categoryController);
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
+                    lblEdit.Text = "";
                 }
                 else
                 {
@@ -137,7 +129,7 @@ namespace InterfazLogic
                     lblEdit.ForeColor = Color.Red;
                 }
             }
-            else if (keyWords.Count <= 0)
+            else if (KeyWords.Count <= 0)
             {
                 lblEdit.Text = "There aren't key words to edit";
                 lblEdit.ForeColor = Color.Red;
@@ -148,7 +140,7 @@ namespace InterfazLogic
         private void TryDeleteKyWord()
         {
             int index = lstCategories.SelectedIndex;
-            keyWords.RemoveAt(index);
+            KeyWords.RemoveAt(index);
             lstCategories.Items.RemoveAt(index);
             lblEdit.Text = "";
             lblKeyWords.Text = "";
@@ -167,6 +159,10 @@ namespace InterfazLogic
             }
         }
 
-       
+        private void btnCanel_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
+
     }
 }

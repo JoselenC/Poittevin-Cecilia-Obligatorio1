@@ -208,5 +208,158 @@ namespace Test
             };
             Assert.AreNotEqual(category1,keyWords);
         }
+
+        [TestMethod]
+        public void ExistThiskeyWordCaseTrue()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord};
+            bool exist = category1.ExistThisKey("theater");
+            Assert.IsTrue(exist);
+        }
+
+        [TestMethod]
+        public void ExistThiskeyWordCaseFalse()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
+            bool exist = category1.ExistThisKey("dinner");
+            Assert.IsFalse(exist);
+        }
+
+        [TestMethod]
+        public void ExistkeyWordInAnotherCategoryCaseTrue()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
+            bool exist = category1.CategoryContainKeyword(keyWord);
+            Assert.IsTrue(exist);
+        }
+
+        [TestMethod]
+        public void ExistkeyWordInAnotherCategoryCaseFalse()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = new KeyWord()};
+            bool exist = category1.CategoryContainKeyword(keyWord);
+            Assert.IsFalse(exist);
+        }
+
+        [TestMethod]
+        public void ExistkeyWordInDescriptionCaseTrue()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
+            bool exist = category1.ExistKeyWordInDscription("theater");
+            Assert.IsTrue(exist);
+        }
+
+        [TestMethod]
+        public void ExistkeyWordInDescriptionCaseFalse()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
+            bool exist = category1.ExistKeyWordInDscription("eat");
+            Assert.IsFalse(exist);
+        }
+
+        [TestMethod]
+        public void SameCategoryNameCaseTrue()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
+            bool exist = category1.IsSameCategoryName("Test Category");
+            Assert.IsTrue(exist);
+        }
+
+        [TestMethod]
+        public void SameCategoryNameCaseFalse()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
+            bool exist = category1.IsSameCategoryName("Entertainment");
+            Assert.IsFalse(exist);
+        }
+
+        [TestMethod]
+        public void ExistkeyWordInDescriptionArrayCaseTrue()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
+            String[] description = { "Go", "theater" };
+            bool exist = category1.IsKeyWordInDescription(description);
+            Assert.IsTrue(exist);
+        }
+
+        [TestMethod]
+        public void ExistkeyWordInDescriptionArrayCaseFalse()
+        {
+            List<string> keyWords = new List<string>
+            {
+                "movie theater",
+                "theater",
+                "departure"
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            Category category1 = new Category { Name = "Test Category", KeyWords = keyWord };
+            String[] description = { "Go", "to", "dinner" };
+            bool exist = category1.IsKeyWordInDescription(description);
+            Assert.IsFalse(exist);
+        }
+
     }
 }

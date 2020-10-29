@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -61,6 +56,18 @@ namespace BusinessLogic
         public override string ToString()
         {
             return description;
+        }
+
+        public bool IsExpenseSameMonth(Months month)
+        {
+            int expected = CreationDate.Month;
+            int actual = (int)month;
+            return expected == actual;
+        }
+
+        public bool IsSameCategory(Category vCategory)
+        {
+            return Category == vCategory;
         }
     }
 }

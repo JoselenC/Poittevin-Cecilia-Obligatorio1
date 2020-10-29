@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -30,6 +26,9 @@ namespace BusinessLogic
     {
     }
 
+    public class ExcepcionInvalidRepeatedKeyWordsInAnotherCategory : Exception
+    {
+    }
     public class ExcepcionInvalidYearExpense : Exception
     {
     }
@@ -50,11 +49,15 @@ namespace BusinessLogic
     {
     }
 
+    public class ExceptionBudgetWithEmptyCategory : Exception
+    {
+    }
+
     public class NegativeValueErrorAttribute : Exception
     {
     }
 
-    public class NoFindBudgetCategoryByCategoryName : Exception
+    public class NoFindBudgetCategory : Exception
     {
     }
 
@@ -74,6 +77,14 @@ namespace BusinessLogic
     }
 
     public class NoAsignCategoryByDescriptionExpense : Exception
+    {
+    }
+
+    public class InvalidKeyWord : Exception
+    {
+    }
+
+    public class ValueNotFound : Exception
     {
     }
 

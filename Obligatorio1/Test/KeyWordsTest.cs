@@ -24,10 +24,10 @@ namespace Test
             "casino",
             "game room",
             "Park",
-            "shopping",
+            "shopping"
+
             };
             KeyWord keyWord = new KeyWord(keyWords);
-            keyWord.SetKeyWord(keyWord);
         }
 
         [TestMethod]
@@ -46,8 +46,7 @@ namespace Test
             "game room",
             };
             KeyWord expectedKeyWord = new KeyWord(keyWords);
-            KeyWord keyWord = new KeyWord(keyWords);
-            keyWord.SetKeyWord(keyWord);
+            KeyWord keyWord = new KeyWord(keyWords);            
             Assert.AreEqual(expectedKeyWord, keyWord);
         }
 
@@ -141,7 +140,7 @@ namespace Test
             };
             string description = "movie theater";
             KeyWord keyWord = new KeyWord(keyWords);
-            Assert.IsTrue(keyWord.KeywordContainsAPartOfDescription(description));
+            Assert.IsTrue(keyWord.DescriptionContainAPartOfText(description));
         }
 
         [TestMethod]
@@ -161,7 +160,7 @@ namespace Test
             };
             string description = "food";
             KeyWord keyWord = new KeyWord(keyWords);
-            Assert.IsFalse(keyWord.KeywordContainsAPartOfDescription(description));
+            Assert.IsFalse(keyWord.DescriptionContainAPartOfText(description));
         }
 
 
@@ -188,7 +187,7 @@ namespace Test
             KeyWord keyWord2 = new KeyWord(keyWords2);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = true;
-            Assert.IsTrue(keyWord.ExistKeyWordInAnotherCategory(keyWord2,ref exist,category));
+            Assert.IsFalse(keyWord.ExistKeyWords(keyWord2));
         }
 
         [TestMethod]
@@ -216,7 +215,7 @@ namespace Test
             KeyWord keyWord2 = new KeyWord(keyWords2);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist =true;
-            Assert.IsFalse(keyWord.ExistKeyWordInAnotherCategory(keyWord2, ref exist, category));
+            Assert.IsTrue(keyWord.ExistKeyWords(keyWord2));
         }
 
 
@@ -238,7 +237,7 @@ namespace Test
             KeyWord keyWord = new KeyWord(keyWords);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = false;
-            Assert.IsTrue(keyWord.ExistThisKey("movie theater", ref exist, category));
+            Assert.IsTrue(keyWord.ContainKey("movie theater"));
         }
 
 
@@ -260,7 +259,7 @@ namespace Test
             KeyWord keyWord = new KeyWord(keyWords);
             Category category = new Category { Name = "entertainment", KeyWords = keyWord };
             bool exist = false;
-            Assert.IsFalse(keyWord.ExistThisKey("food", ref exist, category));
+            Assert.IsFalse(keyWord.ContainKey("food"));
         }
 
         [TestMethod]
@@ -284,7 +283,128 @@ namespace Test
             Assert.AreEqual(keyWords, keyWords2);
         }
 
+        [TestMethod]
+        public void AddValidKeyWord()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            };
+            List<string> keyWords2 = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            "game room"
+            };
+            KeyWord expectedKeyWord = new KeyWord(keyWords2);
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.AddKeyWord("game room");
+            Assert.AreEqual(expectedKeyWord, keyWord);
+        }
 
+        [TestMethod]
+        [ExpectedException(typeof(InvalidKeyWord))]
+        public void AddEmptyKeyWord()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            };
+            KeyWord expectedKeyWord = new KeyWord(keyWords);
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.AddKeyWord("");
+            Assert.AreEqual(expectedKeyWord, keyWord);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory))]
+        public void AddRepetedKeyWord()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.AddKeyWord("casino");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidKeyWordsLengthCategory))]
+        public void AddKeyWordInvalidLength()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            "game room",
+            "Park",
+            };
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.AddKeyWord("keyword");
+        }
+
+        [TestMethod]
+        public void DeleteKeyWord()
+        {
+            List<string> keyWords = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating",
+            "casino",
+            };
+            List<string> keyWords2 = new List<string>()
+            {
+            "movie theater",
+            "theater",
+            "departure",
+            "bookstore",
+            "jugeteria",
+            "shopping",
+            "skating"
+            };
+            KeyWord expectedKeyWord = new KeyWord(keyWords2);
+            KeyWord keyWord = new KeyWord(keyWords);
+            keyWord.DeleteKeyWord("casino");
+            Assert.AreEqual(expectedKeyWord, keyWord);
+        }
 
 
     }

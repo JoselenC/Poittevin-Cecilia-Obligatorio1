@@ -1,134 +1,44 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-   
-    public class Repository
+    public class Repository <T>
     {
-        private List<Category> Categories;
+        List<T> repository = new List<T>();
 
-        private List<Expense> Expenses;
-
-        private List<Budget> Budgets;
-
-        private List<BudgetCategory> BudgetCategories;
-
-        public Repository()
+        public T Find(Predicate<T> condition)
         {
-            Categories = new List<Category>();
-            Expenses = new List<Expense>();
-            Budgets = new List<Budget>();
-            BudgetCategories = new List<BudgetCategory>();
-        }             
-
-        public Repository(List<Category> vCategories)
-        {
-            Expenses = new List<Expense>();
-            Budgets = new List<Budget>();
-            BudgetCategories = new List<BudgetCategory>();
-            Categories = vCategories;
-        }
-
-        private bool AlreadyExistTheCategoryName(string categoryName)
-        {
-            bool exist = true ;
-            foreach (Category category in Categories)
+            T retorno = repository.Find(condition);
+            if (retorno == null)
             {
-                if (categoryName.ToLower() == category.Name.ToLower())
-                   exist= false;
+                throw new ValueNotFound();
             }
-            return exist;
-        }
-     
-        private bool ExistKeyWordInAnotherCategory(KeyWord pkeyWords, ref bool exist,Category category)
-        {
-            pkeyWords.ExistKeyWordInAnotherCategory(pkeyWords, ref exist, category);
-            return exist;
+            return retorno;
         }
 
-        private bool AlreadyExistTheKeyWordsInAnoterCategory(KeyWord pkeyWords)
+        public void Add(T objectToAdd)
         {
-            bool exist = true;
-
-            foreach (Category category in Categories)
-            {
-                exist=ExistKeyWordInAnotherCategory(pkeyWords, ref exist, category);
-            }
-            return exist;
-        }        
-
-        public void AddCategory(Category category)
-        {
-            if (!AlreadyExistTheCategoryName(category.Name))
-                throw new ExcepcionInvalidRepeatedNameCategory();
-            if (!AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
-                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
-            this.Categories.Add(category);
+            if(objectToAdd==null)
+                throw new ValueNotFound();
+            repository.Add(objectToAdd);
         }
 
-        public void AddBudget(Budget vBudget)
+        public List<T> Get()
         {
-            if (vBudget is null)
-            {
-                throw new ArgumentNullException();
-            }
-            Budgets.Add(vBudget);
+            return repository;
         }
 
-        public void AddBudgetCategory(BudgetCategory vCategory)
+        public void Delete(T objectToDelete)
         {
-            if (vCategory is null)
-            {
-                throw new ArgumentNullException();
-            }
-            BudgetCategories.Add(vCategory);
+            repository.Remove(objectToDelete);
         }
 
-        public void AddExpense(Expense expense)
+        public void Set(List<T> objectToAdd)
         {
-            if (expense.Category == null)
-                throw new ExcepcionExpenseWithEmptyCategory();           
-            Expenses.Add(expense);
-        }       
-
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category)
-        {
-            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category };
-            AddExpense(expense);
+            repository = objectToAdd;
         }
 
-        public void SetCategory(string vName,List<string> vKeyWords )
-        {
-            KeyWord pKeyWord = new KeyWord(vKeyWords);
-            Category category = new Category { Name = vName, KeyWords = pKeyWord };
-            AddCategory(category);
-        }
-
-        public List<Category> GetCategories()
-        {
-            return Categories;
-        }
-
-        public List<Expense> GetExpenses()
-        {
-            return Expenses;
-        }
-
-        public List<Budget> GetBudgets()
-        {
-            return Budgets;
-        }
-
-        public List<BudgetCategory> GetBudgetsCategory()
-        {
-            return BudgetCategories;
-        }
 
 
     }

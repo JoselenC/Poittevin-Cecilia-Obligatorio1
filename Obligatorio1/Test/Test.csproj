@@ -51,13 +51,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BudgetTest.cs" />
-    <Compile Include="LogicControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CategoryTest.cs" />
-    <Compile Include="RepositoryTest.cs" />
+    <Compile Include="MemoryRepositoryTest.cs" />
     <Compile Include="ExpenseTest.cs" />
     <Compile Include="BudgetCategoryTest.cs" />
     <Compile Include="KeyWordsTest.cs" />
+    <Compile Include="CategoryControllerTest.cs" />
+    <Compile Include="BudgetControllerTest.cs" />
+    <Compile Include="ExpenseControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 
@@ -13,13 +7,13 @@ namespace InterfazLogic
 {
     public partial class RegisterExpense : UserControl
     {
-        private LogicController logicController;
-        public RegisterExpense(Repository vRepository)
+        private ExpenseController expenseController;
+        public RegisterExpense(MemoryRepository vRepository)
         {
             InitializeComponent();
-            logicController = new LogicController(vRepository);
-            this.MaximumSize = new Size(890, 890);
-            this.MinimumSize = new Size(890, 890);
+            expenseController = new ExpenseController(vRepository);
+            MaximumSize = new Size(890, 890);
+            MinimumSize = new Size(890, 890);
             tbDescription.Clear();
             lstCategories.Items.Clear();
             AreCategories();
@@ -27,30 +21,29 @@ namespace InterfazLogic
 
         private void AreCategories()
         {
-            if(logicController.GetCategories().Count == 0)
+            if(expenseController.GetCategories().Count == 0)
             {
                 MessageBox.Show("There are no categories registered in the system");
                 Visible = false;
             }
         }
         private void CompleteCategories(string description)
-        {
-            
+        {            
             try
             {
-                Category category = logicController.AsignCategoryByDescriptionExpense(description);
+                Category category = expenseController.FindCategoryByDescription(description);
                 lstCategories.Items.Add(category);
             }
             catch (NoAsignCategoryByDescriptionExpense)
             {
-                if (logicController.GetCategories().Count > 0)
+                if (expenseController.GetCategories().Count > 0)
                 {
-                    foreach (Category vCategory in logicController.GetCategories())
+                    foreach (Category vCategory in expenseController.GetCategories())
                     {
                         lstCategories.Items.Add(vCategory.Name);
                     }
                 }
-            }
+            }           
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -69,10 +62,10 @@ namespace InterfazLogic
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 string nameCategory = lstCategories.SelectedItem.ToString();
-                Category category = logicController.FindCategoryByName(nameCategory);
-                logicController.SetExpense(amount, creationDate, description, category);
+                Category category = expenseController.FindCategoryByName(lstCategories.SelectedItem.ToString());
+                expenseController.SetExpense(amount, creationDate, description,category);
                 MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Visible = false;
+                Visible = false;
             }
             else
             {
@@ -87,7 +80,7 @@ namespace InterfazLogic
             try
             {
                 TryRegisterExpense();
-            }
+            }            
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
                 lbDescription.Text = "The description must be between 3 and 20 characters long.";      
@@ -131,7 +124,9 @@ namespace InterfazLogic
             }         
         }
 
-        
-
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
     }
 }
