@@ -16,7 +16,6 @@ namespace InterfazLogic
             monthsWithExpenses();
             MaximumSize = new Size(500, 650);
             MinimumSize = new Size(500, 650);
-
         }
 
         private void monthsWithExpenses(){

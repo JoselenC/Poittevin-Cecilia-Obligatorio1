@@ -73,7 +73,8 @@ namespace Test
             repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment);
             budgetController = new BudgetController(repo);
         }
-            [TestMethod]
+        
+        [TestMethod]
         public void GetTotalSpentByMonthAndCategoryValidCase()
         {
             double expectedTotalSpentJanuary = 330.50;
@@ -180,7 +181,6 @@ namespace Test
             Assert.AreEqual(JanuaryBudget, actualBudget);
         }
 
-
         [TestMethod]
         [ExpectedException(typeof(NoFindBudget), "")]
         public void FindBudgetNotFoundCase()
@@ -250,7 +250,6 @@ namespace Test
             BudgetController controller = new BudgetController(repo);
             List<string> monthsOrder = controller.OrderedMonthsWithBudget();
             CollectionAssert.AreEqual(months, monthsOrder);
-
         }
 
         [TestMethod]
@@ -271,7 +270,6 @@ namespace Test
             BudgetController controller = new BudgetController(repository);
             double totalAmount = controller.AmountOfExpensesInAMonth(month);
             Assert.AreEqual(46, totalAmount);
-
         }
 
         [TestMethod]
@@ -290,7 +288,6 @@ namespace Test
             repository.GetExpenses().Add(expense3);
             double totalAmount = budgetController.AmountOfExpensesInAMonth(month);
             Assert.AreEqual(0, totalAmount);
-
         }
 
         [TestMethod]
@@ -308,6 +305,7 @@ namespace Test
             controller.SetCategory("food", keyWords2);
             Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
         }
+
         [TestMethod]
         public void AddCategoryValidData()
         {
@@ -386,6 +384,7 @@ namespace Test
             };
             CollectionAssert.AreEqual(categories, controller.GetCategories().ToArray());
         }
+
         [TestMethod]
         public void GetCategories()
         {

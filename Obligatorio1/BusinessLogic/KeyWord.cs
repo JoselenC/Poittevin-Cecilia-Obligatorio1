@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
     public class KeyWord
     {
         private List<string> keyWords;
-
     
         public KeyWord(List<string> vKeyWords)
         {
             if(vKeyWords.Count>10)
                 throw new ExcepcionInvalidKeyWordsLengthCategory();
             keyWords = vKeyWords;
-
         }
 
         public KeyWord()

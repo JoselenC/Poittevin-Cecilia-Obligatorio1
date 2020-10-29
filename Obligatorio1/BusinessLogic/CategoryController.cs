@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace BusinessLogic
 {
     public class CategoryController
     {
-
         public MemoryRepository Repository { get; private set; }
 
         public CategoryController(MemoryRepository repository)
@@ -32,12 +26,6 @@ namespace BusinessLogic
             return Repository.FindCategoryByName(categoryName);
         }
 
-        public Category SetCategory(string vName, List<string> vKeyWords)
-        {
-            Category category = Repository.SetCategory(vName, vKeyWords);
-            AddCategoryInAllBudgets(category);
-            return category;
-        }
         private void AddCategoryInAllBudgets(Category category)
         {
             foreach (Budget budget in Repository.GetBudgets())
@@ -46,14 +34,12 @@ namespace BusinessLogic
             }
         }
 
-        private void EditCategoryInAllBudgets(Category oldCategory, Category newCategory)
+        public Category SetCategory(string vName, List<string> vKeyWords)
         {
-            List<Budget> budgets = Repository.GetBudgets();
-            foreach (Budget budget in budgets)
-            {
-                budget.EditBudgetCategory(oldCategory, newCategory);
-            }
-        }
+            Category category = Repository.SetCategory(vName, vKeyWords);
+            AddCategoryInAllBudgets(category);
+            return category;
+        } 
 
         public List<Expense> GetExpenses()
         {
@@ -70,6 +56,15 @@ namespace BusinessLogic
             }
         }
 
+        private void EditCategoryInAllBudgets(Category oldCategory, Category newCategory)
+        {
+            List<Budget> budgets = Repository.GetBudgets();
+            foreach (Budget budget in budgets)
+            {
+                budget.EditBudgetCategory(oldCategory, newCategory);
+            }
+        }
+
         public void EditCategory(Category oldCategory, string newName, List<string> newKeywords)
         {
             Repository.DeleteCategory(oldCategory);
@@ -81,9 +76,7 @@ namespace BusinessLogic
         public List<Category> GetCategories()
         {
             return Repository.GetCategories();
-        }
-
-       
+        }      
 
     }
 

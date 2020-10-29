@@ -1,12 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -73,7 +66,6 @@ namespace BusinessLogic
             try
             {
                Budgets.Add(vBudget);
-
             }
             catch (ValueNotFound)
             {

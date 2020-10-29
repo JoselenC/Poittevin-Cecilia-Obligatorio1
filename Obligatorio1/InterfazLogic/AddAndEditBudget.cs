@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
+
 namespace InterfazLogic
 {
     public partial class AddAndEditBudget : UserControl
@@ -87,9 +88,7 @@ namespace InterfazLogic
             Budget newBudget = GetBudget();
             LoadBudgetData(newBudget);
             currentBudget = newBudget;
-        }
-       
-
+        } 
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

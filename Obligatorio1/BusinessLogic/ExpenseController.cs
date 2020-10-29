@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -37,6 +34,18 @@ namespace BusinessLogic
             return Repository.GetExpenses();
         }
 
+        private List<string> MonthsListIntToString(List<int> months)
+        {
+            List<string> monthsString = new List<string>();
+            foreach (int month in months)
+            {
+                Months vMonth = (Months)month;
+                string nombreMes = vMonth.ToString();
+                monthsString.Add(nombreMes);
+            }
+            return monthsString;
+        }
+
         public List<string> OrderedMonthsWithExpenses()
         {
             List<int> orderedMonthsInt = new List<int>();
@@ -49,19 +58,7 @@ namespace BusinessLogic
             orderedMonthsInt.Sort();
             List<string> orderedMonthsString = MonthsListIntToString(orderedMonthsInt);
             return orderedMonthsString;
-        }
-
-        private List<string> MonthsListIntToString(List<int> months)
-        {
-            List<string> monthsString = new List<string>();
-            foreach (int month in months)
-            {
-                Months vMonth = (Months)month;
-                string nombreMes = vMonth.ToString();
-                monthsString.Add(nombreMes);
-            }
-            return monthsString;
-        }
+        }        
 
         public List<Expense> GetExpenseByMonth(Months month)
         {

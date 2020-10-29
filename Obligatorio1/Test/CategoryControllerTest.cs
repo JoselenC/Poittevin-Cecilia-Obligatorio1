@@ -56,7 +56,8 @@ namespace Test
             repo.AddCategory(categoryHouse);
             categoryController = new CategoryController(repo);
         }
-            [TestMethod]
+        
+        [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsInAnotherCategory), "")]
         public void RepeatedKeyWordToCategory()
         {

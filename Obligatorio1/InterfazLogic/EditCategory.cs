@@ -41,7 +41,6 @@ namespace InterfazLogic
             }
         }
 
-
         private void EditTheCategory()
         {
             txtKeyWord.Enabled = true;

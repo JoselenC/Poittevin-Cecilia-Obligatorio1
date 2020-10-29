@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -25,13 +23,7 @@ namespace BusinessLogic
                     expensesByMonth.Add(vExpense);
             }
             return expensesByMonth;
-        }
-
-        private Months StringToMonthsEnum(string month)
-        {
-            return (Months)Enum.Parse(typeof(Months), month);
-        }
-
+        }        
 
         public List<Category> GetCategories()
         {
@@ -79,6 +71,11 @@ namespace BusinessLogic
         private static bool IsSameCategory(Category vCategory, Expense expense)
         {
             return expense.Category == vCategory;
+        }
+
+        private Months StringToMonthsEnum(string month)
+        {
+            return (Months)Enum.Parse(typeof(Months), month);
         }
 
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
