@@ -37,6 +37,8 @@
             this.btnBudgetReport = new System.Windows.Forms.Button();
             this.btnEditCategory = new System.Windows.Forms.Button();
             this.btnEditExpenses = new System.Windows.Forms.Button();
+            this.btnAddMoney = new System.Windows.Forms.Button();
+            this.btnEditMoney = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblMenu
@@ -68,7 +70,7 @@
             this.mainPanel.Location = new System.Drawing.Point(374, 15);
             this.mainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1299, 821);
+            this.mainPanel.Size = new System.Drawing.Size(1299, 930);
             this.mainPanel.TabIndex = 7;
             // 
             // btnRegisterExpense
@@ -143,12 +145,38 @@
             this.btnEditExpenses.UseVisualStyleBackColor = false;
             this.btnEditExpenses.Click += new System.EventHandler(this.btnEditExpenses_Click);
             // 
+            // btnAddMoney
+            // 
+            this.btnAddMoney.BackColor = System.Drawing.Color.Tan;
+            this.btnAddMoney.Location = new System.Drawing.Point(59, 840);
+            this.btnAddMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddMoney.Name = "btnAddMoney";
+            this.btnAddMoney.Size = new System.Drawing.Size(297, 93);
+            this.btnAddMoney.TabIndex = 13;
+            this.btnAddMoney.Text = "Add money";
+            this.btnAddMoney.UseVisualStyleBackColor = false;
+            this.btnAddMoney.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnEditMoney
+            // 
+            this.btnEditMoney.BackColor = System.Drawing.Color.Tan;
+            this.btnEditMoney.Location = new System.Drawing.Point(59, 937);
+            this.btnEditMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEditMoney.Name = "btnEditMoney";
+            this.btnEditMoney.Size = new System.Drawing.Size(297, 93);
+            this.btnEditMoney.TabIndex = 14;
+            this.btnEditMoney.Text = "Edit money";
+            this.btnEditMoney.UseVisualStyleBackColor = false;
+            this.btnEditMoney.Click += new System.EventHandler(this.btnEditMoney_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
-            this.ClientSize = new System.Drawing.Size(1686, 871);
+            this.ClientSize = new System.Drawing.Size(1686, 1157);
+            this.Controls.Add(this.btnEditMoney);
+            this.Controls.Add(this.btnAddMoney);
             this.Controls.Add(this.btnEditCategory);
             this.Controls.Add(this.btnEditExpenses);
             this.Controls.Add(this.btnBudgetReport);
@@ -177,5 +205,7 @@
         private System.Windows.Forms.Button btnBudgetReport;
         private System.Windows.Forms.Button btnEditCategory;
         private System.Windows.Forms.Button btnEditExpenses;
+        private System.Windows.Forms.Button btnAddMoney;
+        private System.Windows.Forms.Button btnEditMoney;
     }
 }

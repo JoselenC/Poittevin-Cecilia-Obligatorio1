@@ -10,14 +10,16 @@ namespace InterfazLogic
         private BudgetController categoryController;
         private BudgetController expenseController;
         private BudgetController budgetController;
+        private MoneyController moneyController;
         public Menu(MemoryRepository repository)
         {
             InitializeComponent();
             categoryController = new BudgetController(repository);
             expenseController = new BudgetController(repository);
             budgetController = new BudgetController(repository);
-            MaximumSize = new Size(650, 400);
-            MinimumSize = new Size(650, 400);
+            moneyController = new MoneyController (repository);
+            MaximumSize = new Size(650, 600);
+            MinimumSize = new Size(650, 600);
         }
 
         private void btnRegisterCategory_Click(object sender, EventArgs e)
@@ -67,6 +69,20 @@ namespace InterfazLogic
             mainPanel.Controls.Clear();
             UserControl budgetReport = new BudgetReport(budgetController.Repository);
             mainPanel.Controls.Add(budgetReport);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            UserControl addMoney = new AddMoney(moneyController.Repository); ;
+            mainPanel.Controls.Add(addMoney);
+        }
+
+        private void btnEditMoney_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            UserControl editMoney = new EditMoney(moneyController.Repository); ;
+            mainPanel.Controls.Add(editMoney);
         }
     }
 

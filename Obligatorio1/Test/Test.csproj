@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BudgetTest.cs" />
+    <Compile Include="MoneyTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CategoryTest.cs" />
     <Compile Include="MemoryRepositoryTest.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="CategoryControllerTest.cs" />
     <Compile Include="BudgetControllerTest.cs" />
     <Compile Include="ExpenseControllerTest.cs" />
+    <Compile Include="MoneyControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

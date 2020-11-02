@@ -17,6 +17,8 @@ namespace InterfazLogic
             tbDescription.Clear();
             lstCategories.Items.Clear();
             AreCategories();
+            CompleteMoney();
+            lstMoney.SelectedIndex = 0;
         }
 
         private void AreCategories()
@@ -43,7 +45,16 @@ namespace InterfazLogic
                         lstCategories.Items.Add(vCategory.Name);
                     }
                 }
-            }           
+            }
+
+        }
+
+        private void CompleteMoney()
+        {
+            foreach (Money vMoney in expenseController.GetMonies())
+            {
+                lstMoney.Items.Add(vMoney);
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -63,7 +74,8 @@ namespace InterfazLogic
                 DateTime creationDate = dateTime.Value;
                 string nameCategory = lstCategories.SelectedItem.ToString();
                 Category category = expenseController.FindCategoryByName(lstCategories.SelectedItem.ToString());
-                expenseController.SetExpense(amount, creationDate, description,category);
+                Money money = expenseController.FindMoneyByName(lstMoney.SelectedItem.ToString());
+                expenseController.SetExpense(amount, creationDate, description,category,money);
                 MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Visible = false;
             }

@@ -206,5 +206,27 @@ namespace Test
             Assert.IsFalse(sameCreationDate);
         }
 
+        [TestMethod]
+        public void NoConvertToPesos()
+        {
+            Money money = new Money { Name = "pesos", Quotation = 1, Symbol = "$U" };
+            Category category = new Category() { Name = "food" };
+            double amount = 23;
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category,Money=money };
+            double amountExpected = expense.ConvertToPesos();
+            Assert.AreEqual(amount, amountExpected);
+        }
+
+        [TestMethod]
+        public void ConvertToPesos()
+        {
+            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
+            Category category = new Category() { Name = "food" };
+            double amount = 23;
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Money = money };
+            double amountExpected = expense.ConvertToPesos();
+            Assert.AreEqual(amount*43, amountExpected);
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace BusinessLogic
 {
@@ -12,12 +13,17 @@ namespace BusinessLogic
 
         private Repository<Budget> Budgets;
 
+        private Repository<Money> Monies;
+
 
         public MemoryRepository()
         {
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
+            Monies = new Repository<Money>();
+            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            Monies.Add(money);
         }     
 
         public MemoryRepository(List<Category> vCategories)
@@ -25,7 +31,24 @@ namespace BusinessLogic
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
+            Monies = new Repository<Money>();
             Categories.Set(vCategories);
+            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            Monies.Add(money);
+        }
+
+        public Money FindMoney(Money money)
+        {
+            try
+            {
+                return Monies.Find(e => e.Equals(money));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindMoney();
+            }
+            
+          
         }
 
         private bool AlreadyExistTheCategoryName(string categoryName)
@@ -75,11 +98,23 @@ namespace BusinessLogic
             if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();
             Expenses.Add(expense);
-        }       
+        }
 
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category)
+        public Money FindMoneyByName(string moneyName)
         {
-            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category };
+            try
+            {
+                return Monies.Find(e => e.IsSameMoneyName(moneyName));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindMoneyByName();
+            }
+        }
+
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Money money)
+        {
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category,Money=money };
             AddExpense(expense);
         }
 
@@ -114,6 +149,11 @@ namespace BusinessLogic
         public void DeleteCategory(Category category)
         {
             Categories.Delete(category);
+        }
+
+        public void DeleteMoney(Money money)
+        {
+            Monies.Delete(money);
         }
 
         private Months StringToMonthsEnum(string month)
@@ -191,6 +231,43 @@ namespace BusinessLogic
             }
             return expensesByMonth;
         }
+
+        public List<Money> GetMonies()
+        {
+            return Monies.Get();
+        }
+
+        private bool AlreadyExistTheMoneyName(string moneyName)
+        {
+            bool exist = false;
+            foreach (Money money in GetMonies())
+            {
+                if (moneyName.ToLower() == money.Name.ToLower())
+                    exist = true;
+            }
+            return exist;
+        }
+
+        private bool AlreadyExistTheMoneySymbol(string moneySymbol)
+        {
+            bool exist = false;
+            foreach (Money money in GetMonies())
+            {
+                if (moneySymbol.ToLower() == money.Symbol.ToLower())
+                    exist = true;
+            }
+            return exist;
+        }
+
+        public void SetMoney(Money money)
+        {
+            if (AlreadyExistTheMoneyName(money.Name))
+                throw new ExceptionAlreadyExistTheMoneyName();
+            if(AlreadyExistTheMoneySymbol(money.Symbol))
+                throw new ExceptionAlreadyExistTheMoneySymbol();
+            Monies.Add(money);
+        }
+
 
     }
 }

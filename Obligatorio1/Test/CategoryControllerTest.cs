@@ -227,7 +227,7 @@ namespace Test
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryEntertainment };
             MemoryRepository repository = new MemoryRepository();
             CategoryController controller = new CategoryController(repository);
-            controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
+            controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
             List<string> keyWords = new List<string>
             {
                 "movie theater",
@@ -245,7 +245,7 @@ namespace Test
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
             MemoryRepository repository = new MemoryRepository();
             CategoryController controller = new CategoryController(repository);
-            controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
+            controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
             List<string> keyWords = new List<string>
             {
                 "movie theater",

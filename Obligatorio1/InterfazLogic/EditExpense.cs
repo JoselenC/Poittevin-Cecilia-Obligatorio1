@@ -28,7 +28,16 @@ namespace InterfazLogic
             nAmount.Enabled = false;
             dateTime.Enabled = false;
             lstCategories.Enabled = false;
+            CompleteMoney();
 
+        }
+
+        private void CompleteMoney()
+        {
+            foreach (Money vMoney in expenseController.GetMonies())
+            {
+                lstMoney.Items.Add(vMoney);
+            }
         }
 
         private void CompleteExpenses()
@@ -53,6 +62,7 @@ namespace InterfazLogic
             nAmount.Value = (decimal)(expenseToEdit.Amount);
             dateTime.Value = expenseToEdit.CreationDate;
             lblCategory.Text = expenseToEdit.Category.ToString();
+            lstMoney.SelectedIndex=0;
             indexToEdit = lstExpenses.SelectedIndex;
             selectExpense = true;
             btnDelete.Enabled = false;
@@ -193,7 +203,8 @@ namespace InterfazLogic
             string description = tbDescription.Text;
             double amount = decimal.ToDouble(nAmount.Value);
             DateTime creationDate = dateTime.Value;
-            expenseController.SetExpense(amount, creationDate, description, category);
+            Money money = expenseController.FindMoneyByName(lstMoney.SelectedItem.ToString());
+            expenseController.SetExpense(amount, creationDate, description, category,money);
             MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Visible = false;
             if (indexToEdit >= 0)

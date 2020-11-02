@@ -64,6 +64,12 @@
     <Compile Include="EditKeyWord.Designer.cs">
       <DependentUpon>EditKeyWord.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditMoney.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditMoney.Designer.cs">
+      <DependentUpon>EditMoney.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExpenseReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -94,6 +100,12 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddMoney.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AddMoney.Designer.cs">
+      <DependentUpon>AddMoney.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddAndEditBudget.resx">
@@ -123,6 +135,9 @@
     <EmbeddedResource Include="EditKeyWord.resx">
       <DependentUpon>EditKeyWord.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EditMoney.resx">
+      <DependentUpon>EditMoney.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExpenseReport.resx">
       <DependentUpon>ExpenseReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -131,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddMoney.resx">
+      <DependentUpon>AddMoney.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
