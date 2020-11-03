@@ -45,6 +45,7 @@
             this.btnExportar = new System.Windows.Forms.Button();
             this.lstType = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.cMoney = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lstMonths
@@ -86,12 +87,13 @@
             this.cCreationDate,
             this.cDescription,
             this.cCategory,
+            this.cMoney,
             this.cAmount});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(22, 369);
+            this.listView1.Location = new System.Drawing.Point(38, 256);
             this.listView1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1163, 381);
+            this.listView1.Size = new System.Drawing.Size(1091, 381);
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -119,6 +121,7 @@
             // 
             // cAmount
             // 
+            this.cAmount.DisplayIndex = 3;
             this.cAmount.Text = "Amount";
             this.cAmount.Width = 90;
             // 
@@ -170,6 +173,12 @@
             this.label2.Size = new System.Drawing.Size(1089, 92);
             this.label2.TabIndex = 9;
             this.label2.Text = "              Expense report              ";
+            // 
+            // cMoney
+            // 
+            this.cMoney.DisplayIndex = 4;
+            this.cMoney.Text = "Money";
+            this.cMoney.Width = 90;
             // 
             // btnExportar
             // 

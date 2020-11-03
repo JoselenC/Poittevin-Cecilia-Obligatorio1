@@ -54,9 +54,9 @@ namespace Test
             repo.SetCategory("entertainment", keyWords1);
             repo.SetCategory("food", keyWords2);
             repo.SetCategory("house", keyWords3);
-            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood);
-            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood);
-            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment);
+            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood, null);
+            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood, null);
+            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment, null);
             expenseController = new ExpenseController(repo);
         }
 
@@ -66,7 +66,7 @@ namespace Test
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.SetExpense(23,new DateTime(2020,01,01), description,categoryFood);
+            repository.SetExpense(23, new DateTime(2020, 01, 01), description, categoryFood, null);
             ExpenseController controller = new ExpenseController(repository);
             Expense expectedExpense = controller.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
@@ -79,7 +79,7 @@ namespace Test
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.SetExpense(23, new DateTime(2020, 01, 01), description, categoryFood);
+            repository.SetExpense(23, new DateTime(2020, 01, 01), description, categoryFood, null);
             ExpenseController controller = new ExpenseController(repository);
             Expense expectedExpense = controller.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
@@ -94,7 +94,7 @@ namespace Test
             Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             MemoryRepository repository = new MemoryRepository();
-            repository.SetExpense(24, new DateTime(2020, 01, 01), description, categoryFood);
+            repository.SetExpense(24, new DateTime(2020, 01, 01), description, categoryFood, null);
             ExpenseController controller = new ExpenseController(repository);
             Expense expectedExpense = controller.FindExpense(expense2);
         }
@@ -150,7 +150,7 @@ namespace Test
         {
             MemoryRepository repository = new MemoryRepository();
             Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-            repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
+            repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood, null);
             ExpenseController controller = new ExpenseController(repository);
             controller.DeleteExpense(expense);
             Assert.AreEqual(0, controller.GetExpenses().Count);
@@ -278,7 +278,7 @@ namespace Test
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
             MemoryRepository repository = new MemoryRepository();
             ExpenseController controller = new ExpenseController(repository);
-            controller.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood);
+            controller.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood, null);
             Assert.AreEqual(expectedExpense, repository.GetExpenses().ToArray()[0]);
         }
 
@@ -312,6 +312,44 @@ namespace Test
             ExpenseController controller = new ExpenseController(repository);
             List<Category> categories2 = controller.GetCategories();
             Assert.AreEqual(categories, categories2);
+        }
+
+        [TestMethod]
+        public void FindMoneyByName()
+        {
+            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            MemoryRepository repo = new MemoryRepository();
+            repo.SetMoney(moneyExpected);
+            ExpenseController controller = new ExpenseController(repo);            
+            Money money = controller.FindMoneyByName("dolar");
+            Assert.AreEqual(money, moneyExpected);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoFindMoneyByName), "")]
+        public void NoFindMoneyByName()
+        {
+            Money moneyExpected = new Money { Name = "euro", Quotation = 43, Symbol = "USD" };
+            MemoryRepository repo = new MemoryRepository();
+            repo.SetMoney(moneyExpected);
+            ExpenseController controller = new ExpenseController(repo);
+            controller.FindMoneyByName("dolar");        
+        }
+
+        [TestMethod]
+        public void GetMonies()
+        {
+            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            List<Money> moniesExpected = new List<Money>() {
+                money,
+                moneyExpected,                
+            };
+            MemoryRepository repo = new MemoryRepository();
+            repo.SetMoney(moneyExpected);
+            ExpenseController controller = new ExpenseController(repo);
+            List<Money> monies = controller.GetMonies();
+            CollectionAssert.AreEqual(moniesExpected,monies);
         }
     }
 }

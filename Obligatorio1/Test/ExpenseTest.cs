@@ -164,8 +164,9 @@ namespace Test
         [TestMethod]
         public void ToStringOnlyNameFormatValid()
         {
-            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
-            string expectedFormat = "Dinner";
+            Money money = new Money() { Name = "pesos", Symbol = "$U", Quotation = 1 };
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01),Money=money };
+            string expectedFormat = "Dinner   $U";
             string actualFormat = expense.ToString();
             Assert.AreEqual(expectedFormat, actualFormat);
 
@@ -204,6 +205,28 @@ namespace Test
             Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01), Category=category};
             bool sameCreationDate = expense.IsSameCategory(category2);
             Assert.IsFalse(sameCreationDate);
+        }
+
+        [TestMethod]
+        public void NoConvertToPesos()
+        {
+            Money money = new Money { Name = "pesos", Quotation = 1, Symbol = "$U" };
+            Category category = new Category() { Name = "food" };
+            double amount = 23;
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category,Money=money };
+            double amountExpected = expense.ConvertToPesos();
+            Assert.AreEqual(amount, amountExpected);
+        }
+
+        [TestMethod]
+        public void ConvertToPesos()
+        {
+            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
+            Category category = new Category() { Name = "food" };
+            double amount = 23;
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Money = money };
+            double amountExpected = expense.ConvertToPesos();
+            Assert.AreEqual(amount*43, amountExpected);
         }
 
     }

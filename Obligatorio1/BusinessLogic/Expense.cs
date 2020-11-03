@@ -18,6 +18,8 @@ namespace BusinessLogic
 
         public Category Category { get; set;}
 
+        public Money Money { get; set; }
+
         private void SetdDate(DateTime vCreationdate)
         {
             if (vCreationdate.Year > 2030 || vCreationdate.Year < 2018)
@@ -48,14 +50,15 @@ namespace BusinessLogic
                 bool equalsAmount = amount == expense.amount;
                 bool equalsCreationDate = creationDate == expense.creationDate;
                 bool equalsDescription = description == expense.description;
-                return equalsAmount && equalsCreationDate && equalsDescription;
+                bool equalsMoney = Money == expense.Money;
+                return equalsAmount && equalsCreationDate && equalsDescription && equalsMoney;
             }
             return false;
         }
 
         public override string ToString()
         {
-            return description;
+            return $"{Description}   {Money.Symbol}";
         }
 
         public bool IsExpenseSameMonth(Months month)
@@ -68,6 +71,17 @@ namespace BusinessLogic
         public bool IsSameCategory(Category vCategory)
         {
             return Category == vCategory;
+        }
+
+        public double ConvertToPesos()
+        {
+            if (Money.ToString() == "pesos")
+                return amount;
+            else
+            {
+                double quotation = Money.Quotation;
+                return quotation * amount;
+            }
         }
     }
 }

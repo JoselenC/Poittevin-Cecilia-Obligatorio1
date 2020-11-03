@@ -52,6 +52,8 @@
     <Compile Include="ExpenseController.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="KeyWord.cs" />
+    <Compile Include="Money.cs" />
+    <Compile Include="MoneyController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemoryRepository.cs" />
     <Compile Include="Repository.cs" />

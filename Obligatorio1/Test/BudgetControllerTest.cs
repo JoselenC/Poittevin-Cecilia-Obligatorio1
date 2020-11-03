@@ -68,9 +68,9 @@ namespace Test
             repo.SetCategory("entertainment",keyWords1);
             repo.SetCategory("food",keyWords2);
             repo.SetCategory("House",keyWords3);
-            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood);
-            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood);
-            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment);
+            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood,null);
+            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood,null);
+            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment,null);
             budgetController = new BudgetController(repo);
         }
         
