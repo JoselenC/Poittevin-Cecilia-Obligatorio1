@@ -130,9 +130,9 @@
             this.lstCategories.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(292, 642);
+            this.lstCategories.Location = new System.Drawing.Point(284, 642);
             this.lstCategories.Name = "lstCategories";
-            this.lstCategories.Size = new System.Drawing.Size(567, 97);
+            this.lstCategories.Size = new System.Drawing.Size(588, 97);
             this.lstCategories.TabIndex = 8;
             // 
             // nAmount
@@ -167,7 +167,7 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.Location = new System.Drawing.Point(345, 316);
+            this.lblAmount.Location = new System.Drawing.Point(288, 448);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(0, 32);
             this.lblAmount.TabIndex = 10;
@@ -175,7 +175,7 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(345, 439);
+            this.lblDate.Location = new System.Drawing.Point(294, 574);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(0, 32);
             this.lblDate.TabIndex = 11;
@@ -183,7 +183,7 @@
             // lblCategories
             // 
             this.lblCategories.AutoSize = true;
-            this.lblCategories.Location = new System.Drawing.Point(345, 684);
+            this.lblCategories.Location = new System.Drawing.Point(295, 755);
             this.lblCategories.Name = "lblCategories";
             this.lblCategories.Size = new System.Drawing.Size(0, 32);
             this.lblCategories.TabIndex = 12;
@@ -191,7 +191,7 @@
             // btnRegistrExpense
             // 
             this.btnRegistrExpense.BackColor = System.Drawing.Color.Tan;
-            this.btnRegistrExpense.Location = new System.Drawing.Point(292, 856);
+            this.btnRegistrExpense.Location = new System.Drawing.Point(284, 846);
             this.btnRegistrExpense.Name = "btnRegistrExpense";
             this.btnRegistrExpense.Size = new System.Drawing.Size(227, 73);
             this.btnRegistrExpense.TabIndex = 13;
@@ -202,7 +202,7 @@
             // btnSearch
             // 
             this.btnSearch.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSearch.Location = new System.Drawing.Point(898, 473);
+            this.btnSearch.Location = new System.Drawing.Point(922, 642);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(207, 55);
             this.btnSearch.TabIndex = 14;
@@ -213,7 +213,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(615, 856);
+            this.btnCancel.Location = new System.Drawing.Point(682, 846);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(227, 73);
             this.btnCancel.TabIndex = 35;
@@ -264,7 +264,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "RegisterExpense";
-            this.Size = new System.Drawing.Size(1214, 1010);
+            this.Size = new System.Drawing.Size(1214, 968);
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

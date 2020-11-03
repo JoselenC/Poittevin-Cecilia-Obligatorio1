@@ -164,8 +164,9 @@ namespace Test
         [TestMethod]
         public void ToStringOnlyNameFormatValid()
         {
-            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
-            string expectedFormat = "Dinner";
+            Money money = new Money() { Name = "pesos", Symbol = "$U", Quotation = 1 };
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01),Money=money };
+            string expectedFormat = "Dinner   $U";
             string actualFormat = expense.ToString();
             Assert.AreEqual(expectedFormat, actualFormat);
 

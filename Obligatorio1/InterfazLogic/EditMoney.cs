@@ -23,12 +23,19 @@ namespace InterfazLogic
 
         private void CompleteMoney()
         {
-
-            foreach (Money money in moneyController.GetMonies())
+            if (moneyController.GetMonies().Count == 1)
             {
-                lstMonies.Items.Add(money);
+                MessageBox.Show("There are no moneis registered in the system");
+                Visible = false;
             }
-
+            else
+            {
+                for (int i = 1; i < moneyController.GetMonies().Count; i++)
+                {
+                    lstMonies.Items.Add(moneyController.GetMonies()[i]);
+                }
+            }
+           
         }
 
         private void Edit()
@@ -45,17 +52,13 @@ namespace InterfazLogic
             {
                 lblMonies.Text = "";
             }
-
-
         }
 
 
         private void DeleteMoney()
         {
-
             moneyController.DeleteMoney((Money)lstMonies.SelectedItem);
             lstMonies.Items.RemoveAt(lstMonies.SelectedIndex);
-
         }
 
         private void btnAdd_Click(object sender, EventArgs e)

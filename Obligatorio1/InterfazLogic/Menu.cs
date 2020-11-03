@@ -18,8 +18,8 @@ namespace InterfazLogic
             expenseController = new BudgetController(repository);
             budgetController = new BudgetController(repository);
             moneyController = new MoneyController (repository);
-            MaximumSize = new Size(650, 600);
-            MinimumSize = new Size(650, 600);
+            MaximumSize = new Size(650, 500);
+            MinimumSize = new Size(650, 500);
         }
 
         private void btnRegisterCategory_Click(object sender, EventArgs e)

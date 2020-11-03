@@ -36,7 +36,7 @@ namespace BusinessLogic
             foreach (Expense expense in expenses)
             {
                 if (expense.IsSameCategory(vCategory))
-                    total += expense.Amount;
+                    total += expense.Amount*expense.Money.Quotation;
             }
             return total;
         }

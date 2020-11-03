@@ -58,7 +58,7 @@ namespace BusinessLogic
 
         public override string ToString()
         {
-            return description;
+            return $"{Description}   {Money.Symbol}";
         }
 
         public bool IsExpenseSameMonth(Months month)

@@ -52,9 +52,9 @@
             this.label2.Location = new System.Drawing.Point(39, 23);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1169, 92);
+            this.label2.Size = new System.Drawing.Size(1165, 92);
             this.label2.TabIndex = 11;
-            this.label2.Text = "                      Money                     ";
+            this.label2.Text = "              Register money                 ";
             // 
             // label1
             // 
@@ -137,27 +137,24 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(367, 282);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(93, 32);
+            this.lblName.Size = new System.Drawing.Size(0, 32);
             this.lblName.TabIndex = 20;
-            this.lblName.Text = "label5";
             // 
             // lblSymbol
             // 
             this.lblSymbol.AutoSize = true;
             this.lblSymbol.Location = new System.Drawing.Point(367, 459);
             this.lblSymbol.Name = "lblSymbol";
-            this.lblSymbol.Size = new System.Drawing.Size(93, 32);
+            this.lblSymbol.Size = new System.Drawing.Size(0, 32);
             this.lblSymbol.TabIndex = 21;
-            this.lblSymbol.Text = "label5";
             // 
             // lblQuotation
             // 
             this.lblQuotation.AutoSize = true;
             this.lblQuotation.Location = new System.Drawing.Point(367, 650);
             this.lblQuotation.Name = "lblQuotation";
-            this.lblQuotation.Size = new System.Drawing.Size(93, 32);
+            this.lblQuotation.Size = new System.Drawing.Size(0, 32);
             this.lblQuotation.TabIndex = 22;
-            this.lblQuotation.Text = "label5";
             // 
             // btnCancel
             // 

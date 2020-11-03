@@ -44,6 +44,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nQuotation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             // 
             this.lstMonies.FormattingEnabled = true;
             this.lstMonies.ItemHeight = 31;
-            this.lstMonies.Location = new System.Drawing.Point(346, 78);
+            this.lstMonies.Location = new System.Drawing.Point(226, 194);
             this.lstMonies.Name = "lstMonies";
             this.lstMonies.Size = new System.Drawing.Size(588, 97);
             this.lstMonies.TabIndex = 24;
@@ -59,7 +60,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(192, 78);
+            this.label5.Location = new System.Drawing.Point(55, 194);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(107, 32);
             this.label5.TabIndex = 25;
@@ -68,7 +69,7 @@
             // btnDeleteMoney
             // 
             this.btnDeleteMoney.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDeleteMoney.Location = new System.Drawing.Point(958, 130);
+            this.btnDeleteMoney.Location = new System.Drawing.Point(851, 270);
             this.btnDeleteMoney.Name = "btnDeleteMoney";
             this.btnDeleteMoney.Size = new System.Drawing.Size(220, 62);
             this.btnDeleteMoney.TabIndex = 28;
@@ -79,7 +80,7 @@
             // btnEditMoney
             // 
             this.btnEditMoney.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditMoney.Location = new System.Drawing.Point(958, 62);
+            this.btnEditMoney.Location = new System.Drawing.Point(851, 178);
             this.btnEditMoney.Name = "btnEditMoney";
             this.btnEditMoney.Size = new System.Drawing.Size(220, 62);
             this.btnEditMoney.TabIndex = 27;
@@ -90,16 +91,15 @@
             // lblMonies
             // 
             this.lblMonies.AutoSize = true;
-            this.lblMonies.Location = new System.Drawing.Point(340, 219);
+            this.lblMonies.Location = new System.Drawing.Point(220, 323);
             this.lblMonies.Name = "lblMonies";
-            this.lblMonies.Size = new System.Drawing.Size(93, 32);
+            this.lblMonies.Size = new System.Drawing.Size(0, 32);
             this.lblMonies.TabIndex = 29;
-            this.lblMonies.Text = "label6";
             // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(704, 842);
+            this.btnCancel.Location = new System.Drawing.Point(621, 863);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(256, 65);
             this.btnCancel.TabIndex = 40;
@@ -110,29 +110,26 @@
             // lblQuotation
             // 
             this.lblQuotation.AutoSize = true;
-            this.lblQuotation.Location = new System.Drawing.Point(345, 726);
+            this.lblQuotation.Location = new System.Drawing.Point(220, 787);
             this.lblQuotation.Name = "lblQuotation";
-            this.lblQuotation.Size = new System.Drawing.Size(93, 32);
+            this.lblQuotation.Size = new System.Drawing.Size(0, 32);
             this.lblQuotation.TabIndex = 39;
-            this.lblQuotation.Text = "label5";
             // 
             // lblSymbol
             // 
             this.lblSymbol.AutoSize = true;
-            this.lblSymbol.Location = new System.Drawing.Point(345, 535);
+            this.lblSymbol.Location = new System.Drawing.Point(220, 629);
             this.lblSymbol.Name = "lblSymbol";
-            this.lblSymbol.Size = new System.Drawing.Size(93, 32);
+            this.lblSymbol.Size = new System.Drawing.Size(0, 32);
             this.lblSymbol.TabIndex = 38;
-            this.lblSymbol.Text = "label5";
             // 
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(345, 358);
+            this.lblName.Location = new System.Drawing.Point(220, 470);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(93, 32);
+            this.lblName.Size = new System.Drawing.Size(0, 32);
             this.lblName.TabIndex = 37;
-            this.lblName.Text = "label5";
             // 
             // nQuotation
             // 
@@ -141,7 +138,7 @@
             0,
             0,
             65536});
-            this.nQuotation.Location = new System.Drawing.Point(345, 635);
+            this.nQuotation.Location = new System.Drawing.Point(226, 711);
             this.nQuotation.Minimum = new decimal(new int[] {
             1,
             0,
@@ -159,7 +156,7 @@
             // btnAdd
             // 
             this.btnAdd.BackColor = System.Drawing.Color.Tan;
-            this.btnAdd.Location = new System.Drawing.Point(262, 842);
+            this.btnAdd.Location = new System.Drawing.Point(216, 863);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(256, 65);
             this.btnAdd.TabIndex = 35;
@@ -170,7 +167,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(137, 637);
+            this.label4.Location = new System.Drawing.Point(55, 711);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(140, 32);
             this.label4.TabIndex = 34;
@@ -179,7 +176,7 @@
             // tbSymbol
             // 
             this.tbSymbol.BackColor = System.Drawing.Color.White;
-            this.tbSymbol.Location = new System.Drawing.Point(345, 452);
+            this.tbSymbol.Location = new System.Drawing.Point(225, 561);
             this.tbSymbol.Name = "tbSymbol";
             this.tbSymbol.Size = new System.Drawing.Size(589, 38);
             this.tbSymbol.TabIndex = 33;
@@ -187,7 +184,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(167, 458);
+            this.label3.Location = new System.Drawing.Point(55, 567);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(110, 32);
             this.label3.TabIndex = 32;
@@ -196,7 +193,7 @@
             // tbName
             // 
             this.tbName.BackColor = System.Drawing.Color.White;
-            this.tbName.Location = new System.Drawing.Point(351, 270);
+            this.tbName.Location = new System.Drawing.Point(225, 396);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(589, 38);
             this.tbName.TabIndex = 31;
@@ -204,17 +201,30 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(187, 270);
+            this.label1.Location = new System.Drawing.Point(55, 402);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 32);
             this.label1.TabIndex = 30;
             this.label1.Text = "Name";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.label2.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
+            this.label2.Location = new System.Drawing.Point(28, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(1080, 92);
+            this.label2.TabIndex = 41;
+            this.label2.Text = "                 Edit money                ";
             // 
             // EditMoney
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblQuotation);
             this.Controls.Add(this.lblSymbol);
@@ -232,7 +242,7 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lstMonies);
             this.Name = "EditMoney";
-            this.Size = new System.Drawing.Size(1354, 947);
+            this.Size = new System.Drawing.Size(1191, 947);
             ((System.ComponentModel.ISupportInitialize)(this.nQuotation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -257,5 +267,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
