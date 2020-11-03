@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
 using System.IO;
-using System;
 
 namespace InterfazLogic
 {
@@ -13,6 +12,8 @@ namespace InterfazLogic
         private ExpenseController expenseController;
 
         public List<Expense> expenseReportByMonth;
+        public string name;
+        public string route;
         public ExpenseReport(MemoryRepository vRepository)
         {
             InitializeComponent();
@@ -92,21 +93,23 @@ namespace InterfazLogic
            Visible = false;
         }
 
-        private void btnExportar_Click(object sender, EventArgs e)
-        {
-            if(lstType.SelectedItem.ToString()=="TXT")
-                GenerarTXT();
-            else if (lstType.SelectedItem.ToString() =="CSV")
-                GenerarCSV();
+        private void btnExportar_Click(object sender2, EventArgs e)
+        {            
+            Archive archive = new Archive(this);
+            archive.Show();
+            archive.FormClosing += (sender, eventArgs) =>
+            {
+                if (lstType.SelectedItem.ToString() == "TXT")
+                    GenerarTXT();
+                else if (lstType.SelectedItem.ToString() == "CSV")
+                    GenerarCSV();
+            };
         }
 
         void GenerarTXT()
         {
-                    
-            Archive archive = new Archive();
-            string name = archive.Name;
-            string route = archive.Route;
-            string rutaCompleta = @" D:\" + name + ".txt";
+           
+            string rutaCompleta = route+name+".txt";
             using (StreamWriter mylogs = File.AppendText(rutaCompleta))
             {
                 foreach (Expense vExpense in expenseReportByMonth)
@@ -120,15 +123,12 @@ namespace InterfazLogic
                 }
 
             }
+            
         }
 
         void GenerarCSV()
         {
-
-            Archive archive = new Archive();
-            string name = archive.Name;
-            string route = archive.Route;
-            string rutaCompleta = @" D:\" + name + ".csv";
+            string rutaCompleta = route + name + ".csv";
             using (StreamWriter mylogs = File.AppendText(rutaCompleta))
             {
                 foreach (Expense vExpense in expenseReportByMonth)

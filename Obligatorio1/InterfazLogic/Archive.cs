@@ -14,17 +14,23 @@ namespace InterfazLogic
     {
         public string NameArchive { get; set; }
         public string Route { get; set; }
-        public Archive()
+
+        ExpenseReport expense;
+        public Archive(ExpenseReport expenseReport)
         {
             InitializeComponent();
-            Visible = true;
+            tbRoute.Text=@"D:\";
+            expense = expenseReport;
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             NameArchive = tbName.Text;
             Route=tbRoute.Text;
-            Visible = false;
+            expense.name = NameArchive;
+            expense.route = Route;
+            Close();
         }
     }
 }
