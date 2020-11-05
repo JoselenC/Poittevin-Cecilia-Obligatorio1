@@ -56,6 +56,7 @@ namespace BusinessLogic
             return false;
         }
 
+
         public override string ToString()
         {
             return $"{Description}   {Money.Symbol}";
@@ -82,6 +83,23 @@ namespace BusinessLogic
                 double quotation = Money.Quotation;
                 return quotation * amount;
             }
+        }
+
+        public void HaveMoney(Money vMoney)
+        {
+            if (Money == vMoney)
+                throw new ExcepcionNoDeleteMoney();
+        }
+
+        public void EditMoney(Money oldMoney, Money newMoney)
+        {
+            if (Money.Equals(oldMoney))
+            {
+                Money.Name = newMoney.Name;
+                Money.Quotation = newMoney.Quotation;
+                Money.Symbol = newMoney.Symbol;
+            }
+                  
         }
     }
 }

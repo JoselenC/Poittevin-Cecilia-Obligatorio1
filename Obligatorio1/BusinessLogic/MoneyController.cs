@@ -35,6 +35,15 @@ namespace BusinessLogic
         public Money FindMoney(Money money)
         {
             return Repository.FindMoney(money);
+        }      
+
+        public void EditMoney(Money oldMoney, string name, string symbol, double quotation)
+        {
+            Repository.DeleteMoneyToEdit(oldMoney);
+            setMoney(name, symbol, quotation);
+            Money newMoney = new Money { Name = name, Quotation = quotation, Symbol = symbol };
+            Repository.EditMoneyAllExpense(oldMoney, newMoney);
+            
         }
     }
 }

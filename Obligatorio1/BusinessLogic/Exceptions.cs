@@ -18,6 +18,7 @@ namespace BusinessLogic
     {
     }
 
+
     public class ExcepcionInvalidRepeatedNameCategory : Exception
     {
     }
@@ -120,5 +121,8 @@ namespace BusinessLogic
     {
     }
 
+    public class ExcepcionNoDeleteMoney : Exception
+    {
+    }
 }
 

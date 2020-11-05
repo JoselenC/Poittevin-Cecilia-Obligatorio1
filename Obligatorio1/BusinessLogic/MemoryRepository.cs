@@ -51,6 +51,14 @@ namespace BusinessLogic
           
         }
 
+        public void EditMoneyAllExpense(Money oldMoney, Money newMoney)
+        {            
+            foreach (Expense expense in GetExpenses())
+            {
+                expense.EditMoney(oldMoney, newMoney);
+            }
+        }
+
         private bool AlreadyExistTheCategoryName(string categoryName)
         {
             bool exist = true ;
@@ -153,7 +161,23 @@ namespace BusinessLogic
 
         public void DeleteMoney(Money money)
         {
-            Monies.Delete(money);
+            try
+            {
+                foreach (Expense expense in GetExpenses())
+                {
+                    expense.HaveMoney(money);
+                }
+                Monies.Delete(money);
+            }
+            catch(ExcepcionNoDeleteMoney)
+            {
+                throw new ExcepcionNoDeleteMoney();
+            }
+        }
+
+        public void DeleteMoneyToEdit(Money money)
+        {
+            GetMonies().Remove(money);
         }
 
         private Months StringToMonthsEnum(string month)

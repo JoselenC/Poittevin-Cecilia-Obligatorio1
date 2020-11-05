@@ -14,6 +14,7 @@ namespace InterfazLogic
     public partial class EditMoney : UserControl
     {
         private MoneyController moneyController;
+        private Money moneyToEdit;
         public EditMoney(MemoryRepository vRepository)
         {
             InitializeComponent();
@@ -42,10 +43,10 @@ namespace InterfazLogic
         {
             try
             {
-                Money money = moneyController.FindMoney((Money)lstMonies.SelectedItem);
-                tbName.Text = money.Name;
-                tbSymbol.Text = money.Symbol;
-                nQuotation.Value = (decimal)money.Quotation;
+                moneyToEdit = moneyController.FindMoney((Money)lstMonies.SelectedItem);
+                tbName.Text = moneyToEdit.Name;
+                tbSymbol.Text = moneyToEdit.Symbol;
+                nQuotation.Value = (decimal)moneyToEdit.Quotation;
 
             }
             catch (NoFindMoney)
@@ -57,18 +58,67 @@ namespace InterfazLogic
 
         private void DeleteMoney()
         {
-            moneyController.DeleteMoney((Money)lstMonies.SelectedItem);
-            lstMonies.Items.RemoveAt(lstMonies.SelectedIndex);
+            try
+            {
+                moneyController.DeleteMoney((Money)lstMonies.SelectedItem);
+                lstMonies.Items.RemoveAt(lstMonies.SelectedIndex);
+            }
+            catch
+            {
+                lblMonies.Text = "The money selected to delete is being used";
+                lblMonies.ForeColor = Color.Red;
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
-        {            
-            string name = tbName.Text;
-            string symbol = tbSymbol.Text;
-            double quotation = (double)nQuotation.Value;
-            moneyController.setMoney(name, symbol, quotation);
-            Visible = false;
-            DeleteMoney();
+        {
+            try
+            {
+                string name = tbName.Text;
+                string symbol = tbSymbol.Text;
+                double quotation = (double)nQuotation.Value;
+                moneyController.EditMoney(moneyToEdit, name, symbol, quotation);
+                Visible = false;
+            }
+            catch (ExceptionAlreadyExistTheMoneyName)
+            {
+                lblName.Text = "Already exist de money name";
+                lblName.ForeColor = Color.Red;
+                lblSymbol.Text = "";
+            }
+            catch (ExceptionAlreadyExistTheMoneySymbol)
+            {
+                lblSymbol.Text = "Already exist de money symbol";
+                lblSymbol.ForeColor = Color.Red;
+                lblName.Text = "";
+            }
+            catch (ExceptionInvalidLengthMoneyName)
+            {
+                lblName.Text = "The name must be between 3 and 20 characters long.";
+                lblName.ForeColor = Color.Red;
+                lblSymbol.Text = "";
+            }
+            catch (ExceptionInvalidLengthSymbol)
+            {
+                lblSymbol.Text = "The symbol must be between 3 and 20 characters long.";
+                lblSymbol.ForeColor = Color.Red;
+                lblName.Text = "";
+            }
+            catch (ExceptionNegativeQuotation)
+            {
+                lblQuotation.Text = "The quotation must be positive";
+                lblQuotation.ForeColor = Color.Red;
+                lblSymbol.Text = "";
+                lblName.Text = "";
+            }
+            catch (ExceptionInvalidQuotation)
+            {
+                lblSymbol.Text = "The quotation cannot have more than two decimal places.";
+                lblQuotation.ForeColor = Color.Red;
+                lblSymbol.Text = "";
+                lblName.Text = "";
+
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -84,7 +134,8 @@ namespace InterfazLogic
             {
                 lblMonies.Text = "Select a category to edit";
                 lblMonies.ForeColor = Color.Red;
-            }
+            }                
+           
         }
 
         private void btnDeleteMoney_Click_1(object sender, EventArgs e)

@@ -75,9 +75,7 @@ namespace InterfazLogic
             double quotation = (double)nQuotation.Value;
             moneyController.setMoney(name, symbol, quotation);
             Visible = false;
-        }
-
-       
+        }       
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
