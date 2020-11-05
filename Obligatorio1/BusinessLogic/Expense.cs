@@ -87,7 +87,7 @@ namespace BusinessLogic
 
         public void HaveMoney(Money vMoney)
         {
-            if (Money == vMoney)
+            if (Money.Equals(vMoney))
                 throw new ExcepcionNoDeleteMoney();
         }
 
@@ -98,8 +98,7 @@ namespace BusinessLogic
                 Money.Name = newMoney.Name;
                 Money.Quotation = newMoney.Quotation;
                 Money.Symbol = newMoney.Symbol;
-            }
-                  
+            }                  
         }
     }
 }

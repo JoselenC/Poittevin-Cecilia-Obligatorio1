@@ -229,5 +229,28 @@ namespace Test
             Assert.AreEqual(amount*43, amountExpected);
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionNoDeleteMoney), "")]
+        public void HaveMoney()
+        {
+            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
+            Category category = new Category() { Name = "food" };
+            double amount = 23;
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Money = money };
+            expense.HaveMoney(money);
+        }
+
+        [TestMethod]
+        public void EditMoney()
+        {
+            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
+            Money money2 = new Money { Name = "euro", Quotation = 23, Symbol = "E" };
+            Category category = new Category() { Name = "food" };
+            double amount = 23;
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Money = money };
+            expense.EditMoney(money, money2);
+            Assert.AreEqual(expense.Money,money2);
+        }
+
     }
 }

@@ -91,5 +91,22 @@ namespace Test
             moneyController.setMoney("euro", "E", 43);
             CollectionAssert.AreEqual(moneyController.GetMonies(), moniesExpected);
         }
+
+        [TestMethod]
+        public void EditMoney()
+        {
+
+            DateTime month = new DateTime(2020, 8, 24);
+            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            Money money2 = new Money { Name = "euro", Quotation = 40, Symbol = "E" };
+            Category category = new Category() { Name="Entertainment" };
+            Expense expense1 = new Expense { Amount = 23, CreationDate = month, Description = "entertainment", Money=money2,Category=category};
+            MemoryRepository repository = new MemoryRepository();
+            repository.SetExpense(23,month,"entertainment",category,money);
+            MoneyController moneyController = new MoneyController(repository);
+            moneyController.EditMoney(money, "euro", "E",40);
+            Assert.AreEqual(moneyController.Repository.GetExpenses().ToArray()[0].Money,expense1.Money);
+        }
     }
+
 }

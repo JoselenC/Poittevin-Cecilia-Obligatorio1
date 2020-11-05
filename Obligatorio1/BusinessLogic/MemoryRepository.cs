@@ -46,9 +46,7 @@ namespace BusinessLogic
             catch (ValueNotFound)
             {
                 throw new NoFindMoney();
-            }
-            
-          
+            }          
         }
 
         public void EditMoneyAllExpense(Money oldMoney, Money newMoney)
@@ -163,6 +161,7 @@ namespace BusinessLogic
         {
             try
             {
+
                 foreach (Expense expense in GetExpenses())
                 {
                     expense.HaveMoney(money);

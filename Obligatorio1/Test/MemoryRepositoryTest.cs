@@ -510,5 +510,39 @@ namespace Test
             repo.DeleteMoney(money);
             Assert.AreEqual(repo.GetMonies().Count,0);
         }
+
+        [TestMethod]
+        public void DeleteMoneyExpense()
+        {
+            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            MemoryRepository repo = new MemoryRepository();
+            repo.DeleteMoney(money);
+            Assert.AreEqual(repo.GetMonies().Count, 0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionNoDeleteMoney), "")]
+        public void DeleteMoneyNoExist()
+        {
+            Money money = new Money() { Name = "Dolar", Symbol = "USD", Quotation = 1 };            
+            MemoryRepository repo = new MemoryRepository();
+            DateTime date = new DateTime(2020, 01, 01);
+            repo.SetExpense(23, date, "entertainment", categoryFood,money);
+            repo.DeleteMoney(money);
+        }
+
+        [TestMethod]
+        public void EditMoney()
+        {
+            DateTime month = new DateTime(2020, 8, 24);
+            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };            
+            Category category = new Category() { Name = "Entertainment" };           
+            MemoryRepository repository = new MemoryRepository();
+            repository.SetExpense(23, month, "entertainment", category, money);
+            Money money2 = new Money { Name = "euro", Quotation = 40, Symbol = "E" };
+            Expense expense1 = new Expense { Amount = 23, CreationDate = month, Description = "entertainment", Money = money2 };
+            repository.EditMoneyAllExpense(money,money2);
+            Assert.AreEqual(repository.GetExpenses().ToArray()[0].Money, expense1.Money);
+        }
     }
 }
