@@ -56,11 +56,13 @@ namespace InterfazLogic
                     string date = vExpense.CreationDate.ToString("dd/MM/yyyy");
                     string description = vExpense.Description;
                     string name = vExpense.Category.Name;
+                    string money = vExpense.Money.Symbol;
                     string amount = vExpense.Amount.ToString();
-                        totalAmount += Convert.ToDouble(vExpense.Amount);
+                        totalAmount += vExpense.ConvertToPesos();
                         item = listView1.Items.Add(date);
                         item.SubItems.Add(description);
                         item.SubItems.Add(name);
+                        item.SubItems.Add(money);
                         item.SubItems.Add(amount);                   
 
                 }                
@@ -73,6 +75,8 @@ namespace InterfazLogic
             }
 
         }
+
+      
 
         private void btnAccept_Click(object sender, EventArgs e)
         {

@@ -18,6 +18,7 @@ namespace BusinessLogic
     {
     }
 
+
     public class ExcepcionInvalidRepeatedNameCategory : Exception
     {
     }
@@ -88,5 +89,40 @@ namespace BusinessLogic
     {
     }
 
+    public class ExceptionInvalidQuotation : Exception
+    {
+    }
+
+    public class ExceptionNegativeQuotation : Exception
+    {
+    }
+
+    public class ExceptionInvalidLengthSymbol : Exception
+    {
+    }
+
+    public class ExceptionInvalidLengthMoneyName : Exception
+    {
+    }
+
+    public class ExceptionAlreadyExistTheMoneyName : Exception
+    {
+    }
+
+    public class ExceptionAlreadyExistTheMoneySymbol : Exception
+    {
+    }
+
+    public class NoFindMoney : Exception
+    {
+    }
+
+    public class NoFindMoneyByName : Exception
+    {
+    }
+
+    public class ExcepcionNoDeleteMoney : Exception
+    {
+    }
 }
 

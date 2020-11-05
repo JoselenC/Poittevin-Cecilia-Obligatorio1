@@ -50,6 +50,8 @@
             this.lblCategories = new System.Windows.Forms.Label();
             this.lstCategories = new System.Windows.Forms.ListBox();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lstMoney = new System.Windows.Forms.ListBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,7 +111,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(262, 737);
+            this.btnAccept.Location = new System.Drawing.Point(262, 869);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);
             this.btnAccept.TabIndex = 17;
@@ -139,7 +141,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.OldLace;
-            this.label4.Location = new System.Drawing.Point(87, 388);
+            this.label4.Location = new System.Drawing.Point(97, 514);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(113, 32);
             this.label4.TabIndex = 20;
@@ -154,7 +156,7 @@
             0,
             0,
             65536});
-            this.nAmount.Location = new System.Drawing.Point(262, 385);
+            this.nAmount.Location = new System.Drawing.Point(262, 514);
             this.nAmount.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -177,7 +179,7 @@
             // dateTime
             // 
             this.dateTime.CalendarMonthBackground = System.Drawing.Color.OldLace;
-            this.dateTime.Location = new System.Drawing.Point(262, 495);
+            this.dateTime.Location = new System.Drawing.Point(262, 638);
             this.dateTime.Name = "dateTime";
             this.dateTime.Size = new System.Drawing.Size(589, 38);
             this.dateTime.TabIndex = 22;
@@ -186,7 +188,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.OldLace;
-            this.label5.Location = new System.Drawing.Point(87, 499);
+            this.label5.Location = new System.Drawing.Point(126, 638);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 32);
             this.label5.TabIndex = 23;
@@ -196,7 +198,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.OldLace;
-            this.label6.Location = new System.Drawing.Point(87, 611);
+            this.label6.Location = new System.Drawing.Point(97, 751);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(130, 32);
             this.label6.TabIndex = 24;
@@ -216,7 +218,7 @@
             this.lblCategory.BackColor = System.Drawing.Color.White;
             this.lblCategory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(262, 612);
+            this.lblCategory.Location = new System.Drawing.Point(262, 764);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(361, 38);
             this.lblCategory.TabIndex = 27;
@@ -225,7 +227,7 @@
             // btnEditCategory
             // 
             this.btnEditCategory.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditCategory.Location = new System.Drawing.Point(866, 603);
+            this.btnEditCategory.Location = new System.Drawing.Point(881, 739);
             this.btnEditCategory.Name = "btnEditCategory";
             this.btnEditCategory.Size = new System.Drawing.Size(219, 55);
             this.btnEditCategory.TabIndex = 28;
@@ -269,7 +271,7 @@
             // 
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(262, 596);
+            this.lstCategories.Location = new System.Drawing.Point(262, 751);
             this.lstCategories.Name = "lstCategories";
             this.lstCategories.Size = new System.Drawing.Size(589, 66);
             this.lstCategories.TabIndex = 33;
@@ -277,7 +279,7 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(600, 736);
+            this.btnCancel.Location = new System.Drawing.Point(597, 869);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(227, 73);
             this.btnCancel.TabIndex = 34;
@@ -285,11 +287,32 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lstMoney
+            // 
+            this.lstMoney.FormattingEnabled = true;
+            this.lstMoney.ItemHeight = 31;
+            this.lstMoney.Location = new System.Drawing.Point(264, 395);
+            this.lstMoney.Name = "lstMoney";
+            this.lstMoney.Size = new System.Drawing.Size(586, 35);
+            this.lstMoney.TabIndex = 35;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.OldLace;
+            this.label7.Location = new System.Drawing.Point(87, 398);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 32);
+            this.label7.TabIndex = 36;
+            this.label7.Text = "Money";
+            // 
             // EditExpense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lstMoney);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lstCategories);
             this.Controls.Add(this.lblCategories);
@@ -313,7 +336,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "EditExpense";
-            this.Size = new System.Drawing.Size(1171, 852);
+            this.Size = new System.Drawing.Size(1171, 969);
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -344,5 +367,7 @@
         private System.Windows.Forms.Label lblCategories;
         private System.Windows.Forms.ListBox lstCategories;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ListBox lstMoney;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -83,6 +83,11 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
+        public Money FindMoneyByName(string moneyName)
+        {
+            return Repository.FindMoneyByName(moneyName);
+        }
+
         public Category FindCategoryByName(string categoryName)
         {
             return Repository.FindCategoryByName(categoryName);
@@ -100,14 +105,19 @@ namespace BusinessLogic
             return total;
         }
 
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category)
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Money money)
         {
-            Repository.SetExpense(amount, creationDate, description, category);
+            Repository.SetExpense(amount, creationDate, description, category,money);
         }
 
         public List<Category> GetCategories()
         {
             return Repository.GetCategories();
+        }
+
+        public List<Money> GetMonies()
+        {
+            return Repository.GetMonies();
         }
     }
 }
