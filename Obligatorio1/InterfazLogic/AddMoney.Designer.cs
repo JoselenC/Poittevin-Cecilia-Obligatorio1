@@ -112,12 +112,13 @@
             // 
             // nQuotation
             // 
-            this.nQuotation.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
+            this.nQuotation.DecimalPlaces = 2;
             this.nQuotation.Location = new System.Drawing.Point(367, 559);
+            this.nQuotation.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.nQuotation.Minimum = new decimal(new int[] {
             1,
             0,
