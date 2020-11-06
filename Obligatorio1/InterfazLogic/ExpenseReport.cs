@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
+using System.IO;
 
 namespace InterfazLogic
 {
     public partial class ExpenseReport : UserControl
     {
         private ExpenseController expenseController;
+
+        public List<Expense> expenseReportByMonth;
+        public string name;
+        public string route;
         public ExpenseReport(MemoryRepository vRepository)
         {
             InitializeComponent();
@@ -16,6 +21,11 @@ namespace InterfazLogic
             monthsWithExpenses();
             MaximumSize = new Size(500, 650);
             MinimumSize = new Size(500, 650);
+            btnExportar.Enabled = false;
+            lstType.Items.Add("TXT");
+            lstType.Items.Add("CSV");
+            lstType.SelectedIndex = 0;
+            lstMonths.SelectedIndex = 0;
         }
 
         private void monthsWithExpenses(){
@@ -48,7 +58,7 @@ namespace InterfazLogic
                     lblMonths.Text = "You must select a month to consult";
                     lblMonth.ForeColor = Color.Red;
                 }
-                List<Expense> expenseReportByMonth = expenseController.GetExpenseByMonth(month);
+                expenseReportByMonth = expenseController.GetExpenseByMonth(month);
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
                 foreach(Expense vExpense in expenseReportByMonth)
@@ -73,7 +83,7 @@ namespace InterfazLogic
                 lblMonths.Text = "Select a month to consult";
                 lblMonth.ForeColor = Color.Red;
             }
-
+            btnExportar.Enabled = true;
         }
 
       
@@ -81,6 +91,46 @@ namespace InterfazLogic
         private void btnAccept_Click(object sender, EventArgs e)
         {
            Visible = false;
+        }
+
+        private void btnExportar_Click(object sender2, EventArgs e)
+        {
+
+            SaveFileDialog saveFile = new SaveFileDialog();
+            string fileName;
+            saveFile.Title = "Export Report";
+            if (lstType.SelectedItem.ToString() == "TXT")
+            {
+                saveFile.Filter = "Text File (.txt)| *.txt";
+                saveFile.ShowDialog();
+                fileName = saveFile.FileName.ToString();
+                using (StreamWriter sw = new StreamWriter(fileName))
+                {
+                    foreach (Expense vExpense in expenseReportByMonth)
+                    {
+                        sw.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy"));
+                        sw.WriteLine(vExpense.Description);
+                        sw.WriteLine(vExpense.Category.Name);
+                        sw.WriteLine(vExpense.Money.Symbol);
+                        sw.WriteLine(vExpense.Amount.ToString());
+                        sw.WriteLine("####");
+                    }
+                }
+            }
+            else
+            {
+                saveFile.Filter = "Text File | *.csv";
+                saveFile.ShowDialog();
+                fileName = saveFile.FileName.ToString();
+                using (StreamWriter sw = new StreamWriter(fileName))
+                {
+                    foreach (Expense vExpense in expenseReportByMonth)
+                    {
+                        sw.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy") + "," + vExpense.Description + "," +
+                            vExpense.Category.Name + "," + vExpense.Money.Symbol + "," + vExpense.Amount.ToString());
+                    }
+                }
+            }
         }
 
       

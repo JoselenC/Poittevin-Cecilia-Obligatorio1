@@ -67,10 +67,10 @@
             // mainPanel
             // 
             this.mainPanel.BackColor = System.Drawing.Color.OldLace;
-            this.mainPanel.Location = new System.Drawing.Point(374, 15);
+            this.mainPanel.Location = new System.Drawing.Point(375, 123);
             this.mainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1299, 1035);
+            this.mainPanel.Size = new System.Drawing.Size(1299, 872);
             this.mainPanel.TabIndex = 7;
             // 
             // btnRegisterExpense
