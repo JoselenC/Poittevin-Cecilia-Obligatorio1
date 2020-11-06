@@ -94,50 +94,45 @@ namespace InterfazLogic
         }
 
         private void btnExportar_Click(object sender2, EventArgs e)
-        {            
-            Archive archive = new Archive(this);
-            archive.Show();
-            archive.FormClosing += (sender, eventArgs) =>
-            {
-                if (lstType.SelectedItem.ToString() == "TXT")
-                    GenerarTXT();
-                else if (lstType.SelectedItem.ToString() == "CSV")
-                    GenerarCSV();
-            };
-        }
-
-        void GenerarTXT()
         {
-           
-            string rutaCompleta = route+name+".txt";
-            using (StreamWriter mylogs = File.AppendText(rutaCompleta))
-            {
-                foreach (Expense vExpense in expenseReportByMonth)
-                {
-                    mylogs.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy"));
-                    mylogs.WriteLine(vExpense.Description);
-                    mylogs.WriteLine(vExpense.Category.Name);
-                    mylogs.WriteLine(vExpense.Money.Symbol);
-                    mylogs.WriteLine(vExpense.Amount.ToString());
-                    mylogs.WriteLine("####");
-                }
 
+            SaveFileDialog saveFile = new SaveFileDialog();
+            string fileName;
+            saveFile.Title = "Export Report";
+            if (lstType.SelectedItem.ToString() == "TXT")
+            {
+                saveFile.Filter = "Text File (.txt)| *.txt";
+                saveFile.ShowDialog();
+                fileName = saveFile.FileName.ToString();
+                using (StreamWriter sw = new StreamWriter(fileName))
+                {
+                    foreach (Expense vExpense in expenseReportByMonth)
+                    {
+                        sw.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy"));
+                        sw.WriteLine(vExpense.Description);
+                        sw.WriteLine(vExpense.Category.Name);
+                        sw.WriteLine(vExpense.Money.Symbol);
+                        sw.WriteLine(vExpense.Amount.ToString());
+                        sw.WriteLine("####");
+                    }
+                }
             }
-            
-        }
-
-        void GenerarCSV()
-        {
-            string rutaCompleta = route + name + ".csv";
-            using (StreamWriter mylogs = File.AppendText(rutaCompleta))
+            else
             {
-                foreach (Expense vExpense in expenseReportByMonth)
+                saveFile.Filter = "Text File | *.csv";
+                saveFile.ShowDialog();
+                fileName = saveFile.FileName.ToString();
+                using (StreamWriter sw = new StreamWriter(fileName))
                 {
-                    mylogs.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy")+","+ vExpense.Description+","+
-                        vExpense.Category.Name+","+ vExpense.Money.Symbol+","+ vExpense.Amount.ToString());
+                    foreach (Expense vExpense in expenseReportByMonth)
+                    {
+                        sw.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy") + "," + vExpense.Description + "," +
+                            vExpense.Category.Name + "," + vExpense.Money.Symbol + "," + vExpense.Amount.ToString());
+                    }
                 }
-
             }
         }
+
+      
     }
 }
