@@ -43,8 +43,6 @@
             this.lblTotalAmount = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnExportar = new System.Windows.Forms.Button();
-            this.lstType = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lstMonths
@@ -89,7 +87,7 @@
             this.cMoney,
             this.cAmount});
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(40, 389);
+            this.listView1.Location = new System.Drawing.Point(29, 228);
             this.listView1.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(1091, 381);
@@ -143,7 +141,7 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(499, 875);
+            this.btnAccept.Location = new System.Drawing.Point(510, 823);
             this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(227, 73);
@@ -155,7 +153,7 @@
             // lblTotalAmount
             // 
             this.lblTotalAmount.AutoSize = true;
-            this.lblTotalAmount.Location = new System.Drawing.Point(48, 777);
+            this.lblTotalAmount.Location = new System.Drawing.Point(48, 664);
             this.lblTotalAmount.Name = "lblTotalAmount";
             this.lblTotalAmount.Size = new System.Drawing.Size(0, 32);
             this.lblTotalAmount.TabIndex = 8;
@@ -176,7 +174,7 @@
             // btnExportar
             // 
             this.btnExportar.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnExportar.Location = new System.Drawing.Point(817, 259);
+            this.btnExportar.Location = new System.Drawing.Point(882, 651);
             this.btnExportar.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnExportar.Name = "btnExportar";
             this.btnExportar.Size = new System.Drawing.Size(219, 56);
@@ -185,33 +183,11 @@
             this.btnExportar.UseVisualStyleBackColor = false;
             this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
             // 
-            // lstType
-            // 
-            this.lstType.FormattingEnabled = true;
-            this.lstType.ItemHeight = 31;
-            this.lstType.Location = new System.Drawing.Point(333, 270);
-            this.lstType.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.lstType.Name = "lstType";
-            this.lstType.Size = new System.Drawing.Size(457, 35);
-            this.lstType.TabIndex = 11;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(190, 272);
-            this.label1.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 32);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Archive";
-            // 
             // ExpenseReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.lstType);
             this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTotalAmount);
@@ -246,7 +222,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ColumnHeader cMoney;
         private System.Windows.Forms.Button btnExportar;
-        private System.Windows.Forms.ListBox lstType;
-        private System.Windows.Forms.Label label1;
     }
 }

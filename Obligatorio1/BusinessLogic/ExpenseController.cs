@@ -6,6 +6,7 @@ namespace BusinessLogic
     public class ExpenseController
     {
         public MemoryRepository Repository { get; private set; }
+        public IExportExpenseReport Export { get; set; }
 
         public ExpenseController(MemoryRepository repository)
         {
@@ -119,5 +120,16 @@ namespace BusinessLogic
         {
             return Repository.GetMonies();
         }
+
+        public void ExportExpenseReport(List<Expense> expenses, string fileName,int index)
+        {
+            if (index == 1)
+                Export = new ExpenseReportTXT();
+            else
+                Export = new ExpenseReportCSV();
+
+            Export.ExportReport(expenses, fileName);
+        }
+        
     }
 }
