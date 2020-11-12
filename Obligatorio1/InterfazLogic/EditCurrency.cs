@@ -11,29 +11,29 @@ using BusinessLogic;
 
 namespace InterfazLogic
 {
-    public partial class EditMoney : UserControl
+    public partial class EditCurrency : UserControl
     {
-        private MoneyController moneyController;
-        private Money moneyToEdit;
-        public EditMoney(MemoryRepository vRepository)
+        private CurrencyController currencyController;
+        private Currency currencyToEdit;
+        public EditCurrency(MemoryRepository vRepository)
         {
             InitializeComponent();
-            moneyController = new MoneyController(vRepository);
-            CompleteMoney();
+            currencyController = new CurrencyController(vRepository);
+            CompleteCurrency();
         }
 
-        private void CompleteMoney()
+        private void CompleteCurrency()
         {
-            if (moneyController.GetMonies().Count == 1)
+            if (currencyController.GetCurrencies().Count == 1)
             {
-                MessageBox.Show("There are no moneis registered in the system");
+                MessageBox.Show("There are no currencies registered in the system");
                 Visible = false;
             }
             else
             {
-                for (int i = 1; i < moneyController.GetMonies().Count; i++)
+                for (int i = 1; i < currencyController.GetCurrencies().Count; i++)
                 {
-                    lstMonies.Items.Add(moneyController.GetMonies()[i]);
+                    lstCurrencies.Items.Add(currencyController.GetCurrencies()[i]);
                 }
             }
            
@@ -43,30 +43,30 @@ namespace InterfazLogic
         {
             try
             {
-                moneyToEdit = moneyController.FindMoney((Money)lstMonies.SelectedItem);
-                tbName.Text = moneyToEdit.Name;
-                tbSymbol.Text = moneyToEdit.Symbol;
-                nQuotation.Value = (decimal)moneyToEdit.Quotation;
+                currencyToEdit = currencyController.FindCurrency((Currency)lstCurrencies.SelectedItem);
+                tbName.Text = currencyToEdit.Name;
+                tbSymbol.Text = currencyToEdit.Symbol;
+                nQuotation.Value = (decimal)currencyToEdit.Quotation;
 
             }
-            catch (NoFindMoney)
+            catch (NoFindCurrency)
             {
-                lblMonies.Text = "";
+                lblcurrencies.Text = "";
             }
         }
 
 
-        private void DeleteMoney()
+        private void DeleteCurrency()
         {
             try
             {
-                moneyController.DeleteMoney((Money)lstMonies.SelectedItem);
-                lstMonies.Items.RemoveAt(lstMonies.SelectedIndex);
+                currencyController.DeleteCurrency((Currency)lstCurrencies.SelectedItem);
+                lstCurrencies.Items.RemoveAt(lstCurrencies.SelectedIndex);
             }
             catch
             {
-                lblMonies.Text = "The money selected to delete is being used";
-                lblMonies.ForeColor = Color.Red;
+                lblcurrencies.Text = "The currency selected to delete is being used";
+                lblcurrencies.ForeColor = Color.Red;
             }
         }
 
@@ -77,22 +77,22 @@ namespace InterfazLogic
                 string name = tbName.Text;
                 string symbol = tbSymbol.Text;
                 double quotation = (double)nQuotation.Value;
-                moneyController.EditMoney(moneyToEdit, name, symbol, quotation);
+                currencyController.EditCurrency(currencyToEdit, name, symbol, quotation);
                 Visible = false;
             }
-            catch (ExceptionAlreadyExistTheMoneyName)
+            catch (ExceptionAlreadyExistTheCurrencyName)
             {
-                lblName.Text = "Already exist de money name";
+                lblName.Text = "Already exist de currency name";
                 lblName.ForeColor = Color.Red;
                 lblSymbol.Text = "";
             }
-            catch (ExceptionAlreadyExistTheMoneySymbol)
+            catch (ExceptionAlreadyExistTheCurrencySymbol)
             {
-                lblSymbol.Text = "Already exist de money symbol";
+                lblSymbol.Text = "Already exist de currencysymbol";
                 lblSymbol.ForeColor = Color.Red;
                 lblName.Text = "";
             }
-            catch (ExceptionInvalidLengthMoneyName)
+            catch (ExceptionInvalidLengthCurrencyName)
             {
                 lblName.Text = "The name must be between 3 and 20 characters long.";
                 lblName.ForeColor = Color.Red;
@@ -126,26 +126,27 @@ namespace InterfazLogic
             Visible = false;
         }
 
-        private void btnEditMoney_Click_1(object sender, EventArgs e)
+      
+
+        private void btnDeletecurrency_Click(object sender, EventArgs e)
         {
-            if (lstMonies.SelectedIndex >= 0)
+            if (lstCurrencies.SelectedIndex >= 0)
+                DeleteCurrency();
+            else
+            {
+                lblcurrencies.Text = "Select a category to delete";
+                lblcurrencies.ForeColor = Color.Red;
+            }
+        }
+
+        private void btnEditcurrency_Click(object sender, EventArgs e)
+        {
+            if (lstCurrencies.SelectedIndex >= 0)
                 Edit();
             else
             {
-                lblMonies.Text = "Select a category to edit";
-                lblMonies.ForeColor = Color.Red;
-            }                
-           
-        }
-
-        private void btnDeleteMoney_Click_1(object sender, EventArgs e)
-        {
-            if (lstMonies.SelectedIndex >= 0)
-                DeleteMoney();
-            else
-            {
-                lblMonies.Text = "Select a category to delete";
-                lblMonies.ForeColor = Color.Red;
+                lblcurrencies.Text = "Select a category to edit";
+                lblcurrencies.ForeColor = Color.Red;
             }
         }
     }

@@ -13,7 +13,7 @@ namespace BusinessLogic
 
         private Repository<Budget> Budgets;
 
-        private Repository<Money> Monies;
+        private Repository<Currency> Currencies;
 
 
         public MemoryRepository()
@@ -21,9 +21,9 @@ namespace BusinessLogic
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
-            Monies = new Repository<Money>();
-            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            Monies.Add(money);
+            Currencies = new Repository<Currency>();
+            Currency currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            Currencies.Add(currency);
         }     
 
         public MemoryRepository(List<Category> vCategories)
@@ -31,29 +31,29 @@ namespace BusinessLogic
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
-            Monies = new Repository<Money>();
+            Currencies = new Repository<Currency>();
             Categories.Set(vCategories);
-            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            Monies.Add(money);
+            Currency currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            Currencies.Add(currency);
         }
 
-        public Money FindMoney(Money money)
+        public Currency FindCurrency(Currency currency)
         {
             try
             {
-                return Monies.Find(e => e.Equals(money));
+                return Currencies.Find(e => e.Equals(currency));
             }
             catch (ValueNotFound)
             {
-                throw new NoFindMoney();
+                throw new NoFindCurrency();
             }          
         }
 
-        public void EditMoneyAllExpense(Money oldMoney, Money newMoney)
+        public void EditCurrencyAllExpense(Currency oldCurrency, Currency newCurrency)
         {            
             foreach (Expense expense in GetExpenses())
             {
-                expense.EditMoney(oldMoney, newMoney);
+                expense.EditCurrency(oldCurrency, newCurrency);
             }
         }
 
@@ -106,21 +106,21 @@ namespace BusinessLogic
             Expenses.Add(expense);
         }
 
-        public Money FindMoneyByName(string moneyName)
+        public Currency FindCurrency(string currencyName)
         {
             try
             {
-                return Monies.Find(e => e.IsSameMoneyName(moneyName));
+                return Currencies.Find(e => e.IsSameCurrencyName(currencyName));
             }
             catch (ValueNotFound)
             {
-                throw new NoFindMoneyByName();
+                throw new NoFindCurrencyByName();
             }
         }
 
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Money money)
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Currency currency)
         {
-            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category,Money=money };
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category,Currency=currency };
             AddExpense(expense);
         }
 
@@ -157,26 +157,26 @@ namespace BusinessLogic
             Categories.Delete(category);
         }
 
-        public void DeleteMoney(Money money)
+        public void DeleteCurrency(Currency currency)
         {
             try
             {
 
                 foreach (Expense expense in GetExpenses())
                 {
-                    expense.HaveMoney(money);
+                    expense.IsSameCurrencyExpense(currency);
                 }
-                Monies.Delete(money);
+                Currencies.Delete(currency);
             }
-            catch(ExcepcionNoDeleteMoney)
+            catch(ExcepcionNoDeleteCurrency)
             {
-                throw new ExcepcionNoDeleteMoney();
+                throw new ExcepcionNoDeleteCurrency();
             }
         }
 
-        public void DeleteMoneyToEdit(Money money)
+        public void DeleteCurrencyToEdit(Currency currency)
         {
-            GetMonies().Remove(money);
+            GetCurrencies().Remove(currency);
         }
 
         private Months StringToMonthsEnum(string month)
@@ -255,40 +255,40 @@ namespace BusinessLogic
             return expensesByMonth;
         }
 
-        public List<Money> GetMonies()
+        public List<Currency> GetCurrencies()
         {
-            return Monies.Get();
+            return Currencies.Get();
         }
 
-        private bool AlreadyExistTheMoneyName(string moneyName)
+        private bool AlreadyExistTheCurrencyName(string currencyName)
         {
             bool exist = false;
-            foreach (Money money in GetMonies())
+            foreach (Currency currency in GetCurrencies())
             {
-                if (moneyName.ToLower() == money.Name.ToLower())
+                if (currencyName.ToLower() == currency.Name.ToLower())
                     exist = true;
             }
             return exist;
         }
 
-        private bool AlreadyExistTheMoneySymbol(string moneySymbol)
+        private bool AlreadyExistTheCurrencySymbol(string currencySymbol)
         {
             bool exist = false;
-            foreach (Money money in GetMonies())
+            foreach (Currency currency in GetCurrencies())
             {
-                if (moneySymbol.ToLower() == money.Symbol.ToLower())
+                if (currencySymbol.ToLower() == currency.Symbol.ToLower())
                     exist = true;
             }
             return exist;
         }
 
-        public void SetMoney(Money money)
+        public void SetCurrency(Currency currency)
         {
-            if (AlreadyExistTheMoneyName(money.Name))
-                throw new ExceptionAlreadyExistTheMoneyName();
-            if(AlreadyExistTheMoneySymbol(money.Symbol))
-                throw new ExceptionAlreadyExistTheMoneySymbol();
-            Monies.Add(money);
+            if (AlreadyExistTheCurrencyName(currency.Name))
+                throw new ExceptionAlreadyExistTheCurrencyName();
+            if(AlreadyExistTheCurrencySymbol(currency.Symbol))
+                throw new ExceptionAlreadyExistTheCurrencySymbol();
+            Currencies.Add(currency);
         }
 
 

@@ -84,9 +84,9 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
-        public Money FindMoneyByName(string moneyName)
+        public Currency FindCurrencyByName(string currencyName)
         {
-            return Repository.FindMoneyByName(moneyName);
+            return Repository.FindCurrency(currencyName);
         }
 
         public Category FindCategoryByName(string categoryName)
@@ -106,9 +106,9 @@ namespace BusinessLogic
             return total;
         }
 
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Money money)
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Currency currency)
         {
-            Repository.SetExpense(amount, creationDate, description, category,money);
+            Repository.SetExpense(amount, creationDate, description, category,currency);
         }
 
         public List<Category> GetCategories()
@@ -116,9 +116,9 @@ namespace BusinessLogic
             return Repository.GetCategories();
         }
 
-        public List<Money> GetMonies()
+        public List<Currency> GetCurrencies()
         {
-            return Repository.GetMonies();
+            return Repository.GetCurrencies();
         }
 
         public void ExportExpenseReport(List<Expense> expenses, string fileName,int index)

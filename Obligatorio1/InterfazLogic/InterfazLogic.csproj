@@ -64,11 +64,11 @@
     <Compile Include="EditKeyWord.Designer.cs">
       <DependentUpon>EditKeyWord.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditMoney.cs">
+    <Compile Include="EditCurrency.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditMoney.Designer.cs">
-      <DependentUpon>EditMoney.cs</DependentUpon>
+    <Compile Include="EditCurrency.Designer.cs">
+      <DependentUpon>EditCurrency.cs</DependentUpon>
     </Compile>
     <Compile Include="ExpenseReport.cs">
       <SubType>UserControl</SubType>
@@ -100,11 +100,11 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddMoney.cs">
+    <Compile Include="AddCurrency.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AddMoney.Designer.cs">
-      <DependentUpon>AddMoney.cs</DependentUpon>
+    <Compile Include="AddCurrency.Designer.cs">
+      <DependentUpon>AddCurrency.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,8 +135,8 @@
     <EmbeddedResource Include="EditKeyWord.resx">
       <DependentUpon>EditKeyWord.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditMoney.resx">
-      <DependentUpon>EditMoney.cs</DependentUpon>
+    <EmbeddedResource Include="EditCurrency.resx">
+      <DependentUpon>EditCurrency.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExpenseReport.resx">
       <DependentUpon>ExpenseReport.cs</DependentUpon>
@@ -147,8 +147,8 @@
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddMoney.resx">
-      <DependentUpon>AddMoney.cs</DependentUpon>
+    <EmbeddedResource Include="AddCurrency.resx">
+      <DependentUpon>AddCurrency.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -16,7 +16,7 @@ namespace BusinessLogic
                 foreach (Expense vExpense in expenses)
                 {
                     sw.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy") + "," + vExpense.Description + "," +
-                        vExpense.Category.Name + "," + vExpense.Money.Symbol + "," + vExpense.Amount.ToString());
+                        vExpense.Category.Name + "," + vExpense.Currency.Symbol + "," + vExpense.Amount.ToString());
                 }
             }
         }

@@ -28,15 +28,15 @@ namespace InterfazLogic
             nAmount.Enabled = false;
             dateTime.Enabled = false;
             lstCategories.Enabled = false;
-            CompleteMoney();
+            CompleteCurrency();
 
         }
 
-        private void CompleteMoney()
+        private void CompleteCurrency()
         {
-            foreach (Money vMoney in expenseController.GetMonies())
+            foreach (Currency vCurrency in expenseController.GetCurrencies())
             {
-                lstMoney.Items.Add(vMoney);
+                lstCurrency.Items.Add(vCurrency);
             }
         }
 
@@ -62,7 +62,7 @@ namespace InterfazLogic
             nAmount.Value = (decimal)(expenseToEdit.Amount);
             dateTime.Value = expenseToEdit.CreationDate;
             lblCategory.Text = expenseToEdit.Category.ToString();
-            lstMoney.SelectedIndex=0;
+            lstCurrency.SelectedIndex=0;
             indexToEdit = lstExpenses.SelectedIndex;
             selectExpense = true;
             btnDelete.Enabled = false;
@@ -203,8 +203,8 @@ namespace InterfazLogic
             string description = tbDescription.Text;
             double amount = decimal.ToDouble(nAmount.Value);
             DateTime creationDate = dateTime.Value;
-            Money money = expenseController.FindMoneyByName(lstMoney.SelectedItem.ToString());
-            expenseController.SetExpense(amount, creationDate, description, category,money);
+            Currency Currency = expenseController.FindCurrencyByName(lstCurrency.SelectedItem.ToString());
+            expenseController.SetExpense(amount, creationDate, description, category, Currency);
             MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Visible = false;
             if (indexToEdit >= 0)

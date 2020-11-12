@@ -35,7 +35,7 @@
             this.cCreationDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cDescription = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.cMoney = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ccurrency = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cAmount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblMonths = new System.Windows.Forms.Label();
             this.lblMonth = new System.Windows.Forms.Label();
@@ -84,7 +84,7 @@
             this.cCreationDate,
             this.cDescription,
             this.cCategory,
-            this.cMoney,
+            this.ccurrency,
             this.cAmount});
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(29, 228);
@@ -110,11 +110,11 @@
             this.cCategory.Text = "Category";
             this.cCategory.Width = 90;
             // 
-            // cMoney
+            // ccurrency
             // 
-            this.cMoney.DisplayIndex = 4;
-            this.cMoney.Text = "Money";
-            this.cMoney.Width = 90;
+            this.ccurrency.DisplayIndex = 4;
+            this.ccurrency.Text = "currency";
+            this.ccurrency.Width = 90;
             // 
             // cAmount
             // 
@@ -220,7 +220,7 @@
         private System.Windows.Forms.Button btnAccept;
         private System.Windows.Forms.Label lblTotalAmount;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ColumnHeader cMoney;
+        private System.Windows.Forms.ColumnHeader ccurrency;
         private System.Windows.Forms.Button btnExportar;
     }
 }

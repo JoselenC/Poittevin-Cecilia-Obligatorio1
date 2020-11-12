@@ -45,7 +45,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
-            this.lstMoney = new System.Windows.Forms.ListBox();
+            this.lstcurrency = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -229,23 +229,23 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 32);
             this.label6.TabIndex = 36;
-            this.label6.Text = "Money";
+            this.label6.Text = "currency";
             // 
-            // lstMoney
+            // lstcurrency
             // 
-            this.lstMoney.FormattingEnabled = true;
-            this.lstMoney.ItemHeight = 31;
-            this.lstMoney.Location = new System.Drawing.Point(285, 274);
-            this.lstMoney.Name = "lstMoney";
-            this.lstMoney.Size = new System.Drawing.Size(587, 35);
-            this.lstMoney.TabIndex = 37;
+            this.lstcurrency.FormattingEnabled = true;
+            this.lstcurrency.ItemHeight = 31;
+            this.lstcurrency.Location = new System.Drawing.Point(285, 274);
+            this.lstcurrency.Name = "lstcurrency";
+            this.lstcurrency.Size = new System.Drawing.Size(587, 35);
+            this.lstcurrency.TabIndex = 37;
             // 
             // RegisterExpense
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
-            this.Controls.Add(this.lstMoney);
+            this.Controls.Add(this.lstcurrency);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSearch);
@@ -290,6 +290,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ListBox lstMoney;
+        private System.Windows.Forms.ListBox lstcurrency;
     }
 }
