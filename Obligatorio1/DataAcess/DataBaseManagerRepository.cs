@@ -64,10 +64,7 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
-        public List<Budget> GetBudgets()
-        {
-            throw new NotImplementedException();
-        }
+ 
 
         public List<Expense> GetExpenseByMonth(Months month)
         {
@@ -104,7 +101,7 @@ namespace DataAcces
             using (ContextDB context = new ContextDB())
             {
                 List<Category> categories = new List<Category>();
-                foreach (CategoryDto categoryDto in context.Categories.ToList())
+                foreach (CategoryDto categoryDto in context.Categories)
                 {
                     categories.Add(mapCategoryDtoToDomain(categoryDto));
                 }
@@ -125,6 +122,18 @@ namespace DataAcces
                 return category;
             }
         }
+        public List<Budget> GetBudgets()
+        {
+            using (ContextDB context = new ContextDB())
+            {
+                List<Budget> budgets = new List<Budget>();
+                foreach (BudgetDto budgetDto in context.Budgets)
+                {
+                    budgets.Add(mapBudgetDtoToDomain(budgetDto));
+                }
+                return budgets;
+            }
+        }
 
         private CategoryDto mapCategoryDomainToDto(Category category)
         {
@@ -138,6 +147,14 @@ namespace DataAcces
             return new Category()
             {
                 Name = category.Name,
+            };
+        }
+        private Budget mapBudgetDtoToDomain(BudgetDto budget)
+        {
+            return new Budget((Months)budget.Month)
+            {
+                TotalAmount = budget.TotalAmount,
+                Year = budget.Year
             };
         }
     }
