@@ -50,6 +50,9 @@
     <Compile Include="Expense.cs" />
     <Compile Include="BudgetController.cs" />
     <Compile Include="ExpenseController.cs" />
+    <Compile Include="ExpenseReportCSV.cs" />
+    <Compile Include="ExpenseReportTXT.cs" />
+    <Compile Include="IExportExpenseReport.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="KeyWord.cs" />
     <Compile Include="Money.cs" />
