@@ -10,7 +10,7 @@ namespace Test
     public class MemoryRepositoryTest
     {
         private static List<string> keyWords1 = new List<string>();
-        private static MemoryRepository repo = new MemoryRepository();
+        private static IManageRepository repo = new MemoryRepository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
         private static Category categoryHouse;
@@ -96,7 +96,7 @@ namespace Test
         [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
         public void AddCategoryInvalidAddingTwice()
         {
-            MemoryRepository emptyRepository = new MemoryRepository();
+            IManageRepository emptyRepository = new MemoryRepository();
             string categoryName = "house";
             Category category = new Category { Name = categoryName };
             emptyRepository.SetCategory(categoryName,new List<string>());
@@ -124,7 +124,7 @@ namespace Test
                 "game room",
             };
             Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords)};
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetCategory(categoryName, keyWords);
             String categoryName2 = "Food";
             List<string> keyWords2 = new List<string>()
@@ -145,7 +145,7 @@ namespace Test
         [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory), "")]
         public void AddCategoryInvalidKeyWords()
         {
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             String categoryName = "NameExample";
             List<string> keyWords = new List<string>
             {
@@ -167,7 +167,7 @@ namespace Test
         [TestMethod]
         public void AddCategoryValidKeyWords()
         {
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
 
             String categoryName ="Entertainment";
             List<string> keyWords = new List<string>()
@@ -198,7 +198,7 @@ namespace Test
                 TotalAmount = 4000, 
                 Year = DateTime.Now.Year 
             };
-            MemoryRepository EmptyRepository = new MemoryRepository();
+            IManageRepository EmptyRepository = new MemoryRepository();
             EmptyRepository.SetBudget(validBudget);
 
             Budget currentBudget = EmptyRepository.GetBudgets().First();
@@ -218,7 +218,7 @@ namespace Test
         public void CreateAddExpense()
         {
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
             Assert.AreEqual(expectedExpense, repository.GetExpenses().ToArray()[0]);
         }
@@ -228,7 +228,7 @@ namespace Test
         public void CreateAddExpenseCateogryNull()
         {
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner",Category=null };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", null,null);
         }
 
@@ -243,7 +243,7 @@ namespace Test
                 "McDonalds",
                 "Dinner"
             };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetCategory("food", keyWords2);
             Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
         }
@@ -291,7 +291,7 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetBudget(JanuaryBudget);
             Budget actualBudget = repository.FindBudget("January", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
@@ -326,7 +326,7 @@ namespace Test
             Category category2 = new Category { Name = "food", KeyWords = new KeyWord(keyWords2) };
             categoryList.Add(category1);
             categoryList.Add(category2);
-            MemoryRepository respoitory = new MemoryRepository(categoryList);
+            IManageRepository respoitory = new MemoryRepository(categoryList);
             Category category3 = respoitory.FindCategoryByName("entertainment");
             Assert.AreEqual(category1, category3);
         }
@@ -353,7 +353,7 @@ namespace Test
             Category category2 = new Category { Name = "food", KeyWords = new KeyWord(keyWords2) };
             categoryList.Add(category1);
             categoryList.Add(category2);
-            MemoryRepository repository = new MemoryRepository(categoryList);
+            IManageRepository repository = new MemoryRepository(categoryList);
             repository.FindCategoryByName("entertainment");
         }
 
@@ -362,7 +362,7 @@ namespace Test
         {
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetExpense(23, new DateTime(2020, 01, 01),description,categoryFood,null);
             Expense expectedExpense = repository.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
@@ -376,7 +376,7 @@ namespace Test
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetExpense(23, new DateTime(2020, 01, 01), description, categoryFood,null);
             Expense expectedExpense = repository.FindExpense(expense);
             Assert.AreEqual(expense, expectedExpense);
@@ -390,7 +390,7 @@ namespace Test
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
             Expense expense2 = new Expense { Description = description, Amount = 23, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetExpense(24, new DateTime(2020, 01, 01), description, categoryFood,null);
             Expense expectedExpense = repository.FindExpense(expense2);
 
@@ -402,7 +402,7 @@ namespace Test
         {
             string description = "movie theater";
             Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             Expense expectedExpense = repository.FindExpense(expense);
             Assert.IsNull(expectedExpense);
 
@@ -414,7 +414,7 @@ namespace Test
         {
             Money money = new Money { Name = "pesos", Quotation = 43, Symbol = "$U" };
             Money money2 = new Money { Name = "pesos", Quotation = 43, Symbol = "$" };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.SetMoney(money);
             repo.SetMoney(money2);
             
@@ -425,7 +425,7 @@ namespace Test
         public void SetMoneySameSymbol()
         {
             Money money2 = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.SetMoney(money2);
 
         }
@@ -442,7 +442,7 @@ namespace Test
                 money2,
                
             };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.SetMoney(money);
             repo.SetMoney(money2);
             CollectionAssert.AreEqual(repo.GetMonies(), moniesExpected);
@@ -452,8 +452,8 @@ namespace Test
         [TestMethod]
         public void FindMoney()
         {
-            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };           
-            MemoryRepository repo = new MemoryRepository();
+            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            IManageRepository repo = new MemoryRepository();
             repo.SetMoney(moneyExpected);
             Money money=repo.FindMoney(moneyExpected);
             Assert.AreEqual(money, moneyExpected);
@@ -465,7 +465,7 @@ namespace Test
         {
             Money moneyExpected = new Money { Name = "euros", Quotation = 43, Symbol = "E" };
             Money money2 = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.SetMoney(moneyExpected);
             repo.FindMoney(money2);
         }
@@ -474,7 +474,7 @@ namespace Test
         public void FindMoneyByName()
         {
             Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.SetMoney(moneyExpected);
             Money money = repo.FindMoneyByName("dolar");
             Assert.AreEqual(money, money);
@@ -485,7 +485,7 @@ namespace Test
         public void NoFindMoneyByName()
         {
             Money moneyExpected = new Money { Name = "euro", Quotation = 43, Symbol = "E" };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.SetMoney(moneyExpected);
             repo.FindMoneyByName("dolar");
         }
@@ -497,7 +497,7 @@ namespace Test
             List<Money> moniesExpected = new List<Money>() {
                 money,               
             };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             List<Money> monies = repo.GetMonies();
             CollectionAssert.AreEqual(moniesExpected, monies);
         }
@@ -506,7 +506,7 @@ namespace Test
         public void DeleteMonies()
         {
             Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.DeleteMoney(money);
             Assert.AreEqual(repo.GetMonies().Count,0);
         }
@@ -515,7 +515,7 @@ namespace Test
         public void DeleteMoneyExpense()
         {
             Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.DeleteMoney(money);
             Assert.AreEqual(repo.GetMonies().Count, 0);
         }
@@ -524,8 +524,8 @@ namespace Test
         [ExpectedException(typeof(ExcepcionNoDeleteMoney), "")]
         public void DeleteMoneyNoExist()
         {
-            Money money = new Money() { Name = "Dolar", Symbol = "USD", Quotation = 1 };            
-            MemoryRepository repo = new MemoryRepository();
+            Money money = new Money() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            IManageRepository repo = new MemoryRepository();
             DateTime date = new DateTime(2020, 01, 01);
             repo.SetExpense(23, date, "entertainment", categoryFood,money);
             repo.DeleteMoney(money);
@@ -536,8 +536,8 @@ namespace Test
         {
             DateTime month = new DateTime(2020, 8, 24);
             Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };            
-            Category category = new Category() { Name = "Entertainment" };           
-            MemoryRepository repository = new MemoryRepository();
+            Category category = new Category() { Name = "Entertainment" };
+            IManageRepository repository = new MemoryRepository();
             repository.SetExpense(23, month, "entertainment", category, money);
             Money money2 = new Money { Name = "euro", Quotation = 40, Symbol = "E" };
             Expense expense1 = new Expense { Amount = 23, CreationDate = month, Description = "entertainment", Money = money2 };

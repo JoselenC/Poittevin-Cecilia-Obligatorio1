@@ -1,17 +1,14 @@
-﻿using System;
+﻿using BusinessLogic.Repository;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
     public class MoneyController
     {
 
-        public MemoryRepository Repository { get; private set; }
+        public IManageRepository Repository { get; private set; }
 
-        public MoneyController(MemoryRepository repository)
+        public MoneyController(IManageRepository repository)
         {
             Repository = repository;
         }

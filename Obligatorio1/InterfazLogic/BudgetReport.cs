@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Repository;
 
 namespace InterfazLogic
 {
@@ -14,7 +15,7 @@ namespace InterfazLogic
         private int oldYearValue = DateTime.Now.Year;
         private bool changeMonth = false;
 
-        public BudgetReport(MemoryRepository vRepository)
+        public BudgetReport(IManageRepository vRepository)
         {
             budgetController = new BudgetController(vRepository);
             InitializeComponent();

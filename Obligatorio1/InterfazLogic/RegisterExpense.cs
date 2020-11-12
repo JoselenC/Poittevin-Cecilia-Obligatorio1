@@ -2,13 +2,14 @@
 using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Repository;
 
 namespace InterfazLogic
 {
     public partial class RegisterExpense : UserControl
     {
         private ExpenseController expenseController;
-        public RegisterExpense(MemoryRepository vRepository)
+        public RegisterExpense(IManageRepository vRepository)
         {
             InitializeComponent();
             expenseController = new ExpenseController(vRepository);

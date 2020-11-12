@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
 using System.IO;
+using BusinessLogic.Repository;
 
 namespace InterfazLogic
 {
@@ -14,7 +15,7 @@ namespace InterfazLogic
         public List<Expense> expenseReportByMonth;
         public string name;
         public string route;
-        public ExpenseReport(MemoryRepository vRepository)
+        public ExpenseReport(IManageRepository vRepository)
         {
             InitializeComponent();
             expenseController = new ExpenseController(vRepository);

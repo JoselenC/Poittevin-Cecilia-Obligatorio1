@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Repository;
 
 namespace InterfazLogic
 {
@@ -10,7 +11,7 @@ namespace InterfazLogic
     {
         private BudgetController budgetController { get; set; }
         private Budget currentBudget { get; set; }
-        public AddAndEditBudget(MemoryRepository vRepository)
+        public AddAndEditBudget(IManageRepository vRepository)
         {
             InitializeComponent();
             budgetController = new BudgetController(vRepository);

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BusinessLogic
+namespace BusinessLogic.Repository
 {
+
     public interface IRepository<T>
     {
         void Add(T objectToAdd);

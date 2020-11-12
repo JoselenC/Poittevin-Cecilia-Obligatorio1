@@ -1,9 +1,11 @@
-﻿using System;
+﻿using BusinessLogic;
+using BusinessLogic.Repository;
+using System;
 using System.Collections.Generic;
 
-namespace BusinessLogic
+namespace DataAcces
 {
-    public class Repository <T>
+    public class Repository <T>: IRepository<T>
     {
         List<T> repository = new List<T>();
 

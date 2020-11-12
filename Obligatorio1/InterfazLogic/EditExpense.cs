@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Repository;
 
 namespace InterfazLogic
 {
@@ -13,7 +14,7 @@ namespace InterfazLogic
         private bool selectExpense;
         private Expense expenseToEdit;
 
-        public EditExpense(MemoryRepository vRepository)
+        public EditExpense(IManageRepository vRepository)
         {
             InitializeComponent();
             expenseController = new ExpenseController(vRepository);

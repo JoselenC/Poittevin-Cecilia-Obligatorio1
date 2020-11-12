@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Repository;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,15 +8,15 @@ namespace InterfazLogic
 {
     public partial class Menu : Form
     {
-        private BudgetController categoryController;
-        private BudgetController expenseController;
+        private CategoryController categoryController;
+        private ExpenseController expenseController;
         private BudgetController budgetController;
         private MoneyController moneyController;
-        public Menu(MemoryRepository repository)
+        public Menu(IManageRepository repository)
         {
             InitializeComponent();
-            categoryController = new BudgetController(repository);
-            expenseController = new BudgetController(repository);
+            categoryController = new CategoryController(repository);
+            expenseController = new ExpenseController(repository);
             budgetController = new BudgetController(repository);
             moneyController = new MoneyController (repository);
             MaximumSize = new Size(615, 500);

@@ -12,7 +12,7 @@ namespace Test
         public void DeleteMoney()
         {
             Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             MoneyController moneyController = new MoneyController(repo);
             moneyController.DeleteMoney(money);
             Assert.AreEqual(repo.GetMonies().Count, 0);
@@ -21,8 +21,8 @@ namespace Test
         [TestMethod]
         public void FindMoney()
         {
-            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };            
-            MemoryRepository repo = new MemoryRepository();
+            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            IManageRepository repo = new MemoryRepository();
             repo.SetMoney(moneyExpected);
             MoneyController moneyController = new MoneyController(repo);
             Money money = moneyController.FindMoney(moneyExpected);
@@ -35,7 +35,7 @@ namespace Test
         {
             Money moneyExpected = new Money { Name = "euros", Quotation = 43, Symbol = "E" };
             Money money2 = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            MemoryRepository repo = new MemoryRepository();            
+            IManageRepository repo = new MemoryRepository();            
             repo.SetMoney(moneyExpected);
             MoneyController moneyController = new MoneyController(repo);
             moneyController.FindMoney(money2);
@@ -48,7 +48,7 @@ namespace Test
             List<Money> moniesExpected = new List<Money>() {
                 money,
             };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             MoneyController moneyController = new MoneyController(repo);
             List<Money> monies = moneyController.GetMonies();
             CollectionAssert.AreEqual(moniesExpected, monies);
@@ -58,7 +58,7 @@ namespace Test
         [ExpectedException(typeof(ExceptionAlreadyExistTheMoneyName), "")]
         public void SetMonySameName()
         {
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             MoneyController moneyController = new MoneyController(repo);
             moneyController.setMoney("pesos","$U",43);
             moneyController.setMoney("pesos", "$", 43);
@@ -69,7 +69,7 @@ namespace Test
         [ExpectedException(typeof(ExceptionAlreadyExistTheMoneySymbol), "")]
         public void SetMoneySameSymbol()
         {
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             MoneyController moneyController = new MoneyController(repo);
             moneyController.setMoney("dolares", "$U", 43);
         }
@@ -85,7 +85,7 @@ namespace Test
                 money,
                 money2,
             };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             MoneyController moneyController = new MoneyController(repo);
             moneyController.setMoney("dolar", "USD", 43);
             moneyController.setMoney("euro", "E", 43);
@@ -101,7 +101,7 @@ namespace Test
             Money money2 = new Money { Name = "euro", Quotation = 40, Symbol = "E" };
             Category category = new Category() { Name="Entertainment" };
             Expense expense1 = new Expense { Amount = 23, CreationDate = month, Description = "entertainment", Money=money2,Category=category};
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetExpense(23,month,"entertainment",category,money);
             MoneyController moneyController = new MoneyController(repository);
             moneyController.EditMoney(money, "euro", "E",40);

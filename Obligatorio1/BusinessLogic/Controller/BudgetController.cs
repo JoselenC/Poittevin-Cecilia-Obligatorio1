@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,9 +7,9 @@ namespace BusinessLogic
 {
     public class BudgetController
     {
-        public MemoryRepository Repository { get; private set; }
+        public IManageRepository Repository { get; private set; }
 
-        public BudgetController(MemoryRepository repository)
+        public BudgetController(IManageRepository repository)
         {
             Repository = repository;
         }           

@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,22 +44,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Budget.cs" />
-    <Compile Include="BudgetCategory.cs" />
-    <Compile Include="Category.cs" />
-    <Compile Include="CategoryController.cs" />
-    <Compile Include="EnumMonths.cs" />
+    <Compile Include="Domain\Budget.cs" />
+    <Compile Include="Domain\BudgetCategory.cs" />
+    <Compile Include="Domain\Category.cs" />
+    <Compile Include="Controller\CategoryController.cs" />
+    <Compile Include="Domain\EnumMonths.cs" />
     <Compile Include="Exceptions.cs" />
-    <Compile Include="Expense.cs" />
-    <Compile Include="BudgetController.cs" />
-    <Compile Include="ExpenseController.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="KeyWord.cs" />
-    <Compile Include="Money.cs" />
-    <Compile Include="MoneyController.cs" />
+    <Compile Include="Domain\Expense.cs" />
+    <Compile Include="Controller\BudgetController.cs" />
+    <Compile Include="Controller\ExpenseController.cs" />
+    <Compile Include="Domain\KeyWord.cs" />
+    <Compile Include="Domain\Money.cs" />
+    <Compile Include="Controller\MoneyController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MemoryRepository.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="Repository\IManageRepository.cs" />
+    <Compile Include="Repository\IRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,13 +1,14 @@
-﻿using System;
+﻿using BusinessLogic.Repository;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLogic
 {
     public class ExpenseController
     {
-        public MemoryRepository Repository { get; private set; }
+        public IManageRepository Repository { get; private set; }
 
-        public ExpenseController(MemoryRepository repository)
+        public ExpenseController(IManageRepository repository)
         {
             Repository = repository;
         }

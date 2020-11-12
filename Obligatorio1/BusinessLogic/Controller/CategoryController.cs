@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using BusinessLogic.Repository;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
     public class CategoryController
     {
-        public MemoryRepository Repository { get; private set; }
+        public IManageRepository Repository { get; private set; }
 
-        public CategoryController(MemoryRepository repository)
+        public CategoryController(IManageRepository repository)
         {
             Repository = repository;
         }

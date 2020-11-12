@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessLogic.Repository;
 using BusinessLogic;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Test
     public class BudgetControllerTest
     {
         private static List<string> keyWords1 = new List<string>();
-        private static MemoryRepository repo = new MemoryRepository();
+        private static IManageRepository repo = new MemoryRepository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
         private static Category categoryHouse;
@@ -64,22 +65,21 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            Money money = new Money() { Name = "dolar", Symbol = "USD", Quotation = 1 };
             repo.SetBudget(JanuaryBudget);
             repo.SetCategory("entertainment",keyWords1);
             repo.SetCategory("food",keyWords2);
             repo.SetCategory("House",keyWords3);
-            Money money = new Money() { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood, money);
-            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood,money);
-            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment,money);
+            Money CurrencyDolar = new Money() { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood, CurrencyDolar);
+            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood, CurrencyDolar);
+            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment, CurrencyDolar);
             budgetController = new BudgetController(repo);
         }
         
         [TestMethod]
         public void GetTotalSpentByMonthAndCategoryValidCase()
         {
-            double expectedTotalSpentJanuary = 330.50*43;
+            double expectedTotalSpentJanuary = 14211.5;
             double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("January", categoryFood);
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
@@ -121,7 +121,7 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             BudgetController controller = new BudgetController(repository);
             Budget budget = budgetController.BudgetGetOrCreate(month, year);
             Assert.AreEqual(JanuaryBudget, budget);
@@ -130,7 +130,7 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateAddAndFind()
         {
-            MemoryRepository emptyRepository = new MemoryRepository();
+            IManageRepository emptyRepository = new MemoryRepository();
             Months month = Months.December;
             int year = 2020;
             Budget budget = new Budget(month) { Year = year, TotalAmount = 0 };
@@ -149,7 +149,7 @@ namespace Test
             
             Months month = Months.December;
             int year = 2020;
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             BudgetController controller = new BudgetController(repo);
             Budget actualBudget =controller.BudgetGetOrCreate("December", year);
         }
@@ -208,7 +208,7 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetBudget(JanuaryBudget);
             BudgetController controller = new BudgetController(repository);
             Budget actualBudget = controller.FindBudget("January", 2020);
@@ -253,7 +253,7 @@ namespace Test
                 TotalAmount = 4000,
                 Year = DateTime.Now.Year
             };
-            MemoryRepository EmptyRepository = new MemoryRepository();
+            IManageRepository EmptyRepository = new MemoryRepository();
             BudgetController controller = new BudgetController(EmptyRepository);
             controller.SetBudget(validBudget);
             Budget currentBudget = controller.GetBudgets().First();
@@ -278,7 +278,7 @@ namespace Test
             };
             Budget budget1 = new Budget(Months.January) { TotalAmount = 23, Year = 2020 };
             Budget budget2 = new Budget(Months.May) { TotalAmount = 23, Year = 2020 };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.GetBudgets().Add(budget1);
             repo.GetBudgets().Add(budget2);
             BudgetController controller = new BudgetController(repo);

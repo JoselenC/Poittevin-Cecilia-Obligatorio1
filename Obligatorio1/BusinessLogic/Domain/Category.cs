@@ -4,10 +4,10 @@ namespace BusinessLogic
 {
     public class Category
     {
+
         private string name;
 
         private KeyWord keyWords;
-
         public string Name {get=>name; set=>SetName(value); }
 
         public KeyWord KeyWords { get=>keyWords; set=>SetKeyWords(value); } 

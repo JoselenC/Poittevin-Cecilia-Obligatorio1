@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Repository;
 
 namespace InterfazLogic
 {
@@ -13,7 +14,7 @@ namespace InterfazLogic
         public string KeyWordToEdit { get; set; }
         public List<string> KeyWords { get; set; }
         private int indexKeyWordToEdit;
-        public RegisterCategory(MemoryRepository vRepository)
+        public RegisterCategory(IManageRepository vRepository)
         {
             InitializeComponent();
             categoryController = new CategoryController(vRepository);
