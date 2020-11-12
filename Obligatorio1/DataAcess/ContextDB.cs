@@ -1,5 +1,6 @@
 ﻿using DataAcess.DBModels;
 using System.Data.Entity;
+using SqlProviderServices = System.Data.Entity.SqlServer.SqlProviderServices;
 
 namespace DataAcces
 {
