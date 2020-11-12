@@ -164,8 +164,8 @@ namespace Test
         [TestMethod]
         public void ToStringOnlyNameFormatValid()
         {
-            Money money = new Money() { Name = "pesos", Symbol = "$U", Quotation = 1 };
-            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01),Money=money };
+            Currency currency = new Currency() { Name = "pesos", Symbol = "$U", Quotation = 1 };
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01),Currency=currency };
             string expectedFormat = "Dinner   $U";
             string actualFormat = expense.ToString();
             Assert.AreEqual(expectedFormat, actualFormat);
@@ -210,10 +210,10 @@ namespace Test
         [TestMethod]
         public void NoConvertToPesos()
         {
-            Money money = new Money { Name = "pesos", Quotation = 1, Symbol = "$U" };
+            Currency currency = new Currency { Name = "pesos", Quotation = 1, Symbol = "$U" };
             Category category = new Category() { Name = "food" };
             double amount = 23;
-            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category,Money=money };
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category,Currency=currency };
             double amountExpected = expense.ConvertToPesos();
             Assert.AreEqual(amount, amountExpected);
         }
@@ -221,35 +221,35 @@ namespace Test
         [TestMethod]
         public void ConvertToPesos()
         {
-            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
+            Currency currency = new Currency { Name = "dolar", Quotation = 43, Symbol = "$U" };
             Category category = new Category() { Name = "food" };
             double amount = 23;
-            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Money = money };
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Currency = currency };
             double amountExpected = expense.ConvertToPesos();
             Assert.AreEqual(amount*43, amountExpected);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExcepcionNoDeleteMoney), "")]
-        public void HaveMoney()
+        [ExpectedException(typeof(ExcepcionNoDeleteCurrency), "")]
+        public void Havecurrency()
         {
-            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
+            Currency currency = new Currency { Name = "dolar", Quotation = 43, Symbol = "$U" };
             Category category = new Category() { Name = "food" };
             double amount = 23;
-            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Money = money };
-            expense.HaveMoney(money);
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Currency = currency };
+            expense.IsSameCurrencyExpense(currency);
         }
 
         [TestMethod]
-        public void EditMoney()
+        public void Editcurrency()
         {
-            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
-            Money money2 = new Money { Name = "euro", Quotation = 23, Symbol = "E" };
+            Currency currency = new Currency { Name = "dolar", Quotation = 43, Symbol = "$U" };
+            Currency currency2 = new Currency { Name = "euro", Quotation = 23, Symbol = "E" };
             Category category = new Category() { Name = "food" };
             double amount = 23;
-            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Money = money };
-            expense.EditMoney(money, money2);
-            Assert.AreEqual(expense.Money,money2);
+            Expense expense = new Expense { Description = "Dinner", Amount = amount, CreationDate = new DateTime(2020, 01, 01), Category = category, Currency = currency };
+            expense.EditCurrency(currency, currency2);
+            Assert.AreEqual(expense.Currency,currency2);
         }
 
     }

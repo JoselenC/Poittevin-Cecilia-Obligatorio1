@@ -18,7 +18,7 @@ namespace BusinessLogic
 
         public Category Category { get; set;}
 
-        public Money Money { get; set; }
+        public Currency Currency { get; set; }
 
         private void SetdDate(DateTime vCreationdate)
         {
@@ -50,8 +50,8 @@ namespace BusinessLogic
                 bool equalsAmount = amount == expense.amount;
                 bool equalsCreationDate = creationDate == expense.creationDate;
                 bool equalsDescription = description == expense.description;
-                bool equalsMoney = Money == expense.Money;
-                return equalsAmount && equalsCreationDate && equalsDescription && equalsMoney;
+                bool equalsCurrency = Currency == expense.Currency;
+                return equalsAmount && equalsCreationDate && equalsDescription && equalsCurrency;
             }
             return false;
         }
@@ -59,7 +59,7 @@ namespace BusinessLogic
 
         public override string ToString()
         {
-            return $"{Description}   {Money.Symbol}";
+            return $"{Description}   {Currency.Symbol}";
         }
 
         public bool IsExpenseSameMonth(Months month)
@@ -76,28 +76,28 @@ namespace BusinessLogic
 
         public double ConvertToPesos()
         {
-            if (Money.ToString() == "pesos")
+            if (Currency.ToString() == "pesos")
                 return amount;
             else
             {
-                double quotation = Money.Quotation;
+                double quotation = Currency.Quotation;
                 return quotation * amount;
             }
         }
 
-        public void HaveMoney(Money vMoney)
+        public void IsSameCurrencyExpense(Currency vCurrency)
         {
-            if (Money.Equals(vMoney))
-                throw new ExcepcionNoDeleteMoney();
+            if (Currency.Equals(vCurrency))
+                throw new ExcepcionNoDeleteCurrency();
         }
 
-        public void EditMoney(Money oldMoney, Money newMoney)
+        public void EditCurrency(Currency oldCurrency, Currency newCurrency)
         {
-            if (Money.Equals(oldMoney))
+            if (Currency.Equals(oldCurrency))
             {
-                Money.Name = newMoney.Name;
-                Money.Quotation = newMoney.Quotation;
-                Money.Symbol = newMoney.Symbol;
+                Currency.Name = newCurrency.Name;
+                Currency.Quotation = newCurrency.Quotation;
+                Currency.Symbol = newCurrency.Symbol;
             }                  
         }
     }

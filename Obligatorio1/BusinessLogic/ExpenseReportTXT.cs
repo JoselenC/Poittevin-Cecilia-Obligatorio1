@@ -18,7 +18,7 @@ namespace BusinessLogic
                     sw.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy"));
                     sw.WriteLine(vExpense.Description);
                     sw.WriteLine(vExpense.Category.Name);
-                    sw.WriteLine(vExpense.Money.Symbol);
+                    sw.WriteLine(vExpense.Currency.Symbol);
                     sw.WriteLine(vExpense.Amount.ToString());
                     sw.WriteLine("####");
                 }

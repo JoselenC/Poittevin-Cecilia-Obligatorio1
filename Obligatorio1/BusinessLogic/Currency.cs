@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Money
+    public class Currency
     {
         private string name;
         private string symbol;
@@ -14,25 +14,25 @@ namespace BusinessLogic
 
         public string Name { get=>name; set=>setName(value); }
 
-        public string Symbol { get=>symbol; set=>setSymbol(value); }
+        public string Symbol { get=>symbol; set=>SetSymbol(value); }
 
-        public double Quotation { get=>quotation; set=>setQuotation(value); }
+        public double Quotation { get=>quotation; set=>SetQuotation(value); }
 
         private void setName(string vName)
         {
             if (vName.Length < 3 || vName.Length > 20)
-                throw new ExceptionInvalidLengthMoneyName();
+                throw new ExceptionInvalidLengthCurrencyName();
             name= vName;
         }
 
-        private void setSymbol(string vSymbol)
+        private void SetSymbol(string vSymbol)
         {
             if (vSymbol.Length < 1 || vSymbol.Length > 3)
                 throw new ExceptionInvalidLengthSymbol();
            symbol = vSymbol;
         }
 
-        private void setQuotation(double vQuotation)
+        private void SetQuotation(double vQuotation)
         {
             if (vQuotation <= 0)
                 throw new ExceptionNegativeQuotation();
@@ -48,19 +48,19 @@ namespace BusinessLogic
 
         public override bool Equals(object obj)
         {
-            if (obj is Money money)
+            if (obj is Currency currency)
             {
-                bool boolName = Name == money.Name;
-                bool boolSymbol = Symbol == money.Symbol;
-                bool boolQuotation = Quotation == money.Quotation;
+                bool boolName = Name == currency.Name;
+                bool boolSymbol = Symbol == currency.Symbol;
+                bool boolQuotation = Quotation == currency.Quotation;
                 return boolName && boolSymbol && boolQuotation;
             }
             return false;
         }
 
-        public bool IsSameMoneyName(string moneyName)
+        public bool IsSameCurrencyName(string currencyName)
         {
-            return Name == moneyName;
+            return Name == currencyName;
         }
     }
 }

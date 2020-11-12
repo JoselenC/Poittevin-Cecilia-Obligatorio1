@@ -11,34 +11,34 @@ using BusinessLogic;
 
 namespace InterfazLogic
 {
-    public partial class AddMoney : UserControl
+    public partial class AddCurrency : UserControl
     {
-        private MoneyController moneyController;
-        public AddMoney(MemoryRepository vRepository)
+        private CurrencyController currencyController;
+        public AddCurrency(MemoryRepository vRepository)
         {
             InitializeComponent();
-            moneyController = new MoneyController(vRepository);
+            currencyController = new CurrencyController(vRepository);
         }       
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                TryAddNewMoney();
+                TryAddNewCurrency();
             }
-            catch (ExceptionAlreadyExistTheMoneyName)
+            catch (ExceptionAlreadyExistTheCurrencyName)
             {
-                lblName.Text = "Already exist de money name";
+                lblName.Text = "Already exist de currency name";
                 lblName.ForeColor = Color.Red;
                 lblSymbol.Text = "";
             }
-            catch (ExceptionAlreadyExistTheMoneySymbol)
+            catch (ExceptionAlreadyExistTheCurrencySymbol)
             {
-                lblSymbol.Text = "Already exist de money symbol";
+                lblSymbol.Text = "Already exist de currency symbol";
                 lblSymbol.ForeColor = Color.Red;
                 lblName.Text = "";
             }
-            catch (ExceptionInvalidLengthMoneyName)
+            catch (ExceptionInvalidLengthCurrencyName)
             {
                 lblName.Text = "The name must be between 3 and 20 characters long.";
                 lblName.ForeColor = Color.Red;
@@ -68,12 +68,12 @@ namespace InterfazLogic
             }
         }
 
-        private void TryAddNewMoney()
+        private void TryAddNewCurrency()
         {
             string name = tbName.Text;
             string symbol = tbSymbol.Text;
             double quotation = (double)nQuotation.Value;
-            moneyController.setMoney(name, symbol, quotation);
+            currencyController.SetCurrency(name, symbol, quotation);
             Visible = false;
         }       
 

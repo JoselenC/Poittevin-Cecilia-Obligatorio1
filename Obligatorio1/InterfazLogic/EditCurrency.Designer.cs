@@ -1,6 +1,6 @@
 ﻿namespace InterfazLogic
 {
-    partial class EditMoney
+    partial class EditCurrency
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lstMonies = new System.Windows.Forms.ListBox();
+            this.lstCurrencies = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnDeleteMoney = new System.Windows.Forms.Button();
-            this.btnEditMoney = new System.Windows.Forms.Button();
-            this.lblMonies = new System.Windows.Forms.Label();
+            this.btnDeletecurrency = new System.Windows.Forms.Button();
+            this.btnEditcurrency = new System.Windows.Forms.Button();
+            this.lblcurrencies = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblQuotation = new System.Windows.Forms.Label();
             this.lblSymbol = new System.Windows.Forms.Label();
@@ -48,14 +48,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.nQuotation)).BeginInit();
             this.SuspendLayout();
             // 
-            // lstMonies
+            // lstCurrencies
             // 
-            this.lstMonies.FormattingEnabled = true;
-            this.lstMonies.ItemHeight = 31;
-            this.lstMonies.Location = new System.Drawing.Point(226, 194);
-            this.lstMonies.Name = "lstMonies";
-            this.lstMonies.Size = new System.Drawing.Size(588, 97);
-            this.lstMonies.TabIndex = 24;
+            this.lstCurrencies.FormattingEnabled = true;
+            this.lstCurrencies.ItemHeight = 31;
+            this.lstCurrencies.Location = new System.Drawing.Point(226, 194);
+            this.lstCurrencies.Name = "lstCurrencies";
+            this.lstCurrencies.Size = new System.Drawing.Size(588, 97);
+            this.lstCurrencies.TabIndex = 24;
             // 
             // label5
             // 
@@ -66,35 +66,35 @@
             this.label5.TabIndex = 25;
             this.label5.Text = "Monies";
             // 
-            // btnDeleteMoney
+            // btnDeletecurrency
             // 
-            this.btnDeleteMoney.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDeleteMoney.Location = new System.Drawing.Point(851, 270);
-            this.btnDeleteMoney.Name = "btnDeleteMoney";
-            this.btnDeleteMoney.Size = new System.Drawing.Size(220, 62);
-            this.btnDeleteMoney.TabIndex = 28;
-            this.btnDeleteMoney.Text = "Delete money";
-            this.btnDeleteMoney.UseVisualStyleBackColor = false;
-            this.btnDeleteMoney.Click += new System.EventHandler(this.btnDeleteMoney_Click_1);
+            this.btnDeletecurrency.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnDeletecurrency.Location = new System.Drawing.Point(851, 270);
+            this.btnDeletecurrency.Name = "btnDeletecurrency";
+            this.btnDeletecurrency.Size = new System.Drawing.Size(233, 62);
+            this.btnDeletecurrency.TabIndex = 28;
+            this.btnDeletecurrency.Text = "Delete Currency";
+            this.btnDeletecurrency.UseVisualStyleBackColor = false;
+            this.btnDeletecurrency.Click += new System.EventHandler(this.btnDeletecurrency_Click);
             // 
-            // btnEditMoney
+            // btnEditcurrency
             // 
-            this.btnEditMoney.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditMoney.Location = new System.Drawing.Point(851, 178);
-            this.btnEditMoney.Name = "btnEditMoney";
-            this.btnEditMoney.Size = new System.Drawing.Size(220, 62);
-            this.btnEditMoney.TabIndex = 27;
-            this.btnEditMoney.Text = "Edit money";
-            this.btnEditMoney.UseVisualStyleBackColor = false;
-            this.btnEditMoney.Click += new System.EventHandler(this.btnEditMoney_Click_1);
+            this.btnEditcurrency.BackColor = System.Drawing.Color.DarkKhaki;
+            this.btnEditcurrency.Location = new System.Drawing.Point(851, 178);
+            this.btnEditcurrency.Name = "btnEditcurrency";
+            this.btnEditcurrency.Size = new System.Drawing.Size(233, 62);
+            this.btnEditcurrency.TabIndex = 27;
+            this.btnEditcurrency.Text = "Edit currency";
+            this.btnEditcurrency.UseVisualStyleBackColor = false;
+            this.btnEditcurrency.Click += new System.EventHandler(this.btnEditcurrency_Click);
             // 
-            // lblMonies
+            // lblcurrencies
             // 
-            this.lblMonies.AutoSize = true;
-            this.lblMonies.Location = new System.Drawing.Point(220, 323);
-            this.lblMonies.Name = "lblMonies";
-            this.lblMonies.Size = new System.Drawing.Size(0, 32);
-            this.lblMonies.TabIndex = 29;
+            this.lblcurrencies.AutoSize = true;
+            this.lblcurrencies.Location = new System.Drawing.Point(220, 323);
+            this.lblcurrencies.Name = "lblcurrencies";
+            this.lblcurrencies.Size = new System.Drawing.Size(0, 32);
+            this.lblcurrencies.TabIndex = 29;
             // 
             // btnCancel
             // 
@@ -214,13 +214,13 @@
             this.label2.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.label2.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(28, 18);
+            this.label2.Location = new System.Drawing.Point(23, 18);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1080, 92);
+            this.label2.Size = new System.Drawing.Size(1151, 92);
             this.label2.TabIndex = 41;
-            this.label2.Text = "                 Edit money                ";
+            this.label2.Text = "                 Edit currency                ";
             // 
-            // EditMoney
+            // EditCurrency
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -237,12 +237,12 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblMonies);
-            this.Controls.Add(this.btnDeleteMoney);
-            this.Controls.Add(this.btnEditMoney);
+            this.Controls.Add(this.lblcurrencies);
+            this.Controls.Add(this.btnDeletecurrency);
+            this.Controls.Add(this.btnEditcurrency);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.lstMonies);
-            this.Name = "EditMoney";
+            this.Controls.Add(this.lstCurrencies);
+            this.Name = "EditCurrency";
             this.Size = new System.Drawing.Size(1191, 947);
             ((System.ComponentModel.ISupportInitialize)(this.nQuotation)).EndInit();
             this.ResumeLayout(false);
@@ -252,11 +252,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lstMonies;
+        private System.Windows.Forms.ListBox lstCurrencies;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnDeleteMoney;
-        private System.Windows.Forms.Button btnEditMoney;
-        private System.Windows.Forms.Label lblMonies;
+        private System.Windows.Forms.Button btnDeletecurrency;
+        private System.Windows.Forms.Button btnEditcurrency;
+        private System.Windows.Forms.Label lblcurrencies;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblQuotation;
         private System.Windows.Forms.Label lblSymbol;

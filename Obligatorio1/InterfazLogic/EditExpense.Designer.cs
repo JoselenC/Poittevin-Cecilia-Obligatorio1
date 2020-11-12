@@ -50,7 +50,7 @@
             this.lblCategories = new System.Windows.Forms.Label();
             this.lstCategories = new System.Windows.Forms.ListBox();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lstMoney = new System.Windows.Forms.ListBox();
+            this.lstCurrency = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).BeginInit();
             this.SuspendLayout();
@@ -287,14 +287,14 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lstMoney
+            // lstCurrency
             // 
-            this.lstMoney.FormattingEnabled = true;
-            this.lstMoney.ItemHeight = 31;
-            this.lstMoney.Location = new System.Drawing.Point(264, 395);
-            this.lstMoney.Name = "lstMoney";
-            this.lstMoney.Size = new System.Drawing.Size(586, 35);
-            this.lstMoney.TabIndex = 35;
+            this.lstCurrency.FormattingEnabled = true;
+            this.lstCurrency.ItemHeight = 31;
+            this.lstCurrency.Location = new System.Drawing.Point(264, 395);
+            this.lstCurrency.Name = "lstCurrency";
+            this.lstCurrency.Size = new System.Drawing.Size(586, 35);
+            this.lstCurrency.TabIndex = 35;
             // 
             // label7
             // 
@@ -302,9 +302,9 @@
             this.label7.BackColor = System.Drawing.Color.OldLace;
             this.label7.Location = new System.Drawing.Point(87, 398);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 32);
+            this.label7.Size = new System.Drawing.Size(129, 32);
             this.label7.TabIndex = 36;
-            this.label7.Text = "Money";
+            this.label7.Text = "Currency";
             // 
             // EditExpense
             // 
@@ -312,7 +312,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.lstMoney);
+            this.Controls.Add(this.lstCurrency);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lstCategories);
             this.Controls.Add(this.lblCategories);
@@ -367,7 +367,7 @@
         private System.Windows.Forms.Label lblCategories;
         private System.Windows.Forms.ListBox lstCategories;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ListBox lstMoney;
+        private System.Windows.Forms.ListBox lstCurrency;
         private System.Windows.Forms.Label label7;
     }
 }

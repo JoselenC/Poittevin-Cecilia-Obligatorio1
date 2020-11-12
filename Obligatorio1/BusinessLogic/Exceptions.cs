@@ -101,27 +101,27 @@ namespace BusinessLogic
     {
     }
 
-    public class ExceptionInvalidLengthMoneyName : Exception
+    public class ExceptionInvalidLengthCurrencyName : Exception
     {
     }
 
-    public class ExceptionAlreadyExistTheMoneyName : Exception
+    public class ExceptionAlreadyExistTheCurrencyName : Exception
     {
     }
 
-    public class ExceptionAlreadyExistTheMoneySymbol : Exception
+    public class ExceptionAlreadyExistTheCurrencySymbol : Exception
     {
     }
 
-    public class NoFindMoney : Exception
+    public class NoFindCurrency : Exception
     {
     }
 
-    public class NoFindMoneyByName : Exception
+    public class NoFindCurrencyByName : Exception
     {
     }
 
-    public class ExcepcionNoDeleteMoney : Exception
+    public class ExcepcionNoDeleteCurrency : Exception
     {
     }
 }
