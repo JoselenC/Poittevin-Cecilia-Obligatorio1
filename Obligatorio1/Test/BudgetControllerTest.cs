@@ -12,7 +12,7 @@ namespace Test
     public class BudgetControllerTest
     {
         private static List<string> keyWords1 = new List<string>();
-        private static IManageRepository repo = new MemoryRepository();
+        private static IManageRepository repo = new ManageMemoryRepository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
         private static Category categoryHouse;
@@ -32,7 +32,7 @@ namespace Test
             categoryEntertainment = new Category()
             {
                 Name = "entertainment",
-                KeyWords = new KeyWord(keyWords1)
+                KeyWords = keyWords1
             };
             List<string> keyWords2 = new List<string>
             {
@@ -43,7 +43,7 @@ namespace Test
             categoryFood = new Category()
             {
                 Name = "food",
-                KeyWords = new KeyWord(keyWords2)
+                KeyWords = keyWords2
             };
             List<string> keyWords3 = new List<string>
             {
@@ -53,7 +53,7 @@ namespace Test
             categoryHouse = new Category()
             {
                 Name = "House",
-                KeyWords = new KeyWord(keyWords3)
+                KeyWords = keyWords3
             };
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
@@ -123,7 +123,7 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
             BudgetController controller = new BudgetController(repository);
             Budget budget = budgetController.BudgetGetOrCreate(month, year);
             Assert.AreEqual(JanuaryBudget, budget);
@@ -132,7 +132,7 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateAddAndFind()
         {
-            IManageRepository emptyRepository = new MemoryRepository();
+            IManageRepository emptyRepository = new ManageMemoryRepository();
             Months month = Months.December;
             int year = 2020;
             Budget budget = new Budget(month) { Year = year, TotalAmount = 0 };
@@ -151,7 +151,7 @@ namespace Test
             
             Months month = Months.December;
             int year = 2020;
-            IManageRepository repo = new MemoryRepository();
+            IManageRepository repo = new ManageMemoryRepository();
             BudgetController controller = new BudgetController(repo);
             Budget actualBudget =controller.BudgetGetOrCreate("December", year);
         }
@@ -210,7 +210,7 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
             repository.SetBudget(JanuaryBudget);
             BudgetController controller = new BudgetController(repository);
             Budget actualBudget = controller.FindBudget("January", 2020);
@@ -255,7 +255,7 @@ namespace Test
                 TotalAmount = 4000,
                 Year = DateTime.Now.Year
             };
-            IManageRepository EmptyRepository = new MemoryRepository();
+            IManageRepository EmptyRepository = new ManageMemoryRepository();
             BudgetController controller = new BudgetController(EmptyRepository);
             controller.SetBudget(validBudget);
             Budget currentBudget = controller.GetBudgets().First();
@@ -280,7 +280,7 @@ namespace Test
             };
             Budget budget1 = new Budget(Months.January) { TotalAmount = 23, Year = 2020 };
             Budget budget2 = new Budget(Months.May) { TotalAmount = 23, Year = 2020 };
-            IManageRepository repo = new MemoryRepository();
+            IManageRepository repo = new ManageMemoryRepository();
             repo.GetBudgets().Add(budget1);
             repo.GetBudgets().Add(budget2);
             BudgetController controller = new BudgetController(repo);

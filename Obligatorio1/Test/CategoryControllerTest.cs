@@ -12,7 +12,7 @@ namespace Test
     {
 
         private static List<string> keyWords1 = new List<string>();
-        private static IManageRepository repo = new MemoryRepository();
+        private static IManageRepository repo = new ManageMemoryRepository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
         private static Category categoryHouse;
@@ -30,7 +30,7 @@ namespace Test
             categoryEntertainment = new Category()
             {
                 Name = "entertainment",
-                KeyWords = new KeyWord(keyWords1)
+                KeyWords = keyWords1
             };
             List<string> keyWords2 = new List<string>
             {
@@ -41,7 +41,7 @@ namespace Test
             categoryFood = new Category()
             {
                 Name = "food",
-                KeyWords = new KeyWord(keyWords2)
+                KeyWords =keyWords2
             };
             List<string> keyWords3 = new List<string>
             {
@@ -51,7 +51,7 @@ namespace Test
             categoryHouse = new Category()
             {
                 Name = "House",
-                KeyWords = new KeyWord(keyWords3)
+                KeyWords = keyWords3
             };
             repo.SetCategory("entertainment", keyWords1);
             repo.SetCategory("Food",keyWords2);
@@ -82,7 +82,7 @@ namespace Test
                "theater",
                "casino",
             };
-            Category category1 = new Category { Name = "entertainment", KeyWords = new KeyWord(keyWords1) };
+            Category category1 = new Category { Name = "entertainment", KeyWords = keyWords1 };
             Category category3 = categoryController.FindCategoryByName("entertainment");
             Assert.AreEqual(category1, category3);
         }
@@ -99,17 +99,17 @@ namespace Test
                "theater",
                "casino",
             };
-            Category category1 = new Category { Name = "fun", KeyWords = new KeyWord(keyWords1) };
+            Category category1 = new Category { Name = "fun", KeyWords = keyWords1 };
             List<string> keyWords2 = new List<string>()
              {
                 "restaurant",
                 "McDonalds",
                 "Dinner",
             };
-            Category category2 = new Category { Name = "food", KeyWords = new KeyWord(keyWords2) };
+            Category category2 = new Category { Name = "food", KeyWords = keyWords2 };
             categoryList.Add(category1);
             categoryList.Add(category2);
-            IManageRepository repo = new MemoryRepository(categoryList);
+            IManageRepository repo = new ManageMemoryRepository(categoryList);
             CategoryController controller = new CategoryController(repo);
             Category category3 = controller.FindCategoryByName("entertainment");
             Assert.IsNull(category3);
@@ -124,7 +124,7 @@ namespace Test
                 "McDonalds",
                 "Dinner"
             };
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
             CategoryController controller = new CategoryController(repository);
             controller.SetCategory("food", keyWords2);
             Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
@@ -136,7 +136,7 @@ namespace Test
             Category category = new Category { Name = "food" };
             List<Category> categories = new List<Category>();
             categories.Add(category);
-            IManageRepository repository = new MemoryRepository(categories);
+            IManageRepository repository = new ManageMemoryRepository(categories);
             CategoryController controller = new CategoryController(repository);
             List<Category> categories2 = controller.GetCategories();
             Assert.AreEqual(categories, categories2);
@@ -152,8 +152,8 @@ namespace Test
                 "movie theater",
                 "game room",
             };
-            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
-            IManageRepository repository = new MemoryRepository();
+            Category category = new Category { Name = categoryName, KeyWords = keyWords };
+            IManageRepository repository = new ManageMemoryRepository();
             CategoryController controller = new CategoryController(repository);
             controller.SetCategory(categoryName, keyWords);
             String categoryName2 = "food";
@@ -161,7 +161,7 @@ namespace Test
             {
                 "restaurant",
             };
-            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
+            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
             controller.SetCategory(categoryName2, keyWords2);
             List<Category> categories = new List<Category>()
             {
@@ -175,14 +175,14 @@ namespace Test
         [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory), "")]
         public void AddCategoryInvalidKeyWords()
         {
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
             String categoryName = "NameExample";
             List<string> keyWords = new List<string>
             {
                 "movie theater",
                 "theater"
             };
-            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
+            Category category = new Category { Name = categoryName, KeyWords = keyWords };
             CategoryController controller = new CategoryController(repository);
             controller.SetCategory(categoryName, keyWords);
             String categoryName2 = "NameExample2";
@@ -191,14 +191,14 @@ namespace Test
                  "movie theater",
                 "theater"
             };
-            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
+            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
             controller.SetCategory(categoryName2, keyWords2);
         }
 
         [TestMethod]
         public void AddCategoryValidKeyWords()
         {
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
 
             String categoryName = "Entertainment";
             List<string> keyWords = new List<string>()
@@ -206,13 +206,13 @@ namespace Test
                 "movie theater",
                 "game room",
             };
-            Category category = new Category { Name = categoryName, KeyWords = new KeyWord(keyWords) };
+            Category category = new Category { Name = categoryName, KeyWords = keyWords };
             CategoryController controller = new CategoryController(repository);
             controller.SetCategory(categoryName, keyWords);
             String categoryName2 = "food";
             List<string> keyWords2 = new List<string>();
             keyWords2.Add("restaurant");
-            Category category2 = new Category { Name = categoryName2, KeyWords = new KeyWord(keyWords2) };
+            Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
             controller.SetCategory(categoryName2, keyWords2);
             List<Category> categories = new List<Category>()
             {
@@ -227,7 +227,7 @@ namespace Test
         {
             Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryEntertainment };
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
             CategoryController controller = new CategoryController(repository);
             controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
             List<string> keyWords = new List<string>
@@ -245,7 +245,7 @@ namespace Test
         {
             Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
             Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
             CategoryController controller = new CategoryController(repository);
             controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
             List<string> keyWords = new List<string>
@@ -286,7 +286,7 @@ namespace Test
                 "CoffeMaker",
                 "toilet paper",
             };
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
             CategoryController controller = new CategoryController(repository);
             controller.Repository.SetBudget(budget);
             controller.EditCategory(categoryFood, "House", keyWords);
@@ -311,7 +311,7 @@ namespace Test
                 "CoffeMaker",
                 "toilet paper",
             };
-            IManageRepository repository = new MemoryRepository();
+            IManageRepository repository = new ManageMemoryRepository();
             CategoryController controller = new CategoryController(repository);
             controller.Repository.SetBudget(budget);
             controller.EditCategory(categoryFood, "House", keyWords);
