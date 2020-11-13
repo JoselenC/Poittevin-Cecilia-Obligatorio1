@@ -6,9 +6,9 @@ namespace BusinessLogic
     public class MoneyController
     {
 
-        public IManageRepository Repository { get; private set; }
+        public ManageRepository Repository { get; private set; }
 
-        public MoneyController(IManageRepository repository)
+        public MoneyController(ManageRepository repository)
         {
             Repository = repository;
         }

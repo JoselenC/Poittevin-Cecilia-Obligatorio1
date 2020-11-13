@@ -183,7 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
-      <Project>{44A5FD64-A9DD-45ED-8D2E-F8C2F9E1D41C}</Project>
+      <Project>{44a5fd64-a9dd-45ed-8d2e-f8c2f9e1d41c}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataAcess\DataAcess.csproj">

@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAcess.DBModels
+namespace DataAcess.Configurations
 {
-    class KeyWordDto
+    class KeyWordTypeConfiguration
     {
-        public List<string> KeyWords { get; set; }
     }
 }

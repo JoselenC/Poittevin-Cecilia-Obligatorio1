@@ -51,48 +51,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\BudgetTypeConfiguration.cs" />
+    <Compile Include="Configurations\CategoryTypeConfiguration.cs" />
     <Compile Include="ContextDB.cs" />
-    <Compile Include="DataBaseManagerRepository.cs" />
-    <Compile Include="DBModels\BudgetDto.cs" />
-    <Compile Include="DBModels\CategoryDto.cs" />
-    <Compile Include="DBModels\CategoryTypeConfiguration.cs" />
-    <Compile Include="DBModels\CurrencyDto.cs" />
-    <Compile Include="DBModels\CurrencyTypeConfiguration.cs" />
-    <Compile Include="DBModels\ExpenseDTO.cs" />
-    <Compile Include="DBModels\KeyWordDto.cs" />
-    <Compile Include="DBModels\ExpenseTypeConfiguration.cs" />
+    <Compile Include="Managers\DataBaseManagerRepository.cs" />
+    <Compile Include="DataBaseRepository.cs" />
+    <Compile Include="Managers\ManageMemoryRepository.cs" />
+    <Compile Include="Configurations\CurrencyTypeConfiguration.cs" />
+    <Compile Include="Configurations\ExpenseTypeConfiguration.cs" />
+    <Compile Include="Managers\ManageRepository.cs" />
     <Compile Include="MemoryRepository.cs" />
-    <Compile Include="Migrations\202011122152130_Initial.cs" />
-    <Compile Include="Migrations\202011122152130_Initial.designer.cs">
-      <DependentUpon>202011122152130_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011122353154_Add-BudgetDto.cs" />
-    <Compile Include="Migrations\202011122353154_Add-BudgetDto.designer.cs">
-      <DependentUpon>202011122353154_Add-BudgetDto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011130341371_ExpenseDTO.cs" />
-    <Compile Include="Migrations\202011130341371_ExpenseDTO.designer.cs">
-      <DependentUpon>202011130341371_ExpenseDTO.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011130418206_CurrencyDTO.cs" />
-    <Compile Include="Migrations\202011130418206_CurrencyDTO.designer.cs">
-      <DependentUpon>202011130418206_CurrencyDTO.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011131447245_CurrencyTypeConfiguration.cs" />
-    <Compile Include="Migrations\202011131447245_CurrencyTypeConfiguration.designer.cs">
-      <DependentUpon>202011131447245_CurrencyTypeConfiguration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011131541261_CategoryTypeConfiguration.cs" />
-    <Compile Include="Migrations\202011131541261_CategoryTypeConfiguration.designer.cs">
-      <DependentUpon>202011131541261_CategoryTypeConfiguration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011131542139_ExpenseTypeConfiguration.cs" />
-    <Compile Include="Migrations\202011131542139_ExpenseTypeConfiguration.designer.cs">
-      <DependentUpon>202011131542139_ExpenseTypeConfiguration.cs</DependentUpon>
+    <Compile Include="Migrations\202011131718073_Initial.cs" />
+    <Compile Include="Migrations\202011131718073_Initial.designer.cs">
+      <DependentUpon>202011131718073_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -105,26 +79,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011122152130_Initial.resx">
-      <DependentUpon>202011122152130_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011122353154_Add-BudgetDto.resx">
-      <DependentUpon>202011122353154_Add-BudgetDto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011130341371_ExpenseDTO.resx">
-      <DependentUpon>202011130341371_ExpenseDTO.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011130418206_CurrencyDTO.resx">
-      <DependentUpon>202011130418206_CurrencyDTO.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011131447245_CurrencyTypeConfiguration.resx">
-      <DependentUpon>202011131447245_CurrencyTypeConfiguration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011131541261_CategoryTypeConfiguration.resx">
-      <DependentUpon>202011131541261_CategoryTypeConfiguration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011131542139_ExpenseTypeConfiguration.resx">
-      <DependentUpon>202011131542139_ExpenseTypeConfiguration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011131718073_Initial.resx">
+      <DependentUpon>202011131718073_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

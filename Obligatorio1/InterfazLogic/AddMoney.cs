@@ -15,7 +15,7 @@ namespace InterfazLogic
     public partial class AddMoney : UserControl
     {
         private MoneyController moneyController;
-        public AddMoney(IManageRepository vRepository)
+        public AddMoney(ManageRepository vRepository)
         {
             InitializeComponent();
             moneyController = new MoneyController(vRepository);

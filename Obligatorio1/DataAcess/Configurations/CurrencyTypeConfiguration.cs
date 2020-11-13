@@ -2,7 +2,7 @@
 using BusinessLogic;
 using System.Data.Entity.ModelConfiguration;
 
-namespace DataAcess.DBModels
+namespace DataAcess.Configurations
 { 
     class CurrencyTypeConfiguration : EntityTypeConfiguration<Currency>
 

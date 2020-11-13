@@ -3,7 +3,7 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CategoryTypeConfiguration : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -12,6 +12,16 @@
                 c => new
                     {
                         Name = c.String(nullable: false, maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Name);
+            
+            CreateTable(
+                "dbo.Currencies",
+                c => new
+                    {
+                        Name = c.String(nullable: false, maxLength: 128),
+                        Symbol = c.String(),
+                        Quotation = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.Name);
             
@@ -31,37 +41,16 @@
                 .Index(t => t.Category_Name)
                 .Index(t => t.Currency_Name);
             
-            DropTable("dbo.CategoryDtoes");
-            DropTable("dbo.ExpenseDTOes");
         }
         
         public override void Down()
         {
-            CreateTable(
-                "dbo.ExpenseDTOes",
-                c => new
-                    {
-                        ExpenseDTOID = c.Int(nullable: false, identity: true),
-                        Description = c.String(),
-                        Amount = c.Double(nullable: false),
-                        CreationDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.ExpenseDTOID);
-            
-            CreateTable(
-                "dbo.CategoryDtoes",
-                c => new
-                    {
-                        CategoryDtoID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                    })
-                .PrimaryKey(t => t.CategoryDtoID);
-            
             DropForeignKey("dbo.Expenses", "Currency_Name", "dbo.Currencies");
             DropForeignKey("dbo.Expenses", "Category_Name", "dbo.Categories");
             DropIndex("dbo.Expenses", new[] { "Currency_Name" });
             DropIndex("dbo.Expenses", new[] { "Category_Name" });
             DropTable("dbo.Expenses");
+            DropTable("dbo.Currencies");
             DropTable("dbo.Categories");
         }
     }

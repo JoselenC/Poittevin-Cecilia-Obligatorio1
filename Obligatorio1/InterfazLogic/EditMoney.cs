@@ -16,7 +16,7 @@ namespace InterfazLogic
     {
         private MoneyController moneyController;
         private Money moneyToEdit;
-        public EditMoney(IManageRepository vRepository)
+        public EditMoney(ManageRepository vRepository)
         {
             InitializeComponent();
             moneyController = new MoneyController(vRepository);

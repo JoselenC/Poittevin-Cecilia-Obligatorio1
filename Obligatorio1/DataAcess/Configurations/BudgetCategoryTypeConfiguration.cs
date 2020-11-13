@@ -6,14 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAcess.DBModels
+namespace DataAcess.Configurations
 {
-    class ExpenseTypeConfiguration : EntityTypeConfiguration<Expense>
-    {
-        public ExpenseTypeConfiguration()
+    class BudgetCategoryTypeConfiguration: EntityTypeConfiguration<BudgetCategory>
+    {  
+        public BudgetCategoryTypeConfiguration()
         {
-            HasKey(x => x.Description);
+            HasKey(x => x.Amount);
         }
     }
-
 }

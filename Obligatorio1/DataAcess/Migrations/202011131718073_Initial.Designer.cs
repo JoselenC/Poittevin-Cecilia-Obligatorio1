@@ -7,13 +7,13 @@ namespace DataAcess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class ExpenseDTO : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ExpenseDTO));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011130341371_ExpenseDTO"; }
+            get { return "202011131718073_Initial"; }
         }
         
         string IMigrationMetadata.Source

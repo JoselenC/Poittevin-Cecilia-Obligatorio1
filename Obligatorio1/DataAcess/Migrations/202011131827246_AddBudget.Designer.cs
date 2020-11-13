@@ -7,13 +7,13 @@ namespace DataAcess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class CategoryTypeConfiguration : IMigrationMetadata
+    public sealed partial class AddBudget : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CategoryTypeConfiguration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddBudget));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011131541261_CategoryTypeConfiguration"; }
+            get { return "202011131827246_AddBudget"; }
         }
         
         string IMigrationMetadata.Source
