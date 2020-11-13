@@ -55,6 +55,8 @@
     <Compile Include="DataBaseManagerRepository.cs" />
     <Compile Include="DBModels\BudgetDto.cs" />
     <Compile Include="DBModels\CategoryDto.cs" />
+    <Compile Include="DBModels\CurrencyDto.cs" />
+    <Compile Include="DBModels\ExpenseDTO.cs" />
     <Compile Include="MemoryRepository.cs" />
     <Compile Include="Migrations\202011122152130_Initial.cs" />
     <Compile Include="Migrations\202011122152130_Initial.designer.cs">
@@ -63,6 +65,14 @@
     <Compile Include="Migrations\202011122353154_Add-BudgetDto.cs" />
     <Compile Include="Migrations\202011122353154_Add-BudgetDto.designer.cs">
       <DependentUpon>202011122353154_Add-BudgetDto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011130341371_ExpenseDTO.cs" />
+    <Compile Include="Migrations\202011130341371_ExpenseDTO.designer.cs">
+      <DependentUpon>202011130341371_ExpenseDTO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011130418206_CurrencyDTO.cs" />
+    <Compile Include="Migrations\202011130418206_CurrencyDTO.designer.cs">
+      <DependentUpon>202011130418206_CurrencyDTO.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +94,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011122353154_Add-BudgetDto.resx">
       <DependentUpon>202011122353154_Add-BudgetDto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011130341371_ExpenseDTO.resx">
+      <DependentUpon>202011130341371_ExpenseDTO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011130418206_CurrencyDTO.resx">
+      <DependentUpon>202011130418206_CurrencyDTO.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
