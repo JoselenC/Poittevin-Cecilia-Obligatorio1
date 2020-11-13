@@ -18,8 +18,8 @@ namespace InterfazLogic
             tbDescription.Clear();
             lstCategories.Items.Clear();
             AreCategories();
-            CompleteMoney();
-            lstMoney.SelectedIndex = 0;
+            Completecurrency();
+            lstcurrency.SelectedIndex = 0;
         }
 
         private void AreCategories()
@@ -50,11 +50,11 @@ namespace InterfazLogic
 
         }
 
-        private void CompleteMoney()
+        private void Completecurrency()
         {
-            foreach (Money vMoney in expenseController.GetMonies())
+            foreach (Currency vcurrency in expenseController.GetCurrencies())
             {
-                lstMoney.Items.Add(vMoney);
+                lstcurrency.Items.Add(vcurrency);
             }
         }
 
@@ -75,8 +75,8 @@ namespace InterfazLogic
                 DateTime creationDate = dateTime.Value;
                 string nameCategory = lstCategories.SelectedItem.ToString();
                 Category category = expenseController.FindCategoryByName(lstCategories.SelectedItem.ToString());
-                Money money = expenseController.FindMoneyByName(lstMoney.SelectedItem.ToString());
-                expenseController.SetExpense(amount, creationDate, description,category,money);
+                Currency currency = expenseController.FindCurrencyByName(lstcurrency.SelectedItem.ToString());
+                expenseController.SetExpense(amount, creationDate, description,category,currency);
                 MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Visible = false;
             }

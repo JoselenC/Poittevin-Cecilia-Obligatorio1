@@ -1,6 +1,6 @@
 ﻿namespace InterfazLogic
 {
-    partial class AddMoney
+    partial class AddCurrency
     {
         /// <summary> 
         /// Required designer variable.
@@ -52,9 +52,9 @@
             this.label2.Location = new System.Drawing.Point(39, 23);
             this.label2.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1165, 92);
+            this.label2.Size = new System.Drawing.Size(1236, 92);
             this.label2.TabIndex = 11;
-            this.label2.Text = "              Register money                 ";
+            this.label2.Text = "              Register currency                 ";
             // 
             // label1
             // 
@@ -168,7 +168,7 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // AddMoney
+            // AddCurrency
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -185,7 +185,7 @@
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label2);
-            this.Name = "AddMoney";
+            this.Name = "AddCurrency";
             this.Size = new System.Drawing.Size(1247, 878);
             ((System.ComponentModel.ISupportInitialize)(this.nQuotation)).EndInit();
             this.ResumeLayout(false);

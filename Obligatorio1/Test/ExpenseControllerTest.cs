@@ -315,40 +315,40 @@ namespace Test
         }
 
         [TestMethod]
-        public void FindMoneyByName()
+        public void FindcurrencyByName()
         {
-            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(moneyExpected);
+            Currency currencyExpected = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            MemoryRepository repo = new MemoryRepository();
+            repo.SetCurrency(currencyExpected);
             ExpenseController controller = new ExpenseController(repo);            
-            Money money = controller.FindMoneyByName("dolar");
-            Assert.AreEqual(money, moneyExpected);
+            Currency currency = controller.FindCurrencyByName("dolar");
+            Assert.AreEqual(currency, currencyExpected);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NoFindMoneyByName), "")]
-        public void NoFindMoneyByName()
+        [ExpectedException(typeof(NoFindCurrencyByName), "")]
+        public void NoFindcurrencyByName()
         {
-            Money moneyExpected = new Money { Name = "euro", Quotation = 43, Symbol = "USD" };
-            IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(moneyExpected);
+            Currency currencyExpected = new Currency { Name = "euro", Quotation = 43, Symbol = "USD" };
+            MemoryRepository repo = new MemoryRepository();
+            repo.SetCurrency(currencyExpected);
             ExpenseController controller = new ExpenseController(repo);
-            controller.FindMoneyByName("dolar");        
+            controller.FindCurrencyByName("dolar");        
         }
 
         [TestMethod]
         public void GetMonies()
         {
-            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            List<Money> moniesExpected = new List<Money>() {
-                money,
-                moneyExpected,                
+            Currency currencyExpected = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            Currency currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            List<Currency> moniesExpected = new List<Currency>() {
+                currency,
+                currencyExpected,                
             };
             IManageRepository repo = new MemoryRepository();
             repo.SetMoney(moneyExpected);
             ExpenseController controller = new ExpenseController(repo);
-            List<Money> monies = controller.GetMonies();
+            List<Currency> monies = controller.GetCurrencies();
             CollectionAssert.AreEqual(moniesExpected,monies);
         }
     }

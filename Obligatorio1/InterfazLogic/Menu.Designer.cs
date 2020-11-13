@@ -37,8 +37,8 @@
             this.btnBudgetReport = new System.Windows.Forms.Button();
             this.btnEditCategory = new System.Windows.Forms.Button();
             this.btnEditExpenses = new System.Windows.Forms.Button();
-            this.btnAddMoney = new System.Windows.Forms.Button();
-            this.btnEditMoney = new System.Windows.Forms.Button();
+            this.btnAddCurrency = new System.Windows.Forms.Button();
+            this.btnEditCurrency = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblMenu
@@ -145,29 +145,29 @@
             this.btnEditExpenses.UseVisualStyleBackColor = false;
             this.btnEditExpenses.Click += new System.EventHandler(this.btnEditExpenses_Click);
             // 
-            // btnAddMoney
+            // btnAddCurrency
             // 
-            this.btnAddMoney.BackColor = System.Drawing.Color.Tan;
-            this.btnAddMoney.Location = new System.Drawing.Point(59, 345);
-            this.btnAddMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAddMoney.Name = "btnAddMoney";
-            this.btnAddMoney.Size = new System.Drawing.Size(297, 93);
-            this.btnAddMoney.TabIndex = 13;
-            this.btnAddMoney.Text = "Register money";
-            this.btnAddMoney.UseVisualStyleBackColor = false;
-            this.btnAddMoney.Click += new System.EventHandler(this.button1_Click);
+            this.btnAddCurrency.BackColor = System.Drawing.Color.Tan;
+            this.btnAddCurrency.Location = new System.Drawing.Point(59, 345);
+            this.btnAddCurrency.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddCurrency.Name = "btnAddCurrency";
+            this.btnAddCurrency.Size = new System.Drawing.Size(297, 93);
+            this.btnAddCurrency.TabIndex = 13;
+            this.btnAddCurrency.Text = "Register currency";
+            this.btnAddCurrency.UseVisualStyleBackColor = false;
+            this.btnAddCurrency.Click += new System.EventHandler(this.btnAddCurrency_Click);
             // 
-            // btnEditMoney
+            // btnEditCurrency
             // 
-            this.btnEditMoney.BackColor = System.Drawing.Color.Tan;
-            this.btnEditMoney.Location = new System.Drawing.Point(59, 937);
-            this.btnEditMoney.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnEditMoney.Name = "btnEditMoney";
-            this.btnEditMoney.Size = new System.Drawing.Size(297, 93);
-            this.btnEditMoney.TabIndex = 14;
-            this.btnEditMoney.Text = "Edit money";
-            this.btnEditMoney.UseVisualStyleBackColor = false;
-            this.btnEditMoney.Click += new System.EventHandler(this.btnEditMoney_Click);
+            this.btnEditCurrency.BackColor = System.Drawing.Color.Tan;
+            this.btnEditCurrency.Location = new System.Drawing.Point(59, 937);
+            this.btnEditCurrency.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEditCurrency.Name = "btnEditCurrency";
+            this.btnEditCurrency.Size = new System.Drawing.Size(297, 93);
+            this.btnEditCurrency.TabIndex = 14;
+            this.btnEditCurrency.Text = "Edit currency";
+            this.btnEditCurrency.UseVisualStyleBackColor = false;
+            this.btnEditCurrency.Click += new System.EventHandler(this.btnEditCurrency_Click);
             // 
             // Menu
             // 
@@ -175,8 +175,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.ClientSize = new System.Drawing.Size(1686, 1078);
-            this.Controls.Add(this.btnAddMoney);
-            this.Controls.Add(this.btnEditMoney);
+            this.Controls.Add(this.btnAddCurrency);
+            this.Controls.Add(this.btnEditCurrency);
             this.Controls.Add(this.btnEditCategory);
             this.Controls.Add(this.btnEditExpenses);
             this.Controls.Add(this.btnBudgetReport);
@@ -205,7 +205,7 @@
         private System.Windows.Forms.Button btnBudgetReport;
         private System.Windows.Forms.Button btnEditCategory;
         private System.Windows.Forms.Button btnEditExpenses;
-        private System.Windows.Forms.Button btnAddMoney;
-        private System.Windows.Forms.Button btnEditMoney;
+        private System.Windows.Forms.Button btnAddCurrency;
+        private System.Windows.Forms.Button btnEditCurrency;
     }
 }

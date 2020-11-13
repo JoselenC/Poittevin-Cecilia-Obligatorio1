@@ -23,9 +23,6 @@ namespace InterfazLogic
             MaximumSize = new Size(500, 650);
             MinimumSize = new Size(500, 650);
             btnExportar.Enabled = false;
-            lstType.Items.Add("TXT");
-            lstType.Items.Add("CSV");
-            lstType.SelectedIndex = 0;
             lstMonths.SelectedIndex = 0;
         }
 
@@ -67,13 +64,13 @@ namespace InterfazLogic
                     string date = vExpense.CreationDate.ToString("dd/MM/yyyy");
                     string description = vExpense.Description;
                     string name = vExpense.Category.Name;
-                    string money = vExpense.Money.Symbol;
+                    string currency = vExpense.Currency.Symbol;
                     string amount = vExpense.Amount.ToString();
                         totalAmount += vExpense.ConvertToPesos();
                         item = listView1.Items.Add(date);
                         item.SubItems.Add(description);
                         item.SubItems.Add(name);
-                        item.SubItems.Add(money);
+                        item.SubItems.Add(currency);
                         item.SubItems.Add(amount);                   
 
                 }                
@@ -96,42 +93,13 @@ namespace InterfazLogic
 
         private void btnExportar_Click(object sender2, EventArgs e)
         {
-
             SaveFileDialog saveFile = new SaveFileDialog();
             string fileName;
             saveFile.Title = "Export Report";
-            if (lstType.SelectedItem.ToString() == "TXT")
-            {
-                saveFile.Filter = "Text File (.txt)| *.txt";
-                saveFile.ShowDialog();
-                fileName = saveFile.FileName.ToString();
-                using (StreamWriter sw = new StreamWriter(fileName))
-                {
-                    foreach (Expense vExpense in expenseReportByMonth)
-                    {
-                        sw.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy"));
-                        sw.WriteLine(vExpense.Description);
-                        sw.WriteLine(vExpense.Category.Name);
-                        sw.WriteLine(vExpense.Money.Symbol);
-                        sw.WriteLine(vExpense.Amount.ToString());
-                        sw.WriteLine("####");
-                    }
-                }
-            }
-            else
-            {
-                saveFile.Filter = "Text File | *.csv";
-                saveFile.ShowDialog();
-                fileName = saveFile.FileName.ToString();
-                using (StreamWriter sw = new StreamWriter(fileName))
-                {
-                    foreach (Expense vExpense in expenseReportByMonth)
-                    {
-                        sw.WriteLine(vExpense.CreationDate.ToString("dd/MM/yyyy") + "," + vExpense.Description + "," +
-                            vExpense.Category.Name + "," + vExpense.Money.Symbol + "," + vExpense.Amount.ToString());
-                    }
-                }
-            }
+            saveFile.Filter = "Txt File (.txt)| *.txt|Csv File (.csv)| *.csv";
+            saveFile.ShowDialog();
+            fileName = saveFile.FileName.ToString();
+            expenseController.ExportExpenseReport(expenseReportByMonth, fileName, saveFile.FilterIndex);                    
         }
 
       

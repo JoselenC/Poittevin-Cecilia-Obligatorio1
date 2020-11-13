@@ -65,21 +65,22 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
+            Currency currency = new Currency() { Name = "dolar", Symbol = "USD", Quotation = 1 };
             repo.SetBudget(JanuaryBudget);
             repo.SetCategory("entertainment",keyWords1);
             repo.SetCategory("food",keyWords2);
             repo.SetCategory("House",keyWords3);
-            Money CurrencyDolar = new Money() { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood, CurrencyDolar);
-            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood, CurrencyDolar);
-            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment, CurrencyDolar);
+            Currency currency2 = new Currency() { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood, currency);
+            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood,currency2);
+            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment,currency);
             budgetController = new BudgetController(repo);
         }
         
         [TestMethod]
         public void GetTotalSpentByMonthAndCategoryValidCase()
         {
-            double expectedTotalSpentJanuary = 14211.5;
+            double expectedTotalSpentJanuary = 4971.5;
             double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("January", categoryFood);
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }

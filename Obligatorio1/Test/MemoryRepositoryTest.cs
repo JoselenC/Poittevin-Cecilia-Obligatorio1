@@ -409,7 +409,7 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionAlreadyExistTheMoneyName), "")]
+        [ExpectedException(typeof(ExceptionAlreadyExistTheCurrencyName), "")]
         public void SetMonySameName()
         {
             Money money = new Money { Name = "pesos", Quotation = 43, Symbol = "$U" };
@@ -421,8 +421,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExceptionAlreadyExistTheMoneySymbol), "")]
-        public void SetMoneySameSymbol()
+        [ExpectedException(typeof(ExceptionAlreadyExistTheCurrencySymbol), "")]
+        public void SetcurrencySameSymbol()
         {
             Money money2 = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
             IManageRepository repo = new MemoryRepository();
@@ -431,15 +431,15 @@ namespace Test
         }
 
         [TestMethod]
-        public void SetMoneyValidCase()
+        public void SetcurrencyValidCase()
         {
-            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            Money money2 = new Money { Name = "euro", Quotation = 43, Symbol = "E" };
-            Money money3 = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            List<Money> moniesExpected = new List<Money>() {
-                money3,
-                money,
-                money2,
+            Currency currency = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            Currency currency2 = new Currency { Name = "euro", Quotation = 43, Symbol = "E" };
+            Currency currency3 = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            List<Currency> moniesExpected = new List<Currency>() {
+                currency3,
+                currency,
+                currency2,
                
             };
             IManageRepository repo = new MemoryRepository();
@@ -450,7 +450,7 @@ namespace Test
 
 
         [TestMethod]
-        public void FindMoney()
+        public void Findcurrency()
         {
             Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
             IManageRepository repo = new MemoryRepository();
@@ -460,8 +460,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NoFindMoney), "")]
-        public void NoFindMoney()
+        [ExpectedException(typeof(NoFindCurrency), "")]
+        public void NoFindcurrency()
         {
             Money moneyExpected = new Money { Name = "euros", Quotation = 43, Symbol = "E" };
             Money money2 = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
@@ -471,7 +471,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void FindMoneyByName()
+        public void FindcurrencyByName()
         {
             Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
             IManageRepository repo = new MemoryRepository();
@@ -481,8 +481,8 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NoFindMoneyByName), "")]
-        public void NoFindMoneyByName()
+        [ExpectedException(typeof(NoFindCurrencyByName), "")]
+        public void NoFindcurrencyByName()
         {
             Money moneyExpected = new Money { Name = "euro", Quotation = 43, Symbol = "E" };
             IManageRepository repo = new MemoryRepository();
@@ -493,9 +493,9 @@ namespace Test
         [TestMethod]
         public void GetMonies()
         {
-            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            List<Money> moniesExpected = new List<Money>() {
-                money,               
+            Currency currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            List<Currency> moniesExpected = new List<Currency>() {
+                currency,               
             };
             IManageRepository repo = new MemoryRepository();
             List<Money> monies = repo.GetMonies();
@@ -512,7 +512,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void DeleteMoneyExpense()
+        public void DeletecurrencyExpense()
         {
             Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
             IManageRepository repo = new MemoryRepository();
@@ -521,18 +521,18 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ExcepcionNoDeleteMoney), "")]
-        public void DeleteMoneyNoExist()
+        [ExpectedException(typeof(ExcepcionNoDeleteCurrency), "")]
+        public void DeletecurrencyNoExist()
         {
             Money money = new Money() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
             IManageRepository repo = new MemoryRepository();
             DateTime date = new DateTime(2020, 01, 01);
-            repo.SetExpense(23, date, "entertainment", categoryFood,money);
-            repo.DeleteMoney(money);
+            repo.SetExpense(23, date, "entertainment", categoryFood,currency);
+            repo.DeleteCurrency(currency);
         }
 
         [TestMethod]
-        public void EditMoney()
+        public void Editcurrency()
         {
             DateTime month = new DateTime(2020, 8, 24);
             Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };            
