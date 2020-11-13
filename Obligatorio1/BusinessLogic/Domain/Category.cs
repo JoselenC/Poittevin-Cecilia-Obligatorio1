@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic
 {
@@ -7,10 +9,26 @@ namespace BusinessLogic
 
         private string name;
 
-        private KeyWord keyWords;
+        private List<KeyWord> _keyWords;
+
         public string Name {get=>name; set=>SetName(value); }
 
-        public KeyWord KeyWords { get=>keyWords; set=>SetKeyWords(value); } 
+        public List<string> KeyWords { get=> GetKeyWord(); set=>SetKeyWords(value); }
+
+        public Category()
+        {
+            _keyWords = new List<KeyWord>();
+        }
+
+        private List<string> GetKeyWord()
+        {
+            List<string> returnKeyWords = new List<string>();
+            foreach (KeyWord keyWord in _keyWords)
+            {
+                returnKeyWords.Add(keyWord.Value);
+            }
+            return returnKeyWords;
+        }
 
         private void SetName(string vName)
         {
@@ -21,9 +39,16 @@ namespace BusinessLogic
             name = vName;
         }
 
-        private void SetKeyWords(KeyWord vKeyWords)
+        private void SetKeyWords(List<string> vKeyWords)
         {
-            keyWords = vKeyWords;
+            foreach (string keyWord in vKeyWords)
+            {
+                KeyWord keyWordToAdd = new KeyWord()
+                {
+                    Value = keyWord
+                };
+                _keyWords.Add(keyWordToAdd);
+            }
         }
 
         public override bool Equals(object obj)
@@ -31,7 +56,7 @@ namespace BusinessLogic
             if (obj is Category category)
             {
                 bool isEqualName = Name == category.Name;
-                bool isEqualKeyWords = keyWords.Equals(category.keyWords);
+                bool isEqualKeyWords = KeyWords.Equals(category.KeyWords);
                 return isEqualName && isEqualKeyWords;
             }
             return false;
@@ -42,19 +67,14 @@ namespace BusinessLogic
             return Name;
         }
 
-        public bool ExistThisKey(string pKeyWord)
+        public bool CategoryContainKeyword(string vKeyWord)
         {
-            return KeyWords.ContainKey(pKeyWord);
-        }
-
-        public bool CategoryContainKeyword(KeyWord pKeyWords)
-        {
-            return KeyWords.ExistKeyWords(pKeyWords); 
-        }
-
-        public bool ExistKeyWordInDscription(string description)
-        {
-           return KeyWords.DescriptionContainAPartOfText(description);
+            foreach (KeyWord keyWord in _keyWords)
+            {
+                if (keyWord.Equals(vKeyWord))
+                    return true;
+            }
+            return false;
         }
 
         public bool IsSameCategoryName(string categoryName)
@@ -67,7 +87,7 @@ namespace BusinessLogic
             bool exist = false;
             foreach (string description in descriptionArray)
             {
-                exist = ExistKeyWordInDscription(description);
+                exist = CategoryContainKeyword(description);
                 if (exist == true)
                     return true;
             }

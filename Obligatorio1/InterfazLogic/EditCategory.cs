@@ -49,9 +49,7 @@ namespace InterfazLogic
             string nameCategory = lstCatgories.SelectedItem.ToString();
             category = categoryController.FindCategoryByName(nameCategory);
             txtName.Text = category.Name;
-            List<string> keyWords = category.KeyWords.AsignKeyWordToList(category.KeyWords);
-            KeyWords = keyWords;
-            foreach (var keyWord in keyWords)
+            foreach (var keyWord in category.KeyWords)
             {
                 lstKwywords.Items.Add(keyWord);
             }
@@ -80,8 +78,6 @@ namespace InterfazLogic
                 try
                 {
                     categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
-                    KeyWord key = new KeyWord(KeyWords);
-                    key.AddKeyWord(keyWord);
                     lstCatgories.Items.Add(keyWord);
                 }
                 catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)

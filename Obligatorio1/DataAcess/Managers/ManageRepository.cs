@@ -46,12 +46,15 @@ namespace DataAccess
             return exist;
         }
 
-        private bool AlreadyExistTheKeyWordsInAnoterCategory(KeyWord pkeyWords)
+        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pkeyWords)
         {
             foreach (Category category in GetCategories())
             {
-                if (category.CategoryContainKeyword(pkeyWords))
-                    return true;
+                foreach (string keyWord in pkeyWords)
+                {
+                    if (category.CategoryContainKeyword(keyWord))
+                        return true;
+                }
             }
             return false;
         }
@@ -111,8 +114,7 @@ namespace DataAccess
 
         public Category SetCategory(string vName, List<string> vKeyWords)
         {
-            KeyWord pKeyWord = new KeyWord(vKeyWords);
-            Category category = new Category { Name = vName, KeyWords = pKeyWord };
+            Category category = new Category { Name = vName, KeyWords = vKeyWords };
             AddCategory(category);
             return category;
         }

@@ -25,6 +25,7 @@ namespace DataAccess
             modelBuilder.Configurations.Add(new CategoryTypeConfiguration());
             modelBuilder.Configurations.Add(new BudgetTypeConfiguration());
             modelBuilder.Configurations.Add(new BudgetCategoryTypeConfiguration());
+            modelBuilder.Configurations.Add(new KeyWordTypeConfiguration());
         }
     }
 }

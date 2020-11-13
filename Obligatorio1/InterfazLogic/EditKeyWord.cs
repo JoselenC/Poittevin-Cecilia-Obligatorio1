@@ -8,7 +8,7 @@ namespace InterfazLogic
 {
     public partial class EditKeyWord : Form
     {
-        public List<string> KeyWords { get; set; }
+        private List<string> KeyWords;
 
         public int Index { get; set; }
 
@@ -41,9 +41,9 @@ namespace InterfazLogic
             try
             {
                 categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
-                KeyWord key = new KeyWord(KeyWords);
-                key.DeleteKeyWord(editKeyWord);
-                key.AddKeyWord(keyWordEdited);
+
+                KeyWords.Remove(editKeyWord);
+                KeyWords.Add(keyWordEdited);
                 listKeyWords.Items.RemoveAt(Index);
                 listKeyWords.Items.Add(keyWordEdited);
                 Close();

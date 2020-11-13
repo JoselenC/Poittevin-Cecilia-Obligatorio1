@@ -17,7 +17,7 @@ namespace BusinessLogic
             List<Category> categories = Repository.GetCategories();
             foreach (Category category in categories)
             {
-                if (category.ExistThisKey(pKeyWord))
+                if (category.CategoryContainKeyword(pKeyWord))
                     throw new ExcepcionInvalidRepeatedKeyWordsInAnotherCategory();
             }
         }

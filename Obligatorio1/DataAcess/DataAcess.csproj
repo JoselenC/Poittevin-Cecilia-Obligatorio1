@@ -54,6 +54,7 @@
     <Compile Include="Configurations\BudgetCategoryTypeConfiguration.cs" />
     <Compile Include="Configurations\BudgetTypeConfiguration.cs" />
     <Compile Include="Configurations\CategoryTypeConfiguration.cs" />
+    <Compile Include="Configurations\KeyWordTypeConfiguration.cs" />
     <Compile Include="ContextDB.cs" />
     <Compile Include="Managers\DataBaseManagerRepository.cs" />
     <Compile Include="DataBaseRepository.cs" />
@@ -69,6 +70,14 @@
     <Compile Include="Migrations\202011131827246_AddBudget.cs" />
     <Compile Include="Migrations\202011131827246_AddBudget.designer.cs">
       <DependentUpon>202011131827246_AddBudget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011132041591_AddKeyWord.cs" />
+    <Compile Include="Migrations\202011132041591_AddKeyWord.designer.cs">
+      <DependentUpon>202011132041591_AddKeyWord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011132057004_EditKeyWord.cs" />
+    <Compile Include="Migrations\202011132057004_EditKeyWord.designer.cs">
+      <DependentUpon>202011132057004_EditKeyWord.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,6 +98,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011131827246_AddBudget.resx">
       <DependentUpon>202011131827246_AddBudget.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011132041591_AddKeyWord.resx">
+      <DependentUpon>202011132041591_AddKeyWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011132057004_EditKeyWord.resx">
+      <DependentUpon>202011132057004_EditKeyWord.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -83,8 +83,7 @@ namespace InterfazLogic
             try
             {
                 categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
-                KeyWord key = new KeyWord(KeyWords);
-                key.AddKeyWord(keyWord);
+                KeyWords.Add(keyWord);
                 lstCategories.Items.Add(keyWord);
                 tbKeyWord.Text = "";
                 lblKeyWords.Text = "";

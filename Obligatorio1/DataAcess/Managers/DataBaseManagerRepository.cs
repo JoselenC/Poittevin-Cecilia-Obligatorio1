@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using DataAccess;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 
 namespace DataAcces
 {
@@ -12,8 +13,13 @@ namespace DataAcces
             Expenses = new DataBaseRepository<Expense>();
             Budgets = new DataBaseRepository<Budget>();
             Currencies = new DataBaseRepository<Currency>();
-            Currency money = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            Currencies.Add(money);
+            try
+            {
+
+                Currency money = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+                Currencies.Add(money);
+            }
+            catch (DbUpdateException){}
         }
 
         public DataBaseManagerRepository(List<Category> vCategories)
