@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configurations\BudgetCategoryTypeConfiguration.cs" />
     <Compile Include="Configurations\BudgetTypeConfiguration.cs" />
     <Compile Include="Configurations\CategoryTypeConfiguration.cs" />
     <Compile Include="ContextDB.cs" />
@@ -64,6 +65,10 @@
     <Compile Include="Migrations\202011131718073_Initial.cs" />
     <Compile Include="Migrations\202011131718073_Initial.designer.cs">
       <DependentUpon>202011131718073_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011131827246_AddBudget.cs" />
+    <Compile Include="Migrations\202011131827246_AddBudget.designer.cs">
+      <DependentUpon>202011131827246_AddBudget.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,6 +86,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011131718073_Initial.resx">
       <DependentUpon>202011131718073_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011131827246_AddBudget.resx">
+      <DependentUpon>202011131827246_AddBudget.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

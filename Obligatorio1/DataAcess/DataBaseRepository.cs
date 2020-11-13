@@ -13,6 +13,7 @@ namespace DataAccess
             {
                 var entity = context.Set(typeof(T));
                 entity.Add(objectToAdd);
+                context.SaveChanges();
             }
         }
 
@@ -22,6 +23,7 @@ namespace DataAccess
             {
                 var entity = context.Set(typeof(T));
                 entity.Remove(objectToDelete);
+                context.SaveChanges();
             }
         }
 
