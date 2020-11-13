@@ -80,10 +80,10 @@ namespace DataAcces
             using (ContextDB context = new ContextDB())
             {
                 List<Expense> expenses = new List<Expense>();
-                foreach (ExpenseDTO expenseDTO in context.Expenses)
+                foreach (Expense expense in context.Expenses)
                 {
-                    if(expenseDTO.IsExpenseSameMonth(month))
-                    expenses.Add(mapExpenseDtoToDomain(expenseDTO));
+                    if(expense.IsExpenseSameMonth(month))
+                    expenses.Add(expense);
                 }
                 return expenses;
             }
@@ -94,9 +94,9 @@ namespace DataAcces
             using (ContextDB context = new ContextDB())
             {
                 List<Expense> expenses= new List<Expense>();
-                foreach (ExpenseDTO expenseDTO in context.Expenses)
+                foreach (Expense expense in context.Expenses)
                 {
-                    expenses.Add(mapExpenseDtoToDomain(expenseDTO));
+                    expenses.Add(expense);
                 }
                 return expenses;
             }
@@ -128,9 +128,9 @@ namespace DataAcces
             using (ContextDB context = new ContextDB())
             {
                 List<Currency> currencies = new List<Currency>();
-                foreach (CurrencyDto currencyDto in context.Currencies)
+                foreach (Currency currency in context.Currencies)
                 {
-                    currencies.Add(mapCurrencyDtoToDomain(currencyDto));
+                    currencies.Add(currency);
                 }
                 return currencies;
             }
@@ -163,15 +163,16 @@ namespace DataAcces
 
         public void SetExpense(double amount, DateTime creationDate, string description, Category category, Currency Currency)
         {
+            
             using (ContextDB context = new ContextDB())
             {
-
                 Expense expense = new Expense()
                 {
                     Description = description, Amount = amount, CreationDate = creationDate
                 };
-                context.Expenses.Add(mapExpenseDomainToDto(expense));
-                context.SaveChanges();
+                if (expense.Category == null)
+                    throw new ExcepcionExpenseWithEmptyCategory();
+                context.Expenses.Add(expense);
             }
         }
         private bool AlreadyExistTheCurrencyName(string CurrencyName)
@@ -211,7 +212,7 @@ namespace DataAcces
                     Symbol=vCurrency.Symbol,
                     Quotation=vCurrency.Quotation
                 };
-                context.Currencies.Add(mapCurrencyDomainToDto(currency));
+                context.Currencies.Add(currency);
                 context.SaveChanges();
             }
         }
@@ -221,9 +222,9 @@ namespace DataAcces
             using (ContextDB context = new ContextDB())
             {
                 List<Category> categories = new List<Category>();
-                foreach (CategoryDto categoryDto in context.Categories)
+                foreach (Category category in context.Categories)
                 {
-                    categories.Add(mapCategoryDtoToDomain(categoryDto));
+                    categories.Add(category);
                 }
                 return categories;
             }
@@ -235,9 +236,10 @@ namespace DataAcces
 
                 Category category = new Category()
                 {
-                    Name = vName
+                    Name = vName,
+                    KeyWords = new KeyWord(vKeyWords),
                 };
-                context.Categories.Add(mapCategoryDomainToDto(category));
+                context.Categories.Add(category);
                 context.SaveChanges();
                 return category;
             }

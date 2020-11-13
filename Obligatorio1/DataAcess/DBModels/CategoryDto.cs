@@ -11,8 +11,7 @@ namespace DataAcess.DBModels
     {
         public int CategoryDtoID { get; set; }
         public string Name { get; set; }
-
-        //public KeyWord  KeyWords{ get; set; }
+        //public KeyWord KeyWords { get; set; }
 
         //public bool ExistKeyWordInDscription(string description)
         //{
