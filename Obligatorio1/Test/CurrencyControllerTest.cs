@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using BusinessLogic;
+using BusinessLogic.Repository;
+using DataAcces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test
@@ -12,7 +14,7 @@ namespace Test
         public void Deletecurrency()
         {
             Currency currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             CurrencyController currencyController = new CurrencyController(repo);
             currencyController.DeleteCurrency(currency);
             Assert.AreEqual(repo.GetCurrencies().Count, 0);
@@ -21,8 +23,8 @@ namespace Test
         [TestMethod]
         public void Findcurrency()
         {
-            Currency currencyExpected = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };            
-            MemoryRepository repo = new MemoryRepository();
+            Currency currencyExpected = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            IManageRepository repo = new MemoryRepository();
             repo.SetCurrency(currencyExpected);
             CurrencyController currencyController = new CurrencyController(repo);
             Currency currency = currencyController.FindCurrency(currencyExpected);
@@ -35,7 +37,7 @@ namespace Test
         {
             Currency currencyExpected = new Currency { Name = "euros", Quotation = 43, Symbol = "E" };
             Currency currency2 = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            MemoryRepository repo = new MemoryRepository();            
+            IManageRepository repo = new MemoryRepository();            
             repo.SetCurrency(currencyExpected);
             CurrencyController currencyController = new CurrencyController(repo);
             currencyController.FindCurrency(currency2);
@@ -48,7 +50,7 @@ namespace Test
             List<Currency> moniesExpected = new List<Currency>() {
                 currency,
             };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             CurrencyController currencyController = new CurrencyController(repo);
             List<Currency> monies = currencyController.GetCurrencies();
             CollectionAssert.AreEqual(moniesExpected, monies);
@@ -58,7 +60,7 @@ namespace Test
         [ExpectedException(typeof(ExceptionAlreadyExistTheCurrencyName), "")]
         public void SetMonySameName()
         {
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             CurrencyController currencyController = new CurrencyController(repo);
             currencyController.SetCurrency("pesos","$U",43);
             currencyController.SetCurrency("pesos", "$", 43);
@@ -69,7 +71,7 @@ namespace Test
         [ExpectedException(typeof(ExceptionAlreadyExistTheCurrencySymbol), "")]
         public void SetcurrencySameSymbol()
         {
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             CurrencyController currencyController = new CurrencyController(repo);
             currencyController.SetCurrency("dolares", "$U", 43);
         }
@@ -85,7 +87,7 @@ namespace Test
                 currency,
                 currency2,
             };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             CurrencyController currencyController = new CurrencyController(repo);
             currencyController.SetCurrency("dolar", "USD", 43);
             currencyController.SetCurrency("euro", "E", 43);
@@ -101,7 +103,7 @@ namespace Test
             Currency currency2 = new Currency { Name = "euro", Quotation = 40, Symbol = "E" };
             Category category = new Category() { Name="Entertainment" };
             Expense expense1 = new Expense { Amount = 23, CreationDate = month, Description = "entertainment", Currency=currency2,Category=category};
-            MemoryRepository repository = new MemoryRepository();
+            IManageRepository repository = new MemoryRepository();
             repository.SetExpense(23,month,"entertainment",category,currency);
             CurrencyController currencyController = new CurrencyController(repository);
             currencyController.EditCurrency(currency, "euro", "E",40);

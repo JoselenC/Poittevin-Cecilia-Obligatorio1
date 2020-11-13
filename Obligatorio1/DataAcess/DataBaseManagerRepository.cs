@@ -19,17 +19,17 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
-        public void DeleteMoney(Money money)
+        public void DeleteCurrency(Currency Currency)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteMoneyToEdit(Money money)
+        public void DeleteCurrencyToEdit(Currency Currency)
         {
             throw new NotImplementedException();
         }
 
-        public void EditMoneyAllExpense(Money oldMoney, Money newMoney)
+        public void EditCurrencyAllExpense(Currency oldCurrency, Currency newCurrency)
         {
             throw new NotImplementedException();
         }
@@ -54,12 +54,12 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
-        public Money FindMoney(Money money)
+        public Currency FindCurrency(Currency Currency)
         {
             throw new NotImplementedException();
         }
 
-        public Money FindMoneyByName(string moneyName)
+        public Currency FindCurrencyByName(string CurrencyName)
         {
             throw new NotImplementedException();
         }
@@ -76,7 +76,7 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
-        public List<Money> GetMonies()
+        public List<Currency> GetCurrencies()
         {
             throw new NotImplementedException();
         }
@@ -86,12 +86,12 @@ namespace DataAcces
             throw new NotImplementedException();
         }
 
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category, Money money)
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category, Currency Currency)
         {
             throw new NotImplementedException();
         }
 
-        public void SetMoney(Money money)
+        public void SetCurrency(Currency Currency)
         {
             throw new NotImplementedException();
         }

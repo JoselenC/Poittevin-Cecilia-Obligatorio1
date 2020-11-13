@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using BusinessLogic;
+using BusinessLogic.Repository;
+using DataAcces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test
@@ -412,11 +414,11 @@ namespace Test
         [ExpectedException(typeof(ExceptionAlreadyExistTheCurrencyName), "")]
         public void SetMonySameName()
         {
-            Money money = new Money { Name = "pesos", Quotation = 43, Symbol = "$U" };
-            Money money2 = new Money { Name = "pesos", Quotation = 43, Symbol = "$" };
+            Currency Currency = new Currency { Name = "pesos", Quotation = 43, Symbol = "$U" };
+            Currency Currency2 = new Currency { Name = "pesos", Quotation = 43, Symbol = "$" };
             IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(money);
-            repo.SetMoney(money2);
+            repo.SetCurrency(Currency);
+            repo.SetCurrency(Currency2);
             
         }
 
@@ -424,9 +426,9 @@ namespace Test
         [ExpectedException(typeof(ExceptionAlreadyExistTheCurrencySymbol), "")]
         public void SetcurrencySameSymbol()
         {
-            Money money2 = new Money { Name = "dolar", Quotation = 43, Symbol = "$U" };
+            Currency Currency2 = new Currency { Name = "dolar", Quotation = 43, Symbol = "$U" };
             IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(money2);
+            repo.SetCurrency(Currency2);
 
         }
 
@@ -443,51 +445,51 @@ namespace Test
                
             };
             IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(money);
-            repo.SetMoney(money2);
-            CollectionAssert.AreEqual(repo.GetMonies(), moniesExpected);
+            repo.SetCurrency(currency);
+            repo.SetCurrency(currency2);
+            CollectionAssert.AreEqual(repo.GetCurrencies(), moniesExpected);
         }
 
 
         [TestMethod]
         public void Findcurrency()
         {
-            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            Currency CurrencyExpected = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
             IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(moneyExpected);
-            Money money=repo.FindMoney(moneyExpected);
-            Assert.AreEqual(money, moneyExpected);
+            repo.SetCurrency(CurrencyExpected);
+            Currency Currency=repo.FindCurrency(CurrencyExpected);
+            Assert.AreEqual(Currency, CurrencyExpected);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NoFindCurrency), "")]
         public void NoFindcurrency()
         {
-            Money moneyExpected = new Money { Name = "euros", Quotation = 43, Symbol = "E" };
-            Money money2 = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            Currency CurrencyExpected = new Currency { Name = "euros", Quotation = 43, Symbol = "E" };
+            Currency Currency2 = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
             IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(moneyExpected);
-            repo.FindMoney(money2);
+            repo.SetCurrency(CurrencyExpected);
+            repo.FindCurrency(Currency2);
         }
 
         [TestMethod]
         public void FindcurrencyByName()
         {
-            Money moneyExpected = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };
+            Currency CurrencyExpected = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
             IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(moneyExpected);
-            Money money = repo.FindMoneyByName("dolar");
-            Assert.AreEqual(money, money);
+            repo.SetCurrency(CurrencyExpected);
+            Currency Currency = repo.FindCurrencyByName("dolar");
+            Assert.AreEqual(Currency, Currency);
         }
 
         [TestMethod]
         [ExpectedException(typeof(NoFindCurrencyByName), "")]
         public void NoFindcurrencyByName()
         {
-            Money moneyExpected = new Money { Name = "euro", Quotation = 43, Symbol = "E" };
+            Currency CurrencyExpected = new Currency { Name = "euro", Quotation = 43, Symbol = "E" };
             IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(moneyExpected);
-            repo.FindMoneyByName("dolar");
+            repo.SetCurrency(CurrencyExpected);
+            repo.FindCurrencyByName("dolar");
         }
 
         [TestMethod]
@@ -498,33 +500,33 @@ namespace Test
                 currency,               
             };
             IManageRepository repo = new MemoryRepository();
-            List<Money> monies = repo.GetMonies();
+            List<Currency> monies = repo.GetCurrencies();
             CollectionAssert.AreEqual(moniesExpected, monies);
         }
 
         [TestMethod]
         public void DeleteMonies()
         {
-            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            Currency Currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
             IManageRepository repo = new MemoryRepository();
-            repo.DeleteMoney(money);
-            Assert.AreEqual(repo.GetMonies().Count,0);
+            repo.DeleteCurrency(Currency);
+            Assert.AreEqual(repo.GetCurrencies().Count,0);
         }
 
         [TestMethod]
         public void DeletecurrencyExpense()
         {
-            Money money = new Money() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            Currency Currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
             IManageRepository repo = new MemoryRepository();
-            repo.DeleteMoney(money);
-            Assert.AreEqual(repo.GetMonies().Count, 0);
+            repo.DeleteCurrency(Currency);
+            Assert.AreEqual(repo.GetCurrencies().Count, 0);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionNoDeleteCurrency), "")]
         public void DeletecurrencyNoExist()
         {
-            Money money = new Money() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            Currency currency = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
             IManageRepository repo = new MemoryRepository();
             DateTime date = new DateTime(2020, 01, 01);
             repo.SetExpense(23, date, "entertainment", categoryFood,currency);
@@ -535,14 +537,14 @@ namespace Test
         public void Editcurrency()
         {
             DateTime month = new DateTime(2020, 8, 24);
-            Money money = new Money { Name = "dolar", Quotation = 43, Symbol = "USD" };            
+            Currency Currency = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };            
             Category category = new Category() { Name = "Entertainment" };
             IManageRepository repository = new MemoryRepository();
-            repository.SetExpense(23, month, "entertainment", category, money);
-            Money money2 = new Money { Name = "euro", Quotation = 40, Symbol = "E" };
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month, Description = "entertainment", Money = money2 };
-            repository.EditMoneyAllExpense(money,money2);
-            Assert.AreEqual(repository.GetExpenses().ToArray()[0].Money, expense1.Money);
+            repository.SetExpense(23, month, "entertainment", category, Currency);
+            Currency Currency2 = new Currency { Name = "euro", Quotation = 40, Symbol = "E" };
+            Expense expense1 = new Expense { Amount = 23, CreationDate = month, Description = "entertainment", Currency = Currency2 };
+            repository.EditCurrencyAllExpense(Currency,Currency2);
+            Assert.AreEqual(repository.GetExpenses().ToArray()[0].Currency, expense1.Currency);
         }
     }
 }

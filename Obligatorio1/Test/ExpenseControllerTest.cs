@@ -1,5 +1,7 @@
 ﻿using System;
+using DataAcces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using BusinessLogic.Repository;
 using BusinessLogic;
 using System.Collections.Generic;
 
@@ -330,7 +332,7 @@ namespace Test
         public void NoFindcurrencyByName()
         {
             Currency currencyExpected = new Currency { Name = "euro", Quotation = 43, Symbol = "USD" };
-            MemoryRepository repo = new MemoryRepository();
+            IManageRepository repo = new MemoryRepository();
             repo.SetCurrency(currencyExpected);
             ExpenseController controller = new ExpenseController(repo);
             controller.FindCurrencyByName("dolar");        
@@ -346,7 +348,7 @@ namespace Test
                 currencyExpected,                
             };
             IManageRepository repo = new MemoryRepository();
-            repo.SetMoney(moneyExpected);
+            repo.SetCurrency(currencyExpected);
             ExpenseController controller = new ExpenseController(repo);
             List<Currency> monies = controller.GetCurrencies();
             CollectionAssert.AreEqual(moniesExpected,monies);

@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Repository;
+
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ namespace InterfazLogic
         private ExpenseController expenseController;
         private BudgetController budgetController;
         private CurrencyController currencyController;
-        public Menu(MemoryRepository repository)
+        public Menu(IManageRepository repository)
         {
             InitializeComponent();
             categoryController = new CategoryController(repository);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using BusinessLogic;
+using BusinessLogic.Repository;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test

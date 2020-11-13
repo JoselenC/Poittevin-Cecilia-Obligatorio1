@@ -1,4 +1,5 @@
 ﻿using System;
+using BusinessLogic.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,9 +10,9 @@ namespace BusinessLogic
     public class CurrencyController
     {
 
-        public MemoryRepository Repository { get; private set; }
+        public IManageRepository Repository { get; private set; }
 
-        public CurrencyController(MemoryRepository repository)
+        public CurrencyController(IManageRepository repository)
         {
             Repository = repository;
         }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Repository;
 
 namespace InterfazLogic
 {
@@ -15,7 +16,7 @@ namespace InterfazLogic
     {
         private CurrencyController currencyController;
         private Currency currencyToEdit;
-        public EditCurrency(MemoryRepository vRepository)
+        public EditCurrency(IManageRepository vRepository)
         {
             InitializeComponent();
             currencyController = new CurrencyController(vRepository);

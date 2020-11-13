@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Repository;
 
 namespace InterfazLogic
 {
     public partial class AddCurrency : UserControl
     {
         private CurrencyController currencyController;
-        public AddCurrency(MemoryRepository vRepository)
+        public AddCurrency(IManageRepository vRepository)
         {
             InitializeComponent();
             currencyController = new CurrencyController(vRepository);

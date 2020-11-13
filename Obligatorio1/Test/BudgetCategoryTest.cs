@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using BusinessLogic;
+using BusinessLogic.Repository;
+using DataAcces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Test

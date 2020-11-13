@@ -7,7 +7,7 @@ namespace BusinessLogic
     public class ExpenseController
     {
         public IManageRepository Repository { get; private set; }
-
+        public IExportExpenseReport Export { get; set; }
         public ExpenseController(IManageRepository repository)
         {
             Repository = repository;
@@ -59,7 +59,7 @@ namespace BusinessLogic
             orderedMonthsInt.Sort();
             List<string> orderedMonthsString = MonthsListIntToString(orderedMonthsInt);
             return orderedMonthsString;
-        }        
+        }
 
         public List<Expense> GetExpenseByMonth(Months month)
         {
@@ -84,9 +84,9 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
-        public Money FindMoneyByName(string moneyName)
+        public Currency FindCurrencyByName(string CurrencyName)
         {
-            return Repository.FindMoneyByName(moneyName);
+            return Repository.FindCurrencyByName(CurrencyName);
         }
 
         public Category FindCategoryByName(string categoryName)
@@ -106,9 +106,9 @@ namespace BusinessLogic
             return total;
         }
 
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Money money)
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category, Currency Currency)
         {
-            Repository.SetExpense(amount, creationDate, description, category,money);
+            Repository.SetExpense(amount, creationDate, description, category, Currency);
         }
 
         public List<Category> GetCategories()
@@ -116,9 +116,19 @@ namespace BusinessLogic
             return Repository.GetCategories();
         }
 
-        public List<Money> GetMonies()
+        public List<Currency> GetCurrencies()
         {
-            return Repository.GetMonies();
+            return Repository.GetCurrencies();
+        }
+
+        public void ExportExpenseReport(List<Expense> expenses, string fileName, int index)
+        {
+            if (index == 1)
+                Export = new ExpenseReportTXT();
+            else
+                Export = new ExpenseReportCSV();
+
+            Export.ExportReport(expenses, fileName);
         }
     }
-}
+    }
