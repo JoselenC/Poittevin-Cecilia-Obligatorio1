@@ -1,5 +1,4 @@
 ﻿using BusinessLogic;
-using DataAcess.Configurations;
 using DataAcess.DBObjects;
 using System.Data.Entity;
 using SqlProviderServices = System.Data.Entity.SqlServer.SqlProviderServices;
@@ -22,12 +21,6 @@ namespace DataAccess
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             Configuration.LazyLoadingEnabled = false;
-            modelBuilder.Configurations.Add(new CurrencyTypeConfiguration());
-            modelBuilder.Configurations.Add(new ExpenseTypeConfiguration());
-            modelBuilder.Configurations.Add(new CategoryTypeConfiguration());
-            modelBuilder.Configurations.Add(new BudgetTypeConfiguration());
-            modelBuilder.Configurations.Add(new BudgetCategoryTypeConfiguration());
-            modelBuilder.Configurations.Add(new KeyWordTypeConfiguration());
         }
     }
 }

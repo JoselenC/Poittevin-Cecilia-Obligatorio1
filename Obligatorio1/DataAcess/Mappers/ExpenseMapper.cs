@@ -12,14 +12,39 @@ namespace DataAcess.Mappers
 {
     class ExpenseMapper : IMapper<Expense, ExpenseDto>
     {
+        public ExpenseMapper()
+        {
+
+        }
+
         public ExpenseDto DomainToDto(Expense obj)
         {
-            throw new NotImplementedException();
+            CategoryMapper categoryMapper = new CategoryMapper();
+            CurrencyMapper currencyMapper = new CurrencyMapper();
+            return new ExpenseDto()
+            {
+              
+                Description = obj.Description,
+                Amount = obj.Amount,
+                CreationDate = obj.CreationDate,
+
+            };
         }
 
         public Expense DtoToDomain(ExpenseDto obj, DbContext context)
         {
-            throw new NotImplementedException();
+            CategoryMapper categoryMapper = new CategoryMapper();
+            CurrencyMapper currencyMapper = new CurrencyMapper();
+            
+            return new Expense()
+            {
+                Description = obj.Description,
+                Amount = obj.Amount,
+                Currency = currencyMapper.DtoToDomain(obj.Currency, context),
+                CreationDate = obj.CreationDate,
+
+            };
         }
     }
 }
+

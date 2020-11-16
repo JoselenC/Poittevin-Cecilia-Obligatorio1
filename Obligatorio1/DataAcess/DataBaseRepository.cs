@@ -22,7 +22,7 @@ namespace DataAccess
             {
                 var TDto = mapper.DomainToDto(objectToAdd);
                 var entity = context.Set<T>();
-                entity.Add(mapper.DomainToDto(objectToAdd));
+                entity.Add(TDto);
                 context.SaveChanges();
             }
         }

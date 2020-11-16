@@ -9,7 +9,7 @@ namespace BusinessLogic
 
         private string name;
 
-        private List<KeyWord> _keyWords;
+        private List<KeyWord> keyWords;
 
         public string Name {get=>name; set=>SetName(value); }
 
@@ -17,13 +17,13 @@ namespace BusinessLogic
 
         public Category()
         {
-            _keyWords = new List<KeyWord>();
+            keyWords = new List<KeyWord>();
         }
 
         private List<string> GetKeyWord()
         {
             List<string> returnKeyWords = new List<string>();
-            foreach (KeyWord keyWord in _keyWords)
+            foreach (KeyWord keyWord in keyWords)
             {
                 returnKeyWords.Add(keyWord.Value);
             }
@@ -41,13 +41,20 @@ namespace BusinessLogic
 
         private void SetKeyWords(List<string> vKeyWords)
         {
-            foreach (string keyWord in vKeyWords)
+            if (vKeyWords.Count <= 10)
             {
-                KeyWord keyWordToAdd = new KeyWord()
+                foreach (string keyWord in vKeyWords)
                 {
-                    Value = keyWord
-                };
-                _keyWords.Add(keyWordToAdd);
+                    KeyWord keyWordToAdd = new KeyWord()
+                    {
+                        Value = keyWord
+                    };
+                    keyWords.Add(keyWordToAdd);
+                }
+            }
+            else
+            {
+                throw new ExcepcionInvalidKeyWordsLengthCategory();
             }
         }
 
@@ -69,7 +76,7 @@ namespace BusinessLogic
 
         public bool CategoryContainKeyword(string vKeyWord)
         {
-            foreach (KeyWord keyWord in _keyWords)
+            foreach (KeyWord keyWord in keyWords)
             {
                 if (keyWord.Equals(vKeyWord))
                     return true;

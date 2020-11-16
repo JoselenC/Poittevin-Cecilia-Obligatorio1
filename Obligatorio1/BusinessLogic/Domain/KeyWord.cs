@@ -11,11 +11,8 @@ namespace BusinessLogic
 
         private void SetKeyWord(string vKeyWord)
         {
-            if (vKeyWord != "" && vKeyWord.Length < 10)
-                value = vKeyWord;
-
-            else if (vKeyWord.Length >= 10)
-                throw new ExcepcionInvalidKeyWordsLengthCategory();
+            if (vKeyWord != "")
+                value = vKeyWord; 
             else
                 throw new InvalidKeyWord();
         }
@@ -28,9 +25,10 @@ namespace BusinessLogic
 
         public KeyWord(string vKeyWords)
         {
-            if(vKeyWords.Length>10)
-                throw new ExcepcionInvalidKeyWordsLengthCategory();
+            if(vKeyWords!="")
             value = vKeyWords;
+            else
+                throw new InvalidKeyWord();
         }
 
         public KeyWord()
