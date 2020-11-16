@@ -39,12 +39,9 @@ namespace InterfazLogic
             }
             catch (NoAsignCategoryByDescriptionExpense)
             {
-                if (expenseController.GetCategories().Count > 0)
+                foreach (Category vCategory in expenseController.GetCategories())
                 {
-                    foreach (Category vCategory in expenseController.GetCategories())
-                    {
-                        lstCategories.Items.Add(vCategory.Name);
-                    }
+                    lstCategories.Items.Add(vCategory);
                 }
             }
 
@@ -74,8 +71,8 @@ namespace InterfazLogic
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 string nameCategory = lstCategories.SelectedItem.ToString();
-                Category category = expenseController.FindCategoryByName(lstCategories.SelectedItem.ToString());
-                Currency currency = expenseController.FindCurrencyByName(lstcurrency.SelectedItem.ToString());
+                Category category = (Category) lstCategories.SelectedItem;
+                Currency currency = (Currency) lstcurrency.SelectedItem;
                 expenseController.SetExpense(amount, creationDate, description,category,currency);
                 MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Visible = false;

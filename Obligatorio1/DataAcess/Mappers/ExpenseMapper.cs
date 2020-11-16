@@ -23,11 +23,11 @@ namespace DataAcess.Mappers
             CurrencyMapper currencyMapper = new CurrencyMapper();
             return new ExpenseDto()
             {
-              
                 Description = obj.Description,
                 Amount = obj.Amount,
                 CreationDate = obj.CreationDate,
-
+                Category = categoryMapper.DomainToDto(obj.Category),
+                Currency = currencyMapper.DomainToDto(obj.Currency)
             };
         }
 
@@ -42,7 +42,7 @@ namespace DataAcess.Mappers
                 Amount = obj.Amount,
                 Currency = currencyMapper.DtoToDomain(obj.Currency, context),
                 CreationDate = obj.CreationDate,
-
+                Category = categoryMapper.DtoToDomain(obj.Category, context),
             };
         }
     }

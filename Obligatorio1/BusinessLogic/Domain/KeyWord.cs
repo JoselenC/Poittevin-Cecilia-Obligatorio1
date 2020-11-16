@@ -19,8 +19,19 @@ namespace BusinessLogic
 
         public override bool Equals(object obj)
         {
-            return obj is KeyWord word &&
-                   value == word.value;
+            bool isKeyWord = obj is KeyWord;
+            bool isStringKeyWord = obj is string;
+            if (isKeyWord)
+            {
+                KeyWord word = (KeyWord)obj;
+                return value == word.value;
+            }
+            else if (isStringKeyWord)
+            {
+                string wordString = (string)obj;
+                return value == wordString;
+            }
+            return false;
         }
 
         public KeyWord(string vKeyWords)

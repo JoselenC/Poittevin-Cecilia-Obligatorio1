@@ -33,19 +33,17 @@ namespace DataAcess.Mappers
 
         public Category DtoToDomain(CategoryDto obj, DbContext context)
         {
-            List<string> keyWords = new List<string>();            
-
-            context.Entry(obj).Collection("KeyWords").Load();
+            List<string> keyWords = new List<string>();
+            context.Entry(obj).Collection("KeyWords").Query().Load();
             foreach (KeyWordsDto keyWord in obj.KeyWords)
             {
                 keyWords.Add(
-                    keyWord.Value                    
+                    keyWord.Value
                 );
             };
             return new Category()
             {
                 Name = obj.Name,
-
                 KeyWords = keyWords
             };
         }
