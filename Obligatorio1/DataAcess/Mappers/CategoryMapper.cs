@@ -14,7 +14,7 @@ namespace DataAcess.Mappers
         {
         }
 
-        public CategoryDto DomainToDto(Category obj)
+        public CategoryDto DomainToDto(Category obj, DbContext context)
         {
             List<KeyWordsDto> KeyWordsDto = new List<KeyWordsDto>();
             foreach (string KeyWord in obj.KeyWords)

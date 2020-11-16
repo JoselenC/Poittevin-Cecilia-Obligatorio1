@@ -12,7 +12,7 @@ namespace DataAcess.Mappers
 {
     class BudgetMapper: IMapper<Budget, BudgetDto>
     {
-        public BudgetDto DomainToDto(Budget obj)
+        public BudgetDto DomainToDto(Budget obj, DbContext context)
         {
             List<BudgetCategoryDto> budgetCategories = new List<BudgetCategoryDto>();
             CategoryMapper categoryMapper = new CategoryMapper();
@@ -21,7 +21,7 @@ namespace DataAcess.Mappers
             foreach (BudgetCategory budgetCategory in obj.BudgetCategories)
             {
                 budgetCategories.Add(new BudgetCategoryDto() {
-                    Category = categoryMapper.DomainToDto(budgetCategory.Category),
+                    Category = categoryMapper.DomainToDto(budgetCategory.Category, context),
                     Amount = budgetCategory.Amount
                 });
             }

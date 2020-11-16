@@ -17,17 +17,21 @@ namespace DataAcess.Mappers
 
         }
 
-        public ExpenseDto DomainToDto(Expense obj)
+        public ExpenseDto DomainToDto(Expense obj, DbContext context)
         {
             CategoryMapper categoryMapper = new CategoryMapper();
             CurrencyMapper currencyMapper = new CurrencyMapper();
+            CategoryDto category = categoryMapper.DomainToDto(obj.Category, context);
+            CurrencyDto currency = currencyMapper.DomainToDto(obj.Currency, context);
+            context.Entry(category).State = EntityState.Modified;
+            context.Entry(currency).State = EntityState.Modified;
             return new ExpenseDto()
             {
                 Description = obj.Description,
                 Amount = obj.Amount,
                 CreationDate = obj.CreationDate,
-                Category = categoryMapper.DomainToDto(obj.Category),
-                Currency = currencyMapper.DomainToDto(obj.Currency)
+                Category = category,
+                Currency = currency
             };
         }
 

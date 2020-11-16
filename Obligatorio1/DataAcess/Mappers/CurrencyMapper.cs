@@ -12,7 +12,7 @@ namespace DataAcess.Mappers
 {
     class CurrencyMapper : IMapper<Currency, CurrencyDto>
     {
-        public CurrencyDto DomainToDto(Currency obj)
+        public CurrencyDto DomainToDto(Currency obj, DbContext context)
         {
             return new CurrencyDto()
             {

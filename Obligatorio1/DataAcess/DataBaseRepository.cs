@@ -20,7 +20,7 @@ namespace DataAccess
         {
             using (ContextDB context = new ContextDB())
             {
-                var TDto = mapper.DomainToDto(objectToAdd);
+                var TDto = mapper.DomainToDto(objectToAdd, context);
                 var entity = context.Set<T>();
                 entity.Add(TDto);
                 context.SaveChanges();
@@ -32,7 +32,7 @@ namespace DataAccess
             using (ContextDB context = new ContextDB())
             {
                 var entity = context.Set<T>();
-                entity.Remove(mapper.DomainToDto(objectToDelete));
+                entity.Remove(mapper.DomainToDto(objectToDelete, context));
                 context.SaveChanges();
             }
         }
