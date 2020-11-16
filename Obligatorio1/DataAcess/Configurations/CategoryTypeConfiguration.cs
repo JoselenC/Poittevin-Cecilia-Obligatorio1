@@ -1,9 +1,10 @@
 ﻿using BusinessLogic;
+using DataAcess.DBObjects;
 using System.Data.Entity.ModelConfiguration;
 
 namespace DataAcess.Configurations
 {
-    class CategoryTypeConfiguration : EntityTypeConfiguration<Category>
+    class CategoryTypeConfiguration : EntityTypeConfiguration<CategoryDto>
     {
         public CategoryTypeConfiguration()
         {

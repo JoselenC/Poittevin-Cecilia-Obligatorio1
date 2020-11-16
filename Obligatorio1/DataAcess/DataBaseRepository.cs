@@ -2,51 +2,74 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using LinqKit;
+using DataAccess.Mappers;
+using BusinessLogic;
 
 namespace DataAccess
 {
-    class DataBaseRepository <T>: IRepository<T>
+    class DataBaseRepository <D, T>: IRepository<D> where T: class
     {
-        public void Add(T objectToAdd)
+        private IMapper<D,T> mapper;
+        public DataBaseRepository(IMapper<D,T> mapper)
+        {
+            this.mapper = mapper;
+        }
+        public void Add(D objectToAdd)
         {
             using (ContextDB context = new ContextDB())
             {
-                var entity = context.Set(typeof(T));
-                entity.Add(objectToAdd);
+                var TDto = mapper.DomainToDto(objectToAdd);
+                var entity = context.Set<T>();
+                entity.Add(mapper.DomainToDto(objectToAdd));
                 context.SaveChanges();
             }
         }
 
-        public void Delete(T objectToDelete)
+        public void Delete(D objectToDelete)
         {
             using (ContextDB context = new ContextDB())
             {
-                var entity = context.Set(typeof(T));
-                entity.Remove(objectToDelete);
+                var entity = context.Set<T>();
+                entity.Remove(mapper.DomainToDto(objectToDelete));
                 context.SaveChanges();
             }
         }
 
-        public T Find(Predicate<T> condition)
+        public D Find(Predicate<D> condition)
         {
             using (ContextDB context = new ContextDB())
             {
-                var entity = context.Set(typeof(T));
-                return (T) entity.Find(condition);
+                DbSet<T> entity = context.Set<T>();
+                T TDto;
+                try
+                {
+                    TDto = entity.ToList().First(x => condition(mapper.DtoToDomain(x, context)));
+                }
+                catch (InvalidOperationException)
+                {
+                    throw new ValueNotFound();
+                }
+                return mapper.DtoToDomain(TDto, context);
             }
         }
 
-        public List<T> Get()
+        public List<D> Get()
         {
-            return new List<T>();
             using (ContextDB context = new ContextDB())
             {
-                DbSet entity = context.Set(typeof(T));
-                
+                DbSet<T> entity = context.Set<T>();
+                List<D> Dlist = new List<D>();
+                foreach (T item in entity.ToList())
+                {
+                    Dlist.Add(mapper.DtoToDomain(item, context));
+                }
+                return Dlist;
             }
         }
 
-        public void Set(List<T> objectToAdd)
+        public void Set(List<D> objectToAdd)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using DataAcess.DBObjects;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.Configurations
 {
-    class KeyWordTypeConfiguration: EntityTypeConfiguration<KeyWord>
+    class KeyWordTypeConfiguration: EntityTypeConfiguration<KeyWordsDto>
     {  
         public KeyWordTypeConfiguration()
         {

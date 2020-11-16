@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using DataAcess.DBObjects;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
@@ -8,11 +9,10 @@ using System.Threading.Tasks;
 
 namespace DataAcess.Configurations
 {
-    class BudgetCategoryTypeConfiguration: EntityTypeConfiguration<BudgetCategory>
+    class BudgetCategoryTypeConfiguration: EntityTypeConfiguration<BudgetCategoryDto>
     {  
         public BudgetCategoryTypeConfiguration()
         {
-            HasKey(x => x.Amount);
         }
     }
 }

@@ -40,6 +40,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="LinqKit, Version=1.1.21.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.21\lib\net45\LinqKit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -56,28 +59,31 @@
     <Compile Include="Configurations\CategoryTypeConfiguration.cs" />
     <Compile Include="Configurations\KeyWordTypeConfiguration.cs" />
     <Compile Include="ContextDB.cs" />
+    <Compile Include="DBObjects\BudgetCategoryDto.cs" />
+    <Compile Include="DBObjects\CategoryDto.cs" />
+    <Compile Include="DBObjects\BudgetDto.cs" />
+    <Compile Include="DBObjects\CurrencyDto.cs" />
+    <Compile Include="DBObjects\ExpenseDto.cs" />
+    <Compile Include="Mappers\BudgetMapper.cs" />
+    <Compile Include="Mappers\CategoryMapper.cs" />
+    <Compile Include="Mappers\CurrencyMapper.cs" />
+    <Compile Include="Mappers\ExpenseMapper.cs" />
+    <Compile Include="Mappers\IMapper.cs" />
     <Compile Include="Managers\DataBaseManagerRepository.cs" />
     <Compile Include="DataBaseRepository.cs" />
     <Compile Include="Managers\ManageMemoryRepository.cs" />
     <Compile Include="Configurations\CurrencyTypeConfiguration.cs" />
     <Compile Include="Configurations\ExpenseTypeConfiguration.cs" />
     <Compile Include="Managers\ManageRepository.cs" />
+    <Compile Include="DBObjects\KeyWordsDto.cs" />
     <Compile Include="MemoryRepository.cs" />
-    <Compile Include="Migrations\202011131718073_Initial.cs" />
-    <Compile Include="Migrations\202011131718073_Initial.designer.cs">
-      <DependentUpon>202011131718073_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202011160228159_Initial.cs" />
+    <Compile Include="Migrations\202011160228159_Initial.designer.cs">
+      <DependentUpon>202011160228159_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011131827246_AddBudget.cs" />
-    <Compile Include="Migrations\202011131827246_AddBudget.designer.cs">
-      <DependentUpon>202011131827246_AddBudget.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011132041591_AddKeyWord.cs" />
-    <Compile Include="Migrations\202011132041591_AddKeyWord.designer.cs">
-      <DependentUpon>202011132041591_AddKeyWord.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011132057004_EditKeyWord.cs" />
-    <Compile Include="Migrations\202011132057004_EditKeyWord.designer.cs">
-      <DependentUpon>202011132057004_EditKeyWord.cs</DependentUpon>
+    <Compile Include="Migrations\202011160232006_CurrencyAttributes.cs" />
+    <Compile Include="Migrations\202011160232006_CurrencyAttributes.designer.cs">
+      <DependentUpon>202011160232006_CurrencyAttributes.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,17 +99,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011131718073_Initial.resx">
-      <DependentUpon>202011131718073_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011160228159_Initial.resx">
+      <DependentUpon>202011160228159_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011131827246_AddBudget.resx">
-      <DependentUpon>202011131827246_AddBudget.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011132041591_AddKeyWord.resx">
-      <DependentUpon>202011132041591_AddKeyWord.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011132057004_EditKeyWord.resx">
-      <DependentUpon>202011132057004_EditKeyWord.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011160232006_CurrencyAttributes.resx">
+      <DependentUpon>202011160232006_CurrencyAttributes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
