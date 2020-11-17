@@ -37,9 +37,11 @@ namespace DataAcess.Mappers
 
         public Expense DtoToDomain(ExpenseDto obj, DbContext context)
         {
+
             CategoryMapper categoryMapper = new CategoryMapper();
             CurrencyMapper currencyMapper = new CurrencyMapper();
-            
+            context.Entry(obj).Reference("Currency").Query().Load();
+            context.Entry(obj).Reference("Category").Query().Load();
             return new Expense()
             {
                 Description = obj.Description,
