@@ -12,13 +12,13 @@ namespace BusinessLogic
         private string symbol;
         private double quotation;
 
-        public string Name { get=>name; set=>setName(value); }
+        public string Name { get=>name; set=>SetName(value); }
 
         public string Symbol { get=>symbol; set=>SetSymbol(value); }
 
         public double Quotation { get=>quotation; set=>SetQuotation(value); }
 
-        private void setName(string vName)
+        private void SetName(string vName)
         {
             if (vName.Length < 3 || vName.Length > 20)
                 throw new ExceptionInvalidLengthCurrencyName();
@@ -40,10 +40,9 @@ namespace BusinessLogic
                 throw new ExceptionInvalidQuotation();
             quotation = vQuotation;
         }
-
-        public override string ToString()
+        public bool IsSameCurrencyName(string currencyName)
         {
-            return name;
+            return Name == currencyName;
         }
 
         public override bool Equals(object obj)
@@ -57,10 +56,12 @@ namespace BusinessLogic
             }
             return false;
         }
-
-        public bool IsSameCurrencyName(string currencyName)
+        public override string ToString()
         {
-            return Name == currencyName;
+            return name;
         }
+
+
+       
     }
 }

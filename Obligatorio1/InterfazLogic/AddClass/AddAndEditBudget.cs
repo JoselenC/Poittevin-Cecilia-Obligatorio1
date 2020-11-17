@@ -21,7 +21,6 @@ namespace InterfazLogic
             nMonth.SelectedIndex = 0;
         }
 
-
         private void EditBudgetCategory()
         {
             if (currentBudget is null || lstCategory.SelectedItem is null)
@@ -40,6 +39,7 @@ namespace InterfazLogic
                 };
             }
         }
+
         private void listBoxCategory_DoubleClick(object sender, EventArgs e)
         {
             EditBudgetCategory();

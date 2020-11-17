@@ -49,52 +49,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EditCategory.cs">
+    <Compile Include="EditClass\EditCategory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditCategory.Designer.cs">
+    <Compile Include="EditClass\EditCategory.Designer.cs">
       <DependentUpon>EditCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditExpense.cs">
+    <Compile Include="EditClass\EditExpense.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditExpense.Designer.cs">
+    <Compile Include="EditClass\EditExpense.Designer.cs">
       <DependentUpon>EditExpense.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditKeyWord.cs">
+    <Compile Include="EditClass\EditKeyWord.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditKeyWord.Designer.cs">
+    <Compile Include="EditClass\EditKeyWord.Designer.cs">
       <DependentUpon>EditKeyWord.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditCurrency.cs">
+    <Compile Include="EditClass\EditCurrency.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="EditCurrency.Designer.cs">
+    <Compile Include="EditClass\EditCurrency.Designer.cs">
       <DependentUpon>EditCurrency.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExpenseReport.cs">
+    <Compile Include="ReportClass\ExpenseReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ExpenseReport.Designer.cs">
+    <Compile Include="ReportClass\ExpenseReport.Designer.cs">
       <DependentUpon>ExpenseReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddAndEditBudget.cs">
+    <Compile Include="AddClass\AddAndEditBudget.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AddAndEditBudget.Designer.cs">
+    <Compile Include="AddClass\AddAndEditBudget.Designer.cs">
       <DependentUpon>AddAndEditBudget.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditBudgetCategory.cs">
+    <Compile Include="EditClass\EditBudgetCategory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditBudgetCategory.Designer.cs">
+    <Compile Include="EditClass\EditBudgetCategory.Designer.cs">
       <DependentUpon>EditBudgetCategory.cs</DependentUpon>
     </Compile>
-    <Compile Include="BudgetReport.cs">
-      <SubType>Form</SubType>
+    <Compile Include="ReportClass\BudgetReport.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BudgetReport.Designer.cs">
+    <Compile Include="ReportClass\BudgetReport.Designer.cs">
       <DependentUpon>BudgetReport.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu.cs">
@@ -103,54 +103,54 @@
     <Compile Include="Menu.Designer.cs">
       <DependentUpon>Menu.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddCurrency.cs">
+    <Compile Include="AddClass\AddCurrency.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AddCurrency.Designer.cs">
+    <Compile Include="AddClass\AddCurrency.Designer.cs">
       <DependentUpon>AddCurrency.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddAndEditBudget.resx">
+    <EmbeddedResource Include="AddClass\AddAndEditBudget.resx">
       <DependentUpon>AddAndEditBudget.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditBudgetCategory.resx">
+    <EmbeddedResource Include="EditClass\EditBudgetCategory.resx">
       <DependentUpon>EditBudgetCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <Compile Include="RegisterExpense.cs">
+    <Compile Include="AddClass\RegisterExpense.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="RegisterExpense.Designer.cs">
+    <Compile Include="AddClass\RegisterExpense.Designer.cs">
       <DependentUpon>RegisterExpense.cs</DependentUpon>
     </Compile>
-    <Compile Include="RegisterCategory.cs">
+    <Compile Include="AddClass\RegisterCategory.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="RegisterCategory.Designer.cs">
+    <Compile Include="AddClass\RegisterCategory.Designer.cs">
       <DependentUpon>RegisterCategory.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="EditExpense.resx">
+    <EmbeddedResource Include="EditClass\EditExpense.resx">
       <DependentUpon>EditExpense.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditCategory.resx">
+    <EmbeddedResource Include="EditClass\EditCategory.resx">
       <DependentUpon>EditCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditKeyWord.resx">
+    <EmbeddedResource Include="EditClass\EditKeyWord.resx">
       <DependentUpon>EditKeyWord.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditCurrency.resx">
+    <EmbeddedResource Include="EditClass\EditCurrency.resx">
       <DependentUpon>EditCurrency.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExpenseReport.resx">
+    <EmbeddedResource Include="ReportClass\ExpenseReport.resx">
       <DependentUpon>ExpenseReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BudgetReport.resx">
+    <EmbeddedResource Include="ReportClass\BudgetReport.resx">
       <DependentUpon>BudgetReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddCurrency.resx">
+    <EmbeddedResource Include="AddClass\AddCurrency.resx">
       <DependentUpon>AddCurrency.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -162,10 +162,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="RegisterCategory.resx">
+    <EmbeddedResource Include="AddClass\RegisterCategory.resx">
       <DependentUpon>RegisterCategory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RegisterExpense.resx">
+    <EmbeddedResource Include="AddClass\RegisterExpense.resx">
       <DependentUpon>RegisterExpense.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

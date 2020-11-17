@@ -56,7 +56,6 @@ namespace BusinessLogic
             return false;
         }
 
-
         public override string ToString()
         {
             return $"{Description}   {Currency.Symbol}";

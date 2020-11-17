@@ -44,9 +44,9 @@ namespace DataAcess.Mappers
             {
                 Description = obj.Description,
                 Amount = obj.Amount,
-                Currency = currencyMapper.DtoToDomain(obj.Currency, context),
                 CreationDate = obj.CreationDate,
                 Category = categoryMapper.DtoToDomain(obj.Category, context),
+                Currency = currencyMapper.DtoToDomain(obj.Currency, context)
             };
         }
     }

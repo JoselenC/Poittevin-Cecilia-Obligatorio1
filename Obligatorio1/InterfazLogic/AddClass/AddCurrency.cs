@@ -19,7 +19,17 @@ namespace InterfazLogic
         {
             InitializeComponent();
             currencyController = new CurrencyController(vRepository);
-        }       
+        }
+
+        private void TryAddNewCurrency()
+        {
+            string name = tbName.Text;
+            string symbol = tbSymbol.Text;
+            double quotation = (double)nQuotation.Value;
+            currencyController.SetCurrency(name, symbol, quotation);
+            Visible = false;
+        }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -69,15 +79,7 @@ namespace InterfazLogic
             }
         }
 
-        private void TryAddNewCurrency()
-        {
-            string name = tbName.Text;
-            string symbol = tbSymbol.Text;
-            double quotation = (double)nQuotation.Value;
-            currencyController.SetCurrency(name, symbol, quotation);
-            Visible = false;
-        }       
-
+     
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;

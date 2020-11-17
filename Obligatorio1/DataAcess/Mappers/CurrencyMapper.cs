@@ -24,6 +24,7 @@ namespace DataAcess.Mappers
 
         public Currency DtoToDomain(CurrencyDto obj, DbContext context)
         {
+            context.Entry(obj).Collection("Currencies").Query().Load();
             return new Currency()
             {
                 Name = obj.Name,
