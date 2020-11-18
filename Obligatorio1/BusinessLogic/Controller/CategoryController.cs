@@ -41,6 +41,14 @@ namespace BusinessLogic
             AddCategoryInAllBudgets(category);
             return category;
         } 
+        
+        public Category UpdateCategory(Category oldCategory, Category newCategory)
+        {
+            newCategory = Repository.UpdateCategory(oldCategory, newCategory);
+            EditCategoryInAllExpenses(oldCategory, newCategory);
+            EditCategoryInAllBudgets(oldCategory, newCategory);
+            return newCategory;
+        }
 
         private List<Expense> GetExpenses()
         {
@@ -68,10 +76,7 @@ namespace BusinessLogic
 
         public void EditCategory(Category oldCategory, string newName, List<string> newKeywords)
         {
-            Repository.DeleteCategory(oldCategory);
-            Category newCategory = SetCategory(newName, newKeywords);
-            EditCategoryInAllExpenses(oldCategory, newCategory);
-            EditCategoryInAllBudgets(oldCategory, newCategory);
+            
         }
 
         public List<Category> GetCategories()

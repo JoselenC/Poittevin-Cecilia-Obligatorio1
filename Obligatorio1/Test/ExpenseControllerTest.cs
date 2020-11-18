@@ -234,16 +234,8 @@ namespace Test
         [TestMethod]
         public void FindCategoryByName()
         {
-            List<Category> categoryList = new List<Category>();
-            List<string> keyWords1 = new List<string>()
-            {
-               "movie theater",
-               "theater",
-               "casino",
-            };
-            Category category1 = new Category { Name = "entertainment" };
-            Category category3 = expenseController.FindCategoryByName("entertainment");
-            Assert.AreEqual(category1, category3);
+            Category category = expenseController.FindCategoryByName("entertainment");
+            Assert.AreEqual(categoryEntertainment, category);
         }
 
         [TestMethod]

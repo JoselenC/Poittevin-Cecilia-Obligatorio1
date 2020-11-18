@@ -71,25 +71,9 @@
     <Compile Include="Managers\ManageRepository.cs" />
     <Compile Include="DBObjects\KeyWordsDto.cs" />
     <Compile Include="MemoryRepository.cs" />
-    <Compile Include="Migrations\202011160228159_Initial.cs" />
-    <Compile Include="Migrations\202011160228159_Initial.designer.cs">
-      <DependentUpon>202011160228159_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011160232006_CurrencyAttributes.cs" />
-    <Compile Include="Migrations\202011160232006_CurrencyAttributes.designer.cs">
-      <DependentUpon>202011160232006_CurrencyAttributes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011161807542_ExpenseDto.cs" />
-    <Compile Include="Migrations\202011161807542_ExpenseDto.designer.cs">
-      <DependentUpon>202011161807542_ExpenseDto.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011161815220_Initial1.cs" />
-    <Compile Include="Migrations\202011161815220_Initial1.designer.cs">
-      <DependentUpon>202011161815220_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202011161833331_ExpenseMapper.cs" />
-    <Compile Include="Migrations\202011161833331_ExpenseMapper.designer.cs">
-      <DependentUpon>202011161833331_ExpenseMapper.cs</DependentUpon>
+    <Compile Include="Migrations\202011172338200_Initial.cs" />
+    <Compile Include="Migrations\202011172338200_Initial.designer.cs">
+      <DependentUpon>202011172338200_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -105,20 +89,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011160228159_Initial.resx">
-      <DependentUpon>202011160228159_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011160232006_CurrencyAttributes.resx">
-      <DependentUpon>202011160232006_CurrencyAttributes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011161807542_ExpenseDto.resx">
-      <DependentUpon>202011161807542_ExpenseDto.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011161815220_Initial1.resx">
-      <DependentUpon>202011161815220_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011161833331_ExpenseMapper.resx">
-      <DependentUpon>202011161833331_ExpenseMapper.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202011172338200_Initial.resx">
+      <DependentUpon>202011172338200_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

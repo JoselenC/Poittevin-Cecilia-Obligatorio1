@@ -11,5 +11,7 @@ namespace BusinessLogic.Repository
         T Find(Predicate<T> condition);
         List<T> Get();
         void Set(List<T> objectToAdd);
+
+        T Update(T OldObject, T UpdatedObject);
     }
 }

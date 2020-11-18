@@ -41,8 +41,10 @@ namespace DataAccess
             repository = objectToAdd;
         }
 
-
-
+        public T Update(T OldObject, T UpdatedObject)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

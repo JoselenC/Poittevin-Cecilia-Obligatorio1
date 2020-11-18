@@ -25,5 +25,9 @@ namespace BusinessLogic.Repository
         Category SetCategory(string vName, List<string> vKeyWords);
         void SetCurrency(Currency Currency);
         void SetExpense(double amount, DateTime creationDate, string description, Category category, Currency Currency);
+        Category UpdateCategory(Category oldCategory, Category newCategory);
+        Expense UpdateExpense(Expense oldExpense, Expense newExpense);
+        Budget UpdateBudget(Budget oldBudget, Budget newBudget);
+        Currency UpdateCurrency(Currency oldCurrency, Currency newCurrency);
     }
 }

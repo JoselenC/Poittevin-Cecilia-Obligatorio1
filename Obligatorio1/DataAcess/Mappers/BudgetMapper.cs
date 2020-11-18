@@ -20,15 +20,22 @@ namespace DataAcess.Mappers
             // en ese caso hay que agregarlo a la doc, Si se usa fuera de Budget, tendremos que crearle un mapper y usarlo aca (al igual que el de category)
             foreach (BudgetCategory budgetCategory in obj.BudgetCategories)
             {
-                budgetCategories.Add(new BudgetCategoryDto() {
-                    Category = categoryMapper.DomainToDto(budgetCategory.Category, context),
+                CategoryDto categoryDto = categoryMapper.DomainToDto(budgetCategory.Category, context);
+                context.Entry(categoryDto).State = EntityState.Unchanged;
+                BudgetCategoryDto budgetCategoryDto = new BudgetCategoryDto()
+                {
+                    Category = categoryDto,
                     Amount = budgetCategory.Amount
-                });
+                };
+                // context.Entry(budgetCategoryDto).State = EntityState.Ad;
+                budgetCategories.Add(budgetCategoryDto);
             }
+
             return new BudgetDto() {
                 Month = (int)obj.Month,
                 TotalAmount = obj.TotalAmount,
                 Year = obj.Year,
+                BudgetCategories=budgetCategories
             };
         }
 
@@ -41,6 +48,7 @@ namespace DataAcess.Mappers
             context.Entry(obj).Collection("BudgetCategories").Load();
             foreach (BudgetCategoryDto budgetCategory in obj.BudgetCategories)
             {
+                context.Entry(budgetCategory).Reference("Category").Load();
                 budgetCategories.Add(new BudgetCategory()
                 {
                     Category = categoryMapper.DtoToDomain(budgetCategory.Category, context),
@@ -53,6 +61,11 @@ namespace DataAcess.Mappers
                 Year = obj.Year,
                 BudgetCategories = budgetCategories
             };
+        }
+
+        public BudgetDto UpdateDtoObject(BudgetDto objToUpdate, Budget updatedObject, DbContext contex)
+        {
+            throw new NotImplementedException();
         }
     }
 }

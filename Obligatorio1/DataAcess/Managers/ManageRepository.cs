@@ -35,17 +35,6 @@ namespace DataAccess
             }
         }
 
-        private bool AlreadyExistTheCategoryName(string categoryName)
-        {
-            bool exist = true;
-            foreach (Category category in GetCategories())
-            {
-                if (categoryName.ToLower() == category.Name.ToLower())
-                    exist = false;
-            }
-            return exist;
-        }
-
         private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pkeyWords)
         {
             foreach (Category category in GetCategories())
@@ -61,11 +50,16 @@ namespace DataAccess
 
         private void AddCategory(Category category)
         {
-            if (!AlreadyExistTheCategoryName(category.Name))
+            try
+            {
+                if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
+                    throw new ExcepcionInvalidRepeatedKeyWordsCategory();
+                Categories.Add(category);
+            }
+            catch (ExceptionUnableToSaveData)
+            {
                 throw new ExcepcionInvalidRepeatedNameCategory();
-            if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
-                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
-            Categories.Add(category);
+            }
         }
 
         public void SetBudget(Budget vBudget)
@@ -276,6 +270,26 @@ namespace DataAccess
             if (AlreadyExistTheCurrencySymbol(Currency.Symbol))
                 throw new ExceptionAlreadyExistTheCurrencySymbol();
             Currencies.Add(Currency);
+        }
+
+        public Category UpdateCategory(Category oldCategory, Category newCategory)
+        {
+            return Categories.Update(oldCategory, newCategory);
+        }
+
+        public Expense UpdateExpense(Expense oldExpense, Expense newExpense)
+        {
+            return Expenses.Update(oldExpense, newExpense);
+        }
+
+        public Budget UpdateBudget(Budget oldBudget, Budget newBudget)
+        {
+            return Budgets.Update(oldBudget, newBudget);
+        }
+
+        public Currency UpdateCurrency(Currency oldCurrency, Currency newCurrency)
+        {
+            return Currencies.Update(oldCurrency, newCurrency);
         }
     }
 }

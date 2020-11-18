@@ -18,7 +18,7 @@ namespace BusinessLogic
     {
     }
 
-
+    public class ExceptionUnableToSaveData: Exception { }
     public class ExcepcionInvalidRepeatedNameCategory : Exception
     {
     }

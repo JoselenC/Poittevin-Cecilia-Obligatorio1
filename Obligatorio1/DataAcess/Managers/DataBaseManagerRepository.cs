@@ -20,7 +20,7 @@ namespace DataAcces
                 Currency money = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
                 Currencies.Add(money);
             }
-            catch (DbUpdateException){}
+            catch (ExceptionUnableToSaveData) {}
         }
     }
 }

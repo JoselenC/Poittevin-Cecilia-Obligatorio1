@@ -23,8 +23,8 @@ namespace DataAcess.Mappers
             CurrencyMapper currencyMapper = new CurrencyMapper();
             CategoryDto category = categoryMapper.DomainToDto(obj.Category, context);
             CurrencyDto currency = currencyMapper.DomainToDto(obj.Currency, context);
-            context.Entry(category).State = EntityState.Modified;
-            context.Entry(currency).State = EntityState.Modified;
+            context.Entry(category).State = EntityState.Unchanged;
+            context.Entry(currency).State = EntityState.Unchanged;
             return new ExpenseDto()
             {
                 Description = obj.Description,
@@ -50,6 +50,11 @@ namespace DataAcess.Mappers
                 Category = categoryMapper.DtoToDomain(obj.Category, context),
                 Currency = currencyMapper.DtoToDomain(obj.Currency, context)
             };
+        }
+
+        public ExpenseDto UpdateDtoObject(ExpenseDto objToUpdate, Expense updatedObject, DbContext contex)
+        {
+            throw new NotImplementedException();
         }
     }
 }

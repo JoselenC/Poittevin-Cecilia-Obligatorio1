@@ -31,5 +31,13 @@ namespace DataAcess.Mappers
                 Symbol = obj.Symbol
             };
         }
+
+        public CurrencyDto UpdateDtoObject(CurrencyDto objToUpdate, Currency updatedObject, DbContext contex)
+        {
+            objToUpdate.Name = updatedObject.Name;
+            objToUpdate.Quotation = updatedObject.Quotation;
+            objToUpdate.Symbol = updatedObject.Symbol;
+            return objToUpdate;
+        }
     }
 }

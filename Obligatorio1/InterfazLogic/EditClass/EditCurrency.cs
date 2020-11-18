@@ -78,7 +78,13 @@ namespace InterfazLogic
                 string name = tbName.Text;
                 string symbol = tbSymbol.Text;
                 double quotation = (double)nQuotation.Value;
-                currencyController.EditCurrency(currencyToEdit, name, symbol, quotation);
+                Currency newCurrency = new Currency()
+                {
+                    Name = name,
+                    Symbol = symbol,
+                    Quotation = quotation
+                };
+                currencyController.UpdateCurrency(currencyToEdit, newCurrency);
                 Visible = false;
             }
             catch (ExceptionAlreadyExistTheCurrencyName)

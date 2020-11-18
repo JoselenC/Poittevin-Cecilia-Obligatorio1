@@ -8,55 +8,32 @@ namespace InterfazLogic
 {
     public partial class EditKeyWord : Form
     {
-        private List<string> KeyWords;
-
-        public int Index { get; set; }
-
         private CategoryController categoryController;
 
-        public bool Edited { get; set; } = false;
+        public string KeyWord { get; set; }
 
-        private ListBox listKeyWords;
-
-        private string editKeyWord;
-
-        public EditKeyWord(List<string> vKeyWords,int indexToEdit,ListBox lstkeyWords, CategoryController vCategoryController)
+        public EditKeyWord(string keyWord, CategoryController vCategoryController)
         {            
             InitializeComponent();
-            KeyWords = vKeyWords;
-            Index = indexToEdit;
-            listKeyWords = lstkeyWords;
             categoryController = vCategoryController;
             MaximumSize = new Size(380, 200);
             MinimumSize = new Size(380, 200);
             StartPosition = FormStartPosition.CenterScreen;
             tbEdit.Clear();
-            editKeyWord= lstkeyWords.SelectedItem.ToString();
-            tbEdit.Text = editKeyWord;
+            tbEdit.Text = keyWord;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            string keyWordEdited = tbEdit.Text;
             try
             {
-                categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
-
-                KeyWords.Remove(editKeyWord);
-                KeyWords.Add(keyWordEdited);
-                listKeyWords.Items.RemoveAt(Index);
-                listKeyWords.Items.Add(keyWordEdited);
+                categoryController.AlreadyExistKeyWordInAnoterCategory(tbEdit.Text);
+                KeyWord = tbEdit.Text;
                 Close();
             }
             catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
             {
                 lblKeyWord.Text = "You already entered that keyword in another category";
-                lblKeyWord.ForeColor = Color.Red;
-            }
-
-            catch (ExcepcionInvalidKeyWordsLengthCategory)
-            {
-                lblKeyWord.Text = "You cannot add more than 10 keywords.";
                 lblKeyWord.ForeColor = Color.Red;
             }
             catch (ExcepcionInvalidRepeatedKeyWordsCategory)
@@ -73,7 +50,6 @@ namespace InterfazLogic
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            KeyWords.Add(editKeyWord);
             Close();
         }
     }

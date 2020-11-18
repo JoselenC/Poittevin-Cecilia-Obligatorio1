@@ -7,5 +7,7 @@ namespace DataAccess.Mappers
         T DomainToDto(D obj, DbContext context);
 
         D DtoToDomain(T obj, DbContext context);
+
+        T UpdateDtoObject(T objToUpdate, D updatedObject, DbContext contex);
     }
 }

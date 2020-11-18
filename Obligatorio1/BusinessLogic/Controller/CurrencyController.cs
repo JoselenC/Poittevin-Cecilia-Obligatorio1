@@ -38,13 +38,11 @@ namespace BusinessLogic
             return Repository.FindCurrency(currency);
         }      
 
-        public void EditCurrency(Currency oldCurrency, string name, string symbol, double quotation)
+        public void UpdateCurrency(Currency oldCurrency, Currency newCurrency)
         {
-            Repository.DeleteCurrencyToEdit(oldCurrency);
-            SetCurrency(name, symbol, quotation);
-            Currency newCurrency = new Currency { Name = name, Quotation = quotation, Symbol = symbol };
+            Repository.UpdateCurrency(oldCurrency, newCurrency);
             Repository.EditCurrencyAllExpense(oldCurrency, newCurrency);
-            
         }
+
     }
 }

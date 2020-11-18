@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BusinessLogic;
 using BusinessLogic.Repository;
@@ -9,9 +11,9 @@ namespace InterfazLogic
 {
     public partial class EditCategory : UserControl
     {
-        public List<string> KeyWords { get; set; }
         private CategoryController categoryController;
         private Category category;
+        private BindingList<string> EditableKeyWords = new BindingList<string>();
         private int indexKeyWordToEdit;
 
         public EditCategory(IManageRepository vRepository)
@@ -49,17 +51,17 @@ namespace InterfazLogic
             string nameCategory = lstCatgories.SelectedItem.ToString();
             category = categoryController.FindCategoryByName(nameCategory);
             txtName.Text = category.Name;
-            foreach (var keyWord in category.KeyWords)
+            foreach (string keyWord in category.KeyWords)
             {
-                lstKwywords.Items.Add(keyWord);
+                EditableKeyWords.Add(keyWord);
             }
+            lstKwywords.DataSource = EditableKeyWords;
             txtKeyWord.Enabled = true;
             txtName.Enabled = true;
         }
 
         private void btnEditCategory_Click(object sender, EventArgs e)
         {
-            lstKwywords.Items.Clear();
             if (lstCatgories.SelectedIndex >= 0)
                 EditTheCategory();
             else
@@ -115,7 +117,6 @@ namespace InterfazLogic
             if (lstKwywords.SelectedIndex >= 0)
             {
                 int index = lstKwywords.SelectedIndex;
-                KeyWords.RemoveAt(index);
                 lstKwywords.Items.RemoveAt(index);
                 lblKyWords.Text = "";
             }        
@@ -147,14 +148,14 @@ namespace InterfazLogic
             if (lstCatgories.SelectedIndex >= 0)
             {
 
-                if (KeyWords.Count > 0)
+                if (lstKwywords.Items.Count > 0)
                 {
                     indexKeyWordToEdit = lstKwywords.SelectedIndex;
                     if (indexKeyWordToEdit >= 0)
                     {
-                        EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstKwywords, categoryController);
-                        editKeyWord.Show();
-                        lblKyWords.Text = "";
+                        EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(), categoryController);
+                        editKeyWord.ShowDialog();
+                        EditableKeyWords[indexKeyWordToEdit] = editKeyWord.KeyWord;
                         txtKeyWord.Enabled = true;
                         txtName.Enabled = true;
                     }
@@ -164,7 +165,7 @@ namespace InterfazLogic
                         lblKyWords.ForeColor = Color.Red;
                     }
                 }
-                else if (KeyWords.Count <= 0)
+                else if (lstKwywords.Items.Count <= 0)
                 {
                     lblKyWords.Text = "There aren't key words to edit";
                     lblKyWords.ForeColor = Color.Red;
@@ -184,8 +185,13 @@ namespace InterfazLogic
             {
                 lblEditCategories.Text = "Select a category to edit o delete";
                 lblEditCategories.ForeColor = Color.Red;
-            }
-            categoryController.EditCategory(category, txtName.Text, KeyWords);
+            };
+            Category newCategory = new Category()
+            {
+                Name = txtName.Text,
+                KeyWords = EditableKeyWords.ToList()
+            };
+            categoryController.UpdateCategory(category, newCategory);
             MessageBox.Show("Category " + txtName.Text + " was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             lstCatgories.Items.Remove(category);
             Visible = false;

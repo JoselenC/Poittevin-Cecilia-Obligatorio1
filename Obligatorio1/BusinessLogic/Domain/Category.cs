@@ -41,21 +41,25 @@ namespace BusinessLogic
 
         private void SetKeyWords(List<string> vKeyWords)
         {
-            if (vKeyWords.Count <= 10)
+            if (!(vKeyWords is null))
             {
-                foreach (string keyWord in vKeyWords)
+                if (vKeyWords.Count <= 10)
                 {
-                    KeyWord keyWordToAdd = new KeyWord()
+                    foreach (string keyWord in vKeyWords)
                     {
-                        Value = keyWord
-                    };
-                    keyWords.Add(keyWordToAdd);
+                        KeyWord keyWordToAdd = new KeyWord()
+                        {
+                            Value = keyWord
+                        };
+                        keyWords.Add(keyWordToAdd);
+                    }
+                }
+                else
+                {
+                    throw new ExcepcionInvalidKeyWordsLengthCategory();
                 }
             }
-            else
-            {
-                throw new ExcepcionInvalidKeyWordsLengthCategory();
-            }
+           
         }
 
         public override bool Equals(object obj)
@@ -63,7 +67,7 @@ namespace BusinessLogic
             if (obj is Category category)
             {
                 bool isEqualName = Name == category.Name;
-                bool isEqualKeyWords = KeyWords.Equals(category.KeyWords);
+                bool isEqualKeyWords = keyWords.SequenceEqual(category.keyWords);
                 return isEqualName && isEqualKeyWords;
             }
             return false;

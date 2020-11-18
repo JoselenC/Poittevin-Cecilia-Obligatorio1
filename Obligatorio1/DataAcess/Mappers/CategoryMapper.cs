@@ -4,30 +4,34 @@ using BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 
 namespace DataAcess.Mappers
 {
-    class CategoryMapper : IMapper<Category, CategoryDto>
+    public class CategoryMapper : IMapper<Category, CategoryDto>
 
     {
         public CategoryMapper()
         {
         }
-
-        public CategoryDto DomainToDto(Category obj, DbContext context)
+        private List<KeyWordsDto> createKeyWordsDto(List<string> keyWords)
         {
             List<KeyWordsDto> KeyWordsDto = new List<KeyWordsDto>();
-            foreach (string KeyWord in obj.KeyWords)
+            foreach (string KeyWord in keyWords)
             {
                 KeyWordsDto.Add(new KeyWordsDto()
                 {
                     Value = KeyWord
                 });
             };
+            return KeyWordsDto;
+        }
+        public CategoryDto DomainToDto(Category obj, DbContext context)
+        {
             return new CategoryDto()
             {
                 Name = obj.Name,
-                KeyWords= KeyWordsDto
+                KeyWords= createKeyWordsDto(obj.KeyWords)
             };
         }
 
@@ -35,17 +39,38 @@ namespace DataAcess.Mappers
         {
             List<string> keyWords = new List<string>();
             context.Entry(obj).Collection("KeyWords").Query().Load();
-            foreach (KeyWordsDto keyWord in obj.KeyWords)
+            if(!(obj.KeyWords is null))
             {
-                keyWords.Add(
-                    keyWord.Value
-                );
-            };
+                foreach (KeyWordsDto keyWord in obj.KeyWords)
+                {
+                    keyWords.Add(
+                        keyWord.Value
+                    );
+                };
+            }
             return new Category()
             {
                 Name = obj.Name,
                 KeyWords = keyWords
             };
+        }
+
+        public CategoryDto UpdateDtoObject(CategoryDto objToUpdate, Category updatedObject, DbContext context)
+        {
+            objToUpdate.Name = updatedObject.Name;
+            List<KeyWordsDto> diffListOldValues = objToUpdate.KeyWords.Where(x => updatedObject.KeyWords.Contains(x.Value)).ToList();
+            List<string> diffListNewValues = updatedObject.KeyWords.Where(x => !objToUpdate.KeyWords.Contains(new KeyWordsDto() { Value = x })).ToList();
+
+            diffListOldValues.AddRange(diffListNewValues.Select(x => new KeyWordsDto() { Value = x }));
+
+
+            List<KeyWordsDto> keyWordsToDelete = objToUpdate.KeyWords.Where(x => !diffListOldValues.Contains(x)).ToList();
+            foreach (KeyWordsDto keyWordsDto in keyWordsToDelete)
+            {
+                context.Entry(keyWordsDto).State = EntityState.Deleted;
+            };
+            objToUpdate.KeyWords = diffListOldValues;
+            return objToUpdate;
         }
     }
 }

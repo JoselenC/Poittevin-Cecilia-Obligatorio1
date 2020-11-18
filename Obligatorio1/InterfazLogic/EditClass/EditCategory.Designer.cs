@@ -53,47 +53,52 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.label2.Font = new System.Drawing.Font("AR CENA", 24F, System.Drawing.FontStyle.Bold);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.DarkGoldenrod;
-            this.label2.Location = new System.Drawing.Point(24, 16);
+            this.label2.Location = new System.Drawing.Point(9, 7);
+            this.label2.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1059, 92);
+            this.label2.Size = new System.Drawing.Size(506, 37);
             this.label2.TabIndex = 10;
             this.label2.Text = "              Edit category               ";
             // 
             // lblCategories
             // 
             this.lblCategories.AutoSize = true;
-            this.lblCategories.Location = new System.Drawing.Point(55, 161);
+            this.lblCategories.Location = new System.Drawing.Point(21, 68);
+            this.lblCategories.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblCategories.Name = "lblCategories";
-            this.lblCategories.Size = new System.Drawing.Size(153, 32);
+            this.lblCategories.Size = new System.Drawing.Size(57, 13);
             this.lblCategories.TabIndex = 11;
             this.lblCategories.Text = "Categories";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(55, 314);
+            this.label1.Location = new System.Drawing.Point(21, 132);
+            this.label1.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 32);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "Name";
             // 
             // lblKeyWords
             // 
             this.lblKeyWords.AutoSize = true;
-            this.lblKeyWords.Location = new System.Drawing.Point(55, 515);
+            this.lblKeyWords.Location = new System.Drawing.Point(21, 216);
+            this.lblKeyWords.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblKeyWords.Name = "lblKeyWords";
-            this.lblKeyWords.Size = new System.Drawing.Size(145, 32);
+            this.lblKeyWords.Size = new System.Drawing.Size(56, 13);
             this.lblKeyWords.TabIndex = 14;
             this.lblKeyWords.Text = "KeyWords";
             // 
             // btnEditCategory
             // 
             this.btnEditCategory.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditCategory.Location = new System.Drawing.Point(858, 161);
+            this.btnEditCategory.Location = new System.Drawing.Point(322, 68);
+            this.btnEditCategory.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnEditCategory.Name = "btnEditCategory";
-            this.btnEditCategory.Size = new System.Drawing.Size(220, 62);
+            this.btnEditCategory.Size = new System.Drawing.Size(82, 26);
             this.btnEditCategory.TabIndex = 16;
             this.btnEditCategory.Text = "Edit Category";
             this.btnEditCategory.UseVisualStyleBackColor = false;
@@ -102,49 +107,53 @@
             // lblEditCategories
             // 
             this.lblEditCategories.AutoSize = true;
-            this.lblEditCategories.Location = new System.Drawing.Point(229, 230);
+            this.lblEditCategories.Location = new System.Drawing.Point(86, 96);
+            this.lblEditCategories.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblEditCategories.Name = "lblEditCategories";
-            this.lblEditCategories.Size = new System.Drawing.Size(0, 32);
+            this.lblEditCategories.Size = new System.Drawing.Size(0, 13);
             this.lblEditCategories.TabIndex = 17;
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(236, 314);
+            this.txtName.Location = new System.Drawing.Point(88, 132);
+            this.txtName.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(591, 38);
+            this.txtName.Size = new System.Drawing.Size(224, 20);
             this.txtName.TabIndex = 18;
             // 
             // lstCatgories
             // 
             this.lstCatgories.FormattingEnabled = true;
-            this.lstCatgories.ItemHeight = 31;
-            this.lstCatgories.Location = new System.Drawing.Point(235, 161);
+            this.lstCatgories.Location = new System.Drawing.Point(88, 68);
+            this.lstCatgories.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.lstCatgories.Name = "lstCatgories";
-            this.lstCatgories.Size = new System.Drawing.Size(594, 66);
+            this.lstCatgories.Size = new System.Drawing.Size(225, 30);
             this.lstCatgories.TabIndex = 19;
             // 
             // lstKwywords
             // 
             this.lstKwywords.FormattingEnabled = true;
-            this.lstKwywords.ItemHeight = 31;
-            this.lstKwywords.Location = new System.Drawing.Point(236, 515);
+            this.lstKwywords.Location = new System.Drawing.Point(88, 216);
+            this.lstKwywords.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.lstKwywords.Name = "lstKwywords";
-            this.lstKwywords.Size = new System.Drawing.Size(594, 97);
+            this.lstKwywords.Size = new System.Drawing.Size(225, 43);
             this.lstKwywords.TabIndex = 20;
             // 
             // txtKeyWord
             // 
-            this.txtKeyWord.Location = new System.Drawing.Point(237, 419);
+            this.txtKeyWord.Location = new System.Drawing.Point(89, 176);
+            this.txtKeyWord.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.txtKeyWord.Name = "txtKeyWord";
-            this.txtKeyWord.Size = new System.Drawing.Size(591, 38);
+            this.txtKeyWord.Size = new System.Drawing.Size(224, 20);
             this.txtKeyWord.TabIndex = 22;
             // 
             // btnEdit
             // 
             this.btnEdit.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEdit.Location = new System.Drawing.Point(858, 515);
+            this.btnEdit.Location = new System.Drawing.Point(322, 216);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(225, 63);
+            this.btnEdit.Size = new System.Drawing.Size(84, 26);
             this.btnEdit.TabIndex = 23;
             this.btnEdit.Text = "Edit key word";
             this.btnEdit.UseVisualStyleBackColor = false;
@@ -153,9 +162,10 @@
             // btnDelete
             // 
             this.btnDelete.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDelete.Location = new System.Drawing.Point(858, 584);
+            this.btnDelete.Location = new System.Drawing.Point(322, 245);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(229, 63);
+            this.btnDelete.Size = new System.Drawing.Size(86, 26);
             this.btnDelete.TabIndex = 24;
             this.btnDelete.Text = "Delete key word";
             this.btnDelete.UseVisualStyleBackColor = false;
@@ -164,9 +174,10 @@
             // btnAddKeyWord
             // 
             this.btnAddKeyWord.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnAddKeyWord.Location = new System.Drawing.Point(854, 409);
+            this.btnAddKeyWord.Location = new System.Drawing.Point(320, 172);
+            this.btnAddKeyWord.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnAddKeyWord.Name = "btnAddKeyWord";
-            this.btnAddKeyWord.Size = new System.Drawing.Size(233, 63);
+            this.btnAddKeyWord.Size = new System.Drawing.Size(87, 26);
             this.btnAddKeyWord.TabIndex = 26;
             this.btnAddKeyWord.Text = "Add key word";
             this.btnAddKeyWord.UseVisualStyleBackColor = false;
@@ -175,9 +186,10 @@
             // btnAccept
             // 
             this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(238, 736);
+            this.btnAccept.Location = new System.Drawing.Point(89, 309);
+            this.btnAccept.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(227, 73);
+            this.btnAccept.Size = new System.Drawing.Size(85, 31);
             this.btnAccept.TabIndex = 28;
             this.btnAccept.Text = "Accept";
             this.btnAccept.UseVisualStyleBackColor = false;
@@ -186,42 +198,47 @@
             // lblName
             // 
             this.lblName.AutoSize = true;
-            this.lblName.Location = new System.Drawing.Point(232, 366);
+            this.lblName.Location = new System.Drawing.Point(87, 153);
+            this.lblName.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(0, 32);
+            this.lblName.Size = new System.Drawing.Size(0, 13);
             this.lblName.TabIndex = 29;
             // 
             // lblKeyWord
             // 
             this.lblKeyWord.AutoSize = true;
-            this.lblKeyWord.Location = new System.Drawing.Point(232, 460);
+            this.lblKeyWord.Location = new System.Drawing.Point(87, 193);
+            this.lblKeyWord.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblKeyWord.Name = "lblKeyWord";
-            this.lblKeyWord.Size = new System.Drawing.Size(0, 32);
+            this.lblKeyWord.Size = new System.Drawing.Size(0, 13);
             this.lblKeyWord.TabIndex = 30;
             // 
             // lblKyWords
             // 
             this.lblKyWords.AutoSize = true;
-            this.lblKyWords.Location = new System.Drawing.Point(232, 649);
+            this.lblKyWords.Location = new System.Drawing.Point(87, 272);
+            this.lblKyWords.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblKyWords.Name = "lblKyWords";
-            this.lblKyWords.Size = new System.Drawing.Size(0, 32);
+            this.lblKyWords.Size = new System.Drawing.Size(0, 13);
             this.lblKyWords.TabIndex = 31;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(55, 425);
+            this.label3.Location = new System.Drawing.Point(21, 178);
+            this.label3.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(132, 32);
+            this.label3.Size = new System.Drawing.Size(51, 13);
             this.label3.TabIndex = 32;
             this.label3.Text = "Key word";
             // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(600, 736);
+            this.btnCancel.Location = new System.Drawing.Point(225, 309);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(227, 73);
+            this.btnCancel.Size = new System.Drawing.Size(85, 31);
             this.btnCancel.TabIndex = 35;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -229,7 +246,7 @@
             // 
             // EditCategory
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.Controls.Add(this.btnCancel);
@@ -251,8 +268,9 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblCategories);
             this.Controls.Add(this.label2);
+            this.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.Name = "EditCategory";
-            this.Size = new System.Drawing.Size(1125, 833);
+            this.Size = new System.Drawing.Size(422, 349);
             this.ResumeLayout(false);
             this.PerformLayout();
 

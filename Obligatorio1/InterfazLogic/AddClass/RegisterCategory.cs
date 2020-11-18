@@ -115,10 +115,9 @@ namespace InterfazLogic
         {
             if (KeyWords.Count > 0)
             {
-                indexKeyWordToEdit = lstCategories.SelectedIndex;
                 if (indexKeyWordToEdit >= 0)
                 {
-                    EditKeyWord editKeyWord = new EditKeyWord(KeyWords, indexKeyWordToEdit, lstCategories,categoryController);
+                    EditKeyWord editKeyWord = new EditKeyWord(lstCategories.SelectedIndex.ToString(), categoryController);
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
                     lblEdit.Text = "";

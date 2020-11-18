@@ -6,6 +6,8 @@ using System.Linq;
 using LinqKit;
 using DataAccess.Mappers;
 using BusinessLogic;
+using System.Data.Entity.Validation;
+using System.Data.Entity.Infrastructure;
 
 namespace DataAccess
 {
@@ -20,11 +22,33 @@ namespace DataAccess
         {
             using (ContextDB context = new ContextDB())
             {
-                var TDto = mapper.DomainToDto(objectToAdd, context);
-                var entity = context.Set<T>();
-                entity.Add(TDto);
-                context.SaveChanges();
+                try
+                {
+                    var TDto = mapper.DomainToDto(objectToAdd, context);
+                    var entity = context.Set<T>();
+                    entity.Add(TDto);
+                    context.SaveChanges();
+                }
+                catch (DbUpdateException)
+                {
+                    throw new ExceptionUnableToSaveData();
+                };
+                
             }
+        }
+
+        private T FindDto(Predicate<D> condition, ContextDB context)
+        {
+            DbSet<T> entity = context.Set<T>();
+            List<T> TDtos = entity.ToList();
+            foreach (var TDto in TDtos)
+            {
+                var DDto = mapper.DtoToDomain(TDto, context);
+                var condResult = condition(DDto);
+                if (condResult)
+                    return TDto;
+            };
+            throw new ValueNotFound();
         }
 
         public void Delete(D objectToDelete)
@@ -32,7 +56,8 @@ namespace DataAccess
             using (ContextDB context = new ContextDB())
             {
                 var entity = context.Set<T>();
-                entity.Remove(mapper.DomainToDto(objectToDelete, context));
+                var ObjectToDeleteDto = FindDto(x => x.Equals(objectToDelete), context);
+                entity.Remove(ObjectToDeleteDto);
                 context.SaveChanges();
             }
         }
@@ -42,16 +67,15 @@ namespace DataAccess
             using (ContextDB context = new ContextDB())
             {
                 DbSet<T> entity = context.Set<T>();
-                T TDto;
-                try
+                List<T> TDtos = entity.ToList();
+                foreach (var TDto in TDtos)
                 {
-                    TDto = entity.ToList().First(x => condition(mapper.DtoToDomain(x, context)));
-                }
-                catch (InvalidOperationException)
-                {
-                    throw new ValueNotFound();
-                }
-                return mapper.DtoToDomain(TDto, context);
+                    var DDto = mapper.DtoToDomain(TDto, context);
+                    var condResult = condition(DDto);
+                    if (condResult)
+                        return DDto;
+                };
+                throw new ValueNotFound();
             }
         }
 
@@ -72,6 +96,18 @@ namespace DataAccess
         public void Set(List<D> objectToAdd)
         {
             throw new NotImplementedException();
+        }
+
+        public D Update(D OldObject, D UpdatedObject)
+        {
+            using (ContextDB context = new ContextDB())
+            {
+                DbSet<T> entity = context.Set<T>();
+                T objToUpdate = FindDto(x => x.Equals(OldObject), context);
+                mapper.UpdateDtoObject(objToUpdate, UpdatedObject, context);
+                context.SaveChanges();
+                return UpdatedObject;
+            }
         }
     }
 }

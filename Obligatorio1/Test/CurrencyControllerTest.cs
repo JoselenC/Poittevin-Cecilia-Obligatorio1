@@ -93,22 +93,6 @@ namespace Test
             currencyController.SetCurrency("euro", "E", 43);
             CollectionAssert.AreEqual(currencyController.GetCurrencies(), moniesExpected);
         }
-
-        [TestMethod]
-        public void Editcurrency()
-        {
-
-            DateTime month = new DateTime(2020, 8, 24);
-            Currency currency = new Currency { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            Currency currency2 = new Currency { Name = "euro", Quotation = 40, Symbol = "E" };
-            Category category = new Category() { Name="Entertainment" };
-            Expense expense1 = new Expense { Amount = 23, CreationDate = month, Description = "entertainment", Currency=currency2,Category=category};
-            IManageRepository repository = new ManageMemoryRepository();
-            repository.SetExpense(23,month,"entertainment",category,currency);
-            CurrencyController currencyController = new CurrencyController(repository);
-            currencyController.EditCurrency(currency, "euro", "E",40);
-            Assert.AreEqual(currencyController.Repository.GetExpenses().ToArray()[0].Currency,expense1.Currency);
-        }
     }
 
 }

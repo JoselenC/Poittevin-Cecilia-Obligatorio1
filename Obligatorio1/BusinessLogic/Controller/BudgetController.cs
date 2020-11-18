@@ -54,13 +54,13 @@ namespace BusinessLogic
         {
             Months mMonth = StringToMonthsEnum(month);
             Budget returnBudget;
-            List<Category> categories = Repository.GetCategories();
             try
             {
                 returnBudget = FindBudget(month, year);
             }
             catch (NoFindBudget)
             {
+                List<Category> categories = Repository.GetCategories();
                 returnBudget = CreateBudget(year, categories, mMonth);
             }
             return returnBudget;

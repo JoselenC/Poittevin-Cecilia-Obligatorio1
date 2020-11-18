@@ -69,7 +69,6 @@ namespace InterfazLogic
             string month = nMonth.SelectedItem.ToString();
             int year = (int)nYear.Value;
             return budgetController.BudgetGetOrCreate(month, year);
-
         }
 
         private void LoadBudgetData(Budget budget)
