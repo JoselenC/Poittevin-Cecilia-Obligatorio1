@@ -22,18 +22,11 @@ namespace DataAccess
         {
             using (ContextDB context = new ContextDB())
             {
-                try
-                {
-                    var TDto = mapper.DomainToDto(objectToAdd, context);
-                    var entity = context.Set<T>();
+                var TDto = mapper.DomainToDto(objectToAdd, context);
+                var entity = context.Set<T>();
+                if (context.Entry(TDto).State == EntityState.Detached)
                     entity.Add(TDto);
-                    context.SaveChanges();
-                }
-                catch (DbUpdateException)
-                {
-                    throw new ExceptionUnableToSaveData();
-                };
-                
+                context.SaveChanges();
             }
         }
 

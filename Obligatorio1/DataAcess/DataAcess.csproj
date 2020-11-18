@@ -75,6 +75,14 @@
     <Compile Include="Migrations\202011172338200_Initial.designer.cs">
       <DependentUpon>202011172338200_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011181955218_ExposeFKs.cs" />
+    <Compile Include="Migrations\202011181955218_ExposeFKs.designer.cs">
+      <DependentUpon>202011181955218_ExposeFKs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011181957194_CategoryFKBudgetCategory.cs" />
+    <Compile Include="Migrations\202011181957194_CategoryFKBudgetCategory.designer.cs">
+      <DependentUpon>202011181957194_CategoryFKBudgetCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -91,6 +99,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011172338200_Initial.resx">
       <DependentUpon>202011172338200_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011181955218_ExposeFKs.resx">
+      <DependentUpon>202011181955218_ExposeFKs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011181957194_CategoryFKBudgetCategory.resx">
+      <DependentUpon>202011181957194_CategoryFKBudgetCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

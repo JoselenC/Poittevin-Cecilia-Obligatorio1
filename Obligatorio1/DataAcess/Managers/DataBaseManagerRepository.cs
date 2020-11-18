@@ -2,6 +2,7 @@
 using DataAccess;
 using DataAcess.DBObjects;
 using DataAcess.Mappers;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 
@@ -20,7 +21,7 @@ namespace DataAcces
                 Currency money = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
                 Currencies.Add(money);
             }
-            catch (ExceptionUnableToSaveData) {}
+            catch (Exception) {}
         }
     }
 }

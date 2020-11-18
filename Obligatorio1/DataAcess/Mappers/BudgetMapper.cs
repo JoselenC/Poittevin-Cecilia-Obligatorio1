@@ -12,39 +12,67 @@ namespace DataAcess.Mappers
 {
     class BudgetMapper: IMapper<Budget, BudgetDto>
     {
+
+        private List<BudgetCategoryDto> updateBudgetCategories(Budget obj, List<BudgetCategoryDto> budgetCategoriesDtos, DbContext context)
+        {
+            CategoryMapper categoryMapper = new CategoryMapper();
+            List<BudgetCategory> newBudgetCategories = obj.BudgetCategories;
+
+            if (!(budgetCategoriesDtos is null))
+                foreach (BudgetCategoryDto budgetCategoryDto in budgetCategoriesDtos)
+                {
+                    context.Entry(budgetCategoryDto).State = EntityState.Modified;
+                    context.Entry(budgetCategoryDto).Reference("Category").Load();
+                    context.Entry(budgetCategoryDto.Category).State = EntityState.Unchanged;
+                    BudgetCategory budgetCategory = newBudgetCategories.Find(x => x.Category.Name == budgetCategoryDto.Category.Name);
+
+                    budgetCategoryDto.Amount = budgetCategory.Amount;
+                    newBudgetCategories.Remove(budgetCategory);
+                }
+            else
+                budgetCategoriesDtos = new List<BudgetCategoryDto>();
+            foreach (BudgetCategory newBudgetCategory in newBudgetCategories)
+            {
+                budgetCategoriesDtos.Add(new BudgetCategoryDto()
+                {
+                    Amount = newBudgetCategory.Amount,
+                    Category = categoryMapper.DomainToDto(newBudgetCategory.Category, context)
+                });
+            }
+            return budgetCategoriesDtos;
+        }
         public BudgetDto DomainToDto(Budget obj, DbContext context)
         {
-            List<BudgetCategoryDto> budgetCategories = new List<BudgetCategoryDto>();
-            CategoryMapper categoryMapper = new CategoryMapper();
-            // TODO: BudgetCategory, deberia tener su propio mapper? Si no lo usa mas nadie que Budget, no creo que sea necesario
-            // en ese caso hay que agregarlo a la doc, Si se usa fuera de Budget, tendremos que crearle un mapper y usarlo aca (al igual que el de category)
-            foreach (BudgetCategory budgetCategory in obj.BudgetCategories)
+
+            DbSet<BudgetDto> BudgetDtoSet = context.Set<BudgetDto>();
+            BudgetDto budgetDto = BudgetDtoSet
+                .Where(x => x.Month == (int)obj.Month)
+                .Where(x => x.Year == obj.Year)
+                .FirstOrDefault();
+            if (budgetDto is null)
             {
-                CategoryDto categoryDto = categoryMapper.DomainToDto(budgetCategory.Category, context);
-                context.Entry(categoryDto).State = EntityState.Unchanged;
-                BudgetCategoryDto budgetCategoryDto = new BudgetCategoryDto()
+                budgetDto = new BudgetDto()
                 {
-                    Category = categoryDto,
-                    Amount = budgetCategory.Amount
+                    Month = (int)obj.Month,
+                    TotalAmount = obj.TotalAmount,
+                    Year = obj.Year,
                 };
-                // context.Entry(budgetCategoryDto).State = EntityState.Ad;
-                budgetCategories.Add(budgetCategoryDto);
+            }
+            else
+            {
+                context.Entry(budgetDto).Collection("BudgetCategories").Load();
+                context.Entry(budgetDto).State = EntityState.Modified;
             }
 
-            return new BudgetDto() {
-                Month = (int)obj.Month,
-                TotalAmount = obj.TotalAmount,
-                Year = obj.Year,
-                BudgetCategories=budgetCategories
-            };
+            budgetDto.BudgetCategories = updateBudgetCategories(obj, budgetDto.BudgetCategories, context);
+
+            return budgetDto;
         }
 
         public Budget DtoToDomain(BudgetDto obj, DbContext context)
         {
             List<BudgetCategory> budgetCategories = new List<BudgetCategory>();
             CategoryMapper categoryMapper = new CategoryMapper();
-            // TODO: BudgetCategory, deberia tener su propio mapper? Si no lo usa mas nadie que Budget, no creo que sea necesario
-            // en ese caso hay que agregarlo a la doc, Si se usa fuera de Budget, tendremos que crearle un mapper y usarlo aca (al igual que el de category)
             context.Entry(obj).Collection("BudgetCategories").Load();
             foreach (BudgetCategoryDto budgetCategory in obj.BudgetCategories)
             {

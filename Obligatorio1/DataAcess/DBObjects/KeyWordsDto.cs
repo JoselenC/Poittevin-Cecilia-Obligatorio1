@@ -16,6 +16,9 @@ namespace DataAcess.DBObjects
         [Index(IsUnique = true)]
         public string Value { get; set; }
 
+        public int CategoryDtoID { get; set; }
+        public CategoryDto CategoryDto { get; set; }
+
         public override bool Equals(object obj)
         {
             return obj is KeyWordsDto dto &&

@@ -14,25 +14,36 @@ namespace DataAcess.Mappers
         public CategoryMapper()
         {
         }
-        private List<KeyWordsDto> createKeyWordsDto(List<string> keyWords)
+        private List<KeyWordsDto> createKeyWordsDto(List<string> keyWords, DbContext context)
         {
             List<KeyWordsDto> KeyWordsDto = new List<KeyWordsDto>();
+            DbSet<KeyWordsDto> KeyWordsSet = context.Set<KeyWordsDto>();
+
+            
             foreach (string KeyWord in keyWords)
             {
-                KeyWordsDto.Add(new KeyWordsDto()
-                {
-                    Value = KeyWord
-                });
+                KeyWordsDto keyWordsDto = KeyWordsSet.Where(x => x.Value == KeyWord).First();
+                if(keyWordsDto is null)
+                    keyWordsDto = new KeyWordsDto()
+                    {
+                        Value = KeyWord
+                    };
+                KeyWordsDto.Add(keyWordsDto);
             };
             return KeyWordsDto;
         }
         public CategoryDto DomainToDto(Category obj, DbContext context)
         {
-            return new CategoryDto()
-            {
-                Name = obj.Name,
-                KeyWords= createKeyWordsDto(obj.KeyWords)
-            };
+            DbSet<CategoryDto> CategorySet = context.Set<CategoryDto>();
+            CategoryDto categoryDto = CategorySet.Where(x => x.Name == obj.Name).First();
+            if(categoryDto is null)
+                return new CategoryDto()
+                {
+                    Name = obj.Name,
+                };
+
+            categoryDto.KeyWords = createKeyWordsDto(obj.KeyWords, context);
+            return categoryDto;
         }
 
         public Category DtoToDomain(CategoryDto obj, DbContext context)
