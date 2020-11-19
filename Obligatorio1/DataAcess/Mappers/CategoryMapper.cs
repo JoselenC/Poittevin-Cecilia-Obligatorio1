@@ -35,8 +35,9 @@ namespace DataAcess.Mappers
         public CategoryDto DomainToDto(Category obj, DbContext context)
         {
             DbSet<CategoryDto> CategorySet = context.Set<CategoryDto>();
-            CategoryDto categoryDto = CategorySet.Where(x => x.Name == obj.Name).First();
-            if(categoryDto is null)
+            CategoryDto categoryDto = CategorySet.Where(x => x.Name == obj.Name).FirstOrDefault();
+            
+            if (categoryDto is null)
                 return new CategoryDto()
                 {
                     Name = obj.Name,
@@ -69,18 +70,18 @@ namespace DataAcess.Mappers
         public CategoryDto UpdateDtoObject(CategoryDto objToUpdate, Category updatedObject, DbContext context)
         {
             objToUpdate.Name = updatedObject.Name;
-            List<KeyWordsDto> diffListOldValues = objToUpdate.KeyWords.Where(x => updatedObject.KeyWords.Contains(x.Value)).ToList();
-            List<string> diffListNewValues = updatedObject.KeyWords.Where(x => !objToUpdate.KeyWords.Contains(new KeyWordsDto() { Value = x })).ToList();
-
-            diffListOldValues.AddRange(diffListNewValues.Select(x => new KeyWordsDto() { Value = x }));
-
-
-            List<KeyWordsDto> keyWordsToDelete = objToUpdate.KeyWords.Where(x => !diffListOldValues.Contains(x)).ToList();
-            foreach (KeyWordsDto keyWordsDto in keyWordsToDelete)
+            if (objToUpdate.KeyWords != null)
             {
-                context.Entry(keyWordsDto).State = EntityState.Deleted;
-            };
-            objToUpdate.KeyWords = diffListOldValues;
+                List<KeyWordsDto> diffListOldValues = objToUpdate.KeyWords.Where(x => updatedObject.KeyWords.Contains(x.Value)).ToList();
+                List<string> diffListNewValues = updatedObject.KeyWords.Where(x => !objToUpdate.KeyWords.Contains(new KeyWordsDto() { Value = x })).ToList();
+                diffListOldValues.AddRange(diffListNewValues.Select(x => new KeyWordsDto() { Value = x }));
+                List<KeyWordsDto> keyWordsToDelete = objToUpdate.KeyWords.Where(x => !diffListOldValues.Contains(x)).ToList();
+                foreach (KeyWordsDto keyWordsDto in keyWordsToDelete)
+                {
+                    context.Entry(keyWordsDto).State = EntityState.Deleted;
+                };
+                objToUpdate.KeyWords = diffListOldValues;
+            }
             return objToUpdate;
         }
     }

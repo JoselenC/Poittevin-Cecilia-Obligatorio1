@@ -83,6 +83,10 @@
     <Compile Include="Migrations\202011181957194_CategoryFKBudgetCategory.designer.cs">
       <DependentUpon>202011181957194_CategoryFKBudgetCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011182247144_ExpenseDto.cs" />
+    <Compile Include="Migrations\202011182247144_ExpenseDto.designer.cs">
+      <DependentUpon>202011182247144_ExpenseDto.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011181957194_CategoryFKBudgetCategory.resx">
       <DependentUpon>202011181957194_CategoryFKBudgetCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011182247144_ExpenseDto.resx">
+      <DependentUpon>202011182247144_ExpenseDto.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

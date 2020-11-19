@@ -48,6 +48,7 @@ namespace InterfazLogic
         {
             txtKeyWord.Enabled = true;
             txtName.Enabled = true;
+            EditableKeyWords = new BindingList<string>();
             string nameCategory = lstCatgories.SelectedItem.ToString();
             category = categoryController.FindCategoryByName(nameCategory);
             txtName.Text = category.Name;
@@ -55,6 +56,7 @@ namespace InterfazLogic
             {
                 EditableKeyWords.Add(keyWord);
             }
+           
             lstKwywords.DataSource = EditableKeyWords;
             txtKeyWord.Enabled = true;
             txtName.Enabled = true;

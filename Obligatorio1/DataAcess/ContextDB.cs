@@ -10,7 +10,6 @@ namespace DataAccess
         public DbSet<CategoryDto> Categories { get; set; }
         public DbSet<ExpenseDto> Expenses { get; set; }
         public DbSet<CurrencyDto> Currencies { get; set; }
-
         public DbSet<BudgetDto> Budgets { get; set; }
 
         public ContextDB() : base("name=DA1Obli")

@@ -50,7 +50,7 @@ namespace BusinessLogic
                 bool equalsAmount = amount == expense.amount;
                 bool equalsCreationDate = creationDate == expense.creationDate;
                 bool equalsDescription = description == expense.description;
-                bool equalsCurrency = Currency == expense.Currency;
+                bool equalsCurrency = Currency.Equals(expense.Currency);
                 return equalsAmount && equalsCreationDate && equalsDescription && equalsCurrency;
             }
             return false;

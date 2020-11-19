@@ -14,12 +14,21 @@ namespace DataAcess.Mappers
     {
         public CurrencyDto DomainToDto(Currency obj, DbContext context)
         {
+            DbSet<CurrencyDto> CurrencySet = context.Set<CurrencyDto>();
+            CurrencyDto currencyDto = CurrencySet
+                                               .Where(x => x.Name == obj.Name)
+                                               .Where(x => x.Quotation == obj.Quotation)
+                                               .Where(x => x.Symbol == obj.Symbol)
+                                               .FirstOrDefault();
+          
+            if(currencyDto is null)
             return new CurrencyDto()
             {
                 Name = obj.Name,
                 Quotation = obj.Quotation,
                 Symbol = obj.Symbol
             };
+            return currencyDto;
         }
 
         public Currency DtoToDomain(CurrencyDto obj, DbContext context)

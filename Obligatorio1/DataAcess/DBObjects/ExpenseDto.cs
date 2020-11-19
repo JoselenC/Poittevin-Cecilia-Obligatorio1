@@ -15,8 +15,10 @@ namespace DataAcess.DBObjects
 
         public DateTime CreationDate { get; set; }
 
+        public int CategoryDtoID { get; set; }
         public CategoryDto Category { get; set; }
 
+        public int CurrencyDtoID { get; set; }
         public CurrencyDto Currency { get; set; }
     }
 }

@@ -19,20 +19,44 @@ namespace DataAcess.Mappers
 
         public ExpenseDto DomainToDto(Expense obj, DbContext context)
         {
+            
             CategoryMapper categoryMapper = new CategoryMapper();
             CurrencyMapper currencyMapper = new CurrencyMapper();
             CategoryDto category = categoryMapper.DomainToDto(obj.Category, context);
             CurrencyDto currency = currencyMapper.DomainToDto(obj.Currency, context);
             context.Entry(category).State = EntityState.Unchanged;
             context.Entry(currency).State = EntityState.Unchanged;
-            return new ExpenseDto()
+
+            DbSet <ExpenseDto> expenseDtoSet = context.Set<ExpenseDto>();
+            ExpenseDto expenseDto = expenseDtoSet
+                .Where(x => x.Description == obj.Description)
+                .Where(x => x.Amount == obj.Amount)
+                .Where(x => x.CreationDate == obj.CreationDate)
+                .Where(x=>x.CreationDate.Hour==obj.CreationDate.Hour && x.CreationDate.Minute==obj.CreationDate.Minute && x.CreationDate.Second==obj.CreationDate.Second)
+                .FirstOrDefault();
+           
+            if (expenseDto is null)
             {
-                Description = obj.Description,
-                Amount = obj.Amount,
-                CreationDate = obj.CreationDate,
-                Category = category,
-                Currency = currency
-            };
+                expenseDto = new ExpenseDto()
+                {
+                    Description = obj.Description,
+                    Amount = obj.Amount,
+                    CreationDate = obj.CreationDate,
+                    Category = categoryMapper.DomainToDto(obj.Category, context),
+                    Currency = currencyMapper.DomainToDto(obj.Currency, context)
+                };
+
+            }
+            else
+            {
+                context.Entry(expenseDto).State = EntityState.Modified;
+                context.Entry(expenseDto).Reference("Category").Load();
+                context.Entry(expenseDto).Reference("Money").Load();
+                //context.Entry(expenseDto).Reference("Category").Load();
+                context.Entry(expenseDto).State = EntityState.Modified;
+            }
+
+            return expenseDto;
         }
 
         public Expense DtoToDomain(ExpenseDto obj, DbContext context)
