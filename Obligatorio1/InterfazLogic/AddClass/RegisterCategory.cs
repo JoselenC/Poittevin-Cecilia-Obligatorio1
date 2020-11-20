@@ -82,6 +82,7 @@ namespace InterfazLogic
             string keyWord = tbKeyWord.Text;
             try
             {
+                KeyWord key = new KeyWord(keyWord, KeyWords);
                 categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
                 KeyWords.Add(keyWord);
                 lstCategories.Items.Add(keyWord);
@@ -117,7 +118,7 @@ namespace InterfazLogic
             {
                 if (indexKeyWordToEdit >= 0)
                 {
-                    EditKeyWord editKeyWord = new EditKeyWord(lstCategories.SelectedIndex.ToString(), categoryController);
+                    EditKeyWord editKeyWord = new EditKeyWord(lstCategories.SelectedIndex.ToString(), categoryController,KeyWords);
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
                     lblEdit.Text = "";

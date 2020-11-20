@@ -44,7 +44,17 @@ namespace BusinessLogic
 
         public KeyWord()
         {
-        }    
+            
+        }   
+        
+        public KeyWord(string vKeyWord, List<string> keyWords)
+        {
+            if (vKeyWord == "")
+                throw new InvalidKeyWord();
+            if (keyWords.Contains(vKeyWord))
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
+            value = vKeyWord;
+        }
 
     }
 }

@@ -22,7 +22,7 @@ namespace DataAcess.Mappers
             
             foreach (string KeyWord in keyWords)
             {
-                KeyWordsDto keyWordsDto = KeyWordsSet.Where(x => x.Value == KeyWord).First();
+                KeyWordsDto keyWordsDto = KeyWordsSet.Where(x => x.Value == KeyWord).FirstOrDefault();
                 if(keyWordsDto is null)
                     keyWordsDto = new KeyWordsDto()
                     {
@@ -38,7 +38,7 @@ namespace DataAcess.Mappers
             CategoryDto categoryDto = CategorySet.Where(x => x.Name == obj.Name).FirstOrDefault();
             
             if (categoryDto is null)
-                return new CategoryDto()
+                categoryDto=new CategoryDto()
                 {
                     Name = obj.Name,
                 };

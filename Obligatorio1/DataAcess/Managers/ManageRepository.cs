@@ -48,18 +48,25 @@ namespace DataAccess
             return false;
         }
 
+        private bool AlreadyExistTheCategoryName(string categoryName)
+        {
+            bool exist = true;
+            foreach (Category category in GetCategories())
+            {
+                if (categoryName.ToLower() == category.Name.ToLower())
+                    exist = false;
+            }
+            return exist;
+        }
+
+
         private void AddCategory(Category category)
         {
-            try
-            {
-                if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
-                    throw new ExcepcionInvalidRepeatedKeyWordsCategory();
-                Categories.Add(category);
-            }
-            catch (ExceptionUnableToSaveData)
-            {
+            if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
+            if (!AlreadyExistTheCategoryName(category.Name))
                 throw new ExcepcionInvalidRepeatedNameCategory();
-            }
+            Categories.Add(category);
         }
 
         public void SetBudget(Budget vBudget)

@@ -80,7 +80,8 @@ namespace DataAccess
                 List<D> Dlist = new List<D>();
                 foreach (T item in entity.ToList())
                 {
-                    Dlist.Add(mapper.DtoToDomain(item, context));
+                    var x = mapper.DtoToDomain(item, context);
+                    Dlist.Add(x);
                 }
                 return Dlist;
             }

@@ -12,7 +12,8 @@ namespace InterfazLogic
 
         public string KeyWord { get; set; }
 
-        public EditKeyWord(string keyWord, CategoryController vCategoryController)
+        public List<string> KeyWords { get; set; }
+        public EditKeyWord(string keyWord, CategoryController vCategoryController,List<string> vKeyWords)
         {            
             InitializeComponent();
             categoryController = vCategoryController;
@@ -21,12 +22,14 @@ namespace InterfazLogic
             StartPosition = FormStartPosition.CenterScreen;
             tbEdit.Clear();
             tbEdit.Text = keyWord;
+            KeyWords = vKeyWords;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
+                KeyWord key = new KeyWord(tbEdit.Text, KeyWords);
                 categoryController.AlreadyExistKeyWordInAnoterCategory(tbEdit.Text);
                 KeyWord = tbEdit.Text;
                 Close();

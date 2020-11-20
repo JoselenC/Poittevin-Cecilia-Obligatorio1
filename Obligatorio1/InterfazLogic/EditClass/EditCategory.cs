@@ -155,7 +155,8 @@ namespace InterfazLogic
                     indexKeyWordToEdit = lstKwywords.SelectedIndex;
                     if (indexKeyWordToEdit >= 0)
                     {
-                        EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(), categoryController);
+                        List<string> keyWords = EditableKeyWords.ToList();
+                        EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(), categoryController,keyWords);
                         editKeyWord.ShowDialog();
                         EditableKeyWords[indexKeyWordToEdit] = editKeyWord.KeyWord;
                         txtKeyWord.Enabled = true;
