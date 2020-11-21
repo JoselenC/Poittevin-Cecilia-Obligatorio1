@@ -44,9 +44,7 @@ namespace BusinessLogic
         
         public Category UpdateCategory(Category oldCategory, Category newCategory)
         {
-            newCategory = Repository.UpdateCategory(oldCategory, newCategory);
-            EditCategoryInAllExpenses(oldCategory, newCategory);
-            EditCategoryInAllBudgets(oldCategory, newCategory);
+            newCategory = Repository.UpdateCategory(oldCategory, newCategory);          
             return newCategory;
         }
 

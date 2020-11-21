@@ -20,13 +20,20 @@ namespace DataAccess
         }
         public void Add(D objectToAdd)
         {
-            using (ContextDB context = new ContextDB())
+            try
             {
-                var TDto = mapper.DomainToDto(objectToAdd, context);
-                var entity = context.Set<T>();
-                if (context.Entry(TDto).State == EntityState.Detached)
-                    entity.Add(TDto);
-                context.SaveChanges();
+                using (ContextDB context = new ContextDB())
+                {
+                    var TDto = mapper.DomainToDto(objectToAdd, context);
+                    var entity = context.Set<T>();
+                    if (context.Entry(TDto).State == EntityState.Detached)
+                        entity.Add(TDto);
+                    context.SaveChanges();
+                }
+            }
+            catch (DbUpdateException)
+            {
+                throw new ExceptionUnableToSaveData();
             }
         }
 
@@ -94,13 +101,20 @@ namespace DataAccess
 
         public D Update(D OldObject, D UpdatedObject)
         {
-            using (ContextDB context = new ContextDB())
+            try
             {
-                DbSet<T> entity = context.Set<T>();
-                T objToUpdate = FindDto(x => x.Equals(OldObject), context);
-                mapper.UpdateDtoObject(objToUpdate, UpdatedObject, context);
-                context.SaveChanges();
-                return UpdatedObject;
+                using (ContextDB context = new ContextDB())
+                {
+                    DbSet<T> entity = context.Set<T>();
+                    T objToUpdate = FindDto(x => x.Equals(OldObject), context);
+                    mapper.UpdateDtoObject(objToUpdate, UpdatedObject, context);
+                    context.SaveChanges();
+                    return UpdatedObject;
+                }
+            }
+            catch (DbUpdateException)
+            {
+                throw new ExceptionUnableToSaveData();
             }
         }
     }

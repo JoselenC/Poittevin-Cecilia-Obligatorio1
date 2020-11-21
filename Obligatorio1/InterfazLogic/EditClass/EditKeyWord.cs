@@ -10,10 +10,15 @@ namespace InterfazLogic
     {
         private CategoryController categoryController;
 
-        public string KeyWord { get; set; }
+        public int Index { get; set; }
 
+
+        public bool Edited { get; set; } = false;
+
+        public ListBox listKeyWords;
+        public string KeyWord { get; set; }
         public List<string> KeyWords { get; set; }
-        public EditKeyWord(string keyWord, CategoryController vCategoryController,List<string> vKeyWords)
+        public EditKeyWord(string keyWord, int indexToEdit,CategoryController vCategoryController,List<string> vKeyWords, ListBox lstkeyWords)
         {            
             InitializeComponent();
             categoryController = vCategoryController;
@@ -23,15 +28,22 @@ namespace InterfazLogic
             tbEdit.Clear();
             tbEdit.Text = keyWord;
             KeyWords = vKeyWords;
+            KeyWord = keyWord;
+            Index = indexToEdit;
+            listKeyWords = lstkeyWords;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            string keyWordEdited = tbEdit.Text;
             try
             {
-                KeyWord key = new KeyWord(tbEdit.Text, KeyWords);
-                categoryController.AlreadyExistKeyWordInAnoterCategory(tbEdit.Text);
-                KeyWord = tbEdit.Text;
+                KeyWord key = new KeyWord(keyWordEdited, KeyWords);
+                categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
+                KeyWords.Remove(KeyWord);
+                KeyWords.Add(keyWordEdited);
+                listKeyWords.DataSource = KeyWords;
+                
                 Close();
             }
             catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)

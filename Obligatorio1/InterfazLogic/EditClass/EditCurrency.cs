@@ -87,7 +87,7 @@ namespace InterfazLogic
                 currencyController.UpdateCurrency(currencyToEdit, newCurrency);
                 Visible = false;
             }
-            catch (ExceptionAlreadyExistTheCurrencyName)
+            catch (ExceptionUnableToSaveData)
             {
                 lblName.Text = "Already exist de currency name";
                 lblName.ForeColor = Color.Red;

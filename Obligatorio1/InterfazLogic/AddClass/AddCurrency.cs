@@ -37,7 +37,7 @@ namespace InterfazLogic
             {
                 TryAddNewCurrency();
             }
-            catch (ExceptionAlreadyExistTheCurrencyName)
+            catch (ExceptionUnableToSaveData)
             {
                 lblName.Text = "Already exist de currency name";
                 lblName.ForeColor = Color.Red;

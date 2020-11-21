@@ -13,6 +13,7 @@ namespace InterfazLogic
 
         public string KeyWordToEdit { get; set; }
         public List<string> KeyWords { get; set; }
+
         private int indexKeyWordToEdit;
         public RegisterCategory(IManageRepository vRepository)
         {
@@ -114,11 +115,13 @@ namespace InterfazLogic
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
+            indexKeyWordToEdit = lstCategories.SelectedIndex;
             if (KeyWords.Count > 0)
             {
                 if (indexKeyWordToEdit >= 0)
                 {
-                    EditKeyWord editKeyWord = new EditKeyWord(lstCategories.SelectedIndex.ToString(), categoryController,KeyWords);
+                    EditKeyWord editKeyWord = new EditKeyWord(lstCategories.SelectedItem.ToString(),indexKeyWordToEdit, categoryController,KeyWords,lstCategories);
+                    
                     editKeyWord.Show();
                     lblKeyWords.Text = "";
                     lblEdit.Text = "";

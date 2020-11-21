@@ -13,7 +13,7 @@ namespace InterfazLogic
     {
         private CategoryController categoryController;
         private Category category;
-        private BindingList<string> EditableKeyWords = new BindingList<string>();
+        private List<string> EditableKeyWords = new List<string>();
         private int indexKeyWordToEdit;
 
         public EditCategory(IManageRepository vRepository)
@@ -48,7 +48,7 @@ namespace InterfazLogic
         {
             txtKeyWord.Enabled = true;
             txtName.Enabled = true;
-            EditableKeyWords = new BindingList<string>();
+            EditableKeyWords = new List<string>();
             string nameCategory = lstCatgories.SelectedItem.ToString();
             category = categoryController.FindCategoryByName(nameCategory);
             txtName.Text = category.Name;
@@ -155,10 +155,10 @@ namespace InterfazLogic
                     indexKeyWordToEdit = lstKwywords.SelectedIndex;
                     if (indexKeyWordToEdit >= 0)
                     {
-                        List<string> keyWords = EditableKeyWords.ToList();
-                        EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(), categoryController,keyWords);
+                        EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(),indexKeyWordToEdit, categoryController,EditableKeyWords,lstKwywords);
                         editKeyWord.ShowDialog();
-                        EditableKeyWords[indexKeyWordToEdit] = editKeyWord.KeyWord;
+                        EditableKeyWords = editKeyWord.KeyWords;
+                        lstKwywords.DataSource = EditableKeyWords;
                         txtKeyWord.Enabled = true;
                         txtName.Enabled = true;
                     }
