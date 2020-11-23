@@ -8,9 +8,12 @@ namespace BusinessLogic.Domain
 {
     public class FactoryExportReport
     {
-        public void Export()
+        public IExportExpenseReport GetExpenseReportInstance(int index)
         {
-
+            if (index == 1)
+                return new ExpenseReportTXT();
+            else
+               return new ExpenseReportCSV();
         }
     }
 }

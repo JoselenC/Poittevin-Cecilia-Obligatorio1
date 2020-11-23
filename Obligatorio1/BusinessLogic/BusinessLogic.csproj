@@ -51,7 +51,9 @@
     <Compile Include="Domain\Category.cs" />
     <Compile Include="Controller\CategoryController.cs" />
     <Compile Include="Domain\EnumMonths.cs" />
-    <Compile Include="Domain\StrategyExportReport.cs" />
+    <Compile Include="Domain\ExpenseReportObject.cs" />
+    <Compile Include="Domain\ExpenseReportLine.cs" />
+    <Compile Include="Domain\FactoryExportReport.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="Domain\Expense.cs" />
     <Compile Include="Controller\BudgetController.cs" />

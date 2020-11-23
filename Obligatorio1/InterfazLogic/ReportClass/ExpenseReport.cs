@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using BusinessLogic;
 using System.IO;
 using BusinessLogic.Repository;
+using BusinessLogic.Domain;
 
 namespace InterfazLogic
 {
@@ -57,24 +58,20 @@ namespace InterfazLogic
                     lblMonth.ForeColor = Color.Red;
                 }
                 expenseReportByMonth = expenseController.GetExpenseByMonth(month);
+                ExpenseReportObject expenseReportObject = new ExpenseReportObject(month,expenseController.Repository);
+
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
-                foreach(Expense vExpense in expenseReportByMonth)
+                foreach(ExpenseReportLine vExpense in expenseReportObject.ExpenseReportLine)
                 {
-                    string date = vExpense.CreationDate.ToString("dd/MM/yyyy");
-                    string description = vExpense.Description;
-                    string name = vExpense.Category.Name;
-                    string currency = vExpense.Currency.Symbol;
-                    string amount = vExpense.Amount.ToString();
-                        totalAmount += vExpense.ConvertToPesos();
-                        item = listView1.Items.Add(date);
-                        item.SubItems.Add(description);
-                        item.SubItems.Add(name);
-                        item.SubItems.Add(currency);
-                        item.SubItems.Add(amount);                   
+                        item = listView1.Items.Add(vExpense.CreationDate.ToString("dd/MM/yyyy"));
+                        item.SubItems.Add(vExpense.Description);
+                        item.SubItems.Add(vExpense.Category.ToString());
+                        item.SubItems.Add(vExpense.Currency.Symbol);
+                        item.SubItems.Add(vExpense.Amount.ToString());                   
 
-                }                
-                lblTotalAmount.Text = "Total amount of the month " + month + " was " + totalAmount.ToString();
+                }
+                lblTotalAmount.Text = "Total amount of the month " + month + " in pesos was " + expenseReportObject.TotalAmount.ToString();
             }
             else
             {

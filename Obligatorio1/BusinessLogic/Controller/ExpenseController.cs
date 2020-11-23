@@ -1,13 +1,14 @@
 ﻿using BusinessLogic.Repository;
 using System;
 using System.Collections.Generic;
+using BusinessLogic.Domain;
 
 namespace BusinessLogic
 {
     public class ExpenseController
     {
         public IManageRepository Repository { get; private set; }
-        public IExportExpenseReport Export { get; set; }
+       
         public ExpenseController(IManageRepository repository)
         {
             Repository = repository;
@@ -84,6 +85,27 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
+        public List<ExpenseReportLine> GetExpenseReport(string month)
+        {
+            Months mMonth = StringToMonthsEnum(month);
+            List<Expense> expenses= GetExpenseByMonth(mMonth);
+            List<ExpenseReportLine> expensesReportLines = new List<ExpenseReportLine>();
+            foreach (Expense expense in expenses)
+            {
+                ExpenseReportLine expenseReportLine= new ExpenseReportLine();               
+                expenseReportLine.Amount = expense.Amount;
+                expenseReportLine.AmountInPesos = expense.ConvertToPesos();
+                expenseReportLine.Category = expense.Category;
+                expenseReportLine.CreationDate = expense.CreationDate;
+                expenseReportLine.Currency = expense.Currency;
+                expenseReportLine.Description = expense.Description;
+                expensesReportLines.Add(expenseReportLine);
+                
+            }
+            return expensesReportLines;
+        }
+
+
         public Currency FindCurrencyByName(string CurrencyName)
         {
             return Repository.FindCurrencyByName(CurrencyName);
@@ -123,12 +145,8 @@ namespace BusinessLogic
 
         public void ExportExpenseReport(List<Expense> expenses, string fileName, int index)
         {
-            if (index == 1)
-                Export = new ExpenseReportTXT();
-            else
-                Export = new ExpenseReportCSV();
-
-            Export.ExportReport(expenses, fileName);
+            IExportExpenseReport exportExpenseReport = new FactoryExportReport().GetExpenseReportInstance(index);
+            exportExpenseReport.ExportReport(expenses, fileName);
         }
     }
     }
