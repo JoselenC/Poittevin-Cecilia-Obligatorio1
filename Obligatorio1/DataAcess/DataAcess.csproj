@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3EFD2763-5BA1-4825-A578-D7588B8FD366}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAcess</RootNamespace>
+    <AssemblyName>DataAcess</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit, Version=1.1.21.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.21\lib\net45\LinqKit.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ContextDB.cs" />
+    <Compile Include="DBObjects\BudgetCategoryDto.cs" />
+    <Compile Include="DBObjects\CategoryDto.cs" />
+    <Compile Include="DBObjects\BudgetDto.cs" />
+    <Compile Include="DBObjects\CurrencyDto.cs" />
+    <Compile Include="DBObjects\ExpenseDto.cs" />
+    <Compile Include="Mappers\BudgetMapper.cs" />
+    <Compile Include="Mappers\CategoryMapper.cs" />
+    <Compile Include="Mappers\CurrencyMapper.cs" />
+    <Compile Include="Mappers\ExpenseMapper.cs" />
+    <Compile Include="Mappers\IMapper.cs" />
+    <Compile Include="Managers\DataBaseManagerRepository.cs" />
+    <Compile Include="DataBaseRepository.cs" />
+    <Compile Include="Managers\ManageMemoryRepository.cs" />
+    <Compile Include="Managers\ManageRepository.cs" />
+    <Compile Include="DBObjects\KeyWordsDto.cs" />
+    <Compile Include="MemoryRepository.cs" />
+    <Compile Include="Migrations\202011172338200_Initial.cs" />
+    <Compile Include="Migrations\202011172338200_Initial.designer.cs">
+      <DependentUpon>202011172338200_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011181955218_ExposeFKs.cs" />
+    <Compile Include="Migrations\202011181955218_ExposeFKs.designer.cs">
+      <DependentUpon>202011181955218_ExposeFKs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011181957194_CategoryFKBudgetCategory.cs" />
+    <Compile Include="Migrations\202011181957194_CategoryFKBudgetCategory.designer.cs">
+      <DependentUpon>202011181957194_CategoryFKBudgetCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202011182247144_ExpenseDto.cs" />
+    <Compile Include="Migrations\202011182247144_ExpenseDto.designer.cs">
+      <DependentUpon>202011182247144_ExpenseDto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
+      <Project>{44A5FD64-A9DD-45ED-8D2E-F8C2F9E1D41C}</Project>
+      <Name>BusinessLogic</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202011172338200_Initial.resx">
+      <DependentUpon>202011172338200_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011181955218_ExposeFKs.resx">
+      <DependentUpon>202011181955218_ExposeFKs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011181957194_CategoryFKBudgetCategory.resx">
+      <DependentUpon>202011181957194_CategoryFKBudgetCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011182247144_ExpenseDto.resx">
+      <DependentUpon>202011182247144_ExpenseDto.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

@@ -18,7 +18,7 @@ namespace BusinessLogic
     {
     }
 
-
+    public class ExceptionUnableToSaveData: Exception { }
     public class ExcepcionInvalidRepeatedNameCategory : Exception
     {
     }
@@ -57,7 +57,6 @@ namespace BusinessLogic
     public class NegativeValueErrorAttribute : Exception
     {
     }
-
     public class NoFindBudgetCategory : Exception
     {
     }

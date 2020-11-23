@@ -1,8 +1,6 @@
 ﻿using BusinessLogic;
+using DataAcces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace InterfazLogic
@@ -17,7 +15,7 @@ namespace InterfazLogic
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Menu(new MemoryRepository()));
+            Application.Run(new Menu(new DataBaseManagerRepository()));
         }
     }
 }
