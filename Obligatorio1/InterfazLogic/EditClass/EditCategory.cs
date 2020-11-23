@@ -118,9 +118,11 @@ namespace InterfazLogic
         {
             if (lstKwywords.SelectedIndex >= 0)
             {
-                int index = lstKwywords.SelectedIndex;
-                lstKwywords.Items.RemoveAt(index);
-                lblKyWords.Text = "";
+               List<string> keyWords = new List<string>();
+               EditableKeyWords.Remove(lstKwywords.SelectedItem.ToString());
+               lstKwywords.DataSource = keyWords;
+               lstKwywords.DataSource = EditableKeyWords;
+               lblKyWords.Text = "";
             }        
         }
 

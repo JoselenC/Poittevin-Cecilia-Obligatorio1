@@ -187,7 +187,7 @@
       <Name>BusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataAcess\DataAcess.csproj">
-      <Project>{3EFD2763-5BA1-4825-A578-D7588B8FD366}</Project>
+      <Project>{3efd2763-5ba1-4825-a578-d7588b8fd366}</Project>
       <Name>DataAcess</Name>
     </ProjectReference>
   </ItemGroup>
