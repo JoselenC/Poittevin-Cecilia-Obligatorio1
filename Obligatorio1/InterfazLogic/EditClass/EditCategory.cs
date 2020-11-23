@@ -90,23 +90,23 @@ namespace InterfazLogic
                 }
                 catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
                 {
-                    lblKeyWords.Text = "You already entered that keyword in another category";
-                    lblKeyWords.ForeColor = Color.Red;
+                    lblKeyWord.Text = "You already entered that keyword in another category";
+                    lblKeyWord.ForeColor = Color.Red;
                 }
                 catch (ExcepcionInvalidKeyWordsLengthCategory)
                 {
-                    lblKeyWords.Text = "You cannot add more than 10 keywords.";
-                    lblKeyWords.ForeColor = Color.Red;
+                    lblKeyWord.Text = "You cannot add more than 10 keywords.";
+                    lblKeyWord.ForeColor = Color.Red;
                 }
                 catch (ExcepcionInvalidRepeatedKeyWordsCategory)
                 {
-                    lblKeyWords.Text = "You already entered that keyword";
-                    lblKeyWords.ForeColor = Color.Red;
+                    lblKeyWord.Text = "You already entered that keyword";
+                    lblKeyWord.ForeColor = Color.Red;
                 }
                 catch (InvalidKeyWord)
                 {
-                    lblKeyWords.Text = "The keyword cannot be empty.";
-                    lblKeyWords.ForeColor = Color.Red;
+                    lblKeyWord.Text = "The keyword cannot be empty.";
+                    lblKeyWord.ForeColor = Color.Red;
                 }
             }
             else
