@@ -76,36 +76,38 @@ namespace InterfazLogic
 
         private void btnAddKeyWord_Click(object sender, EventArgs e)
         {
-            string keyWord = txtKeyWord.Text;
             if (lstCatgories.SelectedIndex >= 0)
             {
+                string keyWord = txtKeyWord.Text;
                 try
                 {
+                    KeyWord key = new KeyWord(keyWord, EditableKeyWords);
                     categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
-                    lstCatgories.Items.Add(keyWord);
+                    EditableKeyWords.Add(keyWord);
+                    lstKwywords.DataSource = new List<string>();
+                    lstKwywords.DataSource = EditableKeyWords;
+                    txtKeyWord.Text = "";
                 }
                 catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
                 {
-                    lblKyWords.Text = "You already entered that keyword in another category";
-                    lblKyWords.ForeColor = Color.Red;
-                    txtKeyWord.Enabled = true;
-                    txtName.Enabled = true;
+                    lblKeyWords.Text = "You already entered that keyword in another category";
+                    lblKeyWords.ForeColor = Color.Red;
                 }
                 catch (ExcepcionInvalidKeyWordsLengthCategory)
                 {
-                    lblKyWords.Text = "You cannot add more than 10 keywords.";
-                    lblKyWords.ForeColor = Color.Red;
+                    lblKeyWords.Text = "You cannot add more than 10 keywords.";
+                    lblKeyWords.ForeColor = Color.Red;
                 }
                 catch (ExcepcionInvalidRepeatedKeyWordsCategory)
                 {
-                    lblKyWords.Text = "You already entered that keyword";
-                    lblKyWords.ForeColor = Color.Red;
+                    lblKeyWords.Text = "You already entered that keyword";
+                    lblKeyWords.ForeColor = Color.Red;
                 }
                 catch (InvalidKeyWord)
                 {
-                    lblKyWords.Text = "The keyword cannot be empty.";
-                    lblKyWords.ForeColor = Color.Red;
-                }                
+                    lblKeyWords.Text = "The keyword cannot be empty.";
+                    lblKeyWords.ForeColor = Color.Red;
+                }
             }
             else
             {
@@ -194,7 +196,7 @@ namespace InterfazLogic
             Category newCategory = new Category()
             {
                 Name = txtName.Text,
-                KeyWords = EditableKeyWords.ToList()
+                KeyWords = EditableKeyWords
             };
             categoryController.UpdateCategory(category, newCategory);
             MessageBox.Show("Category " + txtName.Text + " was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);

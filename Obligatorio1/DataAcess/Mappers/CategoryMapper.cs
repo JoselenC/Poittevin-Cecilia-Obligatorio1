@@ -70,18 +70,19 @@ namespace DataAcess.Mappers
         public CategoryDto UpdateDtoObject(CategoryDto objToUpdate, Category updatedObject, DbContext context)
         {
             objToUpdate.Name = updatedObject.Name;
-            if (objToUpdate.KeyWords != null)
+            if (objToUpdate.KeyWords == null)
             {
-                List<KeyWordsDto> diffListOldValues = objToUpdate.KeyWords.Where(x => updatedObject.KeyWords.Contains(x.Value)).ToList();
-                List<string> diffListNewValues = updatedObject.KeyWords.Where(x => !objToUpdate.KeyWords.Contains(new KeyWordsDto() { Value = x })).ToList();
-                diffListOldValues.AddRange(diffListNewValues.Select(x => new KeyWordsDto() { Value = x }));
-                List<KeyWordsDto> keyWordsToDelete = objToUpdate.KeyWords.Where(x => !diffListOldValues.Contains(x)).ToList();
-                foreach (KeyWordsDto keyWordsDto in keyWordsToDelete)
-                {
-                    context.Entry(keyWordsDto).State = EntityState.Deleted;
-                };
-                objToUpdate.KeyWords = diffListOldValues;
+                objToUpdate.KeyWords = new List<KeyWordsDto>();
             }
+            List<KeyWordsDto> diffListOldValues = objToUpdate.KeyWords.Where(x => updatedObject.KeyWords.Contains(x.Value)).ToList();
+            List<string> diffListNewValues = updatedObject.KeyWords.Where(x => !objToUpdate.KeyWords.Contains(new KeyWordsDto() { Value = x })).ToList();
+            diffListOldValues.AddRange(diffListNewValues.Select(x => new KeyWordsDto() { Value = x }));
+            List<KeyWordsDto> keyWordsToDelete = objToUpdate.KeyWords.Where(x => !diffListOldValues.Contains(x)).ToList();
+            foreach (KeyWordsDto keyWordsDto in keyWordsToDelete)
+            {
+               context.Entry(keyWordsDto).State = EntityState.Deleted;
+            };
+            objToUpdate.KeyWords = diffListOldValues;
             return objToUpdate;
         }
     }
