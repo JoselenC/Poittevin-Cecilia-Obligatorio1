@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Domain
 {
-    class BudgetReportLine
+    public class BudgetReportLine
     {
+
+        public double TotalAmount { get; }
+
+        public Months Month { get; }
+
+        public int Year { get; }
+
+        public List<BudgetCategory> BudgetCategories { get; }
+
     }
 }

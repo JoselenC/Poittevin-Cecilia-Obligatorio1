@@ -6,7 +6,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Domain
 {
-    class BudgetReportObject
+    public class BudgetReportObject
     {
+        public List<BudgetReportLine> budgetsReportLines { get; set; }
+
+        public double PlaneedAmount { get; set; }
+
+        public double RealAmount { get; set; }
+
+        public BudgetReportObject(string )
+        {
+            budgetController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
+        }
     }
 }
