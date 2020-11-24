@@ -9,13 +9,19 @@ namespace BusinessLogic.Domain
     public class BudgetReportLine
     {
 
-        public double TotalAmount { get; }
+        public double TotalAmount { get; set; }
 
-        public Months Month { get; }
+        public double PlanedAmount { get; set; }
 
-        public int Year { get; }
+        public double RealAmount { get; set; }
 
-        public List<BudgetCategory> BudgetCategories { get; }
+        public double DiffAmount { get; set; }
+
+        public Months Month { get; set; }
+
+        public int Year { get; set; }
+
+        public Category Category { get; set; }
 
     }
 }

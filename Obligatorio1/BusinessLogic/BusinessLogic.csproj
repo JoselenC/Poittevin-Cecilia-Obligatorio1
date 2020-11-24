@@ -49,7 +49,7 @@
     <Compile Include="Domain\Budget.cs" />
     <Compile Include="Domain\BudgetCategory.cs" />
     <Compile Include="Domain\BudgetReportLine.cs" />
-    <Compile Include="Domain\BudgetReportObject.cs" />
+    <Compile Include="Domain\BudgetReport.cs" />
     <Compile Include="Domain\Category.cs" />
     <Compile Include="Controller\CategoryController.cs" />
     <Compile Include="Domain\EnumMonths.cs" />

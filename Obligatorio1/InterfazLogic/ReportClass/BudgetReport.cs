@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Domain;
 using BusinessLogic.Repository;
 
 namespace InterfazLogic
@@ -49,31 +50,30 @@ namespace InterfazLogic
         private bool CompleteReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount, Budget budget)
         {
             lstVReport.Items.Clear();
-            foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
+           BusinessLogic.Domain.BudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text,  budget);
+            foreach (BudgetReportLine budgetReportLine in budgetReport.budgetsReportLines)
             {
-                Category category = budgetCategory.Category;
-                ListViewItem item = new ListViewItem(category.Name);
+                ListViewItem item = new ListViewItem(budgetReportLine.Category.Name);
                 item.UseItemStyleForSubItems = false;
-                double planeedAmount = budgetCategory.Amount;
-                double realAmount = budgetController.GetTotalSpentByMonthAndCategory(cboxMonth.Text, category);
-                double diffAmount = planeedAmount - realAmount;
-                totalPlanedAmount += planeedAmount;
-                totalRealAmount += realAmount;
-                totalDiffAmount += diffAmount;
                 if (totalPlanedAmount < 0)
-                    item.SubItems.Add("(" + (Math.Abs(planeedAmount)).ToString() + ")").ForeColor = Color.Red;
+                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.PlanedAmount)).ToString() + ")").ForeColor = Color.Red;
                 else
-                    item.SubItems.Add(planeedAmount.ToString());
-                if (realAmount < 0)
-                    item.SubItems.Add("(" + (Math.Abs(realAmount)).ToString() + ")").ForeColor = Color.Red;
+                    item.SubItems.Add(budgetReportLine.PlanedAmount.ToString());
+                if (totalRealAmount < 0)
+                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.RealAmount)).ToString() + ")").ForeColor = Color.Red;
                 else
-                    item.SubItems.Add(realAmount.ToString());
-                if (diffAmount < 0)
-                    item.SubItems.Add("(" + (Math.Abs(diffAmount)).ToString() + ")").ForeColor = Color.Red;
+                    item.SubItems.Add(budgetReportLine.RealAmount.ToString());
+                if (totalDiffAmount < 0)
+                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.DiffAmount)).ToString() + ")").ForeColor = Color.Red;
                 else
-                    item.SubItems.Add(diffAmount.ToString());
+                    item.SubItems.Add(budgetReportLine.DiffAmount.ToString());
                 lstVReport.Items.Add(item);
+               
             }
+
+            totalPlanedAmount = budgetReport.TotalAmount;
+            totalRealAmount = budgetReport.RealAmount;
+            totalDiffAmount = budgetReport.DiffAmount;
             ListViewItem total = new ListViewItem("TOTAL");
             total.UseItemStyleForSubItems = false;
             if (totalPlanedAmount < 0)
@@ -88,7 +88,6 @@ namespace InterfazLogic
                 total.SubItems.Add("(" + (Math.Abs(totalDiffAmount)).ToString() + ")").ForeColor = Color.Red;
             else
                 total.SubItems.Add(totalDiffAmount.ToString());
-
             lstVReport.Items.Add(total);
             return true;
         }
