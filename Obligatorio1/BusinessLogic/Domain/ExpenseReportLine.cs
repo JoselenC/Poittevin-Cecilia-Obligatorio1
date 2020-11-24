@@ -10,7 +10,6 @@ namespace BusinessLogic.Domain
     {
         public double Amount { get; set; }
 
-        public double AmountInPesos { get; set; }
         public DateTime CreationDate { get; set; }
 
         public string Description { get; set; }

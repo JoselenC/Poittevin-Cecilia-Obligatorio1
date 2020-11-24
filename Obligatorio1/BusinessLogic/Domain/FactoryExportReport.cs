@@ -8,9 +8,9 @@ namespace BusinessLogic.Domain
 {
     public class FactoryExportReport
     {
-        public IExportExpenseReport GetExpenseReportInstance(int index)
+        public IExportExpenseReport GetExpenseReportInstance(string type)
         {
-            if (index == 1)
+            if (type=="txt")
                 return new ExpenseReportTXT();
             else
                return new ExpenseReportCSV();

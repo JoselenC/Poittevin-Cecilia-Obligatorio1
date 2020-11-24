@@ -58,11 +58,11 @@ namespace InterfazLogic
                     lblMonth.ForeColor = Color.Red;
                 }
                 expenseReportByMonth = expenseController.GetExpenseByMonth(month);
-                ExpenseReportObject expenseReportObject = new ExpenseReportObject(month,expenseController.Repository);
+                BusinessLogic.Domain.ExpenseReport expenseReport = expenseController.GetExpenseReport(month);
 
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
-                foreach(ExpenseReportLine vExpense in expenseReportObject.ExpenseReportLine)
+                foreach(ExpenseReportLine vExpense in expenseReport.ExpenseReportLine)
                 {
                         item = listView1.Items.Add(vExpense.CreationDate.ToString("dd/MM/yyyy"));
                         item.SubItems.Add(vExpense.Description);
@@ -71,7 +71,7 @@ namespace InterfazLogic
                         item.SubItems.Add(vExpense.Amount.ToString());                   
 
                 }
-                lblTotalAmount.Text = "Total amount of the month " + month + " in pesos was " + expenseReportObject.TotalAmount.ToString();
+                lblTotalAmount.Text = "Total amount of the month " + month + " in pesos was " + expenseReport.TotalAmount.ToString();
             }
             else
             {
@@ -90,13 +90,27 @@ namespace InterfazLogic
 
         private void btnExportar_Click(object sender2, EventArgs e)
         {
+           
             SaveFileDialog saveFile = new SaveFileDialog();
             string fileName;
             saveFile.Title = "Export Report";
-            saveFile.Filter = "Txt File (.txt)| *.txt|Csv File (.csv)| *.csv";
-            saveFile.ShowDialog();
+            saveFile.Filter = "Txt File (.txt)| *.txt|Csv File (.csv)| *.csv";  
             fileName = saveFile.FileName.ToString();
-            expenseController.ExportExpenseReport(expenseReportByMonth, fileName, saveFile.FilterIndex);                    
+            saveFile.ShowDialog();
+            string extension = Path.GetExtension(fileName);
+            switch (extension)
+            {
+                case ".txt":
+                    expenseController.ExportExpenseReport(expenseReportByMonth, fileName, "txt");
+                    break;
+                case ".csv":
+                    expenseController.ExportExpenseReport(expenseReportByMonth, fileName, "csv");
+                    break;
+                default:
+                    MessageBox.Show("Select a correct type to export expens report" );
+                    break;
+            }
+                                  
         }
 
       

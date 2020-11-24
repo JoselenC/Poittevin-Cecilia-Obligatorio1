@@ -85,24 +85,27 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
-        public List<ExpenseReportLine> GetExpenseReport(string month)
+        public ExpenseReport GetExpenseReport(string month)
         {
             Months mMonth = StringToMonthsEnum(month);
             List<Expense> expenses= GetExpenseByMonth(mMonth);
+            double totalAmount = 0;
             List<ExpenseReportLine> expensesReportLines = new List<ExpenseReportLine>();
             foreach (Expense expense in expenses)
             {
                 ExpenseReportLine expenseReportLine= new ExpenseReportLine();               
                 expenseReportLine.Amount = expense.Amount;
-                expenseReportLine.AmountInPesos = expense.ConvertToPesos();
                 expenseReportLine.Category = expense.Category;
                 expenseReportLine.CreationDate = expense.CreationDate;
                 expenseReportLine.Currency = expense.Currency;
                 expenseReportLine.Description = expense.Description;
                 expensesReportLines.Add(expenseReportLine);
-                
+                totalAmount+= expense.ConvertToPesos();
+
             }
-            return expensesReportLines;
+
+            ExpenseReport expenseReport = new ExpenseReport() { ExpenseReportLine = expensesReportLines, TotalAmount = totalAmount };
+            return expenseReport;
         }
 
 
@@ -143,9 +146,9 @@ namespace BusinessLogic
             return Repository.GetCurrencies();
         }
 
-        public void ExportExpenseReport(List<Expense> expenses, string fileName, int index)
+        public void ExportExpenseReport(List<Expense> expenses, string fileName, string type)
         {
-            IExportExpenseReport exportExpenseReport = new FactoryExportReport().GetExpenseReportInstance(index);
+            IExportExpenseReport exportExpenseReport = new FactoryExportReport().GetExpenseReportInstance(type);
             exportExpenseReport.ExportReport(expenses, fileName);
         }
     }
