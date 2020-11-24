@@ -176,7 +176,7 @@ namespace Test
         public void AddCategoryInvalidKeyWords()
         {
             IManageRepository repository = new ManageMemoryRepository();
-            String categoryName = "NameExample";
+            string categoryName = "NameExample";
             List<string> keyWords = new List<string>
             {
                 "movie theater",
@@ -185,7 +185,7 @@ namespace Test
             Category category = new Category { Name = categoryName, KeyWords = keyWords };
             CategoryController controller = new CategoryController(repository);
             controller.SetCategory(categoryName, keyWords);
-            String categoryName2 = "NameExample2";
+            string categoryName2 = "NameExample2";
             List<string> keyWords2 = new List<string>
             {
                  "movie theater",

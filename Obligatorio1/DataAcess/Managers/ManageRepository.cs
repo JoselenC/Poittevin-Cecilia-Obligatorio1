@@ -47,10 +47,21 @@ namespace DataAccess
             }
             return false;
         }
+        private bool AlreadyExistCategoryName(string name)
+        {
+            foreach (Category category in GetCategories())
+            {
+                if (category.Name == name)
+                    return true;
+            }
+            return false;
+        }
         private void AddCategory(Category category)
         {
             if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
                 throw new ExcepcionInvalidRepeatedKeyWordsCategory();
+            if (AlreadyExistCategoryName(category.Name))
+                throw new ExcepcionInvalidRepeatedNameCategory();
             Categories.Add(category);
         }
 
@@ -244,10 +255,23 @@ namespace DataAccess
             return exist;
         }
 
+        private bool AlreadyExistTheCurrencyName(string CurrencyName)
+        {
+            bool exist = false;
+            foreach (Currency Currency in GetCurrencies())
+            {
+                if (CurrencyName.ToLower() == Currency.Name.ToLower())
+                    exist = true;
+            }
+            return exist;
+        }
+
         public void SetCurrency(Currency Currency)
         {
             if (AlreadyExistTheCurrencySymbol(Currency.Symbol))
                 throw new ExceptionAlreadyExistTheCurrencySymbol();
+            if (AlreadyExistTheCurrencyName(Currency.Name))
+                throw new ExceptionAlreadyExistTheCurrencyName();
             Currencies.Add(Currency);
         }
 

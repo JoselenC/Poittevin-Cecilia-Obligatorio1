@@ -58,7 +58,7 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionAlreadyExistTheCurrencyName), "")]
-        public void SetMonySameName()
+        public void SetCurrencySameName()
         {
             IManageRepository repo = new ManageMemoryRepository();
             CurrencyController currencyController = new CurrencyController(repo);
@@ -69,7 +69,7 @@ namespace Test
 
         [TestMethod]
         [ExpectedException(typeof(ExceptionAlreadyExistTheCurrencySymbol), "")]
-        public void SetcurrencySameSymbol()
+        public void SetCurrencySameSymbol()
         {
             IManageRepository repo = new ManageMemoryRepository();
             CurrencyController currencyController = new CurrencyController(repo);

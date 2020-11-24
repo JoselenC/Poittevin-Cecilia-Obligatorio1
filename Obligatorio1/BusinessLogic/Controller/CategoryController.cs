@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Repository;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLogic
@@ -82,6 +83,10 @@ namespace BusinessLogic
             return repository.GetCategories();
         }      
 
+        public void SetCategory(object categoryName, object keyWords)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

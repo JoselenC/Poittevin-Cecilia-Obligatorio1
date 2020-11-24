@@ -29,7 +29,7 @@ namespace Test
             };
             categoryEntertainment = new Category()
             {
-                Name ="entertainment",
+                Name = "Entertainment",
                 KeyWords =keyWords1
             };
             List<string> keyWords2 = new List<string>
@@ -53,9 +53,10 @@ namespace Test
                 Name = "House",
                 KeyWords = keyWords3
             };
-            repo.SetCategory("entertainment", keyWords1);
-            repo.SetCategory("food",keyWords2);
-            repo.SetCategory("House",keyWords3);
+            // TODO: El SetCategory reberia esperar un category y no los datos, cambiarlo al hacer el cambio de quitar los Managers
+            repo.SetCategory(categoryEntertainment.Name, keyWords1);
+            repo.SetCategory(categoryFood.Name,keyWords2);
+            repo.SetCategory(categoryHouse.Name,keyWords3);
 
             List<Category> categories = new List<Category>() {
                 categoryEntertainment,
@@ -89,6 +90,7 @@ namespace Test
                 Description = "buy video game",
                 Category = categoryEntertainment
             };
+            // TODO: Esto es lo que nos dijo Leo que no deberiamos permitir, el agregar valores a la lista directo, nos estamos salteando las validaciones
             repo.GetExpenses().Add(januaryExpenseFood);
             repo.GetExpenses().Add(januaryExpenseFood2);
             repo.GetExpenses().Add(januaryExpenseEntertainment);
@@ -110,10 +112,8 @@ namespace Test
         [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
         public void AddCategoryAlreadyUsedName()
         {
-            string categoryName ="Entertainment";
-            Category category2 = new Category { Name = categoryName };
-            repo.SetCategory(categoryName,new List<string>());
-
+            string categoryName = "Entertainment";
+            repo.SetCategory(categoryName, new List<string>());
         }
 
         [TestMethod]
@@ -415,7 +415,7 @@ namespace Test
         public void SetMonySameName()
         {
             Currency Currency = new Currency { Name = "pesos", Quotation = 43, Symbol = "$U" };
-            Currency Currency2 = new Currency { Name = "pesos", Quotation = 43, Symbol = "$" };
+            Currency Currency2 = new Currency { Name = "pesos", Quotation = 43, Symbol = "Pe" };
             IManageRepository repo = new ManageMemoryRepository();
             repo.SetCurrency(Currency);
             repo.SetCurrency(Currency2);

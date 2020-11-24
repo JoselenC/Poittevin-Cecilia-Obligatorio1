@@ -13,8 +13,6 @@ namespace DataAcces
             Expenses = new MemoryRepository<Expense>();
             Budgets = new MemoryRepository<Budget>();
             Currencies = new MemoryRepository<Currency>();
-            Currency money = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            Currencies.Add(money);
         }
 
         public ManageMemoryRepository(List<Category> vCategories)
@@ -24,8 +22,6 @@ namespace DataAcces
             Budgets = new MemoryRepository<Budget>();
             Currencies = new MemoryRepository<Currency>();
             Categories.Set(vCategories);
-            Currency money = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
-            Currencies.Add(money);
         }
     }
 }
