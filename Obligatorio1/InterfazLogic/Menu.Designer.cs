@@ -39,6 +39,7 @@
             this.btnEditExpenses = new System.Windows.Forms.Button();
             this.btnAddCurrency = new System.Windows.Forms.Button();
             this.btnEditCurrency = new System.Windows.Forms.Button();
+            this.BRegisteredObjects = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblMenu
@@ -70,7 +71,7 @@
             this.mainPanel.Location = new System.Drawing.Point(375, 123);
             this.mainPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1299, 941);
+            this.mainPanel.Size = new System.Drawing.Size(1299, 1034);
             this.mainPanel.TabIndex = 7;
             // 
             // btnRegisterExpense
@@ -169,12 +170,25 @@
             this.btnEditCurrency.UseVisualStyleBackColor = false;
             this.btnEditCurrency.Click += new System.EventHandler(this.BtnEditCurrency_Click);
             // 
+            // BRegisteredObjects
+            // 
+            this.BRegisteredObjects.BackColor = System.Drawing.Color.Tan;
+            this.BRegisteredObjects.Location = new System.Drawing.Point(58, 1036);
+            this.BRegisteredObjects.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BRegisteredObjects.Name = "BRegisteredObjects";
+            this.BRegisteredObjects.Size = new System.Drawing.Size(297, 93);
+            this.BRegisteredObjects.TabIndex = 15;
+            this.BRegisteredObjects.Text = "Registered objects";
+            this.BRegisteredObjects.UseVisualStyleBackColor = false;
+            this.BRegisteredObjects.Click += new System.EventHandler(this.BRegisteredObjects_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
-            this.ClientSize = new System.Drawing.Size(1686, 1078);
+            this.ClientSize = new System.Drawing.Size(1686, 1168);
+            this.Controls.Add(this.BRegisteredObjects);
             this.Controls.Add(this.btnAddCurrency);
             this.Controls.Add(this.btnEditCurrency);
             this.Controls.Add(this.btnEditCategory);
@@ -207,5 +221,6 @@
         private System.Windows.Forms.Button btnEditExpenses;
         private System.Windows.Forms.Button btnAddCurrency;
         private System.Windows.Forms.Button btnEditCurrency;
+        private System.Windows.Forms.Button BRegisteredObjects;
     }
 }

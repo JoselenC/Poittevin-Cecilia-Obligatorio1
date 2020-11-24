@@ -15,8 +15,8 @@ namespace InterfazLogic
             this.repository = repository;
 
             InitializeComponent();
-            MaximumSize = new Size(615, 500);
-            MinimumSize = new Size(615, 500);
+            MaximumSize = new Size(630, 530);
+            MinimumSize = new Size(630, 530);
         }
 
         private void BtnRegisterCategory_Click(object sender, EventArgs e)
@@ -80,6 +80,13 @@ namespace InterfazLogic
             mainPanel.Controls.Clear();
             UserControl editCurrency = new EditCurrency(repository); ;
             mainPanel.Controls.Add(editCurrency);
+        }
+
+        private void BRegisteredObjects_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            UserControl registeredObjects = new RegisteredOBjects(repository);
+            mainPanel.Controls.Add(registeredObjects);
         }
     }
 

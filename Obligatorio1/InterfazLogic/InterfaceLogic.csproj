@@ -73,6 +73,12 @@
     <Compile Include="EditClass\EditCurrency.Designer.cs">
       <DependentUpon>EditCurrency.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegisteredOBjects.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RegisteredOBjects.Designer.cs">
+      <DependentUpon>RegisteredOBjects.cs</DependentUpon>
+    </Compile>
     <Compile Include="ReportClass\ExpenseReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -140,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditClass\EditCurrency.resx">
       <DependentUpon>EditCurrency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegisteredOBjects.resx">
+      <DependentUpon>RegisteredOBjects.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportClass\ExpenseReport.resx">
       <DependentUpon>ExpenseReport.cs</DependentUpon>
