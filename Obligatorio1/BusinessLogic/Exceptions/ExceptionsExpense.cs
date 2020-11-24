@@ -56,6 +56,13 @@ namespace BusinessLogic
         { }
     }
 
+    public class NoFindExpenseByDate : Exception
+    {
+        public NoFindExpenseByDate() :
+        base("No find expense by date")
+        { }
+    }
+
     public class NoAsignCategoryByDescriptionExpense : Exception
     {
         public NoAsignCategoryByDescriptionExpense() :

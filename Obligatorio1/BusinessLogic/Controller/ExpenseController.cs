@@ -62,6 +62,19 @@ namespace BusinessLogic
             return orderedMonthsString;
         }
 
+        public List<int> OrderedYearsWithExpenses()
+        {
+            List<int> orderedYEarsInt = new List<int>();
+            List<Expense> expenses = repository.GetExpenses();
+            foreach (Expense expense in expenses)
+            {
+                if (!orderedYEarsInt.Contains(expense.CreationDate.Year))
+                    orderedYEarsInt.Add(expense.CreationDate.Year);
+            }
+            orderedYEarsInt.Sort();
+            return orderedYEarsInt;
+        }
+
         public List<Expense> GetExpenseByMonth(Months month)
         {
             List<Expense> expensesByMonth = new List<Expense>();
@@ -74,6 +87,23 @@ namespace BusinessLogic
             return expensesByMonth;
         }
 
+        public List<Expense> GetExpenseByDate(string month, int year)
+        {
+            Months mMonth = StringToMonthsEnum(month);
+            List<Expense> expensesByMonth = new List<Expense>();
+            List<Expense> expenses = repository.GetExpenses();
+            foreach (Expense vExpense in expenses)
+            {
+                if (vExpense.IsExpenseSameDate(mMonth, year))
+                    expensesByMonth.Add(vExpense);
+            }
+            if (expensesByMonth.Count == 0)
+                throw new NoFindExpenseByDate();
+            return expensesByMonth;
+            
+        }
+
+
         private Months StringToMonthsEnum(string month)
         {
             return (Months)Enum.Parse(typeof(Months), month);
@@ -85,10 +115,9 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
-        public GenerateExpenseReport GetExpenseReport(string month)
+        public GenerateExpenseReport GetExpenseReport(string month,int year)
         {
-            Months mMonth = StringToMonthsEnum(month);
-            List<Expense> expenses= GetExpenseByMonth(mMonth);
+            List<Expense> expenses= GetExpenseByDate(month,year);
             double totalAmount = 0;
             List<ExpenseReportLine> expensesReportLines = new List<ExpenseReportLine>();
             foreach (Expense expense in expenses)
