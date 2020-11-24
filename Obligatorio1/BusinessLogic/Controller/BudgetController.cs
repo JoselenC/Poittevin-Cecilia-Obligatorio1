@@ -8,21 +8,21 @@ namespace BusinessLogic
 {
     public class BudgetController
     {
-        public IManageRepository Repository { get; private set; }
+        private IManageRepository repository;
 
-        public BudgetController(IManageRepository repository)
+        public BudgetController(IManageRepository vRepository)
         {
-            Repository = repository;
+            repository = vRepository;
         }           
 
         public List<Budget> GetBudgets()
         {
-            return Repository.GetBudgets();
+            return repository.GetBudgets();
         }
 
         public void SetBudget(Budget vBudget)
         {
-            Repository.SetBudget(vBudget);
+            repository.SetBudget(vBudget);
         }      
 
         private Months StringToMonthsEnum(string month)
@@ -33,7 +33,7 @@ namespace BusinessLogic
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
         {
             Months mMonths = StringToMonthsEnum(vMonth);
-            List<Expense> expenses = Repository.GetExpenseByMonth(mMonths);
+            List<Expense> expenses = repository.GetExpenseByMonth(mMonths);
             double total = 0;
             foreach (Expense expense in expenses)
             {
@@ -43,10 +43,10 @@ namespace BusinessLogic
             return total;
         }
 
-        public BudgetReport GetBudgetReport(string vMonth,Budget budget)
+        public GenerateBudgetReport GetBudgetReport(string vMonth,Budget budget)
         {
            
-            BudgetReport budgetsReport = new BudgetReport();
+            GenerateBudgetReport budgetsReport = new GenerateBudgetReport();
             budgetsReport.budgetsReportLines = new List<BudgetReportLine>();
             foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
             {
@@ -85,7 +85,7 @@ namespace BusinessLogic
             }
             catch (NoFindBudget)
             {
-                List<Category> categories = Repository.GetCategories();
+                List<Category> categories = repository.GetCategories();
                 returnBudget = CreateBudget(year, categories, mMonth);
             }
             return returnBudget;
@@ -93,7 +93,7 @@ namespace BusinessLogic
 
         public Budget FindBudget(string month, int year)
         {
-            return Repository.FindBudget(month, year);
+            return repository.FindBudget(month, year);
         }
 
         public string[] GetAllMonthsString()
@@ -114,7 +114,7 @@ namespace BusinessLogic
         public List<string> OrderedMonthsWithBudget()
         {
             List<Months> monthsWithBudget = new List<Months>();
-            List<Budget> budgets = Repository.GetBudgets();
+            List<Budget> budgets = repository.GetBudgets();
             foreach (Budget budget in budgets)
             {
                 if (!monthsWithBudget.Contains(budget.Month))

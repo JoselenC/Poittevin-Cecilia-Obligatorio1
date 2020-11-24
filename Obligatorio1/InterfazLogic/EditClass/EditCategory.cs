@@ -73,6 +73,15 @@ namespace InterfazLogic
             }
         }
 
+        private void TryAddKeyWord(string keyWord)
+        {
+            KeyWord key = new KeyWord(keyWord, EditableKeyWords);
+            categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
+            EditableKeyWords.Add(keyWord);
+            lstKwywords.DataSource = new List<string>();
+            lstKwywords.DataSource = EditableKeyWords;
+            txtKeyWord.Text = "";
+        }
 
         private void btnAddKeyWord_Click(object sender, EventArgs e)
         {
@@ -81,12 +90,7 @@ namespace InterfazLogic
                 string keyWord = txtKeyWord.Text;
                 try
                 {
-                    KeyWord key = new KeyWord(keyWord, EditableKeyWords);
-                    categoryController.AlreadyExistKeyWordInAnoterCategory(keyWord);
-                    EditableKeyWords.Add(keyWord);
-                    lstKwywords.DataSource = new List<string>();
-                    lstKwywords.DataSource = EditableKeyWords;
-                    txtKeyWord.Text = "";
+                    TryAddKeyWord(keyWord);
                 }
                 catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
                 {
@@ -116,6 +120,7 @@ namespace InterfazLogic
             }
         }
 
+        
         private void TryDeleteKeyWord()
         {
             if (lstKwywords.SelectedIndex >= 0)
@@ -153,30 +158,7 @@ namespace InterfazLogic
         {
             if (lstCatgories.SelectedIndex >= 0)
             {
-
-                if (lstKwywords.Items.Count > 0)
-                {
-                    indexKeyWordToEdit = lstKwywords.SelectedIndex;
-                    if (indexKeyWordToEdit >= 0)
-                    {
-                        EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(),indexKeyWordToEdit, categoryController,EditableKeyWords,lstKwywords);
-                        editKeyWord.ShowDialog();
-                        EditableKeyWords = editKeyWord.KeyWords;
-                        lstKwywords.DataSource = EditableKeyWords;
-                        txtKeyWord.Enabled = true;
-                        txtName.Enabled = true;
-                    }
-                    else
-                    {
-                        lblKyWords.Text = "Select key word to edit";
-                        lblKyWords.ForeColor = Color.Red;
-                    }
-                }
-                else if (lstKwywords.Items.Count <= 0)
-                {
-                    lblKyWords.Text = "There aren't key words to edit";
-                    lblKyWords.ForeColor = Color.Red;
-                }
+                EditSelectedKyWord();
             }
             else
             {
@@ -184,6 +166,38 @@ namespace InterfazLogic
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
             }
+        }
+
+        private void EditSelectedKyWord()
+        {
+            if (lstKwywords.Items.Count > 0)
+            {
+                indexKeyWordToEdit = lstKwywords.SelectedIndex;
+                if (indexKeyWordToEdit >= 0)
+                {
+                    EditKeyWord();
+                }
+                else
+                {
+                    lblKyWords.Text = "Select key word to edit";
+                    lblKyWords.ForeColor = Color.Red;
+                }
+            }
+            else if (lstKwywords.Items.Count <= 0)
+            {
+                lblKyWords.Text = "There aren't key words to edit";
+                lblKyWords.ForeColor = Color.Red;
+            }
+        }
+
+        private void EditKeyWord()
+        {
+            EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(), indexKeyWordToEdit, categoryController, EditableKeyWords, lstKwywords);
+            editKeyWord.ShowDialog();
+            EditableKeyWords = editKeyWord.KeyWords;
+            lstKwywords.DataSource = EditableKeyWords;
+            txtKeyWord.Enabled = true;
+            txtName.Enabled = true;
         }
 
         private void TryRegisterCategory()

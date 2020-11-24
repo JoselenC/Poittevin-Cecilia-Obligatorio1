@@ -12,9 +12,7 @@ namespace InterfazLogic
     {
         private bool initializingForm = true;
         private BudgetController budgetController;
-        private int oldMonthIndex = DateTime.Now.Month - 1;
         private int oldYearValue = DateTime.Now.Year;
-        private bool changeMonth = false;
 
         public BudgetReport(IManageRepository vRepository)
         {
@@ -50,27 +48,13 @@ namespace InterfazLogic
         private bool CompleteReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount, Budget budget)
         {
             lstVReport.Items.Clear();
-           BusinessLogic.Domain.BudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text,  budget);
-            foreach (BudgetReportLine budgetReportLine in budgetReport.budgetsReportLines)
-            {
-                ListViewItem item = new ListViewItem(budgetReportLine.Category.Name);
-                item.UseItemStyleForSubItems = false;
-                if (totalPlanedAmount < 0)
-                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.PlanedAmount)).ToString() + ")").ForeColor = Color.Red;
-                else
-                    item.SubItems.Add(budgetReportLine.PlanedAmount.ToString());
-                if (totalRealAmount < 0)
-                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.RealAmount)).ToString() + ")").ForeColor = Color.Red;
-                else
-                    item.SubItems.Add(budgetReportLine.RealAmount.ToString());
-                if (totalDiffAmount < 0)
-                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.DiffAmount)).ToString() + ")").ForeColor = Color.Red;
-                else
-                    item.SubItems.Add(budgetReportLine.DiffAmount.ToString());
-                lstVReport.Items.Add(item);
-               
-            }
+            BusinessLogic.Domain.GenerateBudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text, budget);
+            CompleteListViewReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
+            return CompleteTotalValuesOFReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
+        }
 
+        private bool CompleteTotalValuesOFReport(double totalPlanedAmount,double totalRealAmount, double totalDiffAmount, GenerateBudgetReport budgetReport)
+        {
             totalPlanedAmount = budgetReport.TotalAmount;
             totalRealAmount = budgetReport.RealAmount;
             totalDiffAmount = budgetReport.DiffAmount;
@@ -90,6 +74,29 @@ namespace InterfazLogic
                 total.SubItems.Add(totalDiffAmount.ToString());
             lstVReport.Items.Add(total);
             return true;
+        }
+
+        private void CompleteListViewReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount,GenerateBudgetReport budgetReport)
+        {
+            foreach (BudgetReportLine budgetReportLine in budgetReport.budgetsReportLines)
+            {
+                ListViewItem item = new ListViewItem(budgetReportLine.Category.Name);
+                item.UseItemStyleForSubItems = false;
+                if (totalPlanedAmount < 0)
+                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.PlanedAmount)).ToString() + ")").ForeColor = Color.Red;
+                else
+                    item.SubItems.Add(budgetReportLine.PlanedAmount.ToString());
+                if (totalRealAmount < 0)
+                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.RealAmount)).ToString() + ")").ForeColor = Color.Red;
+                else
+                    item.SubItems.Add(budgetReportLine.RealAmount.ToString());
+                if (totalDiffAmount < 0)
+                    item.SubItems.Add("(" + (Math.Abs(budgetReportLine.DiffAmount)).ToString() + ")").ForeColor = Color.Red;
+                else
+                    item.SubItems.Add(budgetReportLine.DiffAmount.ToString());
+                lstVReport.Items.Add(item);
+
+            }
         }
 
         private bool LoadBudgetReport()
@@ -147,8 +154,7 @@ namespace InterfazLogic
             if (LoadBudgetReport())
             {
                 btnSearch.Enabled = true;
-                oldMonthIndex = cboxMonth.SelectedIndex;
-                changeMonth = true;
+               
             }
         }
 
@@ -162,8 +168,7 @@ namespace InterfazLogic
             {
                 oldYearValue = (int)numYear.Value;
                 btnSearch.Enabled = true;
-                oldMonthIndex = cboxMonth.SelectedIndex;
-                changeMonth = true;
+                
             }
         }
         

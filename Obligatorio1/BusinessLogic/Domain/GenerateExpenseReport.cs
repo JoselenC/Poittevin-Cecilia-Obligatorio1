@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BusinessLogic.Domain
 {
     
-    public class ExpenseReport
+    public class GenerateExpenseReport
     {
         public double TotalAmount { get ; set; }
 
