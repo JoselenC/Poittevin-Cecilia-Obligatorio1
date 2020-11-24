@@ -56,6 +56,22 @@ namespace InterfazLogic
             }
         }
 
+        private void SetMessage(string messsage, Label lblToSetMessage)
+        {
+            if (lblToSetMessage != lblAmount)
+                lblAmount.Text = "";
+            if (lblToSetMessage != lblCategories)
+                lblCategories.Text = "";
+            if (lblToSetMessage != lblCategory)
+                lblCategory.Text = "";
+            if (lblToSetMessage != lblDate)
+                lblDate.Text = "";
+            if (lblToSetMessage != lblExpenses)
+                lblExpenses.Text = "";
+            lblToSetMessage.Text = messsage;
+            lblToSetMessage.ForeColor = Color.Red;
+        }
+
         private void CompleteExpenseToEdit()
         {
             expenseToEdit = expenseController.FindExpense((Expense)lstExpenses.SelectedItem);
@@ -83,21 +99,11 @@ namespace InterfazLogic
                 }
                 else if (expenseController.GetExpenses().Count == 0)
                 {
-                    lblExpenses.Text = "There are no more expenses to edit";
-                    lblExpenses.ForeColor = Color.Red;
-                    lblAmount.Text = "";
-                    lblCategories.Text = "";
-                    lbDescription.Text = "";
-                    lblDate.Text = "";
+                    SetMessage("There are no more expenses to edit", lblExpenses);
                 }
                 else
                 {
-                    lblExpenses.Text = "Select expense to edit";
-                    lblExpenses.ForeColor = Color.Red;
-                    lblAmount.Text = "";
-                    lblCategories.Text = "";
-                    lbDescription.Text = "";
-                    lblDate.Text = "";
+                    SetMessage("Select expense to edit", lblExpenses);
                 }
             }
             catch (NoFindEqualsExpense)
@@ -125,21 +131,11 @@ namespace InterfazLogic
             }
             else if (expenseController.GetExpenses().Count == 0)
             {
-                lblExpenses.Text = "There are no more expenses to delete";
-                lblExpenses.ForeColor = Color.Red;
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("There are no more expenses to delete", lblExpenses);
             }
             else
             {
-                lblExpenses.Text = "Select expense to delete";
-                lblExpenses.ForeColor = Color.Red;
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("Select expense to delete", lblExpenses);
             }
         }
 
@@ -164,12 +160,7 @@ namespace InterfazLogic
             Category category = new Category();
             if (lstCategories.SelectedIndex < 0 && edit)
             {
-                lblCategories.Text = "You must select a category";
-                lblCategories.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblAmount.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("You must select a category", lblCategories);
             }
             else if (lstCategories.SelectedIndex >= 0 && edit)
             {
@@ -200,49 +191,23 @@ namespace InterfazLogic
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
-                lbDescription.Text = "The name must be between 3 and 20 characters long.";
-                lbDescription.ForeColor = Color.Red;
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lblExpenses.Text = "";
-                lblDate.Text = "";
+                SetMessage("The name must be between 3 and 20 characters long.", lbDescription);
             }
             catch (ExcepcionNegativeAmountExpense)
             {
-                lblAmount.Text = "The amount must be positive";
-                lblAmount.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("The amount must be positive", lblAmount);
             }
             catch (ExcepcionInvalidAmountExpense)
             {
-                lblAmount.Text = "The amount cannot have more than two decimal places";
-                nAmount.Value = 1;
-                lblAmount.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("The amount cannot have more than two decimal places", lblAmount);               
             }
             catch (ExcepcionInvalidYearExpense)
             {
-                lblDate.Text = "The year must be between 2018 and 2030.";
-                lblDate.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblAmount.Text = "";
+                SetMessage("The year must be between 2018 and 2030.", lblDate);
             }
             catch (ExcepcionExpenseWithEmptyCategory)
             {
-                lblCategories.Text = "The category should not be empty ";
-                lblCategories.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblAmount.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("The category should not be empty ", lblCategories);
             }
           
         }
@@ -276,8 +241,7 @@ namespace InterfazLogic
             }
             else
             {
-                lblCategories.Text = "Select a expense to edit";
-                lblCategories.ForeColor = Color.Red;
+                SetMessage("Select a expense to edit", lblCategories);
             }
         }
 

@@ -58,7 +58,7 @@ namespace InterfazLogic
                     lblMonth.ForeColor = Color.Red;
                 }
                 expenseReportByMonth = expenseController.GetExpenseByMonth(month);
-                BusinessLogic.Domain.ExpenseReport expenseReport = expenseController.GetExpenseReport(month);
+                BusinessLogic.Domain.GenerateExpenseReport expenseReport = expenseController.GetExpenseReport(month);
 
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();

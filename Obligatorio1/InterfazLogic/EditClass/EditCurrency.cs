@@ -55,6 +55,19 @@ namespace InterfazLogic
             }
         }
 
+        private void SetMessage(string messsage, Label lblToSetMessage)
+        {
+            if (lblToSetMessage != lblName)
+                lblName.Text = "";
+            if (lblToSetMessage != lblcurrencies)
+                lblcurrencies.Text = "";
+            if (lblToSetMessage != lblQuotation)
+                lblQuotation.Text = "";
+            if (lblToSetMessage != lblSymbol)
+                lblSymbol.Text = "";
+            lblToSetMessage.Text = messsage;
+            lblToSetMessage.ForeColor = Color.Red;
+        }
 
         private void DeleteCurrency()
         {
@@ -65,8 +78,7 @@ namespace InterfazLogic
             }
             catch
             {
-                lblcurrencies.Text = "The currency selected to delete is being used";
-                lblcurrencies.ForeColor = Color.Red;
+                SetMessage("The currency selected to delete is being used", lblcurrencies);
             }
         }
 
@@ -88,41 +100,27 @@ namespace InterfazLogic
             }
             catch (ExceptionUnableToSaveData)
             {
-                lblName.Text = "Already exist de currency name";
-                lblName.ForeColor = Color.Red;
-                lblSymbol.Text = "";
+                SetMessage("Already exist de currency name", lblName);
             }
             catch (ExceptionAlreadyExistTheCurrencySymbol)
             {
-                lblSymbol.Text = "Already exist de currencysymbol";
-                lblSymbol.ForeColor = Color.Red;
-                lblName.Text = "";
+                SetMessage("Already exist de currencysymbol", lblSymbol);
             }
             catch (ExceptionInvalidLengthCurrencyName)
             {
-                lblName.Text = "The name must be between 3 and 20 characters long.";
-                lblName.ForeColor = Color.Red;
-                lblSymbol.Text = "";
+                SetMessage("The name must be between 3 and 20 characters long.", lblName);
             }
             catch (ExceptionInvalidLengthSymbol)
             {
-                lblSymbol.Text = "The symbol must be between 3 and 20 characters long.";
-                lblSymbol.ForeColor = Color.Red;
-                lblName.Text = "";
+                SetMessage("The symbol must be between 3 and 20 characters long.", lblSymbol);
             }
             catch (ExceptionNegativeQuotation)
             {
-                lblQuotation.Text = "The quotation must be positive";
-                lblQuotation.ForeColor = Color.Red;
-                lblSymbol.Text = "";
-                lblName.Text = "";
+                SetMessage("The quotation must be positive", lblQuotation);
             }
             catch (ExceptionInvalidQuotation)
             {
-                lblSymbol.Text = "The quotation cannot have more than two decimal places.";
-                lblQuotation.ForeColor = Color.Red;
-                lblSymbol.Text = "";
-                lblName.Text = "";
+                SetMessage("The quotation cannot have more than two decimal places.", lblQuotation);
 
             }
         }
@@ -138,8 +136,7 @@ namespace InterfazLogic
                 DeleteCurrency();
             else
             {
-                lblcurrencies.Text = "Select a category to delete";
-                lblcurrencies.ForeColor = Color.Red;
+                SetMessage("Select a category to delete", lblcurrencies);
             }
         }
 
@@ -149,8 +146,7 @@ namespace InterfazLogic
                 Edit();
             else
             {
-                lblcurrencies.Text = "Select a category to edit";
-                lblcurrencies.ForeColor = Color.Red;
+                SetMessage("Select a category to edit", lblcurrencies);
             }
         }
     }

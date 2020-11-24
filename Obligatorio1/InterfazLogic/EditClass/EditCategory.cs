@@ -55,11 +55,24 @@ namespace InterfazLogic
             foreach (string keyWord in category.KeyWords)
             {
                 EditableKeyWords.Add(keyWord);
-            }
-           
+            }           
             lstKwywords.DataSource = EditableKeyWords;
             txtKeyWord.Enabled = true;
             txtName.Enabled = true;
+        }
+
+        private void SetMessage(string messsage, Label lblToSetMessage)
+        {
+            if (lblToSetMessage != lblName)
+                lblName.Text = "";
+            if (lblToSetMessage != lblEditCategories)
+                lblEditCategories.Text = "";
+            if (lblToSetMessage != lblKeyWord)
+                lblKeyWord.Text = "";
+            if (lblToSetMessage != lblKyWords)
+                lblKyWords.Text = "";
+            lblToSetMessage.Text = messsage;
+            lblToSetMessage.ForeColor = Color.Red;
         }
 
         private void BtnEditCategory_Click(object sender, EventArgs e)
@@ -68,8 +81,7 @@ namespace InterfazLogic
                 EditTheCategory();
             else
             {
-                lblEditCategories.Text = "Select a category to edit";
-                lblEditCategories.ForeColor = Color.Red;
+                SetMessage("Select a category to edit", lblEditCategories);
             }
         }
 
@@ -94,29 +106,24 @@ namespace InterfazLogic
                 }
                 catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
                 {
-                    lblKeyWord.Text = "You already entered that keyword in another category";
-                    lblKeyWord.ForeColor = Color.Red;
+                    SetMessage("You already entered that keyword in another category", lblKeyWord);
                 }
                 catch (ExcepcionInvalidKeyWordsLengthCategory)
                 {
-                    lblKeyWord.Text = "You cannot add more than 10 keywords.";
-                    lblKeyWord.ForeColor = Color.Red;
+                    SetMessage("You cannot add more than 10 keywords.", lblKeyWord);
                 }
                 catch (ExcepcionInvalidRepeatedKeyWordsCategory)
                 {
-                    lblKeyWord.Text = "You already entered that keyword";
-                    lblKeyWord.ForeColor = Color.Red;
+                    SetMessage("You already entered that keyword", lblKeyWord);
                 }
                 catch (InvalidKeyWord)
                 {
-                    lblKeyWord.Text = "The keyword cannot be empty.";
-                    lblKeyWord.ForeColor = Color.Red;
+                    SetMessage("The keyword cannot be empty.", lblKeyWord);
                 }
             }
             else
             {
-                lblEditCategories.Text = "Select a category to edit";
-                lblEditCategories.ForeColor = Color.Red;
+                SetMessage("Select a category to edit", lblEditCategories);
             }
         }
 
@@ -143,14 +150,12 @@ namespace InterfazLogic
                 }
                 catch (ArgumentOutOfRangeException)
                 {
-                    lblKyWords.Text = "Select key word to delete";
-                    lblKyWords.ForeColor = Color.Red;
+                    SetMessage("Select key word to delete", lblKyWords);
                 }
             }
             else
             {
-                lblEditCategories.Text = "Select a category to edit";
-                lblEditCategories.ForeColor = Color.Red;
+                SetMessage("Select a category to edit", lblEditCategories);
             }
         }       
 
@@ -161,9 +166,8 @@ namespace InterfazLogic
                 EditSelectedKyWord();
             }
             else
-            {               
-                lblEditCategories.Text = "Select a category to edit";
-                lblEditCategories.ForeColor = Color.Red;
+            {
+                SetMessage("Select a category to edit", lblEditCategories);
             }
         }
 
@@ -188,14 +192,12 @@ namespace InterfazLogic
                 }
                 else
                 {
-                    lblKyWords.Text = "Select key word to edit";
-                    lblKyWords.ForeColor = Color.Red;
+                    SetMessage("Select key word to edit", lblKyWords);
                 }
             }
             else if (lstKwywords.Items.Count <= 0)
             {
-                lblKyWords.Text = "There aren't key words to edit";
-                lblKyWords.ForeColor = Color.Red;
+                SetMessage("There aren't key words to edit", lblKyWords);
             }
         }
 
@@ -203,8 +205,7 @@ namespace InterfazLogic
         {
             if (lstCatgories.SelectedIndex < 0)
             {
-                lblEditCategories.Text = "Select a category to edit o delete";
-                lblEditCategories.ForeColor = Color.Red;
+                SetMessage("Select a category to edit o delete", lblEditCategories);
             };
             Category newCategory = new Category()
             {
@@ -226,13 +227,11 @@ namespace InterfazLogic
             }
             catch (ExcepcionInvalidNameLengthCategory)
             {
-                lblName.Text = "The name must be between 3 and 15 characters long.";
-                lblName.ForeColor = Color.Red;
+                SetMessage("The name must be between 3 and 15 characters long.", lblName);
             }
             catch (ExcepcionInvalidNameDigitCategory)
             {
-                lblName.Text = "The name of the category cannot be just numbers.";
-                lblName.ForeColor = Color.Red;
+                SetMessage("The name of the category cannot be just numbers.", lblName);
             }
             catch (ExcepcionInvalidRepeatedNameCategory)
             {
@@ -242,21 +241,17 @@ namespace InterfazLogic
                 }
                 else
                 {
-                    lblName.Text = "The entered name already exists.";
-                    lblName.ForeColor = Color.Red;
+                    SetMessage("The entered name already exists.", lblName);
                 }
             }
             catch (ExcepcionInvalidRepeatedKeyWordsCategory)
             {
-                lblKyWords.Text = "The entered keyword already exists in another category, edit or delete it.";
-                lblKyWords.ForeColor = Color.Red;
+                SetMessage("The entered keyword already exists in another category, edit or delete it.", lblKyWords);
             }
             catch (ExcepcionInvalidKeyWordsLengthCategory)
             {
-                lblKyWords.Text = "You cannot add more than 10 keywords.";
-                lblKyWords.ForeColor = Color.Red;
+                SetMessage("You cannot add more than 10 keywords.", lblKyWords);
             }
-
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)

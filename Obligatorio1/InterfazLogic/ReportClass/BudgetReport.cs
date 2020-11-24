@@ -99,39 +99,44 @@ namespace InterfazLogic
             }
         }
 
+        private bool TryLoadBudget()
+        {
+            double totalPlanedAmount = 0;
+            double totalRealAmount = 0;
+            double totalDiffAmount = 0;
+            if (!initializingForm)
+            {
+                try
+                {
+                    int year = (int)numYear.Value;
+                    Budget budget = budgetController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
+                    oldYearValue = year;
+                    return CompleteReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budget);
+
+                }
+                catch (NoFindBudget)
+                {
+                    MessageBox.Show("There is not budget created for the selected date");
+                    numYear.Value = oldYearValue;
+                    return false;
+                }
+                catch (System.NullReferenceException)
+                {
+                    lblMonth.Text = "Select a month";
+                    lblMonth.ForeColor = Color.Red;
+                    return false;
+                }
+
+            }
+            else
+                return false;
+        }
+
         private bool LoadBudgetReport()
         {
             try
             {
-                double totalPlanedAmount = 0;
-                double totalRealAmount = 0;
-                double totalDiffAmount = 0;
-                if (!initializingForm)
-                {                   
-                    try
-                    {
-                        int year=(int)numYear.Value;                       
-                        Budget budget = budgetController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
-                        oldYearValue = year;
-                        return CompleteReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budget);                       
-                        
-                    }
-                    catch (NoFindBudget)
-                    {
-                        MessageBox.Show("There is not budget created for the selected date");
-                        numYear.Value = oldYearValue;
-                        return false;
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        lblMonth.Text = "Select a month";
-                        lblMonth.ForeColor = Color.Red;
-                        return false;
-                    }
-
-                }
-                else
-                    return false;
+                return TryLoadBudget();
             }
             catch (ArgumentNullException)
             {

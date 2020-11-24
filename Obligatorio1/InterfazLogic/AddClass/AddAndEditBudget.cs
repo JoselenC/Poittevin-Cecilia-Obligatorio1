@@ -21,12 +21,21 @@ namespace InterfazLogic
             nMonth.SelectedIndex = 0;
         }
 
+        private void SetMessage(string messsage, Label lblToSetMessage)
+        {
+            if (lblToSetMessage != lblMonth)
+                lblMonth.Text = "";
+            if (lblToSetMessage != lblCategories)
+                lblCategories.Text = "";
+            lblToSetMessage.Text = messsage;
+            lblToSetMessage.ForeColor = Color.Red;
+        }
+
         private void EditBudgetCategory()
         {
             if (currentBudget is null || lstCategory.SelectedItem is null)
             {
-                lblCategories.Text = "Select a category from the category list to edit";
-                lblCategories.ForeColor = Color.Red;
+                SetMessage("Select a category from the category list to edit", lblCategories);
             }
             else
             {
@@ -82,11 +91,7 @@ namespace InterfazLogic
             {
                 lstCategory.Items.Add(budgetCategory);
             }
-        }
-
-    
-
-       
+        } 
 
         private void BtnAccept_Click(object sender, EventArgs e)
         {
@@ -97,8 +102,7 @@ namespace InterfazLogic
             }
             catch (ArgumentNullException)
             {
-                lblMonth.Text = "Selecct a correct month";
-                lblMonth.ForeColor = Color.Red;
+                SetMessage("Selecct a correct month", lblMonth);
             }
         }
 
