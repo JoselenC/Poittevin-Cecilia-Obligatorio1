@@ -89,8 +89,7 @@ namespace InterfazLogic
         }
 
         private void btnExportar_Click(object sender2, EventArgs e)
-        {
-           
+        {           
             SaveFileDialog saveFile = new SaveFileDialog();
             string fileName;
             saveFile.Title = "Export Report";

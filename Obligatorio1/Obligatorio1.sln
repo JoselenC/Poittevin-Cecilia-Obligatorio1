@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{44A5FD64-A9DD-45ED-8D2E-F8C2F9E1D41C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfazLogic", "InterfazLogic\InterfazLogic.csproj", "{35DCE5B3-0657-4AD8-9210-AFD4C5A9EC62}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterfaceLogic", "InterfazLogic\InterfaceLogic.csproj", "{35DCE5B3-0657-4AD8-9210-AFD4C5A9EC62}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3EFD2763-5BA1-4825-A578-D7588B8FD366} = {3EFD2763-5BA1-4825-A578-D7588B8FD366}
 	EndProjectSection
