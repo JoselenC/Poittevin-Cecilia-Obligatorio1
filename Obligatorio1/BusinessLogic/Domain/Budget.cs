@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic.Domain;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -145,6 +146,8 @@ namespace BusinessLogic
         {
             return Month == month && Year == year;
         }
+
+      
 
     }
 }

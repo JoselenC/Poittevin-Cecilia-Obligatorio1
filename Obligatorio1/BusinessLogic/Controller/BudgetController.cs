@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Repository;
+﻿using BusinessLogic.Domain;
+using BusinessLogic.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,30 @@ namespace BusinessLogic
             }
             return total;
         }
+
+        public BudgetReport GetBudgetReport(string vMonth,Budget budget)
+        {
+           
+            BudgetReport budgetsReport = new BudgetReport();
+            budgetsReport.budgetsReportLines = new List<BudgetReportLine>();
+            foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
+            {
+                BudgetReportLine budgetReport = new BudgetReportLine();
+                Category category = budgetCategory.Category;
+                budgetReport.PlanedAmount = budgetCategory.Amount;
+                budgetReport.RealAmount = GetTotalSpentByMonthAndCategory(vMonth, category);
+                budgetReport.DiffAmount = budgetReport.PlanedAmount - budgetReport.RealAmount;
+                budgetsReport.TotalAmount += budgetReport.PlanedAmount;
+                budgetsReport.RealAmount += budgetReport.RealAmount;
+                budgetsReport.DiffAmount += budgetReport.DiffAmount;
+                budgetReport.Category= budgetCategory.Category;
+                budgetsReport.budgetsReportLines.Add(budgetReport);
+            }
+
+            return budgetsReport;
+        }
+
+
 
         private Budget CreateBudget(int year, List<Category> categories, Months month)
         {
