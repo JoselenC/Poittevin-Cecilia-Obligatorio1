@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using BusinessLogic;
 using System.IO;
 using BusinessLogic.Repository;
+using BusinessLogic.Domain;
 
 namespace InterfazLogic
 {
@@ -57,24 +58,20 @@ namespace InterfazLogic
                     lblMonth.ForeColor = Color.Red;
                 }
                 expenseReportByMonth = expenseController.GetExpenseByMonth(month);
+                BusinessLogic.Domain.ExpenseReport expenseReport = expenseController.GetExpenseReport(month);
+
                 listView1.Items.Clear();
                 ListViewItem item = new ListViewItem();
-                foreach(Expense vExpense in expenseReportByMonth)
+                foreach(ExpenseReportLine vExpense in expenseReport.ExpenseReportLine)
                 {
-                    string date = vExpense.CreationDate.ToString("dd/MM/yyyy");
-                    string description = vExpense.Description;
-                    string name = vExpense.Category.Name;
-                    string currency = vExpense.Currency.Symbol;
-                    string amount = vExpense.Amount.ToString();
-                        totalAmount += vExpense.ConvertToPesos();
-                        item = listView1.Items.Add(date);
-                        item.SubItems.Add(description);
-                        item.SubItems.Add(name);
-                        item.SubItems.Add(currency);
-                        item.SubItems.Add(amount);                   
+                        item = listView1.Items.Add(vExpense.CreationDate.ToString("dd/MM/yyyy"));
+                        item.SubItems.Add(vExpense.Description);
+                        item.SubItems.Add(vExpense.Category.ToString());
+                        item.SubItems.Add(vExpense.Currency.Symbol);
+                        item.SubItems.Add(vExpense.Amount.ToString());                   
 
-                }                
-                lblTotalAmount.Text = "Total amount of the month " + month + " was " + totalAmount.ToString();
+                }
+                lblTotalAmount.Text = "Total amount of the month " + month + " in pesos was " + expenseReport.TotalAmount.ToString();
             }
             else
             {
@@ -93,13 +90,27 @@ namespace InterfazLogic
 
         private void btnExportar_Click(object sender2, EventArgs e)
         {
+           
             SaveFileDialog saveFile = new SaveFileDialog();
             string fileName;
             saveFile.Title = "Export Report";
-            saveFile.Filter = "Txt File (.txt)| *.txt|Csv File (.csv)| *.csv";
-            saveFile.ShowDialog();
+            saveFile.Filter = "Txt File (.txt)| *.txt|Csv File (.csv)| *.csv";  
             fileName = saveFile.FileName.ToString();
-            expenseController.ExportExpenseReport(expenseReportByMonth, fileName, saveFile.FilterIndex);                    
+            saveFile.ShowDialog();
+            string extension = Path.GetExtension(fileName);
+            switch (extension)
+            {
+                case ".txt":
+                    expenseController.ExportExpenseReport(expenseReportByMonth, fileName, "txt");
+                    break;
+                case ".csv":
+                    expenseController.ExportExpenseReport(expenseReportByMonth, fileName, "csv");
+                    break;
+                default:
+                    MessageBox.Show("Select a correct type to export expens report" );
+                    break;
+            }
+                                  
         }
 
       

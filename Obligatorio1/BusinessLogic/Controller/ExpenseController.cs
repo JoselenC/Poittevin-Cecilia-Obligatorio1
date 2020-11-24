@@ -1,13 +1,14 @@
 ﻿using BusinessLogic.Repository;
 using System;
 using System.Collections.Generic;
+using BusinessLogic.Domain;
 
 namespace BusinessLogic
 {
     public class ExpenseController
     {
         public IManageRepository Repository { get; private set; }
-        public IExportExpenseReport Export { get; set; }
+       
         public ExpenseController(IManageRepository repository)
         {
             Repository = repository;
@@ -84,6 +85,30 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
+        public ExpenseReport GetExpenseReport(string month)
+        {
+            Months mMonth = StringToMonthsEnum(month);
+            List<Expense> expenses= GetExpenseByMonth(mMonth);
+            double totalAmount = 0;
+            List<ExpenseReportLine> expensesReportLines = new List<ExpenseReportLine>();
+            foreach (Expense expense in expenses)
+            {
+                ExpenseReportLine expenseReportLine= new ExpenseReportLine();               
+                expenseReportLine.Amount = expense.Amount;
+                expenseReportLine.Category = expense.Category;
+                expenseReportLine.CreationDate = expense.CreationDate;
+                expenseReportLine.Currency = expense.Currency;
+                expenseReportLine.Description = expense.Description;
+                expensesReportLines.Add(expenseReportLine);
+                totalAmount+= expense.ConvertToPesos();
+
+            }
+
+            ExpenseReport expenseReport = new ExpenseReport() { ExpenseReportLine = expensesReportLines, TotalAmount = totalAmount };
+            return expenseReport;
+        }
+
+
         public Currency FindCurrencyByName(string CurrencyName)
         {
             return Repository.FindCurrencyByName(CurrencyName);
@@ -121,14 +146,10 @@ namespace BusinessLogic
             return Repository.GetCurrencies();
         }
 
-        public void ExportExpenseReport(List<Expense> expenses, string fileName, int index)
+        public void ExportExpenseReport(List<Expense> expenses, string fileName, string type)
         {
-            if (index == 1)
-                Export = new ExpenseReportTXT();
-            else
-                Export = new ExpenseReportCSV();
-
-            Export.ExportReport(expenses, fileName);
+            IExportExpenseReport exportExpenseReport = new FactoryExportReport().GetExpenseReportInstance(type);
+            exportExpenseReport.ExportReport(expenses, fileName);
         }
     }
     }
