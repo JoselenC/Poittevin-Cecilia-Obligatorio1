@@ -7,33 +7,33 @@ namespace BusinessLogic
 {
     public class ExpenseController
     {
-        public IManageRepository Repository { get; private set; }
+        private IManageRepository repository;
        
-        public ExpenseController(IManageRepository repository)
+        public ExpenseController(IManageRepository vRepository)
         {
-            Repository = repository;
+            repository = vRepository;
         }
 
         public Expense FindExpense(Expense expense)
         {
-            return Repository.FindExpense(expense);
+            return repository.FindExpense(expense);
         }
 
         public Category FindCategoryByDescription(string vDescription)
         {
-            return Repository.FindCategoryByDescription(vDescription);
+            return repository.FindCategoryByDescription(vDescription);
         }
 
         public Expense DeleteExpense(Expense expenseToDelete)
         {
             Expense expense = FindExpense(expenseToDelete);
-            Repository.DeleteExpense(expense);
+            repository.DeleteExpense(expense);
             return expense;
         }
 
         public List<Expense> GetExpenses()
         {
-            return Repository.GetExpenses();
+            return repository.GetExpenses();
         }
 
         private List<string> MonthsListIntToString(List<int> months)
@@ -42,8 +42,8 @@ namespace BusinessLogic
             foreach (int month in months)
             {
                 Months vMonth = (Months)month;
-                string nombreMes = vMonth.ToString();
-                monthsString.Add(nombreMes);
+                string nameMonth = vMonth.ToString();
+                monthsString.Add(nameMonth);
             }
             return monthsString;
         }
@@ -51,7 +51,7 @@ namespace BusinessLogic
         public List<string> OrderedMonthsWithExpenses()
         {
             List<int> orderedMonthsInt = new List<int>();
-            List<Expense> expenses = Repository.GetExpenses();
+            List<Expense> expenses = repository.GetExpenses();
             foreach (Expense expense in expenses)
             {
                 if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
@@ -62,10 +62,23 @@ namespace BusinessLogic
             return orderedMonthsString;
         }
 
+        public List<int> OrderedYearsWithExpenses()
+        {
+            List<int> orderedYEarsInt = new List<int>();
+            List<Expense> expenses = repository.GetExpenses();
+            foreach (Expense expense in expenses)
+            {
+                if (!orderedYEarsInt.Contains(expense.CreationDate.Year))
+                    orderedYEarsInt.Add(expense.CreationDate.Year);
+            }
+            orderedYEarsInt.Sort();
+            return orderedYEarsInt;
+        }
+
         public List<Expense> GetExpenseByMonth(Months month)
         {
             List<Expense> expensesByMonth = new List<Expense>();
-            List<Expense> expenses = Repository.GetExpenses();
+            List<Expense> expenses = repository.GetExpenses();
             foreach (Expense vExpense in expenses)
             {
                 if (vExpense.IsExpenseSameMonth(month))
@@ -73,6 +86,23 @@ namespace BusinessLogic
             }
             return expensesByMonth;
         }
+
+        public List<Expense> GetExpenseByDate(string month, int year)
+        {
+            Months mMonth = StringToMonthsEnum(month);
+            List<Expense> expensesByMonth = new List<Expense>();
+            List<Expense> expenses = repository.GetExpenses();
+            foreach (Expense vExpense in expenses)
+            {
+                if (vExpense.IsExpenseSameDate(mMonth, year))
+                    expensesByMonth.Add(vExpense);
+            }
+            if (expensesByMonth.Count == 0)
+                throw new NoFindExpenseByDate();
+            return expensesByMonth;
+            
+        }
+
 
         private Months StringToMonthsEnum(string month)
         {
@@ -85,10 +115,9 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
-        public ExpenseReport GetExpenseReport(string month)
+        public GenerateExpenseReport GetExpenseReport(string month,int year)
         {
-            Months mMonth = StringToMonthsEnum(month);
-            List<Expense> expenses= GetExpenseByMonth(mMonth);
+            List<Expense> expenses= GetExpenseByDate(month,year);
             double totalAmount = 0;
             List<ExpenseReportLine> expensesReportLines = new List<ExpenseReportLine>();
             foreach (Expense expense in expenses)
@@ -104,25 +133,25 @@ namespace BusinessLogic
 
             }
 
-            ExpenseReport expenseReport = new ExpenseReport() { ExpenseReportLine = expensesReportLines, TotalAmount = totalAmount };
+            GenerateExpenseReport expenseReport = new GenerateExpenseReport() { ExpenseReportLine = expensesReportLines, TotalAmount = totalAmount };
             return expenseReport;
         }
 
 
         public Currency FindCurrencyByName(string CurrencyName)
         {
-            return Repository.FindCurrencyByName(CurrencyName);
+            return repository.FindCurrencyByName(CurrencyName);
         }
 
         public Category FindCategoryByName(string categoryName)
         {
-            return Repository.FindCategoryByName(categoryName);
+            return repository.FindCategoryByName(categoryName);
         }
 
         public double AmountOfExpensesInAMonth(Months month)
         {
             double total = 0;
-            List<Expense> expenses = Repository.GetExpenses();
+            List<Expense> expenses = repository.GetExpenses();
             foreach (Expense expense in expenses)
             {
                 if (expense.IsExpenseSameMonth(month))
@@ -133,17 +162,17 @@ namespace BusinessLogic
 
         public void SetExpense(double amount, DateTime creationDate, string description, Category category, Currency Currency)
         {
-            Repository.SetExpense(amount, creationDate, description, category, Currency);
+            repository.SetExpense(amount, creationDate, description, category, Currency);
         }
 
         public List<Category> GetCategories()
         {
-            return Repository.GetCategories();
+            return repository.GetCategories();
         }
 
         public List<Currency> GetCurrencies()
         {
-            return Repository.GetCurrencies();
+            return repository.GetCurrencies();
         }
 
         public void ExportExpenseReport(List<Expense> expenses, string fileName, string type)

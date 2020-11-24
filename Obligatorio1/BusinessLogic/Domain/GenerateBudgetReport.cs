@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Domain
 {
-    public class BudgetReport
+    public class GenerateBudgetReport
     {
         public List<BudgetReportLine> budgetsReportLines { get; set; }
 

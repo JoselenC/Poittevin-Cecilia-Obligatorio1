@@ -21,12 +21,21 @@ namespace InterfazLogic
             nMonth.SelectedIndex = 0;
         }
 
+        private void SetMessage(string messsage, Label lblToSetMessage)
+        {
+            if (lblToSetMessage != lblMonth)
+                lblMonth.Text = "";
+            if (lblToSetMessage != lblCategories)
+                lblCategories.Text = "";
+            lblToSetMessage.Text = messsage;
+            lblToSetMessage.ForeColor = Color.Red;
+        }
+
         private void EditBudgetCategory()
         {
             if (currentBudget is null || lstCategory.SelectedItem is null)
             {
-                lblCategories.Text = "Select a category from the category list to edit";
-                lblCategories.ForeColor = Color.Red;
+                SetMessage("Select a category from the category list to edit", lblCategories);
             }
             else
             {
@@ -67,7 +76,7 @@ namespace InterfazLogic
         {
            
             string month = nMonth.SelectedItem.ToString();
-            int year = (int)nYear.Value;
+            int year = (int)NYear.Value;
             return budgetController.BudgetGetOrCreate(month, year);
         }
 
@@ -82,9 +91,27 @@ namespace InterfazLogic
             {
                 lstCategory.Items.Add(budgetCategory);
             }
+        } 
+
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                budgetController.SetBudget(currentBudget);
+                Visible = false;
+            }
+            catch (ArgumentNullException)
+            {
+                SetMessage("Selecct a correct month", lblMonth);
+            }
         }
 
-        private void numericYear_ValueChanged(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
+
+        private void NYear_ValueChanged(object sender, EventArgs e)
         {
             try
             {
@@ -96,25 +123,6 @@ namespace InterfazLogic
             {
                 MessageBox.Show("There are no categories registered in the system");
                 Visible = false;
-            }
-        } 
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Visible = false;
-        }
-
-        private void btnAccept_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                budgetController.SetBudget(currentBudget);
-                Visible = false;
-            }
-            catch (ArgumentNullException)
-            {
-                lblMonth.Text = "Selecct a correct month";
-                lblMonth.ForeColor = Color.Red;
             }
         }
     }

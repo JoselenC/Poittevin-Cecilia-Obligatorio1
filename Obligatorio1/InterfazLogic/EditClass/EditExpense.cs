@@ -56,6 +56,22 @@ namespace InterfazLogic
             }
         }
 
+        private void SetMessage(string messsage, Label lblToSetMessage)
+        {
+            if (lblToSetMessage != lblAmount)
+                lblAmount.Text = "";
+            if (lblToSetMessage != lblCategories)
+                lblCategories.Text = "";
+            if (lblToSetMessage != lblCategory)
+                lblCategory.Text = "";
+            if (lblToSetMessage != lblDate)
+                lblDate.Text = "";
+            if (lblToSetMessage != lblExpenses)
+                lblExpenses.Text = "";
+            lblToSetMessage.Text = messsage;
+            lblToSetMessage.ForeColor = Color.Red;
+        }
+
         private void CompleteExpenseToEdit()
         {
             expenseToEdit = expenseController.FindExpense((Expense)lstExpenses.SelectedItem);
@@ -66,14 +82,14 @@ namespace InterfazLogic
             lstCurrency.SelectedIndex=0;
             indexToEdit = lstExpenses.SelectedIndex;
             selectExpense = true;
-            btnDelete.Enabled = false;
+            BtnDelete.Enabled = false;
             tbDescription.Enabled = true;
             nAmount.Enabled = true;
             dateTime.Enabled = true;
             lstCategories.Enabled = true;
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -83,21 +99,11 @@ namespace InterfazLogic
                 }
                 else if (expenseController.GetExpenses().Count == 0)
                 {
-                    lblExpenses.Text = "There are no more expenses to edit";
-                    lblExpenses.ForeColor = Color.Red;
-                    lblAmount.Text = "";
-                    lblCategories.Text = "";
-                    lbDescription.Text = "";
-                    lblDate.Text = "";
+                    SetMessage("There are no more expenses to edit", lblExpenses);
                 }
                 else
                 {
-                    lblExpenses.Text = "Select expense to edit";
-                    lblExpenses.ForeColor = Color.Red;
-                    lblAmount.Text = "";
-                    lblCategories.Text = "";
-                    lbDescription.Text = "";
-                    lblDate.Text = "";
+                    SetMessage("Select expense to edit", lblExpenses);
                 }
             }
             catch (NoFindEqualsExpense)
@@ -117,7 +123,7 @@ namespace InterfazLogic
             lblExpenses.Text = "";
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
@@ -125,78 +131,12 @@ namespace InterfazLogic
             }
             else if (expenseController.GetExpenses().Count == 0)
             {
-                lblExpenses.Text = "There are no more expenses to delete";
-                lblExpenses.ForeColor = Color.Red;
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("There are no more expenses to delete", lblExpenses);
             }
             else
             {
-                lblExpenses.Text = "Select expense to delete";
-                lblExpenses.ForeColor = Color.Red;
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("Select expense to delete", lblExpenses);
             }
-        }      
-
-        private void btnAccept_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                btnDelete.Enabled = true;
-                TryRegisterNewExpense();
-            }
-            catch (ExcepcionInvalidDescriptionLengthExpense)
-            {
-                lbDescription.Text = "The name must be between 3 and 20 characters long.";
-                lbDescription.ForeColor = Color.Red;
-                lblAmount.Text = "";
-                lblCategories.Text = "";
-                lblExpenses.Text = "";
-                lblDate.Text = "";
-            }
-            catch (ExcepcionNegativeAmountExpense)
-            {
-                lblAmount.Text = "The amount must be positive";
-                lblAmount.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
-            }
-            catch (ExcepcionInvalidAmountExpense)
-            {
-                lblAmount.Text = "The amount cannot have more than two decimal places";
-                nAmount.Value = 1;
-                lblAmount.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
-            }
-            catch (ExcepcionInvalidYearExpense)
-            {
-                lblDate.Text = "The year must be between 2018 and 2030.";
-                lblDate.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
-                lblAmount.Text = "";
-            }
-            catch (ExcepcionExpenseWithEmptyCategory)
-            {
-                lblCategories.Text = "The category should not be empty ";
-                lblCategories.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblAmount.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
-            }
-          
         }
 
         private void NewExpense(Category category)
@@ -220,12 +160,7 @@ namespace InterfazLogic
             Category category = new Category();
             if (lstCategories.SelectedIndex < 0 && edit)
             {
-                lblCategories.Text = "You must select a category";
-                lblCategories.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblAmount.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
+                SetMessage("You must select a category", lblCategories);
             }
             else if (lstCategories.SelectedIndex >= 0 && edit)
             {
@@ -245,6 +180,36 @@ namespace InterfazLogic
                     Visible = false;
                 }
             }
+        }
+
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                BtnDelete.Enabled = true;
+                TryRegisterNewExpense();
+            }
+            catch (ExcepcionInvalidDescriptionLengthExpense)
+            {
+                SetMessage("The name must be between 3 and 20 characters long.", lbDescription);
+            }
+            catch (ExcepcionNegativeAmountExpense)
+            {
+                SetMessage("The amount must be positive", lblAmount);
+            }
+            catch (ExcepcionInvalidAmountExpense)
+            {
+                SetMessage("The amount cannot have more than two decimal places", lblAmount);               
+            }
+            catch (ExcepcionInvalidYearExpense)
+            {
+                SetMessage("The year must be between 2018 and 2030.", lblDate);
+            }
+            catch (ExcepcionExpenseWithEmptyCategory)
+            {
+                SetMessage("The category should not be empty ", lblCategories);
+            }
+          
         }
 
         private void CompleteCategories()
@@ -268,7 +233,7 @@ namespace InterfazLogic
             edit = true;
         }
 
-        private void btnEditCategory_Click(object sender, EventArgs e)
+        private void BtnEditCategory_Click(object sender, EventArgs e)
         {
             if (selectExpense)
             {
@@ -276,12 +241,11 @@ namespace InterfazLogic
             }
             else
             {
-                lblCategories.Text = "Select a expense to edit";
-                lblCategories.ForeColor = Color.Red;
+                SetMessage("Select a expense to edit", lblCategories);
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
         }

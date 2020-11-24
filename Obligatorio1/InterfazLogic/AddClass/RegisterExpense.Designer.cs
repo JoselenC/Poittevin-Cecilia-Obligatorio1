@@ -41,9 +41,9 @@
             this.lblAmount = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblCategories = new System.Windows.Forms.Label();
-            this.btnRegistrExpense = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnRegistrExpense = new System.Windows.Forms.Button();
+            this.BtnSearch = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.lstcurrency = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).BeginInit();
@@ -188,38 +188,38 @@
             this.lblCategories.Size = new System.Drawing.Size(0, 32);
             this.lblCategories.TabIndex = 12;
             // 
-            // btnRegistrExpense
+            // BtnRegistrExpense
             // 
-            this.btnRegistrExpense.BackColor = System.Drawing.Color.Tan;
-            this.btnRegistrExpense.Location = new System.Drawing.Point(284, 846);
-            this.btnRegistrExpense.Name = "btnRegistrExpense";
-            this.btnRegistrExpense.Size = new System.Drawing.Size(227, 73);
-            this.btnRegistrExpense.TabIndex = 13;
-            this.btnRegistrExpense.Text = "Accept";
-            this.btnRegistrExpense.UseVisualStyleBackColor = false;
-            this.btnRegistrExpense.Click += new System.EventHandler(this.btnRegistrExpense_Click);
+            this.BtnRegistrExpense.BackColor = System.Drawing.Color.Tan;
+            this.BtnRegistrExpense.Location = new System.Drawing.Point(284, 846);
+            this.BtnRegistrExpense.Name = "BtnRegistrExpense";
+            this.BtnRegistrExpense.Size = new System.Drawing.Size(227, 73);
+            this.BtnRegistrExpense.TabIndex = 13;
+            this.BtnRegistrExpense.Text = "Accept";
+            this.BtnRegistrExpense.UseVisualStyleBackColor = false;
+            this.BtnRegistrExpense.Click += new System.EventHandler(this.BtnRegistrExpense_Click);
             // 
-            // btnSearch
+            // BtnSearch
             // 
-            this.btnSearch.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSearch.Location = new System.Drawing.Point(922, 642);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(207, 55);
-            this.btnSearch.TabIndex = 14;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.BtnSearch.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnSearch.Location = new System.Drawing.Point(922, 642);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(207, 55);
+            this.BtnSearch.TabIndex = 14;
+            this.BtnSearch.Text = "Search";
+            this.BtnSearch.UseVisualStyleBackColor = false;
+            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(682, 846);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(227, 73);
-            this.btnCancel.TabIndex = 35;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.BackColor = System.Drawing.Color.Tan;
+            this.BtnCancel.Location = new System.Drawing.Point(682, 846);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(227, 73);
+            this.BtnCancel.TabIndex = 35;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // label6
             // 
@@ -227,7 +227,7 @@
             this.label6.BackColor = System.Drawing.Color.OldLace;
             this.label6.Location = new System.Drawing.Point(111, 282);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 32);
+            this.label6.Size = new System.Drawing.Size(123, 32);
             this.label6.TabIndex = 36;
             this.label6.Text = "currency";
             // 
@@ -247,9 +247,9 @@
             this.BackColor = System.Drawing.Color.OldLace;
             this.Controls.Add(this.lstcurrency);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.btnRegistrExpense);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnSearch);
+            this.Controls.Add(this.BtnRegistrExpense);
             this.Controls.Add(this.lblCategories);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblAmount);
@@ -286,9 +286,9 @@
         private System.Windows.Forms.Label lblAmount;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblCategories;
-        private System.Windows.Forms.Button btnRegistrExpense;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnRegistrExpense;
+        private System.Windows.Forms.Button BtnSearch;
+        private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox lstcurrency;
     }

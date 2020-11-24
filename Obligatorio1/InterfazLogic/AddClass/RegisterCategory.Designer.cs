@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.btnRegisterCategory = new System.Windows.Forms.Button();
+            this.BtnRegisterCategory = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
             this.tbKeyWord = new System.Windows.Forms.TextBox();
             this.lstCategories = new System.Windows.Forms.ListBox();
-            this.btnAddKeyWord = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
+            this.BtnAddKeyWord = new System.Windows.Forms.Button();
+            this.BtnEdit = new System.Windows.Forms.Button();
             this.lblName = new System.Windows.Forms.Label();
             this.lblKeyWords = new System.Windows.Forms.Label();
             this.lblKeyWordToEdit = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lblEdit = new System.Windows.Forms.Label();
-            this.btnCanel = new System.Windows.Forms.Button();
+            this.BtnCanel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -58,16 +58,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "              Register category             ";
             // 
-            // btnRegisterCategory
+            // BtnRegisterCategory
             // 
-            this.btnRegisterCategory.BackColor = System.Drawing.Color.Tan;
-            this.btnRegisterCategory.Location = new System.Drawing.Point(338, 720);
-            this.btnRegisterCategory.Name = "btnRegisterCategory";
-            this.btnRegisterCategory.Size = new System.Drawing.Size(227, 73);
-            this.btnRegisterCategory.TabIndex = 1;
-            this.btnRegisterCategory.Text = "Accept";
-            this.btnRegisterCategory.UseVisualStyleBackColor = false;
-            this.btnRegisterCategory.Click += new System.EventHandler(this.btnRegisterCategory_Click);
+            this.BtnRegisterCategory.BackColor = System.Drawing.Color.Tan;
+            this.BtnRegisterCategory.Location = new System.Drawing.Point(338, 720);
+            this.BtnRegisterCategory.Name = "BtnRegisterCategory";
+            this.BtnRegisterCategory.Size = new System.Drawing.Size(227, 73);
+            this.BtnRegisterCategory.TabIndex = 1;
+            this.BtnRegisterCategory.Text = "Accept";
+            this.BtnRegisterCategory.UseVisualStyleBackColor = false;
+            this.BtnRegisterCategory.Click += new System.EventHandler(this.BtnRegisterCategory_Click);
             // 
             // label2
             // 
@@ -110,27 +110,27 @@
             this.lstCategories.Size = new System.Drawing.Size(582, 128);
             this.lstCategories.TabIndex = 6;
             // 
-            // btnAddKeyWord
+            // BtnAddKeyWord
             // 
-            this.btnAddKeyWord.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnAddKeyWord.Location = new System.Drawing.Point(960, 282);
-            this.btnAddKeyWord.Name = "btnAddKeyWord";
-            this.btnAddKeyWord.Size = new System.Drawing.Size(237, 63);
-            this.btnAddKeyWord.TabIndex = 7;
-            this.btnAddKeyWord.Text = "Add key word";
-            this.btnAddKeyWord.UseVisualStyleBackColor = false;
-            this.btnAddKeyWord.Click += new System.EventHandler(this.btnAddKeyWord_Click);
+            this.BtnAddKeyWord.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnAddKeyWord.Location = new System.Drawing.Point(960, 282);
+            this.BtnAddKeyWord.Name = "BtnAddKeyWord";
+            this.BtnAddKeyWord.Size = new System.Drawing.Size(237, 63);
+            this.BtnAddKeyWord.TabIndex = 7;
+            this.BtnAddKeyWord.Text = "Add key word";
+            this.BtnAddKeyWord.UseVisualStyleBackColor = false;
+            this.BtnAddKeyWord.Click += new System.EventHandler(this.BtnAddKeyWord_Click);
             // 
-            // btnEdit
+            // BtnEdit
             // 
-            this.btnEdit.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEdit.Location = new System.Drawing.Point(960, 421);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(236, 63);
-            this.btnEdit.TabIndex = 8;
-            this.btnEdit.Text = "Edit key word";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.BtnEdit.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnEdit.Location = new System.Drawing.Point(960, 421);
+            this.BtnEdit.Name = "BtnEdit";
+            this.BtnEdit.Size = new System.Drawing.Size(236, 63);
+            this.BtnEdit.TabIndex = 8;
+            this.BtnEdit.Text = "Edit key word";
+            this.BtnEdit.UseVisualStyleBackColor = false;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
             // lblName
             // 
@@ -156,16 +156,16 @@
             this.lblKeyWordToEdit.Size = new System.Drawing.Size(0, 32);
             this.lblKeyWordToEdit.TabIndex = 13;
             // 
-            // btnDelete
+            // BtnDelete
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDelete.Location = new System.Drawing.Point(960, 522);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(236, 63);
-            this.btnDelete.TabIndex = 14;
-            this.btnDelete.Text = "Delete key word";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.BtnDelete.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnDelete.Location = new System.Drawing.Point(960, 522);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(236, 63);
+            this.BtnDelete.TabIndex = 14;
+            this.BtnDelete.Text = "Delete key word";
+            this.BtnDelete.UseVisualStyleBackColor = false;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
             // label4
             // 
@@ -184,37 +184,37 @@
             this.lblEdit.Size = new System.Drawing.Size(0, 32);
             this.lblEdit.TabIndex = 16;
             // 
-            // btnCanel
+            // BtnCanel
             // 
-            this.btnCanel.BackColor = System.Drawing.Color.Tan;
-            this.btnCanel.Location = new System.Drawing.Point(669, 720);
-            this.btnCanel.Name = "btnCanel";
-            this.btnCanel.Size = new System.Drawing.Size(227, 73);
-            this.btnCanel.TabIndex = 17;
-            this.btnCanel.Text = "Cancel";
-            this.btnCanel.UseVisualStyleBackColor = false;
-            this.btnCanel.Click += new System.EventHandler(this.btnCanel_Click);
+            this.BtnCanel.BackColor = System.Drawing.Color.Tan;
+            this.BtnCanel.Location = new System.Drawing.Point(669, 720);
+            this.BtnCanel.Name = "BtnCanel";
+            this.BtnCanel.Size = new System.Drawing.Size(227, 73);
+            this.BtnCanel.TabIndex = 17;
+            this.BtnCanel.Text = "Cancel";
+            this.BtnCanel.UseVisualStyleBackColor = false;
+            this.BtnCanel.Click += new System.EventHandler(this.BtnCanel_Click);
             // 
             // RegisterCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
-            this.Controls.Add(this.btnCanel);
+            this.Controls.Add(this.BtnCanel);
             this.Controls.Add(this.lblEdit);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.BtnDelete);
             this.Controls.Add(this.lblKeyWordToEdit);
             this.Controls.Add(this.lblKeyWords);
             this.Controls.Add(this.lblName);
-            this.Controls.Add(this.btnEdit);
-            this.Controls.Add(this.btnAddKeyWord);
+            this.Controls.Add(this.BtnEdit);
+            this.Controls.Add(this.BtnAddKeyWord);
             this.Controls.Add(this.lstCategories);
             this.Controls.Add(this.tbKeyWord);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnRegisterCategory);
+            this.Controls.Add(this.BtnRegisterCategory);
             this.Controls.Add(this.label1);
             this.Name = "RegisterCategory";
             this.Size = new System.Drawing.Size(1254, 840);
@@ -226,20 +226,20 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnRegisterCategory;
+        private System.Windows.Forms.Button BtnRegisterCategory;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbName;
         private System.Windows.Forms.TextBox tbKeyWord;
         private System.Windows.Forms.ListBox lstCategories;
-        private System.Windows.Forms.Button btnAddKeyWord;
-        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button BtnAddKeyWord;
+        private System.Windows.Forms.Button BtnEdit;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblKeyWords;
         private System.Windows.Forms.Label lblKeyWordToEdit;
-        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button BtnDelete;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblEdit;
-        private System.Windows.Forms.Button btnCanel;
+        private System.Windows.Forms.Button BtnCanel;
     }
 }

@@ -9,39 +9,38 @@ namespace BusinessLogic
 {
     public class CurrencyController
     {
+        private IManageRepository repository;
 
-        public IManageRepository Repository { get; private set; }
-
-        public CurrencyController(IManageRepository repository)
+        public CurrencyController(IManageRepository vRepository)
         {
-            Repository = repository;
+            repository = vRepository;
         }
 
         public void SetCurrency(string name, string symbol, double quotation)
         {
             Currency currency = new Currency() { Name = name, Symbol = symbol, Quotation = quotation };
-            Repository.SetCurrency(currency);
+            repository.SetCurrency(currency);
         }
 
         public void DeleteCurrency(Currency currency)
         {
-            Repository.DeleteCurrency(currency);
+            repository.DeleteCurrency(currency);
         }
 
         public List<Currency> GetCurrencies()
         {
-            return Repository.GetCurrencies();
+            return repository.GetCurrencies();
         }
 
         public Currency FindCurrency(Currency currency)
         {
-            return Repository.FindCurrency(currency);
+            return repository.FindCurrency(currency);
         }      
 
         public void UpdateCurrency(Currency oldCurrency, Currency newCurrency)
         {
-            Repository.UpdateCurrency(oldCurrency, newCurrency);
-            Repository.EditCurrencyAllExpense(oldCurrency, newCurrency);
+            repository.UpdateCurrency(oldCurrency, newCurrency);
+            repository.EditCurrencyAllExpense(oldCurrency, newCurrency);
         }
 
     }

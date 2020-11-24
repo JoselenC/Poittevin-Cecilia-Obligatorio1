@@ -32,8 +32,19 @@ namespace InterfazLogic
 
         }
 
+        private void SetMessage(string messsage, Label lblToSetMessage)
+        {
+            if(lblToSetMessage!=lblName)
+                lblName.Text = "";
+            if (lblToSetMessage!=lblSymbol)
+              lblSymbol.Text = "";
+            if (lblToSetMessage != lblQuotation)
+                lblQuotation.Text = "";
+            lblToSetMessage.Text = messsage;
+            lblToSetMessage.ForeColor = Color.Red;
+        }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -41,48 +52,31 @@ namespace InterfazLogic
             }
             catch (ExceptionUnableToSaveData)
             {
-                lblName.Text = "Already exist de currency name";
-                lblName.ForeColor = Color.Red;
-                lblSymbol.Text = "";
+                SetMessage("Already exist de currency name", lblName);
             }
             catch (ExceptionAlreadyExistTheCurrencySymbol)
             {
-                lblSymbol.Text = "Already exist de currency symbol";
-                lblSymbol.ForeColor = Color.Red;
-                lblName.Text = "";
+                SetMessage("Already exist de currency symbol",lblSymbol);
             }
             catch (ExceptionInvalidLengthCurrencyName)
             {
-                lblName.Text = "The name must be between 3 and 20 characters long.";
-                lblName.ForeColor = Color.Red;
-                lblSymbol.Text = "";
+                SetMessage("The name must be between 3 and 20 characters long.", lblName);
             }
             catch (ExceptionInvalidLengthSymbol)
             {
-                lblSymbol.Text = "The symbol must be between 3 and 20 characters long.";
-                lblSymbol.ForeColor = Color.Red;
-                lblName.Text = "";
+                SetMessage("The symbol must be between 3 and 20 characters long.", lblSymbol);
             }
             catch (ExceptionNegativeQuotation)
             {
-                lblQuotation.Text = "The quotation must be positive";
-                lblQuotation.ForeColor = Color.Red;
-                lblSymbol.Text = "";
-                lblName.Text = "";
+                SetMessage("The quotation must be positive",lblQuotation);
             }
             catch (ExceptionInvalidQuotation)
             {
-                lblSymbol.Text = "The quotation cannot have more than two decimal places.";
-                lblQuotation.ForeColor = Color.Red;
-                lblSymbol.Text = "";
-                lblName.Text = "";
-               
-
+                SetMessage("The quotation cannot have more than two decimal places.", lblSymbol);
             }
         }
 
-     
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
         }

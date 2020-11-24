@@ -47,19 +47,6 @@ namespace DataAccess
             }
             return false;
         }
-
-        private bool AlreadyExistTheCategoryName(string categoryName)
-        {
-            bool exist = true;
-            foreach (Category category in GetCategories())
-            {
-                if (categoryName.ToLower() == category.Name.ToLower())
-                    exist = false;
-            }
-            return exist;
-        }
-
-
         private void AddCategory(Category category)
         {
             if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
@@ -147,7 +134,6 @@ namespace DataAccess
         {
             try
             {
-
                 foreach (Expense expense in GetExpenses())
                 {
                     expense.IsSameCurrencyExpense(Currency);

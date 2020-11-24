@@ -31,9 +31,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lstExpenses = new System.Windows.Forms.ListBox();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnAccept = new System.Windows.Forms.Button();
+            this.BtnEdit = new System.Windows.Forms.Button();
+            this.BtnDelete = new System.Windows.Forms.Button();
+            this.BtnAccept = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -43,13 +43,13 @@
             this.label6 = new System.Windows.Forms.Label();
             this.lblExpenses = new System.Windows.Forms.Label();
             this.lblCategory = new System.Windows.Forms.Label();
-            this.btnEditCategory = new System.Windows.Forms.Button();
+            this.BtnEditCategory = new System.Windows.Forms.Button();
             this.lbDescription = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblCategories = new System.Windows.Forms.Label();
             this.lstCategories = new System.Windows.Forms.ListBox();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.lstCurrency = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nAmount)).BeginInit();
@@ -86,38 +86,38 @@
             this.lstExpenses.Size = new System.Drawing.Size(589, 66);
             this.lstExpenses.TabIndex = 3;
             // 
-            // btnEdit
+            // BtnEdit
             // 
-            this.btnEdit.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEdit.Location = new System.Drawing.Point(866, 134);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(219, 55);
-            this.btnEdit.TabIndex = 15;
-            this.btnEdit.Text = "Edit ";
-            this.btnEdit.UseVisualStyleBackColor = false;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.BtnEdit.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnEdit.Location = new System.Drawing.Point(866, 134);
+            this.BtnEdit.Name = "BtnEdit";
+            this.BtnEdit.Size = new System.Drawing.Size(219, 55);
+            this.BtnEdit.TabIndex = 15;
+            this.BtnEdit.Text = "Edit ";
+            this.BtnEdit.UseVisualStyleBackColor = false;
+            this.BtnEdit.Click += new System.EventHandler(this.BtnEdit_Click);
             // 
-            // btnDelete
+            // BtnDelete
             // 
-            this.btnDelete.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDelete.Location = new System.Drawing.Point(866, 195);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(219, 55);
-            this.btnDelete.TabIndex = 16;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.BtnDelete.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnDelete.Location = new System.Drawing.Point(866, 195);
+            this.BtnDelete.Name = "BtnDelete";
+            this.BtnDelete.Size = new System.Drawing.Size(219, 55);
+            this.BtnDelete.TabIndex = 16;
+            this.BtnDelete.Text = "Delete";
+            this.BtnDelete.UseVisualStyleBackColor = false;
+            this.BtnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
             // 
-            // btnAccept
+            // BtnAccept
             // 
-            this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(262, 869);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(227, 73);
-            this.btnAccept.TabIndex = 17;
-            this.btnAccept.Text = "Accept";
-            this.btnAccept.UseVisualStyleBackColor = false;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            this.BtnAccept.BackColor = System.Drawing.Color.Tan;
+            this.BtnAccept.Location = new System.Drawing.Point(262, 869);
+            this.BtnAccept.Name = "BtnAccept";
+            this.BtnAccept.Size = new System.Drawing.Size(227, 73);
+            this.BtnAccept.TabIndex = 17;
+            this.BtnAccept.Text = "Accept";
+            this.BtnAccept.UseVisualStyleBackColor = false;
+            this.BtnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
             // 
             // label3
             // 
@@ -224,16 +224,16 @@
             this.lblCategory.TabIndex = 27;
             this.lblCategory.Text = "                                           ";
             // 
-            // btnEditCategory
+            // BtnEditCategory
             // 
-            this.btnEditCategory.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditCategory.Location = new System.Drawing.Point(881, 739);
-            this.btnEditCategory.Name = "btnEditCategory";
-            this.btnEditCategory.Size = new System.Drawing.Size(219, 55);
-            this.btnEditCategory.TabIndex = 28;
-            this.btnEditCategory.Text = "Edit category";
-            this.btnEditCategory.UseVisualStyleBackColor = false;
-            this.btnEditCategory.Click += new System.EventHandler(this.btnEditCategory_Click);
+            this.BtnEditCategory.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnEditCategory.Location = new System.Drawing.Point(881, 739);
+            this.BtnEditCategory.Name = "BtnEditCategory";
+            this.BtnEditCategory.Size = new System.Drawing.Size(219, 55);
+            this.BtnEditCategory.TabIndex = 28;
+            this.BtnEditCategory.Text = "Edit category";
+            this.BtnEditCategory.UseVisualStyleBackColor = false;
+            this.BtnEditCategory.Click += new System.EventHandler(this.BtnEditCategory_Click);
             // 
             // lbDescription
             // 
@@ -276,16 +276,16 @@
             this.lstCategories.Size = new System.Drawing.Size(589, 66);
             this.lstCategories.TabIndex = 33;
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(597, 869);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(227, 73);
-            this.btnCancel.TabIndex = 34;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.BackColor = System.Drawing.Color.Tan;
+            this.BtnCancel.Location = new System.Drawing.Point(597, 869);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(227, 73);
+            this.BtnCancel.TabIndex = 34;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // lstCurrency
             // 
@@ -313,13 +313,13 @@
             this.BackColor = System.Drawing.Color.OldLace;
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lstCurrency);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.lstCategories);
             this.Controls.Add(this.lblCategories);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblAmount);
             this.Controls.Add(this.lbDescription);
-            this.Controls.Add(this.btnEditCategory);
+            this.Controls.Add(this.BtnEditCategory);
             this.Controls.Add(this.lblCategory);
             this.Controls.Add(this.lblExpenses);
             this.Controls.Add(this.label6);
@@ -329,9 +329,9 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.BtnAccept);
+            this.Controls.Add(this.BtnDelete);
+            this.Controls.Add(this.BtnEdit);
             this.Controls.Add(this.lstExpenses);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -348,9 +348,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lstExpenses;
-        private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.Button BtnEdit;
+        private System.Windows.Forms.Button BtnDelete;
+        private System.Windows.Forms.Button BtnAccept;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Label label4;
@@ -360,13 +360,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblExpenses;
         private System.Windows.Forms.Label lblCategory;
-        private System.Windows.Forms.Button btnEditCategory;
+        private System.Windows.Forms.Button BtnEditCategory;
         private System.Windows.Forms.Label lbDescription;
         private System.Windows.Forms.Label lblAmount;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblCategories;
         private System.Windows.Forms.ListBox lstCategories;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.ListBox lstCurrency;
         private System.Windows.Forms.Label label7;
     }

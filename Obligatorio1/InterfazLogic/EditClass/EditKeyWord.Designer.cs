@@ -30,9 +30,9 @@
         {
             this.tbEdit = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.BtnSave = new System.Windows.Forms.Button();
             this.lblKeyWord = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbEdit
@@ -51,16 +51,16 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "Key word";
             // 
-            // btnSave
+            // BtnSave
             // 
-            this.btnSave.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSave.Location = new System.Drawing.Point(247, 218);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(218, 63);
-            this.btnSave.TabIndex = 15;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.BtnSave.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnSave.Location = new System.Drawing.Point(210, 218);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(218, 63);
+            this.BtnSave.TabIndex = 15;
+            this.BtnSave.Text = "Save";
+            this.BtnSave.UseVisualStyleBackColor = false;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
             // lblKeyWord
             // 
@@ -70,16 +70,16 @@
             this.lblKeyWord.Size = new System.Drawing.Size(0, 32);
             this.lblKeyWord.TabIndex = 16;
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnCancel.Location = new System.Drawing.Point(611, 218);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(218, 63);
-            this.btnCancel.TabIndex = 17;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnCancel.Location = new System.Drawing.Point(611, 218);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(218, 63);
+            this.BtnCancel.TabIndex = 17;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // EditKeyWord
             // 
@@ -87,9 +87,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.ClientSize = new System.Drawing.Size(915, 325);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.lblKeyWord);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbEdit);
             this.Name = "EditKeyWord";
@@ -103,8 +103,8 @@
 
         private System.Windows.Forms.TextBox tbEdit;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button BtnSave;
         private System.Windows.Forms.Label lblKeyWord;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }

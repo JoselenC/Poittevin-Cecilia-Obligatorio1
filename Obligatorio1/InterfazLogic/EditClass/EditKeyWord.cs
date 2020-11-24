@@ -33,18 +33,22 @@ namespace InterfazLogic
             listKeyWords = lstkeyWords;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private void UpdateKeyWord(string keyWordEdited)
+        {
+            KeyWord key = new KeyWord(keyWordEdited, KeyWords);
+            categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
+            KeyWords.Remove(KeyWord);
+            KeyWords.Add(keyWordEdited);
+            listKeyWords.DataSource = KeyWords;
+            Close();
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             string keyWordEdited = tbEdit.Text;
             try
             {
-                KeyWord key = new KeyWord(keyWordEdited, KeyWords);
-                categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
-                KeyWords.Remove(KeyWord);
-                KeyWords.Add(keyWordEdited);
-                listKeyWords.DataSource = KeyWords;
-                
-                Close();
+                UpdateKeyWord(keyWordEdited);
             }
             catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
             {

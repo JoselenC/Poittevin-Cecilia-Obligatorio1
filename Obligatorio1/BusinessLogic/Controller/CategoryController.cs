@@ -5,16 +5,16 @@ namespace BusinessLogic
 {
     public class CategoryController
     {
-        public IManageRepository Repository { get; private set; }
+        private IManageRepository repository;
 
-        public CategoryController(IManageRepository repository)
+        public CategoryController(IManageRepository vRepository)
         {
-            Repository = repository;
+            repository = vRepository;
         }
 
         public void AlreadyExistKeyWordInAnoterCategory(string pKeyWord)
         {
-            List<Category> categories = Repository.GetCategories();
+            List<Category> categories = repository.GetCategories();
             foreach (Category category in categories)
             {
                 if (category.CategoryContainKeyword(pKeyWord))
@@ -24,12 +24,12 @@ namespace BusinessLogic
 
         public Category FindCategoryByName(string categoryName)
         {
-            return Repository.FindCategoryByName(categoryName);
+            return repository.FindCategoryByName(categoryName);
         }
 
         private void AddCategoryInAllBudgets(Category category)
         {
-            foreach (Budget budget in Repository.GetBudgets())
+            foreach (Budget budget in repository.GetBudgets())
             {
                 budget.AddBudgetCategory(category);
             }
@@ -37,20 +37,20 @@ namespace BusinessLogic
 
         public Category SetCategory(string vName, List<string> vKeyWords)
         {
-            Category category = Repository.SetCategory(vName, vKeyWords);
+            Category category = repository.SetCategory(vName, vKeyWords);
             AddCategoryInAllBudgets(category);
             return category;
         } 
         
         public Category UpdateCategory(Category oldCategory, Category newCategory)
         {
-            newCategory = Repository.UpdateCategory(oldCategory, newCategory);          
+            newCategory = repository.UpdateCategory(oldCategory, newCategory);          
             return newCategory;
         }
 
         private List<Expense> GetExpenses()
         {
-            return Repository.GetExpenses();
+            return repository.GetExpenses();
         }
 
         private void EditCategoryInAllExpenses(Category category, Category newCategory)
@@ -65,7 +65,7 @@ namespace BusinessLogic
 
         private void EditCategoryInAllBudgets(Category oldCategory, Category newCategory)
         {
-            List<Budget> budgets = Repository.GetBudgets();
+            List<Budget> budgets = repository.GetBudgets();
             foreach (Budget budget in budgets)
             {
                 budget.EditBudgetCategory(oldCategory, newCategory);
@@ -79,7 +79,7 @@ namespace BusinessLogic
 
         public List<Category> GetCategories()
         {
-            return Repository.GetCategories();
+            return repository.GetCategories();
         }      
 
     }

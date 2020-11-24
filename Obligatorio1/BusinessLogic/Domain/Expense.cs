@@ -68,6 +68,14 @@ namespace BusinessLogic
             return expected == actual;
         }
 
+        public bool IsExpenseSameDate(Months month, int year)
+        {
+            int expected = CreationDate.Month;
+            int actual = (int)month;
+            int yearExpected = CreationDate.Year;
+            return expected == actual && yearExpected == year;
+        }
+
         public bool IsSameCategory(Category vCategory)
         {
             return Category == vCategory;

@@ -44,7 +44,18 @@ namespace InterfazLogic
                     lstCategories.Items.Add(vCategory);
                 }
             }
+        }
 
+        private void SetMessage(string messsage, Label lblToSetMessage)
+        {
+            if (lblToSetMessage != lblAmount)
+                lblAmount.Text = "";
+            if (lblToSetMessage != lblCategories)
+                lblCategories.Text = "";
+            if (lblToSetMessage != lblDate)
+                lblDate.Text = ""; 
+            lblToSetMessage.Text = messsage;
+            lblToSetMessage.ForeColor = Color.Red;
         }
 
         private void Completecurrency()
@@ -54,14 +65,12 @@ namespace InterfazLogic
                 lstcurrency.Items.Add(vcurrency);
             }
         }
-
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             lstCategories.Items.Clear();
             string description = tbDescription.Text;
             CompleteCategories(description);
         }
-
 
         private void TryRegisterExpense()
         {
@@ -71,70 +80,47 @@ namespace InterfazLogic
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 string nameCategory = lstCategories.SelectedItem.ToString();
-                Category category = (Category) lstCategories.SelectedItem;
-                Currency currency = (Currency) lstcurrency.SelectedItem;
-                expenseController.SetExpense(amount, creationDate, description,category,currency);
+                Category category = (Category)lstCategories.SelectedItem;
+                Currency currency = (Currency)lstcurrency.SelectedItem;
+                expenseController.SetExpense(amount, creationDate, description, category, currency);
                 MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Visible = false;
             }
             else
             {
-                lblCategories.Text = "You must select a category";
-                lblCategories.ForeColor = Color.Red;
-                lbDescription.Text = "";
+                SetMessage("You must select a category", lblCategories);
             }
         }
 
-        private void btnRegistrExpense_Click(object sender, EventArgs e)
+        private void BtnRegistrExpense_Click(object sender, EventArgs e)
         {
             try
             {
                 TryRegisterExpense();
-            }            
+            }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
-                lbDescription.Text = "The description must be between 3 and 20 characters long.";      
-                lbDescription.ForeColor = Color.Red;
-                lblCategories.Text = "";
-                lblAmount.Text = "";
-                lblDate.Text = "";
+                SetMessage("The description must be between 3 and 20 characters long.", lbDescription);
             }
             catch (ExcepcionNegativeAmountExpense)
             {
-                lblAmount.Text = "The amount must be positive";
-                lblAmount.ForeColor = Color.Red;
-                lblDate.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
+                SetMessage("The amount must be positive", lblAmount);
             }
             catch (ExcepcionInvalidAmountExpense)
             {
-                lblAmount.Text = "The amount cannot have more than two decimal places";
-                nAmount.Value = 1;
-                lblAmount.ForeColor = Color.Red;
-                lblDate.Text = "";
-                lblCategories.Text = "";
-                lbDescription.Text = "";
+                SetMessage("The amount cannot have more than two decimal places", lblAmount);
             }
             catch (ExcepcionInvalidYearExpense)
             {
-                lblDate.Text = "The year must be between 2018 and 2030.";
-                lblDate.ForeColor = Color.Red;
-                lblCategories.Text = "";
-                lblAmount.Text = "";
-                lbDescription.Text = "";
+                SetMessage("The year must be between 2018 and 2030.", lblDate);
             }
             catch (ExcepcionExpenseWithEmptyCategory)
             {
-                lblCategories.Text = "The category should not be empty ";
-                lblCategories.ForeColor = Color.Red;
-                lblDate.Text = "";
-                lbDescription.Text = "";
-                lblAmount.Text = "";
-            }         
+                SetMessage("The category should not be empty ", lblCategories);
+            }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
         }
