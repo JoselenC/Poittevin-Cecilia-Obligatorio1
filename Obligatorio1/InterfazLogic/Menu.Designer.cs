@@ -62,7 +62,7 @@
             this.btnRegisterCategory.TabIndex = 2;
             this.btnRegisterCategory.Text = "Register Category";
             this.btnRegisterCategory.UseVisualStyleBackColor = false;
-            this.btnRegisterCategory.Click += new System.EventHandler(this.btnRegisterCategory_Click);
+            this.btnRegisterCategory.Click += new System.EventHandler(this.BtnRegisterCategory_Click);
             // 
             // mainPanel
             // 
@@ -83,7 +83,7 @@
             this.btnRegisterExpense.TabIndex = 8;
             this.btnRegisterExpense.Text = "Register Expense";
             this.btnRegisterExpense.UseVisualStyleBackColor = false;
-            this.btnRegisterExpense.Click += new System.EventHandler(this.btnRegisterExpense_Click);
+            this.btnRegisterExpense.Click += new System.EventHandler(this.BtnRegisterExpense_Click);
             // 
             // btnRegisterBudget
             // 
@@ -95,7 +95,7 @@
             this.btnRegisterBudget.TabIndex = 9;
             this.btnRegisterBudget.Text = "Register edit Budget";
             this.btnRegisterBudget.UseVisualStyleBackColor = false;
-            this.btnRegisterBudget.Click += new System.EventHandler(this.btnRegisterBudget_Click);
+            this.btnRegisterBudget.Click += new System.EventHandler(this.BtnRegisterBudget_Click);
             // 
             // btnExpenseReport
             // 
@@ -107,7 +107,7 @@
             this.btnExpenseReport.TabIndex = 10;
             this.btnExpenseReport.Text = "Expense Report";
             this.btnExpenseReport.UseVisualStyleBackColor = false;
-            this.btnExpenseReport.Click += new System.EventHandler(this.btnExpenseReport_Click);
+            this.btnExpenseReport.Click += new System.EventHandler(this.BtnExpenseReport_Click);
             // 
             // btnBudgetReport
             // 
@@ -119,7 +119,7 @@
             this.btnBudgetReport.TabIndex = 11;
             this.btnBudgetReport.Text = "Budget Report";
             this.btnBudgetReport.UseVisualStyleBackColor = false;
-            this.btnBudgetReport.Click += new System.EventHandler(this.btnBudgetReport_Click_1);
+            this.btnBudgetReport.Click += new System.EventHandler(this.BtnBudgetReport_Click_1);
             // 
             // btnEditCategory
             // 
@@ -131,7 +131,7 @@
             this.btnEditCategory.TabIndex = 12;
             this.btnEditCategory.Text = "Edit Category";
             this.btnEditCategory.UseVisualStyleBackColor = false;
-            this.btnEditCategory.Click += new System.EventHandler(this.btnEditCategory_Click);
+            this.btnEditCategory.Click += new System.EventHandler(this.BtnEditCategory_Click);
             // 
             // btnEditExpenses
             // 
@@ -143,7 +143,7 @@
             this.btnEditExpenses.TabIndex = 12;
             this.btnEditExpenses.Text = "Edit expenses";
             this.btnEditExpenses.UseVisualStyleBackColor = false;
-            this.btnEditExpenses.Click += new System.EventHandler(this.btnEditExpenses_Click);
+            this.btnEditExpenses.Click += new System.EventHandler(this.BtnEditExpenses_Click);
             // 
             // btnAddCurrency
             // 
@@ -155,7 +155,7 @@
             this.btnAddCurrency.TabIndex = 13;
             this.btnAddCurrency.Text = "Register currency";
             this.btnAddCurrency.UseVisualStyleBackColor = false;
-            this.btnAddCurrency.Click += new System.EventHandler(this.btnAddCurrency_Click);
+            this.btnAddCurrency.Click += new System.EventHandler(this.BtnAddCurrency_Click);
             // 
             // btnEditCurrency
             // 
@@ -167,7 +167,7 @@
             this.btnEditCurrency.TabIndex = 14;
             this.btnEditCurrency.Text = "Edit currency";
             this.btnEditCurrency.UseVisualStyleBackColor = false;
-            this.btnEditCurrency.Click += new System.EventHandler(this.btnEditCurrency_Click);
+            this.btnEditCurrency.Click += new System.EventHandler(this.BtnEditCurrency_Click);
             // 
             // Menu
             // 

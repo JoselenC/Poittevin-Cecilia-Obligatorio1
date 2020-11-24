@@ -66,14 +66,14 @@ namespace InterfazLogic
             lstCurrency.SelectedIndex=0;
             indexToEdit = lstExpenses.SelectedIndex;
             selectExpense = true;
-            btnDelete.Enabled = false;
+            BtnDelete.Enabled = false;
             tbDescription.Enabled = true;
             nAmount.Enabled = true;
             dateTime.Enabled = true;
             lstCategories.Enabled = true;
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
+        private void BtnEdit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace InterfazLogic
             lblExpenses.Text = "";
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (lstExpenses.SelectedIndex >= 0)
             {
@@ -141,13 +141,61 @@ namespace InterfazLogic
                 lbDescription.Text = "";
                 lblDate.Text = "";
             }
-        }      
+        }
 
-        private void btnAccept_Click(object sender, EventArgs e)
+        private void NewExpense(Category category)
+        {
+            string description = tbDescription.Text;
+            double amount = decimal.ToDouble(nAmount.Value);
+            DateTime creationDate = dateTime.Value;
+            Currency Currency = expenseController.FindCurrencyByName(lstCurrency.SelectedItem.ToString());
+            expenseController.SetExpense(amount, creationDate, description, category, Currency);
+            MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            Visible = false;
+            if (indexToEdit >= 0)
+            {
+                lstExpenses.Items.RemoveAt(indexToEdit);
+                expenseController.DeleteExpense(expenseToEdit);
+            }
+        }
+
+        private void TryRegisterNewExpense()
+        {
+            Category category = new Category();
+            if (lstCategories.SelectedIndex < 0 && edit)
+            {
+                lblCategories.Text = "You must select a category";
+                lblCategories.ForeColor = Color.Red;
+                lblExpenses.Text = "";
+                lblAmount.Text = "";
+                lbDescription.Text = "";
+                lblDate.Text = "";
+            }
+            else if (lstCategories.SelectedIndex >= 0 && edit)
+            {
+                string nameCategory = lstCategories.SelectedItem.ToString();
+                category = expenseController.FindCategoryByName(nameCategory);
+                NewExpense(category);
+            }
+            else
+            {
+                if (expenseToEdit != null)
+                {
+                    category = expenseToEdit.Category;
+                    NewExpense(category);
+                }
+                else
+                {
+                    Visible = false;
+                }
+            }
+        }
+
+        private void BtnAccept_Click(object sender, EventArgs e)
         {
             try
             {
-                btnDelete.Enabled = true;
+                BtnDelete.Enabled = true;
                 TryRegisterNewExpense();
             }
             catch (ExcepcionInvalidDescriptionLengthExpense)
@@ -199,54 +247,6 @@ namespace InterfazLogic
           
         }
 
-        private void NewExpense(Category category)
-        {
-            string description = tbDescription.Text;
-            double amount = decimal.ToDouble(nAmount.Value);
-            DateTime creationDate = dateTime.Value;
-            Currency Currency = expenseController.FindCurrencyByName(lstCurrency.SelectedItem.ToString());
-            expenseController.SetExpense(amount, creationDate, description, category, Currency);
-            MessageBox.Show("The expense was edited successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Visible = false;
-            if (indexToEdit >= 0)
-            {
-                lstExpenses.Items.RemoveAt(indexToEdit);
-                expenseController.DeleteExpense(expenseToEdit);
-            }
-        }
-
-        private void TryRegisterNewExpense()
-        {
-            Category category = new Category();
-            if (lstCategories.SelectedIndex < 0 && edit)
-            {
-                lblCategories.Text = "You must select a category";
-                lblCategories.ForeColor = Color.Red;
-                lblExpenses.Text = "";
-                lblAmount.Text = "";
-                lbDescription.Text = "";
-                lblDate.Text = "";
-            }
-            else if (lstCategories.SelectedIndex >= 0 && edit)
-            {
-                string nameCategory = lstCategories.SelectedItem.ToString();
-                category = expenseController.FindCategoryByName(nameCategory);
-                NewExpense(category);
-            }
-            else
-            {
-                if (expenseToEdit != null)
-                {
-                    category = expenseToEdit.Category;
-                    NewExpense(category);
-                }
-                else
-                {
-                    Visible = false;
-                }
-            }
-        }
-
         private void CompleteCategories()
         {
             lstCategories.Visible = true;
@@ -268,7 +268,7 @@ namespace InterfazLogic
             edit = true;
         }
 
-        private void btnEditCategory_Click(object sender, EventArgs e)
+        private void BtnEditCategory_Click(object sender, EventArgs e)
         {
             if (selectExpense)
             {
@@ -281,7 +281,7 @@ namespace InterfazLogic
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
         }

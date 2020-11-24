@@ -62,7 +62,7 @@ namespace InterfazLogic
             txtName.Enabled = true;
         }
 
-        private void btnEditCategory_Click(object sender, EventArgs e)
+        private void BtnEditCategory_Click(object sender, EventArgs e)
         {
             if (lstCatgories.SelectedIndex >= 0)
                 EditTheCategory();
@@ -83,7 +83,7 @@ namespace InterfazLogic
             txtKeyWord.Text = "";
         }
 
-        private void btnAddKeyWord_Click(object sender, EventArgs e)
+        private void BtnAddKeyWord_Click(object sender, EventArgs e)
         {
             if (lstCatgories.SelectedIndex >= 0)
             {
@@ -133,7 +133,7 @@ namespace InterfazLogic
             }        
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void BtnDelete_Click(object sender, EventArgs e)
         {
             if (lstCatgories.SelectedIndex >= 0)
             {
@@ -154,18 +154,27 @@ namespace InterfazLogic
             }
         }       
 
-         private void btnEdit_Click(object sender, EventArgs e)
+         private void BtnEdit_Click(object sender, EventArgs e)
         {
             if (lstCatgories.SelectedIndex >= 0)
             {
                 EditSelectedKyWord();
             }
             else
-            {
-               
+            {               
                 lblEditCategories.Text = "Select a category to edit";
                 lblEditCategories.ForeColor = Color.Red;
             }
+        }
+
+        private void EditKeyWord()
+        {
+            EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(), indexKeyWordToEdit, categoryController, EditableKeyWords, lstKwywords);
+            editKeyWord.ShowDialog();
+            EditableKeyWords = editKeyWord.KeyWords;
+            lstKwywords.DataSource = EditableKeyWords;
+            txtKeyWord.Enabled = true;
+            txtName.Enabled = true;
         }
 
         private void EditSelectedKyWord()
@@ -190,16 +199,6 @@ namespace InterfazLogic
             }
         }
 
-        private void EditKeyWord()
-        {
-            EditKeyWord editKeyWord = new EditKeyWord(lstKwywords.SelectedItem.ToString(), indexKeyWordToEdit, categoryController, EditableKeyWords, lstKwywords);
-            editKeyWord.ShowDialog();
-            EditableKeyWords = editKeyWord.KeyWords;
-            lstKwywords.DataSource = EditableKeyWords;
-            txtKeyWord.Enabled = true;
-            txtName.Enabled = true;
-        }
-
         private void TryRegisterCategory()
         {
             if (lstCatgories.SelectedIndex < 0)
@@ -219,7 +218,7 @@ namespace InterfazLogic
             
         }
 
-        private void btnAccept_Click(object sender, EventArgs e)
+        private void BtnAccept_Click(object sender, EventArgs e)
         {
             try
             {
@@ -260,7 +259,7 @@ namespace InterfazLogic
 
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
         }

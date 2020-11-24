@@ -67,7 +67,7 @@ namespace InterfazLogic
         {
            
             string month = nMonth.SelectedItem.ToString();
-            int year = (int)nYear.Value;
+            int year = (int)NYear.Value;
             return budgetController.BudgetGetOrCreate(month, year);
         }
 
@@ -84,7 +84,30 @@ namespace InterfazLogic
             }
         }
 
-        private void numericYear_ValueChanged(object sender, EventArgs e)
+    
+
+       
+
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                budgetController.SetBudget(currentBudget);
+                Visible = false;
+            }
+            catch (ArgumentNullException)
+            {
+                lblMonth.Text = "Selecct a correct month";
+                lblMonth.ForeColor = Color.Red;
+            }
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            Visible = false;
+        }
+
+        private void NYear_ValueChanged(object sender, EventArgs e)
         {
             try
             {
@@ -96,25 +119,6 @@ namespace InterfazLogic
             {
                 MessageBox.Show("There are no categories registered in the system");
                 Visible = false;
-            }
-        } 
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            Visible = false;
-        }
-
-        private void btnAccept_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                budgetController.SetBudget(currentBudget);
-                Visible = false;
-            }
-            catch (ArgumentNullException)
-            {
-                lblMonth.Text = "Selecct a correct month";
-                lblMonth.ForeColor = Color.Red;
             }
         }
     }

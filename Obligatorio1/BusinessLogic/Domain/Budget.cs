@@ -54,7 +54,7 @@ namespace BusinessLogic
             }
         }
 
-        private List<BudgetCategory> generateBudgetCategoryList(List<Category> categories)
+        private List<BudgetCategory> GenerateBudgetCategoryList(List<Category> categories)
         {
             List<BudgetCategory> returnList = new List<BudgetCategory>();
             foreach (var category in categories)
@@ -67,7 +67,7 @@ namespace BusinessLogic
             if (ValidMonth(vCurrentMonth))
             {
                 month = vCurrentMonth;
-                BudgetCategories = generateBudgetCategoryList(categories);
+                BudgetCategories = GenerateBudgetCategoryList(categories);
             }
         }
 

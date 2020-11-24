@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.lblAmount = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnSave = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.numericAmount = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numericAmount)).BeginInit();
             this.SuspendLayout();
@@ -45,29 +45,29 @@
             this.lblAmount.TabIndex = 0;
             this.lblAmount.Text = "Budget";
             // 
-            // btnSave
+            // BtnSave
             // 
-            this.btnSave.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnSave.Location = new System.Drawing.Point(117, 212);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(200, 55);
-            this.btnSave.TabIndex = 2;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            this.BtnSave.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnSave.Location = new System.Drawing.Point(117, 212);
+            this.BtnSave.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.BtnSave.Name = "BtnSave";
+            this.BtnSave.Size = new System.Drawing.Size(200, 55);
+            this.BtnSave.TabIndex = 2;
+            this.BtnSave.Text = "Save";
+            this.BtnSave.UseVisualStyleBackColor = false;
+            this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnCancel.Location = new System.Drawing.Point(581, 212);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(200, 55);
-            this.btnCancel.TabIndex = 3;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnCancel.Location = new System.Drawing.Point(581, 212);
+            this.BtnCancel.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(200, 55);
+            this.BtnCancel.TabIndex = 3;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // numericAmount
             // 
@@ -89,8 +89,8 @@
             this.BackColor = System.Drawing.Color.OldLace;
             this.ClientSize = new System.Drawing.Size(893, 310);
             this.Controls.Add(this.numericAmount);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.BtnCancel);
+            this.Controls.Add(this.BtnSave);
             this.Controls.Add(this.lblAmount);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "EditBudgetCategory";
@@ -104,8 +104,8 @@
         #endregion
 
         private System.Windows.Forms.Label lblAmount;
-        private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnSave;
+        private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.NumericUpDown numericAmount;
     }
 }

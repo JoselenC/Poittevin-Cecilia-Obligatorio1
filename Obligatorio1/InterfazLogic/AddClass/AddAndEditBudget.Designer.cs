@@ -28,46 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAccept = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
+            this.BtnAccept = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.nMonth = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lstCategory = new System.Windows.Forms.ListBox();
-            this.nYear = new System.Windows.Forms.NumericUpDown();
-            this.btnEditBudget = new System.Windows.Forms.Button();
+            this.NYear = new System.Windows.Forms.NumericUpDown();
+            this.BtnEditBudget = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.lblCategories = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lblMonth = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.nYear)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NYear)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(684, 715);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(227, 73);
-            this.btnCancel.TabIndex = 0;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.BackColor = System.Drawing.Color.Tan;
+            this.BtnCancel.Location = new System.Drawing.Point(684, 715);
+            this.BtnCancel.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(227, 73);
+            this.BtnCancel.TabIndex = 0;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
-            // btnAccept
+            // BtnAccept
             // 
-            this.btnAccept.BackColor = System.Drawing.Color.Tan;
-            this.btnAccept.Location = new System.Drawing.Point(336, 715);
-            this.btnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.btnAccept.Name = "btnAccept";
-            this.btnAccept.Size = new System.Drawing.Size(227, 73);
-            this.btnAccept.TabIndex = 1;
-            this.btnAccept.Text = "Accept";
-            this.btnAccept.UseVisualStyleBackColor = false;
-            this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
+            this.BtnAccept.BackColor = System.Drawing.Color.Tan;
+            this.BtnAccept.Location = new System.Drawing.Point(336, 715);
+            this.BtnAccept.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.BtnAccept.Name = "BtnAccept";
+            this.BtnAccept.Size = new System.Drawing.Size(227, 73);
+            this.BtnAccept.TabIndex = 1;
+            this.BtnAccept.Text = "Accept";
+            this.BtnAccept.UseVisualStyleBackColor = false;
+            this.BtnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
             // 
             // label1
             // 
@@ -110,41 +110,41 @@
             this.lstCategory.TabIndex = 6;
             this.lstCategory.DoubleClick += new System.EventHandler(this.listBoxCategory_DoubleClick);
             // 
-            // nYear
+            // NYear
             // 
-            this.nYear.Location = new System.Drawing.Point(338, 265);
-            this.nYear.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.nYear.Maximum = new decimal(new int[] {
+            this.NYear.Location = new System.Drawing.Point(338, 265);
+            this.NYear.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.NYear.Maximum = new decimal(new int[] {
             2030,
             0,
             0,
             0});
-            this.nYear.Minimum = new decimal(new int[] {
+            this.NYear.Minimum = new decimal(new int[] {
             2018,
             0,
             0,
             0});
-            this.nYear.Name = "nYear";
-            this.nYear.Size = new System.Drawing.Size(589, 38);
-            this.nYear.TabIndex = 7;
-            this.nYear.Value = new decimal(new int[] {
+            this.NYear.Name = "NYear";
+            this.NYear.Size = new System.Drawing.Size(589, 38);
+            this.NYear.TabIndex = 7;
+            this.NYear.Value = new decimal(new int[] {
             2020,
             0,
             0,
             0});
-            this.nYear.ValueChanged += new System.EventHandler(this.numericYear_ValueChanged);
+            this.NYear.ValueChanged += new System.EventHandler(this.NYear_ValueChanged);
             // 
-            // btnEditBudget
+            // BtnEditBudget
             // 
-            this.btnEditBudget.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditBudget.Location = new System.Drawing.Point(954, 405);
-            this.btnEditBudget.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.btnEditBudget.Name = "btnEditBudget";
-            this.btnEditBudget.Size = new System.Drawing.Size(283, 55);
-            this.btnEditBudget.TabIndex = 8;
-            this.btnEditBudget.Text = "Edit budget categoy";
-            this.btnEditBudget.UseVisualStyleBackColor = false;
-            this.btnEditBudget.Click += new System.EventHandler(this.ChangeBudgetCategory_Click);
+            this.BtnEditBudget.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnEditBudget.Location = new System.Drawing.Point(954, 405);
+            this.BtnEditBudget.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.BtnEditBudget.Name = "BtnEditBudget";
+            this.BtnEditBudget.Size = new System.Drawing.Size(283, 55);
+            this.BtnEditBudget.TabIndex = 8;
+            this.BtnEditBudget.Text = "Edit budget categoy";
+            this.BtnEditBudget.UseVisualStyleBackColor = false;
+            this.BtnEditBudget.Click += new System.EventHandler(this.ChangeBudgetCategory_Click);
             // 
             // label3
             // 
@@ -217,18 +217,18 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.lblCategories);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnEditBudget);
-            this.Controls.Add(this.nYear);
+            this.Controls.Add(this.BtnEditBudget);
+            this.Controls.Add(this.NYear);
             this.Controls.Add(this.lstCategory);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.nMonth);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnAccept);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.BtnAccept);
+            this.Controls.Add(this.BtnCancel);
             this.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.Name = "AddAndEditBudget";
             this.Size = new System.Drawing.Size(1263, 886);
-            ((System.ComponentModel.ISupportInitialize)(this.nYear)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NYear)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -236,14 +236,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnAccept;
+        private System.Windows.Forms.Button BtnCancel;
+        private System.Windows.Forms.Button BtnAccept;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox nMonth;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lstCategory;
-        private System.Windows.Forms.NumericUpDown nYear;
-        private System.Windows.Forms.Button btnEditBudget;
+        private System.Windows.Forms.NumericUpDown NYear;
+        private System.Windows.Forms.Button BtnEditBudget;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblCategories;
         private System.Windows.Forms.Label label4;

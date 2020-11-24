@@ -30,15 +30,15 @@
         {
             this.lstCurrencies = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnDeletecurrency = new System.Windows.Forms.Button();
-            this.btnEditcurrency = new System.Windows.Forms.Button();
+            this.BtnDeletecurrency = new System.Windows.Forms.Button();
+            this.BtnEditcurrency = new System.Windows.Forms.Button();
             this.lblcurrencies = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             this.lblQuotation = new System.Windows.Forms.Label();
             this.lblSymbol = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.nQuotation = new System.Windows.Forms.NumericUpDown();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.BtnAdd = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tbSymbol = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,27 +66,27 @@
             this.label5.TabIndex = 25;
             this.label5.Text = "Monies";
             // 
-            // btnDeletecurrency
+            // BtnDeletecurrency
             // 
-            this.btnDeletecurrency.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnDeletecurrency.Location = new System.Drawing.Point(851, 270);
-            this.btnDeletecurrency.Name = "btnDeletecurrency";
-            this.btnDeletecurrency.Size = new System.Drawing.Size(233, 62);
-            this.btnDeletecurrency.TabIndex = 28;
-            this.btnDeletecurrency.Text = "Delete Currency";
-            this.btnDeletecurrency.UseVisualStyleBackColor = false;
-            this.btnDeletecurrency.Click += new System.EventHandler(this.btnDeletecurrency_Click);
+            this.BtnDeletecurrency.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnDeletecurrency.Location = new System.Drawing.Point(851, 270);
+            this.BtnDeletecurrency.Name = "BtnDeletecurrency";
+            this.BtnDeletecurrency.Size = new System.Drawing.Size(233, 62);
+            this.BtnDeletecurrency.TabIndex = 28;
+            this.BtnDeletecurrency.Text = "Delete Currency";
+            this.BtnDeletecurrency.UseVisualStyleBackColor = false;
+            this.BtnDeletecurrency.Click += new System.EventHandler(this.BtnDeletecurrency_Click);
             // 
-            // btnEditcurrency
+            // BtnEditcurrency
             // 
-            this.btnEditcurrency.BackColor = System.Drawing.Color.DarkKhaki;
-            this.btnEditcurrency.Location = new System.Drawing.Point(851, 178);
-            this.btnEditcurrency.Name = "btnEditcurrency";
-            this.btnEditcurrency.Size = new System.Drawing.Size(233, 62);
-            this.btnEditcurrency.TabIndex = 27;
-            this.btnEditcurrency.Text = "Edit currency";
-            this.btnEditcurrency.UseVisualStyleBackColor = false;
-            this.btnEditcurrency.Click += new System.EventHandler(this.btnEditcurrency_Click);
+            this.BtnEditcurrency.BackColor = System.Drawing.Color.DarkKhaki;
+            this.BtnEditcurrency.Location = new System.Drawing.Point(851, 178);
+            this.BtnEditcurrency.Name = "BtnEditcurrency";
+            this.BtnEditcurrency.Size = new System.Drawing.Size(233, 62);
+            this.BtnEditcurrency.TabIndex = 27;
+            this.BtnEditcurrency.Text = "Edit currency";
+            this.BtnEditcurrency.UseVisualStyleBackColor = false;
+            this.BtnEditcurrency.Click += new System.EventHandler(this.BtnEditcurrency_Click);
             // 
             // lblcurrencies
             // 
@@ -96,16 +96,16 @@
             this.lblcurrencies.Size = new System.Drawing.Size(0, 32);
             this.lblcurrencies.TabIndex = 29;
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(621, 863);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(256, 65);
-            this.btnCancel.TabIndex = 40;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.BackColor = System.Drawing.Color.Tan;
+            this.BtnCancel.Location = new System.Drawing.Point(621, 863);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(256, 65);
+            this.BtnCancel.TabIndex = 40;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // lblQuotation
             // 
@@ -154,16 +154,16 @@
             0,
             65536});
             // 
-            // btnAdd
+            // BtnAdd
             // 
-            this.btnAdd.BackColor = System.Drawing.Color.Tan;
-            this.btnAdd.Location = new System.Drawing.Point(216, 863);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(256, 65);
-            this.btnAdd.TabIndex = 35;
-            this.btnAdd.Text = "Accept";
-            this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.BtnAdd.BackColor = System.Drawing.Color.Tan;
+            this.BtnAdd.Location = new System.Drawing.Point(216, 863);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(256, 65);
+            this.BtnAdd.TabIndex = 35;
+            this.BtnAdd.Text = "Accept";
+            this.BtnAdd.UseVisualStyleBackColor = false;
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // label4
             // 
@@ -226,20 +226,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.lblQuotation);
             this.Controls.Add(this.lblSymbol);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.nQuotation);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbSymbol);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblcurrencies);
-            this.Controls.Add(this.btnDeletecurrency);
-            this.Controls.Add(this.btnEditcurrency);
+            this.Controls.Add(this.BtnDeletecurrency);
+            this.Controls.Add(this.BtnEditcurrency);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.lstCurrencies);
             this.Name = "EditCurrency";
@@ -254,15 +254,15 @@
 
         private System.Windows.Forms.ListBox lstCurrencies;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnDeletecurrency;
-        private System.Windows.Forms.Button btnEditcurrency;
+        private System.Windows.Forms.Button BtnDeletecurrency;
+        private System.Windows.Forms.Button BtnEditcurrency;
         private System.Windows.Forms.Label lblcurrencies;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnCancel;
         private System.Windows.Forms.Label lblQuotation;
         private System.Windows.Forms.Label lblSymbol;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.NumericUpDown nQuotation;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbSymbol;
         private System.Windows.Forms.Label label3;

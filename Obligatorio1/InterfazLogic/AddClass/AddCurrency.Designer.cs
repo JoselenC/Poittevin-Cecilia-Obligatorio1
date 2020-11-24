@@ -34,12 +34,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbSymbol = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
+            this.BtnAdd = new System.Windows.Forms.Button();
             this.nQuotation = new System.Windows.Forms.NumericUpDown();
             this.lblName = new System.Windows.Forms.Label();
             this.lblSymbol = new System.Windows.Forms.Label();
             this.lblQuotation = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.BtnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nQuotation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,16 +99,16 @@
             this.label4.TabIndex = 17;
             this.label4.Text = "Quotation";
             // 
-            // btnAdd
+            // BtnAdd
             // 
-            this.btnAdd.BackColor = System.Drawing.Color.Tan;
-            this.btnAdd.Location = new System.Drawing.Point(284, 766);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(256, 65);
-            this.btnAdd.TabIndex = 18;
-            this.btnAdd.Text = "Accept";
-            this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.BtnAdd.BackColor = System.Drawing.Color.Tan;
+            this.BtnAdd.Location = new System.Drawing.Point(284, 766);
+            this.BtnAdd.Name = "BtnAdd";
+            this.BtnAdd.Size = new System.Drawing.Size(256, 65);
+            this.BtnAdd.TabIndex = 18;
+            this.BtnAdd.Text = "Accept";
+            this.BtnAdd.UseVisualStyleBackColor = false;
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // nQuotation
             // 
@@ -157,28 +157,28 @@
             this.lblQuotation.Size = new System.Drawing.Size(0, 32);
             this.lblQuotation.TabIndex = 22;
             // 
-            // btnCancel
+            // BtnCancel
             // 
-            this.btnCancel.BackColor = System.Drawing.Color.Tan;
-            this.btnCancel.Location = new System.Drawing.Point(726, 766);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(256, 65);
-            this.btnCancel.TabIndex = 23;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = false;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.BtnCancel.BackColor = System.Drawing.Color.Tan;
+            this.BtnCancel.Location = new System.Drawing.Point(726, 766);
+            this.BtnCancel.Name = "BtnCancel";
+            this.BtnCancel.Size = new System.Drawing.Size(256, 65);
+            this.BtnCancel.TabIndex = 23;
+            this.BtnCancel.Text = "Cancel";
+            this.BtnCancel.UseVisualStyleBackColor = false;
+            this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
             // AddCurrency
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.OldLace;
-            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.lblQuotation);
             this.Controls.Add(this.lblSymbol);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.nQuotation);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.BtnAdd);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbSymbol);
             this.Controls.Add(this.label3);
@@ -201,11 +201,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbSymbol;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button BtnAdd;
         private System.Windows.Forms.NumericUpDown nQuotation;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblSymbol;
         private System.Windows.Forms.Label lblQuotation;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button BtnCancel;
     }
 }

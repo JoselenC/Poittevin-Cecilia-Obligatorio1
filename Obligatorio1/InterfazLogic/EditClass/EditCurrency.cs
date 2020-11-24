@@ -36,8 +36,7 @@ namespace InterfazLogic
                 {
                     lstCurrencies.Items.Add(currencyController.GetCurrencies()[i]);
                 }
-            }
-           
+            }           
         }
 
         private void Edit()
@@ -71,7 +70,7 @@ namespace InterfazLogic
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -128,14 +127,12 @@ namespace InterfazLogic
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
-        }
+        }      
 
-      
-
-        private void btnDeletecurrency_Click(object sender, EventArgs e)
+        private void BtnDeletecurrency_Click(object sender, EventArgs e)
         {
             if (lstCurrencies.SelectedIndex >= 0)
                 DeleteCurrency();
@@ -146,7 +143,7 @@ namespace InterfazLogic
             }
         }
 
-        private void btnEditcurrency_Click(object sender, EventArgs e)
+        private void BtnEditcurrency_Click(object sender, EventArgs e)
         {
             if (lstCurrencies.SelectedIndex >= 0)
                 Edit();

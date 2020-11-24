@@ -32,8 +32,7 @@ namespace InterfazLogic
 
         }
 
-
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             try
             {
@@ -76,13 +75,11 @@ namespace InterfazLogic
                 lblQuotation.ForeColor = Color.Red;
                 lblSymbol.Text = "";
                 lblName.Text = "";
-               
 
             }
         }
 
-     
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
         }

@@ -44,7 +44,6 @@ namespace InterfazLogic
                     lstCategories.Items.Add(vCategory);
                 }
             }
-
         }
 
         private void Completecurrency()
@@ -54,14 +53,12 @@ namespace InterfazLogic
                 lstcurrency.Items.Add(vcurrency);
             }
         }
-
-        private void btnSearch_Click(object sender, EventArgs e)
+        private void BtnSearch_Click(object sender, EventArgs e)
         {
             lstCategories.Items.Clear();
             string description = tbDescription.Text;
             CompleteCategories(description);
         }
-
 
         private void TryRegisterExpense()
         {
@@ -71,9 +68,9 @@ namespace InterfazLogic
                 double amount = decimal.ToDouble(nAmount.Value);
                 DateTime creationDate = dateTime.Value;
                 string nameCategory = lstCategories.SelectedItem.ToString();
-                Category category = (Category) lstCategories.SelectedItem;
-                Currency currency = (Currency) lstcurrency.SelectedItem;
-                expenseController.SetExpense(amount, creationDate, description,category,currency);
+                Category category = (Category)lstCategories.SelectedItem;
+                Currency currency = (Currency)lstcurrency.SelectedItem;
+                expenseController.SetExpense(amount, creationDate, description, category, currency);
                 MessageBox.Show("The expense was recorded successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Visible = false;
             }
@@ -85,15 +82,15 @@ namespace InterfazLogic
             }
         }
 
-        private void btnRegistrExpense_Click(object sender, EventArgs e)
+        private void BtnRegistrExpense_Click(object sender, EventArgs e)
         {
             try
             {
                 TryRegisterExpense();
-            }            
+            }
             catch (ExcepcionInvalidDescriptionLengthExpense)
             {
-                lbDescription.Text = "The description must be between 3 and 20 characters long.";      
+                lbDescription.Text = "The description must be between 3 and 20 characters long.";
                 lbDescription.ForeColor = Color.Red;
                 lblCategories.Text = "";
                 lblAmount.Text = "";
@@ -131,10 +128,10 @@ namespace InterfazLogic
                 lblDate.Text = "";
                 lbDescription.Text = "";
                 lblAmount.Text = "";
-            }         
+            }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             Visible = false;
         }
