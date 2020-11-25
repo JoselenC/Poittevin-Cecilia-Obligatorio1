@@ -81,26 +81,18 @@ namespace BusinessLogic
             AddCategory(category);
             return category;
         }
-        public Category UpdateCategory(Category oldCategory, Category newCategory)
-        {
-            newCategory = repository.Categories.Update(oldCategory, newCategory);          
-            return newCategory;
-        }
 
-        public void EditCategory(Category oldCategory, string newName, List<string> newKeywords)
+        public void UpdateCategory(Category oldCategory, Category newCategory)
         {
-            throw new NotImplementedException();
-        }
+            newCategory = repository.Categories.Update(oldCategory, newCategory);  
+        }        
 
         public List<Category> GetCategories()
         {
             return repository.Categories.Get();
         }      
 
-        public void SetCategory(object categoryName, object keyWords)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         private Category FindCategoryByDescription(string[] descriptionArray)
         {

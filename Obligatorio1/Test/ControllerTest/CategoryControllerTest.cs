@@ -256,101 +256,120 @@ namespace Test
             categoryController.SetCategory(categoryEntertainment);
         }
 
-        //[TestMethod]
-        //public void EditCategoryExpense()
-        //{
-        //    Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-        //    Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryEntertainment };
-        //    IManageRepository repository = new ManageMemoryRepository();
-        //    CategoryController controller = new CategoryController(repository);
-        //    controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
-        //    List<string> keyWords = new List<string>
-        //    {
-        //        "movie theater",
-        //        "theater",
-        //        "casino"
-        //    };
-        //    controller.EditCategory(categoryFood, "entertainment", keyWords);
-        //    CollectionAssert.Equals(expectedExpense, expense);
-        //}
+        [TestMethod]
+        [ExpectedException(typeof(NotImplementedException), "")]
+        public void UpdateCategory()
+        {
+            ManagerRepository repository = new ManageMemoryRepository();
+            CategoryController controller = new CategoryController(repository);
+            List<string> keyWords = new List<string> { "restaurant", "McDonalds", "Dinner" };
+            controller.SetCategory("food", keyWords);
+            List<string> keyWords2 = new List<string> { "movie theater", "theater", "casino" };
+            Category oldCategory = new Category() { Name = "food", KeyWords = keyWords };
+            Category newCategory = new Category() { Name = "entertainment", KeyWords = keyWords2 };
+            List<Category> categories = new List<Category>() { newCategory };
+            controller.UpdateCategory(oldCategory, newCategory);
+            Assert.Equals(controller.GetCategories(), categories);
+        }
 
-        //[TestMethod]
-        //public void NoEditCategoryExpense()
-        //{
-        //    Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-        //    Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
-        //    IManageRepository repository = new ManageMemoryRepository();
-        //    CategoryController controller = new CategoryController(repository);
-        //    controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
-        //    List<string> keyWords = new List<string>
-        //    {
-        //        "movie theater",
-        //        "theater",
-        //        "casino"
-        //    };
-        //    controller.EditCategory(categoryFood, "dinner", keyWords);
-        //    CollectionAssert.Equals(expectedExpense, expense);
-        //}
-
-        //[TestMethod]
-        //public void EditCategoryBudget()
-        //{
-        //    List<Category> categories = new List<Category>
-        //    {
-        //        categoryEntertainment,
-        //        categoryFood,
-        //    };
-        //    Budget budget = new Budget(Months.December, categories)
-        //    {
-        //        Year = 2020,
-        //        TotalAmount = 0
-        //    };
-        //    List<Category> categories2 = new List<Category>
-        //    {
-        //        categoryEntertainment,
-        //        categoryHouse
-        //    };
-        //    Budget expectedBudget = new Budget(Months.December, categories2)
-        //    {
-        //        Year = 2020,
-        //        TotalAmount = 0
-        //    };
-        //    List<string> keyWords = new List<string>
-        //    {
-        //        "CoffeMaker",
-        //        "toilet paper",
-        //    };
-        //    IManageRepository repository = new ManageMemoryRepository();
-        //    CategoryController controller = new CategoryController(repository);
-        //    controller.Repository.SetBudget(budget);
-        //    controller.EditCategory(categoryFood, "House", keyWords);
-        //    CollectionAssert.Equals(expectedBudget, budget);
-        //}
-
-        //[TestMethod]
-        //public void NoEditCategoryBudget()
-        //{
-        //    List<Category> categories = new List<Category>
-        //    {
-        //        categoryEntertainment,
-        //        categoryFood,
-        //    };
-        //    Budget budget = new Budget(Months.December, categories)
-        //    {
-        //        Year = 2020,
-        //        TotalAmount = 0
-        //    };
-        //    List<string> keyWords = new List<string>
-        //    {
-        //        "CoffeMaker",
-        //        "toilet paper",
-        //    };
-        //    IManageRepository repository = new ManageMemoryRepository();
-        //    CategoryController controller = new CategoryController(repository);
-        //    controller.Repository.SetBudget(budget);
-        //    controller.EditCategory(categoryFood, "House", keyWords);
-        //    CollectionAssert.Equals(budget, budget);
-        //}
 
     }
+
+    //[TestMethod]
+    //public void EditCategoryExpense()
+    //{
+    //    Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
+    //    Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryEntertainment };
+    //    IManageRepository repository = new ManageMemoryRepository();
+    //    CategoryController controller = new CategoryController(repository);
+    //    controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
+    //    List<string> keyWords = new List<string>
+    //    {
+    //        "movie theater",
+    //        "theater",
+    //        "casino"
+    //    };
+    //    controller.EditCategory(categoryFood, "entertainment", keyWords);
+    //    CollectionAssert.Equals(expectedExpense, expense);
+    //}
+
+    //[TestMethod]
+    //public void NoEditCategoryExpense()
+    //{
+    //    Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
+    //    Expense expectedExpense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "dinner", Category = categoryFood };
+    //    IManageRepository repository = new ManageMemoryRepository();
+    //    CategoryController controller = new CategoryController(repository);
+    //    controller.Repository.SetExpense(23, new DateTime(2020, 01, 01), "dinner", categoryFood,null);
+    //    List<string> keyWords = new List<string>
+    //    {
+    //        "movie theater",
+    //        "theater",
+    //        "casino"
+    //    };
+    //    controller.EditCategory(categoryFood, "dinner", keyWords);
+    //    CollectionAssert.Equals(expectedExpense, expense);
+    //}
+
+    //[TestMethod]
+    //public void EditCategoryBudget()
+    //{
+    //    List<Category> categories = new List<Category>
+    //    {
+    //        categoryEntertainment,
+    //        categoryFood,
+    //    };
+    //    Budget budget = new Budget(Months.December, categories)
+    //    {
+    //        Year = 2020,
+    //        TotalAmount = 0
+    //    };
+    //    List<Category> categories2 = new List<Category>
+    //    {
+    //        categoryEntertainment,
+    //        categoryHouse
+    //    };
+    //    Budget expectedBudget = new Budget(Months.December, categories2)
+    //    {
+    //        Year = 2020,
+    //        TotalAmount = 0
+    //    };
+    //    List<string> keyWords = new List<string>
+    //    {
+    //        "CoffeMaker",
+    //        "toilet paper",
+    //    };
+    //    IManageRepository repository = new ManageMemoryRepository();
+    //    CategoryController controller = new CategoryController(repository);
+    //    controller.Repository.SetBudget(budget);
+    //    controller.EditCategory(categoryFood, "House", keyWords);
+    //    CollectionAssert.Equals(expectedBudget, budget);
+    //}
+
+    //[TestMethod]
+    //public void NoEditCategoryBudget()
+    //{
+    //    List<Category> categories = new List<Category>
+    //    {
+    //        categoryEntertainment,
+    //        categoryFood,
+    //    };
+    //    Budget budget = new Budget(Months.December, categories)
+    //    {
+    //        Year = 2020,
+    //        TotalAmount = 0
+    //    };
+    //    List<string> keyWords = new List<string>
+    //    {
+    //        "CoffeMaker",
+    //        "toilet paper",
+    //    };
+    //    IManageRepository repository = new ManageMemoryRepository();
+    //    CategoryController controller = new CategoryController(repository);
+    //    controller.Repository.SetBudget(budget);
+    //    controller.EditCategory(categoryFood, "House", keyWords);
+    //    CollectionAssert.Equals(budget, budget);
+    //}
+
 }
+

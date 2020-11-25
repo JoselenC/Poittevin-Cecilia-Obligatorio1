@@ -47,12 +47,6 @@ namespace BusinessLogic
             repository.Currencies.Add(currency);
         }
 
-        public void SetCurrency(string name, string symbol, double quotation)
-        {
-            Currency currency = new Currency() { Name = name, Symbol = symbol, Quotation = quotation };
-            SetCurrency(currency);
-        }
-
         public void DeleteCurrency(Currency currency)
         {
             ExpenseController expenseController = new ExpenseController(repository);
@@ -90,16 +84,6 @@ namespace BusinessLogic
         public void UpdateCurrency(Currency oldCurrency, Currency newCurrency)
         {
             repository.Currencies.Update(oldCurrency, newCurrency);
-            EditCurrencyAllExpense(oldCurrency, newCurrency);
-        }
-
-        private void EditCurrencyAllExpense(Currency oldCurrency, Currency newCurrency)
-        {
-            ExpenseController expenseController = new ExpenseController(repository);
-            foreach (Expense expense in expenseController.GetExpenses())
-            {
-                expense.EditCurrency(oldCurrency, newCurrency);
-            }
         }
 
         public Currency FindCurrencyByName(string currencyName)

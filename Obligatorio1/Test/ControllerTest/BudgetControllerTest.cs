@@ -267,16 +267,16 @@ namespace Test
         [TestMethod]
         public void GetBudgetReportSuccessCase()
         {
-            BudgetReport budgetReport = new BudgetReport
+            GenerateBudgetReport budgetReport = new GenerateBudgetReport
             {
                 TotalAmount = 0,
                 RealAmount = 10403.3,
                 PlaneedAmount=0,
                 DiffAmount = -10403.3,
             };
-            List<BudgetReportLine> budgetReportLines = new List<BudgetReportLine>()
+            List<BusinessLogic.Domain.BudgetReportLine> budgetReportLines = new List<BusinessLogic.Domain.BudgetReportLine>()
             {
-                new BudgetReportLine()
+                new BusinessLogic.Domain.BudgetReportLine()
                 {
                     Category = categoryEntertainment,
                     DiffAmount = -230.15,
@@ -286,7 +286,7 @@ namespace Test
                     TotalAmount = 0,
                     Year = 0,
                 },
-                new BudgetReportLine()
+                new BusinessLogic.Domain.BudgetReportLine()
                 {
                     Category = categoryFood,
                     DiffAmount = -4971.5,
@@ -296,7 +296,7 @@ namespace Test
                     TotalAmount = 0,
                     Year = 0,
                 },
-                new BudgetReportLine()
+                new BusinessLogic.Domain.BudgetReportLine()
                 {
                     Category = categoryHouse,
                     DiffAmount = 0,
@@ -306,7 +306,7 @@ namespace Test
                     TotalAmount = 0,
                     Year = 0,
                 },
-                new BudgetReportLine()
+                new BusinessLogic.Domain.BudgetReportLine()
                 {
                     Category = categoryEntertainment,
                     DiffAmount = -230.15,
@@ -316,7 +316,7 @@ namespace Test
                     TotalAmount = 0,
                     Year = 0,
                 },
-                new BudgetReportLine()
+                new BusinessLogic.Domain.BudgetReportLine()
                 {
                     Category = categoryFood,
                     DiffAmount = -4971.5,
@@ -326,7 +326,7 @@ namespace Test
                     TotalAmount = 0,
                     Year = 0,
                 },
-                new BudgetReportLine()
+                new BusinessLogic.Domain.BudgetReportLine()
                 {
                     Category = categoryHouse,
                     DiffAmount = 0,
@@ -339,7 +339,7 @@ namespace Test
 
             };
             budgetReport.budgetsReportLines = budgetReportLines;
-            BudgetReport expectedBudgetReport = budgetController.GetBudgetReport("January", 2020);
+            GenerateBudgetReport expectedBudgetReport = budgetController.GetBudgetReport("January", 2020);
             Assert.AreEqual(budgetReport, expectedBudgetReport);
         }
 

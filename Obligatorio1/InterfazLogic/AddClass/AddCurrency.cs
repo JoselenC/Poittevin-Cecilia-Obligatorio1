@@ -26,7 +26,8 @@ namespace InterfazLogic
             string name = tbName.Text;
             string symbol = tbSymbol.Text;
             double quotation = (double)nQuotation.Value;
-            currencyController.SetCurrency(name, symbol, quotation);
+            Currency currency = new Currency() { Name = name, Quotation = quotation, Symbol = symbol };
+            currencyController.SetCurrency(currency);
             MessageBox.Show("Currency" + name + " was register successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Visible = false;
 

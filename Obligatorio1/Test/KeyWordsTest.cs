@@ -8,120 +8,77 @@ namespace Test
     [TestClass]
     public class KeyWordsTest
     {
-        //[TestMethod]
-        //[ExpectedException(typeof(ExcepcionInvalidKeyWordsLengthCategory))]
-        //public void SetKeyWordInvalidLength()
-        //{
-        //    List<string> keyWords = new List<string>()
-        //    {
-        //    "movie theater",
-        //    "theater",
-        //    "departure",
-        //    "bookstore",
-        //    "jugeteria",
-        //    "shopping",
-        //    "skating",
-        //    "casino",
-        //    "game room",
-        //    "Park",
-        //    "shopping"
+        [TestMethod]
+        public void SetKeyWord()
+        {
+            KeyWord keyWord = new KeyWord() { Value = "movie theater" };
+            Assert.AreEqual("movie theater", keyWord.Value);
+        }
 
-        //    };
-        //    KeyWord keyWord = new KeyWord(keyWords);
-        //}
+        [TestMethod]
+        [ExpectedException(typeof(InvalidKeyWord))]
+        public void SetEmptyKeyWord()
+        {
+            KeyWord keyWord = new KeyWord() { Value = "" };
+        }
 
-        //[TestMethod]
-        //public void SetKeyWordValidCase()
-        //{
-        //    List<string> keyWords = new List<string>()
-        //    {
-        //    "movie theater",
-        //    "theater",
-        //    "departure",
-        //    "bookstore",
-        //    "jugeteria",
-        //    "shopping",
-        //    "skating",
-        //    "casino",
-        //    "game room",
-        //    };
-        //    KeyWord expectedKeyWord = new KeyWord(keyWords);
-        //    KeyWord keyWord = new KeyWord(keyWords);            
-        //    Assert.AreEqual(expectedKeyWord, keyWord);
-        //}
+        [TestMethod]
+        public void EqualsKeyWordCaseTrue()
+        {
+            KeyWord keyWord = new KeyWord() { Value = "movie" };
+            KeyWord keyWord2 = new KeyWord() { Value = "movie" };
+            Assert.AreEqual(keyWord, keyWord2);
+        }
 
-        //[TestMethod]
-        //public void EqualsKeyWordCaseTrue()
-        //{
-        //    List<string> keyWords = new List<string>()
-        //    {
-        //    "movie theater",
-        //    "theater",
-        //    "departure",
-        //    "bookstore",
-        //    "jugeteria",
-        //    "shopping",
-        //    "skating",
-        //    "casino",
-        //    "game room",
-        //    };
-        //    KeyWord expectedKeyWord = new KeyWord(keyWords);
-        //    KeyWord keyWord = new KeyWord(keyWords);
-        //    Assert.IsTrue(expectedKeyWord.Equals(keyWord));
-        //}
+        [TestMethod]
+        public void EqualsKeyWordCaseEquealsString()
+        {
+            KeyWord keyWord = new KeyWord() { Value = "movie" };
+            string value = "movie";
+            Assert.AreEqual(keyWord, value);
+        }
 
 
-        //[TestMethod]
-        //public void EqualsKeyWordCaseFalse()
-        //{
-        //    List<string> keyWords = new List<string>()
-        //    {
-        //    "movie theater",
-        //    "theater",
-        //    "departure",
-        //    "bookstore",
-        //    "jugeteria",
-        //    "shopping",
-        //    "skating",
-        //    "casino",
-        //    "game room",
-        //    };
-        //    List<string> keyWords2 = new List<string>()
-        //    {
-        //    "movie theater",
-        //    "theater",
-        //    "departure",
-        //    };
-        //    KeyWord expectedKeyWord = new KeyWord(keyWords);
-        //    KeyWord keyWord = new KeyWord(keyWords2);
-        //    Assert.IsFalse(expectedKeyWord.Equals(keyWord));
-        //}
+        [TestMethod]
+        public void EqualsKeyWordCaseFalse()
+        {
+            KeyWord keyWord = new KeyWord() { Value = "movie" };
+            KeyWord keyWord2 = new KeyWord() { Value = "food" };
+            Assert.AreNotEqual(keyWord, keyWord2);
+        }
 
-        //[TestMethod]
-        //public void EqualsKeyWordCaseNoKeyWord()
-        //{
-        //    List<string> keyWords = new List<string>()
-        //    {
-        //    "movie theater",
-        //    "theater",
-        //    "departure",
-        //    "bookstore",
-        //    "jugeteria",
-        //    "shopping",
-        //    "skating",
-        //    "casino",
-        //    "game room",
-        //    };
-        //    List<string> keyWords2 = new List<string>()
-        //    {
-        //    "movie theater",
-        //    "theater",
-        //    "departure",
-        //    };
-        //    KeyWord expectedKeyWord = new KeyWord(keyWords);
-        //    KeyWord keyWord = new KeyWord(keyWords2);
-        //    Assert.IsFalse(expectedKeyWord.Equals(keyWords));
-        //}
+        [TestMethod]
+        public void EqualsKeyWordCaseFalseObj()
+        {
+            KeyWord keyWord = new KeyWord() { Value = "movie" };
+            Currency currency = new Currency();
+            Assert.AreNotEqual(keyWord,currency);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidKeyWord))]
+        public void KeyWordsConstructorCaseEmptyString()
+        {
+            KeyWord keyWord = new KeyWord("", new List<string>());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory))]
+        public void KeyWordsConstructorRepetedKeyWord()
+        {
+            List<string> keyWords = new List<string>() { "movie" };
+            KeyWord keyWord = new KeyWord("movie", keyWords);
+
+        }
+
+        [TestMethod]
+        public void KeyWordsConstructor()
+        {
+            List<string> keyWords = new List<string>() { "food" };
+            KeyWord keyWord = new KeyWord("movie", keyWords);
+            KeyWord keyWord2 = new KeyWord() { Value = "movie" };
+            Assert.AreEqual(keyWord, keyWord2);
+        }
 
     }
 }

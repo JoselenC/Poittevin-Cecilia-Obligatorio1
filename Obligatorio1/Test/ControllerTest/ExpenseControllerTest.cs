@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BusinessLogic.Repository;
 using BusinessLogic;
 using System.Collections.Generic;
+using BusinessLogic.Domain;
 
 namespace Test
 {
@@ -256,6 +257,146 @@ namespace Test
 
             Assert.AreEqual(450.15, totalAmount);
 
+        }
+
+        [TestMethod]
+        public void ExportExpenseReport()
+        {
+            string description = "movie theater";
+            Currency currency = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            Expense expense = new Expense { Description = description, Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01),Currency=currency };
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            controller.SetExpense(expense);
+            string type = ".txt";
+            string fileName = "reporte";
+            controller.ExportExpenseReport(controller.GetExpenses(), fileName, type);
+        }
+
+        [TestMethod]
+        public void FindCategoryByName()
+        {
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            CategoryController categoryController = new CategoryController(repository);
+            categoryController.SetCategory(categoryFood);
+            Expense expense = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            controller.SetExpense(expense);
+            Category category=controller.FindCategoryByName("food");
+            Assert.AreEqual(categoryFood, category);
+        }
+
+        [TestMethod]
+        public void FindCurrencyByName()
+        {
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            CurrencyController CurrencyController = new CurrencyController(repository);
+            Currency currencyExpecet = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            CurrencyController.SetCurrency(currencyExpecet);
+            Expense expense = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01),Currency=currencyExpecet };
+            controller.SetExpense(expense);
+            Currency Currency = controller.FindCurrencyByName("Dolar");
+            Assert.AreEqual(currencyExpecet, Currency);
+        }
+
+        [TestMethod]
+        public void GetCategories()
+        {
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            CategoryController categoryController = new CategoryController(repository);
+            categoryController.SetCategory(categoryFood);
+            Expense expense = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01) };
+            controller.SetExpense(expense);
+            List<Category> categories = controller.GetCategories();
+            List<Category> categoriesExpected = categoryController.GetCategories();
+            Assert.AreEqual(categoriesExpected, categories);
+        }
+
+        [TestMethod]
+        public void GetCurrencies()
+        {
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            CurrencyController CurrencyController = new CurrencyController(repository);
+            Currency currencyExpecet = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            CurrencyController.SetCurrency(currencyExpecet);
+            Expense expense = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01), Currency = currencyExpecet };
+            controller.SetExpense(expense);
+            List<Currency> currenciesExpected = CurrencyController.GetCurrencies();
+            List<Currency> currencies = controller.GetCurrencies();
+            Assert.AreEqual(currenciesExpected, currencies);
+        }
+
+        [TestMethod]
+        public void GetExpenseByDateExist()
+        {
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            Currency currency = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            Expense expenseExpected = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01), Currency = currency};
+            controller.SetExpense(expenseExpected);
+            List<Expense> expenses = controller.GetExpenseByDate("January", 2020);
+            Assert.AreEqual(controller.GetExpenses(), expenses);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoFindExpenseByDate), "")]
+        public void GetExpenseByDateNoExist()
+        {
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            Currency currency = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            Expense expenseExpected = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01), Currency = currency };
+            controller.SetExpense(expenseExpected);
+            List<Expense> expenses = controller.GetExpenseByDate("March", 2021);
+            Assert.AreEqual(0, expenses.Count);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionExpenseWithEmptyCategory), "")]
+        public void setExpenseWithEmptyCategory()
+        {
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            Currency currency = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            Expense expenseExpected = new Expense { Description = "movie theater", Amount = 24, Category = null, CreationDate = new DateTime(2020, 01, 01), Currency = currency };
+            controller.SetExpense(expenseExpected);
+        }
+
+        [TestMethod]
+        public void YearsOrderedInWhichAreExpenses()
+        {
+
+            List<int> years = new List<int>()
+            {
+             2020
+            };
+            List<int> yersOrder = expenseController.OrderedYearsWithExpenses();
+            CollectionAssert.AreEqual(years, yersOrder);
+        }
+
+        [TestMethod]
+        public void GetExpenseReport()
+        {           
+           
+            Currency currency = new Currency { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            Expense expense = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01), Currency = currency };
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+            controller.SetExpense(expense);
+            ExpenseReportLine expenseReportLine = new ExpenseReportLine()
+            {
+                Amount = expense.Amount,
+                Category = expense.Category,
+                CreationDate = expense.CreationDate,
+                Description = expense.Description,
+                Currency= expense.Currency
+            };
+            List<ExpenseReportLine> expensesReportLines = new List<ExpenseReportLine>() { expenseReportLine};
+            GenerateExpenseReport expenseReport = controller.GetExpenseReport("January", 2020);
+            Assert.AreEqual(expenseReportLine, expenseReport.ExpenseReportLine.ToArray()[0]);
         }
 
     }

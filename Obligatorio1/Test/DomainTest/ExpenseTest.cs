@@ -140,13 +140,25 @@ namespace Test
         }
 
         [TestMethod]
+        public void EqualFalseCaseDiffCurrency()
+        {
+            Currency currency = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 40 };
+            double amount = 23.5;
+            string description = "when go to the movie";
+            Expense expense = new Expense { Amount = amount, CreationDate = new DateTime(2020, 01, 01), Description = description, Currency = currency };
+            Expense expense2 = new Expense { Amount = amount, CreationDate = new DateTime(2021, 01, 01), Description = description, Currency = currency };
+            Assert.AreNotEqual(expense, expense2);
+        }
+
+        [TestMethod]
         public void EqualTrueEqualsExpenses()
         {
+            Currency currency = new Currency() { Name = "Dolar", Symbol = "USD", Quotation = 40 };
             double amount = 23.5;
             string description = "when go to the movie";
             DateTime creationDate = new DateTime(2020, 01, 01);
-            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
-            Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = description };
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description,Currency=currency };
+            Expense expense2 = new Expense { Amount = amount, CreationDate = creationDate, Description = description,Currency=currency };
             Assert.AreEqual(expense, expense2);
         }
 
@@ -173,7 +185,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void ISameCreationDateCaseTrue()
+        public void ISameMonthCaseTrue()
         {
             Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
             bool sameCreationDate = expense.IsExpenseSameMonth(Months.January);
@@ -181,10 +193,35 @@ namespace Test
         }
 
         [TestMethod]
-        public void ISameCreationDateCaseFalse()
+        public void ISameMonthCaseFalse()
         {
             Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
             bool sameCreationDate = expense.IsExpenseSameMonth(Months.February);
+            Assert.IsFalse(sameCreationDate);
+        }
+
+        [TestMethod]
+        public void ISameCreationDateCaseTrue()
+        {
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
+            bool sameCreationDate = expense.IsExpenseSameDate(Months.January,2020);
+            Assert.IsTrue(sameCreationDate);
+        }
+
+        [TestMethod]
+        public void ISameCreationDateCaseMonthFalse()
+        {
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
+            bool sameCreationDate = expense.IsExpenseSameDate(Months.February, 2020);
+            Assert.IsFalse(sameCreationDate);
+        }
+
+
+        [TestMethod]
+        public void ISameCreationDateCaseYearFalse()
+        {
+            Expense expense = new Expense { Description = "Dinner", Amount = 23, CreationDate = new DateTime(2020, 01, 01) };
+            bool sameCreationDate = expense.IsExpenseSameDate(Months.January, 2021);
             Assert.IsFalse(sameCreationDate);
         }
 

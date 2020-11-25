@@ -18,5 +18,19 @@ namespace BusinessLogic.Domain
 
         public Currency Currency { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            if (obj is ExpenseReportLine expense)
+            {
+                bool equalsAmount = Amount == expense.Amount;
+                bool equalsCreationDate = CreationDate == expense.CreationDate;
+                bool equalsDescription = Description == expense.Description;
+                bool equalsCurrency = Currency.Equals(expense.Currency);
+                return equalsAmount && equalsCreationDate && equalsDescription && equalsCurrency;
+            }
+            return false;
+        }
+
+
     }
 }

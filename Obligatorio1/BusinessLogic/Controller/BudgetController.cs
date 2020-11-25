@@ -45,10 +45,10 @@ namespace BusinessLogic
             return total;
         }
 
-        public BudgetReport GetBudgetReport(string vMonth, int year)
+        public GenerateBudgetReport GetBudgetReport(string vMonth, int year)
         {
             Budget budget = FindBudget(vMonth, year);
-            BudgetReport budgetReport = new BudgetReport
+            GenerateBudgetReport budgetReport = new GenerateBudgetReport
             {
                 budgetsReportLines = new List<BudgetReportLine>()
             };

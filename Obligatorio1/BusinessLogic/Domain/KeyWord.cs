@@ -34,14 +34,6 @@ namespace BusinessLogic
             return false;
         }
 
-        public KeyWord(string vKeyWords)
-        {
-            if(vKeyWords!="")
-            value = vKeyWords;
-            else
-                throw new InvalidKeyWord();
-        }
-
         public KeyWord()
         {
             

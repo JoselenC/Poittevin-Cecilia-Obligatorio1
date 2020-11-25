@@ -58,19 +58,26 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BudgetTest.cs" />
-    <Compile Include="CurrencyTest.cs" />
+    <Compile Include="DomainTest\BudgetTest.cs" />
+    <Compile Include="DomainTest\CurrencyTest.cs" />
+    <Compile Include="ExpenseReportCSVTest.cs" />
+    <Compile Include="ExpenseReportLineTest.cs" />
+    <Compile Include="ExpenseReportTXTTEst.cs" />
     <Compile Include="MapperCategoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CategoryTest.cs" />
+    <Compile Include="DomainTest\CategoryTest.cs" />
     <Compile Include="MemoryRepositoryTest.cs" />
-    <Compile Include="ExpenseTest.cs" />
-    <Compile Include="BudgetCategoryTest.cs" />
+    <Compile Include="DomainTest\ExpenseTest.cs" />
+    <Compile Include="DomainTest\BudgetCategoryTest.cs" />
     <Compile Include="KeyWordsTest.cs" />
-    <Compile Include="CategoryControllerTest.cs" />
-    <Compile Include="BudgetControllerTest.cs" />
-    <Compile Include="ExpenseControllerTest.cs" />
-    <Compile Include="CurrencyControllerTest.cs" />
+    <Compile Include="ControllerTest\CategoryControllerTest.cs" />
+    <Compile Include="ControllerTest\BudgetControllerTest.cs" />
+    <Compile Include="ControllerTest\ExpenseControllerTest.cs" />
+    <Compile Include="ControllerTest\CurrencyControllerTest.cs" />
+    <Compile Include="GenerateExpenseReportTest.cs" />
+    <Compile Include="FactoryExportReportTest.cs" />
+    <Compile Include="GenerateBudgetReportTest.cs" />
+    <Compile Include="BudgetReportLineTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
