@@ -153,7 +153,8 @@ namespace BusinessLogic
 
         public Category FindCategoryByName(string categoryName)
         {
-            return repository.FindCategoryByName(categoryName);
+            CategoryController categoryController = new CategoryController(repository);
+            return categoryController.FindCategoryByName(categoryName);
         }
 
         public double AmountOfExpensesInAMonth(Months month)
