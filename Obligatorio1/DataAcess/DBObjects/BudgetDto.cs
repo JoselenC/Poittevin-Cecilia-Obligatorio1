@@ -2,7 +2,7 @@
 
 namespace DataAcess.DBObjects
 {
-    internal class BudgetDto
+    public class BudgetDto
     {
         public int BudgetDtoID { get; set; }
         public int Month { get; set; }
