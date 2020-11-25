@@ -15,7 +15,7 @@ namespace InterfazLogic
     public partial class AddCurrency : UserControl
     {
         private CurrencyController currencyController;
-        public AddCurrency(IManageRepository vRepository)
+        public AddCurrency(ManagerRepository vRepository)
         {
             InitializeComponent();
             currencyController = new CurrencyController(vRepository);

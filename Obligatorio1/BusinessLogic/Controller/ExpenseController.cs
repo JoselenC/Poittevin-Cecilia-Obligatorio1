@@ -7,33 +7,41 @@ namespace BusinessLogic
 {
     public class ExpenseController
     {
-        private IManageRepository repository;
+        private ManagerRepository repository;
        
-        public ExpenseController(IManageRepository vRepository)
+        public ExpenseController(ManagerRepository vRepository)
         {
             repository = vRepository;
         }
 
         public Expense FindExpense(Expense expense)
         {
-            return repository.FindExpense(expense);
+            try
+            {
+                return repository.Expenses.Find(e => e.Equals(expense));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindEqualsExpense();
+            }
         }
 
         public Category FindCategoryByDescription(string vDescription)
         {
-            return repository.FindCategoryByDescription(vDescription);
+            CategoryController categoryController = new CategoryController(repository);
+            return categoryController.FindCategoryByDescription(vDescription);
         }
 
         public Expense DeleteExpense(Expense expenseToDelete)
         {
             Expense expense = FindExpense(expenseToDelete);
-            repository.DeleteExpense(expense);
+            repository.Expenses.Delete(expense);
             return expense;
         }
 
         public List<Expense> GetExpenses()
         {
-            return repository.GetExpenses();
+            return repository.Expenses.Get();
         }
 
         private List<string> MonthsListIntToString(List<int> months)
@@ -51,7 +59,7 @@ namespace BusinessLogic
         public List<string> OrderedMonthsWithExpenses()
         {
             List<int> orderedMonthsInt = new List<int>();
-            List<Expense> expenses = repository.GetExpenses();
+            List<Expense> expenses = GetExpenses();
             foreach (Expense expense in expenses)
             {
                 if (!orderedMonthsInt.Contains(expense.CreationDate.Month))
@@ -65,7 +73,7 @@ namespace BusinessLogic
         public List<int> OrderedYearsWithExpenses()
         {
             List<int> orderedYEarsInt = new List<int>();
-            List<Expense> expenses = repository.GetExpenses();
+            List<Expense> expenses = GetExpenses();
             foreach (Expense expense in expenses)
             {
                 if (!orderedYEarsInt.Contains(expense.CreationDate.Year))
@@ -78,8 +86,7 @@ namespace BusinessLogic
         public List<Expense> GetExpenseByMonth(Months month)
         {
             List<Expense> expensesByMonth = new List<Expense>();
-            List<Expense> expenses = repository.GetExpenses();
-            foreach (Expense vExpense in expenses)
+            foreach (Expense vExpense in GetExpenses())
             {
                 if (vExpense.IsExpenseSameMonth(month))
                     expensesByMonth.Add(vExpense);
@@ -91,7 +98,7 @@ namespace BusinessLogic
         {
             Months mMonth = StringToMonthsEnum(month);
             List<Expense> expensesByMonth = new List<Expense>();
-            List<Expense> expenses = repository.GetExpenses();
+            List<Expense> expenses = GetExpenses();
             foreach (Expense vExpense in expenses)
             {
                 if (vExpense.IsExpenseSameDate(mMonth, year))
@@ -140,7 +147,8 @@ namespace BusinessLogic
 
         public Currency FindCurrencyByName(string CurrencyName)
         {
-            return repository.FindCurrencyByName(CurrencyName);
+            CurrencyController currencyController = new CurrencyController(repository);
+            return currencyController.FindCurrencyByName(CurrencyName);
         }
 
         public Category FindCategoryByName(string categoryName)
@@ -151,7 +159,7 @@ namespace BusinessLogic
         public double AmountOfExpensesInAMonth(Months month)
         {
             double total = 0;
-            List<Expense> expenses = repository.GetExpenses();
+            List<Expense> expenses = GetExpenses();
             foreach (Expense expense in expenses)
             {
                 if (expense.IsExpenseSameMonth(month))
@@ -160,19 +168,36 @@ namespace BusinessLogic
             return total;
         }
 
+        private void AddExpense(Expense expense)
+        {
+            if (expense.Category == null)
+                throw new ExcepcionExpenseWithEmptyCategory();
+            repository.Expenses.Add(expense);
+        }
+
         public void SetExpense(double amount, DateTime creationDate, string description, Category category, Currency Currency)
         {
-            repository.SetExpense(amount, creationDate, description, category, Currency);
+            Expense expense = new Expense
+            {
+                Amount = amount,
+                CreationDate = creationDate,
+                Description = description,
+                Category = category,
+                Currency = Currency
+            };
+            AddExpense(expense);
         }
 
+        // TODO: revisar si podemos llamar directamente al GetCategories de el CategoryController
         public List<Category> GetCategories()
         {
-            return repository.GetCategories();
+            return repository.Categories.Get();
         }
 
+        // TODO: revisar si podemos llamar directamente al GetCurrencies de el CurrencyController
         public List<Currency> GetCurrencies()
         {
-            return repository.GetCurrencies();
+            return repository.Currencies.Get();
         }
 
         public void ExportExpenseReport(List<Expense> expenses, string fileName, string type)

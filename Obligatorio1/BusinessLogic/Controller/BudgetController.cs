@@ -8,21 +8,21 @@ namespace BusinessLogic
 {
     public class BudgetController
     {
-        private IManageRepository repository;
+        private readonly ManagerRepository repository;
 
-        public BudgetController(IManageRepository vRepository)
+        public BudgetController(ManagerRepository vRepository)
         {
             repository = vRepository;
         }           
 
         public List<Budget> GetBudgets()
         {
-            return repository.GetBudgets();
+            return repository.Budgets.Get();
         }
 
         public void SetBudget(Budget vBudget)
         {
-            repository.SetBudget(vBudget);
+            repository.Budgets.Add(vBudget);
         }      
 
         private Months StringToMonthsEnum(string month)
@@ -30,10 +30,12 @@ namespace BusinessLogic
             return (Months)Enum.Parse(typeof(Months), month);
         }
 
+        // TODO: esto deberia estar en ExpenseController, no aca
         public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
         {
+            ExpenseController expenseController = new ExpenseController(repository);
             Months mMonths = StringToMonthsEnum(vMonth);
-            List<Expense> expenses = repository.GetExpenseByMonth(mMonths);
+            List<Expense> expenses = expenseController.GetExpenseByMonth(mMonths);
             double total = 0;
             foreach (Expense expense in expenses)
             {
@@ -43,17 +45,21 @@ namespace BusinessLogic
             return total;
         }
 
-        public GenerateBudgetReport GetBudgetReport(string vMonth,Budget budget)
+        public GenerateBudgetReport GetBudgetReport(string vMonth, int year)
         {
-           
-            GenerateBudgetReport budgetsReport = new GenerateBudgetReport();
-            budgetsReport.budgetsReportLines = new List<BudgetReportLine>();
+            Budget budget = FindBudget(vMonth, year);
+            GenerateBudgetReport budgetsReport = new GenerateBudgetReport
+            {
+                budgetsReportLines = new List<BudgetReportLine>()
+            };
             foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
             {
-                BudgetReportLine budgetReport = new BudgetReportLine();
                 Category category = budgetCategory.Category;
-                budgetReport.PlanedAmount = budgetCategory.Amount;
-                budgetReport.RealAmount = GetTotalSpentByMonthAndCategory(vMonth, category);
+                BudgetReportLine budgetReport = new BudgetReportLine
+                {
+                    PlanedAmount = budgetCategory.Amount,
+                    RealAmount = GetTotalSpentByMonthAndCategory(vMonth, category)
+                };
                 budgetReport.DiffAmount = budgetReport.PlanedAmount - budgetReport.RealAmount;
                 budgetsReport.TotalAmount += budgetReport.PlanedAmount;
                 budgetsReport.RealAmount += budgetReport.RealAmount;
@@ -61,7 +67,6 @@ namespace BusinessLogic
                 budgetReport.Category= budgetCategory.Category;
                 budgetsReport.budgetsReportLines.Add(budgetReport);
             }
-
             return budgetsReport;
         }
 
@@ -85,7 +90,7 @@ namespace BusinessLogic
             }
             catch (NoFindBudget)
             {
-                List<Category> categories = repository.GetCategories();
+                List<Category> categories = repository.Categories.Get();
                 returnBudget = CreateBudget(year, categories, mMonth);
             }
             return returnBudget;
@@ -93,7 +98,15 @@ namespace BusinessLogic
 
         public Budget FindBudget(string month, int year)
         {
-            return repository.FindBudget(month, year);
+            Months mMonth = StringToMonthsEnum(month);
+            try
+            {
+                return repository.Budgets.Find(e => e.IsSameCreationDate(mMonth, year));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindBudget();
+            }
         }
 
         public string[] GetAllMonthsString()
@@ -114,7 +127,7 @@ namespace BusinessLogic
         public List<string> OrderedMonthsWithBudget()
         {
             List<Months> monthsWithBudget = new List<Months>();
-            List<Budget> budgets = repository.GetBudgets();
+            List<Budget> budgets = repository.Budgets.Get();
             foreach (Budget budget in budgets)
             {
                 if (!monthsWithBudget.Contains(budget.Month))
@@ -124,6 +137,15 @@ namespace BusinessLogic
             List<string> orderedMonthsString = MonthsEnumToStrings(monthsWithBudget);
             return orderedMonthsString;
         }
+
+        public void AddCategoryInAllBudgets(Category category)
+        {
+            foreach (Budget budget in repository.Budgets.Get())
+            {
+                budget.AddBudgetCategory(category);
+            }
+        }
+
 
     }
 }

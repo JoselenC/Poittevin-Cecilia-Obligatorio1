@@ -14,7 +14,7 @@ namespace InterfazLogic
         private BudgetController budgetController;
         private int oldYearValue = DateTime.Now.Year;
 
-        public BudgetReport(IManageRepository vRepository)
+        public BudgetReport(ManagerRepository vRepository)
         {
             budgetController = new BudgetController(vRepository);
             InitializeComponent();
@@ -43,14 +43,6 @@ namespace InterfazLogic
                     cboxMonth.SelectedIndex = 0;
                 }                
             }           
-        }
-
-        private bool CompleteReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount, Budget budget)
-        {
-            lstVReport.Items.Clear();
-            BusinessLogic.Domain.GenerateBudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text, budget);
-            CompleteListViewReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
-            return CompleteTotalValuesOFReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
         }
 
         private bool CompleteTotalValuesOFReport(double totalPlanedAmount,double totalRealAmount, double totalDiffAmount, GenerateBudgetReport budgetReport)
@@ -109,10 +101,11 @@ namespace InterfazLogic
                 try
                 {
                     int year = (int)numYear.Value;
-                    Budget budget = budgetController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
+                    lstVReport.Items.Clear();
+                    BusinessLogic.Domain.GenerateBudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text.ToString(), year);
                     oldYearValue = year;
-                    return CompleteReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budget);
-
+                    CompleteListViewReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
+                    return CompleteTotalValuesOFReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
                 }
                 catch (NoFindBudget)
                 {

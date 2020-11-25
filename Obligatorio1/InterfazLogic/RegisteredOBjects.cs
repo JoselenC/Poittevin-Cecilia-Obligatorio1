@@ -16,7 +16,7 @@ namespace InterfazLogic
     {
         private CategoryController categoryController;
         private ExpenseController expenseController;
-        public RegisteredOBjects(IManageRepository vRepository)
+        public RegisteredOBjects(ManagerRepository vRepository)
         {
             InitializeComponent();
             categoryController = new CategoryController(vRepository);

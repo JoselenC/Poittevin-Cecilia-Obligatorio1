@@ -14,7 +14,7 @@ namespace InterfazLogic
         public List<string> KeyWords { get; set; }
         private int indexKeyWordToEdit;
 
-        public RegisterCategory(IManageRepository vRepository)
+        public RegisterCategory(ManagerRepository vRepository)
         {
             InitializeComponent();
             categoryController = new CategoryController(vRepository);
