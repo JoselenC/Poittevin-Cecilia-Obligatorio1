@@ -37,15 +37,20 @@ namespace BusinessLogic
             return exist;
         }
 
-        public void SetCurrency(string name, string symbol, double quotation)
-        {
-            Currency currency = new Currency() { Name = name, Symbol = symbol, Quotation = quotation };
 
+        public void SetCurrency(Currency currency)
+        {
             if (AlreadyExistTheCurrencySymbol(currency.Symbol))
                 throw new ExceptionAlreadyExistTheCurrencySymbol();
             if (AlreadyExistTheCurrencyName(currency.Name))
                 throw new ExceptionAlreadyExistTheCurrencyName();
             repository.Currencies.Add(currency);
+        }
+
+        public void SetCurrency(string name, string symbol, double quotation)
+        {
+            Currency currency = new Currency() { Name = name, Symbol = symbol, Quotation = quotation };
+            SetCurrency(currency);
         }
 
         public void DeleteCurrency(Currency currency)

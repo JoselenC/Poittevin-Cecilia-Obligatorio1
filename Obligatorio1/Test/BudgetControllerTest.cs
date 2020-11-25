@@ -5,6 +5,7 @@ using BusinessLogic;
 using DataAcces;
 using System.Collections.Generic;
 using System.Linq;
+using BusinessLogic.Domain;
 
 namespace Test
 {
@@ -12,7 +13,7 @@ namespace Test
     public class BudgetControllerTest
     {
         private static List<string> keyWords1 = new List<string>();
-        private static IManageRepository repo = new ManageMemoryRepository();
+        private static ManagerRepository repo = new ManageMemoryRepository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
         private static Category categoryHouse;
@@ -23,6 +24,10 @@ namespace Test
         [ClassInitialize()]
         public static void TestFixtureSetup(TestContext context)
         {
+
+            budgetController = new BudgetController(repo);
+            ExpenseController expenseController = new ExpenseController(repo);
+            CategoryController categoryController = new CategoryController(repo);
             keyWords1 = new List<string>
             {
                 "movie theater",
@@ -67,15 +72,16 @@ namespace Test
                 TotalAmount = 0
             };
             Currency currency = new Currency() { Name = "dolar", Symbol = "USD", Quotation = 1 };
-            repo.SetBudget(JanuaryBudget);
-            repo.SetCategory("entertainment",keyWords1);
-            repo.SetCategory("food",keyWords2);
-            repo.SetCategory("House",keyWords3);
+
             Currency currency2 = new Currency() { Name = "dolar", Quotation = 43, Symbol = "USD" };
-            repo.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood, currency);
-            repo.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood,currency2);
-            repo.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment,currency);
-            budgetController = new BudgetController(repo);
+
+            budgetController.SetBudget(JanuaryBudget);
+            categoryController.SetCategory(categoryEntertainment);
+            categoryController.SetCategory(categoryFood);
+            categoryController.SetCategory(categoryHouse);
+            expenseController.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood, currency);
+            expenseController.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood,currency2);
+            expenseController.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment,currency);
         }
         
         [TestMethod]
@@ -123,7 +129,7 @@ namespace Test
                 Year = 2020,
                 TotalAmount = 0
             };
-            IManageRepository repository = new ManageMemoryRepository();
+            ManagerRepository repository = new ManageMemoryRepository();
             BudgetController controller = new BudgetController(repository);
             Budget budget = budgetController.BudgetGetOrCreate(month, year);
             Assert.AreEqual(JanuaryBudget, budget);
@@ -132,13 +138,17 @@ namespace Test
         [TestMethod]
         public void BudgetGetOrCreateAddAndFind()
         {
-            IManageRepository emptyRepository = new ManageMemoryRepository();
-            Months month = Months.December;
-            int year = 2020;
-            Budget budget = new Budget(month) { Year = year, TotalAmount = 0 };
-            emptyRepository.SetBudget(budget);
+            ManagerRepository emptyRepository = new ManageMemoryRepository();
             BudgetController controller = new BudgetController(emptyRepository);
-            Budget actualBudget = controller.BudgetGetOrCreate("December", year);
+            Months month = Months.December;
+
+            int year = 2020;
+            Budget budget = new Budget(month) { 
+                Year = year, 
+                TotalAmount = 0 
+            };
+            controller.SetBudget(budget);
+            Budget actualBudget = controller.BudgetGetOrCreate(Months.December.ToString(), year);
             Assert.AreEqual(budget, actualBudget);
         }
 
@@ -151,7 +161,7 @@ namespace Test
             
             Months month = Months.December;
             int year = 2020;
-            IManageRepository repo = new ManageMemoryRepository();
+            ManagerRepository repo = new ManageMemoryRepository();
             BudgetController controller = new BudgetController(repo);
             Budget actualBudget =controller.BudgetGetOrCreate("December", year);
         }
@@ -175,44 +185,17 @@ namespace Test
 
 
         [TestMethod]
-        public void BudgetGetOrCreateCheckCategories()
-        {
-            BudgetCategory budgetCategory = new BudgetCategory
-            {
-                Category = categoryEntertainment,
-                Amount = 0
-            };
-            BudgetCategory budgetCategory2 = new BudgetCategory
-            {
-                Category = categoryFood,
-                Amount = 0
-            };
-            BudgetCategory budgetCategory3 = new BudgetCategory
-            {
-                Category = categoryHouse,
-                Amount = 0
-            };
-            List<BudgetCategory> budgetCategories = new List<BudgetCategory>() {
-            budgetCategory,
-            budgetCategory2,
-            budgetCategory3
-            };
-            Budget actualBudget = budgetController.BudgetGetOrCreate("January", 2020);
-            List<BudgetCategory> actualBudgetCategories = actualBudget.BudgetCategories;
-            CollectionAssert.AreEqual(budgetCategories, actualBudgetCategories);
-        }
-
-        [TestMethod]
         public void FindBudgetFoundCase()
         {
+            ManagerRepository repository = new ManageMemoryRepository();
+            BudgetController controller = new BudgetController(repository);
             JanuaryBudget = new Budget(Months.January)
             {
                 Year = 2020,
                 TotalAmount = 0
             };
-            IManageRepository repository = new ManageMemoryRepository();
-            repository.SetBudget(JanuaryBudget);
-            BudgetController controller = new BudgetController(repository);
+            controller.SetBudget(JanuaryBudget);
+            
             Budget actualBudget = controller.FindBudget("January", 2020);
             Assert.AreEqual(JanuaryBudget, actualBudget);
         }
@@ -255,7 +238,7 @@ namespace Test
                 TotalAmount = 4000,
                 Year = DateTime.Now.Year
             };
-            IManageRepository EmptyRepository = new ManageMemoryRepository();
+            ManagerRepository EmptyRepository = new ManageMemoryRepository();
             BudgetController controller = new BudgetController(EmptyRepository);
             controller.SetBudget(validBudget);
             Budget currentBudget = controller.GetBudgets().First();
@@ -263,16 +246,11 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void AddInvalidNullBudgetToRepository()
-        {
-            Budget invalidBudget = null;
-            budgetController.SetBudget(invalidBudget);
-        }
-
-        [TestMethod]
         public void MonthsOrderedInWhichAreBudget()
         {
+            ManagerRepository repo = new ManageMemoryRepository();
+            BudgetController controller = new BudgetController(repo);
+
             List<string> months = new List<string>()
             {
             "January",
@@ -280,15 +258,90 @@ namespace Test
             };
             Budget budget1 = new Budget(Months.January) { TotalAmount = 23, Year = 2020 };
             Budget budget2 = new Budget(Months.May) { TotalAmount = 23, Year = 2020 };
-            IManageRepository repo = new ManageMemoryRepository();
-            repo.GetBudgets().Add(budget1);
-            repo.GetBudgets().Add(budget2);
-            BudgetController controller = new BudgetController(repo);
+            controller.SetBudget(budget1);
+            controller.SetBudget(budget2);
             List<string> monthsOrder = controller.OrderedMonthsWithBudget();
             CollectionAssert.AreEqual(months, monthsOrder);
         }
 
+        [TestMethod]
+        public void GetBudgetReportSuccessCase()
+        {
+            BudgetReport budgetReport = new BudgetReport
+            {
+                TotalAmount = 0,
+                RealAmount = 10403.3,
+                PlaneedAmount=0,
+                DiffAmount = -10403.3,
+            };
+            List<BudgetReportLine> budgetReportLines = new List<BudgetReportLine>()
+            {
+                new BudgetReportLine()
+                {
+                    Category = categoryEntertainment,
+                    DiffAmount = -230.15,
+                    Month = 0,
+                    PlanedAmount = 0,
+                    RealAmount = 230.15,
+                    TotalAmount = 0,
+                    Year = 0,
+                },
+                new BudgetReportLine()
+                {
+                    Category = categoryFood,
+                    DiffAmount = -4971.5,
+                    Month = 0,
+                    PlanedAmount = 0,
+                    RealAmount = 4971.5,
+                    TotalAmount = 0,
+                    Year = 0,
+                },
+                new BudgetReportLine()
+                {
+                    Category = categoryHouse,
+                    DiffAmount = 0,
+                    Month = 0,
+                    PlanedAmount = 0,
+                    RealAmount = 0,
+                    TotalAmount = 0,
+                    Year = 0,
+                },
+                new BudgetReportLine()
+                {
+                    Category = categoryEntertainment,
+                    DiffAmount = -230.15,
+                    Month = 0,
+                    PlanedAmount = 0,
+                    RealAmount = 230.15,
+                    TotalAmount = 0,
+                    Year = 0,
+                },
+                new BudgetReportLine()
+                {
+                    Category = categoryFood,
+                    DiffAmount = -4971.5,
+                    Month = 0,
+                    PlanedAmount = 0,
+                    RealAmount = 4971.5,
+                    TotalAmount = 0,
+                    Year = 0,
+                },
+                new BudgetReportLine()
+                {
+                    Category = categoryHouse,
+                    DiffAmount = 0,
+                    Month = 0,
+                    PlanedAmount = 0,
+                    RealAmount = 0,
+                    TotalAmount = 0,
+                    Year = 0,
+                },
 
+            };
+            budgetReport.budgetsReportLines = budgetReportLines;
+            BudgetReport expectedBudgetReport = budgetController.GetBudgetReport("January", 2020);
+            Assert.AreEqual(budgetReport, expectedBudgetReport);
+        }
 
 
     }

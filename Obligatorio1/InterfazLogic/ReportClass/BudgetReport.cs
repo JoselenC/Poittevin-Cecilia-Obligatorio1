@@ -45,7 +45,7 @@ namespace InterfazLogic
             }           
         }
 
-        private bool CompleteTotalValuesOFReport(double totalPlanedAmount,double totalRealAmount, double totalDiffAmount, GenerateBudgetReport budgetReport)
+        private bool CompleteTotalValuesOFReport(double totalPlanedAmount,double totalRealAmount, double totalDiffAmount, BusinessLogic.Domain.BudgetReport budgetReport)
         {
             totalPlanedAmount = budgetReport.TotalAmount;
             totalRealAmount = budgetReport.RealAmount;
@@ -68,7 +68,7 @@ namespace InterfazLogic
             return true;
         }
 
-        private void CompleteListViewReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount,GenerateBudgetReport budgetReport)
+        private void CompleteListViewReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount, BusinessLogic.Domain.BudgetReport budgetReport)
         {
             foreach (BudgetReportLine budgetReportLine in budgetReport.budgetsReportLines)
             {
@@ -102,7 +102,7 @@ namespace InterfazLogic
                 {
                     int year = (int)numYear.Value;
                     lstVReport.Items.Clear();
-                    BusinessLogic.Domain.GenerateBudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text.ToString(), year);
+                    BusinessLogic.Domain.BudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text.ToString(), year);
                     oldYearValue = year;
                     CompleteListViewReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
                     return CompleteTotalValuesOFReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);

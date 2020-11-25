@@ -168,7 +168,7 @@ namespace BusinessLogic
             return total;
         }
 
-        private void AddExpense(Expense expense)
+        public void SetExpense(Expense expense)
         {
             if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();
@@ -185,7 +185,7 @@ namespace BusinessLogic
                 Category = category,
                 Currency = Currency
             };
-            AddExpense(expense);
+            SetExpense(expense);
         }
 
         // TODO: revisar si podemos llamar directamente al GetCategories de el CategoryController

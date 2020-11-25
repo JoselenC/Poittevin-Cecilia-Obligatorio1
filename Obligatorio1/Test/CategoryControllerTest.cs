@@ -12,7 +12,7 @@ namespace Test
     {
 
         private static List<string> keyWords1 = new List<string>();
-        private static IManageRepository repo = new ManageMemoryRepository();
+        private static ManagerRepository repo = new ManageMemoryRepository();
         private static Category categoryEntertainment;
         private static Category categoryFood;
         private static Category categoryHouse;
@@ -21,6 +21,8 @@ namespace Test
         [ClassInitialize()]
         public static void TestFixtureSetup(TestContext context)
         {
+            categoryController = new CategoryController(repo);
+
             keyWords1 = new List<string>
             {
                 "movie theater",
@@ -53,10 +55,9 @@ namespace Test
                 Name = "House",
                 KeyWords = keyWords3
             };
-            repo.SetCategory("entertainment", keyWords1);
-            repo.SetCategory("Food",keyWords2);
-            repo.SetCategory("House",keyWords3);
-            categoryController = new CategoryController(repo);
+            categoryController.SetCategory("entertainment", keyWords1);
+            categoryController.SetCategory("Food",keyWords2);
+            categoryController.SetCategory("House",keyWords3);
         }
         
         [TestMethod]
@@ -75,7 +76,6 @@ namespace Test
         [TestMethod]
         public void FindCategoryByName()
         {
-            List<Category> categoryList = new List<Category>();
             List<string> keyWords1 = new List<string>()
             {
                "movie theater",
@@ -83,7 +83,7 @@ namespace Test
                "casino",
             };
             Category category1 = new Category { Name = "entertainment", KeyWords = keyWords1 };
-            Category category3 = categoryController.FindCategoryByName("entertainment");
+            Category category3 = categoryController.FindCategoryByName("Entertainment");
             Assert.AreEqual(category1, category3);
         }
 
@@ -91,7 +91,10 @@ namespace Test
         [ExpectedException(typeof(NoFindCategoryByName), "")]
         public void FindCategoryByNameNull()
         {
-            List<Category> categoryList = new List<Category>();
+            ManagerRepository repo = new ManageMemoryRepository();
+            CategoryController controller = new CategoryController(repo);
+
+            
             List<string> keyWords1 = new List<string>()
             {
 
@@ -99,127 +102,158 @@ namespace Test
                "theater",
                "casino",
             };
-            Category category1 = new Category { Name = "fun", KeyWords = keyWords1 };
+           
             List<string> keyWords2 = new List<string>()
              {
                 "restaurant",
                 "McDonalds",
                 "Dinner",
             };
+            Category category1 = new Category { Name = "fun", KeyWords = keyWords1 };
             Category category2 = new Category { Name = "food", KeyWords = keyWords2 };
-            categoryList.Add(category1);
-            categoryList.Add(category2);
-            IManageRepository repo = new ManageMemoryRepository(categoryList);
-            CategoryController controller = new CategoryController(repo);
-            Category category3 = controller.FindCategoryByName("entertainment");
+            List<Category> categoryList = new List<Category>();
+            controller.SetCategory(category1);
+            controller.SetCategory(category2);
+            Category category3 = controller.FindCategoryByName("Entertainment");
             Assert.IsNull(category3);
         }
 
         [TestMethod]
         public void CreateAddCategoty()
         {
+            ManagerRepository repository = new ManageMemoryRepository();
+            CategoryController controller = new CategoryController(repository);
             List<string> keyWords2 = new List<string>
             {
                 "restaurant",
                 "McDonalds",
                 "Dinner"
             };
-            IManageRepository repository = new ManageMemoryRepository();
-            CategoryController controller = new CategoryController(repository);
-            controller.SetCategory("food", keyWords2);
-            Assert.AreEqual(categoryFood, repository.GetCategories().ToArray()[0]);
+            Category category = new Category()
+            {
+                Name = "food",
+                KeyWords = keyWords2
+            };
+            controller.SetCategory(category);
+            Assert.AreEqual(categoryFood, controller.GetCategories()[0]);
         }
 
         [TestMethod]
         public void GetCategories()
         {
-            Category category = new Category { Name = "food" };
-            List<Category> categories = new List<Category>();
-            categories.Add(category);
-            IManageRepository repository = new ManageMemoryRepository(categories);
+            ManagerRepository repository = new ManageMemoryRepository();
             CategoryController controller = new CategoryController(repository);
+
+            Category category = new Category { Name = "food" };
+            List<Category> categories = new List<Category>
+            {
+                category
+            };
+            controller.SetCategory(category);
             List<Category> categories2 = controller.GetCategories();
-            Assert.AreEqual(categories, categories2);
+            CollectionAssert.AreEqual(categories, categories2);
         }
 
 
         [TestMethod]
         public void AddCategoryValidData()
         {
-            String categoryName = "Entertainment";
+            ManagerRepository repository = new ManageMemoryRepository();
+            CategoryController controller = new CategoryController(repository);
+
+            string categoryName = "Entertainment";
             List<string> keyWords = new List<string>()
             {
                 "movie theater",
                 "game room",
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
-            IManageRepository repository = new ManageMemoryRepository();
-            CategoryController controller = new CategoryController(repository);
-            controller.SetCategory(categoryName, keyWords);
-            String categoryName2 = "food";
+            
+           
+            string categoryName2 = "food";
             List<string> keyWords2 = new List<string>()
             {
                 "restaurant",
             };
+
+            Category category = new Category { Name = categoryName, KeyWords = keyWords };
             Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
-            controller.SetCategory(categoryName2, keyWords2);
             List<Category> categories = new List<Category>()
             {
                 category,
                 category2
             };
-            CollectionAssert.AreEqual(categories, controller.GetCategories().ToArray());
+            controller.SetCategory(category);
+            controller.SetCategory(category2);
+            CollectionAssert.AreEqual(categories, controller.GetCategories());
         }
 
         [TestMethod]
         [ExpectedException(typeof(ExcepcionInvalidRepeatedKeyWordsCategory), "")]
         public void AddCategoryInvalidKeyWords()
         {
-            IManageRepository repository = new ManageMemoryRepository();
+            ManagerRepository repository = new ManageMemoryRepository();
+            CategoryController controller = new CategoryController(repository);
+
             string categoryName = "NameExample";
+            string categoryName2 = "NameExample2";
             List<string> keyWords = new List<string>
             {
                 "movie theater",
                 "theater"
             };
-            Category category = new Category { Name = categoryName, KeyWords = keyWords };
-            CategoryController controller = new CategoryController(repository);
-            controller.SetCategory(categoryName, keyWords);
-            string categoryName2 = "NameExample2";
             List<string> keyWords2 = new List<string>
             {
-                 "movie theater",
+                "movie theater",
                 "theater"
             };
+
+            Category category = new Category { Name = categoryName, KeyWords = keyWords };
             Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
-            controller.SetCategory(categoryName2, keyWords2);
+
+            controller.SetCategory(category);
+            controller.SetCategory(category2);
         }
 
         [TestMethod]
         public void AddCategoryValidKeyWords()
         {
-            IManageRepository repository = new ManageMemoryRepository();
+            ManagerRepository repository = new ManageMemoryRepository();
+            CategoryController controller = new CategoryController(repository);
 
-            String categoryName = "Entertainment";
+            string categoryName = "Entertainment";
+            string categoryName2 = "food";
             List<string> keyWords = new List<string>()
             {
                 "movie theater",
                 "game room",
             };
+            List<string> keyWords2 = new List<string>
+            {
+                "restaurant"
+            };
             Category category = new Category { Name = categoryName, KeyWords = keyWords };
-            CategoryController controller = new CategoryController(repository);
-            controller.SetCategory(categoryName, keyWords);
-            String categoryName2 = "food";
-            List<string> keyWords2 = new List<string>();
-            keyWords2.Add("restaurant");
             Category category2 = new Category { Name = categoryName2, KeyWords = keyWords2 };
+
+            controller.SetCategory(categoryName, keyWords);
             controller.SetCategory(categoryName2, keyWords2);
+
             List<Category> categories = new List<Category>()
             {
                 category,
                 category2
             };
-            CollectionAssert.AreEqual(categories, controller.GetCategories().ToArray());
+            CollectionAssert.AreEqual(categories, controller.GetCategories());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ExcepcionInvalidRepeatedNameCategory), "")]
+        public void AddCategoryInvalidName()
+        {
+            Category categoryEntertainment = new Category()
+            {
+                Name = "entertainment",
+            }; 
+            categoryController.SetCategory(categoryEntertainment);
         }
 
         //[TestMethod]

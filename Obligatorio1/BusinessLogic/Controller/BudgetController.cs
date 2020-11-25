@@ -45,29 +45,29 @@ namespace BusinessLogic
             return total;
         }
 
-        public GenerateBudgetReport GetBudgetReport(string vMonth, int year)
+        public BudgetReport GetBudgetReport(string vMonth, int year)
         {
             Budget budget = FindBudget(vMonth, year);
-            GenerateBudgetReport budgetsReport = new GenerateBudgetReport
+            BudgetReport budgetReport = new BudgetReport
             {
                 budgetsReportLines = new List<BudgetReportLine>()
             };
             foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
             {
                 Category category = budgetCategory.Category;
-                BudgetReportLine budgetReport = new BudgetReportLine
+                BudgetReportLine budgetReportLine = new BudgetReportLine
                 {
                     PlanedAmount = budgetCategory.Amount,
                     RealAmount = GetTotalSpentByMonthAndCategory(vMonth, category)
                 };
-                budgetReport.DiffAmount = budgetReport.PlanedAmount - budgetReport.RealAmount;
-                budgetsReport.TotalAmount += budgetReport.PlanedAmount;
-                budgetsReport.RealAmount += budgetReport.RealAmount;
-                budgetsReport.DiffAmount += budgetReport.DiffAmount;
-                budgetReport.Category= budgetCategory.Category;
-                budgetsReport.budgetsReportLines.Add(budgetReport);
+                budgetReportLine.DiffAmount = budgetReportLine.PlanedAmount - budgetReportLine.RealAmount;
+                budgetReport.TotalAmount += budgetReportLine.PlanedAmount;
+                budgetReport.RealAmount += budgetReportLine.RealAmount;
+                budgetReport.DiffAmount += budgetReportLine.DiffAmount;
+                budgetReportLine.Category= budgetCategory.Category;
+                budgetReport.budgetsReportLines.Add(budgetReportLine);
             }
-            return budgetsReport;
+            return budgetReport;
         }
 
 

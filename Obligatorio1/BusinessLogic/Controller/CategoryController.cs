@@ -59,22 +59,28 @@ namespace BusinessLogic
 
         private void AddCategory(Category category)
         {
+            BudgetController budgetController = new BudgetController(repository);
+
             if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
                 throw new ExcepcionInvalidRepeatedKeyWordsCategory();
             if (AlreadyExistCategoryName(category.Name))
                 throw new ExcepcionInvalidRepeatedNameCategory();
+
             repository.Categories.Add(category);
+            budgetController.AddCategoryInAllBudgets(category);
         }
 
         public Category SetCategory(string vName, List<string> vKeyWords)
         {
-            BudgetController budgetController = new BudgetController(repository);
             Category category = new Category { Name = vName, KeyWords = vKeyWords };
             AddCategory(category);
-            budgetController.AddCategoryInAllBudgets(category);
             return category;
-        } 
-        
+        }
+        public Category SetCategory(Category category)
+        {
+            AddCategory(category);
+            return category;
+        }
         public Category UpdateCategory(Category oldCategory, Category newCategory)
         {
             newCategory = repository.Categories.Update(oldCategory, newCategory);          
