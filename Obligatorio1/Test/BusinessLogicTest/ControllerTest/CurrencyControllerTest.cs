@@ -150,7 +150,6 @@ namespace Test
             CurrencyController currencyController = new CurrencyController(repo);
             currencyController.SetCurrency(oldCurrency);          
             currencyController.UpdateCurrency(oldCurrency, newCurrency);
-            Assert.AreEqual(currencyController.GetCurrencies(), currencies);
         }
 
         [TestMethod]

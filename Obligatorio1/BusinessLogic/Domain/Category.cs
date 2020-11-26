@@ -105,6 +105,10 @@ namespace BusinessLogic
             return exist;
         }
 
-      
+        public int CompareTo(Category compareCategory)
+        {
+            return Name.CompareTo(compareCategory.Name);
+        }
+
     }
 }

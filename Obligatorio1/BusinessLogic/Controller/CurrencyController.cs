@@ -50,6 +50,7 @@ namespace BusinessLogic
         public void DeleteCurrency(Currency currency)
         {
             ExpenseController expenseController = new ExpenseController(repository);
+            // TODO: Arreglar el IsSameCurrencyExpense
             try
             {
                 foreach (Expense expense in expenseController.GetExpenses())

@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace DataAccess
 {
-    class DataBaseRepository <D, T>: IRepository<D> where T: class
+    public class DataBaseRepository <D, T>: IRepository<D> where T: class
     {
         private IMapper<D,T> mapper;
         public DataBaseRepository(IMapper<D,T> mapper)
