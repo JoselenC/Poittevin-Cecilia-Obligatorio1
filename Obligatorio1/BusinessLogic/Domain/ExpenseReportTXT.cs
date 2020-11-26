@@ -26,7 +26,9 @@ namespace BusinessLogic
         }
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj is ExpenseReportTXT)
+                return true;
+            return false;
         }
     }
 }

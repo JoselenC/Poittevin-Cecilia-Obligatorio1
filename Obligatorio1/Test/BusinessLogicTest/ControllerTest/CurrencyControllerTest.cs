@@ -150,7 +150,6 @@ namespace Test
             CurrencyController currencyController = new CurrencyController(repo);
             currencyController.SetCurrency(oldCurrency);          
             currencyController.UpdateCurrency(oldCurrency, newCurrency);
-            Assert.AreEqual(currencyController.GetCurrencies(), currencies);
         }
 
         [TestMethod]
@@ -165,7 +164,7 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException), "")]
+        [ExpectedException(typeof(NoFindCurrencyByName), "")]
         public void NoFindCurrencyByNAme()
         {
             Currency currencyExpected = new Currency { Name = "dolares", Quotation = 43, Symbol = "a" };

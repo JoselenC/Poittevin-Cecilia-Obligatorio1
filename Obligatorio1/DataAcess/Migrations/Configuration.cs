@@ -3,8 +3,10 @@
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
 
+    [ExcludeFromCodeCoverage]
     internal sealed class Configuration : DbMigrationsConfiguration<DataAccess.ContextDB>
     {
         public Configuration()

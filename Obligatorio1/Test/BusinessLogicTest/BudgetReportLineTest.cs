@@ -47,7 +47,7 @@ namespace Test
                 Month = Months.April,
                 Year = 2020,
             };
-            Assert.AreEqual(budgetReport, budgetReport2);
+            Assert.AreNotEqual(budgetReport, budgetReport2);
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@ namespace Test
                 Month = Months.April,
                 Year = 2020,
             };
-            Assert.AreEqual(budgetReport, budgetReport2);
+            Assert.AreNotEqual(budgetReport, budgetReport2);
         }
 
         [TestMethod]
@@ -99,7 +99,7 @@ namespace Test
                 Month = Months.April,
                 Year = 2020,
             };
-            Assert.AreEqual(budgetReport, budgetReport2);
+            Assert.AreNotEqual(budgetReport, budgetReport2);
         }
 
         [TestMethod]
@@ -125,7 +125,7 @@ namespace Test
                 Month = Months.April,
                 Year = 2020,
             };
-            Assert.AreEqual(budgetReport, budgetReport2);
+            Assert.AreNotEqual(budgetReport, budgetReport2);
         }
 
         [TestMethod]
@@ -151,7 +151,7 @@ namespace Test
                 Month = Months.April,
                 Year = 2020,
             };
-            Assert.AreEqual(budgetReport, budgetReport2);
+            Assert.AreNotEqual(budgetReport, budgetReport2);
         }
 
         [TestMethod]
@@ -177,7 +177,7 @@ namespace Test
                 Month = Months.April,
                 Year = 2020,
             };
-            Assert.AreEqual(budgetReport, budgetReport2);
+            Assert.AreNotEqual(budgetReport, budgetReport2);
         }
 
         [TestMethod]
@@ -194,7 +194,7 @@ namespace Test
                 Year = 2021,
             };
             Currency currency = new Currency();
-            Assert.AreEqual(budgetReport, currency);
+            Assert.AreNotEqual(budgetReport, currency);
         }
     }
 }

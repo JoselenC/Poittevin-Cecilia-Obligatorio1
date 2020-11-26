@@ -102,8 +102,12 @@ namespace InterfazLogic
             }
             catch (NoFindExpenseByDate)
             {
+                listView1.Items.Clear();
                 lblYears.Text = "There are no expenses recorded on this date";
+                lblTotalAmount.Text = "";
                 lblYears.ForeColor = Color.Red;
+                btnExportar.Enabled = false;
+
             }
         }
         private void btnAccept_Click(object sender, EventArgs e)

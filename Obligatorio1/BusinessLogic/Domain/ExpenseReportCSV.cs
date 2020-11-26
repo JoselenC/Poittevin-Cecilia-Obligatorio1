@@ -23,7 +23,9 @@ namespace BusinessLogic
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj is ExpenseReportCSV)
+                return true;
+            return false;
         }
     }
 }

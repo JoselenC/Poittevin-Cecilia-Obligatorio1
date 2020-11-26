@@ -31,11 +31,10 @@ namespace BusinessLogic
         }
 
         // TODO: esto deberia estar en ExpenseController, no aca
-        public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
+        public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory,int year)
         {
-            ExpenseController expenseController = new ExpenseController(repository);
-            Months mMonths = StringToMonthsEnum(vMonth);
-            List<Expense> expenses = expenseController.GetExpenseByMonth(mMonths);
+            ExpenseController expenseController = new ExpenseController(repository);           
+            List<Expense> expenses = expenseController.GetExpenseByDate(vMonth,year);
             double total = 0;
             foreach (Expense expense in expenses)
             {
@@ -47,23 +46,40 @@ namespace BusinessLogic
 
         public GenerateBudgetReport GetBudgetReport(string vMonth, int year)
         {
+            double totalPlanedAmount = 0;
+            double totalRealAmount = 0;
+            double totalDiffAmount = 0;
+            double realAmount = 0;
             Budget budget = FindBudget(vMonth, year);
+
             GenerateBudgetReport budgetReport = new GenerateBudgetReport
             {
                 budgetsReportLines = new List<BudgetReportLine>()
             };
             foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
             {
+                BudgetReportLine budgetReportLine = new BudgetReportLine();
+                budgetReportLine.PlanedAmount = budgetCategory.Amount;
                 Category category = budgetCategory.Category;
-                BudgetReportLine budgetReportLine = new BudgetReportLine
+                try
+                {                  
+                    budgetReportLine.RealAmount = GetTotalSpentByMonthAndCategory(vMonth, category, year);
+                    realAmount=GetTotalSpentByMonthAndCategory(vMonth, category, year);
+                }
+                catch (NoFindExpenseByDate)
                 {
-                    PlanedAmount = budgetCategory.Amount,
-                    RealAmount = GetTotalSpentByMonthAndCategory(vMonth, category)
-                };
-                budgetReportLine.DiffAmount = budgetReportLine.PlanedAmount - budgetReportLine.RealAmount;
-                budgetReport.TotalAmount += budgetReportLine.PlanedAmount;
-                budgetReport.RealAmount += budgetReportLine.RealAmount;
-                budgetReport.DiffAmount += budgetReportLine.DiffAmount;
+                    budgetReportLine.RealAmount = 0;
+                    realAmount = 0;
+                }
+                double planeedAmount = budgetCategory.Amount;               
+                double diffAmount = planeedAmount - realAmount;
+                totalPlanedAmount = planeedAmount;
+                totalRealAmount = realAmount;
+                totalDiffAmount = diffAmount;
+                budgetReportLine.DiffAmount = diffAmount;
+                budgetReport.TotalAmount += planeedAmount;
+                budgetReport.RealAmount += realAmount;
+                budgetReport.DiffAmount += diffAmount;
                 budgetReportLine.Category= budgetCategory.Category;
                 budgetReport.budgetsReportLines.Add(budgetReportLine);
             }
@@ -142,8 +158,11 @@ namespace BusinessLogic
         {
             foreach (Budget budget in repository.Budgets.Get())
             {
+                Budget budgetAux = FindBudget(budget.Month.ToString(),budget.Year);               
                 budget.AddBudgetCategory(category);
+                repository.Budgets.Add(budget);
             }
+           
         }
 
 

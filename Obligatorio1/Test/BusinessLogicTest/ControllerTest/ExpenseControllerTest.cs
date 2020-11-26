@@ -338,7 +338,7 @@ namespace Test
             Expense expenseExpected = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01), Currency = currency};
             controller.SetExpense(expenseExpected);
             List<Expense> expenses = controller.GetExpenseByDate("January", 2020);
-            Assert.AreEqual(controller.GetExpenses(), expenses);
+           CollectionAssert.AreEqual(controller.GetExpenses(), expenses);
         }
 
         [TestMethod]

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.Mappers
 {
-    class BudgetMapper: IMapper<Budget, BudgetDto>
+    public class BudgetMapper: IMapper<Budget, BudgetDto>
     {
 
         private List<BudgetCategoryDto> updateBudgetCategories(Budget obj, List<BudgetCategoryDto> budgetCategoriesDtos, DbContext context)
