@@ -24,5 +24,11 @@ namespace BusinessLogic
                 }
             }
         }
+        public override bool Equals(object obj)
+        {
+            if (obj is ExpenseReportTXT)
+                return true;
+            return false;
+        }
     }
 }

@@ -23,5 +23,28 @@ namespace BusinessLogic.Domain
 
         public Category Category { get; set; }
 
+        public override bool Equals(object obj)
+        {
+
+            if (obj is BudgetReportLine line)
+            {
+                bool total = TotalAmount == line.TotalAmount;
+                bool planed = PlanedAmount == line.PlanedAmount;
+                bool real = RealAmount == line.RealAmount;
+                bool diff = DiffAmount == line.DiffAmount;
+                bool month = Month == line.Month;
+                bool year = Year == line.Year;
+                return 
+                   total &&
+                   planed &&
+                   real &&
+                   diff &&
+                   month &&
+                   year &&
+                   EqualityComparer<Category>.Default.Equals(Category, line.Category);
+            };
+            return false;
+            
+        }
     }
 }

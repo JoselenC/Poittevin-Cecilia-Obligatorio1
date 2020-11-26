@@ -9,39 +9,94 @@ namespace BusinessLogic
 {
     public class CurrencyController
     {
-        private IManageRepository repository;
+        private ManagerRepository repository;
 
-        public CurrencyController(IManageRepository vRepository)
+        public CurrencyController(ManagerRepository vRepository)
         {
             repository = vRepository;
         }
-
-        public void SetCurrency(string name, string symbol, double quotation)
+        private bool AlreadyExistTheCurrencySymbol(string CurrencySymbol)
         {
-            Currency currency = new Currency() { Name = name, Symbol = symbol, Quotation = quotation };
-            repository.SetCurrency(currency);
+            bool exist = false;
+            foreach (Currency Currency in GetCurrencies())
+            {
+                if (CurrencySymbol.ToLower() == Currency.Symbol.ToLower())
+                    exist = true;
+            }
+            return exist;
+        }
+
+        private bool AlreadyExistTheCurrencyName(string CurrencyName)
+        {
+            bool exist = false;
+            foreach (Currency Currency in GetCurrencies())
+            {
+                if (CurrencyName.ToLower() == Currency.Name.ToLower())
+                    exist = true;
+            }
+            return exist;
+        }
+
+
+        public void SetCurrency(Currency currency)
+        {
+            if (AlreadyExistTheCurrencySymbol(currency.Symbol))
+                throw new ExceptionAlreadyExistTheCurrencySymbol();
+            if (AlreadyExistTheCurrencyName(currency.Name))
+                throw new ExceptionAlreadyExistTheCurrencyName();
+            repository.Currencies.Add(currency);
         }
 
         public void DeleteCurrency(Currency currency)
         {
-            repository.DeleteCurrency(currency);
+            ExpenseController expenseController = new ExpenseController(repository);
+            // TODO: Arreglar el IsSameCurrencyExpense
+            try
+            {
+                foreach (Expense expense in expenseController.GetExpenses())
+                {
+                    expense.IsSameCurrencyExpense(currency);
+                }
+                repository.Currencies.Delete(currency);
+            }
+            catch (ExcepcionNoDeleteCurrency)
+            {
+                throw new ExcepcionNoDeleteCurrency();
+            }
         }
 
         public List<Currency> GetCurrencies()
         {
-            return repository.GetCurrencies();
+            return repository.Currencies.Get();
         }
 
         public Currency FindCurrency(Currency currency)
         {
-            return repository.FindCurrency(currency);
+            try
+            {
+                return repository.Currencies.Find(e => e.Equals(currency));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindCurrency();
+            }
         }      
 
         public void UpdateCurrency(Currency oldCurrency, Currency newCurrency)
         {
-            repository.UpdateCurrency(oldCurrency, newCurrency);
-            repository.EditCurrencyAllExpense(oldCurrency, newCurrency);
+            repository.Currencies.Update(oldCurrency, newCurrency);
         }
 
+        public Currency FindCurrencyByName(string currencyName)
+        {
+            try
+            {
+                return repository.Currencies.Find(e => e.IsSameCurrencyName(currencyName));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindCurrencyByName();
+            }
+        }
     }
 }

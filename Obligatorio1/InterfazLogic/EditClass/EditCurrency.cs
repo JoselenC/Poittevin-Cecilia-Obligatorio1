@@ -16,7 +16,7 @@ namespace InterfazLogic
     {
         private CurrencyController currencyController;
         private Currency currencyToEdit;
-        public EditCurrency(IManageRepository vRepository)
+        public EditCurrency(ManagerRepository vRepository)
         {
             InitializeComponent();
             currencyController = new CurrencyController(vRepository);
@@ -78,7 +78,9 @@ namespace InterfazLogic
             }
             catch
             {
-                SetMessage("The currency selected to delete is being used", lblcurrencies);
+                MessageBox.Show("The currency selected to delete is being used");
+                Visible = false;
+
             }
         }
 
@@ -96,6 +98,7 @@ namespace InterfazLogic
                     Quotation = quotation
                 };
                 currencyController.UpdateCurrency(currencyToEdit, newCurrency);
+                MessageBox.Show("The currency was edited succesfully");
                 Visible = false;
             }
             catch (ExceptionUnableToSaveData)

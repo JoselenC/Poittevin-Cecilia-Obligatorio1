@@ -49,9 +49,9 @@
             this.label3.ForeColor = System.Drawing.Color.DarkGoldenrod;
             this.label3.Location = new System.Drawing.Point(21, 27);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(1208, 92);
+            this.label3.Size = new System.Drawing.Size(1243, 92);
             this.label3.TabIndex = 11;
-            this.label3.Text = "               Registered Objects             ";
+            this.label3.Text = "               Registered data                   ";
             // 
             // lstCatgories
             // 
@@ -137,7 +137,7 @@
             // BtnAccept
             // 
             this.BtnAccept.BackColor = System.Drawing.Color.Tan;
-            this.BtnAccept.Location = new System.Drawing.Point(482, 691);
+            this.BtnAccept.Location = new System.Drawing.Point(518, 692);
             this.BtnAccept.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnAccept.Name = "BtnAccept";
             this.BtnAccept.Size = new System.Drawing.Size(227, 74);

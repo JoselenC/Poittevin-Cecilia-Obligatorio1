@@ -15,7 +15,7 @@ namespace InterfazLogic
     public partial class AddCurrency : UserControl
     {
         private CurrencyController currencyController;
-        public AddCurrency(IManageRepository vRepository)
+        public AddCurrency(ManagerRepository vRepository)
         {
             InitializeComponent();
             currencyController = new CurrencyController(vRepository);
@@ -26,7 +26,8 @@ namespace InterfazLogic
             string name = tbName.Text;
             string symbol = tbSymbol.Text;
             double quotation = (double)nQuotation.Value;
-            currencyController.SetCurrency(name, symbol, quotation);
+            Currency currency = new Currency() { Name = name, Quotation = quotation, Symbol = symbol };
+            currencyController.SetCurrency(currency);
             MessageBox.Show("Currency" + name + " was register successfully", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Visible = false;
 
@@ -51,6 +52,10 @@ namespace InterfazLogic
                 TryAddNewCurrency();
             }
             catch (ExceptionUnableToSaveData)
+            {
+                SetMessage("Already exist de currency name", lblName);
+            }
+            catch (ExceptionAlreadyExistTheCurrencyName)
             {
                 SetMessage("Already exist de currency name", lblName);
             }

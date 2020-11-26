@@ -1,6 +1,6 @@
 ﻿namespace DataAcess.DBObjects
 {
-    class BudgetCategoryDto
+    public class BudgetCategoryDto
     {
         public int BudgetCategoryDtoID { get; set; }
         public int CategoryDtoID { get; set; }

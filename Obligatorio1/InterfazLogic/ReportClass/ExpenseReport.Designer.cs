@@ -117,7 +117,6 @@
             // 
             this.ccurrency.DisplayIndex = 4;
             this.ccurrency.Text = "currency";
-            this.ccurrency.Width = 90;
             // 
             // cAmount
             // 

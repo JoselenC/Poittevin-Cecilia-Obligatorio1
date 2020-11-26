@@ -14,7 +14,7 @@ namespace InterfazLogic
         private BudgetController budgetController;
         private int oldYearValue = DateTime.Now.Year;
 
-        public BudgetReport(IManageRepository vRepository)
+        public BudgetReport(ManagerRepository vRepository)
         {
             budgetController = new BudgetController(vRepository);
             InitializeComponent();
@@ -45,15 +45,7 @@ namespace InterfazLogic
             }           
         }
 
-        private bool CompleteReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount, Budget budget)
-        {
-            lstVReport.Items.Clear();
-            BusinessLogic.Domain.GenerateBudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text, budget);
-            CompleteListViewReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
-            return CompleteTotalValuesOFReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
-        }
-
-        private bool CompleteTotalValuesOFReport(double totalPlanedAmount,double totalRealAmount, double totalDiffAmount, GenerateBudgetReport budgetReport)
+        private bool CompleteTotalValuesOFReport(double totalPlanedAmount,double totalRealAmount, double totalDiffAmount, BusinessLogic.Domain.GenerateBudgetReport budgetReport)
         {
             totalPlanedAmount = budgetReport.TotalAmount;
             totalRealAmount = budgetReport.RealAmount;
@@ -76,7 +68,7 @@ namespace InterfazLogic
             return true;
         }
 
-        private void CompleteListViewReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount,GenerateBudgetReport budgetReport)
+        private void CompleteListViewReport(double totalPlanedAmount, double totalRealAmount, double totalDiffAmount, BusinessLogic.Domain.GenerateBudgetReport budgetReport)
         {
             foreach (BudgetReportLine budgetReportLine in budgetReport.budgetsReportLines)
             {
@@ -109,10 +101,11 @@ namespace InterfazLogic
                 try
                 {
                     int year = (int)numYear.Value;
-                    Budget budget = budgetController.FindBudget(cboxMonth.SelectedItem.ToString(), year);
+                    lstVReport.Items.Clear();
+                    GenerateBudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text.ToString(), year);
                     oldYearValue = year;
-                    return CompleteReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budget);
-
+                    CompleteListViewReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
+                    return CompleteTotalValuesOFReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
                 }
                 catch (NoFindBudget)
                 {
@@ -120,6 +113,7 @@ namespace InterfazLogic
                     numYear.Value = oldYearValue;
                     return false;
                 }
+               
                 catch (System.NullReferenceException)
                 {
                     lblMonth.Text = "Select a month";

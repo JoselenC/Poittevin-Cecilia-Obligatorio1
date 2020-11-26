@@ -8,61 +8,69 @@ namespace BusinessLogic
 {
     public class BudgetController
     {
-        private IManageRepository repository;
+        private readonly ManagerRepository repository;
 
-        public BudgetController(IManageRepository vRepository)
+        public BudgetController(ManagerRepository vRepository)
         {
             repository = vRepository;
-        }           
+        }
 
         public List<Budget> GetBudgets()
         {
-            return repository.GetBudgets();
+            return repository.Budgets.Get();
         }
 
         public void SetBudget(Budget vBudget)
         {
-            repository.SetBudget(vBudget);
-        }      
+            repository.Budgets.Add(vBudget);
+        }
 
         private Months StringToMonthsEnum(string month)
         {
             return (Months)Enum.Parse(typeof(Months), month);
-        }
-
-        public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory)
+        } 
+     
+        public GenerateBudgetReport GetBudgetReport(string vMonth, int year)
         {
-            Months mMonths = StringToMonthsEnum(vMonth);
-            List<Expense> expenses = repository.GetExpenseByMonth(mMonths);
-            double total = 0;
-            foreach (Expense expense in expenses)
+            ExpenseController expenseController = new ExpenseController(repository);
+            double totalPlanedAmount = 0;
+            double totalRealAmount = 0;
+            double totalDiffAmount = 0;
+            double realAmount = 0;
+            Budget budget = FindBudget(vMonth, year);
+
+            GenerateBudgetReport budgetReport = new GenerateBudgetReport
             {
-                if (expense.IsSameCategory(vCategory))
-                    total += expense.Amount*expense.Currency.Quotation;
-            }
-            return total;
-        }
-
-        public GenerateBudgetReport GetBudgetReport(string vMonth,Budget budget)
-        {
-           
-            GenerateBudgetReport budgetsReport = new GenerateBudgetReport();
-            budgetsReport.budgetsReportLines = new List<BudgetReportLine>();
+                budgetsReportLines = new List<BudgetReportLine>()
+            };
             foreach (BudgetCategory budgetCategory in budget.BudgetCategories)
             {
-                BudgetReportLine budgetReport = new BudgetReportLine();
+                BudgetReportLine budgetReportLine = new BudgetReportLine();
+                budgetReportLine.PlanedAmount = budgetCategory.Amount;
                 Category category = budgetCategory.Category;
-                budgetReport.PlanedAmount = budgetCategory.Amount;
-                budgetReport.RealAmount = GetTotalSpentByMonthAndCategory(vMonth, category);
-                budgetReport.DiffAmount = budgetReport.PlanedAmount - budgetReport.RealAmount;
-                budgetsReport.TotalAmount += budgetReport.PlanedAmount;
-                budgetsReport.RealAmount += budgetReport.RealAmount;
-                budgetsReport.DiffAmount += budgetReport.DiffAmount;
-                budgetReport.Category= budgetCategory.Category;
-                budgetsReport.budgetsReportLines.Add(budgetReport);
+                try
+                {                  
+                    budgetReportLine.RealAmount = expenseController.GetTotalSpentByDateAndCategory(vMonth, category, year);
+                    realAmount = expenseController.GetTotalSpentByDateAndCategory(vMonth, category, year);
+                }
+                catch (NoFindExpenseByDate)
+                {
+                    budgetReportLine.RealAmount = 0;
+                    realAmount = 0;
+                }
+                double planeedAmount = budgetCategory.Amount;               
+                double diffAmount = planeedAmount - realAmount;
+                totalPlanedAmount = planeedAmount;
+                totalRealAmount = realAmount;
+                totalDiffAmount = diffAmount;
+                budgetReportLine.DiffAmount = diffAmount;
+                budgetReport.TotalAmount += planeedAmount;
+                budgetReport.RealAmount += realAmount;
+                budgetReport.DiffAmount += diffAmount;
+                budgetReportLine.Category= budgetCategory.Category;
+                budgetReport.budgetsReportLines.Add(budgetReportLine);
             }
-
-            return budgetsReport;
+            return budgetReport;
         }
 
 
@@ -85,7 +93,7 @@ namespace BusinessLogic
             }
             catch (NoFindBudget)
             {
-                List<Category> categories = repository.GetCategories();
+                List<Category> categories = repository.Categories.Get();
                 returnBudget = CreateBudget(year, categories, mMonth);
             }
             return returnBudget;
@@ -93,7 +101,15 @@ namespace BusinessLogic
 
         public Budget FindBudget(string month, int year)
         {
-            return repository.FindBudget(month, year);
+            Months mMonth = StringToMonthsEnum(month);
+            try
+            {
+                return repository.Budgets.Find(e => e.IsSameCreationDate(mMonth, year));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindBudget();
+            }
         }
 
         public string[] GetAllMonthsString()
@@ -114,7 +130,7 @@ namespace BusinessLogic
         public List<string> OrderedMonthsWithBudget()
         {
             List<Months> monthsWithBudget = new List<Months>();
-            List<Budget> budgets = repository.GetBudgets();
+            List<Budget> budgets = repository.Budgets.Get();
             foreach (Budget budget in budgets)
             {
                 if (!monthsWithBudget.Contains(budget.Month))
@@ -124,6 +140,17 @@ namespace BusinessLogic
             List<string> orderedMonthsString = MonthsEnumToStrings(monthsWithBudget);
             return orderedMonthsString;
         }
+
+        public void AddCategoryInAllBudgets(Category category)
+        {
+            foreach (Budget budget in repository.Budgets.Get())
+            {
+                budget.AddBudgetCategory(category);
+                repository.Budgets.Add(budget);
+            }
+           
+        }
+
 
     }
 }

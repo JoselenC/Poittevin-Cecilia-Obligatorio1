@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.Mappers
 {
-    class ExpenseMapper : IMapper<Expense, ExpenseDto>
+    public class ExpenseMapper : IMapper<Expense, ExpenseDto>
     {
         public ExpenseMapper()
         {
@@ -32,7 +32,9 @@ namespace DataAcess.Mappers
                 .Where(x => x.Description == obj.Description)
                 .Where(x => x.Amount == obj.Amount)
                 .Where(x => x.CreationDate == obj.CreationDate)
-                .Where(x=>x.CreationDate.Hour==obj.CreationDate.Hour && x.CreationDate.Minute==obj.CreationDate.Minute && x.CreationDate.Second==obj.CreationDate.Second)
+                .Where(x=> x.CreationDate.Hour==obj.CreationDate.Hour)
+                .Where(x=> x.CreationDate.Minute==obj.CreationDate.Minute)
+                .Where(x=> x.CreationDate.Second==obj.CreationDate.Second)
                 .FirstOrDefault();
            
             if (expenseDto is null)
@@ -51,8 +53,7 @@ namespace DataAcess.Mappers
             {
                 context.Entry(expenseDto).State = EntityState.Modified;
                 context.Entry(expenseDto).Reference("Category").Load();
-                context.Entry(expenseDto).Reference("Money").Load();
-                //context.Entry(expenseDto).Reference("Category").Load();
+                context.Entry(expenseDto).Reference("Currency").Load();
                 context.Entry(expenseDto).State = EntityState.Modified;
             }
 

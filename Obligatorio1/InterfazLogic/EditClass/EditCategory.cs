@@ -16,7 +16,7 @@ namespace InterfazLogic
         private List<string> EditableKeyWords = new List<string>();
         private int indexKeyWordToEdit;
 
-        public EditCategory(IManageRepository vRepository)
+        public EditCategory(ManagerRepository vRepository)
         {
             InitializeComponent();
             categoryController = new CategoryController(vRepository);

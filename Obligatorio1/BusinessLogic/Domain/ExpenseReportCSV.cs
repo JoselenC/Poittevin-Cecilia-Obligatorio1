@@ -20,5 +20,12 @@ namespace BusinessLogic
                 }
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ExpenseReportCSV)
+                return true;
+            return false;
+        }
     }
 }

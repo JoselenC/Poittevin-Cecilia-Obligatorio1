@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.DBObjects
 {
-    class CurrencyDto
+    public class CurrencyDto
     {
         public int CurrencyDtoID { get; set; }
         [StringLength(450)]

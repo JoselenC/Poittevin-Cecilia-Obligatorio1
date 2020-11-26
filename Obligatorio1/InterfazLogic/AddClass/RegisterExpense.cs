@@ -9,7 +9,7 @@ namespace InterfazLogic
     public partial class RegisterExpense : UserControl
     {
         private ExpenseController expenseController;
-        public RegisterExpense(IManageRepository vRepository)
+        public RegisterExpense(ManagerRepository vRepository)
         {
             InitializeComponent();
             expenseController = new ExpenseController(vRepository);

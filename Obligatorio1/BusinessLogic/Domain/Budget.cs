@@ -78,8 +78,15 @@ namespace BusinessLogic
 
         public void AddBudgetCategory(Category category)
         {
-            BudgetCategory budgetCategory = new BudgetCategory() { Amount = 0, Category = category };
-            BudgetCategories.Add(budgetCategory);
+            try
+            {
+                FindBudgetCategory(category);
+            }
+            catch (NoFindBudgetCategory)
+            {
+                BudgetCategory budgetCategory = new BudgetCategory() { Amount = 0, Category = category };
+                BudgetCategories.Add(budgetCategory);
+            }
         }
 
         public string[] GetAllCategoryNames()

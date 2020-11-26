@@ -178,7 +178,7 @@
             this.BRegisteredObjects.Name = "BRegisteredObjects";
             this.BRegisteredObjects.Size = new System.Drawing.Size(297, 93);
             this.BRegisteredObjects.TabIndex = 15;
-            this.BRegisteredObjects.Text = "Registered objects";
+            this.BRegisteredObjects.Text = "Registered data";
             this.BRegisteredObjects.UseVisualStyleBackColor = false;
             this.BRegisteredObjects.Click += new System.EventHandler(this.BRegisteredObjects_Click);
             // 

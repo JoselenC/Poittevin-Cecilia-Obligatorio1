@@ -12,11 +12,10 @@ namespace InterfazLogic
     public partial class ExpenseReport : UserControl
     {
         private ExpenseController expenseController;
-
         public List<Expense> expenseReportByDate;
         public string name;
         public string route;
-        public ExpenseReport(IManageRepository vRepository)
+        public ExpenseReport(ManagerRepository vRepository)
         {
             InitializeComponent();
             expenseController = new ExpenseController(vRepository);
@@ -28,7 +27,6 @@ namespace InterfazLogic
             lstMonths.SelectedIndex = 0;
             lstYears.SelectedIndex = 0;
         }
-
         private void yearWithExpensees()
         {
             lblYears.Text = "";
@@ -47,7 +45,6 @@ namespace InterfazLogic
                 Visible = true;
             }
         }
-
         private void monthsWithExpenses(){
             lblMonths.Text = "";
             List <string> months= expenseController.OrderedMonthsWithExpenses();
@@ -65,7 +62,6 @@ namespace InterfazLogic
                 Visible = true;
             }
         }
-
         private void btnConsult_Click(object sender, EventArgs e)
         {
             try
@@ -106,18 +102,18 @@ namespace InterfazLogic
             }
             catch (NoFindExpenseByDate)
             {
+                listView1.Items.Clear();
                 lblYears.Text = "There are no expenses recorded on this date";
+                lblTotalAmount.Text = "";
                 lblYears.ForeColor = Color.Red;
+                btnExportar.Enabled = false;
+
             }
         }
-
-      
-
         private void btnAccept_Click(object sender, EventArgs e)
         {
            Visible = false;
         }
-
         private void btnExportar_Click(object sender2, EventArgs e)
         {           
             SaveFileDialog saveFile = new SaveFileDialog();
