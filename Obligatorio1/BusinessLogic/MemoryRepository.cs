@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace BusinessLogic
 {
@@ -12,12 +13,17 @@ namespace BusinessLogic
 
         private Repository<Budget> Budgets;
 
+        private Repository<Currency> Currencies;
+
 
         public MemoryRepository()
         {
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
+            Currencies = new Repository<Currency>();
+            Currency currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            Currencies.Add(currency);
         }     
 
         public MemoryRepository(List<Category> vCategories)
@@ -25,7 +31,30 @@ namespace BusinessLogic
             Categories = new Repository<Category>();
             Expenses = new Repository<Expense>();
             Budgets = new Repository<Budget>();
+            Currencies = new Repository<Currency>();
             Categories.Set(vCategories);
+            Currency currency = new Currency() { Name = "Pesos", Symbol = "$U", Quotation = 1 };
+            Currencies.Add(currency);
+        }
+
+        public Currency FindCurrency(Currency currency)
+        {
+            try
+            {
+                return Currencies.Find(e => e.Equals(currency));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindCurrency();
+            }          
+        }
+
+        public void EditCurrencyAllExpense(Currency oldCurrency, Currency newCurrency)
+        {            
+            foreach (Expense expense in GetExpenses())
+            {
+                expense.EditCurrency(oldCurrency, newCurrency);
+            }
         }
 
         private bool AlreadyExistTheCategoryName(string categoryName)
@@ -75,11 +104,23 @@ namespace BusinessLogic
             if (expense.Category == null)
                 throw new ExcepcionExpenseWithEmptyCategory();
             Expenses.Add(expense);
-        }       
+        }
 
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category)
+        public Currency FindCurrency(string currencyName)
         {
-            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category };
+            try
+            {
+                return Currencies.Find(e => e.IsSameCurrencyName(currencyName));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindCurrencyByName();
+            }
+        }
+
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Currency currency)
+        {
+            Expense expense = new Expense { Amount = amount, CreationDate = creationDate, Description = description, Category = category,Currency=currency };
             AddExpense(expense);
         }
 
@@ -114,6 +155,28 @@ namespace BusinessLogic
         public void DeleteCategory(Category category)
         {
             Categories.Delete(category);
+        }
+
+        public void DeleteCurrency(Currency currency)
+        {
+            try
+            {
+
+                foreach (Expense expense in GetExpenses())
+                {
+                    expense.IsSameCurrencyExpense(currency);
+                }
+                Currencies.Delete(currency);
+            }
+            catch(ExcepcionNoDeleteCurrency)
+            {
+                throw new ExcepcionNoDeleteCurrency();
+            }
+        }
+
+        public void DeleteCurrencyToEdit(Currency currency)
+        {
+            GetCurrencies().Remove(currency);
         }
 
         private Months StringToMonthsEnum(string month)
@@ -191,6 +254,43 @@ namespace BusinessLogic
             }
             return expensesByMonth;
         }
+
+        public List<Currency> GetCurrencies()
+        {
+            return Currencies.Get();
+        }
+
+        private bool AlreadyExistTheCurrencyName(string currencyName)
+        {
+            bool exist = false;
+            foreach (Currency currency in GetCurrencies())
+            {
+                if (currencyName.ToLower() == currency.Name.ToLower())
+                    exist = true;
+            }
+            return exist;
+        }
+
+        private bool AlreadyExistTheCurrencySymbol(string currencySymbol)
+        {
+            bool exist = false;
+            foreach (Currency currency in GetCurrencies())
+            {
+                if (currencySymbol.ToLower() == currency.Symbol.ToLower())
+                    exist = true;
+            }
+            return exist;
+        }
+
+        public void SetCurrency(Currency currency)
+        {
+            if (AlreadyExistTheCurrencyName(currency.Name))
+                throw new ExceptionAlreadyExistTheCurrencyName();
+            if(AlreadyExistTheCurrencySymbol(currency.Symbol))
+                throw new ExceptionAlreadyExistTheCurrencySymbol();
+            Currencies.Add(currency);
+        }
+
 
     }
 }

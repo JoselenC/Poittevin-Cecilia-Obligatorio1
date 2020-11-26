@@ -6,6 +6,7 @@ namespace BusinessLogic
     public class ExpenseController
     {
         public MemoryRepository Repository { get; private set; }
+        public IExportExpenseReport Export { get; set; }
 
         public ExpenseController(MemoryRepository repository)
         {
@@ -83,6 +84,11 @@ namespace BusinessLogic
             return GetExpenseByMonth(mMonth);
         }
 
+        public Currency FindCurrencyByName(string currencyName)
+        {
+            return Repository.FindCurrency(currencyName);
+        }
+
         public Category FindCategoryByName(string categoryName)
         {
             return Repository.FindCategoryByName(categoryName);
@@ -100,14 +106,30 @@ namespace BusinessLogic
             return total;
         }
 
-        public void SetExpense(double amount, DateTime creationDate, string description, Category category)
+        public void SetExpense(double amount, DateTime creationDate, string description, Category category,Currency currency)
         {
-            Repository.SetExpense(amount, creationDate, description, category);
+            Repository.SetExpense(amount, creationDate, description, category,currency);
         }
 
         public List<Category> GetCategories()
         {
             return Repository.GetCategories();
         }
+
+        public List<Currency> GetCurrencies()
+        {
+            return Repository.GetCurrencies();
+        }
+
+        public void ExportExpenseReport(List<Expense> expenses, string fileName,int index)
+        {
+            if (index == 1)
+                Export = new ExpenseReportTXT();
+            else
+                Export = new ExpenseReportCSV();
+
+            Export.ExportReport(expenses, fileName);
+        }
+        
     }
 }
