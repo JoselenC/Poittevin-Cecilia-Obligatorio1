@@ -76,9 +76,6 @@ namespace Test
             Currency currency2 = new Currency() { Name = "dolar", Quotation = 43, Symbol = "USD" };
 
             budgetController.SetBudget(JanuaryBudget);
-            categoryController.SetCategory(categoryEntertainment);
-            categoryController.SetCategory(categoryFood);
-            categoryController.SetCategory(categoryHouse);
             expenseController.SetExpense(220, new DateTime(2020, 1, 1), "sushi night", categoryFood, currency);
             expenseController.SetExpense(110.50, new DateTime(2020, 1, 1), "sushi night", categoryFood,currency2);
             expenseController.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment,currency);
@@ -179,7 +176,10 @@ namespace Test
             };
 
             Budget budget = new Budget(month,categories) { Year = 2020,TotalAmount=0};
-            Budget actualBudget = budgetController.BudgetGetOrCreate("December", year);
+            ManagerRepository repository = new ManageMemoryRepository();
+            repository.Categories.Set(categories);
+            BudgetController controller = new BudgetController(repository);
+            Budget actualBudget = controller.BudgetGetOrCreate("December", year);
             Assert.AreEqual(actualBudget, budget);
         }
 
@@ -270,13 +270,13 @@ namespace Test
             GenerateBudgetReport budgetReport = new GenerateBudgetReport
             {
                 TotalAmount = 0,
-                RealAmount = 10403.3,
-                PlaneedAmount=0,
-                DiffAmount = -10403.3,
+                RealAmount = 5201.65,
+                PlaneedAmount = 0,
+                DiffAmount = -5201.65,
             };
-            List<BusinessLogic.Domain.BudgetReportLine> budgetReportLines = new List<BusinessLogic.Domain.BudgetReportLine>()
+            List<BudgetReportLine> budgetReportLines = new List<BudgetReportLine>()
             {
-                new BusinessLogic.Domain.BudgetReportLine()
+                new BudgetReportLine()
                 {
                     Category = categoryEntertainment,
                     DiffAmount = -230.15,
@@ -286,7 +286,7 @@ namespace Test
                     TotalAmount = 0,
                     Year = 0,
                 },
-                new BusinessLogic.Domain.BudgetReportLine()
+                new BudgetReportLine()
                 {
                     Category = categoryFood,
                     DiffAmount = -4971.5,
@@ -296,37 +296,7 @@ namespace Test
                     TotalAmount = 0,
                     Year = 0,
                 },
-                new BusinessLogic.Domain.BudgetReportLine()
-                {
-                    Category = categoryHouse,
-                    DiffAmount = 0,
-                    Month = 0,
-                    PlanedAmount = 0,
-                    RealAmount = 0,
-                    TotalAmount = 0,
-                    Year = 0,
-                },
-                new BusinessLogic.Domain.BudgetReportLine()
-                {
-                    Category = categoryEntertainment,
-                    DiffAmount = -230.15,
-                    Month = 0,
-                    PlanedAmount = 0,
-                    RealAmount = 230.15,
-                    TotalAmount = 0,
-                    Year = 0,
-                },
-                new BusinessLogic.Domain.BudgetReportLine()
-                {
-                    Category = categoryFood,
-                    DiffAmount = -4971.5,
-                    Month = 0,
-                    PlanedAmount = 0,
-                    RealAmount = 4971.5,
-                    TotalAmount = 0,
-                    Year = 0,
-                },
-                new BusinessLogic.Domain.BudgetReportLine()
+                new BudgetReportLine()
                 {
                     Category = categoryHouse,
                     DiffAmount = 0,

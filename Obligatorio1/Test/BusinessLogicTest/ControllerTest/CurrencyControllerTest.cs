@@ -165,7 +165,7 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException), "")]
+        [ExpectedException(typeof(NoFindCurrencyByName), "")]
         public void NoFindCurrencyByNAme()
         {
             Currency currencyExpected = new Currency { Name = "dolares", Quotation = 43, Symbol = "a" };

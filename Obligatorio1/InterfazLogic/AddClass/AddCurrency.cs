@@ -55,6 +55,10 @@ namespace InterfazLogic
             {
                 SetMessage("Already exist de currency name", lblName);
             }
+            catch (ExceptionAlreadyExistTheCurrencyName)
+            {
+                SetMessage("Already exist de currency name", lblName);
+            }
             catch (ExceptionAlreadyExistTheCurrencySymbol)
             {
                 SetMessage("Already exist de currency symbol",lblSymbol);

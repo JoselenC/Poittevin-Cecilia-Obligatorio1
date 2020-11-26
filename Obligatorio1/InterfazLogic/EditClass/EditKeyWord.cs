@@ -39,6 +39,7 @@ namespace InterfazLogic
             categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
             KeyWords.Remove(KeyWord);
             KeyWords.Add(keyWordEdited);
+            listKeyWords.DataSource = new List<string>();
             listKeyWords.DataSource = KeyWords;
             Close();
         }
