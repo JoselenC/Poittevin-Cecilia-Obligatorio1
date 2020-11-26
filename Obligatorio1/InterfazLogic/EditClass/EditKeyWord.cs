@@ -35,9 +35,9 @@ namespace InterfazLogic
 
         private void UpdateKeyWord(string keyWordEdited)
         {
-            KeyWord key = new KeyWord(keyWordEdited, KeyWords);
-            categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);
             KeyWords.Remove(KeyWord);
+            KeyWord key = new KeyWord(keyWordEdited, KeyWords);
+            categoryController.AlreadyExistKeyWordInAnoterCategory(keyWordEdited);            
             KeyWords.Add(keyWordEdited);
             listKeyWords.DataSource = new List<string>();
             listKeyWords.DataSource = KeyWords;
@@ -50,6 +50,7 @@ namespace InterfazLogic
             try
             {
                 UpdateKeyWord(keyWordEdited);
+             
             }
             catch (ExcepcionInvalidRepeatedKeyWordsInAnotherCategory)
             {

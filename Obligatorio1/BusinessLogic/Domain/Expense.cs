@@ -78,7 +78,7 @@ namespace BusinessLogic
 
         public bool IsSameCategory(Category vCategory)
         {
-            return Category == vCategory;
+            return Category.Equals(vCategory);
         }
 
         public double ConvertToPesos()

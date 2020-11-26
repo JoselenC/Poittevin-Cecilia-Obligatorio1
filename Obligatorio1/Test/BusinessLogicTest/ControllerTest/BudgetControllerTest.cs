@@ -85,7 +85,7 @@ namespace Test
         public void GetTotalSpentByMonthAndCategoryValidCase()
         {
             double expectedTotalSpentJanuary = 4971.5;
-            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("January", categoryFood);
+            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("January", categoryFood,2020);
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
 
@@ -93,7 +93,7 @@ namespace Test
         public void GetTotalSpentByMonthAndCategoryMonthWithoutExpenses()
         {
             double expectedTotalSpentJanuary = 0;
-            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("March", categoryFood);
+            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("March", categoryFood,2020);
 
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
@@ -102,7 +102,7 @@ namespace Test
         public void GetTotalSpentByMonthAndCategoryMonthWithoutExpensesInCategory()
         {
             double expectedTotalSpentJanuary = 0;
-            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("January", categoryHouse);
+            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("January", categoryHouse,2020);
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
 

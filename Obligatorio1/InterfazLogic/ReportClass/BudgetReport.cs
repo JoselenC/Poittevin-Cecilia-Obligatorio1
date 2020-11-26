@@ -102,7 +102,7 @@ namespace InterfazLogic
                 {
                     int year = (int)numYear.Value;
                     lstVReport.Items.Clear();
-                    BusinessLogic.Domain.GenerateBudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text.ToString(), year);
+                    GenerateBudgetReport budgetReport = budgetController.GetBudgetReport(cboxMonth.Text.ToString(), year);
                     oldYearValue = year;
                     CompleteListViewReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
                     return CompleteTotalValuesOFReport(totalPlanedAmount, totalRealAmount, totalDiffAmount, budgetReport);
@@ -113,6 +113,7 @@ namespace InterfazLogic
                     numYear.Value = oldYearValue;
                     return false;
                 }
+               
                 catch (System.NullReferenceException)
                 {
                     lblMonth.Text = "Select a month";
