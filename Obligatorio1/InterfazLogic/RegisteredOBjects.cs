@@ -33,7 +33,7 @@ namespace InterfazLogic
             }
             else
             {
-                lblCategories.Text = "There are no expenses registered in the system";
+                lblCategories.Text = "There are no categories registered in the system";
                 lblCategories.ForeColor = Color.Red;
             }
         }
