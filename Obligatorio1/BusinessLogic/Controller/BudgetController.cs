@@ -142,8 +142,11 @@ namespace BusinessLogic
         {
             foreach (Budget budget in repository.Budgets.Get())
             {
+                Budget budgetAux = FindBudget(budget.Month.ToString(),budget.Year);               
                 budget.AddBudgetCategory(category);
+                repository.Budgets.Add(budget);
             }
+           
         }
 
 
