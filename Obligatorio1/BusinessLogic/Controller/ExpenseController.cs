@@ -189,13 +189,27 @@ namespace BusinessLogic
             SetExpense(expense);
         }
 
-        // TODO: revisar si podemos llamar directamente al GetCategories de el CategoryController
+
+        public double GetTotalSpentByDateAndCategory(string vMonth, Category vCategory, int year)
+        {
+            ExpenseController expenseController = new ExpenseController(repository);
+            List<Expense> expenses = expenseController.GetExpenseByDate(vMonth, year);
+            double total = 0;
+            foreach (Expense expense in expenses)
+            {
+                if (expense.IsSameCategory(vCategory))
+                    total += expense.Amount * expense.Currency.Quotation;
+            }
+            return total;
+        }
+
+
         public List<Category> GetCategories()
         {
             return repository.Categories.Get();
         }
 
-        // TODO: revisar si podemos llamar directamente al GetCurrencies de el CurrencyController
+   
         public List<Currency> GetCurrencies()
         {
             return repository.Currencies.Get();

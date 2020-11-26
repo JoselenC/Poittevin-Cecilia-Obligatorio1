@@ -13,7 +13,7 @@ namespace BusinessLogic
         public BudgetController(ManagerRepository vRepository)
         {
             repository = vRepository;
-        }           
+        }
 
         public List<Budget> GetBudgets()
         {
@@ -23,29 +23,16 @@ namespace BusinessLogic
         public void SetBudget(Budget vBudget)
         {
             repository.Budgets.Add(vBudget);
-        }      
+        }
 
         private Months StringToMonthsEnum(string month)
         {
             return (Months)Enum.Parse(typeof(Months), month);
-        }
-
-        // TODO: esto deberia estar en ExpenseController, no aca
-        public double GetTotalSpentByMonthAndCategory(string vMonth, Category vCategory,int year)
-        {
-            ExpenseController expenseController = new ExpenseController(repository);           
-            List<Expense> expenses = expenseController.GetExpenseByDate(vMonth,year);
-            double total = 0;
-            foreach (Expense expense in expenses)
-            {
-                if (expense.IsSameCategory(vCategory))
-                    total += expense.Amount*expense.Currency.Quotation;
-            }
-            return total;
-        }
-
+        } 
+     
         public GenerateBudgetReport GetBudgetReport(string vMonth, int year)
         {
+            ExpenseController expenseController = new ExpenseController(repository);
             double totalPlanedAmount = 0;
             double totalRealAmount = 0;
             double totalDiffAmount = 0;
@@ -63,8 +50,8 @@ namespace BusinessLogic
                 Category category = budgetCategory.Category;
                 try
                 {                  
-                    budgetReportLine.RealAmount = GetTotalSpentByMonthAndCategory(vMonth, category, year);
-                    realAmount=GetTotalSpentByMonthAndCategory(vMonth, category, year);
+                    budgetReportLine.RealAmount = expenseController.GetTotalSpentByDateAndCategory(vMonth, category, year);
+                    realAmount = expenseController.GetTotalSpentByDateAndCategory(vMonth, category, year);
                 }
                 catch (NoFindExpenseByDate)
                 {

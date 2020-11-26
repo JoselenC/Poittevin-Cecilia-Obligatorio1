@@ -49,7 +49,7 @@ namespace DataAccess
 
         public T Update(T OldObject, T UpdatedObject)
         {
-            throw new NotImplementedException();
+            return UpdatedObject;
         }
     }
 

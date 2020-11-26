@@ -30,7 +30,7 @@ namespace Test
         {
             expenseController = new ExpenseController(repo);
             CategoryController categoryController = new CategoryController(repo);
-
+            Currency currency = new Currency { Name = "pesos", Quotation = 1, Symbol="$U" };
             keyWords1 = new List<string>
             {
                 "movie theater",
@@ -72,28 +72,32 @@ namespace Test
                 Description = "buy desktop game", 
                 Amount = 230.15, 
                 Category = categoryEntertainment, 
-                CreationDate = new DateTime(2020, 8, 1) 
+                CreationDate = new DateTime(2020, 8, 1) ,
+                Currency=currency
             };
             expenseSushi = new Expense()
             {
                 Description = "sushi night",
                 Amount = 220,
                 Category = categoryFood,
-                CreationDate = new DateTime(2020, 8, 1)
+                CreationDate = new DateTime(2020, 8, 1),
+                Currency = currency
             };
             expenseBurgers = new Expense()
             {
                 Description = "burgers night",
                 Amount = 110.50,
                 Category = categoryFood,
-                CreationDate = new DateTime(2020, 1, 1)
+                CreationDate = new DateTime(2020, 1, 1),
+                Currency = currency
             };
             expenseVideoGame = new Expense()
             {
                 Description = "buy video game",
                 Amount = 230.15,
                 Category = categoryEntertainment,
-                CreationDate = new DateTime(2020, 1, 1)
+                CreationDate = new DateTime(2020, 1, 1),
+                Currency = currency
             };
             expenseController.SetExpense(expenseDesktopGame);
             expenseController.SetExpense(expenseSushi);
@@ -397,6 +401,32 @@ namespace Test
             List<ExpenseReportLine> expensesReportLines = new List<ExpenseReportLine>() { expenseReportLine};
             GenerateExpenseReport expenseReport = controller.GetExpenseReport("January", 2020);
             Assert.AreEqual(expenseReportLine, expenseReport.ExpenseReportLine.ToArray()[0]);
+        }
+
+        [TestMethod]
+        public void GetTotalSpentByMonthAndCategoryValidCase()
+        {
+            double expectedTotalSpentJanuary = 110.5;
+            double actualTotalSpentJanuary = expenseController.GetTotalSpentByDateAndCategory("January", categoryFood, 2020);
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(NoFindExpenseByDate), "")]
+        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpenses()
+        {
+            double expectedTotalSpentJanuary = 0;
+            double actualTotalSpentJanuary = expenseController.GetTotalSpentByDateAndCategory("March", categoryFood, 2020);
+
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
+        }
+
+        [TestMethod]
+        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpensesInCategory()
+        {
+            double expectedTotalSpentJanuary = 0;
+            double actualTotalSpentJanuary = expenseController.GetTotalSpentByDateAndCategory("January", categoryHouse, 2020);
+            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
 
     }

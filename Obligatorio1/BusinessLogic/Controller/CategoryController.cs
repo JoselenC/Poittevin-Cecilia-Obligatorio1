@@ -84,7 +84,7 @@ namespace BusinessLogic
 
         public void UpdateCategory(Category oldCategory, Category newCategory)
         {
-            newCategory = repository.Categories.Update(oldCategory, newCategory);  
+            repository.Categories.Update(oldCategory, newCategory);  
         }        
 
         public List<Category> GetCategories()

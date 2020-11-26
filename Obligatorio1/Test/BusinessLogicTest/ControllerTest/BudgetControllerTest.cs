@@ -81,31 +81,7 @@ namespace Test
             expenseController.SetExpense(230.15, new DateTime(2020, 1, 1), "buy video game", categoryEntertainment,currency);
         }
         
-        [TestMethod]
-        public void GetTotalSpentByMonthAndCategoryValidCase()
-        {
-            double expectedTotalSpentJanuary = 4971.5;
-            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("January", categoryFood,2020);
-            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
-        }
-
-        [TestMethod]
-        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpenses()
-        {
-            double expectedTotalSpentJanuary = 0;
-            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("March", categoryFood,2020);
-
-            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
-        }
-
-        [TestMethod]
-        public void GetTotalSpentByMonthAndCategoryMonthWithoutExpensesInCategory()
-        {
-            double expectedTotalSpentJanuary = 0;
-            double actualTotalSpentJanuary = budgetController.GetTotalSpentByMonthAndCategory("January", categoryHouse,2020);
-            Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
-        }
-
+    
         [TestMethod]
         public void BudgetGetOrCreateFindCase()
         {
@@ -270,9 +246,9 @@ namespace Test
             GenerateBudgetReport budgetReport = new GenerateBudgetReport
             {
                 TotalAmount = 0,
-                RealAmount = 5201.65,
+                RealAmount = 0,
                 PlaneedAmount = 0,
-                DiffAmount = -5201.65,
+                DiffAmount = 0,
             };
             List<BudgetReportLine> budgetReportLines = new List<BudgetReportLine>()
             {
@@ -309,10 +285,25 @@ namespace Test
 
             };
             budgetReport.budgetsReportLines = budgetReportLines;
-            GenerateBudgetReport expectedBudgetReport = budgetController.GetBudgetReport("January", 2020);
+            GenerateBudgetReport expectedBudgetReport = budgetController.GetBudgetReport("January", 2010);
             Assert.AreEqual(budgetReport, expectedBudgetReport);
         }
 
-
+        [TestMethod]
+        public void AddCategoryInAllBudgets()
+        {
+            List<Category> categories = new List<Category>() { categoryFood};
+            Budget budget = new Budget(Months.January, categories) { TotalAmount = 23 };
+            ManagerRepository repository = new ManageMemoryRepository();
+            List<Budget> budgets = new List<Budget>() { budget };
+            repository.Budgets.Set(budgets);
+            repository.Categories.Set(categories);
+            BudgetController controller = new BudgetController(repository);
+            
+            controller.AddCategoryInAllBudgets(categoryEntertainment);
+            List<Category> categoriesExpected = new List<Category>() { categoryFood,categoryEntertainment };
+            Budget budgetxpected= new Budget(Months.January, categoriesExpected) { TotalAmount = 23 };
+            Assert.AreEqual(budgetxpected, budget);
+        }
     }
 }

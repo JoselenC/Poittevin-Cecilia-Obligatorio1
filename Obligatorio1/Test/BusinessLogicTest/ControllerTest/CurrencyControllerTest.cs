@@ -140,7 +140,6 @@ namespace Test
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotImplementedException), "")]
         public void UpdateCurrency()
         {
             Currency oldCurrency = new Currency { Name = "dolares", Quotation = 43, Symbol = "a" };
@@ -150,6 +149,7 @@ namespace Test
             CurrencyController currencyController = new CurrencyController(repo);
             currencyController.SetCurrency(oldCurrency);          
             currencyController.UpdateCurrency(oldCurrency, newCurrency);
+            Assert.AreEqual(newCurrency, newCurrency);
         }
 
         [TestMethod]
