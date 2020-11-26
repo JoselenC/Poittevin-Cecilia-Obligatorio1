@@ -1,11 +1,12 @@
 using BusinessLogic;
+using BusinessLogic.Repository;
 using DataAccess;
 using System.Collections.Generic;
 
 namespace DataAcces
 {
 
-    public class ManageMemoryRepository : ManageRepository
+    public class ManageMemoryRepository : ManagerRepository
     {
         public ManageMemoryRepository()
         {

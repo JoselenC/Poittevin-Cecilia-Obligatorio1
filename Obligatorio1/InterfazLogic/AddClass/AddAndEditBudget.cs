@@ -11,7 +11,7 @@ namespace InterfazLogic
     {
         private BudgetController budgetController { get; set; }
         private Budget currentBudget { get; set; }
-        public AddAndEditBudget(IManageRepository vRepository)
+        public AddAndEditBudget(ManagerRepository vRepository)
         {
             InitializeComponent();
             budgetController = new BudgetController(vRepository);

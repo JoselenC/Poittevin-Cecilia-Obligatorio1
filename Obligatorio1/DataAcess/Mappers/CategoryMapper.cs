@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Reflection;
 
 namespace DataAcess.Mappers
 {
@@ -35,16 +36,22 @@ namespace DataAcess.Mappers
         public CategoryDto DomainToDto(Category obj, DbContext context)
         {
             DbSet<CategoryDto> CategorySet = context.Set<CategoryDto>();
-            CategoryDto categoryDto = CategorySet.Where(x => x.Name == obj.Name).FirstOrDefault();
-            
-            if (categoryDto is null)
-                categoryDto=new CategoryDto()
-                {
-                    Name = obj.Name,
-                };
+            try
+            {
+                CategoryDto categoryDto = CategorySet.Where(x => x.Name == obj.Name).FirstOrDefault();
+                if (categoryDto is null)
+                    categoryDto = new CategoryDto()
+                    {
+                        Name = obj.Name,
+                    };
 
-            categoryDto.KeyWords = createKeyWordsDto(obj.KeyWords, context);
-            return categoryDto;
+                categoryDto.KeyWords = createKeyWordsDto(obj.KeyWords, context);
+                return categoryDto;
+            }
+            catch (TargetException)
+            {
+                throw new ExceptionUnableToSaveData();
+            }
         }
 
         public Category DtoToDomain(CategoryDto obj, DbContext context)

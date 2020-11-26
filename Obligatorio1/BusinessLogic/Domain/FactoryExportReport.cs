@@ -10,7 +10,7 @@ namespace BusinessLogic.Domain
     {
         public IExportExpenseReport GetExpenseReportInstance(string type)
         {
-            if (type=="txt")
+            if (type=="txt" || type== "TXT")
                 return new ExpenseReportTXT();
             else
                return new ExpenseReportCSV();

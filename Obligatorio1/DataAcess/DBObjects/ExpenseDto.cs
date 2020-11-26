@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.DBObjects
 {
-    class ExpenseDto
+    public class ExpenseDto
     {
         public int ExpenseDtoID { get; set; }
         public string Description { get; set; }

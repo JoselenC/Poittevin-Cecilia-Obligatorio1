@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogic;
 using BusinessLogic.Repository;
@@ -16,7 +10,7 @@ namespace InterfazLogic
     {
         private CategoryController categoryController;
         private ExpenseController expenseController;
-        public RegisteredOBjects(IManageRepository vRepository)
+        public RegisteredOBjects(ManagerRepository vRepository)
         {
             InitializeComponent();
             categoryController = new CategoryController(vRepository);

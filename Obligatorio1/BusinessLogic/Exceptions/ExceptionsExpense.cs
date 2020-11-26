@@ -42,13 +42,6 @@ namespace BusinessLogic
         { }
     }
 
-    public class NoFindExpenseByDescription : Exception
-    {
-        public NoFindExpenseByDescription() :
-        base("No find expense by description")
-        { }
-    }
-
     public class NoFindEqualsExpense : Exception
     {
         public NoFindEqualsExpense() :

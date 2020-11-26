@@ -21,9 +21,15 @@ namespace DataAccess
 
         public void Add(T objectToAdd)
         {
-            if (objectToAdd == null)
+                
+            try
+            {
+                repository.Add(objectToAdd);
+            }
+            catch (ArgumentNullException)
+            {
                 throw new ValueNotFound();
-            repository.Add(objectToAdd);
+            }
         }
 
         public List<T> Get()

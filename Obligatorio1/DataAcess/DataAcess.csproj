@@ -68,7 +68,6 @@
     <Compile Include="Managers\DataBaseManagerRepository.cs" />
     <Compile Include="DataBaseRepository.cs" />
     <Compile Include="Managers\ManageMemoryRepository.cs" />
-    <Compile Include="Managers\ManageRepository.cs" />
     <Compile Include="DBObjects\KeyWordsDto.cs" />
     <Compile Include="MemoryRepository.cs" />
     <Compile Include="Migrations\202011172338200_Initial.cs" />

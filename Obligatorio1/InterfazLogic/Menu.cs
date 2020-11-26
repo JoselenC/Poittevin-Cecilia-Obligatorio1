@@ -9,8 +9,8 @@ namespace InterfazLogic
 {
     public partial class Menu : Form
     {
-        private readonly IManageRepository repository;
-        public Menu(IManageRepository repository)
+        private readonly ManagerRepository repository;
+        public Menu(ManagerRepository repository)
         {
             this.repository = repository;
 

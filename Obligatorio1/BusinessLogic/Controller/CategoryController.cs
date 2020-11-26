@@ -6,16 +6,16 @@ namespace BusinessLogic
 {
     public class CategoryController
     {
-        private IManageRepository repository;
+        private ManagerRepository repository;
 
-        public CategoryController(IManageRepository vRepository)
+        public CategoryController(ManagerRepository vRepository)
         {
             repository = vRepository;
         }
 
         public void AlreadyExistKeyWordInAnoterCategory(string pKeyWord)
         {
-            List<Category> categories = repository.GetCategories();
+            List<Category> categories = GetCategories();
             foreach (Category category in categories)
             {
                 if (category.CategoryContainKeyword(pKeyWord))
@@ -25,67 +25,96 @@ namespace BusinessLogic
 
         public Category FindCategoryByName(string categoryName)
         {
-            return repository.FindCategoryByName(categoryName);
+            try
+            {
+                return repository.Categories.Find(e => e.IsSameCategoryName(categoryName));
+            }
+            catch (ValueNotFound)
+            {
+                throw new NoFindCategoryByName();
+            }
         }
 
-        private void AddCategoryInAllBudgets(Category category)
+        private bool AlreadyExistTheKeyWordsInAnoterCategory(List<string> pkeyWords)
         {
-            foreach (Budget budget in repository.GetBudgets())
+            foreach (Category category in GetCategories())
             {
-                budget.AddBudgetCategory(category);
+                foreach (string keyWord in pkeyWords)
+                {
+                    if (category.CategoryContainKeyword(keyWord))
+                        return true;
+                }
             }
+            return false;
+        }
+        private bool AlreadyExistCategoryName(string name)
+        {
+            foreach (Category category in GetCategories())
+            {
+                if (category.Name == name)
+                    return true;
+            }
+            return false;
+        }
+
+        private void AddCategory(Category category)
+        {
+            BudgetController budgetController = new BudgetController(repository);
+
+            if (AlreadyExistTheKeyWordsInAnoterCategory(category.KeyWords))
+                throw new ExcepcionInvalidRepeatedKeyWordsCategory();
+            if (AlreadyExistCategoryName(category.Name))
+                throw new ExcepcionInvalidRepeatedNameCategory();
+
+            repository.Categories.Add(category);
+            budgetController.AddCategoryInAllBudgets(category);
         }
 
         public Category SetCategory(string vName, List<string> vKeyWords)
         {
-            Category category = repository.SetCategory(vName, vKeyWords);
-            AddCategoryInAllBudgets(category);
+            Category category = new Category { Name = vName, KeyWords = vKeyWords };
+            AddCategory(category);
             return category;
-        } 
-        
-        public Category UpdateCategory(Category oldCategory, Category newCategory)
+        }
+        public Category SetCategory(Category category)
         {
-            newCategory = repository.UpdateCategory(oldCategory, newCategory);          
-            return newCategory;
+            AddCategory(category);
+            return category;
         }
 
-        private List<Expense> GetExpenses()
+        public void UpdateCategory(Category oldCategory, Category newCategory)
         {
-            return repository.GetExpenses();
-        }
-
-        private void EditCategoryInAllExpenses(Category category, Category newCategory)
-        {
-            List<Expense> expenses = GetExpenses();
-            foreach (Expense expense in expenses)
-            {
-                if (expense.Category.Equals(category))
-                    expense.Category = newCategory;
-            }
-        }
-
-        private void EditCategoryInAllBudgets(Category oldCategory, Category newCategory)
-        {
-            List<Budget> budgets = repository.GetBudgets();
-            foreach (Budget budget in budgets)
-            {
-                budget.EditBudgetCategory(oldCategory, newCategory);
-            }
-        }
-
-        public void EditCategory(Category oldCategory, string newName, List<string> newKeywords)
-        {
-            
-        }
+            newCategory = repository.Categories.Update(oldCategory, newCategory);  
+        }        
 
         public List<Category> GetCategories()
         {
-            return repository.GetCategories();
+            return repository.Categories.Get();
         }      
 
-        public void SetCategory(object categoryName, object keyWords)
+      
+
+        private Category FindCategoryByDescription(string[] descriptionArray)
         {
-            throw new NotImplementedException();
+            Category category = null;
+            foreach (Category vCategory in GetCategories())
+            {
+                if (vCategory.IsKeyWordInDescription(descriptionArray))
+                {
+                    if (!(category is null))
+                        throw new NoAsignCategoryByDescriptionExpense();
+                    category = vCategory;
+                }
+            }
+            if (category is null)
+                throw new NoAsignCategoryByDescriptionExpense();
+            return category;
+        }
+
+        public Category FindCategoryByDescription(string vDescription)
+        {
+            string[] descriptionArray = vDescription.Split(' ');
+            return FindCategoryByDescription(descriptionArray);
         }
     }
 

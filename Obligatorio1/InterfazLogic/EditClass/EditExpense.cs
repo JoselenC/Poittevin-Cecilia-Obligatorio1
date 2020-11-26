@@ -14,7 +14,7 @@ namespace InterfazLogic
         private bool selectExpense;
         private Expense expenseToEdit;
 
-        public EditExpense(IManageRepository vRepository)
+        public EditExpense(ManagerRepository vRepository)
         {
             InitializeComponent();
             expenseController = new ExpenseController(vRepository);

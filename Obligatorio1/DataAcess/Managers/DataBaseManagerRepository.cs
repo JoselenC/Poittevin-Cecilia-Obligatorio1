@@ -1,14 +1,13 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Repository;
 using DataAccess;
 using DataAcess.DBObjects;
 using DataAcess.Mappers;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 
 namespace DataAcces
 {
-    public class DataBaseManagerRepository : ManageRepository
+    public class DataBaseManagerRepository : ManagerRepository
     {
         public DataBaseManagerRepository()
         {
