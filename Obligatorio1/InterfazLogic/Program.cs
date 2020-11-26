@@ -1,0 +1,21 @@
+﻿using BusinessLogic;
+using DataAcces;
+using System;
+using System.Windows.Forms;
+
+namespace InterfazLogic
+{
+    static class Program
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Menu(new DataBaseManagerRepository()));
+        }
+    }
+}
