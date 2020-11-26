@@ -9,6 +9,7 @@ namespace DataAcess.DBObjects
     public class ExpenseDto
     {
         public int ExpenseDtoID { get; set; }
+
         public string Description { get; set; }
 
         public double Amount { get; set; }
@@ -16,9 +17,11 @@ namespace DataAcess.DBObjects
         public DateTime CreationDate { get; set; }
 
         public int CategoryDtoID { get; set; }
+
         public CategoryDto Category { get; set; }
 
         public int CurrencyDtoID { get; set; }
+
         public CurrencyDto Currency { get; set; }
     }
 }

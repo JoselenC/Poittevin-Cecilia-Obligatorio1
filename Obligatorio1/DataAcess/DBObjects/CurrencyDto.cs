@@ -11,6 +11,7 @@ namespace DataAcess.DBObjects
     public class CurrencyDto
     {
         public int CurrencyDtoID { get; set; }
+
         [StringLength(450)]
         [Index(IsUnique = true)]
         public string Name { get; set; }

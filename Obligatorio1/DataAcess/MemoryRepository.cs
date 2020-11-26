@@ -20,8 +20,7 @@ namespace DataAccess
         }
 
         public void Add(T objectToAdd)
-        {
-                
+        {                
             try
             {
                 repository.Add(objectToAdd);

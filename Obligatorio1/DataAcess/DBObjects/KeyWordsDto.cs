@@ -17,6 +17,7 @@ namespace DataAcess.DBObjects
         public string Value { get; set; }
 
         public int CategoryDtoID { get; set; }
+
         public CategoryDto CategoryDto { get; set; }
 
         public override bool Equals(object obj)

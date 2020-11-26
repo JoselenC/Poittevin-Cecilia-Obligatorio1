@@ -207,7 +207,7 @@
             // lblExpenses
             // 
             this.lblExpenses.AutoSize = true;
-            this.lblExpenses.Location = new System.Drawing.Point(343, 224);
+            this.lblExpenses.Location = new System.Drawing.Point(275, 218);
             this.lblExpenses.Name = "lblExpenses";
             this.lblExpenses.Size = new System.Drawing.Size(0, 32);
             this.lblExpenses.TabIndex = 26;
@@ -238,7 +238,7 @@
             // lbDescription
             // 
             this.lbDescription.AutoSize = true;
-            this.lbDescription.Location = new System.Drawing.Point(343, 347);
+            this.lbDescription.Location = new System.Drawing.Point(275, 330);
             this.lbDescription.Name = "lbDescription";
             this.lbDescription.Size = new System.Drawing.Size(0, 32);
             this.lbDescription.TabIndex = 29;
@@ -246,7 +246,7 @@
             // lblAmount
             // 
             this.lblAmount.AutoSize = true;
-            this.lblAmount.Location = new System.Drawing.Point(343, 443);
+            this.lblAmount.Location = new System.Drawing.Point(275, 564);
             this.lblAmount.Name = "lblAmount";
             this.lblAmount.Size = new System.Drawing.Size(0, 32);
             this.lblAmount.TabIndex = 30;
@@ -254,7 +254,7 @@
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(343, 555);
+            this.lblDate.Location = new System.Drawing.Point(275, 688);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(0, 32);
             this.lblDate.TabIndex = 31;
@@ -262,7 +262,7 @@
             // lblCategories
             // 
             this.lblCategories.AutoSize = true;
-            this.lblCategories.Location = new System.Drawing.Point(343, 665);
+            this.lblCategories.Location = new System.Drawing.Point(258, 822);
             this.lblCategories.Name = "lblCategories";
             this.lblCategories.Size = new System.Drawing.Size(0, 32);
             this.lblCategories.TabIndex = 32;
@@ -271,7 +271,7 @@
             // 
             this.lstCategories.FormattingEnabled = true;
             this.lstCategories.ItemHeight = 31;
-            this.lstCategories.Location = new System.Drawing.Point(262, 751);
+            this.lstCategories.Location = new System.Drawing.Point(261, 739);
             this.lstCategories.Name = "lstCategories";
             this.lstCategories.Size = new System.Drawing.Size(589, 66);
             this.lstCategories.TabIndex = 33;

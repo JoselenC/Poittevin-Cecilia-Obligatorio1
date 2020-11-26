@@ -16,6 +16,7 @@ namespace DataAcess.DBObjects
         [StringLength(15)]
         [Index(IsUnique = true)]
         public string Name { get; set; }
+
         public List<KeyWordsDto> KeyWords { get; set; }
     }
 }

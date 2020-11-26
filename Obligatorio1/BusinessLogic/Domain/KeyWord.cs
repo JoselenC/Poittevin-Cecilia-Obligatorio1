@@ -35,8 +35,7 @@ namespace BusinessLogic
         }
 
         public KeyWord()
-        {
-            
+        {            
         }   
         
         public KeyWord(string vKeyWord, List<string> keyWords)

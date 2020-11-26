@@ -15,6 +15,7 @@ namespace BusinessLogic
         {
             repository = vRepository;
         }
+
         private bool AlreadyExistTheCurrencySymbol(string CurrencySymbol)
         {
             bool exist = false;
@@ -37,7 +38,6 @@ namespace BusinessLogic
             return exist;
         }
 
-
         public void SetCurrency(Currency currency)
         {
             if (AlreadyExistTheCurrencySymbol(currency.Symbol))
@@ -49,8 +49,7 @@ namespace BusinessLogic
 
         public void DeleteCurrency(Currency currency)
         {
-            ExpenseController expenseController = new ExpenseController(repository);
-            // TODO: Arreglar el IsSameCurrencyExpense
+            ExpenseController expenseController = new ExpenseController(repository);           
             try
             {
                 foreach (Expense expense in expenseController.GetExpenses())

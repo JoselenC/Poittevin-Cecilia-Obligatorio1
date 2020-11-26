@@ -296,30 +296,6 @@ namespace Test
             Assert.AreEqual(budgetReport, actualBudgetReport);
         }
 
-        //[TestMethod]
-        //public void AddCategoryInAllBudgets()
-        //{
-        //    ManagerRepository repository = new ManageMemoryRepository();
-        //    BudgetController budgetController = new BudgetController(repository);
-        //    CategoryController categoryController = new CategoryController(repository);
-
-        //    List<Category> categories = new List<Category>() { categoryFood };
-        //    Budget budget = new Budget(Months.January, categories) { 
-        //        TotalAmount = 23,
-        //        Year=2020
-        //    };
-
-        //    budgetController.SetBudget(budget);
-        //    categoryController.SetCategory(categoryFood);
-
-        //    Budget expectedBudget = new Budget(Months.January, new List<Category>() { categoryFood, categoryEntertainment })
-        //    {
-        //        TotalAmount = 23,
-        //        Year = 2020
-        //    };
-        //    Budget realBudget = budgetController.FindBudget("January", 2020);
-
-        //    Assert.AreEqual(expectedBudget, realBudget);
-        //}
+      
     }
 }

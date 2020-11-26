@@ -144,7 +144,6 @@ namespace BusinessLogic
             return expenseReport;
         }
 
-
         public Currency FindCurrencyByName(string CurrencyName)
         {
             CurrencyController currencyController = new CurrencyController(repository);
@@ -189,7 +188,6 @@ namespace BusinessLogic
             SetExpense(expense);
         }
 
-
         public double GetTotalSpentByDateAndCategory(string vMonth, Category vCategory, int year)
         {
             ExpenseController expenseController = new ExpenseController(repository);
@@ -203,12 +201,10 @@ namespace BusinessLogic
             return total;
         }
 
-
         public List<Category> GetCategories()
         {
             return repository.Categories.Get();
         }
-
    
         public List<Currency> GetCurrencies()
         {

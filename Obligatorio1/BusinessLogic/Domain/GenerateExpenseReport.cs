@@ -12,9 +12,7 @@ namespace BusinessLogic.Domain
     {
         public double TotalAmount { get ; set; }
 
-        public List<ExpenseReportLine> ExpenseReportLine { get; set; }
-
-     
+        public List<ExpenseReportLine> ExpenseReportLine { get; set; }     
         
     }
 }

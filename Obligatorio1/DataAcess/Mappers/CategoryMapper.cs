@@ -18,9 +18,7 @@ namespace DataAcess.Mappers
         private List<KeyWordsDto> createKeyWordsDto(List<string> keyWords, DbContext context)
         {
             List<KeyWordsDto> KeyWordsDto = new List<KeyWordsDto>();
-            DbSet<KeyWordsDto> KeyWordsSet = context.Set<KeyWordsDto>();
-
-            
+            DbSet<KeyWordsDto> KeyWordsSet = context.Set<KeyWordsDto>();                        
             foreach (string KeyWord in keyWords)
             {
                 KeyWordsDto keyWordsDto = KeyWordsSet.Where(x => x.Value == KeyWord).FirstOrDefault();
@@ -33,6 +31,7 @@ namespace DataAcess.Mappers
             };
             return KeyWordsDto;
         }
+
         public CategoryDto DomainToDto(Category obj, DbContext context)
         {
             DbSet<CategoryDto> CategorySet = context.Set<CategoryDto>();

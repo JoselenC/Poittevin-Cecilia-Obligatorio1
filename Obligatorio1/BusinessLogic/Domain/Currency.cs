@@ -9,7 +9,9 @@ namespace BusinessLogic
     public class Currency
     {
         private string name;
+
         private string symbol;
+
         private double quotation;
 
         public string Name { get=>name; set=>SetName(value); }
@@ -60,8 +62,6 @@ namespace BusinessLogic
         {
             return name;
         }
-
-
        
     }
 }

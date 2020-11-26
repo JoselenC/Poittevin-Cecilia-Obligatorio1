@@ -73,8 +73,6 @@ namespace BusinessLogic
             return budgetReport;
         }
 
-
-
         private Budget CreateBudget(int year, List<Category> categories, Months month)
         {
             if (categories.Count==0)
@@ -147,8 +145,7 @@ namespace BusinessLogic
             {
                 budget.AddBudgetCategory(category);
                 repository.Budgets.Add(budget);
-            }
-           
+            }           
         }
 
 

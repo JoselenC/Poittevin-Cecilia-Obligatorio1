@@ -90,9 +90,7 @@ namespace BusinessLogic
         public List<Category> GetCategories()
         {
             return repository.Categories.Get();
-        }      
-
-      
+        }            
 
         private Category FindCategoryByDescription(string[] descriptionArray)
         {
