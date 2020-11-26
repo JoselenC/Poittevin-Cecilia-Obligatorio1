@@ -5,7 +5,7 @@ using SqlProviderServices = System.Data.Entity.SqlServer.SqlProviderServices;
 
 namespace DataAccess
 {
-    class ContextDB: DbContext
+    public class ContextDB: DbContext
     {
         public DbSet<CategoryDto> Categories { get; set; }
         public DbSet<ExpenseDto> Expenses { get; set; }

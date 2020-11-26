@@ -2,7 +2,7 @@
 
 namespace DataAccess.Mappers
 {
-    internal interface IMapper<D, T>
+    public interface IMapper<D, T>
     {
         T DomainToDto(D obj, DbContext context);
 
