@@ -28,7 +28,12 @@ namespace InterfazLogic
 
         private void TryRegisterCategoty()
         {
-            categoryController.SetCategory(tbName.Text, KeyWords);
+            Category category = new Category()
+            {
+                Name = tbName.Text,
+                KeyWords = KeyWords
+            };
+            categoryController.SetCategory(category);
             lblKeyWords.Text = "";
             lblEdit.Text = "";
             lblName.Text = "";
