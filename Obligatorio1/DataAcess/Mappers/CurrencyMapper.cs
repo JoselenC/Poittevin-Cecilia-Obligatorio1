@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAcess.Mappers
 {
-    class CurrencyMapper : IMapper<Currency, CurrencyDto>
+    public class CurrencyMapper : IMapper<Currency, CurrencyDto>
     {
         public CurrencyDto DomainToDto(Currency obj, DbContext context)
         {

@@ -74,6 +74,8 @@
     <Compile Include="DataAcessTest\DataBaseRepositoryTest.cs" />
     <Compile Include="DataAcessTest\Managers\DataBaseManagerRepositoryTest.cs" />
     <Compile Include="Mappers\BudgetMapperTest.cs" />
+    <Compile Include="Mappers\CurrencyMapperTest.cs" />
+    <Compile Include="Mappers\ExpenseMapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BusinessLogicTest\DomainTest\CategoryTest.cs" />
     <Compile Include="BusinessLogicTest\MemoryRepositoryTest.cs" />

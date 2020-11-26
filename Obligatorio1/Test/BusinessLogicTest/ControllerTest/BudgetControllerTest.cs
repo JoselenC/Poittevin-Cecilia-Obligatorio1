@@ -241,14 +241,21 @@ namespace Test
         }
 
         [TestMethod]
+        [ExpectedException(typeof(NoFindBudget), "")]
+        public void GetBudgetReportNoFindBudgetCase()
+        {
+            budgetController.GetBudgetReport("January", 2010);
+        }
+
+        [TestMethod]
         public void GetBudgetReportSuccessCase()
         {
             GenerateBudgetReport budgetReport = new GenerateBudgetReport
             {
                 TotalAmount = 0,
-                RealAmount = 0,
+                RealAmount = 5201.65,
                 PlaneedAmount = 0,
-                DiffAmount = 0,
+                DiffAmount = -5201.65,
             };
             List<BudgetReportLine> budgetReportLines = new List<BudgetReportLine>()
             {
@@ -285,25 +292,34 @@ namespace Test
 
             };
             budgetReport.budgetsReportLines = budgetReportLines;
-            GenerateBudgetReport expectedBudgetReport = budgetController.GetBudgetReport("January", 2010);
-            Assert.AreEqual(budgetReport, expectedBudgetReport);
+            GenerateBudgetReport actualBudgetReport = budgetController.GetBudgetReport("January", 2020);
+            Assert.AreEqual(budgetReport, actualBudgetReport);
         }
 
-        [TestMethod]
-        public void AddCategoryInAllBudgets()
-        {
-            List<Category> categories = new List<Category>() { categoryFood};
-            Budget budget = new Budget(Months.January, categories) { TotalAmount = 23 };
-            ManagerRepository repository = new ManageMemoryRepository();
-            List<Budget> budgets = new List<Budget>() { budget };
-            repository.Budgets.Set(budgets);
-            repository.Categories.Set(categories);
-            BudgetController controller = new BudgetController(repository);
-            
-            controller.AddCategoryInAllBudgets(categoryEntertainment);
-            List<Category> categoriesExpected = new List<Category>() { categoryFood,categoryEntertainment };
-            Budget budgetxpected= new Budget(Months.January, categoriesExpected) { TotalAmount = 23 };
-            Assert.AreEqual(budgetxpected, budget);
-        }
+        //[TestMethod]
+        //public void AddCategoryInAllBudgets()
+        //{
+        //    ManagerRepository repository = new ManageMemoryRepository();
+        //    BudgetController budgetController = new BudgetController(repository);
+        //    CategoryController categoryController = new CategoryController(repository);
+
+        //    List<Category> categories = new List<Category>() { categoryFood };
+        //    Budget budget = new Budget(Months.January, categories) { 
+        //        TotalAmount = 23,
+        //        Year=2020
+        //    };
+
+        //    budgetController.SetBudget(budget);
+        //    categoryController.SetCategory(categoryFood);
+
+        //    Budget expectedBudget = new Budget(Months.January, new List<Category>() { categoryFood, categoryEntertainment })
+        //    {
+        //        TotalAmount = 23,
+        //        Year = 2020
+        //    };
+        //    Budget realBudget = budgetController.FindBudget("January", 2020);
+
+        //    Assert.AreEqual(expectedBudget, realBudget);
+        //}
     }
 }

@@ -123,6 +123,19 @@ namespace DataAcess.Mappers.Tests
         }
 
         [TestMethod()]
+        public void UpdateBudgetCategoryTest()
+        {
+            double oldValue = JanuaryBudget.BudgetCategories[0].Amount;
+            JanuaryBudget.BudgetCategories[0].Amount = 12;
+            Budgets.Add(JanuaryBudget);
+
+            Budget actualBudget = Budgets.Find(x => x.IsSameCreationDate(Months.January, 2020));
+            Assert.AreEqual(actualBudget, JanuaryBudget);
+            JanuaryBudget.BudgetCategories[0].Amount = oldValue;
+            Budgets.Add(JanuaryBudget);
+        }
+
+        [TestMethod()]
         [ExpectedException(typeof(NotImplementedException), "")]
         public void UpdateDtoObjectTest()
         {
@@ -145,5 +158,6 @@ namespace DataAcess.Mappers.Tests
             };
             Budgets.Update(JanuaryBudget, UpdatedBudget);
         }
+
     }
 }

@@ -23,6 +23,7 @@ namespace Test
         private static Expense expenseVideoGame;
         private static Expense expenseSushi;
         private static Expense expenseBurgers;
+        private static Currency CurrencyPesos;
 
 
         [ClassInitialize()]
@@ -30,7 +31,7 @@ namespace Test
         {
             expenseController = new ExpenseController(repo);
             CategoryController categoryController = new CategoryController(repo);
-            Currency currency = new Currency { Name = "pesos", Quotation = 1, Symbol="$U" };
+            CurrencyPesos = new Currency { Name = "pesos", Quotation = 1, Symbol="$U" };
             keyWords1 = new List<string>
             {
                 "movie theater",
@@ -73,7 +74,7 @@ namespace Test
                 Amount = 230.15, 
                 Category = categoryEntertainment, 
                 CreationDate = new DateTime(2020, 8, 1) ,
-                Currency=currency
+                Currency= CurrencyPesos
             };
             expenseSushi = new Expense()
             {
@@ -81,7 +82,7 @@ namespace Test
                 Amount = 220,
                 Category = categoryFood,
                 CreationDate = new DateTime(2020, 8, 1),
-                Currency = currency
+                Currency = CurrencyPesos
             };
             expenseBurgers = new Expense()
             {
@@ -89,7 +90,7 @@ namespace Test
                 Amount = 110.50,
                 Category = categoryFood,
                 CreationDate = new DateTime(2020, 1, 1),
-                Currency = currency
+                Currency = CurrencyPesos
             };
             expenseVideoGame = new Expense()
             {
@@ -97,7 +98,7 @@ namespace Test
                 Amount = 230.15,
                 Category = categoryEntertainment,
                 CreationDate = new DateTime(2020, 1, 1),
-                Currency = currency
+                Currency = CurrencyPesos
             };
             expenseController.SetExpense(expenseDesktopGame);
             expenseController.SetExpense(expenseSushi);
@@ -177,7 +178,7 @@ namespace Test
         [ExpectedException(typeof(NoFindEqualsExpense), "")]
         public void FindRemoveExpense()
         {
-            Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 01, 01), Description = "Testing Dinner", Category = categoryFood };
+            Expense expense = new Expense { Amount = 23, CreationDate = new DateTime(2020, 05, 22), Description = "Testing Dinner", Category = categoryFood };
             
             expenseController.SetExpense(expense);
             expenseController.DeleteExpense(expense);
@@ -383,12 +384,13 @@ namespace Test
 
         [TestMethod]
         public void GetExpenseReport()
-        {           
-           
-            Currency currency = new Currency { Name = "Dolar", Symbol = "USD", Quotation = 1 };
-            Expense expense = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01), Currency = currency };
+        {
+
             ManagerRepository repository = new ManageMemoryRepository();
             ExpenseController controller = new ExpenseController(repository);
+
+            Currency currency = new Currency { Name = "Dolar", Symbol = "USD", Quotation = 1 };
+            Expense expense = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01), Currency = currency };
             controller.SetExpense(expense);
             ExpenseReportLine expenseReportLine = new ExpenseReportLine()
             {
@@ -398,7 +400,6 @@ namespace Test
                 Description = expense.Description,
                 Currency= expense.Currency
             };
-            List<ExpenseReportLine> expensesReportLines = new List<ExpenseReportLine>() { expenseReportLine};
             GenerateExpenseReport expenseReport = controller.GetExpenseReport("January", 2020);
             Assert.AreEqual(expenseReportLine, expenseReport.ExpenseReportLine.ToArray()[0]);
         }
@@ -406,8 +407,14 @@ namespace Test
         [TestMethod]
         public void GetTotalSpentByMonthAndCategoryValidCase()
         {
-            double expectedTotalSpentJanuary = 110.5;
-            double actualTotalSpentJanuary = expenseController.GetTotalSpentByDateAndCategory("January", categoryFood, 2020);
+            ManagerRepository repository = new ManageMemoryRepository();
+            ExpenseController controller = new ExpenseController(repository);
+
+            Expense expense = new Expense { Description = "movie theater", Amount = 24, Category = categoryFood, CreationDate = new DateTime(2020, 01, 01), Currency = CurrencyPesos };
+            controller.SetExpense(expense);
+
+            double expectedTotalSpentJanuary = 24;
+            double actualTotalSpentJanuary = controller.GetTotalSpentByDateAndCategory("January", categoryFood, 2020);
             Assert.AreEqual(expectedTotalSpentJanuary, actualTotalSpentJanuary);
         }
 

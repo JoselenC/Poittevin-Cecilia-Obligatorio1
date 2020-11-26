@@ -12,11 +12,12 @@ namespace DataAcess.Mappers
 {
     public class BudgetMapper: IMapper<Budget, BudgetDto>
     {
-
         private List<BudgetCategoryDto> updateBudgetCategories(Budget obj, List<BudgetCategoryDto> budgetCategoriesDtos, DbContext context)
         {
             CategoryMapper categoryMapper = new CategoryMapper();
-            List<BudgetCategory> newBudgetCategories = obj.BudgetCategories;
+            BudgetCategory[] auxBudgetCategories =  new BudgetCategory[obj.BudgetCategories.Count()];
+            obj.BudgetCategories.CopyTo(auxBudgetCategories);
+            List<BudgetCategory> newBudgetCategories = auxBudgetCategories.ToList();
 
             if (!(budgetCategoriesDtos is null))
                 foreach (BudgetCategoryDto budgetCategoryDto in budgetCategoriesDtos)
